@@ -1,0 +1,2435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MetaSprint Autopilot</title>
+<style>
+:root {
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #6366f1;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --radius: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.1);
+  --font: system-ui, -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* --- Header --- */
+.app-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+}
+.app-header h1 { font-size: 1.25rem; color: var(--primary); }
+.header-actions { display: flex; gap: 8px; align-items: center; }
+.header-actions select {
+  padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius);
+  font-size: 0.875rem; background: var(--surface);
+}
+
+/* --- Buttons --- */
+button {
+  padding: 6px 14px; border: none; border-radius: var(--radius);
+  font-size: 0.875rem; cursor: pointer; font-family: var(--font);
+  background: var(--primary); color: #fff; transition: background 0.15s;
+}
+button:hover { background: var(--primary-hover); }
+.btn-success { background: var(--success); }
+.btn-success:hover { background: #059669; }
+.btn-warning { background: var(--warning); color: #000; }
+.btn-warning:hover { background: #d97706; }
+.btn-danger { background: var(--danger); }
+.btn-danger:hover { background: #dc2626; }
+.btn-info { background: var(--info); }
+.btn-info:hover { background: #4f46e5; }
+.btn-sm { padding: 3px 8px; font-size: 0.75rem; }
+.btn-outline {
+  background: transparent; border: 1px solid var(--border); color: var(--text);
+}
+.btn-outline:hover { background: var(--bg); }
+
+/* --- Tab Bar --- */
+.tab-bar {
+  display: flex; gap: 0; background: var(--surface);
+  border-bottom: 2px solid var(--border); padding: 0 24px;
+  overflow-x: auto;
+}
+.tab {
+  padding: 10px 18px; background: none; color: var(--text-muted);
+  border: none; border-bottom: 2px solid transparent;
+  margin-bottom: -2px; font-size: 0.85rem; white-space: nowrap;
+  border-radius: 0; transition: color 0.15s, border-color 0.15s;
+}
+.tab:hover { color: var(--text); background: none; }
+.tab.active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 600; background: none; }
+
+/* --- Phases --- */
+.phase { display: none; padding: 24px; max-width: 1200px; margin: 0 auto; }
+.phase.active { display: block; }
+
+/* --- Screen Phase Layout --- */
+.screen-header {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.screen-header h2 { margin-right: auto; }
+.screen-layout { display: grid; grid-template-columns: 340px 1fr; gap: 16px; min-height: 500px; }
+.ref-list {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  overflow-y: auto; max-height: 600px;
+}
+.ref-item {
+  padding: 10px 14px; border-bottom: 1px solid var(--border);
+  cursor: pointer; transition: background 0.1s; position: relative;
+}
+.ref-item:hover { background: #f1f5f9; }
+.ref-item.selected { background: #eff6ff; border-left: 3px solid var(--primary); }
+.ref-title { font-size: 0.85rem; font-weight: 500; line-height: 1.3; }
+.ref-meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+.ref-item.decision-include { border-left: 3px solid var(--success); }
+.ref-item.decision-exclude { border-left: 3px solid var(--danger); opacity: 0.6; }
+.ref-item.decision-maybe { border-left: 3px solid var(--warning); }
+.ref-item.decision-duplicate { border-left: 3px solid var(--text-muted); opacity: 0.5; }
+
+.badge {
+  display: inline-block; padding: 2px 8px; border-radius: 12px;
+  font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+}
+.badge-include { background: #d1fae5; color: #065f46; }
+.badge-exclude { background: #fee2e2; color: #991b1b; }
+.badge-maybe { background: #fef3c7; color: #92400e; }
+.badge-duplicate { background: #e2e8f0; color: #475569; }
+
+.ref-detail {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px; overflow-y: auto; max-height: 600px;
+}
+.detail-title { font-size: 1.1rem; margin-bottom: 12px; line-height: 1.4; }
+.detail-section { margin-bottom: 14px; }
+.detail-section h3 { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
+.detail-section p { font-size: 0.9rem; line-height: 1.5; }
+.abstract-content { font-size: 0.88rem; line-height: 1.6; }
+.abstract-content mark { background: #fef08a; padding: 1px 2px; border-radius: 2px; }
+.keyword-list { display: flex; flex-wrap: wrap; gap: 4px; }
+.keyword { background: #eff6ff; color: var(--primary); padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; }
+
+.placeholder { color: var(--text-muted); text-align: center; padding: 60px 20px; }
+
+/* --- Decision Bar --- */
+.decision-bar {
+  display: flex; gap: 8px; padding: 12px 24px; background: var(--surface);
+  border-top: 1px solid var(--border); position: sticky; bottom: 0;
+  justify-content: center; align-items: center;
+}
+.decision-bar kbd {
+  display: inline-block; padding: 1px 5px; font-size: 0.7rem;
+  background: #e2e8f0; border-radius: 3px; margin-left: 4px; font-family: monospace;
+}
+
+/* --- Filter Bar --- */
+.filter-bar {
+  display: flex; gap: 6px; margin-bottom: 8px; padding: 0 2px;
+}
+.filter-btn {
+  padding: 4px 10px; font-size: 0.75rem; background: var(--bg);
+  border: 1px solid var(--border); color: var(--text-muted); border-radius: 14px;
+}
+.filter-btn:hover { background: #e2e8f0; color: var(--text); }
+.filter-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+/* --- Extraction Table --- */
+.extract-header {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px;
+}
+.extract-header h2 { margin-right: auto; }
+.extract-table {
+  width: 100%; border-collapse: collapse; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.85rem;
+}
+.extract-table th {
+  background: #f1f5f9; padding: 8px 6px; text-align: left;
+  font-size: 0.75rem; color: var(--text-muted); border-bottom: 2px solid var(--border);
+}
+.extract-table td { padding: 4px 4px; border-bottom: 1px solid var(--border); }
+.extract-table input, .extract-table select {
+  width: 100%; padding: 4px 6px; border: 1px solid transparent;
+  border-radius: 4px; font-size: 0.82rem; font-family: var(--font);
+}
+.extract-table input:focus, .extract-table select:focus {
+  border-color: var(--primary); outline: none;
+}
+
+/* --- Stat Cards --- */
+.analysis-summary { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+.stat-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px 20px; min-width: 120px; text-align: center;
+}
+.stat-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; }
+.stat-value { font-size: 1.3rem; font-weight: 700; color: var(--primary); }
+.analysis-plots { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* --- PRISMA Section --- */
+.prisma-section {
+  margin-top: 20px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px;
+}
+
+/* --- Toast Notifications --- */
+#toastContainer {
+  position: fixed; bottom: 20px; right: 20px; z-index: 1000;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.toast {
+  padding: 10px 18px; border-radius: var(--radius); color: #fff;
+  font-size: 0.85rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  animation: toastIn 0.25s ease;
+}
+.toast-info { background: var(--info); }
+.toast-success { background: var(--success); }
+.toast-warning { background: var(--warning); color: #000; }
+.toast-danger { background: var(--danger); }
+@keyframes toastIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* --- Gap Card --- */
+.gap-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+.gap-card h3 { margin-bottom: 12px; }
+.gap-stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.gap-high { border-left: 4px solid var(--success); }
+.gap-medium { border-left: 4px solid var(--warning); }
+.gap-low { border-left: 4px solid var(--text-muted); }
+
+/* --- Forms --- */
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 8px 12px; border: 1px solid var(--border);
+  border-radius: var(--radius); font-size: 0.9rem; font-family: var(--font);
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--primary); outline: none; box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+}
+
+/* --- PICO Builder --- */
+.pico-builder { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.pico-row { display: flex; flex-direction: column; }
+.pico-row label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; font-weight: 600; }
+.pico-row input { padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.9rem; }
+
+/* --- Search Results --- */
+.search-results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.search-result-item {
+  padding: 10px 14px; border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.result-title { font-size: 0.85rem; font-weight: 500; }
+.result-meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+/* --- Discover Input --- */
+.discover-input { display: flex; gap: 8px; margin-bottom: 16px; }
+.discover-input input { flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.95rem; }
+
+/* --- Protocol --- */
+.protocol-form { max-width: 700px; }
+.protocol-output { margin-top: 16px; }
+.protocol-text, .paper-text {
+  white-space: pre-wrap; font-size: 0.85rem; line-height: 1.6;
+  background: var(--bg); padding: 16px; border: 1px solid var(--border);
+  border-radius: var(--radius); max-height: 500px; overflow-y: auto; font-family: var(--font);
+}
+
+/* --- Search Actions --- */
+.search-actions { display: flex; gap: 8px; margin-bottom: 16px; }
+
+/* --- Responsive --- */
+@media (max-width: 800px) {
+  .screen-layout { grid-template-columns: 1fr; }
+  .analysis-plots { grid-template-columns: 1fr; }
+  .pico-builder { grid-template-columns: 1fr; }
+}
+
+/* --- Text utilities --- */
+.text-muted { color: var(--text-muted); font-size: 0.85rem; }
+
+/* --- Dark Mode --- */
+body.dark-mode {
+  --bg: #0f172a; --surface: #1e293b; --text: #e2e8f0;
+  --text-muted: #94a3b8; --border: #334155;
+}
+</style>
+</head>
+<body>
+  <header class="app-header">
+    <h1>MetaSprint Autopilot</h1>
+    <div class="header-actions">
+      <select id="projectSelect" onchange="switchProject(this.value)"></select>
+      <button onclick="createProject()">New Project</button>
+      <button class="btn-outline" onclick="exportProject()">Export</button>
+      <button class="btn-outline" onclick="importProject()">Import</button>
+      <button class="btn-outline" onclick="document.body.classList.toggle('dark-mode')">Theme</button>
+    </div>
+  </header>
+
+  <nav class="tab-bar" role="tablist">
+    <button class="tab active" data-phase="discover" role="tab">1. Discover</button>
+    <button class="tab" data-phase="protocol" role="tab">2. Protocol</button>
+    <button class="tab" data-phase="search" role="tab">3. Search</button>
+    <button class="tab" data-phase="screen" role="tab">4. Screen</button>
+    <button class="tab" data-phase="extract" role="tab">5. Extract</button>
+    <button class="tab" data-phase="analyze" role="tab">6. Analyze</button>
+    <button class="tab" data-phase="write" role="tab">7. Write</button>
+  </nav>
+
+  <main id="mainContent">
+    <!-- Phase 1: Discover -->
+    <section id="phase-discover" class="phase active">
+      <h2>Topic Discovery</h2>
+      <p>Find topics with multiple RCTs but no recent meta-analysis.</p>
+      <div class="discover-input">
+        <input type="text" id="topicInput" placeholder="Enter broad topic (e.g., SGLT2 inhibitors, atrial fibrillation)">
+        <button onclick="discoverTopics()">Analyze Gap</button>
+      </div>
+      <div id="discoveryStatus"></div>
+      <div id="discoveryResults"></div>
+    </section>
+
+    <!-- Phase 2: Protocol -->
+    <section id="phase-protocol" class="phase">
+      <h2>PROSPERO Protocol</h2>
+      <div class="protocol-form">
+        <div class="form-group"><label>Review Title:</label>
+          <input id="protTitle" placeholder="e.g., Efficacy of X vs Y in patients with Z: a systematic review"></div>
+        <div class="form-group"><label>Population:</label><input id="protP"></div>
+        <div class="form-group"><label>Intervention:</label><input id="protI"></div>
+        <div class="form-group"><label>Comparator:</label><input id="protC"></div>
+        <div class="form-group"><label>Outcomes:</label><input id="protO"></div>
+        <div class="form-group"><label>Study Types:</label>
+          <select id="protStudyType"><option>RCTs only</option><option>RCTs and observational</option></select></div>
+        <div style="display:flex;gap:8px">
+          <button onclick="generateProtocol()">Generate Protocol</button>
+        </div>
+      </div>
+      <div id="protocolOutput" class="protocol-output"></div>
+    </section>
+
+    <!-- Phase 3: Search -->
+    <section id="phase-search" class="phase">
+      <h2>Search Strategy</h2>
+      <div class="pico-builder">
+        <div class="pico-row"><label>Population (P):</label><input id="picoP" onchange="savePICO()"></div>
+        <div class="pico-row"><label>Intervention (I):</label><input id="picoI" onchange="savePICO()"></div>
+        <div class="pico-row"><label>Comparator (C):</label><input id="picoC" onchange="savePICO()"></div>
+        <div class="pico-row"><label>Outcomes (O):</label><input id="picoO" onchange="savePICO()"></div>
+      </div>
+      <div class="search-actions">
+        <button onclick="searchPubMed()">PubMed</button>
+        <button onclick="searchOpenAlex()">OpenAlex</button>
+        <button onclick="searchCTGov()">CT.gov</button>
+        <button onclick="searchEuropePMC()">Europe PMC</button>
+        <button onclick="searchCrossRef()">CrossRef</button>
+        <button onclick="searchAACT()">AACT (local)</button>
+        <button class="btn-success" onclick="searchAll()">Search All Sources</button>
+      </div>
+      <p class="text-muted" style="font-size:0.75rem;margin-top:4px">
+        5 online sources + optional AACT PostgreSQL (run <code>python aact_proxy.py</code> for local AACT)
+      </p>
+      <div id="searchStatus"></div>
+      <div id="searchResults"></div>
+    </section>
+
+    <!-- Phase 4: Screen -->
+    <section id="phase-screen" class="phase">
+      <div class="screen-header">
+        <h2>Abstract Screening</h2>
+        <div class="filter-bar">
+          <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+          <button class="filter-btn" onclick="setFilter('pending',this)">Pending</button>
+          <button class="filter-btn" onclick="setFilter('include',this)">Include</button>
+          <button class="filter-btn" onclick="setFilter('exclude',this)">Exclude</button>
+          <button class="filter-btn" onclick="setFilter('maybe',this)">Maybe</button>
+          <button class="filter-btn" onclick="setFilter('duplicate',this)">Duplicate</button>
+        </div>
+        <button onclick="document.getElementById('risFileInput').click()">Import RIS/BibTeX</button>
+        <button onclick="importFromPMIDList()">Paste PMIDs</button>
+        <button onclick="runDeduplication()">Find Duplicates</button>
+        <input type="file" id="risFileInput" accept=".ris,.bib,.nbib,.xml,.csv,.txt"
+               style="display:none" onchange="handleFileImport(event)" multiple>
+        <span id="refCount" class="text-muted">0 references</span>
+      </div>
+      <div class="screen-layout">
+        <div class="ref-list" id="refList"></div>
+        <div class="ref-detail" id="refDetail">
+          <p class="placeholder">Select a reference to view details</p>
+        </div>
+      </div>
+      <div class="decision-bar" id="decisionBar" style="display:none">
+        <button class="btn-success" onclick="makeDecision('include')">Include <kbd>I</kbd></button>
+        <button class="btn-warning" onclick="makeDecision('maybe')">Maybe <kbd>M</kbd></button>
+        <button class="btn-danger" onclick="makeDecision('exclude')">Exclude <kbd>E</kbd></button>
+        <button class="btn-info" onclick="makeDecision('duplicate')">Duplicate <kbd>D</kbd></button>
+        <button class="btn-outline" onclick="skipRecord()">Skip <kbd>N</kbd></button>
+      </div>
+      <div class="prisma-section">
+        <h3>PRISMA Flow</h3>
+        <div id="prismaFlow"></div>
+        <button onclick="exportPRISMASVG()" style="margin-top:8px">Export SVG</button>
+      </div>
+    </section>
+
+    <!-- Phase 5: Extract -->
+    <section id="phase-extract" class="phase">
+      <div class="extract-header">
+        <h2>Data Extraction</h2>
+        <button onclick="addStudyRow()">Add Study</button>
+        <button onclick="autoPopulateFromIncluded()">Import from Screening</button>
+        <button class="btn-outline" onclick="exportToMetaSprint('pairwise')">Export Pairwise CSV</button>
+        <button class="btn-outline" onclick="exportToMetaSprint('nma')">Export NMA JSON</button>
+        <button class="btn-outline" onclick="exportStudiesCSV()">Export CSV</button>
+      </div>
+      <table class="extract-table" id="extractTable">
+        <thead><tr>
+          <th>Study ID</th><th>N Total</th><th>N Intervention</th><th>N Control</th>
+          <th>Effect</th><th>Lower CI</th><th>Upper CI</th><th>Type</th>
+          <th>Weight</th><th>Notes</th><th></th>
+        </tr></thead>
+        <tbody id="extractBody"></tbody>
+      </table>
+    </section>
+
+    <!-- Phase 6: Analyze -->
+    <section id="phase-analyze" class="phase">
+      <h2>Analysis Dashboard</h2>
+      <div style="margin-bottom:12px">
+        <button class="btn-success" onclick="runAnalysis()">Run Analysis</button>
+      </div>
+      <div class="analysis-summary" id="analysisSummary"></div>
+      <div class="analysis-plots">
+        <div id="forestPlotContainer"></div>
+        <div id="funnelPlotContainer"></div>
+      </div>
+    </section>
+
+    <!-- Phase 7: Write -->
+    <section id="phase-write" class="phase">
+      <h2>Paper Generator</h2>
+      <p>Auto-generate Methods and Results sections from your review data.</p>
+      <button onclick="generatePaper()" style="margin:12px 0">Generate Draft</button>
+      <div id="paperOutput"></div>
+    </section>
+  </main>
+
+  <div id="toastContainer"></div>
+
+  <script>
+  // ============================================================
+  // UTILITIES
+  // ============================================================
+  function escapeHtml(str) {
+    if (typeof str !== 'string') return '';
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function toSafeFloat(value, fallback = null) {
+    const n = parseFloat(value);
+    return Number.isFinite(n) ? n : fallback;
+  }
+
+  function toSafeInt(value, fallback = 0, min = 0, max = 1000000) {
+    const n = parseInt(value, 10);
+    if (!Number.isFinite(n)) return fallback;
+    return Math.min(max, Math.max(min, n));
+  }
+
+  function generateId() {
+    return 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  }
+
+  function showToast(msg, type = 'info', duration = 3000) {
+    const container = document.getElementById('toastContainer');
+    const el = document.createElement('div');
+    el.className = 'toast toast-' + type;
+    el.textContent = msg;
+    container.appendChild(el);
+    setTimeout(() => el.remove(), duration);
+  }
+
+  function debounce(fn, ms = 300) {
+    let timer;
+    return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), ms); };
+  }
+
+  // ============================================================
+  // TAB NAVIGATION
+  // ============================================================
+  let currentPhase = 'discover';
+
+  function switchPhase(phase) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+    document.querySelector('[data-phase="' + phase + '"]')?.classList.add('active');
+    document.getElementById('phase-' + phase)?.classList.add('active');
+    currentPhase = phase;
+    localStorage.setItem('msa-state', JSON.stringify({ phase, projectId: currentProjectId }));
+    // Load phase-specific data
+    if (phase === 'screen') renderReferenceList();
+    if (phase === 'extract') loadStudies().then(renderExtractTable);
+    if (phase === 'analyze') loadStudies();
+    if (phase === 'search') loadPICO();
+  }
+
+  document.querySelector('.tab-bar').addEventListener('click', (e) => {
+    const tab = e.target.closest('[data-phase]');
+    if (tab) switchPhase(tab.dataset.phase);
+  });
+
+  // ============================================================
+  // INDEXEDDB
+  // ============================================================
+  const DB_NAME = 'MetaSprintAutopilot';
+  const DB_VERSION = 1;
+  let db = null;
+
+  function initDB() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(DB_NAME, DB_VERSION);
+      request.onupgradeneeded = (e) => {
+        const database = e.target.result;
+        if (!database.objectStoreNames.contains('references')) {
+          const store = database.createObjectStore('references', { keyPath: 'id' });
+          store.createIndex('doi', 'doi', { unique: false });
+          store.createIndex('pmid', 'pmid', { unique: false });
+          store.createIndex('projectId', 'projectId', { unique: false });
+        }
+        if (!database.objectStoreNames.contains('studies')) {
+          const store = database.createObjectStore('studies', { keyPath: 'id' });
+          store.createIndex('projectId', 'projectId', { unique: false });
+        }
+        if (!database.objectStoreNames.contains('searches')) {
+          const store = database.createObjectStore('searches', { keyPath: 'id' });
+          store.createIndex('projectId', 'projectId', { unique: false });
+        }
+        if (!database.objectStoreNames.contains('projects')) {
+          database.createObjectStore('projects', { keyPath: 'id' });
+        }
+      };
+      request.onsuccess = (e) => { db = e.target.result; resolve(db); };
+      request.onerror = (e) => reject(e.target.error);
+    });
+  }
+
+  // Helper: wrap IDB transaction in a promise
+  function idbPut(storeName, record) {
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(storeName, 'readwrite');
+      const req = tx.objectStore(storeName).put(record);
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  function idbGetAll(storeName, indexName, key) {
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(storeName, 'readonly');
+      const store = tx.objectStore(storeName);
+      const source = indexName ? store.index(indexName) : store;
+      const req = key !== undefined ? source.getAll(key) : source.getAll();
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  function idbDelete(storeName, key) {
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(storeName, 'readwrite');
+      const req = tx.objectStore(storeName).delete(key);
+      req.onsuccess = () => resolve();
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  // ============================================================
+  // PROJECT MANAGEMENT
+  // ============================================================
+  let currentProjectId = null;
+  let projects = [];
+
+  function createEmptyProject(name) {
+    return {
+      id: generateId(),
+      name: name || 'Untitled Review',
+      createdAt: new Date().toISOString(),
+      pico: { P: '', I: '', C: '', O: '' },
+      searchStrategy: '',
+      prisma: { identified: 0, duplicates: 0, screened: 0,
+                excludedScreen: 0, fullText: 0, excludedFullText: 0, included: 0 },
+      settings: {}
+    };
+  }
+
+  async function createProject() {
+    const name = prompt('Project name:');
+    if (!name) return;
+    const project = createEmptyProject(name.slice(0, 80));
+    await idbPut('projects', project);
+    currentProjectId = project.id;
+    await loadProjects();
+    showToast('Project created', 'success');
+  }
+
+  async function loadProjects() {
+    projects = await idbGetAll('projects');
+    renderProjectSelect();
+  }
+
+  function renderProjectSelect() {
+    const sel = document.getElementById('projectSelect');
+    sel.innerHTML = projects.map(p =>
+      '<option value="' + p.id + '"' + (p.id === currentProjectId ? ' selected' : '') + '>' + escapeHtml(p.name) + '</option>'
+    ).join('');
+  }
+
+  function switchProject(id) {
+    currentProjectId = id;
+    localStorage.setItem('msa-state', JSON.stringify({ phase: currentPhase, projectId: currentProjectId }));
+    switchPhase(currentPhase);
+    showToast('Switched project', 'info');
+  }
+
+  // ============================================================
+  // FILE PARSERS (RIS, BibTeX, NBIB, XML, CSV)
+  // ============================================================
+
+  // --- RIS Parser ---
+  function parseRIS(content) {
+    const entries = content.split(/\r?\nER\s*-/);
+    const parsed = [];
+    for (const entry of entries) {
+      if (!entry.trim()) continue;
+      const record = { id: generateId(), keywords: [], projectId: currentProjectId };
+      const lines = entry.split(/\r?\n/);
+      let currentTag = '';
+      for (const line of lines) {
+        const match = line.match(/^([A-Z][A-Z0-9])\s+-\s+(.*)$/);
+        if (match) {
+          currentTag = match[1];
+          const value = match[2].trim();
+          switch (currentTag) {
+            case 'TY': record.type = value; break;
+            case 'TI': case 'T1': record.title = (record.title || '') + value; break;
+            case 'AU': case 'A1': record.authors = record.authors ? record.authors + '; ' + value : value; break;
+            case 'PY': case 'Y1': record.year = value.substring(0, 4); break;
+            case 'AB': case 'N2': record.abstract = (record.abstract || '') + value; break;
+            case 'JO': case 'JF': case 'T2': record.journal = value; break;
+            case 'VL': record.volume = value; break;
+            case 'IS': record.issue = value; break;
+            case 'SP': record.startPage = value; break;
+            case 'EP': record.endPage = value; break;
+            case 'DO': record.doi = value; break;
+            case 'AN': record.pmid = value; break;
+            case 'KW': record.keywords.push(value); break;
+          }
+        } else if (currentTag && line.startsWith('      ')) {
+          const value = line.trim();
+          if (currentTag === 'AB' || currentTag === 'N2') record.abstract = (record.abstract || '') + ' ' + value;
+          if (currentTag === 'TI' || currentTag === 'T1') record.title = (record.title || '') + ' ' + value;
+        }
+      }
+      if (record.title) parsed.push(record);
+    }
+    return parsed;
+  }
+
+  // --- BibTeX Parser ---
+  function parseBibTeX(content) {
+    const entries = content.split(/(?=@\w+\{)/);
+    const parsed = [];
+    for (const entry of entries) {
+      if (!entry.trim()) continue;
+      const record = { id: generateId(), keywords: [], projectId: currentProjectId };
+      const f = (pat) => { const m = entry.match(pat); return m ? m[1].replace(/[{}]/g, '') : ''; };
+      record.title = f(/title\s*=\s*[{"]([^}"]+)[}"]/i);
+      record.authors = f(/author\s*=\s*[{"]([^}"]+)[}"]/i).replace(/ and /g, '; ');
+      record.year = f(/year\s*=\s*[{"]?(\d{4})[}""]?/i);
+      record.abstract = f(/abstract\s*=\s*[{"]([^}"]+)[}"]/i);
+      record.journal = f(/journal\s*=\s*[{"]([^}"]+)[}"]/i);
+      record.doi = f(/doi\s*=\s*[{"]([^}"]+)[}"]/i);
+      record.volume = f(/volume\s*=\s*[{"]?(\d+)[}""]?/i);
+      const pages = f(/pages\s*=\s*[{"]([^}"]+)[}"]/i);
+      if (pages) {
+        const parts = pages.split(/[-\u2013]/);
+        record.startPage = parts[0];
+        if (parts[1]) record.endPage = parts[1];
+      }
+      if (record.title) parsed.push(record);
+    }
+    return parsed;
+  }
+
+  // --- PubMed NBIB Parser ---
+  function parsePubMedNBib(content) {
+    const entries = content.split(/\r?\n\r?\n(?=PMID-)/);
+    const parsed = [];
+    for (const entry of entries) {
+      if (!entry.trim()) continue;
+      const record = { id: generateId(), keywords: [], projectId: currentProjectId };
+      const lines = entry.split(/\r?\n/);
+      let currentTag = '';
+      for (const line of lines) {
+        const match = line.match(/^([A-Z]+)\s*-\s*(.*)$/);
+        if (match) {
+          currentTag = match[1];
+          const value = match[2].trim();
+          switch (currentTag) {
+            case 'PMID': record.pmid = value; break;
+            case 'TI': record.title = (record.title || '') + value; break;
+            case 'AU': record.authors = record.authors ? record.authors + '; ' + value : value; break;
+            case 'DP': record.year = value.substring(0, 4); break;
+            case 'AB': record.abstract = (record.abstract || '') + value; break;
+            case 'TA': case 'JT': record.journal = value; break;
+            case 'VI': record.volume = value; break;
+            case 'IP': record.issue = value; break;
+            case 'PG': {
+              const pg = value.split('-');
+              record.startPage = pg[0];
+              if (pg[1]) record.endPage = pg[1];
+              break;
+            }
+            case 'AID':
+              if (value.includes('[doi]')) record.doi = value.replace('[doi]', '').trim();
+              break;
+            case 'MH': case 'OT': record.keywords.push(value); break;
+          }
+        } else if (currentTag && line.startsWith('      ')) {
+          const value = line.trim();
+          if (currentTag === 'AB') record.abstract = (record.abstract || '') + ' ' + value;
+          if (currentTag === 'TI') record.title = (record.title || '') + ' ' + value;
+        }
+      }
+      if (record.title) parsed.push(record);
+    }
+    return parsed;
+  }
+
+  // --- EndNote XML Parser ---
+  function parseEndNoteXML(content) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(content, 'text/xml');
+    const recs = doc.querySelectorAll('record, Record');
+    const parsed = [];
+    recs.forEach(rec => {
+      const record = { id: generateId(), keywords: [], projectId: currentProjectId };
+      const q = (sel) => rec.querySelector(sel)?.textContent?.trim() || '';
+      record.title = q('titles title, title');
+      record.authors = Array.from(rec.querySelectorAll('authors author, contributors author'))
+        .map(a => a.textContent.trim()).join('; ');
+      record.year = q('dates year, year');
+      record.abstract = q('abstract');
+      record.journal = q('periodical full-title, secondary-title');
+      record.doi = q('electronic-resource-num');
+      record.pmid = q('accession-num');
+      rec.querySelectorAll('keywords keyword').forEach(kw => record.keywords.push(kw.textContent.trim()));
+      if (record.title) parsed.push(record);
+    });
+    return parsed;
+  }
+
+  // --- CSV Parser ---
+  function parseCSVReferences(content) {
+    const lines = content.split(/\r?\n/);
+    if (lines.length < 2) return [];
+    const headers = parseCSVLine(lines[0].replace(/^\uFEFF/, '')).map(h => h.trim().toLowerCase());
+    const parsed = [];
+    for (let i = 1; i < lines.length; i++) {
+      if (!lines[i].trim()) continue;
+      const values = parseCSVLine(lines[i]);
+      const record = { id: generateId(), keywords: [], projectId: currentProjectId };
+      headers.forEach((h, idx) => {
+        const val = values[idx] || '';
+        if (h.includes('title')) record.title = val;
+        else if (h.includes('author')) record.authors = val;
+        else if (h.includes('year')) record.year = val;
+        else if (h.includes('abstract')) record.abstract = val;
+        else if (h.includes('journal')) record.journal = val;
+        else if (h.includes('doi')) record.doi = val;
+        else if (h.includes('pmid')) record.pmid = val;
+      });
+      if (record.title) parsed.push(record);
+    }
+    return parsed;
+  }
+
+  function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        if (inQuotes && line[i + 1] === '"') { current += '"'; i++; }
+        else { inQuotes = !inQuotes; }
+      } else if (ch === ',' && !inQuotes) { result.push(current.trim()); current = ''; }
+      else { current += ch; }
+    }
+    result.push(current.trim());
+    return result;
+  }
+
+  // ============================================================
+  // FILE IMPORT HANDLER
+  // ============================================================
+  async function handleFileImport(event) {
+    const files = event.target.files;
+    if (!files.length) return;
+    let totalImported = 0;
+    for (const file of files) {
+      const content = await file.text();
+      let records = [];
+      const ext = file.name.split('.').pop().toLowerCase();
+      if (ext === 'ris' || ext === 'txt') records = parseRIS(content);
+      else if (ext === 'bib') records = parseBibTeX(content);
+      else if (ext === 'nbib') records = parsePubMedNBib(content);
+      else if (ext === 'xml') records = parseEndNoteXML(content);
+      else if (ext === 'csv') records = parseCSVReferences(content);
+      else { showToast('Unknown format: .' + ext, 'warning'); continue; }
+
+      const tx = db.transaction('references', 'readwrite');
+      const store = tx.objectStore('references');
+      for (const rec of records) {
+        rec.importedAt = new Date().toISOString();
+        rec.source = file.name;
+        rec.decision = null;
+        rec.reason = '';
+        store.put(rec);
+      }
+      totalImported += records.length;
+    }
+    event.target.value = '';
+    showToast('Imported ' + totalImported + ' references', 'success');
+    await renderReferenceList();
+  }
+
+  async function importFromPMIDList() {
+    const input = prompt('Paste PMIDs (one per line or comma-separated):');
+    if (!input) return;
+    const pmids = input.split(/[\n,;]+/).map(s => s.trim().replace(/\D/g, '')).filter(Boolean);
+    if (!pmids.length) { showToast('No valid PMIDs', 'warning'); return; }
+    showToast('Fetching ' + pmids.length + ' PMIDs from PubMed...', 'info');
+    try {
+      const fetchUrl = PUBMED_BASE + 'efetch.fcgi?db=pubmed&id=' + pmids.join(',') + '&retmode=xml&rettype=abstract';
+      const resp = await rateLimitedFetch(fetchUrl);
+      const xml = await resp.text();
+      const records = parsePubMedXML(xml);
+      const tx = db.transaction('references', 'readwrite');
+      const store = tx.objectStore('references');
+      for (const rec of records) {
+        rec.importedAt = new Date().toISOString();
+        rec.decision = null;
+        rec.reason = '';
+        store.put(rec);
+      }
+      showToast('Imported ' + records.length + ' references from PMIDs', 'success');
+      await renderReferenceList();
+    } catch (err) {
+      showToast('Error fetching PMIDs: ' + err.message, 'danger');
+    }
+  }
+
+  // ============================================================
+  // SCREENING — REFERENCE LIST & DETAIL
+  // ============================================================
+  let allReferences = [];
+  let selectedRefId = null;
+  let filterStatus = 'all';
+
+  async function loadReferences() {
+    allReferences = await idbGetAll('references', 'projectId', currentProjectId);
+    return allReferences;
+  }
+
+  function setFilter(status, btn) {
+    filterStatus = status;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    renderReferenceList();
+  }
+
+  async function renderReferenceList() {
+    await loadReferences();
+    const filtered = allReferences.filter(r => {
+      if (filterStatus === 'all') return true;
+      if (filterStatus === 'pending') return !r.decision;
+      return r.decision === filterStatus;
+    });
+    const list = document.getElementById('refList');
+    document.getElementById('refCount').textContent = allReferences.length + ' references';
+    list.innerHTML = filtered.map(r =>
+      '<div class="ref-item' + (r.id === selectedRefId ? ' selected' : '') +
+        (r.decision ? ' decision-' + r.decision : '') + '"' +
+        ' onclick="selectReference(\'' + r.id + '\')">' +
+        '<div class="ref-title">' + escapeHtml((r.title || 'Untitled').slice(0, 120)) + '</div>' +
+        '<div class="ref-meta">' + escapeHtml((r.authors || '').split(';')[0] || '') +
+          (r.year ? ' (' + escapeHtml(r.year) + ')' : '') + '</div>' +
+        (r.decision ? '<span class="badge badge-' + r.decision + '">' + r.decision + '</span>' : '') +
+      '</div>'
+    ).join('');
+    updatePRISMACounts();
+  }
+
+  function selectReference(id) {
+    selectedRefId = id;
+    const r = allReferences.find(ref => ref.id === id);
+    if (!r) return;
+    document.getElementById('decisionBar').style.display = 'flex';
+    const detail = document.getElementById('refDetail');
+    const project = projects.find(p => p.id === currentProjectId);
+    const picoTerms = project ? [project.pico.P, project.pico.I, project.pico.C, project.pico.O]
+      .filter(Boolean).flatMap(t => t.split(/[,;]/).map(s => s.trim()).filter(Boolean)) : [];
+
+    detail.innerHTML =
+      '<h2 class="detail-title">' + escapeHtml(r.title || 'Untitled') + '</h2>' +
+      '<div class="detail-section"><h3>Authors</h3><p>' + escapeHtml(r.authors || 'Not available') + '</p></div>' +
+      '<div class="detail-section"><h3>Publication</h3><p>' +
+        escapeHtml(r.journal || 'Unknown') +
+        (r.year ? ' (' + escapeHtml(r.year) + ')' : '') +
+        (r.volume ? ', Vol. ' + escapeHtml(r.volume) : '') +
+        (r.issue ? '(' + escapeHtml(r.issue) + ')' : '') +
+        (r.startPage ? ': ' + escapeHtml(r.startPage) + (r.endPage ? '-' + escapeHtml(r.endPage) : '') : '') +
+      '</p>' +
+        (r.doi ? '<p class="text-muted">DOI: ' + escapeHtml(r.doi) + '</p>' : '') +
+        (r.pmid ? '<p class="text-muted">PMID: ' + escapeHtml(r.pmid) + '</p>' : '') +
+      '</div>' +
+      '<div class="detail-section"><h3>Abstract</h3>' +
+        '<div class="abstract-content">' + highlightTerms(escapeHtml(r.abstract || 'No abstract available'), picoTerms) + '</div>' +
+      '</div>' +
+      (r.keywords && r.keywords.length ? '<div class="detail-section"><h3>Keywords</h3><div class="keyword-list">' +
+        r.keywords.map(k => '<span class="keyword">' + escapeHtml(k) + '</span>').join('') +
+      '</div></div>' : '') +
+      '<div class="detail-section"><label>Exclusion Reason:</label>' +
+        '<input type="text" id="exclusionReason" value="' + escapeHtml(r.reason || '') + '"' +
+        ' placeholder="e.g., wrong population, not RCT..."' +
+        ' onchange="updateReason(this.value)" style="margin-top:4px;padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius);width:100%">' +
+      '</div>';
+    renderReferenceList();
+  }
+
+  function highlightTerms(text, terms) {
+    if (!terms.length) return text;
+    const escaped = terms.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    const regex = new RegExp('(' + escaped.join('|') + ')', 'gi');
+    return text.replace(regex, '<mark>$1</mark>');
+  }
+
+  // ============================================================
+  // SCREENING — DECISIONS & KEYBOARD SHORTCUTS
+  // ============================================================
+  async function makeDecision(decision) {
+    if (!selectedRefId) return;
+    const ref = allReferences.find(r => r.id === selectedRefId);
+    if (!ref) return;
+    ref.decision = decision;
+    if (decision === 'exclude') {
+      const reasonInput = document.getElementById('exclusionReason');
+      if (reasonInput) ref.reason = reasonInput.value;
+    }
+    await idbPut('references', ref);
+    // Move to next pending
+    const nextPending = allReferences.find(r => !r.decision && r.id !== selectedRefId);
+    if (nextPending) selectReference(nextPending.id);
+    else { selectedRefId = null; document.getElementById('decisionBar').style.display = 'none'; }
+    await renderReferenceList();
+  }
+
+  function updateReason(value) {
+    const ref = allReferences.find(r => r.id === selectedRefId);
+    if (!ref) return;
+    ref.reason = value.slice(0, 500);
+    idbPut('references', ref);
+  }
+
+  function skipRecord() {
+    const currentIdx = allReferences.findIndex(r => r.id === selectedRefId);
+    if (currentIdx < allReferences.length - 1) selectReference(allReferences[currentIdx + 1].id);
+  }
+
+  // Keyboard shortcuts (only active on screen phase)
+  document.addEventListener('keydown', (e) => {
+    if (currentPhase !== 'screen' || !selectedRefId) return;
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+    switch (e.key.toLowerCase()) {
+      case 'i': makeDecision('include'); break;
+      case 'e': makeDecision('exclude'); break;
+      case 'm': makeDecision('maybe'); break;
+      case 'd': makeDecision('duplicate'); break;
+      case 'n': skipRecord(); break;
+    }
+  });
+
+  // ============================================================
+  // DEDUPLICATION
+  // ============================================================
+  function normalizeDOI(value) {
+    if (!value) return '';
+    return String(value).trim().replace(/^doi:\s*/i, '')
+      .replace(/^https?:\/\/(dx\.)?doi\.org\//i, '').trim().toLowerCase();
+  }
+
+  function normalizeTitle(title) {
+    if (!title) return '';
+    return title.toLowerCase().replace(/[^\w\s]/g, '').replace(/\s+/g, ' ').trim();
+  }
+
+  function levenshteinSimilarity(a, b) {
+    if (a === b) return 1;
+    if (!a || !b) return 0;
+    const longer = a.length > b.length ? a : b;
+    const shorter = a.length > b.length ? b : a;
+    if (longer.length === 0) return 1;
+    const matrix = [];
+    for (let i = 0; i <= shorter.length; i++) matrix[i] = [i];
+    for (let j = 0; j <= longer.length; j++) matrix[0][j] = j;
+    for (let i = 1; i <= shorter.length; i++) {
+      for (let j = 1; j <= longer.length; j++) {
+        matrix[i][j] = shorter[i-1] === longer[j-1]
+          ? matrix[i-1][j-1]
+          : Math.min(matrix[i-1][j-1]+1, matrix[i][j-1]+1, matrix[i-1][j]+1);
+      }
+    }
+    return (longer.length - matrix[shorter.length][longer.length]) / longer.length;
+  }
+
+  async function runDeduplication() {
+    await loadReferences();
+    const dupes = [];
+    const seenDOI = new Map();
+    const seenPMID = new Map();
+    const seenTitle = new Map();
+
+    for (const r of allReferences) {
+      if (r.decision === 'duplicate') continue; // already marked
+      // DOI match
+      if (r.doi) {
+        const nd = normalizeDOI(r.doi);
+        if (nd && seenDOI.has(nd)) { dupes.push({ id: r.id, of: seenDOI.get(nd), method: 'DOI' }); continue; }
+        if (nd) seenDOI.set(nd, r.id);
+      }
+      // PMID match
+      if (r.pmid) {
+        const np = String(r.pmid).replace(/\D/g, '');
+        if (np && seenPMID.has(np)) { dupes.push({ id: r.id, of: seenPMID.get(np), method: 'PMID' }); continue; }
+        if (np) seenPMID.set(np, r.id);
+      }
+      // Fuzzy title match
+      if (r.title) {
+        const nt = normalizeTitle(r.title);
+        if (!nt) continue;
+        const exact = seenTitle.get(nt);
+        if (exact) { dupes.push({ id: r.id, of: exact, method: 'Title (exact)' }); continue; }
+        let found = false;
+        for (const [existingTitle, existingId] of seenTitle) {
+          if (Math.abs(existingTitle.length - nt.length) > Math.max(12, nt.length * 0.25)) continue;
+          if (levenshteinSimilarity(nt, existingTitle) >= 0.85) {
+            dupes.push({ id: r.id, of: existingId, method: 'Title (fuzzy)' });
+            found = true; break;
+          }
+        }
+        if (!found) seenTitle.set(nt, r.id);
+      }
+    }
+
+    // Mark duplicates
+    const tx = db.transaction('references', 'readwrite');
+    const store = tx.objectStore('references');
+    for (const d of dupes) {
+      const ref = allReferences.find(r => r.id === d.id);
+      if (ref && !ref.decision) {
+        ref.decision = 'duplicate';
+        ref.reason = 'Duplicate of ' + d.of + ' (' + d.method + ')';
+        store.put(ref);
+      }
+    }
+    showToast('Found ' + dupes.length + ' duplicates', 'info');
+    await renderReferenceList();
+  }
+
+  // ============================================================
+  // PRISMA FLOW DIAGRAM
+  // ============================================================
+  function updatePRISMACounts() {
+    const counts = { total: 0, duplicates: 0, excluded: 0, included: 0, maybe: 0, pending: 0, reasons: {} };
+    for (const r of allReferences) {
+      counts.total++;
+      if (!r.decision) counts.pending++;
+      else if (r.decision === 'duplicate') counts.duplicates++;
+      else if (r.decision === 'exclude') {
+        counts.excluded++;
+        const reason = r.reason || 'Other';
+        counts.reasons[reason] = (counts.reasons[reason] || 0) + 1;
+      }
+      else if (r.decision === 'include') counts.included++;
+      else if (r.decision === 'maybe') counts.maybe++;
+    }
+    const project = projects.find(p => p.id === currentProjectId);
+    if (project) {
+      project.prisma = {
+        identified: counts.total,
+        duplicates: counts.duplicates,
+        screened: counts.total - counts.duplicates,
+        excludedScreen: counts.excluded,
+        included: counts.included
+      };
+      idbPut('projects', project);
+    }
+    renderPRISMAFlow(counts);
+  }
+
+  function renderPRISMAFlow(stats) {
+    const screened = stats.total - stats.duplicates;
+    const el = document.getElementById('prismaFlow');
+    if (!el) return;
+    el.innerHTML =
+      '<svg viewBox="0 0 700 480" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;width:100%">' +
+        '<style>' +
+          '.pbox { fill: var(--surface); stroke: var(--primary); stroke-width: 2; rx: 8; }' +
+          '.pbox-ex { fill: var(--surface); stroke: var(--danger); stroke-width: 2; rx: 8; }' +
+          '.pbox-inc { fill: var(--surface); stroke: var(--success); stroke-width: 2; rx: 8; }' +
+          '.plabel { font-family: var(--font); font-size: 12px; fill: var(--text); text-anchor: middle; }' +
+          '.pvalue { font-family: var(--font); font-size: 15px; font-weight: bold; fill: var(--primary); text-anchor: middle; }' +
+          '.parrow { stroke: var(--text-muted); stroke-width: 1.5; fill: none; marker-end: url(#ah); }' +
+        '</style>' +
+        '<defs><marker id="ah" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">' +
+          '<polygon points="0 0, 8 3, 0 6" fill="var(--text-muted)"/></marker></defs>' +
+
+        '<rect class="pbox" x="175" y="20" width="350" height="60"/>' +
+        '<text class="plabel" x="350" y="45">Records identified</text>' +
+        '<text class="pvalue" x="350" y="65">(n = ' + stats.total + ')</text>' +
+
+        '<path class="parrow" d="M350 80 L350 110"/>' +
+
+        '<rect class="pbox" x="175" y="110" width="350" height="60"/>' +
+        '<text class="plabel" x="350" y="135">After duplicates removed</text>' +
+        '<text class="pvalue" x="350" y="155">(n = ' + screened + ')</text>' +
+
+        '<rect class="pbox-ex" x="545" y="70" width="140" height="50"/>' +
+        '<text class="plabel" x="615" y="90" style="fill:var(--danger)">Duplicates</text>' +
+        '<text class="pvalue" x="615" y="108" style="fill:var(--danger)">(n = ' + stats.duplicates + ')</text>' +
+        '<path d="M525 95 L545 95" style="stroke:var(--danger);stroke-width:1.5"/>' +
+
+        '<path class="parrow" d="M350 170 L350 200"/>' +
+
+        '<rect class="pbox" x="175" y="200" width="350" height="60"/>' +
+        '<text class="plabel" x="350" y="225">Records screened</text>' +
+        '<text class="pvalue" x="350" y="245">(n = ' + screened + ')</text>' +
+
+        '<rect class="pbox-ex" x="545" y="200" width="140" height="60"/>' +
+        '<text class="plabel" x="615" y="220" style="fill:var(--danger)">Excluded</text>' +
+        '<text class="pvalue" x="615" y="245" style="fill:var(--danger)">(n = ' + stats.excluded + ')</text>' +
+        '<path d="M525 230 L545 230" style="stroke:var(--danger);stroke-width:1.5"/>' +
+
+        '<path class="parrow" d="M350 260 L350 290"/>' +
+
+        '<rect class="pbox" x="175" y="290" width="350" height="60"/>' +
+        '<text class="plabel" x="350" y="315">Awaiting decision</text>' +
+        '<text class="pvalue" x="350" y="335">(n = ' + (stats.pending + stats.maybe) + ')</text>' +
+
+        '<path class="parrow" d="M350 350 L350 380"/>' +
+
+        '<rect class="pbox-inc" x="175" y="380" width="350" height="60"/>' +
+        '<text class="plabel" x="350" y="405" style="fill:var(--success)">Studies included</text>' +
+        '<text class="pvalue" x="350" y="425" style="fill:var(--success)">(n = ' + stats.included + ')</text>' +
+      '</svg>';
+  }
+
+  function exportPRISMASVG() {
+    const svg = document.querySelector('#prismaFlow svg');
+    if (!svg) { showToast('No PRISMA diagram to export', 'warning'); return; }
+    const serializer = new XMLSerializer();
+    const svgStr = serializer.serializeToString(svg);
+    downloadFile(svgStr, 'prisma-flow.svg', 'image/svg+xml');
+  }
+
+  // ============================================================
+  // DATA EXTRACTION
+  // ============================================================
+  const VALID_EFFECT_TYPES = ['OR', 'RR', 'HR', 'MD', 'SMD', 'RD', 'Other'];
+  let extractedStudies = [];
+
+  async function loadStudies() {
+    extractedStudies = await idbGetAll('studies', 'projectId', currentProjectId);
+    return extractedStudies;
+  }
+
+  function addStudyRow(data) {
+    data = data || {};
+    const study = {
+      id: data.id || generateId(),
+      projectId: currentProjectId,
+      authorYear: data.authorYear || '',
+      nTotal: data.nTotal ?? null,
+      nIntervention: data.nIntervention ?? null,
+      nControl: data.nControl ?? null,
+      effectEstimate: data.effectEstimate ?? null,
+      lowerCI: data.lowerCI ?? null,
+      upperCI: data.upperCI ?? null,
+      effectType: VALID_EFFECT_TYPES.includes(data.effectType) ? data.effectType : 'OR',
+      weight: data.weight ?? null,
+      notes: data.notes || '',
+      rob: { d1: '', d2: '', d3: '', d4: '', d5: '', overall: '' }
+    };
+    extractedStudies.push(study);
+    saveStudy(study);
+    renderExtractTable();
+  }
+
+  function saveStudy(study) {
+    idbPut('studies', study);
+  }
+
+  function renderExtractTable() {
+    const body = document.getElementById('extractBody');
+    if (!body) return;
+    body.innerHTML = extractedStudies.map(s =>
+      '<tr data-id="' + s.id + '">' +
+        '<td><input type="text" value="' + escapeHtml(s.authorYear) + '" maxlength="200" onchange="updateStudy(\'' + s.id + '\',\'authorYear\',this.value)"></td>' +
+        '<td><input type="number" value="' + (s.nTotal ?? '') + '" onchange="updateStudy(\'' + s.id + '\',\'nTotal\',toSafeInt(this.value,null))"></td>' +
+        '<td><input type="number" value="' + (s.nIntervention ?? '') + '" onchange="updateStudy(\'' + s.id + '\',\'nIntervention\',toSafeInt(this.value,null))"></td>' +
+        '<td><input type="number" value="' + (s.nControl ?? '') + '" onchange="updateStudy(\'' + s.id + '\',\'nControl\',toSafeInt(this.value,null))"></td>' +
+        '<td><input type="number" step="any" value="' + (s.effectEstimate ?? '') + '" onchange="updateStudy(\'' + s.id + '\',\'effectEstimate\',toSafeFloat(this.value))"></td>' +
+        '<td><input type="number" step="any" value="' + (s.lowerCI ?? '') + '" onchange="updateStudy(\'' + s.id + '\',\'lowerCI\',toSafeFloat(this.value))"></td>' +
+        '<td><input type="number" step="any" value="' + (s.upperCI ?? '') + '" onchange="updateStudy(\'' + s.id + '\',\'upperCI\',toSafeFloat(this.value))"></td>' +
+        '<td><select onchange="updateStudy(\'' + s.id + '\',\'effectType\',this.value)">' +
+          VALID_EFFECT_TYPES.map(t => '<option value="' + t + '"' + (s.effectType === t ? ' selected' : '') + '>' + t + '</option>').join('') +
+        '</select></td>' +
+        '<td><input type="number" step="any" value="' + (s.weight ?? '') + '" onchange="updateStudy(\'' + s.id + '\',\'weight\',toSafeFloat(this.value))"></td>' +
+        '<td><input type="text" value="' + escapeHtml(s.notes) + '" maxlength="500" onchange="updateStudy(\'' + s.id + '\',\'notes\',this.value.slice(0,500))"></td>' +
+        '<td><button onclick="deleteStudy(\'' + s.id + '\')" class="btn-sm btn-danger">X</button></td>' +
+      '</tr>'
+    ).join('');
+  }
+
+  function updateStudy(id, field, value) {
+    const s = extractedStudies.find(st => st.id === id);
+    if (!s) return;
+    s[field] = value;
+    saveStudy(s);
+  }
+
+  function deleteStudy(id) {
+    extractedStudies = extractedStudies.filter(s => s.id !== id);
+    idbDelete('studies', id);
+    renderExtractTable();
+  }
+
+  function autoPopulateFromIncluded() {
+    const included = allReferences.filter(r => r.decision === 'include');
+    if (!included.length) { showToast('No included references', 'warning'); return; }
+    let added = 0;
+    for (const r of included) {
+      const authorYear = ((r.authors || '').split(';')[0] || '').trim() + ' ' + (r.year || '');
+      const label = authorYear.trim();
+      const exists = extractedStudies.some(s => s.authorYear === label);
+      if (!exists) {
+        addStudyRow({ authorYear: label });
+        added++;
+      }
+    }
+    showToast('Added ' + added + ' studies from screening', 'success');
+  }
+
+  // ============================================================
+  // EXPORT HELPERS
+  // ============================================================
+  function downloadFile(content, filename, mimeType) {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function exportToMetaSprint(format) {
+    if (!extractedStudies.length) { showToast('No studies to export', 'warning'); return; }
+    if (format === 'pairwise') {
+      const header = 'Study ID,N Total,N Intervention,N Control,Effect,Lower CI,Upper CI,Type,Weight,Notes';
+      const rows = extractedStudies.map(s =>
+        [s.authorYear, s.nTotal ?? '', s.nIntervention ?? '', s.nControl ?? '',
+         s.effectEstimate ?? '', s.lowerCI ?? '', s.upperCI ?? '',
+         s.effectType, s.weight ?? '', '"' + (s.notes || '').replace(/"/g, '""') + '"'].join(',')
+      );
+      downloadFile(header + '\n' + rows.join('\n'), 'metasprint-pairwise-export.csv', 'text/csv');
+    } else if (format === 'nma') {
+      const data = extractedStudies.map(s => ({
+        id: s.id, authorYear: s.authorYear,
+        nTotal: s.nTotal, effectEstimate: s.effectEstimate,
+        lowerCI: s.lowerCI, upperCI: s.upperCI, effectType: s.effectType
+      }));
+      downloadFile(JSON.stringify(data, null, 2), 'metasprint-nma-export.json', 'application/json');
+    }
+    showToast('Exported ' + extractedStudies.length + ' studies', 'success');
+  }
+
+  function exportStudiesCSV() {
+    if (!extractedStudies.length) { showToast('No studies to export', 'warning'); return; }
+    const header = 'Study ID,N Total,N Intervention,N Control,Effect,Lower CI,Upper CI,Type,Weight,Notes';
+    const rows = extractedStudies.map(s =>
+      [s.authorYear, s.nTotal ?? '', s.nIntervention ?? '', s.nControl ?? '',
+       s.effectEstimate ?? '', s.lowerCI ?? '', s.upperCI ?? '',
+       s.effectType, s.weight ?? '', '"' + (s.notes || '').replace(/"/g, '""') + '"'].join(',')
+    );
+    downloadFile(header + '\n' + rows.join('\n'), 'studies-export.csv', 'text/csv');
+  }
+
+  // ============================================================
+  // META-ANALYSIS ENGINE (DerSimonian-Laird)
+  // ============================================================
+  function normalCDF(x) {
+    const a1 = 0.254829592, a2 = -0.284496736, a3 = 1.421413741, a4 = -1.453152027, a5 = 1.061405429;
+    const p = 0.3275911;
+    const sign = x < 0 ? -1 : 1;
+    x = Math.abs(x) / Math.sqrt(2);
+    const t = 1 / (1 + p * x);
+    const y = 1 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+    return 0.5 * (1 + sign * y);
+  }
+
+  function normalQuantile(p) {
+    // Rational approximation (Abramowitz & Stegun 26.2.23)
+    if (p <= 0) return -Infinity;
+    if (p >= 1) return Infinity;
+    if (p === 0.5) return 0;
+    const a = p < 0.5 ? p : 1 - p;
+    const t = Math.sqrt(-2 * Math.log(a));
+    const c0 = 2.515517, c1 = 0.802853, c2 = 0.010328;
+    const d1 = 1.432788, d2 = 0.189269, d3 = 0.001308;
+    let z = t - (c0 + c1 * t + c2 * t * t) / (1 + d1 * t + d2 * t * t + d3 * t * t * t);
+    return p < 0.5 ? -z : z;
+  }
+
+  function computeMetaAnalysis(studies, confLevel) {
+    confLevel = confLevel ?? 0.95;
+    const alpha = 1 - confLevel;
+    const zCrit = normalQuantile(1 - alpha / 2);
+
+    const valid = studies.filter(s =>
+      s.effectEstimate !== null && s.lowerCI !== null && s.upperCI !== null
+    );
+    if (valid.length === 0) return null;
+
+    const isRatio = ['OR', 'RR', 'HR'].includes(valid[0].effectType);
+
+    const data = valid.map(s => {
+      const yi = isRatio ? Math.log(s.effectEstimate) : s.effectEstimate;
+      const lo = isRatio ? Math.log(s.lowerCI) : s.lowerCI;
+      const hi = isRatio ? Math.log(s.upperCI) : s.upperCI;
+      const sei = (hi - lo) / (2 * zCrit);
+      return { ...s, yi, sei, vi: sei * sei, wi: 1 / (sei * sei) };
+    });
+
+    // Fixed-effect estimate
+    const sumW = data.reduce((a, d) => a + d.wi, 0);
+    const muFE = data.reduce((a, d) => a + d.wi * d.yi, 0) / sumW;
+
+    // Q statistic
+    const Q = data.reduce((a, d) => a + d.wi * (d.yi - muFE) ** 2, 0);
+    const df = data.length - 1;
+
+    // DerSimonian-Laird tau-squared
+    const C = sumW - data.reduce((a, d) => a + d.wi * d.wi, 0) / sumW;
+    const tau2 = df > 0 ? Math.max(0, (Q - df) / C) : 0;
+
+    // Random-effects weights
+    const reData = data.map(d => {
+      const wi_re = 1 / (d.vi + tau2);
+      return { ...d, wi_re };
+    });
+    const sumW_re = reData.reduce((a, d) => a + d.wi_re, 0);
+    const muRE = reData.reduce((a, d) => a + d.wi_re * d.yi, 0) / sumW_re;
+    const seRE = Math.sqrt(1 / sumW_re);
+
+    // I-squared
+    const I2 = df > 0 ? Math.max(0, (Q - df) / Q * 100) : 0;
+
+    // z-test
+    const z = muRE / seRE;
+    const pValue = 2 * (1 - normalCDF(Math.abs(z)));
+
+    // Back-transform
+    const pooled = isRatio ? Math.exp(muRE) : muRE;
+    const pooledLo = isRatio ? Math.exp(muRE - zCrit * seRE) : muRE - zCrit * seRE;
+    const pooledHi = isRatio ? Math.exp(muRE + zCrit * seRE) : muRE + zCrit * seRE;
+
+    // Per-study weights (%)
+    const totalW = reData.reduce((a, d) => a + d.wi_re, 0);
+    const studyResults = reData.map(d => ({
+      ...d,
+      weightPct: (d.wi_re / totalW * 100).toFixed(1),
+      display: isRatio ? Math.exp(d.yi) : d.yi,
+      displayLo: isRatio ? Math.exp(d.yi - zCrit * d.sei) : d.yi - zCrit * d.sei,
+      displayHi: isRatio ? Math.exp(d.yi + zCrit * d.sei) : d.yi + zCrit * d.sei
+    }));
+
+    return {
+      pooled, pooledLo, pooledHi, tau2, I2, Q, df, pValue,
+      k: data.length, isRatio, studyResults,
+      muRE, seRE, confLevel, zCrit
+    };
+  }
+
+  // ============================================================
+  // FOREST PLOT (SVG)
+  // ============================================================
+  function renderForestPlot(result) {
+    if (!result) return '<p>No data for forest plot</p>';
+    const { studyResults, pooled, pooledLo, pooledHi, isRatio, zCrit } = result;
+    const k = studyResults.length;
+    const rowH = 28, headerH = 40, footerH = 50, pad = 20;
+    const h = headerH + k * rowH + footerH + pad;
+    const plotLeft = 250, plotRight = 550, plotW = plotRight - plotLeft;
+    const nullLine = isRatio ? 1 : 0;
+
+    const allVals = studyResults.flatMap(s => [s.displayLo, s.displayHi]).concat([pooledLo, pooledHi, nullLine]);
+    let xMin = Math.min(...allVals) * (isRatio ? 0.8 : 1) - (isRatio ? 0 : 0.2);
+    let xMax = Math.max(...allVals) * (isRatio ? 1.2 : 1) + (isRatio ? 0 : 0.2);
+    if (isRatio) xMin = Math.max(0.01, xMin);
+
+    const xScale = isRatio
+      ? (v) => plotLeft + (Math.log(v) - Math.log(xMin)) / (Math.log(xMax) - Math.log(xMin)) * plotW
+      : (v) => plotLeft + (v - xMin) / (xMax - xMin) * plotW;
+
+    let svg = '<svg viewBox="0 0 750 ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:750px;width:100%;font-family:var(--font)">';
+
+    // Header
+    svg += '<text x="10" y="25" font-size="11" font-weight="bold">Study</text>';
+    svg += '<text x="' + (plotLeft + plotW/2) + '" y="25" text-anchor="middle" font-size="11" font-weight="bold">Effect (95% CI)</text>';
+    svg += '<text x="570" y="25" font-size="11" font-weight="bold">Weight</text>';
+    svg += '<text x="620" y="25" font-size="11" font-weight="bold">Est [CI]</text>';
+
+    // Null line
+    const nullX = xScale(nullLine);
+    svg += '<line x1="' + nullX + '" y1="' + headerH + '" x2="' + nullX + '" y2="' + (headerH + k * rowH) + '" stroke="#ccc" stroke-dasharray="4"/>';
+
+    // Study rows
+    studyResults.forEach((s, i) => {
+      const y = headerH + i * rowH + rowH / 2;
+      const cx = xScale(s.display);
+      const x1 = xScale(Math.max(s.displayLo, xMin));
+      const x2 = xScale(Math.min(s.displayHi, xMax));
+      const size = Math.max(3, Math.min(10, Math.sqrt(parseFloat(s.weightPct)) * 2));
+
+      svg += '<text x="10" y="' + (y + 4) + '" font-size="10">' + escapeHtml((s.authorYear || '').slice(0, 30)) + '</text>';
+      svg += '<line x1="' + Math.max(plotLeft, x1) + '" y1="' + y + '" x2="' + Math.min(plotRight, x2) + '" y2="' + y + '" stroke="var(--primary)" stroke-width="1.5"/>';
+      svg += '<rect x="' + (cx - size/2) + '" y="' + (y - size/2) + '" width="' + size + '" height="' + size + '" fill="var(--primary)" transform="rotate(45 ' + cx + ' ' + y + ')"/>';
+      svg += '<text x="570" y="' + (y + 4) + '" font-size="9">' + s.weightPct + '%</text>';
+      svg += '<text x="620" y="' + (y + 4) + '" font-size="9">' + s.display.toFixed(2) + ' [' + s.displayLo.toFixed(2) + ', ' + s.displayHi.toFixed(2) + ']</text>';
+    });
+
+    // Pooled diamond
+    const dy = headerH + k * rowH + 20;
+    const dx = xScale(pooled);
+    const dlo = xScale(Math.max(pooledLo, xMin));
+    const dhi = xScale(Math.min(pooledHi, xMax));
+    svg += '<polygon points="' + dlo + ',' + dy + ' ' + dx + ',' + (dy-8) + ' ' + dhi + ',' + dy + ' ' + dx + ',' + (dy+8) + '" fill="var(--danger)" opacity="0.8"/>';
+    svg += '<text x="10" y="' + (dy + 4) + '" font-size="10" font-weight="bold">Pooled (RE)</text>';
+    svg += '<text x="620" y="' + (dy + 4) + '" font-size="9" font-weight="bold">' + pooled.toFixed(2) + ' [' + pooledLo.toFixed(2) + ', ' + pooledHi.toFixed(2) + ']</text>';
+
+    // X-axis
+    const axisY = headerH + k * rowH + 40;
+    svg += '<line x1="' + plotLeft + '" y1="' + axisY + '" x2="' + plotRight + '" y2="' + axisY + '" stroke="var(--text)" stroke-width="1"/>';
+    const ticks = isRatio ? [0.1, 0.25, 0.5, 1, 2, 4].filter(v => v >= xMin && v <= xMax) : [];
+    if (!isRatio) {
+      const range = xMax - xMin;
+      const step = Math.pow(10, Math.floor(Math.log10(range))) / 2;
+      for (let v = Math.ceil(xMin / step) * step; v <= xMax; v += step) ticks.push(parseFloat(v.toFixed(4)));
+    }
+    ticks.forEach(v => {
+      const tx = xScale(v);
+      svg += '<line x1="' + tx + '" y1="' + axisY + '" x2="' + tx + '" y2="' + (axisY + 5) + '" stroke="var(--text)"/>';
+      svg += '<text x="' + tx + '" y="' + (axisY + 15) + '" text-anchor="middle" font-size="9">' + v + '</text>';
+    });
+
+    svg += '</svg>';
+    return svg;
+  }
+
+  // ============================================================
+  // FUNNEL PLOT (SVG)
+  // ============================================================
+  function renderFunnelPlot(result) {
+    if (!result) return '';
+    const { studyResults, muRE, isRatio } = result;
+    const w = 500, h = 400, pad = 50;
+
+    const ses = studyResults.map(d => d.sei);
+    const maxSE = Math.max(...ses) * 1.2;
+
+    const xScale = (v) => pad + (v - (muRE - 3 * maxSE)) / (6 * maxSE) * (w - 2 * pad);
+    const yScale = (se) => pad + (se / maxSE) * (h - 2 * pad);
+
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;width:100%;font-family:var(--font)">';
+
+    // Funnel triangle
+    const topX = xScale(muRE);
+    const bottomLo = xScale(muRE - 1.96 * maxSE);
+    const bottomHi = xScale(muRE + 1.96 * maxSE);
+    svg += '<polygon points="' + topX + ',' + pad + ' ' + bottomLo + ',' + (h - pad) + ' ' + bottomHi + ',' + (h - pad) + '" fill="#f0f0f0" stroke="#ccc"/>';
+
+    // Vertical center line
+    svg += '<line x1="' + topX + '" y1="' + pad + '" x2="' + topX + '" y2="' + (h - pad) + '" stroke="#999" stroke-dasharray="4"/>';
+
+    // Study points
+    studyResults.forEach(d => {
+      const cx = xScale(d.yi);
+      const cy = yScale(d.sei);
+      svg += '<circle cx="' + cx + '" cy="' + cy + '" r="4" fill="var(--primary)" opacity="0.7"/>';
+    });
+
+    // Axes
+    svg += '<text x="' + (w/2) + '" y="' + (h - 5) + '" text-anchor="middle" font-size="10">Effect size' + (isRatio ? ' (log scale)' : '') + '</text>';
+    svg += '<text x="15" y="' + (h/2) + '" text-anchor="middle" font-size="10" transform="rotate(-90,15,' + (h/2) + ')">Standard Error</text>';
+
+    svg += '</svg>';
+    return svg;
+  }
+
+  // ============================================================
+  // ANALYSIS DASHBOARD
+  // ============================================================
+  async function runAnalysis() {
+    await loadStudies();
+    const result = computeMetaAnalysis(extractedStudies);
+    if (!result) { showToast('Need at least 1 study with complete data', 'warning'); return; }
+    document.getElementById('analysisSummary').innerHTML =
+      '<div class="stat-card"><div class="stat-label">Studies</div><div class="stat-value">' + result.k + '</div></div>' +
+      '<div class="stat-card"><div class="stat-label">Pooled Effect</div><div class="stat-value">' + result.pooled.toFixed(3) + '</div></div>' +
+      '<div class="stat-card"><div class="stat-label">95% CI</div><div class="stat-value">[' + result.pooledLo.toFixed(3) + ', ' + result.pooledHi.toFixed(3) + ']</div></div>' +
+      '<div class="stat-card"><div class="stat-label">I\u00B2</div><div class="stat-value">' + result.I2.toFixed(1) + '%</div></div>' +
+      '<div class="stat-card"><div class="stat-label">\u03C4\u00B2</div><div class="stat-value">' + result.tau2.toFixed(4) + '</div></div>' +
+      '<div class="stat-card"><div class="stat-label">p-value</div><div class="stat-value">' + (result.pValue < 0.001 ? '< 0.001' : result.pValue.toFixed(3)) + '</div></div>';
+    document.getElementById('forestPlotContainer').innerHTML = renderForestPlot(result);
+    document.getElementById('funnelPlotContainer').innerHTML = renderFunnelPlot(result);
+  }
+
+  // ============================================================
+  // SEARCH ENGINE — 5 sources (PubMed, OpenAlex, CT.gov, Europe PMC, CrossRef)
+  // Adapted from universal_rct_finder search strategies
+  // ============================================================
+  const PUBMED_BASE = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
+  const RATE_LIMITS = { pubmed: 350, openalex: 100, ctgov: 50, europepmc: 120, crossref: 50 };
+  const lastRequestTimes = {};
+
+  async function rateLimitedFetch(url, source) {
+    source = source || 'pubmed';
+    const limit = RATE_LIMITS[source] ?? 350;
+    const now = Date.now();
+    const last = lastRequestTimes[source] || 0;
+    const wait = Math.max(0, limit - (now - last));
+    if (wait > 0) await new Promise(r => setTimeout(r, wait));
+    lastRequestTimes[source] = Date.now();
+    return fetch(url);
+  }
+
+  // --- Registry ID extraction (11 registries from universal_rct_finder) ---
+  const REGISTRY_PATTERNS = {
+    nct: /NCT\d{8}/gi,
+    isrctn: /ISRCTN\d{5,15}/gi,
+    euctr: /\d{4}-\d{6}-\d{2}/g,
+    actrn: /ACTRN\d{14}/gi,
+    chictr: /ChiCTR[-\u2010]?\w{3,15}/gi,
+    drks: /DRKS\d{8}/gi,
+    ctri: /CTRI\/\d{4}\/\d+\/\d+/gi,
+    jprn: /(?:UMIN\d{9}|jRCT\w{10,})/gi,
+    ntr: /NTR\d{3,6}/gi,
+    pactr: /PACTR\d{12,}/gi,
+    irct: /IRCT\w{15,}/gi
+  };
+
+  function extractRegistryIds(text) {
+    if (!text) return {};
+    const ids = {};
+    for (const [key, pattern] of Object.entries(REGISTRY_PATTERNS)) {
+      const matches = text.match(new RegExp(pattern.source, pattern.flags));
+      if (matches && matches.length > 0) {
+        ids[key] = [...new Set(matches.map(m => m.trim().toUpperCase()))];
+      }
+    }
+    return ids;
+  }
+
+  // --- Search status tracking ---
+  let searchResultsCache = [];
+  let searchSourceStats = {};
+
+  function updateSearchStatus(msg) {
+    document.getElementById('searchStatus').textContent = msg;
+  }
+
+  // ============================================================
+  // PubMed — Publication Type filter (from universal_rct_finder)
+  // ============================================================
+  function buildPubMedQuery() {
+    const P = document.getElementById('picoP')?.value || '';
+    const I = document.getElementById('picoI')?.value || '';
+    const C = document.getElementById('picoC')?.value || '';
+    const O = document.getElementById('picoO')?.value || '';
+    const parts = [];
+    if (P) parts.push('(' + P + '[Title/Abstract] OR ' + P + '[MeSH Terms])');
+    if (I) parts.push('(' + I + '[Title/Abstract] OR ' + I + '[MeSH Terms])');
+    if (C) parts.push('(' + C + '[Title/Abstract])');
+    if (O) parts.push('(' + O + '[Title/Abstract])');
+    // Use Publication Type filter (more precise than free text)
+    parts.push('"Randomized Controlled Trial"[Publication Type]');
+    return parts.join(' AND ');
+  }
+
+  async function searchPubMed() {
+    const query = buildPubMedQuery();
+    updateSearchStatus('Searching PubMed...');
+    try {
+      const searchUrl = PUBMED_BASE + 'esearch.fcgi?db=pubmed&term=' + encodeURIComponent(query) + '&retmax=500&retmode=json&usehistory=y';
+      const searchResp = await rateLimitedFetch(searchUrl, 'pubmed');
+      const searchData = await searchResp.json();
+      const totalCount = parseInt(searchData.esearchresult?.count || '0');
+      const pmids = searchData.esearchresult?.idlist || [];
+      if (!pmids.length) { updateSearchStatus('PubMed: 0 results'); return; }
+
+      const allRecords = [];
+      for (let i = 0; i < pmids.length; i += 200) {
+        const batch = pmids.slice(i, i + 200);
+        const fetchUrl = PUBMED_BASE + 'efetch.fcgi?db=pubmed&id=' + batch.join(',') + '&retmode=xml&rettype=abstract';
+        const fetchResp = await rateLimitedFetch(fetchUrl, 'pubmed');
+        const xml = await fetchResp.text();
+        allRecords.push(...parsePubMedXML(xml));
+        updateSearchStatus('PubMed: fetched ' + Math.min(i + 200, pmids.length) + '/' + pmids.length + ' (total: ' + totalCount + ')');
+      }
+      searchSourceStats.pubmed = allRecords.length;
+      displaySearchResults(allRecords, 'PubMed');
+    } catch (err) {
+      updateSearchStatus('PubMed error: ' + err.message);
+    }
+  }
+
+  function parsePubMedXML(xml) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xml, 'text/xml');
+    const articles = doc.querySelectorAll('PubmedArticle');
+    const results = [];
+    articles.forEach(article => {
+      const record = { id: generateId(), keywords: [], registryIds: {}, projectId: currentProjectId, source: 'PubMed' };
+      record.pmid = article.querySelector('MedlineCitation PMID')?.textContent || '';
+      record.title = article.querySelector('ArticleTitle')?.textContent || '';
+      const abTexts = article.querySelectorAll('AbstractText');
+      record.abstract = Array.from(abTexts).map(at => {
+        const label = at.getAttribute('Label');
+        return label ? label + ': ' + at.textContent : at.textContent;
+      }).join(' ');
+      const authors = article.querySelectorAll('Author');
+      record.authors = Array.from(authors).map(a =>
+        (a.querySelector('LastName')?.textContent || '') + ' ' + (a.querySelector('Initials')?.textContent || '')
+      ).filter(Boolean).join('; ');
+      record.year = article.querySelector('PubDate Year')?.textContent || '';
+      record.journal = article.querySelector('Journal Title')?.textContent || '';
+      record.doi = article.querySelector('ArticleId[IdType="doi"]')?.textContent || '';
+      article.querySelectorAll('MeshHeading DescriptorName').forEach(m => record.keywords.push(m.textContent));
+      // Extract NCT IDs from DataBank + abstract (universal_rct_finder pattern)
+      const dataBanks = article.querySelectorAll('DataBank AccessionNumber');
+      dataBanks.forEach(db => {
+        const val = db.textContent || '';
+        if (/^NCT\d{8}$/i.test(val)) {
+          record.nctId = val.toUpperCase();
+        }
+      });
+      // Mine abstract for registry IDs
+      record.registryIds = extractRegistryIds((record.abstract || '') + ' ' + (record.title || ''));
+      if (!record.nctId && record.registryIds.nct && record.registryIds.nct.length > 0) {
+        record.nctId = record.registryIds.nct[0];
+      }
+      if (record.title) results.push(record);
+    });
+    return results;
+  }
+
+  // ============================================================
+  // OpenAlex — RCT Concept filter C71924100 (from universal_rct_finder)
+  // ============================================================
+  async function searchOpenAlex() {
+    const P = document.getElementById('picoP')?.value || '';
+    const I = document.getElementById('picoI')?.value || '';
+    const query = [P, I].filter(Boolean).join(' ');
+    if (!query) { showToast('Enter at least Population or Intervention', 'warning'); return; }
+    updateSearchStatus('Searching OpenAlex...');
+    try {
+      // Use RCT concept filter (C71924100) from universal_rct_finder
+      const url = 'https://api.openalex.org/works?search=' + encodeURIComponent(query) +
+        '&filter=type:article,concepts.id:C71924100' +
+        '&per_page=200&sort=relevance_score:desc' +
+        '&select=id,doi,title,ids,abstract_inverted_index,publication_year,type,authorships,primary_location,concepts';
+      const resp = await rateLimitedFetch(url, 'openalex');
+      const data = await resp.json();
+      const records = (data.results || []).map(w => {
+        const abstract = w.abstract_inverted_index ? reconstructAbstract(w.abstract_inverted_index) : '';
+        const rec = {
+          id: generateId(), projectId: currentProjectId, source: 'OpenAlex',
+          title: w.title || '', doi: w.doi?.replace('https://doi.org/', '') || '',
+          year: String(w.publication_year || ''),
+          authors: (w.authorships || []).map(a => a.author?.display_name || '').join('; '),
+          journal: w.primary_location?.source?.display_name || '',
+          abstract: abstract,
+          keywords: (w.concepts || []).slice(0, 5).map(c => c.display_name),
+          openalex_id: w.id?.replace('https://openalex.org/', '') || '',
+          registryIds: extractRegistryIds(abstract + ' ' + (w.title || ''))
+        };
+        // Extract PMID from OpenAlex ids
+        if (w.ids?.pmid) rec.pmid = String(w.ids.pmid).replace(/^.*\//, '');
+        if (rec.registryIds.nct && rec.registryIds.nct.length > 0) rec.nctId = rec.registryIds.nct[0];
+        return rec;
+      });
+      searchSourceStats.openalex = records.length;
+      displaySearchResults(records, 'OpenAlex');
+    } catch (err) {
+      updateSearchStatus('OpenAlex error: ' + err.message);
+    }
+  }
+
+  function reconstructAbstract(invertedIndex) {
+    if (!invertedIndex) return '';
+    const words = [];
+    for (const [word, positions] of Object.entries(invertedIndex)) {
+      for (const pos of positions) words[pos] = word;
+    }
+    return words.filter(Boolean).join(' ');
+  }
+
+  // ============================================================
+  // CT.gov — Multi-strategy search (from universal_rct_finder)
+  // ============================================================
+  async function searchCTGov() {
+    const P = document.getElementById('picoP')?.value || '';
+    const I = document.getElementById('picoI')?.value || '';
+    if (!P && !I) { showToast('Enter at least Population or Intervention', 'warning'); return; }
+    updateSearchStatus('Searching ClinicalTrials.gov (multi-strategy)...');
+    try {
+      // Multi-strategy: condition-only, condition+randomized, condition+randomized+treatment
+      const strategies = [];
+      if (P) {
+        strategies.push({ 'query.cond': P, pageSize: '1000', countTotal: 'true' });
+        strategies.push({ 'query.cond': P, 'query.term': 'AREA[DesignAllocation]RANDOMIZED', pageSize: '1000', countTotal: 'true' });
+        strategies.push({ 'query.cond': P, 'query.term': 'AREA[DesignAllocation]RANDOMIZED AND AREA[DesignPrimaryPurpose]TREATMENT', pageSize: '1000', countTotal: 'true' });
+      }
+      if (I) {
+        strategies.push({ 'query.cond': P || '', 'query.intr': I, 'query.term': 'AREA[StudyType]INTERVENTIONAL AND AREA[DesignAllocation]RANDOMIZED', pageSize: '1000', countTotal: 'true' });
+      }
+
+      const seenNCT = new Set();
+      const allRecords = [];
+
+      for (let si = 0; si < strategies.length; si++) {
+        const params = new URLSearchParams(strategies[si]);
+        let pageToken = null;
+        let pageNum = 0;
+        do {
+          const url = 'https://clinicaltrials.gov/api/v2/studies?' + params + (pageToken ? '&pageToken=' + pageToken : '');
+          const resp = await rateLimitedFetch(url, 'ctgov');
+          const data = await resp.json();
+          const studies = data.studies || [];
+          pageToken = data.nextPageToken || null;
+          pageNum++;
+
+          for (const s of studies) {
+            const p = s.protocolSection || {};
+            const nctId = p.identificationModule?.nctId || '';
+            if (seenNCT.has(nctId)) continue;
+            seenNCT.add(nctId);
+            allRecords.push({
+              id: generateId(), projectId: currentProjectId, source: 'ClinicalTrials.gov',
+              title: p.identificationModule?.officialTitle || p.identificationModule?.briefTitle || '',
+              abstract: p.descriptionModule?.briefSummary || '',
+              year: p.statusModule?.startDateStruct?.date?.substring(0, 4) || '',
+              nctId: nctId,
+              enrollment: p.designModule?.enrollmentInfo?.count,
+              status: p.statusModule?.overallStatus || '',
+              phase: p.designModule?.phases?.join(', ') || '',
+              keywords: [],
+              registryIds: nctId ? { nct: [nctId] } : {}
+            });
+          }
+          updateSearchStatus('CT.gov strategy ' + (si + 1) + '/' + strategies.length + ': ' + allRecords.length + ' unique trials (page ' + pageNum + ')');
+        } while (pageToken && pageNum < 10); // cap at 10 pages per strategy
+      }
+
+      searchSourceStats.ctgov = allRecords.length;
+      displaySearchResults(allRecords, 'ClinicalTrials.gov');
+    } catch (err) {
+      updateSearchStatus('CT.gov error: ' + err.message);
+    }
+  }
+
+  // ============================================================
+  // Europe PMC — RCT filter + registry mention mining (from universal_rct_finder)
+  // ============================================================
+  async function searchEuropePMC() {
+    const P = document.getElementById('picoP')?.value || '';
+    const I = document.getElementById('picoI')?.value || '';
+    const terms = [P, I].filter(Boolean).join(' AND ');
+    if (!terms) { showToast('Enter at least Population or Intervention', 'warning'); return; }
+    updateSearchStatus('Searching Europe PMC...');
+    try {
+      // Strategy 1: RCT publication type filter
+      const rctQuery = '(' + terms + ') AND (PUB_TYPE:"Randomized Controlled Trial" OR "randomized controlled trial")';
+      const url = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=' +
+        encodeURIComponent(rctQuery) + '&resultType=core&pageSize=200&format=json';
+      const resp = await rateLimitedFetch(url, 'europepmc');
+      const data = await resp.json();
+      const rawResults = data.resultList?.result || [];
+
+      const records = rawResults.map(r => {
+        const abstract = r.abstractText || '';
+        const fullText = abstract + ' ' + (r.title || '');
+        const rec = {
+          id: generateId(), projectId: currentProjectId, source: 'Europe PMC',
+          title: r.title || '',
+          authors: r.authorString || '',
+          year: r.pubYear || '',
+          journal: r.journalTitle || '',
+          abstract: abstract,
+          doi: r.doi || '',
+          pmid: r.pmid || '',
+          keywords: [],
+          registryIds: extractRegistryIds(fullText)
+        };
+        if (rec.registryIds.nct && rec.registryIds.nct.length > 0) rec.nctId = rec.registryIds.nct[0];
+        return rec;
+      }).filter(r => r.title);
+
+      searchSourceStats.europepmc = records.length;
+      displaySearchResults(records, 'Europe PMC');
+    } catch (err) {
+      updateSearchStatus('Europe PMC error: ' + err.message);
+    }
+  }
+
+  // ============================================================
+  // CrossRef — clinical-trial-number field (from universal_rct_finder)
+  // ============================================================
+  async function searchCrossRef() {
+    const P = document.getElementById('picoP')?.value || '';
+    const I = document.getElementById('picoI')?.value || '';
+    const query = [P, I].filter(Boolean).join(' ') + ' randomized controlled trial';
+    if (!query.trim()) return;
+    updateSearchStatus('Searching CrossRef...');
+    try {
+      const url = 'https://api.crossref.org/works?query=' + encodeURIComponent(query) +
+        '&filter=type:journal-article&rows=100&sort=relevance&order=desc' +
+        '&mailto=metasprint-autopilot@example.com';
+      const resp = await rateLimitedFetch(url, 'crossref');
+      const data = await resp.json();
+      const items = data.message?.items || [];
+
+      const records = items.map(item => {
+        const abstract = item.abstract || '';
+        // CrossRef has a dedicated clinical-trial-number field
+        const trialNumbers = item['clinical-trial-number'] || [];
+        const nctIds = trialNumbers
+          .filter(t => /NCT\d{8}/i.test(t['clinical-trial-number'] || ''))
+          .map(t => t['clinical-trial-number'].toUpperCase());
+
+        const rec = {
+          id: generateId(), projectId: currentProjectId, source: 'CrossRef',
+          title: (item.title || [])[0] || '',
+          authors: (item.author || []).map(a => (a.family || '') + ' ' + (a.given || '')).join('; '),
+          year: item.published?.['date-parts']?.[0]?.[0]?.toString() || '',
+          journal: (item['container-title'] || [])[0] || '',
+          abstract: abstract.replace(/<[^>]*>/g, ''), // strip HTML tags
+          doi: item.DOI || '',
+          keywords: [],
+          registryIds: extractRegistryIds(abstract + ' ' + ((item.title || [])[0] || ''))
+        };
+        // Use dedicated clinical-trial-number field
+        if (nctIds.length > 0) {
+          rec.nctId = nctIds[0];
+          rec.registryIds.nct = nctIds;
+        }
+        return rec;
+      }).filter(r => r.title);
+
+      searchSourceStats.crossref = records.length;
+      displaySearchResults(records, 'CrossRef');
+    } catch (err) {
+      updateSearchStatus('CrossRef error: ' + err.message);
+    }
+  }
+
+  // ============================================================
+  // AACT PostgreSQL — via local proxy (optional, highest priority)
+  // Run: python aact_proxy.py (requires AACT_USER/AACT_PASSWORD env vars)
+  // ============================================================
+  const AACT_PROXY_URL = 'http://localhost:8765';
+  let aactAvailable = null; // null = unknown, true/false after check
+
+  async function checkAACTProxy() {
+    try {
+      const resp = await fetch(AACT_PROXY_URL + '/health', { signal: AbortSignal.timeout(2000) });
+      if (resp.ok) { aactAvailable = true; return true; }
+    } catch (e) { /* proxy not running */ }
+    aactAvailable = false;
+    return false;
+  }
+
+  async function searchAACT() {
+    if (aactAvailable === null) await checkAACTProxy();
+    if (!aactAvailable) {
+      showToast('AACT proxy not running. Run: python aact_proxy.py', 'warning', 5000);
+      return;
+    }
+    const P = document.getElementById('picoP')?.value || '';
+    const I = document.getElementById('picoI')?.value || '';
+    const terms = [P, I].filter(Boolean).join(',');
+    if (!terms) { showToast('Enter at least Population or Intervention', 'warning'); return; }
+    updateSearchStatus('Searching AACT (local PostgreSQL)...');
+    try {
+      const resp = await fetch(AACT_PROXY_URL + '/search?terms=' + encodeURIComponent(terms));
+      const data = await resp.json();
+      if (data.error) { updateSearchStatus('AACT error: ' + data.error); return; }
+      const records = (data.trials || []).map(t => ({
+        id: generateId(), projectId: currentProjectId, source: 'AACT',
+        title: t.title || '',
+        nctId: t.nctId || '',
+        status: t.status || '',
+        phase: t.phase || '',
+        enrollment: t.enrollment,
+        year: t.startDate ? t.startDate.substring(0, 4) : '',
+        abstract: '',
+        keywords: [],
+        registryIds: t.nctId ? { nct: [t.nctId] } : {}
+      }));
+      searchSourceStats.aact = records.length;
+      displaySearchResults(records, 'AACT');
+    } catch (err) {
+      updateSearchStatus('AACT error: ' + err.message);
+    }
+  }
+
+  // ============================================================
+  // SEARCH ORCHESTRATION — Search All Sources (5 + optional AACT)
+  // ============================================================
+  async function searchAll() {
+    searchResultsCache = [];
+    searchSourceStats = {};
+
+    // Check AACT availability first
+    await checkAACTProxy();
+    const sourceCount = aactAvailable ? 6 : 5;
+    updateSearchStatus('Searching all ' + sourceCount + ' sources...');
+
+    // Run AACT first if available (highest priority metadata)
+    if (aactAvailable) {
+      await searchAACT();
+    }
+
+    // Run PubMed next (highest priority for bibliographic data)
+    await searchPubMed();
+
+    // Run remaining sources in parallel
+    const results = await Promise.allSettled([
+      searchOpenAlex(),
+      searchCTGov(),
+      searchEuropePMC(),
+      searchCrossRef()
+    ]);
+
+    // Report any failures
+    const failed = results.filter(r => r.status === 'rejected');
+    if (failed.length > 0) {
+      showToast(failed.length + ' source(s) had errors', 'warning');
+    }
+
+    // Run cross-source dedup on search results
+    const beforeDedup = searchResultsCache.length;
+    searchResultsCache = dedupSearchResults(searchResultsCache);
+    const removed = beforeDedup - searchResultsCache.length;
+
+    // Update display with deduped results
+    const statsLine = Object.entries(searchSourceStats)
+      .map(([k, v]) => k + ':' + v).join(' | ');
+    updateSearchStatus(
+      searchResultsCache.length + ' unique results (' + statsLine + ')' +
+      (removed > 0 ? ' [' + removed + ' cross-source duplicates removed]' : '')
+    );
+    renderSearchResultsList();
+    showToast('All ' + sourceCount + ' sources searched: ' + searchResultsCache.length + ' unique results', 'success');
+  }
+
+  // ============================================================
+  // CROSS-SOURCE DEDUP (multi-key indexing from universal_rct_finder)
+  // ============================================================
+  function dedupSearchResults(records) {
+    const byDOI = new Map();
+    const byPMID = new Map();
+    const byNCT = new Map();
+    const byTitle = new Map();
+    const unique = [];
+
+    // Source priority (higher = preferred for metadata, from universal_rct_finder)
+    const SOURCE_PRIORITY = {
+      'AACT': 7, 'ClinicalTrials.gov': 6, 'PubMed': 5, 'Europe PMC': 4,
+      'OpenAlex': 3, 'CrossRef': 2
+    };
+
+    for (const rec of records) {
+      const ndoi = normalizeDOI(rec.doi);
+      const npmid = rec.pmid ? String(rec.pmid).replace(/\D/g, '') : '';
+      const nnct = rec.nctId ? rec.nctId.toUpperCase() : '';
+      const ntitle = normalizeTitle(rec.title);
+
+      // Check for existing match
+      let existing = null;
+      if (ndoi && byDOI.has(ndoi)) existing = byDOI.get(ndoi);
+      if (!existing && npmid && byPMID.has(npmid)) existing = byPMID.get(npmid);
+      if (!existing && nnct && byNCT.has(nnct)) existing = byNCT.get(nnct);
+      if (!existing && ntitle && byTitle.has(ntitle)) existing = byTitle.get(ntitle);
+      // Fuzzy title fallback
+      if (!existing && ntitle) {
+        for (const [t, r] of byTitle) {
+          if (Math.abs(t.length - ntitle.length) <= Math.max(12, ntitle.length * 0.25) &&
+              levenshteinSimilarity(t, ntitle) >= 0.85) {
+            existing = r; break;
+          }
+        }
+      }
+
+      if (existing) {
+        // Merge: fill missing identifiers, prefer higher-priority source
+        if (ndoi && !existing.doi) existing.doi = rec.doi;
+        if (npmid && !existing.pmid) existing.pmid = rec.pmid;
+        if (nnct && !existing.nctId) existing.nctId = rec.nctId;
+        // Merge registry IDs
+        if (rec.registryIds) {
+          existing.registryIds = existing.registryIds || {};
+          for (const [key, vals] of Object.entries(rec.registryIds)) {
+            if (!existing.registryIds[key]) existing.registryIds[key] = vals;
+            else existing.registryIds[key] = [...new Set([...existing.registryIds[key], ...vals])];
+          }
+        }
+        // Prefer higher-priority source for metadata
+        const existingPri = SOURCE_PRIORITY[existing.source] || 0;
+        const recPri = SOURCE_PRIORITY[rec.source] || 0;
+        if (recPri > existingPri) {
+          if (rec.abstract && rec.abstract.length > (existing.abstract || '').length) existing.abstract = rec.abstract;
+          if (rec.authors && !existing.authors) existing.authors = rec.authors;
+          if (rec.journal && !existing.journal) existing.journal = rec.journal;
+        }
+        // Track merged sources
+        existing.mergedSources = existing.mergedSources || [existing.source];
+        if (!existing.mergedSources.includes(rec.source)) existing.mergedSources.push(rec.source);
+      } else {
+        // New unique record — index it
+        rec.mergedSources = [rec.source];
+        unique.push(rec);
+        if (ndoi) byDOI.set(ndoi, rec);
+        if (npmid) byPMID.set(npmid, rec);
+        if (nnct) byNCT.set(nnct, rec);
+        if (ntitle) byTitle.set(ntitle, rec);
+      }
+    }
+    return unique;
+  }
+
+  // ============================================================
+  // SEARCH RESULTS DISPLAY
+  // ============================================================
+  function displaySearchResults(records, source) {
+    searchResultsCache = searchResultsCache.concat(records);
+    updateSearchStatus(searchResultsCache.length + ' total results (' + source + ': ' + records.length + ')');
+    renderSearchResultsList();
+  }
+
+  function renderSearchResultsList() {
+    document.getElementById('searchResults').innerHTML =
+      '<div class="search-results-header">' +
+        '<span>' + searchResultsCache.length + ' results' +
+          (searchResultsCache.some(r => r.mergedSources?.length > 1) ?
+            ' (multi-source matches merged)' : '') +
+        '</span>' +
+        '<button onclick="importSearchResults()">Import All to Screening</button>' +
+        '<button class="btn-outline" onclick="exportSearchCSV()">Export CSV</button>' +
+      '</div>' +
+      searchResultsCache.slice(0, 100).map(r =>
+        '<div class="search-result-item">' +
+          '<div class="result-title">' + escapeHtml(r.title) + '</div>' +
+          '<div class="result-meta">' +
+            escapeHtml((r.authors || '').split(';')[0] || '') +
+            ' (' + escapeHtml(r.year || '?') + ')' +
+            ' - ' + escapeHtml(r.mergedSources ? r.mergedSources.join(', ') : r.source) +
+            (r.nctId ? ' [' + escapeHtml(r.nctId) + ']' : '') +
+            (r.doi ? ' DOI' : '') +
+          '</div>' +
+        '</div>'
+      ).join('') +
+      (searchResultsCache.length > 100 ? '<p class="text-muted" style="padding:10px">Showing first 100 of ' + searchResultsCache.length + '</p>' : '');
+  }
+
+  function exportSearchCSV() {
+    if (!searchResultsCache.length) return;
+    const header = 'Title,Authors,Year,Source,DOI,PMID,NCT_ID,Journal,Registry_IDs';
+    const rows = searchResultsCache.map(r => {
+      const regIds = r.registryIds ? Object.entries(r.registryIds).map(([k, v]) => k + ':' + v.join('|')).join('; ') : '';
+      return [
+        '"' + (r.title || '').replace(/"/g, '""') + '"',
+        '"' + (r.authors || '').replace(/"/g, '""') + '"',
+        r.year || '', r.source || '', r.doi || '', r.pmid || '', r.nctId || '',
+        '"' + (r.journal || '').replace(/"/g, '""') + '"',
+        '"' + regIds + '"'
+      ].join(',');
+    });
+    downloadFile(header + '\n' + rows.join('\n'), 'search-results.csv', 'text/csv');
+    showToast('Exported ' + searchResultsCache.length + ' results', 'success');
+  }
+
+  async function importSearchResults() {
+    if (!searchResultsCache.length) return;
+    const tx = db.transaction('references', 'readwrite');
+    const store = tx.objectStore('references');
+    for (const rec of searchResultsCache) {
+      rec.importedAt = new Date().toISOString();
+      rec.decision = null;
+      rec.reason = '';
+      store.put(rec);
+    }
+    showToast('Imported ' + searchResultsCache.length + ' references to screening', 'success');
+    searchResultsCache = [];
+    switchPhase('screen');
+    await renderReferenceList();
+  }
+
+  // ============================================================
+  // TOPIC DISCOVERY
+  // ============================================================
+  async function discoverTopics() {
+    const topic = document.getElementById('topicInput').value.trim();
+    if (!topic) { showToast('Enter a topic', 'warning'); return; }
+    document.getElementById('discoveryStatus').textContent = 'Searching PubMed for RCTs...';
+
+    try {
+      const rctQuery = encodeURIComponent(topic) + '+AND+randomized+controlled+trial[pt]';
+      const rctResp = await rateLimitedFetch(PUBMED_BASE + 'esearch.fcgi?db=pubmed&term=' + rctQuery + '&retmax=0&retmode=json');
+      const rctData = await rctResp.json();
+      const rctCount = parseInt(rctData.esearchresult?.count || '0');
+
+      const srQuery = encodeURIComponent(topic) + '+AND+(systematic+review[pt]+OR+meta-analysis[pt])';
+      const srResp = await rateLimitedFetch(PUBMED_BASE + 'esearch.fcgi?db=pubmed&term=' + srQuery + '&retmax=10&retmode=json&sort=pub+date');
+      const srData = await srResp.json();
+      const srCount = parseInt(srData.esearchresult?.count || '0');
+      const srPMIDs = srData.esearchresult?.idlist || [];
+
+      let recentSRs = [];
+      if (srPMIDs.length > 0) {
+        const fetchUrl = PUBMED_BASE + 'efetch.fcgi?db=pubmed&id=' + srPMIDs.join(',') + '&retmode=xml&rettype=abstract';
+        const fetchResp = await rateLimitedFetch(fetchUrl);
+        const xml = await fetchResp.text();
+        recentSRs = parsePubMedXML(xml);
+      }
+
+      const currentYear = new Date().getFullYear();
+      const latestSRYear = recentSRs.length > 0 ? Math.max(...recentSRs.map(r => parseInt(r.year) || 0)) : 0;
+      const yearsSinceLastSR = latestSRYear > 0 ? currentYear - latestSRYear : 999;
+
+      let gapLevel, gapLabel;
+      if (rctCount >= 5 && yearsSinceLastSR >= 3) { gapLevel = 'high'; gapLabel = 'Strong opportunity'; }
+      else if (rctCount >= 3 && yearsSinceLastSR >= 2) { gapLevel = 'medium'; gapLabel = 'Moderate opportunity'; }
+      else { gapLevel = 'low'; gapLabel = 'Low opportunity'; }
+
+      document.getElementById('discoveryStatus').textContent = '';
+      document.getElementById('discoveryResults').innerHTML =
+        '<div class="gap-card gap-' + gapLevel + '">' +
+          '<h3>' + escapeHtml(topic) + '</h3>' +
+          '<div class="gap-stats">' +
+            '<div class="stat-card"><div class="stat-label">RCTs Found</div><div class="stat-value">' + rctCount + '</div></div>' +
+            '<div class="stat-card"><div class="stat-label">SRs/MAs Found</div><div class="stat-value">' + srCount + '</div></div>' +
+            '<div class="stat-card"><div class="stat-label">Latest SR</div><div class="stat-value">' + (latestSRYear || 'None') + '</div></div>' +
+            '<div class="stat-card"><div class="stat-label">Gap Score</div><div class="stat-value">' + gapLabel + '</div></div>' +
+          '</div>' +
+          (recentSRs.length > 0 ?
+            '<h4>Recent Systematic Reviews</h4><ul>' +
+            recentSRs.map(sr => '<li>' + escapeHtml(sr.title) + ' (' + escapeHtml(sr.year) + ')</li>').join('') +
+            '</ul>' : '<p>No existing systematic reviews found -- strong opportunity!</p>') +
+          '<button onclick="useTopicForProtocol(\'' + escapeHtml(topic).replace(/'/g, "\\'") + '\')">Use This Topic &rarr; Protocol</button>' +
+        '</div>';
+    } catch (err) {
+      document.getElementById('discoveryStatus').textContent = 'Error: ' + err.message;
+    }
+  }
+
+  function useTopicForProtocol(topic) {
+    const protP = document.getElementById('protP');
+    if (protP) protP.value = topic;
+    const picoP = document.getElementById('picoP');
+    if (picoP) picoP.value = topic;
+    switchPhase('protocol');
+  }
+
+  // ============================================================
+  // PROSPERO PROTOCOL GENERATOR
+  // ============================================================
+  function generateProtocol() {
+    const title = document.getElementById('protTitle').value || 'Untitled Review';
+    const P = document.getElementById('protP').value || '[Population]';
+    const I = document.getElementById('protI').value || '[Intervention]';
+    const C = document.getElementById('protC').value || '[Comparator]';
+    const O = document.getElementById('protO').value || '[Outcomes]';
+    const studyType = document.getElementById('protStudyType').value;
+    const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+    const protocol =
+      '# PROSPERO Protocol\n\n' +
+      '## Review Title\n' + title + '\n\n' +
+      '## Review Question\n' +
+      'What is the effect of ' + I + ' compared with ' + C + ' on ' + O + ' in ' + P + '?\n\n' +
+      '## Searches\n' +
+      'We will search the following databases from inception to ' + dateStr + ':\n' +
+      '- PubMed/MEDLINE\n' +
+      '- Cochrane Central Register of Controlled Trials (CENTRAL)\n' +
+      '- OpenAlex\n' +
+      '- ClinicalTrials.gov (for unpublished and ongoing trials)\n\n' +
+      'Search terms will combine MeSH terms and free-text synonyms for the population (' + P + '), intervention (' + I + '), and comparator (' + C + '), combined with a validated RCT filter. No language restrictions will be applied.\n\n' +
+      '## Condition or Domain\n' + P + '\n\n' +
+      '## Participants/Population\n' +
+      'Studies enrolling ' + P + '. No restrictions on age, sex, or severity unless otherwise specified.\n\n' +
+      '## Intervention(s)/Exposure(s)\n' + I + '\n\n' +
+      '## Comparator(s)/Control\n' + C + '\n\n' +
+      '## Types of Study\n' +
+      (studyType === 'RCTs only' ? 'Randomized controlled trials (RCTs) only.' : 'Randomized controlled trials and prospective observational studies.') + '\n\n' +
+      '## Main Outcome(s)\n' + O + '\n\n' +
+      '## Data Extraction\n' +
+      'Two reviewers will independently extract data using a standardized form including: study characteristics, participant demographics, intervention details, outcome definitions, and results. Disagreements will be resolved by consensus or a third reviewer.\n\n' +
+      '## Risk of Bias Assessment\n' +
+      'Risk of bias will be assessed using the Cochrane Risk of Bias 2.0 (RoB 2) tool for randomized trials across five domains: randomization process, deviations from intended interventions, missing outcome data, measurement of the outcome, and selection of the reported result.\n\n' +
+      '## Data Synthesis\n' +
+      'We will perform random-effects meta-analysis using the DerSimonian-Laird method. Heterogeneity will be assessed using I-squared and tau-squared statistics. If I-squared > 50%, we will explore sources of heterogeneity through pre-specified subgroup analyses. Publication bias will be assessed by funnel plot inspection and Egger\'s test when >= 10 studies are available.\n\n' +
+      '## Analysis of Subgroups or Subsets\n' +
+      'Pre-specified subgroup analyses by: age group, severity of condition, dose of intervention, and follow-up duration.\n\n' +
+      '## Dissemination Plans\n' +
+      'Results will be submitted for publication in a peer-reviewed journal and presented at relevant conferences.';
+
+    document.getElementById('protocolOutput').innerHTML =
+      '<pre class="protocol-text">' + escapeHtml(protocol) + '</pre>' +
+      '<div style="display:flex;gap:8px;margin-top:8px">' +
+        '<button onclick="copyToClipboard(document.querySelector(\'.protocol-text\').textContent)">Copy to Clipboard</button>' +
+        '<button class="btn-outline" onclick="downloadProtocol()">Download .txt</button>' +
+      '</div>';
+
+    // Store protocol text for download
+    window._lastProtocol = protocol;
+    savePICO();
+  }
+
+  function downloadProtocol() {
+    if (window._lastProtocol) {
+      downloadFile(window._lastProtocol, 'prospero-protocol.txt', 'text/plain');
+    }
+  }
+
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => showToast('Copied!', 'success'));
+  }
+
+  function savePICO() {
+    const project = projects.find(p => p.id === currentProjectId);
+    if (!project) return;
+    project.pico = {
+      P: document.getElementById('picoP')?.value || document.getElementById('protP')?.value || '',
+      I: document.getElementById('picoI')?.value || document.getElementById('protI')?.value || '',
+      C: document.getElementById('picoC')?.value || document.getElementById('protC')?.value || '',
+      O: document.getElementById('picoO')?.value || document.getElementById('protO')?.value || ''
+    };
+    idbPut('projects', project);
+  }
+
+  function loadPICO() {
+    const project = projects.find(p => p.id === currentProjectId);
+    if (!project) return;
+    const pico = project.pico || {};
+    const picoP = document.getElementById('picoP');
+    const picoI = document.getElementById('picoI');
+    const picoC = document.getElementById('picoC');
+    const picoO = document.getElementById('picoO');
+    if (picoP) picoP.value = pico.P || '';
+    if (picoI) picoI.value = pico.I || '';
+    if (picoC) picoC.value = pico.C || '';
+    if (picoO) picoO.value = pico.O || '';
+  }
+
+  // ============================================================
+  // PAPER GENERATOR
+  // ============================================================
+  async function generatePaper() {
+    const project = projects.find(p => p.id === currentProjectId);
+    if (!project) return;
+    await loadStudies();
+    await loadReferences();
+    const result = computeMetaAnalysis(extractedStudies);
+    const pico = project.pico;
+    const prisma = project.prisma;
+    const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+    const methods =
+      '## Methods\n\n' +
+      '### Search Strategy\n' +
+      'A systematic search was conducted in PubMed, OpenAlex, and ClinicalTrials.gov from inception to ' + today + '. ' +
+      'Search terms combined Medical Subject Headings (MeSH) and free-text terms for the population (' +
+        escapeHtml(pico.P || '[population]') + '), intervention (' +
+        escapeHtml(pico.I || '[intervention]') + '), and comparator (' +
+        escapeHtml(pico.C || '[comparator]') + '), combined with a validated randomized controlled trial filter. ' +
+      'Reference lists of included studies and relevant systematic reviews were also screened.\n\n' +
+      '### Eligibility Criteria\n' +
+      'We included randomized controlled trials comparing ' +
+        escapeHtml(pico.I || '[intervention]') + ' with ' +
+        escapeHtml(pico.C || '[comparator]') + ' in ' +
+        escapeHtml(pico.P || '[population]') + '. The primary outcome was ' +
+        escapeHtml(pico.O || '[outcome]') + '.\n\n' +
+      '### Study Selection\n' +
+      'Titles and abstracts of retrieved records were screened independently. Full-text articles of potentially eligible studies were assessed against pre-defined inclusion criteria.\n\n' +
+      '### Data Extraction\n' +
+      'Data were extracted using a standardized form. Extracted items included study design, sample size, participant characteristics, intervention details, and primary and secondary outcomes.\n\n' +
+      '### Risk of Bias Assessment\n' +
+      'Risk of bias was assessed using the Cochrane Risk of Bias 2.0 (RoB 2) tool.\n\n' +
+      '### Statistical Analysis\n' +
+      'Random-effects meta-analysis was performed using the DerSimonian-Laird method. Effect sizes were expressed as ' +
+      (result?.isRatio ? 'hazard ratios (HR) or odds ratios (OR)' : 'mean differences (MD) or standardized mean differences (SMD)') +
+      ' with 95% confidence intervals. Heterogeneity was quantified using I-squared and tau-squared statistics. ' +
+      'Publication bias was assessed by visual inspection of funnel plots' +
+      (result && result.k >= 10 ? " and Egger's regression test" : '') + '.';
+
+    const totalN = extractedStudies.reduce((a, s) => a + (s.nTotal || 0), 0);
+    const results =
+      '## Results\n\n' +
+      '### Study Selection\n' +
+      'The systematic search identified ' + (prisma.identified || '[N]') + ' records. ' +
+      'After removing ' + (prisma.duplicates || '[N]') + ' duplicates, ' +
+        (prisma.screened || '[N]') + ' records were screened at the title and abstract level. ' +
+      'Of these, ' + (prisma.excludedScreen || '[N]') + ' were excluded, and ' +
+        ((prisma.screened || 0) - (prisma.excludedScreen || 0)) + ' full-text articles were assessed for eligibility. ' +
+      'A total of ' + (prisma.included || extractedStudies.length) + ' studies were included in the quantitative synthesis.\n\n' +
+      '### Study Characteristics\n' +
+      extractedStudies.length + ' studies were included, enrolling a total of ' + totalN + ' participants.' +
+      (result ? ' The pooled ' + (result.isRatio ? 'effect estimate' : 'mean difference') +
+        ' was ' + result.pooled.toFixed(2) + ' (95% CI: ' + result.pooledLo.toFixed(2) +
+        ' to ' + result.pooledHi.toFixed(2) + '; p ' +
+        (result.pValue < 0.001 ? '< 0.001' : '= ' + result.pValue.toFixed(3)) + ').' : '') + '\n\n' +
+      '### Heterogeneity\n' +
+      (result ?
+        'Heterogeneity was ' +
+        (result.I2 < 25 ? 'low' : result.I2 < 50 ? 'moderate' : result.I2 < 75 ? 'substantial' : 'considerable') +
+        ' (I-squared = ' + result.I2.toFixed(1) + '%, tau-squared = ' + result.tau2.toFixed(4) + ').'
+        : '[Awaiting analysis]');
+
+    document.getElementById('paperOutput').innerHTML =
+      '<div class="paper-section">' +
+        '<pre class="paper-text" id="methodsText">' + escapeHtml(methods) + '</pre>' +
+        '<pre class="paper-text" id="resultsText">' + escapeHtml(results) + '</pre>' +
+      '</div>' +
+      '<div style="display:flex;gap:8px;margin-top:8px">' +
+        '<button onclick="copyToClipboard(document.getElementById(\'methodsText\').textContent + \'\\n\\n\' + document.getElementById(\'resultsText\').textContent)">Copy All</button>' +
+        '<button class="btn-outline" onclick="downloadPaper()">Download Markdown</button>' +
+      '</div>';
+
+    window._lastMethods = methods;
+    window._lastResults = results;
+  }
+
+  function downloadPaper() {
+    if (window._lastMethods && window._lastResults) {
+      downloadFile(window._lastMethods + '\n\n' + window._lastResults, 'paper-draft.md', 'text/markdown');
+    }
+  }
+
+  // ============================================================
+  // PROJECT IMPORT / EXPORT
+  // ============================================================
+  async function exportProject() {
+    const project = projects.find(p => p.id === currentProjectId);
+    if (!project) { showToast('No project selected', 'warning'); return; }
+    await loadReferences();
+    await loadStudies();
+    const bundle = { project, references: allReferences, studies: extractedStudies, version: '1.0' };
+    downloadFile(JSON.stringify(bundle, null, 2), project.name.replace(/\W+/g, '-') + '.json', 'application/json');
+    showToast('Project exported', 'success');
+  }
+
+  async function importProject() {
+    const input = document.createElement('input');
+    input.type = 'file'; input.accept = '.json';
+    input.onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      try {
+        const data = JSON.parse(await file.text());
+        if (!data.project) { showToast('Invalid project file', 'danger'); return; }
+        await idbPut('projects', data.project);
+        if (data.references) {
+          const tx = db.transaction('references', 'readwrite');
+          for (const r of data.references) tx.objectStore('references').put(r);
+        }
+        if (data.studies) {
+          const tx = db.transaction('studies', 'readwrite');
+          for (const s of data.studies) tx.objectStore('studies').put(s);
+        }
+        currentProjectId = data.project.id;
+        await loadProjects();
+        showToast('Project imported', 'success');
+      } catch (err) {
+        showToast('Import failed: ' + err.message, 'danger');
+      }
+    };
+    document.body.appendChild(input);
+    input.click();
+    document.body.removeChild(input);
+  }
+
+  // ============================================================
+  // APP INITIALIZATION
+  // ============================================================
+  document.addEventListener('DOMContentLoaded', async () => {
+    try {
+      await initDB();
+      await loadProjects();
+      if (projects.length === 0) {
+        const p = createEmptyProject('My First Review');
+        await idbPut('projects', p);
+        currentProjectId = p.id;
+        await loadProjects();
+      } else {
+        const saved = JSON.parse(localStorage.getItem('msa-state') || '{}');
+        currentProjectId = saved.projectId || projects[0].id;
+        if (saved.phase) switchPhase(saved.phase);
+      }
+      renderProjectSelect();
+    } catch (err) {
+      console.error('Init failed:', err);
+      showToast('Failed to initialize database', 'danger');
+    }
+  });
+  </script>
+</body>
+</html>
