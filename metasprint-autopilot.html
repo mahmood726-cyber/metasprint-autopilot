@@ -314,7 +314,177 @@ button:hover { background: var(--primary-hover); }
 body.dark-mode {
   --bg: #0f172a; --surface: #1e293b; --text: #e2e8f0;
   --text-muted: #94a3b8; --border: #334155;
+  --primary: #3b82f6; --primary-hover: #2563eb;
+  --success: #10b981; --warning: #f59e0b; --danger: #ef4444;
+  --info: #818cf8;
 }
+body.dark-mode .ref-item:hover { background: #334155; }
+body.dark-mode .extract-table th { background: #1e293b; }
+body.dark-mode input, body.dark-mode select, body.dark-mode textarea { background: var(--surface); color: var(--text); }
+
+/* --- Sprint Overlay: Health Dashboard --- */
+.health-dashboard {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
+  border: 2px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 16px;
+}
+.health-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 12px; }
+.health-title { font-weight: 700; font-size: 1rem; }
+.health-score { font-size: 1.5rem; font-weight: 700; }
+.health-score.good { color: var(--success); }
+.health-score.warning { color: var(--warning); }
+.health-score.danger { color: var(--danger); }
+.health-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+.health-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }
+.health-stat-value { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+.health-stat-value.urgent { color: var(--danger); animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+.health-stat-label { font-size: 0.68rem; color: var(--text-muted); margin-top: 2px; }
+.gate-dots { display: flex; gap: 6px; justify-content: center; margin-top: 10px; }
+.gate-dot {
+  width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.68rem; font-weight: 700; color: var(--text-muted);
+}
+.gate-dot.passed { background: var(--success); border-color: var(--success); color: white; }
+.gate-dot.current { border-color: var(--warning); color: var(--warning); animation: pulse 1.5s infinite; }
+
+/* --- Sprint Overlay: Risk Panel --- */
+.risk-panel { margin-top: 10px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px; }
+.risk-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.risk-title { font-size: 0.72rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
+.risk-badge { font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+.risk-badge.low { background: #d1fae5; color: #065f46; }
+.risk-badge.medium { background: #fef3c7; color: #92400e; }
+.risk-badge.high { background: #fee2e2; color: #991b1b; }
+body.dark-mode .risk-badge.low { background: #032e23; color: #10b981; }
+body.dark-mode .risk-badge.medium { background: #4a2008; color: #f59e0b; }
+body.dark-mode .risk-badge.high { background: #451a1a; color: #ef4444; }
+.risk-list { list-style: none; display: grid; gap: 4px; }
+.risk-item { font-size: 0.75rem; color: var(--text-muted); padding: 4px 6px; border-radius: 4px; background: var(--bg); border: 1px solid var(--border); }
+.risk-item.high { border-color: var(--danger); background: #fee2e2; color: #991b1b; }
+.risk-item.medium { border-color: var(--warning); background: #fef3c7; color: #92400e; }
+body.dark-mode .risk-item.high { background: #451a1a; color: #ef4444; }
+body.dark-mode .risk-item.medium { background: #4a2008; color: #f59e0b; }
+
+/* --- Sprint Overlay: Alerts --- */
+.sprint-alert { padding: 10px 14px; border-radius: 8px; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px; }
+.sprint-alert-icon { font-size: 1.1rem; flex-shrink: 0; }
+.sprint-alert-content { flex: 1; }
+.sprint-alert-title { font-weight: 600; margin-bottom: 2px; font-size: 0.85rem; }
+.sprint-alert-text { font-size: 0.78rem; }
+.sprint-alert-info { background: #dbeafe; border: 1px solid var(--primary); }
+.sprint-alert-warning { background: #fef3c7; border: 1px solid var(--warning); }
+.sprint-alert-danger { background: #fee2e2; border: 1px solid var(--danger); }
+.sprint-alert-success { background: #d1fae5; border: 1px solid var(--success); }
+body.dark-mode .sprint-alert-info { background: #1e3a5f; }
+body.dark-mode .sprint-alert-warning { background: #4a2008; }
+body.dark-mode .sprint-alert-danger { background: #451a1a; }
+body.dark-mode .sprint-alert-success { background: #032e23; }
+
+/* --- Sprint Overlay: Day Navigator --- */
+.day-control { display: flex; align-items: center; gap: 6px; }
+.day-btn-nav {
+  width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 6px;
+  background: var(--surface); cursor: pointer; display: flex; align-items: center;
+  justify-content: center; font-size: 0.85rem; padding: 0; color: var(--text);
+}
+.day-btn-nav:hover:not(:disabled) { border-color: var(--primary); background: var(--bg); }
+.day-btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+.day-display { font-weight: 700; font-size: 0.85rem; min-width: 60px; text-align: center; }
+
+/* --- Sprint Overlay: DoD Checklists --- */
+.dod-section { margin-bottom: 20px; }
+.dod-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding: 10px 12px; border-radius: 8px; }
+.dod-header.phase-a { background: #ede9fe; }
+.dod-header.phase-b { background: #dbeafe; }
+.dod-header.phase-c { background: #fef3c7; }
+.dod-header.phase-d { background: #d1fae5; }
+.dod-header.phase-e { background: #fee2e2; }
+body.dark-mode .dod-header.phase-a { background: #2e1065; }
+body.dark-mode .dod-header.phase-b { background: #1e3a5f; }
+body.dark-mode .dod-header.phase-c { background: #4a2008; }
+body.dark-mode .dod-header.phase-d { background: #032e23; }
+body.dark-mode .dod-header.phase-e { background: #451a1a; }
+.dod-title { font-weight: 700; font-size: 0.85rem; }
+.dod-gate-status { padding: 3px 10px; border-radius: 12px; font-size: 0.68rem; font-weight: 600; }
+.gate-pending { background: var(--bg); color: var(--text-muted); }
+.gate-ready { background: #fef3c7; color: #92400e; }
+.gate-passed { background: #d1fae5; color: #065f46; }
+body.dark-mode .gate-ready { background: #4a2008; color: #f59e0b; }
+body.dark-mode .gate-passed { background: #032e23; color: #10b981; }
+
+.checklist-item {
+  display: flex; align-items: flex-start; gap: 10px; padding: 10px;
+  border: 1px solid var(--border); border-radius: 8px; margin-bottom: 6px;
+  cursor: pointer; transition: all 0.15s;
+}
+.checklist-item:hover { background: var(--bg); }
+.checklist-item.checked { background: #d1fae5; border-color: var(--success); }
+body.dark-mode .checklist-item.checked { background: #032e23; }
+.check-box {
+  width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+}
+.checklist-item.checked .check-box { background: var(--success); border-color: var(--success); }
+.check-box svg { color: white; display: none; }
+.checklist-item.checked .check-box svg { display: block; }
+.checklist-title { font-weight: 500; font-size: 0.85rem; }
+
+/* --- Sprint Overlay: Progress Bar --- */
+.timeline-bar { height: 8px; background: var(--border); border-radius: 4px; position: relative; margin: 10px 0; }
+.timeline-fill { height: 100%; background: var(--primary); border-radius: 4px; transition: width 0.3s; }
+
+/* --- Sprint Overlay: Tasks Today Card --- */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 14px; overflow: hidden; }
+.card-header-sprint { padding: 12px 14px; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 0.9rem; }
+.card-body-sprint { padding: 14px; }
+.phase-badge-sprint { padding: 3px 8px; border-radius: 12px; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; }
+
+/* --- Sprint Overlay: RoB 2 Section --- */
+.rob-summary-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin-top: 8px; overflow-x: auto; display: block; }
+.rob-summary-table th { padding: 5px 6px; background: var(--bg); font-weight: 600; text-align: center; border-bottom: 2px solid var(--border); white-space: nowrap; }
+.rob-summary-table td { padding: 5px 6px; text-align: center; border-bottom: 1px solid var(--border); }
+.rob-dot { display: inline-block; width: 18px; height: 18px; border-radius: 50%; cursor: pointer; }
+.rob-dot.low { background: var(--success); }
+.rob-dot.some { background: var(--warning); }
+.rob-dot.high { background: var(--danger); }
+.rob-dot.empty { background: var(--border); }
+.rob-entry-panel { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-top: 10px; display: none; }
+.rob-entry-panel.visible { display: block; }
+.rob-entry-domain { margin-bottom: 12px; }
+.rob-domain-label { font-weight: 600; font-size: 0.8rem; margin-bottom: 4px; }
+.rob-judgment-btns { display: flex; gap: 4px; flex-wrap: wrap; }
+.rob-judgment-btn {
+  padding: 5px 12px; border: 2px solid var(--border); border-radius: 6px;
+  background: var(--surface); font-size: 0.75rem; font-weight: 500;
+  cursor: pointer; color: var(--text-muted);
+}
+.rob-judgment-btn:hover { border-color: var(--text-muted); }
+.rob-judgment-btn.selected-low { border-color: var(--success); background: #d1fae5; color: #065f46; }
+.rob-judgment-btn.selected-some { border-color: var(--warning); background: #fef3c7; color: #92400e; }
+.rob-judgment-btn.selected-high { border-color: var(--danger); background: #fee2e2; color: #991b1b; }
+body.dark-mode .rob-judgment-btn.selected-low { background: #032e23; color: #10b981; }
+body.dark-mode .rob-judgment-btn.selected-some { background: #4a2008; color: #f59e0b; }
+body.dark-mode .rob-judgment-btn.selected-high { background: #451a1a; color: #ef4444; }
+.rob-support-input {
+  width: 100%; margin-top: 4px; padding: 4px 8px; border: 1px solid var(--border);
+  border-radius: 4px; font-size: 0.78rem; background: var(--surface); color: var(--text);
+}
+.rob-grade-banner { margin-top: 10px; padding: 8px 12px; background: #dbeafe; border: 1px solid var(--primary); border-radius: 8px; font-size: 0.8rem; }
+body.dark-mode .rob-grade-banner { background: #1e3a5f; }
+
+/* --- Sprint Overlay: Timeline Table --- */
+.sprint-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+.sprint-table th,.sprint-table td { padding: 6px 8px; border: 1px solid var(--border); text-align: left; }
+.sprint-table th { background: var(--bg); font-weight: 600; }
+
+/* --- Dark mode icon toggle --- */
+.dark-toggle-btn {
+  width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 6px;
+  background: var(--surface); cursor: pointer; font-size: 0.85rem; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.dark-toggle-btn:hover { border-color: var(--primary); }
 </style>
 </head>
 <body>
@@ -323,31 +493,106 @@ body.dark-mode {
     <div class="header-actions">
       <select id="projectSelect" onchange="switchProject(this.value)"></select>
       <button onclick="createProject()">New Project</button>
+      <div class="day-control">
+        <button class="day-btn-nav" id="prevDayBtn" onclick="changeSprintDay(-1)" title="Previous day">&#8592;</button>
+        <div class="day-display">Day <span id="sprintDayNum">1</span>/40</div>
+        <button class="day-btn-nav" id="nextDayBtn" onclick="changeSprintDay(1)" title="Next day">&#8594;</button>
+      </div>
       <button class="btn-outline" onclick="exportProject()">Export</button>
       <button class="btn-outline" onclick="importProject()">Import</button>
-      <button class="btn-outline" onclick="document.body.classList.toggle('dark-mode')">Theme</button>
+      <button class="dark-toggle-btn" id="darkModeBtn" onclick="toggleDarkMode()" title="Toggle dark mode">&#127769;</button>
     </div>
   </header>
 
   <nav class="tab-bar" role="tablist">
-    <button class="tab active" data-phase="discover" role="tab">1. Discover</button>
+    <button class="tab active" data-phase="dashboard" role="tab">Dashboard</button>
+    <button class="tab" data-phase="discover" role="tab">1. Discover</button>
     <button class="tab" data-phase="protocol" role="tab">2. Protocol</button>
     <button class="tab" data-phase="search" role="tab">3. Search</button>
     <button class="tab" data-phase="screen" role="tab">4. Screen</button>
     <button class="tab" data-phase="extract" role="tab">5. Extract</button>
     <button class="tab" data-phase="analyze" role="tab">6. Analyze</button>
     <button class="tab" data-phase="write" role="tab">7. Write</button>
+    <button class="tab" data-phase="checkpoints" role="tab">Checkpoints</button>
   </nav>
 
   <main id="mainContent">
+    <!-- Sprint Dashboard -->
+    <section id="phase-dashboard" class="phase active">
+      <div class="health-dashboard" id="healthDashboard">
+        <div class="health-header">
+          <div class="health-title">Project Health</div>
+          <div class="health-score" id="healthScore">--</div>
+        </div>
+        <div class="health-grid">
+          <div class="health-stat"><div class="health-stat-value" id="daysRemaining">40</div><div class="health-stat-label">Days Left</div></div>
+          <div class="health-stat"><div class="health-stat-value" id="daysToFreeze">34</div><div class="health-stat-label">Until Freeze</div></div>
+          <div class="health-stat"><div class="health-stat-value" id="gatesPassed">0/5</div><div class="health-stat-label">Gates Passed</div></div>
+          <div class="health-stat"><div class="health-stat-value" id="studiesExtracted">0</div><div class="health-stat-label">Studies</div></div>
+        </div>
+        <div class="gate-dots">
+          <div class="gate-dot" id="gateA" title="DoD-A: Protocol">A</div>
+          <div class="gate-dot" id="gateB" title="DoD-B: Search">B</div>
+          <div class="gate-dot" id="gateC" title="DoD-C: Extraction">C</div>
+          <div class="gate-dot" id="gateD" title="DoD-D: Analysis">D</div>
+          <div class="gate-dot" id="gateE" title="DoD-E: Submission">E</div>
+        </div>
+        <div class="timeline-bar"><div class="timeline-fill" id="sprintTimelineFill" style="width:0%"></div></div>
+        <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:var(--text-muted)">
+          <span>D3 DoD-A</span><span>D10 DoD-B</span><span>D28 DoD-C</span><span>D33 DoD-D</span><span>D40 Submit</span>
+        </div>
+        <div class="risk-panel" id="riskPanel">
+          <div class="risk-header">
+            <div class="risk-title">Project Risk</div>
+            <div class="risk-badge low" id="riskBadge">LOW</div>
+          </div>
+          <ul class="risk-list" id="riskList"><li class="risk-item">No active risks. Keep completing daily tasks.</li></ul>
+        </div>
+      </div>
+      <div id="sprintAlerts"></div>
+      <div class="sprint-alert sprint-alert-info" id="todayGoal">
+        <div class="sprint-alert-icon">&#127919;</div>
+        <div class="sprint-alert-content">
+          <div class="sprint-alert-title">Today's Goal</div>
+          <div class="sprint-alert-text" id="goalText">Loading...</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header-sprint">Your Tasks Today</div>
+        <div class="card-body-sprint" id="sprintTasks"></div>
+      </div>
+      <div class="card">
+        <div class="card-header-sprint">40-Day Timeline</div>
+        <div class="card-body-sprint">
+          <table class="sprint-table">
+            <thead><tr><th>Phase</th><th>Days</th><th>Gate</th><th>Status</th></tr></thead>
+            <tbody id="sprintTimeline"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Checkpoints -->
+    <section id="phase-checkpoints" class="phase">
+      <h2>Definition of Done (DoD) Checkpoints</h2>
+      <p class="text-muted" style="margin-bottom:14px">Track completion of each quality gate. All items must be checked before a gate can be signed off.</p>
+      <div id="dodContainer"></div>
+    </section>
+
     <!-- Phase 1: Discover -->
-    <section id="phase-discover" class="phase active">
+    <section id="phase-discover" class="phase">
       <h2>Topic Discovery</h2>
       <p>Explore the RCT landscape in a broad area, spot where trials are clustering recently, then check for meta-analysis gaps.</p>
       <div class="discover-input">
         <input type="text" id="topicInput" placeholder="Enter a broad area (e.g., heart failure, diabetes, lung cancer, stroke)">
         <button class="btn-success" onclick="loadRCTUniverse()">Map RCT Universe</button>
+        <label style="display:flex;align-items:center;gap:4px;font-size:0.8rem;color:var(--text-muted);cursor:pointer;white-space:nowrap">
+          <input type="checkbox" id="picoClusterToggle"> PICO clustering
+        </label>
       </div>
+      <p class="text-muted" style="font-size:0.75rem;margin-top:-4px">
+        Default groups by condition. PICO clustering groups by Condition + Intervention, showing truly comparable RCTs.
+      </p>
       <div id="discoveryStatus" style="margin:8px 0"></div>
       <div id="universeControls" style="display:none;margin-bottom:12px">
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
@@ -464,6 +709,28 @@ body.dark-mode {
         </tr></thead>
         <tbody id="extractBody"></tbody>
       </table>
+      <!-- RoB 2 Risk of Bias Assessment -->
+      <div style="margin-top:20px;border-top:2px solid var(--border);padding-top:16px">
+        <h3 style="cursor:pointer;display:flex;align-items:center;gap:8px" onclick="toggleRoBSection()">
+          Risk of Bias (RoB 2) <span id="robArrow" style="font-size:0.8rem">&#9660;</span>
+        </h3>
+        <div id="robBody" style="display:none;margin-top:10px">
+          <p class="text-muted" style="margin-bottom:10px">
+            Assess 5 bias domains per study: Randomization, Deviations, Missing Data, Measurement, Selection.
+            Results auto-feed into GRADE assessment.
+          </p>
+          <div id="robSummaryTable"></div>
+          <div class="rob-entry-panel" id="robEntryPanel">
+            <h4 id="robEntryTitle" style="margin-bottom:10px"></h4>
+            <div id="robEntryDomains"></div>
+            <button style="margin-top:10px" onclick="closeRoBEntry()">Done</button>
+          </div>
+          <div class="rob-grade-banner" id="robGradeBanner" style="display:none"></div>
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <button class="btn-outline" onclick="exportRoBSummary()">Copy RoB Summary</button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Phase 6: Analyze -->
@@ -530,9 +797,563 @@ body.dark-mode {
   }
 
   // ============================================================
+  // SPRINT OVERLAY — 40-day framework from MetaSprint pairwise
+  // ============================================================
+  const SPRINT_PHASES = [
+    { id: 'A', name: 'Protocol', days: [1, 3], cls: 'phase-a', autopilotPhases: ['discover','protocol'] },
+    { id: 'B', name: 'Search & Screen', days: [4, 10], cls: 'phase-b', autopilotPhases: ['search','screen'] },
+    { id: 'C', name: 'Extraction', days: [11, 28], cls: 'phase-c', autopilotPhases: ['extract'] },
+    { id: 'D', name: 'Analysis', days: [29, 33], cls: 'phase-d', autopilotPhases: ['analyze'] },
+    { id: 'E', name: 'Submission', days: [34, 40], cls: 'phase-e', autopilotPhases: ['write'] }
+  ];
+
+  const SPRINT_GOALS = {
+    1: 'Finalize and register your study plan on PROSPERO or protocols.io.',
+    2: 'Refine PICO, finalize search strategy, confirm eligibility criteria.',
+    3: 'Sign off DoD-A. Protocol must be locked and registered.',
+    4: 'Execute systematic search across all databases.',
+    5: 'Begin title/abstract screening. Target ~200 records/day per person.',
+    6: 'Continue screening. Flag duplicates and borderline cases.',
+    7: 'Finish initial screening. Review borderline cases with team.',
+    8: 'Begin full-text retrieval for included/maybe records.',
+    9: 'Continue full-text assessment against inclusion criteria.',
+    10: 'Sign off DoD-B. All screening complete, PRISMA counts final.',
+    11: 'Begin data extraction. Set up extraction form fields.',
+    12: 'Extract first batch of studies (aim for 3-5 per day).',
+    13: 'Continue extraction. Cross-check with second reviewer.',
+    14: 'Continue extraction. Document any protocol deviations.',
+    15: 'Continue extraction. Begin risk of bias (RoB 2) assessments.',
+    16: 'Continue extraction and RoB. Resolve disagreements.',
+    17: 'Continue extraction and RoB. Check data consistency.',
+    18: 'Audit 1 window: 10% trace audit of extracted studies.',
+    19: 'Audit 1 continues. Fix any discrepancies found.',
+    20: 'Audit 1 complete. Document findings and corrective actions.',
+    21: 'Continue extraction for remaining studies.',
+    22: 'Continue extraction. Prioritize studies with missing data.',
+    23: 'Continue extraction and RoB assessments.',
+    24: 'Continue extraction. Begin contacting authors for missing data.',
+    25: 'Continue extraction. Finalize RoB for all studies.',
+    26: 'Cross-check all extracted data. Verify numeric consistency.',
+    27: 'Final extraction review. Prepare for DoD-C sign-off.',
+    28: 'Sign off DoD-C. All extraction and RoB complete.',
+    29: 'Run primary meta-analysis. Check forest plot.',
+    30: 'Audit 2 window: Rerun match verification for high-impact studies.',
+    31: 'Sensitivity analyses. Leave-one-out, subgroup, and funnel plot.',
+    32: 'Audit 2 complete. Finalize all analyses.',
+    33: 'Sign off DoD-D. Analysis locked. Begin writing.',
+    34: 'FREEZE begins. No new studies. Draft Methods section.',
+    35: 'Draft Results section from analysis output.',
+    36: 'Draft Introduction and Discussion sections.',
+    37: 'Finalize manuscript. Internal team review.',
+    38: 'Address internal review comments. Polish figures/tables.',
+    39: 'Final proofread. Prepare supplementary materials.',
+    40: 'Submit! DoD-E complete. Celebrate with your team.'
+  };
+
+  const SPRINT_TASKS = {
+    1: ['Review study plan draft', 'Set up project workspace', 'Define PICO elements', 'Register on PROSPERO/protocols.io'],
+    2: ['Refine search terms with MeSH/synonyms', 'Pilot search on PubMed', 'Confirm eligibility criteria'],
+    3: ['Review search strategy completeness', 'Verify protocol registration is public', 'Sign off DoD-A'],
+    4: ['Execute PubMed search', 'Execute OpenAlex search', 'Execute CT.gov search', 'Import results and begin dedup'],
+    5: ['Screen titles/abstracts (batch 1)', 'Flag borderline cases for discussion'],
+    6: ['Screen titles/abstracts (batch 2)', 'Resolve disagreements from batch 1'],
+    7: ['Complete title/abstract screening', 'Review all borderline cases'],
+    8: ['Retrieve full-text PDFs for shortlisted studies', 'Begin full-text eligibility assessment'],
+    9: ['Continue full-text assessment', 'Document exclusion reasons'],
+    10: ['Finalize PRISMA counts', 'Verify screening completeness', 'Sign off DoD-B'],
+    11: ['Set up extraction form', 'Extract first 3 studies', 'Begin RoB 2 training if needed'],
+    12: ['Extract studies (batch)', 'Cross-check 2 studies with second reviewer'],
+    13: ['Continue extraction', 'Resolve any data discrepancies'],
+    14: ['Continue extraction', 'Document protocol deviations if any'],
+    15: ['Continue extraction', 'Begin RoB 2 assessments for completed studies'],
+    16: ['Continue extraction and RoB', 'Resolve RoB disagreements'],
+    17: ['Continue extraction and RoB', 'Check numeric data consistency'],
+    18: ['Trace audit: verify 10% of studies source-to-table', 'Document audit findings'],
+    19: ['Fix audit discrepancies', 'Re-extract corrected studies'],
+    20: ['Complete audit 1 report', 'Apply corrections across all studies'],
+    21: ['Continue remaining extraction'],
+    22: ['Prioritize studies with missing data fields'],
+    23: ['Continue extraction and RoB assessments'],
+    24: ['Contact authors for missing data', 'Continue extraction'],
+    25: ['Finalize RoB 2 for all extracted studies'],
+    26: ['Cross-check all numeric data', 'Verify CI/effect consistency'],
+    27: ['Final extraction review', 'Prepare DoD-C checklist'],
+    28: ['Verify all extraction complete', 'Verify all RoB complete', 'Sign off DoD-C'],
+    29: ['Run primary random-effects meta-analysis', 'Generate forest plot', 'Check for outliers'],
+    30: ['Rerun match audit on 5 highest-weight studies', 'Run sensitivity analysis'],
+    31: ['Leave-one-out analysis', 'Subgroup analyses', 'Generate funnel plot'],
+    32: ['Complete audit 2', 'Finalize heterogeneity assessment'],
+    33: ['Lock analysis results', 'Export final forest/funnel plots', 'Sign off DoD-D'],
+    34: ['FREEZE: no new studies', 'Draft Methods section from protocol'],
+    35: ['Draft Results section from analysis', 'Insert tables and figures'],
+    36: ['Draft Introduction', 'Draft Discussion', 'Draft Limitations'],
+    37: ['Internal team review of full manuscript', 'Address comments'],
+    38: ['Polish figures and tables', 'Finalize references'],
+    39: ['Final proofread', 'Prepare supplementary materials', 'Prepare cover letter'],
+    40: ['Submit manuscript', 'Submit audit pack', 'Sign off DoD-E', 'Celebrate!']
+  };
+
+  const DOD_CHECKLISTS = {
+    A: [
+      { id: 'a1', text: 'PICO elements defined (Population, Intervention, Comparator, Outcomes)' },
+      { id: 'a2', text: 'Primary outcome specified' },
+      { id: 'a3', text: 'Search strategy drafted and piloted' },
+      { id: 'a4', text: 'Eligibility criteria explicit and unambiguous' },
+      { id: 'a5', text: 'Protocol registered on PROSPERO or protocols.io' },
+      { id: 'a6', text: 'Protocol registration is publicly accessible' },
+      { id: 'a7', text: 'Effect measure chosen (OR/RR/HR/MD/SMD)' },
+      { id: 'a8', text: 'Statistical analysis plan documented' },
+      { id: 'a9', text: 'Team roles and responsibilities assigned' }
+    ],
+    B: [
+      { id: 'b1', text: 'All planned databases searched' },
+      { id: 'b2', text: 'Deduplication completed' },
+      { id: 'b3', text: 'Title/abstract screening complete (dual reviewer)' },
+      { id: 'b4', text: 'Full-text assessment complete' },
+      { id: 'b5', text: 'PRISMA flow diagram counts finalized' },
+      { id: 'b6', text: 'Exclusion reasons documented for all full-text exclusions' }
+    ],
+    C: [
+      { id: 'c1', text: 'All included studies extracted' },
+      { id: 'c2', text: 'All studies assessed with RoB 2' },
+      { id: 'c3', text: 'Data cross-checked by second reviewer' },
+      { id: 'c4', text: '10% trace audit completed (Audit 1)' },
+      { id: 'c5', text: 'All discrepancies resolved and documented' }
+    ],
+    D: [
+      { id: 'd1', text: 'Primary meta-analysis completed' },
+      { id: 'd2', text: 'Heterogeneity assessed (I-squared, tau-squared)' },
+      { id: 'd3', text: 'Sensitivity analyses completed (leave-one-out, subgroup)' },
+      { id: 'd4', text: 'Publication bias assessed (funnel plot)' },
+      { id: 'd5', text: 'Rerun audit completed (Audit 2)' },
+      { id: 'd6', text: 'All analysis outputs verified and locked' }
+    ],
+    E: [
+      { id: 'e1', text: 'Manuscript complete (Introduction, Methods, Results, Discussion)' },
+      { id: 'e2', text: 'Tables and figures finalized' },
+      { id: 'e3', text: 'Supplementary materials prepared' },
+      { id: 'e4', text: 'Internal team review completed' },
+      { id: 'e5', text: 'All review comments addressed' },
+      { id: 'e6', text: 'References formatted and verified' },
+      { id: 'e7', text: 'Manuscript submitted to target journal' }
+    ]
+  };
+
+  const ROB2_DOMAINS = [
+    { key: 'd1', label: 'Randomization process', short: 'D1' },
+    { key: 'd2', label: 'Deviations from intended interventions', short: 'D2' },
+    { key: 'd3', label: 'Missing outcome data', short: 'D3' },
+    { key: 'd4', label: 'Measurement of the outcome', short: 'D4' },
+    { key: 'd5', label: 'Selection of the reported result', short: 'D5' },
+    { key: 'overall', label: 'Overall', short: 'Overall' }
+  ];
+
+  // ---- Sprint State (stored in project) ----
+  function getSprintState() {
+    const project = projects.find(p => p.id === currentProjectId);
+    if (!project) return {};
+    if (!project.sprint) project.sprint = { day: 1, dodChecked: {}, dodGates: {}, completed: {}, robAssessments: [] };
+    return project.sprint;
+  }
+
+  function saveSprintState() {
+    const project = projects.find(p => p.id === currentProjectId);
+    if (project) idbPut('projects', project);
+  }
+
+  // ---- Day Navigation ----
+  function changeSprintDay(delta) {
+    const s = getSprintState();
+    s.day = Math.max(1, Math.min(40, (s.day ?? 1) + delta));
+    saveSprintState();
+    renderSprintDashboard();
+  }
+
+  // ---- Dashboard Rendering ----
+  function renderSprintDashboard() {
+    const s = getSprintState();
+    const d = s.day ?? 1;
+    const gates = s.dodGates ?? {};
+    const completed = s.completed ?? {};
+
+    // Day display
+    const dayNumEl = document.getElementById('sprintDayNum');
+    if (dayNumEl) dayNumEl.textContent = d;
+    const prevBtn = document.getElementById('prevDayBtn');
+    const nextBtn = document.getElementById('nextDayBtn');
+    if (prevBtn) prevBtn.disabled = d <= 1;
+    if (nextBtn) nextBtn.disabled = d >= 40;
+
+    // Timeline fill
+    const fill = document.getElementById('sprintTimelineFill');
+    if (fill) fill.style.width = ((d / 40) * 100) + '%';
+
+    // Days remaining
+    const daysLeft = 40 - d;
+    const daysToFreeze = Math.max(0, 34 - d);
+    const daysRemainingEl = document.getElementById('daysRemaining');
+    if (daysRemainingEl) daysRemainingEl.textContent = daysLeft;
+    const daysToFreezeEl = document.getElementById('daysToFreeze');
+    if (daysToFreezeEl) {
+      daysToFreezeEl.textContent = daysToFreeze;
+      daysToFreezeEl.classList.toggle('urgent', daysToFreeze <= 3 && daysToFreeze > 0);
+    }
+
+    // Gate dots
+    const gateDeadlines = { A: 3, B: 10, C: 28, D: 33, E: 40 };
+    const gateLetters = ['A', 'B', 'C', 'D', 'E'];
+    let gatesPassedCount = 0;
+    gateLetters.forEach(g => {
+      const dot = document.getElementById('gate' + g);
+      if (!dot) return;
+      dot.classList.remove('passed', 'current');
+      if (gates[g]) { dot.classList.add('passed'); gatesPassedCount++; }
+      else if (d <= gateDeadlines[g]) dot.classList.add('current');
+    });
+    const gatesPassedEl = document.getElementById('gatesPassed');
+    if (gatesPassedEl) gatesPassedEl.textContent = gatesPassedCount + '/5';
+
+    // Studies count
+    const studiesEl = document.getElementById('studiesExtracted');
+    if (studiesEl) studiesEl.textContent = extractedStudies.length;
+
+    // Health score
+    let healthScore = 100;
+    if (d > 3 && !gates.A) healthScore -= 20;
+    if (d > 10 && !gates.B) healthScore -= 20;
+    if (d > 28 && !gates.C) healthScore -= 20;
+    if (d > 33 && !gates.D) healthScore -= 20;
+    healthScore = Math.max(0, healthScore);
+    const scoreEl = document.getElementById('healthScore');
+    if (scoreEl) {
+      scoreEl.textContent = healthScore + '%';
+      scoreEl.className = 'health-score ' + (healthScore >= 80 ? 'good' : healthScore >= 50 ? 'warning' : 'danger');
+    }
+
+    // Risk panel
+    renderRiskPanel(d, gates, daysToFreeze);
+
+    // Goal
+    const goalEl = document.getElementById('goalText');
+    if (goalEl) goalEl.textContent = SPRINT_GOALS[d] || 'Continue current phase work.';
+
+    // Alerts
+    renderSprintAlerts(d, gates);
+
+    // Tasks
+    renderSprintTasks(d, completed);
+
+    // Timeline table
+    renderSprintTimeline(d, gates);
+  }
+
+  function renderRiskPanel(d, gates, daysToFreeze) {
+    const risks = [];
+    if (d > 3 && !gates.A) risks.push({ text: 'DoD-A overdue (protocol not locked)', level: 'high' });
+    if (d > 10 && !gates.B) risks.push({ text: 'DoD-B overdue (search/screen incomplete)', level: d > 15 ? 'high' : 'medium' });
+    if (d > 28 && !gates.C) risks.push({ text: 'DoD-C overdue (extraction incomplete)', level: 'high' });
+    if (d > 33 && !gates.D) risks.push({ text: 'DoD-D overdue (analysis not locked)', level: 'high' });
+    if (daysToFreeze <= 5 && daysToFreeze > 0 && !gates.C) risks.push({ text: 'Freeze approaching with extraction incomplete', level: 'medium' });
+
+    const listEl = document.getElementById('riskList');
+    const badgeEl = document.getElementById('riskBadge');
+    if (!listEl || !badgeEl) return;
+
+    if (risks.length === 0) {
+      listEl.innerHTML = '<li class="risk-item">No active risks. Keep completing daily tasks.</li>';
+      badgeEl.textContent = 'LOW'; badgeEl.className = 'risk-badge low';
+    } else {
+      const hasHigh = risks.some(r => r.level === 'high');
+      badgeEl.textContent = hasHigh ? 'HIGH' : 'MEDIUM';
+      badgeEl.className = 'risk-badge ' + (hasHigh ? 'high' : 'medium');
+      listEl.innerHTML = risks.map(r => '<li class="risk-item ' + r.level + '">' + escapeHtml(r.text) + '</li>').join('');
+    }
+  }
+
+  function renderSprintAlerts(d, gates) {
+    const el = document.getElementById('sprintAlerts');
+    if (!el) return;
+    let html = '';
+    if (d <= 3 && !gates.A) {
+      html += '<div class="sprint-alert sprint-alert-warning"><div class="sprint-alert-icon">&#128203;</div><div class="sprint-alert-content"><div class="sprint-alert-title">Protocol not registered</div><div class="sprint-alert-text">DoD-A requires a registered protocol on PROSPERO or protocols.io by Day 3.</div></div></div>';
+    }
+    if (d >= 18 && d <= 20) {
+      html += '<div class="sprint-alert sprint-alert-warning"><div class="sprint-alert-icon">&#128269;</div><div class="sprint-alert-content"><div class="sprint-alert-title">Audit 1 Window (Days 18-20)</div><div class="sprint-alert-text">10% trace audit required. Verify source data matches extracted values.</div></div></div>';
+    }
+    if (d >= 30 && d <= 32) {
+      html += '<div class="sprint-alert sprint-alert-warning"><div class="sprint-alert-icon">&#128269;</div><div class="sprint-alert-content"><div class="sprint-alert-title">Audit 2 Window (Days 30-32)</div><div class="sprint-alert-text">Rerun verification for high-impact studies.</div></div></div>';
+    }
+    if (d === 34) {
+      html += '<div class="sprint-alert sprint-alert-danger"><div class="sprint-alert-icon">&#128274;</div><div class="sprint-alert-content"><div class="sprint-alert-title">FREEZE begins today</div><div class="sprint-alert-text">No new studies can be added. Only corrections allowed.</div></div></div>';
+    }
+    if (d >= 34) {
+      html += '<div class="sprint-alert sprint-alert-info"><div class="sprint-alert-icon">&#9999;</div><div class="sprint-alert-content"><div class="sprint-alert-title">Writing Phase</div><div class="sprint-alert-text">Focus on manuscript preparation. Use the Write tab to auto-generate sections.</div></div></div>';
+    }
+    el.innerHTML = html;
+  }
+
+  function renderSprintTasks(d, completed) {
+    const el = document.getElementById('sprintTasks');
+    if (!el) return;
+    const tasks = SPRINT_TASKS[d] || ['Continue current phase work'];
+    el.innerHTML = tasks.map((task, i) => {
+      const key = d + '-' + i;
+      const checked = completed[key];
+      return '<div class="checklist-item ' + (checked ? 'checked' : '') + '" onclick="toggleSprintTask(\'' + key + '\')" tabindex="0" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();this.click()}" role="checkbox" aria-checked="' + (!!checked) + '">' +
+        '<div class="check-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>' +
+        '<div class="checklist-title">' + escapeHtml(task) + '</div></div>';
+    }).join('');
+  }
+
+  function toggleSprintTask(key) {
+    const s = getSprintState();
+    if (!s.completed) s.completed = {};
+    s.completed[key] = !s.completed[key];
+    saveSprintState();
+    renderSprintTasks(s.day ?? 1, s.completed);
+    showToast('Saved', 'success');
+  }
+
+  function renderSprintTimeline(d, gates) {
+    const el = document.getElementById('sprintTimeline');
+    if (!el) return;
+    el.innerHTML = SPRINT_PHASES.map(p => {
+      const isCurrent = d >= p.days[0] && d <= p.days[1];
+      const isPast = d > p.days[1];
+      const passed = gates[p.id];
+      let status = '';
+      if (passed) status = '<span style="color:var(--success);font-weight:600">PASSED</span>';
+      else if (isCurrent) status = '<span style="color:var(--warning);font-weight:600">IN PROGRESS</span>';
+      else if (isPast) status = '<span style="color:var(--danger);font-weight:600">OVERDUE</span>';
+      else status = '<span style="color:var(--text-muted)">Upcoming</span>';
+      return '<tr' + (isCurrent ? ' style="background:var(--bg)"' : '') + '>' +
+        '<td><strong>' + escapeHtml(p.name) + '</strong></td>' +
+        '<td>Days ' + p.days[0] + '-' + p.days[1] + '</td>' +
+        '<td>DoD-' + p.id + '</td>' +
+        '<td>' + status + '</td></tr>';
+    }).join('');
+  }
+
+  // ---- DoD Checkpoints ----
+  function renderDoDPage() {
+    const s = getSprintState();
+    const el = document.getElementById('dodContainer');
+    if (!el) return;
+    let html = '';
+    SPRINT_PHASES.forEach(phase => {
+      const items = DOD_CHECKLISTS[phase.id] || [];
+      const checked = s.dodChecked ?? {};
+      const checkedCount = items.filter(item => checked[item.id]).length;
+      const allChecked = checkedCount === items.length;
+      const gatePassed = (s.dodGates ?? {})[phase.id];
+
+      let gateStatus, gateClass;
+      if (gatePassed) { gateStatus = 'PASSED'; gateClass = 'gate-passed'; }
+      else if (allChecked) { gateStatus = 'Ready to Sign'; gateClass = 'gate-ready'; }
+      else { gateStatus = checkedCount + '/' + items.length; gateClass = 'gate-pending'; }
+
+      html += '<div class="dod-section"><div class="dod-header ' + phase.cls + '">' +
+        '<div class="dod-title">' + (gatePassed ? '&#10003; ' : '') + 'DoD-' + phase.id + ': ' + escapeHtml(phase.name) + ' (Days ' + phase.days[0] + '-' + phase.days[1] + ')</div>' +
+        '<div class="dod-gate-status ' + gateClass + '">' + gateStatus + '</div></div>';
+
+      items.forEach(item => {
+        const isChecked = checked[item.id];
+        html += '<div class="checklist-item ' + (isChecked ? 'checked' : '') + '" onclick="toggleDoDItem(\'' + item.id + '\')" tabindex="0" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();this.click()}" role="checkbox" aria-checked="' + (!!isChecked) + '">' +
+          '<div class="check-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></div>' +
+          '<div class="checklist-title">' + escapeHtml(item.text) + '</div></div>';
+      });
+
+      if (allChecked && !gatePassed) {
+        html += '<button style="width:100%;margin-top:10px" onclick="signOffGate(\'' + phase.id + '\')">Sign Off DoD-' + phase.id + '</button>';
+      }
+      html += '</div>';
+    });
+    el.innerHTML = html;
+  }
+
+  function toggleDoDItem(itemId) {
+    const s = getSprintState();
+    if (!s.dodChecked) s.dodChecked = {};
+    s.dodChecked[itemId] = !s.dodChecked[itemId];
+    saveSprintState();
+    renderDoDPage();
+    showToast('Saved', 'success');
+  }
+
+  function signOffGate(gateId) {
+    if (!confirm('Sign off DoD-' + gateId + '? This confirms all checklist items are complete.')) return;
+    const s = getSprintState();
+    if (!s.dodGates) s.dodGates = {};
+    s.dodGates[gateId] = true;
+    saveSprintState();
+    renderDoDPage();
+    renderSprintDashboard();
+    showToast('DoD-' + gateId + ' PASSED!', 'success');
+  }
+
+  // ---- RoB 2 (Risk of Bias) ----
+  function getRoBAssessments() {
+    const s = getSprintState();
+    if (!s.robAssessments) s.robAssessments = [];
+    return s.robAssessments;
+  }
+
+  function syncRoBFromStudies() {
+    const studies = extractedStudies || [];
+    const robs = getRoBAssessments();
+    const ids = new Set(studies.map(s => s.id));
+    studies.forEach(s => {
+      if (!robs.find(r => r.studyId === s.id)) {
+        const entry = { studyId: s.id, authorYear: s.studyId || '' };
+        ROB2_DOMAINS.forEach(d => { entry[d.key] = ''; entry[d.key + 'Support'] = ''; });
+        robs.push(entry);
+      } else {
+        const rob = robs.find(r => r.studyId === s.id);
+        if (rob) rob.authorYear = s.studyId || '';
+      }
+    });
+    const s = getSprintState();
+    s.robAssessments = robs.filter(r => ids.has(r.studyId));
+    saveSprintState();
+  }
+
+  function toggleRoBSection() {
+    const body = document.getElementById('robBody');
+    const arrow = document.getElementById('robArrow');
+    if (!body) return;
+    const visible = body.style.display !== 'none';
+    body.style.display = visible ? 'none' : 'block';
+    if (arrow) arrow.innerHTML = visible ? '&#9660;' : '&#9650;';
+    if (!visible) {
+      syncRoBFromStudies();
+      renderRoBSummaryTable();
+      computeGRADERoBSuggestion();
+    }
+  }
+
+  function renderRoBSummaryTable() {
+    const robs = getRoBAssessments();
+    const container = document.getElementById('robSummaryTable');
+    if (!container) return;
+    if (robs.length === 0) {
+      container.innerHTML = '<p class="text-muted">No studies extracted yet. Add studies above first.</p>';
+      return;
+    }
+    const headers = ROB2_DOMAINS.map(d => '<th>' + escapeHtml(d.short) + '</th>').join('');
+    const rows = robs.map(r => {
+      const cells = ROB2_DOMAINS.map(d => {
+        const j = r[d.key] || '';
+        const cls = j || 'empty';
+        return '<td><span class="rob-dot ' + cls + '" title="' + escapeHtml(j || 'Not assessed') + '"></span></td>';
+      }).join('');
+      return '<tr><td style="text-align:left;cursor:pointer;font-weight:500" onclick="openRoBEntry(\'' + escapeHtml(r.studyId) + '\')">' + escapeHtml(r.authorYear || r.studyId) + ' &#9998;</td>' + cells + '</tr>';
+    }).join('');
+    container.innerHTML = '<table class="rob-summary-table"><thead><tr><th style="text-align:left">Study</th>' + headers + '</tr></thead><tbody>' + rows + '</tbody></table>';
+  }
+
+  function openRoBEntry(studyId) {
+    const robs = getRoBAssessments();
+    const rob = robs.find(r => r.studyId === studyId);
+    if (!rob) return;
+    const panel = document.getElementById('robEntryPanel');
+    const title = document.getElementById('robEntryTitle');
+    const domainsDiv = document.getElementById('robEntryDomains');
+    if (!panel || !title || !domainsDiv) return;
+    title.textContent = 'Assessing: ' + (rob.authorYear || rob.studyId);
+    let html = '';
+    ROB2_DOMAINS.forEach(d => {
+      const current = rob[d.key] || '';
+      const support = rob[d.key + 'Support'] || '';
+      html += '<div class="rob-entry-domain"><div class="rob-domain-label">' + escapeHtml(d.short) + ': ' + escapeHtml(d.label) + '</div>' +
+        '<div class="rob-judgment-btns">' +
+        '<button class="rob-judgment-btn' + (current === 'low' ? ' selected-low' : '') + '" onclick="setRoBJudgment(\'' + escapeHtml(studyId) + '\',\'' + d.key + '\',\'low\')">Low</button>' +
+        '<button class="rob-judgment-btn' + (current === 'some' ? ' selected-some' : '') + '" onclick="setRoBJudgment(\'' + escapeHtml(studyId) + '\',\'' + d.key + '\',\'some\')">Some concerns</button>' +
+        '<button class="rob-judgment-btn' + (current === 'high' ? ' selected-high' : '') + '" onclick="setRoBJudgment(\'' + escapeHtml(studyId) + '\',\'' + d.key + '\',\'high\')">High</button>' +
+        '</div>' +
+        '<input class="rob-support-input" value="' + escapeHtml(support) + '" placeholder="Support for judgment..." onchange="setRoBSupport(\'' + escapeHtml(studyId) + '\',\'' + d.key + '\',this.value)"></div>';
+    });
+    domainsDiv.innerHTML = html;
+    panel.classList.add('visible');
+  }
+
+  function setRoBJudgment(studyId, domain, judgment) {
+    const rob = getRoBAssessments().find(r => r.studyId === studyId);
+    if (!rob) return;
+    rob[domain] = rob[domain] === judgment ? '' : judgment;
+    saveSprintState();
+    openRoBEntry(studyId);
+    renderRoBSummaryTable();
+    computeGRADERoBSuggestion();
+  }
+
+  function setRoBSupport(studyId, domain, value) {
+    const rob = getRoBAssessments().find(r => r.studyId === studyId);
+    if (!rob) return;
+    rob[domain + 'Support'] = String(value).slice(0, 500);
+    saveSprintState();
+  }
+
+  function closeRoBEntry() {
+    const panel = document.getElementById('robEntryPanel');
+    if (panel) panel.classList.remove('visible');
+  }
+
+  function computeGRADERoBSuggestion() {
+    const robs = getRoBAssessments();
+    const banner = document.getElementById('robGradeBanner');
+    if (!banner || robs.length === 0) { if (banner) banner.style.display = 'none'; return; }
+    const assessed = robs.filter(r => r.overall !== '' && r.overall !== undefined);
+    if (assessed.length === 0) { banner.style.display = 'none'; return; }
+    const highCount = assessed.filter(r => r.overall === 'high').length;
+    const someCount = assessed.filter(r => r.overall === 'some').length;
+    const highPct = highCount / assessed.length;
+    const somePct = someCount / assessed.length;
+    let suggestion = 'No serious concern';
+    if (highPct > 0.5) suggestion = 'Very serious (-2)';
+    else if (highPct > 0.25 || somePct > 0.5) suggestion = 'Serious (-1)';
+    banner.style.display = 'block';
+    banner.innerHTML = '<strong>GRADE RoB suggestion:</strong> ' + escapeHtml(suggestion) +
+      ' (' + highCount + '/' + assessed.length + ' high risk, ' + someCount + '/' + assessed.length + ' some concerns)';
+  }
+
+  function exportRoBSummary() {
+    const robs = getRoBAssessments();
+    if (robs.length === 0) { showToast('No RoB assessments yet', 'warning'); return; }
+    const lines = ['Study\t' + ROB2_DOMAINS.map(d => d.short).join('\t')];
+    robs.forEach(r => {
+      lines.push((r.authorYear || r.studyId) + '\t' + ROB2_DOMAINS.map(d => r[d.key] || '-').join('\t'));
+    });
+    navigator.clipboard.writeText(lines.join('\n')).then(() => showToast('RoB summary copied', 'success'));
+  }
+
+  // ---- Dark Mode ----
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    try { localStorage.setItem('msa-dark', isDark ? '1' : '0'); } catch(e) {}
+    const btn = document.getElementById('darkModeBtn');
+    if (btn) btn.innerHTML = isDark ? '&#9728;' : '&#127769;';
+  }
+
+  function loadDarkMode() {
+    if (localStorage.getItem('msa-dark') === '1') {
+      document.body.classList.add('dark-mode');
+      const btn = document.getElementById('darkModeBtn');
+      if (btn) btn.innerHTML = '&#9728;';
+    }
+  }
+
+  // ---- Keyboard shortcuts for day navigation ----
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+    if (e.key === 'ArrowLeft') { e.preventDefault(); changeSprintDay(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); changeSprintDay(1); }
+  });
+
+  // ============================================================
   // TAB NAVIGATION
   // ============================================================
-  let currentPhase = 'discover';
+  let currentPhase = 'dashboard';
 
   function switchPhase(phase) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -542,8 +1363,10 @@ body.dark-mode {
     currentPhase = phase;
     localStorage.setItem('msa-state', JSON.stringify({ phase, projectId: currentProjectId }));
     // Load phase-specific data
+    if (phase === 'dashboard') renderSprintDashboard();
+    if (phase === 'checkpoints') renderDoDPage();
     if (phase === 'screen') renderReferenceList();
-    if (phase === 'extract') loadStudies().then(renderExtractTable);
+    if (phase === 'extract') loadStudies().then(() => { renderExtractTable(); syncRoBFromStudies(); renderRoBSummaryTable(); });
     if (phase === 'analyze') loadStudies();
     if (phase === 'search') loadPICO();
   }
@@ -2173,10 +2996,11 @@ body.dark-mode {
   }
 
   // ============================================================
-  // TOPIC DISCOVERY — RCT Universe Explorer
+  // TOPIC DISCOVERY — RCT Universe Explorer (Condition or PICO mode)
   // ============================================================
-  let universeData = []; // Array of { term, count, recentCount, years, trials }
+  let universeData = []; // Array of cluster objects
   let universeSortMode = 'recent';
+  let universeRawTrials = []; // keep raw trials for re-clustering
 
   async function loadRCTUniverse() {
     const topic = document.getElementById('topicInput').value.trim();
@@ -2189,7 +3013,7 @@ body.dark-mode {
     document.getElementById('gapCheckResult').innerHTML = '';
 
     try {
-      // Fetch up to 1000 RCTs from CT.gov for this broad area
+      // Fetch RCTs from CT.gov — request arms/interventions and outcomes for PICO
       const allTrials = [];
       let pageToken = null;
       let page = 0;
@@ -2209,13 +3033,22 @@ body.dark-mode {
         for (const s of studies) {
           const p = s.protocolSection || {};
           const conditions = (p.conditionsModule?.conditions || []);
-          const interventions = (p.armsInterventionsModule?.interventions || []).map(iv => iv.name || '');
+          const rawInterventions = p.armsInterventionsModule?.interventions || [];
+          const interventions = rawInterventions.map(iv => ({
+            name: iv.name || '', type: iv.type || ''
+          }));
+          const arms = (p.armsInterventionsModule?.armGroups || []).map(a => ({
+            label: a.label || '', type: a.type || '' // EXPERIMENTAL, ACTIVE_COMPARATOR, PLACEBO_COMPARATOR, etc.
+          }));
+          const primaryOutcomes = (p.outcomesModule?.primaryOutcomes || []).map(o => o.measure || '');
           const startYear = parseInt(p.statusModule?.startDateStruct?.date?.substring(0, 4) || '0');
           allTrials.push({
             nctId: p.identificationModule?.nctId || '',
             title: p.identificationModule?.officialTitle || p.identificationModule?.briefTitle || '',
             conditions: conditions,
             interventions: interventions,
+            arms: arms,
+            primaryOutcomes: primaryOutcomes,
             startYear: startYear,
             status: p.statusModule?.overallStatus || '',
             enrollment: p.designModule?.enrollmentInfo?.count || 0,
@@ -2230,49 +3063,197 @@ body.dark-mode {
         return;
       }
 
-      // Cluster by condition terms
-      const clusterMap = new Map();
-      const currentYear = new Date().getFullYear();
-      for (const trial of allTrials) {
-        const terms = trial.conditions.length > 0 ? trial.conditions : [topic];
-        for (const rawTerm of terms) {
-          const term = rawTerm.trim();
-          if (!term || term.length < 3) continue;
-          const key = term.toLowerCase();
-          if (!clusterMap.has(key)) {
-            clusterMap.set(key, { term: term, count: 0, recentCount: 0, years: {}, trials: [] });
-          }
-          const cluster = clusterMap.get(key);
-          cluster.count++;
-          if (trial.startYear >= currentYear - 3) cluster.recentCount++;
-          const yr = trial.startYear || 'Unknown';
-          cluster.years[yr] = (cluster.years[yr] || 0) + 1;
-          cluster.trials.push(trial);
-        }
-      }
-
-      // Filter to clusters with >= 3 RCTs and sort
-      universeData = Array.from(clusterMap.values())
-        .filter(c => c.count >= 3)
-        .map(c => {
-          // Compute recency score: fraction of trials from last 3 years
-          c.recencyScore = c.count > 0 ? c.recentCount / c.count : 0;
-          c.gapChecked = false;
-          c.srCount = null;
-          c.latestSRYear = null;
-          return c;
-        });
-
-      universeData.sort((a, b) => b.recentCount - a.recentCount);
-      statusEl.textContent = allTrials.length + ' RCTs mapped across ' + universeData.length + ' sub-topics';
-      document.getElementById('universeControls').style.display = 'block';
-      document.getElementById('universeStats').textContent =
-        allTrials.length + ' total RCTs | ' + universeData.length + ' sub-topics with 3+ RCTs';
-      renderUniverse();
+      universeRawTrials = allTrials;
+      const usePICO = document.getElementById('picoClusterToggle')?.checked || false;
+      clusterAndRender(allTrials, topic, usePICO);
     } catch (err) {
       statusEl.textContent = 'Error: ' + err.message;
     }
   }
+
+  // --- Intervention normalization: strip dosage, standardize casing ---
+  function normalizeIntervention(name) {
+    if (!name) return '';
+    // Strip dosage patterns like "10 mg", "100mg/day", etc.
+    let n = name.replace(/\d+\s*(mg|g|ml|mcg|ug|units?|iu)\b[^,;]*/gi, '').trim();
+    // Strip leading "Drug: " or "Biological: " prefixes
+    n = n.replace(/^(Drug|Biological|Device|Procedure|Dietary Supplement|Other):\s*/i, '');
+    // Collapse whitespace
+    n = n.replace(/\s+/g, ' ').trim();
+    // Title case
+    return n.length > 0 ? n.charAt(0).toUpperCase() + n.slice(1).toLowerCase() : '';
+  }
+
+  // --- Extract comparator from arm types ---
+  function extractComparator(arms) {
+    const comparators = arms.filter(a =>
+      /placebo|sham|no.intervention|standard|usual.care/i.test(a.label + ' ' + a.type) ||
+      a.type === 'PLACEBO_COMPARATOR' || a.type === 'NO_INTERVENTION'
+    );
+    if (comparators.length > 0) {
+      return comparators.map(c => c.label).join(', ') || 'Placebo/Control';
+    }
+    const activeComps = arms.filter(a => a.type === 'ACTIVE_COMPARATOR');
+    if (activeComps.length > 0) return activeComps.map(c => c.label).join(', ');
+    return 'Not specified';
+  }
+
+  // --- Normalize primary outcome for grouping ---
+  function normalizeOutcome(outcome) {
+    if (!outcome) return '';
+    const o = outcome.toLowerCase();
+    // Common outcome categories
+    if (/mortalit|death|surviv|all.cause/i.test(o)) return 'Mortality/Survival';
+    if (/composite|mace|major.adverse/i.test(o)) return 'Composite endpoint';
+    if (/hospitali[sz]/i.test(o)) return 'Hospitalization';
+    if (/response.rate|objective.response|orr/i.test(o)) return 'Response rate';
+    if (/progress.free|pfs/i.test(o)) return 'Progression-free survival';
+    if (/overall.surviv|os\b/i.test(o)) return 'Overall survival';
+    if (/hba1c|glyc[ae]m|glucose/i.test(o)) return 'Glycemic control';
+    if (/blood.press|systolic|diastolic|bp\b/i.test(o)) return 'Blood pressure';
+    if (/pain|vas\b|visual.anal/i.test(o)) return 'Pain';
+    if (/quality.of.life|qol|eq.?5d|sf.?36/i.test(o)) return 'Quality of life';
+    if (/safety|adverse|tolerab/i.test(o)) return 'Safety/Adverse events';
+    if (/ejection.fraction|lvef/i.test(o)) return 'Ejection fraction';
+    if (/efficacy|effic/i.test(o)) return 'Efficacy';
+    // Truncate to first meaningful phrase
+    return outcome.slice(0, 60);
+  }
+
+  function clusterAndRender(allTrials, topic, usePICO) {
+    const clusterMap = new Map();
+    const currentYear = new Date().getFullYear();
+
+    for (const trial of allTrials) {
+      let clusterKeys;
+
+      if (usePICO) {
+        // PICO clustering: group by (Condition + Intervention type/name)
+        const conditions = trial.conditions.length > 0 ? trial.conditions : [topic];
+        const expInterventions = trial.interventions.filter(iv =>
+          iv.type === 'DRUG' || iv.type === 'BIOLOGICAL' || iv.type === 'DEVICE' ||
+          iv.type === 'PROCEDURE' || iv.type === 'DIETARY_SUPPLEMENT' ||
+          iv.type === 'RADIATION' || iv.type === 'BEHAVIORAL' || iv.type === 'OTHER'
+        );
+        // Use the first experimental intervention, or all if unclear
+        const interventionNames = expInterventions.length > 0
+          ? expInterventions.map(iv => normalizeIntervention(iv.name)).filter(Boolean)
+          : trial.interventions.map(iv => normalizeIntervention(iv.name)).filter(Boolean);
+
+        if (interventionNames.length === 0) {
+          // No clear intervention — cluster by condition only
+          clusterKeys = conditions.map(c => ({
+            key: c.toLowerCase(),
+            label: c,
+            intervention: 'Various',
+            interventionType: '',
+            comparator: extractComparator(trial.arms),
+            outcome: trial.primaryOutcomes.length > 0 ? normalizeOutcome(trial.primaryOutcomes[0]) : ''
+          }));
+        } else {
+          // Cross condition x intervention
+          clusterKeys = [];
+          for (const cond of conditions) {
+            for (const ivName of interventionNames) {
+              clusterKeys.push({
+                key: (cond + ' + ' + ivName).toLowerCase(),
+                label: cond + ' + ' + ivName,
+                intervention: ivName,
+                interventionType: expInterventions[0]?.type || '',
+                comparator: extractComparator(trial.arms),
+                outcome: trial.primaryOutcomes.length > 0 ? normalizeOutcome(trial.primaryOutcomes[0]) : ''
+              });
+            }
+          }
+        }
+      } else {
+        // Simple condition-only clustering
+        const conditions = trial.conditions.length > 0 ? trial.conditions : [topic];
+        clusterKeys = conditions.map(c => ({
+          key: c.toLowerCase(),
+          label: c,
+          intervention: '',
+          interventionType: '',
+          comparator: '',
+          outcome: ''
+        }));
+      }
+
+      for (const ck of clusterKeys) {
+        const key = ck.key;
+        if (key.length < 3) continue;
+        if (!clusterMap.has(key)) {
+          clusterMap.set(key, {
+            term: ck.label, count: 0, recentCount: 0, years: {}, trials: [],
+            isPICO: usePICO,
+            // PICO fields: aggregate top values
+            interventions: new Map(), comparators: new Map(), outcomes: new Map(),
+            interventionType: ck.interventionType
+          });
+        }
+        const cluster = clusterMap.get(key);
+        cluster.count++;
+        if (trial.startYear >= currentYear - 3) cluster.recentCount++;
+        const yr = trial.startYear || 'Unknown';
+        cluster.years[yr] = (cluster.years[yr] || 0) + 1;
+        cluster.trials.push(trial);
+        // Tally PICO details
+        if (ck.intervention) {
+          cluster.interventions.set(ck.intervention, (cluster.interventions.get(ck.intervention) || 0) + 1);
+        }
+        if (ck.comparator) {
+          cluster.comparators.set(ck.comparator, (cluster.comparators.get(ck.comparator) || 0) + 1);
+        }
+        if (ck.outcome) {
+          cluster.outcomes.set(ck.outcome, (cluster.outcomes.get(ck.outcome) || 0) + 1);
+        }
+        // Also tally outcomes from all trials in the cluster
+        for (const po of trial.primaryOutcomes) {
+          const no = normalizeOutcome(po);
+          if (no) cluster.outcomes.set(no, (cluster.outcomes.get(no) || 0) + 1);
+        }
+      }
+    }
+
+    // Convert Maps to sorted arrays for display
+    universeData = Array.from(clusterMap.values())
+      .filter(c => c.count >= 3)
+      .map(c => {
+        c.recencyScore = c.count > 0 ? c.recentCount / c.count : 0;
+        c.gapChecked = false;
+        c.srCount = null;
+        c.latestSRYear = null;
+        // Top 3 for each PICO element
+        c.topInterventions = [...c.interventions.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3);
+        c.topComparators = [...c.comparators.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3);
+        c.topOutcomes = [...c.outcomes.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4);
+        // Enrollment total
+        c.totalEnrollment = c.trials.reduce((sum, t) => sum + (t.enrollment || 0), 0);
+        return c;
+      });
+
+    universeData.sort((a, b) => b.recentCount - a.recentCount);
+    const modeLabel = usePICO ? 'PICO clusters' : 'condition clusters';
+    document.getElementById('discoveryStatus').textContent =
+      allTrials.length + ' RCTs mapped into ' + universeData.length + ' ' + modeLabel;
+    document.getElementById('universeControls').style.display = 'block';
+    document.getElementById('universeStats').textContent =
+      allTrials.length + ' total RCTs | ' + universeData.length + ' ' + modeLabel + ' (3+ RCTs each)';
+    renderUniverse();
+  }
+
+  // Re-cluster when toggle changes
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('picoClusterToggle');
+    if (toggle) {
+      toggle.addEventListener('change', () => {
+        if (universeRawTrials.length > 0) {
+          const topic = document.getElementById('topicInput').value.trim() || 'Topic';
+          clusterAndRender(universeRawTrials, topic, toggle.checked);
+        }
+      });
+    }
+  });
 
   function sortUniverse(mode, btn) {
     universeSortMode = mode;
@@ -2281,7 +3262,6 @@ body.dark-mode {
     if (mode === 'recent') universeData.sort((a, b) => b.recentCount - a.recentCount);
     else if (mode === 'count') universeData.sort((a, b) => b.count - a.count);
     else if (mode === 'gap') {
-      // Put gap-checked items with high gap score first
       universeData.sort((a, b) => {
         if (a.gapChecked && !b.gapChecked) return -1;
         if (!a.gapChecked && b.gapChecked) return 1;
@@ -2293,6 +3273,8 @@ body.dark-mode {
   }
 
   function renderUniverse() {
+    const usePICO = document.getElementById('picoClusterToggle')?.checked || false;
+
     // Bubble chart (top 30)
     const top30 = universeData.slice(0, 30);
     const maxCount = Math.max(...top30.map(c => c.count), 1);
@@ -2302,15 +3284,15 @@ body.dark-mode {
         const size = Math.max(40, Math.min(120, 40 + (c.count / maxCount) * 80));
         const hue = c.recencyScore > 0.4 ? '0' : c.recencyScore > 0.2 ? '30' : c.recencyScore > 0.1 ? '45' : '220';
         const sat = c.recencyScore > 0.1 ? '70%' : '30%';
-        const light = '45%';
+        const label = c.term.length > 20 ? c.term.slice(0, 18) + '..' : c.term;
         return '<div class="bubble" style="width:' + size + 'px;height:' + size + 'px;' +
-          'background:hsl(' + hue + ',' + sat + ',' + light + ')" ' +
+          'background:hsl(' + hue + ',' + sat + ',45%)" ' +
           'onclick="scrollToCard(' + i + ')" title="' + escapeHtml(c.term) + ': ' + c.count + ' RCTs (' + c.recentCount + ' recent)">' +
-          escapeHtml(c.term.length > 18 ? c.term.slice(0, 16) + '..' : c.term) +
+          escapeHtml(label) +
         '</div>';
       }).join('') +
       '</div>' +
-      '<p class="text-muted" style="text-align:center;font-size:0.7rem">Bubble size = RCT count | Red = many recent trials | Blue = mostly older | Click to jump</p>';
+      '<p class="text-muted" style="text-align:center;font-size:0.7rem">Size = RCT count | Red = many recent | Blue = older | Click to jump</p>';
 
     // Card grid
     const currentYear = new Date().getFullYear();
@@ -2336,13 +3318,34 @@ body.dark-mode {
           else gapBadge = '<span class="badge badge-exclude" style="font-size:0.7rem">' + c.srCount + ' recent MAs</span>';
         }
 
+        // PICO detail lines (only in PICO mode and if data exists)
+        let picoLines = '';
+        if (usePICO) {
+          const parts = [];
+          if (c.topInterventions.length > 0 && c.topInterventions[0][0] !== 'Various') {
+            parts.push('<b>I:</b> ' + c.topInterventions.map(e => escapeHtml(e[0]) + ' <span class="text-muted">(' + e[1] + ')</span>').join(', '));
+          }
+          if (c.topComparators.length > 0) {
+            parts.push('<b>C:</b> ' + escapeHtml(c.topComparators[0][0]));
+          }
+          if (c.topOutcomes.length > 0) {
+            parts.push('<b>O:</b> ' + c.topOutcomes.map(e => escapeHtml(e[0])).join(', '));
+          }
+          if (parts.length > 0) {
+            picoLines = '<div style="font-size:0.72rem;color:var(--text-muted);line-height:1.4;margin:4px 0;border-top:1px solid var(--border);padding-top:4px">' +
+              parts.join('<br>') + '</div>';
+          }
+        }
+
         return '<div class="universe-card' + (c.gapChecked ? ' checked' : '') + '" id="ucard-' + i + '">' +
           '<div class="card-heat ' + heatClass + '"></div>' +
           '<h4>' + escapeHtml(c.term) + '</h4>' +
           '<div class="card-stats">' +
-            '<div class="card-stat"><div class="card-stat-value">' + c.count + '</div><div class="card-stat-label">Total RCTs</div></div>' +
-            '<div class="card-stat"><div class="card-stat-value" style="color:' + (c.recentCount > 3 ? 'var(--danger)' : 'var(--text)') + '">' + c.recentCount + '</div><div class="card-stat-label">Since ' + (currentYear - 3) + '</div></div>' +
+            '<div class="card-stat"><div class="card-stat-value">' + c.count + '</div><div class="card-stat-label">RCTs</div></div>' +
+            '<div class="card-stat"><div class="card-stat-value" style="color:' + (c.recentCount > 3 ? 'var(--danger)' : 'var(--text)') + '">' + c.recentCount + '</div><div class="card-stat-label">Recent (3yr)</div></div>' +
+            '<div class="card-stat"><div class="card-stat-value" style="font-size:0.9rem">' + (c.totalEnrollment > 999 ? Math.round(c.totalEnrollment / 1000) + 'K' : c.totalEnrollment) + '</div><div class="card-stat-label">Enrolled</div></div>' +
           '</div>' +
+          picoLines +
           '<div class="sparkline-row" title="RCTs per year (last 10 years)">' + sparkline + '</div>' +
           gapBadge +
           '<div class="card-actions">' +
@@ -2363,16 +3366,21 @@ body.dark-mode {
   async function checkGapForCluster(index) {
     const cluster = universeData[index];
     if (!cluster) return;
-    const term = cluster.term;
-    const cardEl = document.getElementById('ucard-' + index);
     const resultEl = document.getElementById('gapCheckResult');
 
-    resultEl.innerHTML = '<p class="text-muted">Checking PubMed for meta-analyses on "' + escapeHtml(term) + '"...</p>';
+    // Build a more specific PubMed query for PICO clusters
+    let searchTerms = cluster.term;
+    if (cluster.isPICO && cluster.topInterventions.length > 0 && cluster.topInterventions[0][0] !== 'Various') {
+      // Use condition + intervention for more targeted MA search
+      const parts = cluster.term.split(' + ');
+      if (parts.length >= 2) searchTerms = parts[0] + ' AND ' + parts[1];
+    }
+
+    resultEl.innerHTML = '<p class="text-muted">Checking PubMed for meta-analyses on "' + escapeHtml(searchTerms) + '"...</p>';
     resultEl.scrollIntoView({ behavior: 'smooth' });
 
     try {
-      // Search PubMed for SRs/MAs on this specific sub-topic
-      const srQuery = encodeURIComponent(term) + '+AND+(systematic+review[pt]+OR+meta-analysis[pt])';
+      const srQuery = encodeURIComponent(searchTerms) + '+AND+(systematic+review[pt]+OR+meta-analysis[pt])';
       const srResp = await rateLimitedFetch(PUBMED_BASE + 'esearch.fcgi?db=pubmed&term=' + srQuery + '&retmax=10&retmode=json&sort=pub+date', 'pubmed');
       const srData = await srResp.json();
       const srCount = parseInt(srData.esearchresult?.count || '0');
@@ -2390,12 +3398,10 @@ body.dark-mode {
       const latestSRYear = recentSRs.length > 0 ? Math.max(...recentSRs.map(r => parseInt(r.year) || 0)) : 0;
       const yearsSinceLastSR = latestSRYear > 0 ? currentYear - latestSRYear : 999;
 
-      // Update cluster data
       cluster.gapChecked = true;
       cluster.srCount = srCount;
       cluster.latestSRYear = latestSRYear || null;
 
-      // Determine gap level
       let gapLevel, gapLabel, gapColor;
       if (cluster.recentCount >= 3 && (srCount === 0 || yearsSinceLastSR >= 3)) {
         gapLevel = 'high'; gapLabel = 'Strong opportunity'; gapColor = 'var(--success)';
@@ -2405,15 +3411,30 @@ body.dark-mode {
         gapLevel = 'low'; gapLabel = 'Well covered'; gapColor = 'var(--text-muted)';
       }
 
+      // PICO summary for gap card
+      let picoSummary = '';
+      if (cluster.isPICO) {
+        const lines = [];
+        if (cluster.topInterventions.length > 0) lines.push('<b>Interventions:</b> ' + cluster.topInterventions.map(e => escapeHtml(e[0]) + ' (' + e[1] + ')').join(', '));
+        if (cluster.topComparators.length > 0) lines.push('<b>Comparators:</b> ' + cluster.topComparators.map(e => escapeHtml(e[0])).join(', '));
+        if (cluster.topOutcomes.length > 0) lines.push('<b>Primary outcomes:</b> ' + cluster.topOutcomes.map(e => escapeHtml(e[0]) + ' (' + e[1] + ')').join(', '));
+        lines.push('<b>Total enrollment:</b> ' + cluster.totalEnrollment.toLocaleString());
+        if (lines.length > 0) {
+          picoSummary = '<div style="font-size:0.82rem;line-height:1.5;margin:8px 0;padding:8px 12px;background:var(--bg);border-radius:var(--radius)">' +
+            lines.join('<br>') + '</div>';
+        }
+      }
+
       resultEl.innerHTML =
         '<div class="gap-card gap-' + gapLevel + '">' +
-          '<h3>' + escapeHtml(term) + ' <span style="font-size:0.85rem;font-weight:normal;color:' + gapColor + '">' + gapLabel + '</span></h3>' +
+          '<h3>' + escapeHtml(cluster.term) + ' <span style="font-size:0.85rem;font-weight:normal;color:' + gapColor + '">' + gapLabel + '</span></h3>' +
           '<div class="gap-stats">' +
             '<div class="stat-card"><div class="stat-label">Total RCTs</div><div class="stat-value">' + cluster.count + '</div></div>' +
             '<div class="stat-card"><div class="stat-label">Recent RCTs (3yr)</div><div class="stat-value" style="color:var(--danger)">' + cluster.recentCount + '</div></div>' +
             '<div class="stat-card"><div class="stat-label">SRs/MAs Found</div><div class="stat-value">' + srCount + '</div></div>' +
             '<div class="stat-card"><div class="stat-label">Latest MA</div><div class="stat-value">' + (latestSRYear || 'None') + '</div></div>' +
           '</div>' +
+          picoSummary +
           (recentSRs.length > 0 ?
             '<h4 style="margin-top:12px">Recent Systematic Reviews / Meta-Analyses</h4>' +
             '<ul style="font-size:0.85rem;line-height:1.5">' +
@@ -2425,7 +3446,6 @@ body.dark-mode {
           '</div>' +
         '</div>';
 
-      // Re-render cards to show updated badge
       renderUniverse();
     } catch (err) {
       resultEl.innerHTML = '<p style="color:var(--danger)">Error checking PubMed: ' + err.message + '</p>';
@@ -2435,18 +3455,43 @@ body.dark-mode {
   function useClusterForProtocol(index) {
     const cluster = universeData[index];
     if (!cluster) return;
+    // In PICO mode, split "Condition + Intervention" into P and I fields
+    const parts = cluster.term.split(' + ');
+    const condition = parts[0] || cluster.term;
+    const intervention = parts.length > 1 ? parts[1] : '';
     const protP = document.getElementById('protP');
-    if (protP) protP.value = cluster.term;
+    if (protP) protP.value = condition;
+    const protI = document.getElementById('protI');
+    if (protI && intervention) protI.value = intervention;
     const picoP = document.getElementById('picoP');
-    if (picoP) picoP.value = cluster.term;
+    if (picoP) picoP.value = condition;
+    const picoI = document.getElementById('picoI');
+    if (picoI && intervention) picoI.value = intervention;
+    // Pre-fill outcome if available
+    if (cluster.topOutcomes.length > 0) {
+      const protO = document.getElementById('protO');
+      if (protO) protO.value = cluster.topOutcomes[0][0];
+      const picoO = document.getElementById('picoO');
+      if (picoO) picoO.value = cluster.topOutcomes[0][0];
+    }
+    // Pre-fill comparator
+    if (cluster.topComparators.length > 0) {
+      const protC = document.getElementById('protC');
+      if (protC) protC.value = cluster.topComparators[0][0];
+      const picoC = document.getElementById('picoC');
+      if (picoC) picoC.value = cluster.topComparators[0][0];
+    }
     switchPhase('protocol');
   }
 
   function useClusterForSearch(index) {
     const cluster = universeData[index];
     if (!cluster) return;
+    const parts = cluster.term.split(' + ');
     const picoP = document.getElementById('picoP');
-    if (picoP) picoP.value = cluster.term;
+    if (picoP) picoP.value = parts[0] || cluster.term;
+    const picoI = document.getElementById('picoI');
+    if (picoI && parts.length > 1) picoI.value = parts[1];
     switchPhase('search');
   }
 
@@ -2673,6 +3718,7 @@ body.dark-mode {
   // ============================================================
   document.addEventListener('DOMContentLoaded', async () => {
     try {
+      loadDarkMode();
       await initDB();
       await loadProjects();
       if (projects.length === 0) {
@@ -2686,6 +3732,7 @@ body.dark-mode {
         if (saved.phase) switchPhase(saved.phase);
       }
       renderProjectSelect();
+      renderSprintDashboard();
     } catch (err) {
       console.error('Init failed:', err);
       showToast('Failed to initialize database', 'danger');
