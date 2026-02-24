@@ -272,6 +272,44 @@ button:hover { background: var(--primary-hover); }
 /* --- Text utilities --- */
 .text-muted { color: var(--text-muted); font-size: 0.85rem; }
 
+/* --- RCT Universe Discovery --- */
+.universe-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+.universe-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px; cursor: pointer; transition: box-shadow 0.15s, border-color 0.15s;
+  position: relative; overflow: hidden;
+}
+.universe-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-color: var(--primary); }
+.universe-card.checked { border-color: var(--success); }
+.universe-card .card-heat {
+  position: absolute; top: 0; right: 0; width: 6px; height: 100%;
+}
+.universe-card h4 { font-size: 0.9rem; margin-bottom: 6px; line-height: 1.3; }
+.card-stats { display: flex; gap: 12px; margin-bottom: 6px; }
+.card-stat { text-align: center; }
+.card-stat-value { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+.card-stat-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; }
+.sparkline-row { display: flex; align-items: flex-end; gap: 1px; height: 24px; margin: 6px 0; }
+.sparkline-bar { flex: 1; background: var(--primary); border-radius: 1px 1px 0 0; min-width: 3px; opacity: 0.7; }
+.card-actions { display: flex; gap: 6px; margin-top: 8px; }
+.card-actions button { font-size: 0.75rem; padding: 4px 10px; }
+.heat-hot { background: linear-gradient(to bottom, #ef4444, #f97316); }
+.heat-warm { background: linear-gradient(to bottom, #f59e0b, #eab308); }
+.heat-cool { background: linear-gradient(to bottom, #6366f1, #8b5cf6); }
+.heat-cold { background: linear-gradient(to bottom, #94a3b8, #cbd5e1); }
+
+.bubble-chart { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: center; padding: 8px 0; }
+.bubble {
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 0.65rem; font-weight: 600; cursor: pointer;
+  transition: transform 0.15s; text-align: center; line-height: 1.1; padding: 4px;
+  overflow: hidden; word-break: break-word;
+}
+.bubble:hover { transform: scale(1.15); z-index: 1; }
+
 /* --- Dark Mode --- */
 body.dark-mode {
   --bg: #0f172a; --surface: #1e293b; --text: #e2e8f0;
@@ -305,13 +343,24 @@ body.dark-mode {
     <!-- Phase 1: Discover -->
     <section id="phase-discover" class="phase active">
       <h2>Topic Discovery</h2>
-      <p>Find topics with multiple RCTs but no recent meta-analysis.</p>
+      <p>Explore the RCT landscape in a broad area, spot where trials are clustering recently, then check for meta-analysis gaps.</p>
       <div class="discover-input">
-        <input type="text" id="topicInput" placeholder="Enter broad topic (e.g., SGLT2 inhibitors, atrial fibrillation)">
-        <button onclick="discoverTopics()">Analyze Gap</button>
+        <input type="text" id="topicInput" placeholder="Enter a broad area (e.g., heart failure, diabetes, lung cancer, stroke)">
+        <button class="btn-success" onclick="loadRCTUniverse()">Map RCT Universe</button>
       </div>
-      <div id="discoveryStatus"></div>
-      <div id="discoveryResults"></div>
+      <div id="discoveryStatus" style="margin:8px 0"></div>
+      <div id="universeControls" style="display:none;margin-bottom:12px">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <label class="text-muted" style="font-size:0.8rem">Sort by:</label>
+          <button class="filter-btn active" onclick="sortUniverse('recent',this)">Most Recent RCTs</button>
+          <button class="filter-btn" onclick="sortUniverse('count',this)">Most RCTs</button>
+          <button class="filter-btn" onclick="sortUniverse('gap',this)">Biggest Gaps</button>
+          <span class="text-muted" style="margin-left:auto;font-size:0.8rem" id="universeStats"></span>
+        </div>
+      </div>
+      <div id="universeBubbles" style="margin-bottom:16px"></div>
+      <div id="universeGrid"></div>
+      <div id="gapCheckResult" style="margin-top:16px"></div>
     </section>
 
     <!-- Phase 2: Protocol -->
@@ -2124,21 +2173,207 @@ body.dark-mode {
   }
 
   // ============================================================
-  // TOPIC DISCOVERY
+  // TOPIC DISCOVERY — RCT Universe Explorer
   // ============================================================
-  async function discoverTopics() {
+  let universeData = []; // Array of { term, count, recentCount, years, trials }
+  let universeSortMode = 'recent';
+
+  async function loadRCTUniverse() {
     const topic = document.getElementById('topicInput').value.trim();
-    if (!topic) { showToast('Enter a topic', 'warning'); return; }
-    document.getElementById('discoveryStatus').textContent = 'Searching PubMed for RCTs...';
+    if (!topic) { showToast('Enter a broad topic area', 'warning'); return; }
+    const statusEl = document.getElementById('discoveryStatus');
+    statusEl.textContent = 'Loading RCT universe from ClinicalTrials.gov...';
+    document.getElementById('universeControls').style.display = 'none';
+    document.getElementById('universeBubbles').innerHTML = '';
+    document.getElementById('universeGrid').innerHTML = '';
+    document.getElementById('gapCheckResult').innerHTML = '';
 
     try {
-      const rctQuery = encodeURIComponent(topic) + '+AND+randomized+controlled+trial[pt]';
-      const rctResp = await rateLimitedFetch(PUBMED_BASE + 'esearch.fcgi?db=pubmed&term=' + rctQuery + '&retmax=0&retmode=json');
-      const rctData = await rctResp.json();
-      const rctCount = parseInt(rctData.esearchresult?.count || '0');
+      // Fetch up to 1000 RCTs from CT.gov for this broad area
+      const allTrials = [];
+      let pageToken = null;
+      let page = 0;
+      do {
+        const params = new URLSearchParams({
+          'query.cond': topic,
+          'query.term': 'AREA[StudyType]INTERVENTIONAL AND AREA[DesignAllocation]RANDOMIZED',
+          pageSize: '1000', countTotal: 'true'
+        });
+        if (pageToken) params.append('pageToken', pageToken);
+        const resp = await fetch('https://clinicaltrials.gov/api/v2/studies?' + params);
+        const data = await resp.json();
+        const studies = data.studies || [];
+        pageToken = data.nextPageToken || null;
+        page++;
 
-      const srQuery = encodeURIComponent(topic) + '+AND+(systematic+review[pt]+OR+meta-analysis[pt])';
-      const srResp = await rateLimitedFetch(PUBMED_BASE + 'esearch.fcgi?db=pubmed&term=' + srQuery + '&retmax=10&retmode=json&sort=pub+date');
+        for (const s of studies) {
+          const p = s.protocolSection || {};
+          const conditions = (p.conditionsModule?.conditions || []);
+          const interventions = (p.armsInterventionsModule?.interventions || []).map(iv => iv.name || '');
+          const startYear = parseInt(p.statusModule?.startDateStruct?.date?.substring(0, 4) || '0');
+          allTrials.push({
+            nctId: p.identificationModule?.nctId || '',
+            title: p.identificationModule?.officialTitle || p.identificationModule?.briefTitle || '',
+            conditions: conditions,
+            interventions: interventions,
+            startYear: startYear,
+            status: p.statusModule?.overallStatus || '',
+            enrollment: p.designModule?.enrollmentInfo?.count || 0,
+            phase: (p.designModule?.phases || []).join(', ')
+          });
+        }
+        statusEl.textContent = 'Loaded ' + allTrials.length + ' RCTs' + (pageToken ? ' (fetching more...)' : '');
+      } while (pageToken && page < 5);
+
+      if (allTrials.length === 0) {
+        statusEl.textContent = 'No RCTs found for "' + topic + '". Try a broader term.';
+        return;
+      }
+
+      // Cluster by condition terms
+      const clusterMap = new Map();
+      const currentYear = new Date().getFullYear();
+      for (const trial of allTrials) {
+        const terms = trial.conditions.length > 0 ? trial.conditions : [topic];
+        for (const rawTerm of terms) {
+          const term = rawTerm.trim();
+          if (!term || term.length < 3) continue;
+          const key = term.toLowerCase();
+          if (!clusterMap.has(key)) {
+            clusterMap.set(key, { term: term, count: 0, recentCount: 0, years: {}, trials: [] });
+          }
+          const cluster = clusterMap.get(key);
+          cluster.count++;
+          if (trial.startYear >= currentYear - 3) cluster.recentCount++;
+          const yr = trial.startYear || 'Unknown';
+          cluster.years[yr] = (cluster.years[yr] || 0) + 1;
+          cluster.trials.push(trial);
+        }
+      }
+
+      // Filter to clusters with >= 3 RCTs and sort
+      universeData = Array.from(clusterMap.values())
+        .filter(c => c.count >= 3)
+        .map(c => {
+          // Compute recency score: fraction of trials from last 3 years
+          c.recencyScore = c.count > 0 ? c.recentCount / c.count : 0;
+          c.gapChecked = false;
+          c.srCount = null;
+          c.latestSRYear = null;
+          return c;
+        });
+
+      universeData.sort((a, b) => b.recentCount - a.recentCount);
+      statusEl.textContent = allTrials.length + ' RCTs mapped across ' + universeData.length + ' sub-topics';
+      document.getElementById('universeControls').style.display = 'block';
+      document.getElementById('universeStats').textContent =
+        allTrials.length + ' total RCTs | ' + universeData.length + ' sub-topics with 3+ RCTs';
+      renderUniverse();
+    } catch (err) {
+      statusEl.textContent = 'Error: ' + err.message;
+    }
+  }
+
+  function sortUniverse(mode, btn) {
+    universeSortMode = mode;
+    document.querySelectorAll('#universeControls .filter-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    if (mode === 'recent') universeData.sort((a, b) => b.recentCount - a.recentCount);
+    else if (mode === 'count') universeData.sort((a, b) => b.count - a.count);
+    else if (mode === 'gap') {
+      // Put gap-checked items with high gap score first
+      universeData.sort((a, b) => {
+        if (a.gapChecked && !b.gapChecked) return -1;
+        if (!a.gapChecked && b.gapChecked) return 1;
+        if (a.gapChecked && b.gapChecked) return (a.srCount || 999) - (b.srCount || 999);
+        return b.recentCount - a.recentCount;
+      });
+    }
+    renderUniverse();
+  }
+
+  function renderUniverse() {
+    // Bubble chart (top 30)
+    const top30 = universeData.slice(0, 30);
+    const maxCount = Math.max(...top30.map(c => c.count), 1);
+    document.getElementById('universeBubbles').innerHTML =
+      '<div class="bubble-chart">' +
+      top30.map((c, i) => {
+        const size = Math.max(40, Math.min(120, 40 + (c.count / maxCount) * 80));
+        const hue = c.recencyScore > 0.4 ? '0' : c.recencyScore > 0.2 ? '30' : c.recencyScore > 0.1 ? '45' : '220';
+        const sat = c.recencyScore > 0.1 ? '70%' : '30%';
+        const light = '45%';
+        return '<div class="bubble" style="width:' + size + 'px;height:' + size + 'px;' +
+          'background:hsl(' + hue + ',' + sat + ',' + light + ')" ' +
+          'onclick="scrollToCard(' + i + ')" title="' + escapeHtml(c.term) + ': ' + c.count + ' RCTs (' + c.recentCount + ' recent)">' +
+          escapeHtml(c.term.length > 18 ? c.term.slice(0, 16) + '..' : c.term) +
+        '</div>';
+      }).join('') +
+      '</div>' +
+      '<p class="text-muted" style="text-align:center;font-size:0.7rem">Bubble size = RCT count | Red = many recent trials | Blue = mostly older | Click to jump</p>';
+
+    // Card grid
+    const currentYear = new Date().getFullYear();
+    const yearRange = [];
+    for (let y = currentYear - 9; y <= currentYear; y++) yearRange.push(y);
+
+    document.getElementById('universeGrid').innerHTML =
+      '<div class="universe-grid">' +
+      universeData.map((c, i) => {
+        const heatClass = c.recencyScore > 0.4 ? 'heat-hot' : c.recencyScore > 0.2 ? 'heat-warm' : c.recencyScore > 0.1 ? 'heat-cool' : 'heat-cold';
+        const maxYearCount = Math.max(...yearRange.map(y => c.years[y] || 0), 1);
+        const sparkline = yearRange.map(y => {
+          const h = Math.max(1, ((c.years[y] || 0) / maxYearCount) * 22);
+          const isRecent = y >= currentYear - 2;
+          return '<div class="sparkline-bar" style="height:' + h + 'px;' +
+            (isRecent ? 'background:var(--danger);opacity:0.9' : '') + '" title="' + y + ': ' + (c.years[y] || 0) + ' RCTs"></div>';
+        }).join('');
+
+        let gapBadge = '';
+        if (c.gapChecked) {
+          if (c.srCount === 0) gapBadge = '<span class="badge badge-include" style="font-size:0.7rem">NO META-ANALYSES</span>';
+          else if (c.latestSRYear && currentYear - c.latestSRYear >= 3) gapBadge = '<span class="badge badge-maybe" style="font-size:0.7rem">Last MA: ' + c.latestSRYear + '</span>';
+          else gapBadge = '<span class="badge badge-exclude" style="font-size:0.7rem">' + c.srCount + ' recent MAs</span>';
+        }
+
+        return '<div class="universe-card' + (c.gapChecked ? ' checked' : '') + '" id="ucard-' + i + '">' +
+          '<div class="card-heat ' + heatClass + '"></div>' +
+          '<h4>' + escapeHtml(c.term) + '</h4>' +
+          '<div class="card-stats">' +
+            '<div class="card-stat"><div class="card-stat-value">' + c.count + '</div><div class="card-stat-label">Total RCTs</div></div>' +
+            '<div class="card-stat"><div class="card-stat-value" style="color:' + (c.recentCount > 3 ? 'var(--danger)' : 'var(--text)') + '">' + c.recentCount + '</div><div class="card-stat-label">Since ' + (currentYear - 3) + '</div></div>' +
+          '</div>' +
+          '<div class="sparkline-row" title="RCTs per year (last 10 years)">' + sparkline + '</div>' +
+          gapBadge +
+          '<div class="card-actions">' +
+            '<button onclick="checkGapForCluster(' + i + ')" class="btn-info" style="font-size:0.75rem">' +
+              (c.gapChecked ? 'Re-check' : 'Check for MAs') + '</button>' +
+            '<button onclick="useClusterForProtocol(' + i + ')" class="btn-outline" style="font-size:0.75rem">Use Topic</button>' +
+          '</div>' +
+        '</div>';
+      }).join('') +
+      '</div>';
+  }
+
+  function scrollToCard(index) {
+    const card = document.getElementById('ucard-' + index);
+    if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  async function checkGapForCluster(index) {
+    const cluster = universeData[index];
+    if (!cluster) return;
+    const term = cluster.term;
+    const cardEl = document.getElementById('ucard-' + index);
+    const resultEl = document.getElementById('gapCheckResult');
+
+    resultEl.innerHTML = '<p class="text-muted">Checking PubMed for meta-analyses on "' + escapeHtml(term) + '"...</p>';
+    resultEl.scrollIntoView({ behavior: 'smooth' });
+
+    try {
+      // Search PubMed for SRs/MAs on this specific sub-topic
+      const srQuery = encodeURIComponent(term) + '+AND+(systematic+review[pt]+OR+meta-analysis[pt])';
+      const srResp = await rateLimitedFetch(PUBMED_BASE + 'esearch.fcgi?db=pubmed&term=' + srQuery + '&retmax=10&retmode=json&sort=pub+date', 'pubmed');
       const srData = await srResp.json();
       const srCount = parseInt(srData.esearchresult?.count || '0');
       const srPMIDs = srData.esearchresult?.idlist || [];
@@ -2146,7 +2381,7 @@ body.dark-mode {
       let recentSRs = [];
       if (srPMIDs.length > 0) {
         const fetchUrl = PUBMED_BASE + 'efetch.fcgi?db=pubmed&id=' + srPMIDs.join(',') + '&retmode=xml&rettype=abstract';
-        const fetchResp = await rateLimitedFetch(fetchUrl);
+        const fetchResp = await rateLimitedFetch(fetchUrl, 'pubmed');
         const xml = await fetchResp.text();
         recentSRs = parsePubMedXML(xml);
       }
@@ -2155,38 +2390,64 @@ body.dark-mode {
       const latestSRYear = recentSRs.length > 0 ? Math.max(...recentSRs.map(r => parseInt(r.year) || 0)) : 0;
       const yearsSinceLastSR = latestSRYear > 0 ? currentYear - latestSRYear : 999;
 
-      let gapLevel, gapLabel;
-      if (rctCount >= 5 && yearsSinceLastSR >= 3) { gapLevel = 'high'; gapLabel = 'Strong opportunity'; }
-      else if (rctCount >= 3 && yearsSinceLastSR >= 2) { gapLevel = 'medium'; gapLabel = 'Moderate opportunity'; }
-      else { gapLevel = 'low'; gapLabel = 'Low opportunity'; }
+      // Update cluster data
+      cluster.gapChecked = true;
+      cluster.srCount = srCount;
+      cluster.latestSRYear = latestSRYear || null;
 
-      document.getElementById('discoveryStatus').textContent = '';
-      document.getElementById('discoveryResults').innerHTML =
+      // Determine gap level
+      let gapLevel, gapLabel, gapColor;
+      if (cluster.recentCount >= 3 && (srCount === 0 || yearsSinceLastSR >= 3)) {
+        gapLevel = 'high'; gapLabel = 'Strong opportunity'; gapColor = 'var(--success)';
+      } else if (cluster.recentCount >= 2 && yearsSinceLastSR >= 2) {
+        gapLevel = 'medium'; gapLabel = 'Moderate opportunity'; gapColor = 'var(--warning)';
+      } else {
+        gapLevel = 'low'; gapLabel = 'Well covered'; gapColor = 'var(--text-muted)';
+      }
+
+      resultEl.innerHTML =
         '<div class="gap-card gap-' + gapLevel + '">' +
-          '<h3>' + escapeHtml(topic) + '</h3>' +
+          '<h3>' + escapeHtml(term) + ' <span style="font-size:0.85rem;font-weight:normal;color:' + gapColor + '">' + gapLabel + '</span></h3>' +
           '<div class="gap-stats">' +
-            '<div class="stat-card"><div class="stat-label">RCTs Found</div><div class="stat-value">' + rctCount + '</div></div>' +
+            '<div class="stat-card"><div class="stat-label">Total RCTs</div><div class="stat-value">' + cluster.count + '</div></div>' +
+            '<div class="stat-card"><div class="stat-label">Recent RCTs (3yr)</div><div class="stat-value" style="color:var(--danger)">' + cluster.recentCount + '</div></div>' +
             '<div class="stat-card"><div class="stat-label">SRs/MAs Found</div><div class="stat-value">' + srCount + '</div></div>' +
-            '<div class="stat-card"><div class="stat-label">Latest SR</div><div class="stat-value">' + (latestSRYear || 'None') + '</div></div>' +
-            '<div class="stat-card"><div class="stat-label">Gap Score</div><div class="stat-value">' + gapLabel + '</div></div>' +
+            '<div class="stat-card"><div class="stat-label">Latest MA</div><div class="stat-value">' + (latestSRYear || 'None') + '</div></div>' +
           '</div>' +
           (recentSRs.length > 0 ?
-            '<h4>Recent Systematic Reviews</h4><ul>' +
-            recentSRs.map(sr => '<li>' + escapeHtml(sr.title) + ' (' + escapeHtml(sr.year) + ')</li>').join('') +
-            '</ul>' : '<p>No existing systematic reviews found -- strong opportunity!</p>') +
-          '<button onclick="useTopicForProtocol(\'' + escapeHtml(topic).replace(/'/g, "\\'") + '\')">Use This Topic &rarr; Protocol</button>' +
+            '<h4 style="margin-top:12px">Recent Systematic Reviews / Meta-Analyses</h4>' +
+            '<ul style="font-size:0.85rem;line-height:1.5">' +
+            recentSRs.map(sr => '<li>' + escapeHtml(sr.title) + ' <span class="text-muted">(' + escapeHtml(sr.year) + ')</span></li>').join('') +
+            '</ul>' : '<p style="margin-top:8px;color:var(--success);font-weight:600">No existing meta-analyses found -- strong opportunity for a new one!</p>') +
+          '<div style="margin-top:12px;display:flex;gap:8px">' +
+            '<button class="btn-success" onclick="useClusterForProtocol(' + index + ')">Use This Topic &rarr; Protocol</button>' +
+            '<button class="btn-outline" onclick="useClusterForSearch(' + index + ')">Search for Papers &rarr;</button>' +
+          '</div>' +
         '</div>';
+
+      // Re-render cards to show updated badge
+      renderUniverse();
     } catch (err) {
-      document.getElementById('discoveryStatus').textContent = 'Error: ' + err.message;
+      resultEl.innerHTML = '<p style="color:var(--danger)">Error checking PubMed: ' + err.message + '</p>';
     }
   }
 
-  function useTopicForProtocol(topic) {
+  function useClusterForProtocol(index) {
+    const cluster = universeData[index];
+    if (!cluster) return;
     const protP = document.getElementById('protP');
-    if (protP) protP.value = topic;
+    if (protP) protP.value = cluster.term;
     const picoP = document.getElementById('picoP');
-    if (picoP) picoP.value = topic;
+    if (picoP) picoP.value = cluster.term;
     switchPhase('protocol');
+  }
+
+  function useClusterForSearch(index) {
+    const cluster = universeData[index];
+    if (!cluster) return;
+    const picoP = document.getElementById('picoP');
+    if (picoP) picoP.value = cluster.term;
+    switchPhase('search');
   }
 
   // ============================================================
