@@ -10816,6 +10816,315 @@ body.dark-mode .input-error { background: #451a1a !important; }
   }
 
   // ============================================================
+  // LAYER 2: TAFSIR (Cross-References) — Ayat-as-Signs
+  // ============================================================
+
+  function computeTafsirLinks(ayatNodes) {
+    if (!ayatNodes || ayatNodes.length < 2) return [];
+    const links = [];
+    const seen = new Set();
+
+    for (let i = 0; i < ayatNodes.length; i++) {
+      for (let j = i + 1; j < ayatNodes.length; j++) {
+        const a = ayatNodes[i], b = ayatNodes[j];
+        if (a.subcatId === b.subcatId) continue;
+        const pairKey = a.id + '|' + b.id;
+        if (seen.has(pairKey)) continue;
+
+        const aLabel = a.label.toLowerCase();
+        const bLabel = b.label.toLowerCase();
+        if (aLabel === bLabel || (aLabel.length > 3 && bLabel.includes(aLabel)) || (bLabel.length > 3 && aLabel.includes(bLabel))) {
+          links.push({ sourceId: a.id, targetId: b.id, linkType: 'drug', label: a.label });
+          seen.add(pairKey);
+          continue;
+        }
+
+        const aOutcomes = new Set((a.topOutcomes || []).map(classifyOutcome).filter(Boolean));
+        const bOutcomes = new Set((b.topOutcomes || []).map(classifyOutcome).filter(Boolean));
+        const shared = [...aOutcomes].filter(o => bOutcomes.has(o));
+        if (shared.length > 0) {
+          links.push({ sourceId: a.id, targetId: b.id, linkType: 'outcome', label: shared[0] });
+          seen.add(pairKey);
+          continue;
+        }
+
+        const drugClasses = ['sglt2', 'ace', 'arb', 'beta-block', 'calcium', 'statin',
+          'doac', 'anticoagul', 'antiplatelet', 'diuretic', 'nitrate', 'amiodarone',
+          'ivabradine', 'sacubitril', 'entresto', 'pcsk9', 'mra', 'aldosterone'];
+        for (const dc of drugClasses) {
+          if (aLabel.includes(dc) && bLabel.includes(dc)) {
+            links.push({ sourceId: a.id, targetId: b.id, linkType: 'mechanism', label: dc });
+            seen.add(pairKey);
+            break;
+          }
+        }
+      }
+    }
+    return links;
+  }
+
+  function renderTafsirEdges(ctx, links, ayatNodes, lod) {
+    if (!links || links.length === 0 || lod < 1) return;
+    const nodeById = new Map(ayatNodes.map(n => [n.id, n]));
+    const typeColors = { drug: '#a78bfa', outcome: '#fbbf24', mechanism: '#2dd4bf' };
+
+    ctx.save();
+    ctx.setLineDash([4, 4]);
+    ctx.lineWidth = lod >= 2 ? 1.5 : 1;
+
+    for (const link of links) {
+      const src = nodeById.get(link.sourceId);
+      const tgt = nodeById.get(link.targetId);
+      if (!src || !tgt) continue;
+
+      const color = typeColors[link.linkType] || '#94a3b8';
+      ctx.strokeStyle = color + (lod >= 2 ? 'aa' : '55');
+      ctx.beginPath();
+
+      const mx = (src.x + tgt.x) / 2;
+      const my = (src.y + tgt.y) / 2;
+      const dx = tgt.x - src.x, dy = tgt.y - src.y;
+      const len = Math.sqrt(dx * dx + dy * dy) || 1;
+      const offX = -dy / len * 15;
+      const offY = dx / len * 15;
+
+      ctx.moveTo(src.x, src.y);
+      ctx.quadraticCurveTo(mx + offX, my + offY, tgt.x, tgt.y);
+      ctx.stroke();
+
+      if (lod >= 2 && link.label) {
+        ctx.fillStyle = color + 'cc';
+        ctx.font = '6px system-ui';
+        ctx.textAlign = 'center';
+        ctx.fillText(link.label, mx + offX, my + offY - 4);
+      }
+    }
+    ctx.setLineDash([]);
+    ctx.restore();
+  }
+
+  // ============================================================
+  // LAYER 3: BAYAN (Void Cartography) — Tadabbur
+  // ============================================================
+
+  function buildBayanMatrix(trials) {
+    if (!trials || trials.length === 0) return null;
+
+    const ivCounts = {};
+    const ivTrialSets = {};
+    for (let i = 0; i < trials.length; i++) {
+      const t = trials[i];
+      const names = getTrialInterventionNames(t, { excludeComparators: true, maxItems: 2, fallbackLabel: '' })
+        .map(n => n.toLowerCase().slice(0, 30)).filter(n => n.length > 2);
+      for (const n of names) {
+        ivCounts[n] = (ivCounts[n] || 0) + 1;
+        if (!ivTrialSets[n]) ivTrialSets[n] = new Set();
+        ivTrialSets[n].add(i);
+      }
+    }
+    const topIvs = Object.entries(ivCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 20)
+      .map(([k]) => k);
+
+    const outcomeCats = Object.keys(OUTCOME_TAXONOMY);
+    const cells = [];
+    for (let iv = 0; iv < topIvs.length; iv++) {
+      cells[iv] = [];
+      for (let oc = 0; oc < outcomeCats.length; oc++) {
+        cells[iv][oc] = { count: 0, trialIndices: [] };
+      }
+    }
+
+    for (let i = 0; i < trials.length; i++) {
+      const t = trials[i];
+      const names = getTrialInterventionNames(t, { excludeComparators: true, maxItems: 2, fallbackLabel: '' })
+        .map(n => n.toLowerCase().slice(0, 30)).filter(n => n.length > 2);
+      const matchedIvs = names.map(n => topIvs.indexOf(n)).filter(idx => idx >= 0);
+      if (matchedIvs.length === 0) continue;
+
+      const matchedOcs = new Set();
+      for (const o of (t.primaryOutcomes || [])) {
+        const cat = classifyOutcome(o);
+        if (cat) {
+          const ocIdx = outcomeCats.indexOf(cat);
+          if (ocIdx >= 0) matchedOcs.add(ocIdx);
+        }
+      }
+      if (matchedOcs.size === 0 && t.title) {
+        for (let oc = 0; oc < outcomeCats.length; oc++) {
+          if (OUTCOME_TAXONOMY[outcomeCats[oc]].some(term => t.title.toLowerCase().includes(term))) {
+            matchedOcs.add(oc);
+          }
+        }
+      }
+
+      for (const ivIdx of matchedIvs) {
+        for (const ocIdx of matchedOcs) {
+          cells[ivIdx][ocIdx].count++;
+          cells[ivIdx][ocIdx].trialIndices.push(i);
+        }
+      }
+    }
+
+    return {
+      interventions: topIvs,
+      outcomes: outcomeCats,
+      cells,
+      outcomeLabels: outcomeCats.map(k => k.charAt(0).toUpperCase() + k.slice(1).replace(/([A-Z])/g, ' $1'))
+    };
+  }
+
+  function computeVoidScores(matrix) {
+    if (!matrix) return [];
+    const { interventions, outcomes, cells } = matrix;
+    const voids = [];
+
+    for (let iv = 0; iv < interventions.length; iv++) {
+      let drugTotal = 0;
+      for (let oc = 0; oc < outcomes.length; oc++) drugTotal += cells[iv][oc].count;
+
+      for (let oc = 0; oc < outcomes.length; oc++) {
+        if (cells[iv][oc].count > 0) continue;
+
+        let outcomeTotal = 0;
+        for (let iv2 = 0; iv2 < interventions.length; iv2++) outcomeTotal += cells[iv2][oc].count;
+
+        let neighborSum = 0, neighborCount = 0;
+        if (iv > 0) { neighborSum += cells[iv - 1][oc].count; neighborCount++; }
+        if (iv < interventions.length - 1) { neighborSum += cells[iv + 1][oc].count; neighborCount++; }
+        if (oc > 0) { neighborSum += cells[iv][oc - 1].count; neighborCount++; }
+        if (oc < outcomes.length - 1) { neighborSum += cells[iv][oc + 1].count; neighborCount++; }
+        const neighborDensity = neighborCount > 0 ? neighborSum / neighborCount : 0;
+
+        if (neighborDensity === 0 && drugTotal === 0) continue;
+
+        const voidScore = neighborDensity * Math.log2(drugTotal + 1) * Math.log2(outcomeTotal + 1);
+        if (voidScore > 0.5) {
+          voids.push({
+            ivIdx: iv, ocIdx: oc,
+            intervention: interventions[iv],
+            outcome: outcomes[oc],
+            voidScore: Math.round(voidScore * 10) / 10,
+            drugTotal, outcomeTotal, neighborDensity
+          });
+        }
+      }
+    }
+
+    return voids.sort((a, b) => b.voidScore - a.voidScore);
+  }
+
+  function renderBayanMatrix(trials) {
+    _bayanMatrix = buildBayanMatrix(trials);
+    if (!_bayanMatrix) return;
+
+    const voids = computeVoidScores(_bayanMatrix);
+    const { interventions, outcomeLabels, cells } = _bayanMatrix;
+    const canvas = document.getElementById('matrixCanvas');
+    if (!canvas) return;
+
+    let container = document.getElementById('bayanMatrixContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'bayanMatrixContainer';
+      container.style.cssText = 'overflow:auto;max-height:600px;font-size:0.75rem';
+      canvas.parentElement.insertBefore(container, canvas);
+      canvas.style.display = 'none';
+    }
+
+    let maxCount = 1;
+    for (let iv = 0; iv < interventions.length; iv++) {
+      for (let oc = 0; oc < outcomeLabels.length; oc++) {
+        if (cells[iv][oc].count > maxCount) maxCount = cells[iv][oc].count;
+      }
+    }
+
+    const voidLookup = {};
+    for (const v of voids) voidLookup[v.ivIdx + ',' + v.ocIdx] = v;
+
+    let html = '<table style="border-collapse:collapse;width:100%">';
+    html += '<thead><tr><th style="padding:4px 6px;position:sticky;top:0;background:var(--bg);z-index:1;text-align:left;min-width:120px">Intervention</th>';
+    for (const ol of outcomeLabels) {
+      html += '<th style="padding:4px 4px;position:sticky;top:0;background:var(--bg);z-index:1;writing-mode:vertical-rl;text-align:left;font-size:0.7rem;min-width:28px;max-width:36px">' + escapeHtml(ol) + '</th>';
+    }
+    html += '</tr></thead><tbody>';
+
+    for (let iv = 0; iv < interventions.length; iv++) {
+      html += '<tr>';
+      html += '<td style="padding:3px 6px;border:1px solid var(--border);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px" title="' + escapeHtml(interventions[iv]) + '">' + escapeHtml(interventions[iv]) + '</td>';
+      for (let oc = 0; oc < outcomeLabels.length; oc++) {
+        const count = cells[iv][oc].count;
+        const voidInfo = voidLookup[iv + ',' + oc];
+        let bg, fg, title;
+        if (count > 0) {
+          const intensity = Math.min(1, count / maxCount);
+          const g = Math.round(180 + (1 - intensity) * 75);
+          bg = 'rgb(' + Math.round(220 - intensity * 100) + ',' + g + ',' + Math.round(220 - intensity * 100) + ')';
+          fg = intensity > 0.6 ? '#fff' : 'var(--text)';
+          title = interventions[iv] + ' x ' + outcomeLabels[oc] + ': ' + count + ' trials';
+        } else if (voidInfo) {
+          bg = voidInfo.voidScore > 5 ? '#fca5a5' : voidInfo.voidScore > 2 ? '#fed7aa' : '#fef3c7';
+          fg = '#92400e';
+          title = 'VOID: ' + interventions[iv] + ' x ' + outcomeLabels[oc] + ' (score ' + voidInfo.voidScore + ')';
+        } else {
+          bg = 'var(--surface)';
+          fg = 'var(--text-muted)';
+          title = interventions[iv] + ' x ' + outcomeLabels[oc] + ': 0 trials';
+        }
+        html += '<td style="padding:2px;border:1px solid var(--border);text-align:center;background:' + bg + ';color:' + fg + ';cursor:pointer;min-width:28px" title="' + escapeHtml(title) + '" onclick="clickBayanCell(' + iv + ',' + oc + ',' + count + ')">';
+        html += count > 0 ? count : (voidInfo ? '<span style="font-size:0.65rem">&#x25CB;</span>' : '');
+        html += '</td>';
+      }
+      html += '</tr>';
+    }
+    html += '</tbody></table>';
+
+    if (voids.length > 0) {
+      html += '<div style="margin-top:12px;padding:8px;background:var(--surface);border-radius:6px">';
+      html += '<div style="font-weight:600;font-size:0.82rem;margin-bottom:6px">Top Research Voids (Bayan)</div>';
+      var topVoids = voids.slice(0, 10);
+      for (var vi = 0; vi < topVoids.length; vi++) {
+        var v = topVoids[vi];
+        var vColor = v.voidScore > 5 ? '#dc2626' : v.voidScore > 2 ? '#d97706' : '#ca8a04';
+        html += '<div style="display:flex;gap:8px;align-items:center;margin:3px 0;font-size:0.78rem">';
+        html += '<span style="color:' + vColor + ';font-weight:600;min-width:30px">' + v.voidScore + '</span>';
+        html += '<span>' + escapeHtml(v.intervention) + ' x ' + escapeHtml(v.outcome) + '</span>';
+        html += '<span style="color:var(--text-muted);font-size:0.72rem">(' + v.drugTotal + ' trials for drug, ' + v.outcomeTotal + ' for outcome)</span>';
+        html += '</div>';
+      }
+      html += '</div>';
+    }
+
+    container.innerHTML = html;
+  }
+
+  function clickBayanCell(ivIdx, ocIdx, count) {
+    if (!_bayanMatrix) return;
+    var iv = _bayanMatrix.interventions[ivIdx];
+    var oc = _bayanMatrix.outcomes[ocIdx];
+    if (count > 0) {
+      var input = document.getElementById('fihrisSearch');
+      if (input) { input.value = iv + ' ' + oc; executeFihrisSearch(iv + ' ' + oc); }
+      switchUniverseView('ayat');
+    } else {
+      var voids = computeVoidScores(_bayanMatrix);
+      var match = voids.find(function(v) { return v.ivIdx === ivIdx && v.ocIdx === ocIdx; });
+      var html = '<div style="text-align:center;padding:16px">';
+      html += '<div style="font-size:1.2rem;font-weight:700;color:#d97706;margin-bottom:8px">Research Void Detected</div>';
+      html += '<div style="font-size:0.9rem"><strong>' + escapeHtml(iv) + '</strong> x <strong>' + escapeHtml(oc) + '</strong></div>';
+      if (match) {
+        html += '<div style="margin-top:8px;font-size:0.82rem;color:var(--text-muted)">Void score: ' + match.voidScore + '</div>';
+        html += '<div style="font-size:0.82rem;color:var(--text-muted)">This drug has ' + match.drugTotal + ' trials for other outcomes.</div>';
+        html += '<div style="font-size:0.82rem;color:var(--text-muted)">This outcome has ' + match.outcomeTotal + ' trials with other drugs.</div>';
+      }
+      html += '<div style="margin-top:12px;font-size:0.82rem">No trials study this combination despite strong evidence in neighboring cells.</div>';
+      html += '</div>';
+      showDrillDownPanel('Research Void: ' + iv + ' x ' + oc, html);
+    }
+  }
+
+  // ============================================================
   // NETWORK GRAPH — Force-Directed Layout
   // ============================================================
   let networkNodes = [];
@@ -11392,6 +11701,25 @@ body.dark-mode .input-error { background: #451a1a !important; }
       html += '<div style="margin-top:6px;font-size:0.8rem;color:var(--text-muted)">Showing 50 of ' + matchTrials.length + ' trials</div>';
     }
 
+    // Tafsir: Related Signs
+    if (_tafsirLinks.length > 0) {
+      var relLinks = _tafsirLinks.filter(function(l) { return l.sourceId === node.id || l.targetId === node.id; });
+      if (relLinks.length > 0) {
+        html += '<div style="margin-top:12px;padding-top:8px;border-top:1px solid var(--border)">';
+        html += '<div style="font-weight:600;font-size:0.82rem;margin-bottom:4px">Related Signs (Tafsir)</div>';
+        for (var ri = 0; ri < relLinks.length; ri++) {
+          var rl = relLinks[ri];
+          var sibId = rl.sourceId === node.id ? rl.targetId : rl.sourceId;
+          var parts = sibId.split(':');
+          var typeLabel = rl.linkType === 'drug' ? 'Drug' : rl.linkType === 'outcome' ? 'Outcome' : 'Mechanism';
+          html += '<span style="display:inline-block;margin:2px 6px 2px 0;padding:2px 8px;background:var(--surface);border-radius:12px;font-size:0.75rem;cursor:pointer" title="' + escapeHtml(typeLabel) + ': ' + escapeHtml(rl.label || '') + '">';
+          html += escapeHtml(typeLabel) + ': ' + escapeHtml(parts[1] || sibId) + ' (' + escapeHtml(parts[0] || '') + ')';
+          html += '</span>';
+        }
+        html += '</div>';
+      }
+    }
+
     showDrillDownPanel(
       escapeHtml(node.label) + ' \u2014 ' + matchTrials.length + ' trials in ' + escapeHtml(node.subcatLabel),
       html
@@ -11656,7 +11984,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       case 'network': /* already rendered */ break;
       case 'treemap': renderTreemapView(trials); break;
       case 'timeline': renderTimelineView(trials); break;
-      case 'matrix': renderMatrixView(trials); break;
+      case 'matrix': renderBayanMatrix(trials); break;
       case 'gapscatter': renderGapScatterView(trials); break;
       case 'pipeline': renderPipelineView(trials); break;
     }
@@ -13929,6 +14257,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     if (clusters.length === 0) return;
     _lastAyatClusters = clusters;
     _fihrisIndex = buildFihrisIndex(trials, clusters);
+    _tafsirLinks = computeTafsirLinks(clusters);
     renderAyatUniverseOnCanvas(canvas, clusters, 'ayat');
   }
 
@@ -14128,6 +14457,11 @@ body.dark-mode .input-error { background: #451a1a !important; }
         } else {
           renderAyatGlyph(ctx, node, lod);
         }
+      }
+
+      // Layer 3b: Tafsir cross-reference edges (dashed curves)
+      if (_kitabLayers.crossRefs && _tafsirLinks.length > 0) {
+        renderTafsirEdges(ctx, _tafsirLinks, clusters, lod);
       }
 
       // Layer 4: Subcategory orbit labels
