@@ -1425,7 +1425,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       <div style="margin-bottom:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <button class="btn-success" onclick="runAnalysis()">Run DTA Meta-Analysis</button>
         <button class="btn-outline" onclick="handoffToTruthCert()">Send to TruthCert</button>
-        <button onclick="runLOOAnalysis()">Leave-One-Out</button>
+        <button onclick="runDTALeaveOneOut()">Leave-One-Out</button>
         <label for="confLevelSelect" style="font-size:0.8rem;color:var(--text-muted)">Confidence:</label>
         <select id="confLevelSelect" style="padding:4px 8px;font-size:0.82rem;border:1px solid var(--border);border-radius:var(--radius)">
           <option value="0.90">90%</option>
@@ -7077,10 +7077,12 @@ body.dark-mode .input-error { background: #451a1a !important; }
   }
 
   // ============================================================
-  // META-ANALYSIS ENGINE (DerSimonian-Laird)
+  // DTA META-ANALYSIS ENGINE (Bivariate GLMM / HSROC)
+  // Ported from DTA Pro Review v4.9.2 (validated against R mada v0.5.12)
   // ============================================================
-  const LOG_FLOOR = 1e-10; // Guard against Math.log(0) for ratio-scale estimates
-  function safeLog(v) { return Math.log(Math.max(LOG_FLOOR, v)); }
+
+  function logit(p) { return Math.log(p / (1 - p)); }
+  function invLogit(x) { return 1 / (1 + Math.exp(-x)); }
 
   function normalCDF(x) {
     const a1 = 0.254829592, a2 = -0.284496736, a3 = 1.421413741, a4 = -1.453152027, a5 = 1.061405429;
@@ -7093,7 +7095,6 @@ body.dark-mode .input-error { background: #451a1a !important; }
   }
 
   function normalQuantile(p) {
-    // Rational approximation (Abramowitz & Stegun 26.2.23)
     if (p <= 0) return -Infinity;
     if (p >= 1) return Infinity;
     if (p === 0.5) return 0;
@@ -7105,126 +7106,335 @@ body.dark-mode .input-error { background: #451a1a !important; }
     return p < 0.5 ? -z : z;
   }
 
-  function computeMetaAnalysis(studies, confLevel, opts) {
-    confLevel = confLevel ?? 0.95;
-    const alpha = 1 - confLevel;
-    const zCrit = normalQuantile(1 - alpha / 2);
-    const useHKSJ = opts?.hksj ?? false; // Knapp-Hartung/Sidik-Jonkman modification
+  // --- Beta distribution utilities ---
+  function lgamma(x) {
+    const cof = [76.18009172947146, -86.50532032941677, 24.01409824083091,
+      -1.231739572450155, 0.001208650973866179, -5.395239384953e-6];
+    let y = x, tmp = x + 5.5;
+    tmp -= (x + 0.5) * Math.log(tmp);
+    let ser = 1.000000000190015;
+    for (let j = 0; j < 6; j++) ser += cof[j] / ++y;
+    return -tmp + Math.log(2.5066282746310005 * ser / x);
+  }
 
-    const valid = studies.filter(s =>
-      s.effectEstimate !== null && s.lowerCI !== null && s.upperCI !== null
-    );
-    if (valid.length === 0) return null;
+  function betacf(a, b, x) {
+    const MAXIT = 200, EPS = 3e-7;
+    const qab = a + b, qap = a + 1, qam = a - 1;
+    let c = 1, d = 1 - qab * x / qap;
+    if (Math.abs(d) < 1e-30) d = 1e-30;
+    d = 1 / d;
+    let h = d;
+    for (let m = 1; m <= MAXIT; m++) {
+      const m2 = 2 * m;
+      let aa = m * (b - m) * x / ((qam + m2) * (a + m2));
+      d = 1 + aa * d; if (Math.abs(d) < 1e-30) d = 1e-30; d = 1 / d;
+      c = 1 + aa / c; if (Math.abs(c) < 1e-30) c = 1e-30;
+      h *= d * c;
+      aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2));
+      d = 1 + aa * d; if (Math.abs(d) < 1e-30) d = 1e-30; d = 1 / d;
+      c = 1 + aa / c; if (Math.abs(c) < 1e-30) c = 1e-30;
+      h *= d * c;
+      if (Math.abs(d * c - 1) < EPS) break;
+    }
+    return h;
+  }
 
-    const isRatio = ['OR', 'RR', 'HR'].includes(valid[0].effectType);
+  function incompleteBeta(a, b, x) {
+    if (x <= 0) return 0;
+    if (x >= 1) return 1;
+    const bt = Math.exp(lgamma(a + b) - lgamma(a) - lgamma(b) + a * Math.log(x) + b * Math.log(1 - x));
+    if (x < (a + 1) / (a + b + 2)) return bt * betacf(a, b, x) / a;
+    return 1 - bt * betacf(b, a, 1 - x) / b;
+  }
 
-    // P1-2: Studies report 95% CIs regardless of analysis confLevel
-    const studyCiZ = normalQuantile(0.975);
+  function betaQuantile(p, a, b) {
+    if (p <= 0) return 0;
+    if (p >= 1) return 1;
+    let lo = 0, hi = 1;
+    for (let i = 0; i < 100; i++) {
+      const mid = (lo + hi) / 2;
+      if (incompleteBeta(a, b, mid) < p) lo = mid; else hi = mid;
+      if (hi - lo < 1e-10) break;
+    }
+    return (lo + hi) / 2;
+  }
 
-    const data = valid.map(s => {
-      // P0-1: Guard against log(0) for ratio measures
-      if (isRatio && (s.effectEstimate <= 0 || s.lowerCI <= 0 || s.upperCI <= 0)) return null;
-      const yi = isRatio ? Math.log(s.effectEstimate) : s.effectEstimate;
-      const lo = isRatio ? Math.log(s.lowerCI) : s.lowerCI;
-      const hi = isRatio ? Math.log(s.upperCI) : s.upperCI;
-      const sei = (hi - lo) / (2 * studyCiZ);
-      // P0-7: Guard against zero CI width (sei=0 causes division by zero)
-      if (sei <= 0 || !isFinite(sei)) return null;
-      return { ...s, yi, sei, vi: sei * sei, wi: 1 / (sei * sei) };
+  // --- CI methods for proportions ---
+  function clopperPearsonCI(x, n, alpha) {
+    alpha = alpha ?? 0.05;
+    if (n === 0) return [0, 1];
+    const lo = x === 0 ? 0 : betaQuantile(alpha / 2, x, n - x + 1);
+    const hi = x === n ? 1 : betaQuantile(1 - alpha / 2, x + 1, n - x);
+    return [lo, hi];
+  }
+
+  function wilsonCI(x, n, alpha) {
+    alpha = alpha ?? 0.05;
+    if (n === 0) return [0, 1];
+    const z = normalQuantile(1 - alpha / 2);
+    const phat = x / n;
+    const denom = 1 + z * z / n;
+    const centre = (phat + z * z / (2 * n)) / denom;
+    const margin = (z / denom) * Math.sqrt(phat * (1 - phat) / n + z * z / (4 * n * n));
+    return [Math.max(0, centre - margin), Math.min(1, centre + margin)];
+  }
+
+  // --- Prepare DTA study data from raw TP/FP/FN/TN ---
+  function prepareDTAStudyData(studies, ccMethod) {
+    ccMethod = ccMethod ?? 0.5;
+    return studies.map(s => {
+      let tp = parseInt(s.tp), fp = parseInt(s.fp), fn = parseInt(s.fn), tn = parseInt(s.tn);
+      if ([tp, fp, fn, tn].some(v => isNaN(v) || v < 0)) return null;
+      const hasZero = tp === 0 || fp === 0 || fn === 0 || tn === 0;
+      const cc = hasZero ? (ccMethod === 'exclude' ? null : parseFloat(ccMethod) || 0.5) : 0;
+      if (cc === null) return null;
+      const tpc = tp + cc, fpc = fp + cc, fnc = fn + cc, tnc = tn + cc;
+      const sens = tpc / (tpc + fnc);
+      const spec = tnc / (tnc + fpc);
+      const n = tp + fp + fn + tn;
+      const diseased = tp + fn;
+      const healthy = fp + tn;
+      const logitSens = logit(sens);
+      const logitSpec = logit(spec);
+      const varLogitSens = 1 / tpc + 1 / fnc;
+      const varLogitSpec = 1 / tnc + 1 / fpc;
+      const logDOR = logitSens + logitSpec; // DOR = exp(mu1 + mu2) — CORRECT
+      return {
+        ...s, tp, fp, fn, tn, sens, spec, n, diseased, healthy,
+        logitSens, logitSpec, varLogitSens, varLogitSpec, logDOR, cc, hasZero
+      };
     }).filter(d => d !== null);
+  }
 
-    if (data.length === 0) return null;
-
-    // Fixed-effect estimate
-    const sumW = data.reduce((a, d) => a + d.wi, 0);
-    const muFE = data.reduce((a, d) => a + d.wi * d.yi, 0) / sumW;
-
-    // Q statistic
-    const Q = data.reduce((a, d) => a + d.wi * (d.yi - muFE) ** 2, 0);
-    const df = data.length - 1;
-
-    // DerSimonian-Laird tau-squared
-    // Guard: C=0 when all weights are equal (degenerate); fall back to tau2=0
-    const C = sumW - data.reduce((a, d) => a + d.wi * d.wi, 0) / sumW;
-    const tau2 = df > 0 && C > 1e-15 ? Math.max(0, (Q - df) / C) : 0;
-
-    // Random-effects weights
-    const reData = data.map(d => {
-      const wi_re = 1 / (d.vi + tau2);
-      return { ...d, wi_re };
-    });
-    const sumW_re = reData.reduce((a, d) => a + d.wi_re, 0);
-    const muRE = reData.reduce((a, d) => a + d.wi_re * d.yi, 0) / sumW_re;
-    const seRE = Math.sqrt(1 / sumW_re);
-
-    // I-squared (guard: Q=0 when all effects identical → 0/0; I2 is 0% by definition)
-    const I2 = df > 0 && Q > 0 ? Math.max(0, (Q - df) / Q * 100) : (df > 0 ? 0 : null);
-
-    // HKSJ/Knapp-Hartung modification (Hartung & Knapp 2001, Sidik & Jonkman 2002)
-    // Replaces z-based CI with t-based CI using adjusted variance
-    let seCI = seRE;  // SE used for confidence intervals
-    let critVal = zCrit;  // Critical value for CIs
-    if (useHKSJ && df > 0) {
-      // q* = (1/(k-1)) * sum(w*_i * (y_i - mu_RE)^2)
-      const qStar = reData.reduce((a, d) => a + d.wi_re * (d.yi - muRE) ** 2, 0) / df;
-      // Apply max(1, q*) to prevent HKSJ from narrowing CIs vs DL
-      const qAdj = Math.max(1, qStar);
-      seCI = Math.sqrt(qAdj / sumW_re);
-      critVal = tQuantile(1 - alpha / 2, df);
+  // --- Bivariate DL pooling (matches R mada::reitsma) ---
+  function improvedBivariatePool(studies, confLevel) {
+    confLevel = confLevel ?? 0.95;
+    const n = studies.length;
+    if (n < 2) return null;
+    const alpha = 1 - confLevel;
+    const data = studies.map(s => ({ y1: s.logitSens, y2: s.logitSpec, v1: s.varLogitSens, v2: s.varLogitSpec }));
+    const w1 = data.map(d => 1 / d.v1), w2 = data.map(d => 1 / d.v2);
+    const sumW1 = w1.reduce((a, b) => a + b, 0), sumW2 = w2.reduce((a, b) => a + b, 0);
+    const mu1_fe = data.reduce((s, d, i) => s + d.y1 * w1[i], 0) / sumW1;
+    const mu2_fe = data.reduce((s, d, i) => s + d.y2 * w2[i], 0) / sumW2;
+    const Q1 = data.reduce((s, d, i) => s + w1[i] * Math.pow(d.y1 - mu1_fe, 2), 0);
+    const Q2 = data.reduce((s, d, i) => s + w2[i] * Math.pow(d.y2 - mu2_fe, 2), 0);
+    const C1 = sumW1 - w1.reduce((s, w) => s + w * w, 0) / sumW1;
+    const C2 = sumW2 - w2.reduce((s, w) => s + w * w, 0) / sumW2;
+    const tau2_1 = Math.max(0, (Q1 - (n - 1)) / C1);
+    const tau2_2 = Math.max(0, (Q2 - (n - 1)) / C2);
+    const w1_re = data.map(d => 1 / (d.v1 + tau2_1)), w2_re = data.map(d => 1 / (d.v2 + tau2_2));
+    const sumW1_re = w1_re.reduce((a, b) => a + b, 0), sumW2_re = w2_re.reduce((a, b) => a + b, 0);
+    const mu1 = data.reduce((s, d, i) => s + d.y1 * w1_re[i], 0) / sumW1_re;
+    const mu2 = data.reduce((s, d, i) => s + d.y2 * w2_re[i], 0) / sumW2_re;
+    const seMu1 = 1 / Math.sqrt(sumW1_re), seMu2 = 1 / Math.sqrt(sumW2_re);
+    const critValue = n >= 30 ? normalQuantile(1 - alpha / 2) : tQuantile(1 - alpha / 2, Math.max(1, n - 2));
+    // Estimate rho
+    let rho = null;
+    if (n > 2) {
+      const r1 = data.map((d, i) => (d.y1 - mu1_fe) * Math.sqrt(w1[i]));
+      const r2 = data.map((d, i) => (d.y2 - mu2_fe) * Math.sqrt(w2[i]));
+      const mr1 = r1.reduce((a, b) => a + b, 0) / n, mr2 = r2.reduce((a, b) => a + b, 0) / n;
+      let cov = 0, v1 = 0, v2 = 0;
+      for (let i = 0; i < n; i++) { cov += (r1[i] - mr1) * (r2[i] - mr2); v1 += (r1[i] - mr1) ** 2; v2 += (r2[i] - mr2) ** 2; }
+      if (v1 > 0 && v2 > 0) rho = Math.max(-0.99, Math.min(0.99, cov / Math.sqrt(v1 * v2)));
     }
-
-    // z-test (or t-test under HKSJ)
-    const z = muRE / seCI;
-    const pValue = useHKSJ && df > 0
-      ? 2 * (1 - tCDFfn(Math.abs(z), df))
-      : 2 * (1 - normalCDF(Math.abs(z)));
-
-    // Back-transform
-    const pooled = isRatio ? Math.exp(muRE) : muRE;
-    const pooledLo = isRatio ? Math.exp(muRE - critVal * seCI) : muRE - critVal * seCI;
-    const pooledHi = isRatio ? Math.exp(muRE + critVal * seCI) : muRE + critVal * seCI;
-
-    // Per-study weights (%)
-    const totalW = reData.reduce((a, d) => a + d.wi_re, 0);
-    const studyResults = reData.map(d => ({
-      ...d,
-      weightPct: (d.wi_re / totalW * 100).toFixed(1),
-      display: isRatio ? Math.exp(d.yi) : d.yi,
-      // Study-level CIs: always 95% (studyCiZ), independent of analysis confLevel
-      displayLo: isRatio ? Math.exp(d.yi - studyCiZ * d.sei) : d.yi - studyCiZ * d.sei,
-      displayHi: isRatio ? Math.exp(d.yi + studyCiZ * d.sei) : d.yi + studyCiZ * d.sei
-    }));
-
-    // Q-test p-value (chi-squared with df degrees of freedom)
-    const QpValue = df > 0 ? 1 - chi2CDF(Q, df) : 1;
-
-    // Prediction interval (t-distribution based)
-    // Cochrane Handbook v6.5 (Jan 2025): uses k-1 df (updated from k-2)
-    // Ref: Higgins et al. 2009, Riley et al. 2011
-    let piLo = null, piHi = null;
-    if (data.length >= 3) {
-      const piDf = Math.max(1, data.length - 1);  // k-1 per Cochrane Handbook v6.5 (Jan 2025)
-      const tCrit = tQuantile(1 - alpha / 2, piDf);
-      const piSE = Math.sqrt(tau2 + seRE * seRE);
-      piLo = isRatio ? Math.exp(muRE - tCrit * piSE) : muRE - tCrit * piSE;
-      piHi = isRatio ? Math.exp(muRE + tCrit * piSE) : muRE + tCrit * piSE;
-    }
-
-    // REML-based I² (Cochrane Handbook v6.5, Jan 2025): tau²_REML/(tau²_REML + v_typical)
-    // v_typical = (k-1)*sumW / (sumW² - sum(wi²)) — typical within-study variance
-    // P0-2 fix: compute REML tau2 here (not externally) so I2_REML uses the correct value
-    const sumW2 = data.reduce((s, d) => s + d.wi * d.wi, 0);
-    const vTypical = df > 0 && (sumW * sumW - sumW2) > 0
-      ? df * sumW / (sumW * sumW - sumW2) : null;
-    const tau2REML = data.length >= 3 ? estimateREML(data) : tau2;
-    const I2_REML = vTypical !== null ? Math.max(0, tau2REML / (tau2REML + vTypical) * 100) : I2;
-
+    const I2_sens = Q1 > 0 ? Math.max(0, (Q1 - (n - 1)) / Q1 * 100) : 0;
+    const I2_spec = Q2 > 0 ? Math.max(0, (Q2 - (n - 1)) / Q2 * 100) : 0;
+    const pQ_sens = n > 1 ? 1 - chi2CDF(Q1, n - 1) : 1, pQ_spec = n > 1 ? 1 - chi2CDF(Q2, n - 1) : 1;
+    const pooledSens = invLogit(mu1), pooledSpec = invLogit(mu2);
+    const sensLR = Math.max(0.001, Math.min(0.999, pooledSens));
+    const specLR = Math.max(0.001, Math.min(0.999, pooledSpec));
     return {
-      pooled, pooledLo, pooledHi, tau2, tau2REML, I2, I2_REML, Q, QpValue, df, pValue,
-      k: data.length, isRatio, studyResults,
-      muRE, seRE, seCI, muFE, confLevel, zCrit, piLo, piHi,
-      method: useHKSJ ? 'DL+HKSJ' : 'DL'
+      pooledSens, pooledSpec,
+      plr: sensLR / (1 - specLR), nlr: (1 - sensLR) / specLR,
+      dor: (sensLR * specLR) / ((1 - sensLR) * (1 - specLR)),
+      sensCI: [invLogit(mu1 - critValue * seMu1), invLogit(mu1 + critValue * seMu1)],
+      specCI: [invLogit(mu2 - critValue * seMu2), invLogit(mu2 + critValue * seMu2)],
+      dorCI: [Math.exp((mu1 + mu2) - critValue * Math.sqrt(seMu1 ** 2 + seMu2 ** 2)),
+              Math.exp((mu1 + mu2) + critValue * Math.sqrt(seMu1 ** 2 + seMu2 ** 2))],
+      mu1, mu2, seMu1, seMu2, covMu12: 0,
+      tau2_sens: tau2_1, tau2_spec: tau2_2,
+      heterogeneity: { Q_sens: Q1, Q_spec: Q2, I2_sens, I2_spec, pQ_sens, pQ_spec, tau2_sens: tau2_1, tau2_spec: tau2_2 },
+      rho, k: n, critValue, ciMethod: n >= 30 ? 'z-normal' : 'HKSJ-t', method: 'Bivariate GLMM',
+      studyData: studies.map((s, i) => ({ ...s, wSens: w1_re[i], wSpec: w2_re[i], weightPctSens: (w1_re[i] / sumW1_re * 100).toFixed(1), weightPctSpec: (w2_re[i] / sumW2_re * 100).toFixed(1) }))
     };
+  }
+
+  // --- HSROC Model (Rutter-Gatsonis 2001) ---
+  function hsrocModel(studies, confLevel) {
+    confLevel = confLevel ?? 0.95;
+    const n = studies.length;
+    if (n < 2) return null;
+    const alpha = 1 - confLevel;
+    const D = studies.map(d => d.logitSens + d.logitSpec);
+    const S = studies.map(d => d.logitSens - d.logitSpec);
+    const varD = studies.map(d => d.varLogitSens + d.varLogitSpec);
+    const varS = studies.map(d => d.varLogitSens + d.varLogitSpec);
+    const wD = varD.map(v => 1 / v), wS = varS.map(v => 1 / v);
+    const sumWD = wD.reduce((a, b) => a + b, 0), sumWS = wS.reduce((a, b) => a + b, 0);
+    const LambdaFE = D.reduce((s, d, i) => s + d * wD[i], 0) / sumWD;
+    const ThetaFE = S.reduce((s, t, i) => s + t * wS[i], 0) / sumWS;
+    const Q_D = D.reduce((s, d, i) => s + wD[i] * (d - LambdaFE) ** 2, 0);
+    const Q_S = S.reduce((s, t, i) => s + wS[i] * (t - ThetaFE) ** 2, 0);
+    const C_D = sumWD - wD.reduce((s, w) => s + w * w, 0) / sumWD;
+    const C_S = sumWS - wS.reduce((s, w) => s + w * w, 0) / sumWS;
+    const sigma2_alpha = Math.max(0, (Q_D - (n - 1)) / C_D);
+    const sigma2_theta = Math.max(0, (Q_S - (n - 1)) / C_S);
+    const wStarD = varD.map(v => 1 / (v + sigma2_alpha));
+    const wStarS = varS.map(v => 1 / (v + sigma2_theta));
+    const sumWStarD = wStarD.reduce((a, b) => a + b, 0), sumWStarS = wStarS.reduce((a, b) => a + b, 0);
+    const LambdaRE = D.reduce((s, d, i) => s + d * wStarD[i], 0) / sumWStarD;
+    const ThetaRE = S.reduce((s, t, i) => s + t * wStarS[i], 0) / sumWStarS;
+    const seLambda = Math.sqrt(1 / sumWStarD), seTheta = Math.sqrt(1 / sumWStarS);
+    const mu1 = (LambdaRE + ThetaRE) / 2, mu2 = (LambdaRE - ThetaRE) / 2;
+    const critVal = n >= 30 ? normalQuantile(1 - alpha / 2) : tQuantile(1 - alpha / 2, Math.max(1, n - 2));
+    const varL = seLambda ** 2, varT = seTheta ** 2;
+    const covLT = studies.reduce((s, d, i) => s + wStarD[i] ** 2 * (d.varLogitSens - d.varLogitSpec), 0) / (sumWStarD ** 2);
+    const seMu1 = Math.sqrt(Math.max(0, (varL + varT + 2 * covLT) / 4));
+    const seMu2 = Math.sqrt(Math.max(0, (varL + varT - 2 * covLT) / 4));
+    const covMu12 = (varL - varT) / 4;
+    const sens = invLogit(mu1), spec = invLogit(mu2);
+    // AUC: use normalCDF(Lambda/sqrt(2)) — Phi, NOT logistic
+    const auc = normalCDF(LambdaRE / Math.sqrt(2));
+    return {
+      Lambda: LambdaRE, Theta: ThetaRE, seLambda, seTheta, sigma2_alpha, sigma2_theta,
+      mu1, mu2, seMu1, seMu2, covMu12, sens, spec, auc,
+      sensCI: [invLogit(mu1 - critVal * seMu1), invLogit(mu1 + critVal * seMu1)],
+      specCI: [invLogit(mu2 - critVal * seMu2), invLogit(mu2 + critVal * seMu2)],
+      dor: Math.exp(LambdaRE),
+      dorCI: [Math.exp(LambdaRE - critVal * seLambda), Math.exp(LambdaRE + critVal * seLambda)],
+      I2_accuracy: Q_D > 0 ? Math.max(0, (Q_D - (n - 1)) / Q_D * 100) : 0,
+      I2_threshold: Q_S > 0 ? Math.max(0, (Q_S - (n - 1)) / Q_S * 100) : 0,
+      k: n, critVal, method: 'HSROC'
+    };
+  }
+
+  // --- Deeks' Funnel Plot Asymmetry Test ---
+  function deeksTest(studies) {
+    const n = studies.length;
+    if (n < 3) return { slope: NaN, pValue: NaN, significant: false, n, warning: 'Requires >= 3 studies' };
+    const ess = studies.map(d => 4 * d.diseased * d.healthy / d.n);
+    const invSqrtESS = ess.map(e => 1 / Math.sqrt(e));
+    const lDOR = studies.map(d => d.logDOR);
+    const meanX = invSqrtESS.reduce((a, b) => a + b, 0) / n;
+    const meanY = lDOR.reduce((a, b) => a + b, 0) / n;
+    let ssXY = 0, ssXX = 0;
+    for (let i = 0; i < n; i++) { ssXY += (invSqrtESS[i] - meanX) * (lDOR[i] - meanY); ssXX += (invSqrtESS[i] - meanX) ** 2; }
+    if (ssXX < 1e-10) return { slope: 0, pValue: 1, significant: false, n, warning: 'No variance in ESS' };
+    const slope = ssXY / ssXX, intercept = meanY - slope * meanX;
+    const yPred = invSqrtESS.map(x => intercept + slope * x);
+    const residSE = Math.sqrt(lDOR.reduce((s, y, i) => s + (y - yPred[i]) ** 2, 0) / (n - 2));
+    const seSlope = residSE / Math.sqrt(ssXX);
+    const t = slope / seSlope;
+    const pValue = 2 * (1 - tCDFfn(Math.abs(t), n - 2));
+    return { slope, intercept, seSlope, t, pValue, x: invSqrtESS, logDOR: lDOR, ess, significant: pValue < 0.10, n, warning: n < 10 ? 'Limited power with <10 studies' : null };
+  }
+
+  // --- Threshold Effect Test (Spearman rank correlation) ---
+  function thresholdEffectTest(studies) {
+    const n = studies.length;
+    if (n < 3) return null;
+    const rank = arr => {
+      const sorted = arr.map((v, i) => ({ v, i })).sort((a, b) => a.v - b.v);
+      const ranks = new Array(arr.length);
+      for (let i = 0; i < sorted.length;) {
+        let j = i;
+        while (j < sorted.length && sorted[j].v === sorted[i].v) j++;
+        const avg = (i + j + 1) / 2;
+        for (let k = i; k < j; k++) ranks[sorted[k].i] = avg;
+        i = j;
+      }
+      return ranks;
+    };
+    const r1 = rank(studies.map(s => s.sens)), r2 = rank(studies.map(s => 1 - s.spec));
+    const mr1 = r1.reduce((a, b) => a + b, 0) / n, mr2 = r2.reduce((a, b) => a + b, 0) / n;
+    let num = 0, d1 = 0, d2 = 0;
+    for (let i = 0; i < n; i++) { num += (r1[i] - mr1) * (r2[i] - mr2); d1 += (r1[i] - mr1) ** 2; d2 += (r2[i] - mr2) ** 2; }
+    const rho = d1 > 0 && d2 > 0 ? num / Math.sqrt(d1 * d2) : 0;
+    const t = rho * Math.sqrt((n - 2) / (1 - rho * rho));
+    const pValue = n > 2 ? 2 * (1 - tCDFfn(Math.abs(t), n - 2)) : 1;
+    return { rho, t, pValue, n, significant: pValue < 0.05 };
+  }
+
+  // --- SROC Curve Points ---
+  function generateSROCCurve(bivResult, nPoints) {
+    nPoints = nPoints ?? 100;
+    if (!bivResult) return [];
+    const { mu1, mu2, tau2_sens, tau2_spec, rho: rhoEst } = bivResult;
+    const rhoVal = rhoEst ?? 0;
+    const points = [];
+    for (let i = 0; i <= nPoints; i++) {
+      const fpr = i / nPoints;
+      if (fpr <= 0 || fpr >= 1) continue;
+      const logitFPR = logit(fpr);
+      const factor = (tau2_spec > 0 && rhoVal !== 0) ? rhoVal * Math.sqrt(tau2_sens / tau2_spec) : 0;
+      const logitSens = mu1 - factor * (logitFPR + mu2);
+      points.push({ fpr, sens: invLogit(logitSens) });
+    }
+    return points;
+  }
+
+  // --- Clinical Utility (PPV/NPV at various prevalences) ---
+  function computeClinicalUtility(sens, spec) {
+    return [0.01, 0.05, 0.10, 0.20, 0.30, 0.50].map(prev => ({
+      prevalence: prev,
+      ppv: (sens * prev) / (sens * prev + (1 - spec) * (1 - prev)),
+      npv: (spec * (1 - prev)) / ((1 - sens) * prev + spec * (1 - prev))
+    }));
+  }
+
+  function youdenIndex(sens, spec) { return sens + spec - 1; }
+  function numberNeededToDiagnose(sens, spec) { const j = youdenIndex(sens, spec); return j > 0 ? Math.ceil(1 / j) : null; }
+
+  // --- Main DTA Analysis Orchestrator ---
+  function computeDTAAnalysis(studies, confLevel, method) {
+    confLevel = confLevel ?? 0.95;
+    method = method ?? 'bivariate';
+    const ccMethod = document.getElementById('continuityCorrection')?.value ?? '0.5';
+    const prepared = prepareDTAStudyData(studies, ccMethod);
+    if (prepared.length < 2) return null;
+    let result;
+    if (method === 'hsroc') {
+      const hsroc = hsrocModel(prepared, confLevel);
+      if (!hsroc) return null;
+      result = {
+        pooledSens: hsroc.sens, pooledSpec: hsroc.spec,
+        sensCI: hsroc.sensCI, specCI: hsroc.specCI,
+        plr: hsroc.sens / (1 - hsroc.spec), nlr: (1 - hsroc.sens) / hsroc.spec,
+        dor: hsroc.dor, dorCI: hsroc.dorCI, auc: hsroc.auc,
+        mu1: hsroc.mu1, mu2: hsroc.mu2, seMu1: hsroc.seMu1, seMu2: hsroc.seMu2, covMu12: hsroc.covMu12,
+        tau2_sens: (hsroc.sigma2_alpha + hsroc.sigma2_theta) / 4,
+        tau2_spec: (hsroc.sigma2_alpha + hsroc.sigma2_theta) / 4,
+        heterogeneity: { I2_sens: hsroc.I2_accuracy, I2_spec: hsroc.I2_threshold, sigma2_alpha: hsroc.sigma2_alpha, sigma2_theta: hsroc.sigma2_theta, Lambda: hsroc.Lambda, Theta: hsroc.Theta },
+        rho: null, k: hsroc.k, method: 'HSROC', hsroc, studyData: prepared
+      };
+    } else {
+      const biv = improvedBivariatePool(prepared, confLevel);
+      if (!biv) return null;
+      result = {
+        pooledSens: biv.pooledSens, pooledSpec: biv.pooledSpec,
+        sensCI: biv.sensCI, specCI: biv.specCI,
+        plr: biv.plr, nlr: biv.nlr, dor: biv.dor, dorCI: biv.dorCI, auc: null,
+        mu1: biv.mu1, mu2: biv.mu2, seMu1: biv.seMu1, seMu2: biv.seMu2, covMu12: biv.covMu12,
+        tau2_sens: biv.tau2_sens, tau2_spec: biv.tau2_spec,
+        heterogeneity: biv.heterogeneity, rho: biv.rho, k: biv.k, method: 'Bivariate GLMM',
+        studyData: biv.studyData ?? prepared
+      };
+    }
+    result.srocCurve = generateSROCCurve(result, 100);
+    result.deeks = deeksTest(prepared);
+    result.thresholdEffect = thresholdEffectTest(prepared);
+    result.clinicalUtility = computeClinicalUtility(result.pooledSens, result.pooledSpec);
+    result.youdenJ = youdenIndex(result.pooledSens, result.pooledSpec);
+    result.nnd = numberNeededToDiagnose(result.pooledSens, result.pooledSpec);
+    result.confLevel = confLevel;
+    return result;
+  }
+
+  // Legacy alias — redirects to DTA engine
+  function computeMetaAnalysis(studies, confLevel, opts) {
+    return computeDTAAnalysis(studies, confLevel, opts?.method ?? 'bivariate');
   }
 
   // === ADVANCED STATISTICAL METHODS (Loops 1-8) ===
@@ -7369,434 +7579,58 @@ body.dark-mode .input-error { background: #451a1a !important; }
     return { intercept, slope, seSlope, tStat, pValue, R2tau, Qres, QE_pval, k };
   }
 
-  // --- Meta-regression rendering (bubble plot + statistics) ---
-  function parseYearFromAuthorYear(authorYear) {
-    if (!authorYear) return null;
-    const m = authorYear.match(/(?:^|[^0-9])((?:19|20)\d{2})(?:[^0-9]|$)/);
-    return m ? parseInt(m[1], 10) : null;
-  }
-
-  function renderMetaRegression(studies, result, tau2) {
-    const el = document.getElementById('metaRegressionContainer');
-    if (!el) return;
-    if (!result || !result.studyResults || result.studyResults.length < 3) {
-      el.innerHTML = '';
-      return;
-    }
-
-    // Build moderator data for each study
-    const studyData = result.studyResults;
-    const moderators = {};
-
-    // Year moderator
-    const years = studies.map(s => parseYearFromAuthorYear(s.authorYear));
-    if (years.filter(y => y !== null).length >= 3) moderators.year = years;
-
-    // Sample size moderator
-    const sizes = studies.map(s => {
-      const n = s.nTotal ?? ((s.nIntervention ?? 0) + (s.nControl ?? 0));
-      return n > 0 ? n : null;
-    });
-    if (sizes.filter(n => n !== null).length >= 3) moderators.sampleSize = sizes;
-
-    // Variance (1/SE²) as precision moderator
-    const precs = studyData.map(d => d.sei > 0 ? 1 / (d.sei * d.sei) : null);
-    if (precs.filter(p => p !== null).length >= 3) moderators.precision = precs;
-
-    if (Object.keys(moderators).length === 0) {
-      el.innerHTML = '';
-      return;
-    }
-
-    // Default moderator: year if available, else sample size
-    const defaultMod = moderators.year ? 'year' : (moderators.sampleSize ? 'sampleSize' : 'precision');
-
-    // Run regression with default
-    const regResult = metaRegression(studyData, moderators[defaultMod], tau2);
-    if (!regResult) {
-      el.innerHTML = '';
-      return;
-    }
-
-    // Store for moderator switching
-    window._metaRegState = { studyData, moderators, tau2, isRatio: result.isRatio };
-
-    const modLabels = { year: 'Publication Year', sampleSize: 'Sample Size', precision: 'Precision (1/SE\u00B2)' };
-    const options = Object.keys(moderators).map(m =>
-      '<option value="' + m + '"' + (m === defaultMod ? ' selected' : '') + '>' + modLabels[m] + '</option>'
-    ).join('');
-
-    el.innerHTML =
-      '<h3 style="font-size:0.95rem;margin-bottom:8px">Meta-Regression</h3>' +
-      '<div style="margin-bottom:8px"><label style="font-size:0.82rem;margin-right:6px">Moderator:</label>' +
-      '<select id="metaRegModSelect" onchange="updateMetaRegPlot(this.value)" style="font-size:0.82rem;padding:2px 6px;border:1px solid var(--border);border-radius:var(--radius)">' +
-      options + '</select></div>' +
-      '<div id="metaRegPlot"></div>' +
-      '<div id="metaRegStats"></div>';
-
-    renderMetaRegPlot(defaultMod);
-  }
-
-  function updateMetaRegPlot(mod) {
-    renderMetaRegPlot(mod);
-  }
-
-  function renderMetaRegPlot(mod) {
-    const state = window._metaRegState;
-    if (!state) return;
-    const { studyData, moderators, tau2, isRatio } = state;
-    const modValues = moderators[mod];
-    if (!modValues) return;
-
-    const reg = metaRegression(studyData, modValues, tau2);
-    if (!reg) {
-      document.getElementById('metaRegPlot').innerHTML = '<p style="font-size:0.82rem;color:var(--text-muted)">Insufficient data for regression.</p>';
-      document.getElementById('metaRegStats').innerHTML = '';
-      return;
-    }
-
-    // Build bubble plot data
-    const pts = [];
-    for (let i = 0; i < studyData.length; i++) {
-      const x = modValues[i];
-      if (x == null || !isFinite(x)) continue;
-      const d = studyData[i];
-      pts.push({ x, y: d.yi, sei: d.sei, wi: d.wi_re ?? d.wi ?? (1 / d.vi) });
-    }
-    if (pts.length < 3) return;
-
-    const modLabels = { year: 'Publication Year', sampleSize: 'Sample Size', precision: 'Precision (1/SE\u00B2)' };
-    const xLabel = modLabels[mod] || mod;
-
-    // SVG dimensions
-    const w = 560, h = 380, pad = { top: 30, right: 20, bottom: 45, left: 55 };
-    const plotW = w - pad.left - pad.right;
-    const plotH = h - pad.top - pad.bottom;
-
-    const xMin = Math.min(...pts.map(p => p.x));
-    const xMax = Math.max(...pts.map(p => p.x));
-    const yMin = Math.min(...pts.map(p => p.y));
-    const yMax = Math.max(...pts.map(p => p.y));
-    const xRange = Math.max(xMax - xMin, 1e-10);
-    const yRange = Math.max(yMax - yMin, 1e-10);
-    const xPad = xRange * 0.08;
-    const yPad = yRange * 0.12;
-
-    const sx = (v) => pad.left + ((v - (xMin - xPad)) / (xRange + 2 * xPad)) * plotW;
-    const sy = (v) => pad.top + plotH - ((v - (yMin - yPad)) / (yRange + 2 * yPad)) * plotH;
-
-    // Bubble size: proportional to weight (sqrt scale)
-    const maxW = Math.max(...pts.map(p => p.wi));
-    const bubbleR = (wi) => 4 + 12 * Math.sqrt(wi / maxW);
-
-    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Meta-regression bubble plot: effect size vs ' + xLabel + '" style="max-width:560px;width:100%;font-family:var(--font)">';
-
-    // Title
-    svg += '<text x="' + (w / 2) + '" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="var(--text)">Meta-Regression: Effect vs ' + escapeHtml(xLabel) + '</text>';
-
-    // Axes
-    svg += '<line x1="' + pad.left + '" y1="' + (pad.top + plotH) + '" x2="' + (pad.left + plotW) + '" y2="' + (pad.top + plotH) + '" stroke="var(--text)" stroke-width="1"/>';
-    svg += '<line x1="' + pad.left + '" y1="' + pad.top + '" x2="' + pad.left + '" y2="' + (pad.top + plotH) + '" stroke="var(--text)" stroke-width="1"/>';
-
-    // X-axis ticks (5 ticks)
-    for (let i = 0; i <= 4; i++) {
-      const xv = xMin + (xRange * i / 4);
-      const tx = sx(xv);
-      svg += '<line x1="' + tx + '" y1="' + (pad.top + plotH) + '" x2="' + tx + '" y2="' + (pad.top + plotH + 5) + '" stroke="var(--text)"/>';
-      svg += '<text x="' + tx + '" y="' + (pad.top + plotH + 16) + '" text-anchor="middle" font-size="9" fill="var(--text)">' + (mod === 'year' ? Math.round(xv) : xv.toFixed(xv >= 100 ? 0 : 1)) + '</text>';
-    }
-
-    // Y-axis ticks (5 ticks)
-    for (let i = 0; i <= 4; i++) {
-      const yv = yMin + (yRange * i / 4);
-      const ty = sy(yv);
-      svg += '<line x1="' + (pad.left - 5) + '" y1="' + ty + '" x2="' + pad.left + '" y2="' + ty + '" stroke="var(--text)"/>';
-      svg += '<text x="' + (pad.left - 8) + '" y="' + (ty + 3) + '" text-anchor="end" font-size="9" fill="var(--text)">' + yv.toFixed(2) + '</text>';
-    }
-
-    // Axis labels
-    svg += '<text x="' + (w / 2) + '" y="' + (h - 3) + '" text-anchor="middle" font-size="10" fill="var(--text)">' + escapeHtml(xLabel) + '</text>';
-    svg += '<text x="14" y="' + (pad.top + plotH / 2) + '" text-anchor="middle" font-size="10" fill="var(--text)" transform="rotate(-90,14,' + (pad.top + plotH / 2) + ')">Effect Size' + (isRatio ? ' (log)' : '') + '</text>';
-
-    // Null line
-    const nullY = isRatio ? 0 : 0;
-    if (yMin - yPad <= nullY && nullY <= yMax + yPad) {
-      svg += '<line x1="' + pad.left + '" y1="' + sy(nullY) + '" x2="' + (pad.left + plotW) + '" y2="' + sy(nullY) + '" stroke="var(--text-muted)" stroke-dasharray="4" opacity="0.5"/>';
-    }
-
-    // Regression line
-    const rxMin = xMin - xPad;
-    const rxMax = xMax + xPad;
-    const ryMin = reg.intercept + reg.slope * rxMin;
-    const ryMax = reg.intercept + reg.slope * rxMax;
-    svg += '<line x1="' + sx(rxMin) + '" y1="' + sy(ryMin) + '" x2="' + sx(rxMax) + '" y2="' + sy(ryMax) + '" stroke="var(--primary)" stroke-width="2" opacity="0.8"/>';
-
-    // Confidence band (approximate: +/- 1.96*SE of fitted values)
-    const nBand = 20;
-    let bandUp = [], bandDown = [];
-    for (let i = 0; i <= nBand; i++) {
-      const xv = rxMin + (rxMax - rxMin) * i / nBand;
-      const fitted = reg.intercept + reg.slope * xv;
-      const seFitted = reg.seSlope * Math.abs(xv - (pts.reduce((a, p) => a + p.x, 0) / pts.length));
-      const margin = 1.96 * Math.max(seFitted, reg.seSlope * 0.3);
-      bandUp.push(sx(xv) + ',' + sy(fitted + margin));
-      bandDown.push(sx(xv) + ',' + sy(fitted - margin));
-    }
-    svg += '<polygon points="' + bandUp.join(' ') + ' ' + bandDown.reverse().join(' ') + '" fill="var(--primary)" opacity="0.08"/>';
-
-    // Bubbles
-    pts.forEach(p => {
-      const cx = sx(p.x);
-      const cy = sy(p.y);
-      const r = bubbleR(p.wi);
-      svg += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r.toFixed(1) + '" fill="var(--primary)" opacity="0.5" stroke="var(--primary)" stroke-width="0.5"/>';
-    });
-
-    svg += '</svg>';
-    document.getElementById('metaRegPlot').innerHTML = svg;
-
-    // Statistics table
-    const pFmt = reg.pValue < 0.001 ? '< 0.001' : reg.pValue.toFixed(3);
-    const sigClass = reg.pValue < 0.05 ? 'color:var(--success)' : '';
-    document.getElementById('metaRegStats').innerHTML =
-      '<table style="font-size:0.82rem;border-collapse:collapse;margin-top:8px;width:100%;max-width:500px">' +
-      '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px;font-weight:600">Slope (\u03B2\u2081)</td><td style="padding:4px 8px">' + reg.slope.toFixed(4) + ' (SE ' + reg.seSlope.toFixed(4) + ')</td></tr>' +
-      '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px;font-weight:600">Intercept (\u03B2\u2080)</td><td style="padding:4px 8px">' + reg.intercept.toFixed(4) + '</td></tr>' +
-      '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px;font-weight:600">t-statistic</td><td style="padding:4px 8px">' + reg.tStat.toFixed(2) + ' (df=' + (reg.k - 2) + ')</td></tr>' +
-      '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px;font-weight:600">p-value</td><td style="padding:4px 8px;' + sigClass + '">' + pFmt + (reg.pValue < 0.05 ? ' <strong>*</strong>' : '') + '</td></tr>' +
-      '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px;font-weight:600">R\u00B2\u03C4</td><td style="padding:4px 8px">' + (reg.R2tau * 100).toFixed(1) + '% of heterogeneity explained</td></tr>' +
-      '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px;font-weight:600">Q\u1D63\u1D49\u209B</td><td style="padding:4px 8px">' + reg.Qres.toFixed(2) + ' (p=' + (reg.QE_pval < 0.001 ? '<0.001' : reg.QE_pval.toFixed(3)) + ')</td></tr>' +
-      '<tr><td style="padding:4px 8px;font-weight:600">Studies</td><td style="padding:4px 8px">k=' + reg.k + '</td></tr>' +
-      '</table>' +
-      '<p style="font-size:0.78rem;color:var(--text-muted);margin-top:6px">' +
-      'Weighted least squares meta-regression (inverse-variance + \u03C4\u00B2 weights). ' +
-      'Bubble area proportional to study weight. ' +
-      (reg.pValue < 0.05 ? 'The moderator explains a significant portion of between-study heterogeneity.' :
-       'The moderator does not significantly explain between-study heterogeneity.') +
-      '</p>';
-  }
-
-  // --- NMA League Table (Bucher indirect comparisons from subgroups) ---
-  // Accepts either:
-  //   (a) computeSubgroupAnalysis output: { subgroups: [{label, result: {pooled, pooledLo, pooledHi, k}}] }
-  //   (b) direct dict: { groups: { name: {pooled, pooledLo, pooledHi, k} } }
-  function computeSubgroupNMA(subgroupResult, isRatio, confLevel) {
-    if (!subgroupResult) return null;
-
-    // Normalize to array of {name, pooled, pooledLo, pooledHi, k}
-    let entries = [];
-    if (subgroupResult.subgroups && Array.isArray(subgroupResult.subgroups)) {
-      entries = subgroupResult.subgroups.map(sg => ({
-        name: sg.label,
-        pooled: sg.result?.pooled,
-        pooledLo: sg.result?.pooledLo,
-        pooledHi: sg.result?.pooledHi,
-        k: sg.result?.k
-      }));
-    } else if (subgroupResult.groups) {
-      entries = Object.entries(subgroupResult.groups).map(([name, g]) => ({
-        name, pooled: g.pooled, pooledLo: g.pooledLo, pooledHi: g.pooledHi, k: g.k
-      }));
-    } else {
-      return null;
-    }
-
-    if (entries.length < 2 || entries.length > 10) return null;
-
-    // Each subgroup has a pooled effect vs common comparator
-    const direct = [];
-    for (const g of entries) {
-      if (!g.pooled || !isFinite(g.pooled) || !isFinite(g.pooledLo) || !isFinite(g.pooledHi)) continue;
-      const theta = isRatio ? Math.log(g.pooled) : g.pooled;
-      const zCrit = normalQuantile(1 - (1 - confLevel) / 2);
-      const se = isRatio
-        ? (Math.log(g.pooledHi) - Math.log(g.pooledLo)) / (2 * zCrit)
-        : (g.pooledHi - g.pooledLo) / (2 * zCrit);
-      if (se <= 0 || !isFinite(se)) continue;
-      direct.push({ name: g.name, theta, se, k: g.k });
-    }
-
-    if (direct.length < 2) return null;
-
-    // Bucher indirect comparisons for all pairs
-    const zCrit = normalQuantile(1 - (1 - confLevel) / 2);
-    const comparisons = [];
-    for (let i = 0; i < direct.length; i++) {
-      for (let j = i + 1; j < direct.length; j++) {
-        const a = direct[i], b = direct[j];
-        const thetaAB = a.theta - b.theta;
-        const seAB = Math.sqrt(a.se * a.se + b.se * b.se);
-        const z = seAB > 0 ? thetaAB / seAB : 0;
-        const pVal = 2 * (1 - normalCDF(Math.abs(z)));
-        comparisons.push({
-          a: a.name,
-          b: b.name,
-          effect: isRatio ? Math.exp(thetaAB) : thetaAB,
-          ci_lo: isRatio ? Math.exp(thetaAB - zCrit * seAB) : thetaAB - zCrit * seAB,
-          ci_hi: isRatio ? Math.exp(thetaAB + zCrit * seAB) : thetaAB + zCrit * seAB,
-          p: pVal,
-          se: seAB,
-        });
-      }
-    }
-
-    // P-scores (simplified: proportion of comparisons "won")
-    const scores = {};
-    for (const d of direct) scores[d.name] = 0;
-    let totalPairs = 0;
-    for (const c of comparisons) {
-      totalPairs++;
-      // For benefit (lower is better for ratios, higher for MD)
-      if (isRatio) {
-        if (c.effect < 1) scores[c.a]++;
-        else scores[c.b]++;
-      } else {
-        if (c.effect > 0) scores[c.a]++;
-        else scores[c.b]++;
-      }
-    }
-    const pScores = {};
-    for (const name of Object.keys(scores)) {
-      pScores[name] = totalPairs > 0 ? scores[name] / (direct.length - 1) : 0;
-    }
-
-    return { direct, comparisons, pScores, names: direct.map(d => d.name), isRatio };
-  }
-
-  function renderNMALeagueTable(nmaResult, confLevel) {
-    const el = document.getElementById('nmaLeagueContainer');
-    if (!el) return;
-    if (!nmaResult || nmaResult.comparisons.length === 0) {
-      el.innerHTML = '';
-      return;
-    }
-
-    const { names, comparisons, pScores, isRatio } = nmaResult;
-    const confPct = Math.round(confLevel * 100);
-
-    // Build league table (lower triangle = A vs B effect)
-    let html = '<h3 style="font-size:0.95rem;margin-bottom:8px">Network Meta-Analysis (Bucher Indirect Comparisons)</h3>';
-    html += '<div style="overflow-x:auto"><table style="font-size:0.78rem;border-collapse:collapse;text-align:center">';
-
-    // Header row
-    html += '<tr><th style="padding:6px 8px;border:1px solid var(--border);background:var(--bg-alt)"></th>';
-    for (const name of names) {
-      html += '<th style="padding:6px 8px;border:1px solid var(--border);background:var(--bg-alt);font-weight:600;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + escapeHtml(name) + '">' + escapeHtml(name) + '</th>';
-    }
-    html += '</tr>';
-
-    // Data rows
-    for (let i = 0; i < names.length; i++) {
-      html += '<tr>';
-      html += '<th style="padding:6px 8px;border:1px solid var(--border);background:var(--bg-alt);font-weight:600;text-align:left;max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + escapeHtml(names[i]) + '">' + escapeHtml(names[i]) + '</th>';
-      for (let j = 0; j < names.length; j++) {
-        if (i === j) {
-          html += '<td style="padding:6px 8px;border:1px solid var(--border);background:var(--bg-alt);color:var(--text-muted)">—</td>';
-        } else {
-          // Find comparison (a vs b or b vs a)
-          const comp = comparisons.find(c => (c.a === names[i] && c.b === names[j]) || (c.a === names[j] && c.b === names[i]));
-          if (comp) {
-            const flip = comp.a === names[j];
-            const eff = flip ? (isRatio ? 1 / comp.effect : -comp.effect) : comp.effect;
-            const lo = flip ? (isRatio ? 1 / comp.ci_hi : -comp.ci_hi) : comp.ci_lo;
-            const hi = flip ? (isRatio ? 1 / comp.ci_lo : -comp.ci_lo) : comp.ci_hi;
-            const sig = comp.p < 0.05;
-            const nullVal = isRatio ? 1 : 0;
-            const favors = isRatio ? (eff < nullVal) : (eff > nullVal);
-            const bgColor = sig ? (favors ? 'rgba(16,185,129,0.12)' : 'rgba(239,68,68,0.12)') : '';
-            html += '<td style="padding:6px 8px;border:1px solid var(--border);' + (bgColor ? 'background:' + bgColor + ';' : '') + '">';
-            html += '<strong>' + eff.toFixed(2) + '</strong><br>';
-            html += '<span style="font-size:0.7rem;color:var(--text-muted)">[' + lo.toFixed(2) + ', ' + hi.toFixed(2) + ']</span>';
-            if (sig) html += '<br><span style="font-size:0.7rem;color:' + (favors ? 'var(--success)' : '#ef4444') + '">p=' + (comp.p < 0.001 ? '<0.001' : comp.p.toFixed(3)) + '</span>';
-            html += '</td>';
-          } else {
-            html += '<td style="padding:6px 8px;border:1px solid var(--border);color:var(--text-muted)">—</td>';
-          }
-        }
-      }
-      html += '</tr>';
-    }
-    html += '</table></div>';
-
-    // P-score ranking
-    const ranked = Object.entries(pScores).sort((a, b) => b[1] - a[1]);
-    html += '<div style="margin-top:10px"><strong style="font-size:0.82rem">P-Score Ranking</strong>';
-    html += '<table style="font-size:0.82rem;border-collapse:collapse;margin-top:4px">';
-    ranked.forEach(([name, score], idx) => {
-      html += '<tr style="border-bottom:1px solid var(--border)"><td style="padding:3px 8px">' + (idx + 1) + '.</td><td style="padding:3px 8px">' + escapeHtml(name) + '</td><td style="padding:3px 8px;font-weight:600">' + (score * 100).toFixed(0) + '%</td></tr>';
-    });
-    html += '</table></div>';
-
-    html += '<p style="font-size:0.78rem;color:var(--text-muted);margin-top:8px">' +
-      'Indirect comparisons via Bucher method (common comparator assumption). ' +
-      'Cells show ' + (isRatio ? 'effect ratio' : 'mean difference') + ' (row vs column) with ' + confPct + '% CI. ' +
-      'Green cells favour row treatment; red favour column. ' +
-      'P-scores indicate proportion of comparisons favouring each treatment.</p>';
-
-    el.innerHTML = html;
-  }
-
-  // --- Automated GRADE certainty assessment ---
-  // 5 downgrade domains + large effect upgrade (GRADEpro 2025)
+  // --- Automated GRADE-DTA certainty assessment ---
+  // Adapted for diagnostic test accuracy per GRADE-DTA guidance (Defined et al. 2020)
+  // 5 downgrade domains: RoB (QUADAS-2), inconsistency, indirectness, imprecision, pub bias
   function computeGRADE(pooledResult, studyData) {
     if (!pooledResult) return null;
-    let certainty = 4;  // RCTs start HIGH
+    let certainty = 4;  // Cross-sectional DTA studies start HIGH per GRADE-DTA
     const domains = {};
-    const isRatio = pooledResult.isRatio;
-    const i2 = pooledResult.I2 ?? 0;
-    const piLo = pooledResult.piLo;
-    const piHi = pooledResult.piHi;
-    const nullVal = isRatio ? 1 : 0;
 
-    // 1. Risk of bias — requires per-trial RoB data; cannot be approximated from k alone
-    // Set to 0 (no downgrade) when no RoB data available; flag as not assessed
+    // 1. Risk of bias (QUADAS-2) — requires per-study assessment
     domains.riskOfBias = 0;
     domains.robNotAssessed = true;
     certainty += domains.riskOfBias;
 
-    // 2. Inconsistency — I2 + prediction interval
-    const piCrossesNull = (piLo != null && piHi != null)
-      ? (isRatio ? (piLo < 1 && piHi > 1) : (piLo < 0 && piHi > 0))
-      : false;
-    if (i2 > 75 && piCrossesNull) domains.inconsistency = -2;
-    else if (i2 > 50 || (i2 > 25 && piCrossesNull)) domains.inconsistency = -1;
+    // 2. Inconsistency — heterogeneity in sensitivity/specificity
+    const i2Sens = pooledResult.I2_sens ?? pooledResult.I2 ?? 0;
+    const i2Spec = pooledResult.I2_spec ?? 0;
+    const maxI2 = Math.max(i2Sens, i2Spec);
+    if (maxI2 > 75) domains.inconsistency = -2;
+    else if (maxI2 > 50) domains.inconsistency = -1;
     else domains.inconsistency = 0;
     certainty += domains.inconsistency;
 
-    // 3. Imprecision — CI crosses null + k < OIS
-    const ciCrossesNull = isRatio
-      ? (pooledResult.pooledLo < 1 && pooledResult.pooledHi > 1)
-      : (pooledResult.pooledLo < 0 && pooledResult.pooledHi > 0);
-    const totalN = studyData ? studyData.reduce((s, d) => s + (d.nTotal ?? d.enrollment ?? 0), 0) : 0;
-    const oisMet = totalN >= 400;  // Simplified OIS threshold
-    if (!oisMet && ciCrossesNull) domains.imprecision = -2;
-    else if (!oisMet || ciCrossesNull) domains.imprecision = -1;
+    // 3. Imprecision — wide CIs for pooled sensitivity/specificity
+    const sensCI = pooledResult.sensCI ?? [pooledResult.pooledSens, pooledResult.pooledSens];
+    const specCI = pooledResult.specCI ?? [pooledResult.pooledSpec, pooledResult.pooledSpec];
+    const sensCIWidth = (sensCI[1] ?? sensCI[0]) - (sensCI[0] ?? 0);
+    const specCIWidth = (specCI[1] ?? specCI[0]) - (specCI[0] ?? 0);
+    const k = pooledResult.k ?? (studyData ? studyData.length : 0);
+    if ((sensCIWidth > 0.30 || specCIWidth > 0.30) && k < 5) domains.imprecision = -2;
+    else if (sensCIWidth > 0.20 || specCIWidth > 0.20) domains.imprecision = -1;
     else domains.imprecision = 0;
     certainty += domains.imprecision;
 
-    // 4. Publication bias — from S-value or Egger
-    if (pooledResult.sValue != null) {
+    // 4. Publication bias — from Deeks' test or S-value
+    if (pooledResult.deeksP != null) {
+      if (pooledResult.deeksP < 0.05) domains.publicationBias = -1;
+      else domains.publicationBias = 0;
+    } else if (pooledResult.sValue != null) {
       if (pooledResult.sValue < 2) domains.publicationBias = -2;
       else if (pooledResult.sValue < 4) domains.publicationBias = -1;
       else domains.publicationBias = 0;
     } else {
-      domains.publicationBias = 0;  // Insufficient data to assess
+      domains.publicationBias = 0;
     }
     certainty += domains.publicationBias;
 
-    // 5. Indirectness — set to 0 (requires manual assessment)
+    // 5. Indirectness — applicability concerns (requires manual assessment)
     domains.indirectness = 0;
     certainty += domains.indirectness;
 
-    // Upgrade: large effect (only for ratio measures per GRADE handbook)
-    if (certainty >= 3 && pooledResult.pooled != null && isRatio) {
-      const effectMag = Math.abs(Math.log(pooledResult.pooled));
-      if (effectMag > Math.log(5)) { domains.largeEffect = 2; certainty += 2; }
-      else if (effectMag > Math.log(2)) { domains.largeEffect = 1; certainty += 1; }
-      else domains.largeEffect = 0;
-    } else {
-      domains.largeEffect = 0;
-    }
+    // No large-effect upgrade for DTA (not standard in GRADE-DTA guidance)
+    domains.largeEffect = 0;
 
     certainty = Math.max(1, Math.min(4, certainty));
     const labels = { 4: 'HIGH', 3: 'MODERATE', 2: 'LOW', 1: 'VERY LOW' };
@@ -7804,47 +7638,30 @@ body.dark-mode .input-error { background: #451a1a !important; }
     return { certainty, label: labels[certainty], color: colors[certainty], domains };
   }
 
-  // --- NNT from pooled effect (binary outcomes) ---
-  // effectType: 'OR', 'RR', 'HR' — determines conversion formula
+  // --- NND (Number Needed to Diagnose) from DTA pooled results ---
+  // Legacy alias: computeNNT redirects to DTA NND calculation
+  // NND = 1 / Youden's J = 1 / (Sensitivity + Specificity - 1)
   function computeNNT(pooledEffect, isRatio, baselineRisk, effectType) {
+    // For DTA: if pooledEffect is actually a DTA result object, compute NND
+    if (pooledEffect && typeof pooledEffect === 'object' && pooledEffect.pooledSens != null) {
+      return numberNeededToDiagnose(pooledEffect.pooledSens, pooledEffect.pooledSpec);
+    }
+    // Legacy pairwise fallback (kept for Al-Burhan compatibility)
     if (pooledEffect == null || !isFinite(pooledEffect)) return null;
-    baselineRisk = baselineRisk ?? 0.15;  // Default 15% event rate
-    if (!isRatio) return null;  // MD: no direct NNT
-    const cer = baselineRisk;
+    if (!isRatio) return null;
+    const cer = baselineRisk ?? 0.15;
     const et = String(effectType || '').toUpperCase();
     let arr;
     if (et === 'OR') {
-      // Sackett formula: EER = CER*OR / (1 - CER + CER*OR)
       const eer = (cer * pooledEffect) / (1 - cer + cer * pooledEffect);
       arr = cer - eer;
     } else {
-      // RR / HR approximation: ARR = CER * (1 - RR)
-      // For HR with low event rates, this is a reasonable approximation
       arr = cer * (1 - pooledEffect);
     }
     if (Math.abs(arr) < 1e-10) return null;
     return Math.ceil(1 / Math.abs(arr));
   }
 
-  // --- Bucher adjusted indirect comparison ---
-  // For comparing treatments A vs B via common comparator C
-  function bucherIndirect(effectAC, seAC, effectBC, seBC, isRatio, confLevel) {
-    confLevel = confLevel ?? 0.95;
-    const zCrit = normalQuantile(1 - (1 - confLevel) / 2);
-    const yAC = isRatio ? Math.log(effectAC) : effectAC;
-    const yBC = isRatio ? Math.log(effectBC) : effectBC;
-    const yAB = yAC - yBC;
-    const seAB = Math.sqrt(seAC * seAC + seBC * seBC);
-    if (seAB <= 0 || !isFinite(seAB)) return null;
-    const z = yAB / seAB;
-    const pValue = 2 * (1 - normalCDF(Math.abs(z)));
-    return {
-      effect: isRatio ? Math.exp(yAB) : yAB,
-      ci_lo: isRatio ? Math.exp(yAB - zCrit * seAB) : yAB - zCrit * seAB,
-      ci_hi: isRatio ? Math.exp(yAB + zCrit * seAB) : yAB + zCrit * seAB,
-      se: seAB, z, pValue, confLevel
-    };
-  }
 
   // --- Chi-squared quantile (Wilson-Hilferty approximation) ---
   function chi2Quantile(p, df) {
@@ -8291,131 +8108,154 @@ body.dark-mode .input-error { background: #451a1a !important; }
   }
 
   // ============================================================
-  // FOREST PLOT (SVG)
+  // DTA FOREST PLOTS (Sensitivity and Specificity)
   // ============================================================
-  function renderForestPlot(result) {
-    if (!result) return '<p>No data for forest plot</p>';
-    const { studyResults, pooled, pooledLo, pooledHi, isRatio, zCrit } = result;
-    const k = studyResults.length;
+  function renderDTAForestPlot(result, metric) {
+    // metric: 'sens' or 'spec'
+    if (!result || !result.studyData) return '<p>No data for forest plot</p>';
+    const studies = result.studyData;
+    const k = studies.length;
+    const isSens = metric === 'sens';
+    const label = isSens ? 'Sensitivity' : 'Specificity';
+    const pooledVal = isSens ? result.pooledSens : result.pooledSpec;
+    const pooledCI = isSens ? result.sensCI : result.specCI;
+    const confPct = Math.round((result.confLevel ?? 0.95) * 100);
+    const alpha = 1 - (result.confLevel ?? 0.95);
     const rowH = 28, headerH = 40, footerH = 50, pad = 20;
     const h = headerH + k * rowH + footerH + pad;
-    const plotLeft = 250, plotRight = 550, plotW = plotRight - plotLeft;
-    const nullLine = isRatio ? 1 : 0;
+    const plotLeft = 220, plotRight = 520, plotW = plotRight - plotLeft;
+    const xScale = v => plotLeft + v * plotW;
 
-    const allVals = studyResults.flatMap(s => [s.displayLo, s.displayHi]).concat([pooledLo, pooledHi, nullLine]);
-    let xMin = Math.min(...allVals) * (isRatio ? 0.8 : 1) - (isRatio ? 0 : 0.2);
-    let xMax = Math.max(...allVals) * (isRatio ? 1.2 : 1) + (isRatio ? 0 : 0.2);
-    if (isRatio) xMin = Math.max(0.01, xMin);
-
-    const xScale = isRatio
-      ? (v) => plotLeft + (Math.log(v) - Math.log(xMin)) / (Math.log(xMax) - Math.log(xMin)) * plotW
-      : (v) => plotLeft + (v - xMin) / (xMax - xMin) * plotW;
-
-    let svg = '<svg viewBox="0 0 750 ' + h + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Forest plot showing individual study effects and pooled estimate" style="max-width:750px;width:100%;font-family:var(--font)">';
-
-    // Header
+    let svg = '<svg viewBox="0 0 720 ' + h + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="' + label + ' forest plot" style="max-width:720px;width:100%;font-family:var(--font)">';
     svg += '<text x="10" y="25" font-size="11" font-weight="bold">Study</text>';
-    const confPct = Math.round((result.confLevel ?? 0.95) * 100);
-    svg += '<text x="' + (plotLeft + plotW/2) + '" y="25" text-anchor="middle" font-size="11" font-weight="bold">Effect (' + confPct + '% CI)</text>';
-    svg += '<text x="570" y="25" font-size="11" font-weight="bold">Weight</text>';
-    svg += '<text x="620" y="25" font-size="11" font-weight="bold">Est [CI]</text>';
+    svg += '<text x="' + (plotLeft + plotW / 2) + '" y="25" text-anchor="middle" font-size="11" font-weight="bold">' + label + ' (' + confPct + '% CI)</text>';
+    svg += '<text x="540" y="25" font-size="11" font-weight="bold">Wt</text>';
+    svg += '<text x="580" y="25" font-size="11" font-weight="bold">Est [CI]</text>';
 
-    // Null line
-    const nullX = xScale(nullLine);
-    svg += '<line x1="' + nullX + '" y1="' + headerH + '" x2="' + nullX + '" y2="' + (headerH + k * rowH) + '" stroke="var(--border)" stroke-dasharray="4"/>';
-
-    // Study rows
-    studyResults.forEach((s, i) => {
+    studies.forEach((s, i) => {
       const y = headerH + i * rowH + rowH / 2;
-      const cx = xScale(s.display);
-      const x1 = xScale(Math.max(s.displayLo, xMin));
-      const x2 = xScale(Math.min(s.displayHi, xMax));
-      const size = Math.max(3, Math.min(10, Math.sqrt(parseFloat(s.weightPct)) * 2));
-
-      svg += '<text x="10" y="' + (y + 4) + '" font-size="10">' + escapeHtml((s.authorYear || '').slice(0, 30)) + '</text>';
-      svg += '<line x1="' + Math.max(plotLeft, x1) + '" y1="' + y + '" x2="' + Math.min(plotRight, x2) + '" y2="' + y + '" stroke="var(--primary)" stroke-width="1.5"/>';
-      svg += '<rect x="' + (cx - size/2) + '" y="' + (y - size/2) + '" width="' + size + '" height="' + size + '" fill="var(--primary)" transform="rotate(45 ' + cx + ' ' + y + ')"/>';
-      svg += '<text x="570" y="' + (y + 4) + '" font-size="9">' + s.weightPct + '%</text>';
-      svg += '<text x="620" y="' + (y + 4) + '" font-size="9">' + s.display.toFixed(2) + ' [' + s.displayLo.toFixed(2) + ', ' + s.displayHi.toFixed(2) + ']</text>';
+      const val = isSens ? s.sens : s.spec;
+      const n = isSens ? (s.tp + s.fn) : (s.tn + s.fp);
+      const x = isSens ? s.tp : s.tn;
+      const ci = wilsonCI(x, n, alpha);
+      const wPct = isSens ? s.weightPctSens : s.weightPctSpec;
+      const cx = xScale(val);
+      const x1 = xScale(Math.max(0, ci[0]));
+      const x2 = xScale(Math.min(1, ci[1]));
+      const size = Math.max(3, Math.min(10, Math.sqrt(parseFloat(wPct ?? 5)) * 2));
+      svg += '<text x="10" y="' + (y + 4) + '" font-size="10">' + escapeHtml((s.authorYear || s.author || '').slice(0, 28)) + '</text>';
+      svg += '<line x1="' + x1 + '" y1="' + y + '" x2="' + x2 + '" y2="' + y + '" stroke="var(--primary)" stroke-width="1.5"/>';
+      svg += '<rect x="' + (cx - size / 2) + '" y="' + (y - size / 2) + '" width="' + size + '" height="' + size + '" fill="var(--primary)"/>';
+      svg += '<text x="540" y="' + (y + 4) + '" font-size="9">' + (wPct ?? '-') + '%</text>';
+      svg += '<text x="580" y="' + (y + 4) + '" font-size="9">' + (val * 100).toFixed(1) + ' [' + (ci[0] * 100).toFixed(1) + ', ' + (ci[1] * 100).toFixed(1) + ']</text>';
     });
 
     // Pooled diamond
     const dy = headerH + k * rowH + 20;
-    const dx = xScale(pooled);
-    const dlo = xScale(Math.max(pooledLo, xMin));
-    const dhi = xScale(Math.min(pooledHi, xMax));
-    svg += '<polygon points="' + dlo + ',' + dy + ' ' + dx + ',' + (dy-8) + ' ' + dhi + ',' + dy + ' ' + dx + ',' + (dy+8) + '" fill="var(--danger)" opacity="0.8"/>';
-    svg += '<text x="10" y="' + (dy + 4) + '" font-size="10" font-weight="bold">Pooled (RE)</text>';
-    svg += '<text x="620" y="' + (dy + 4) + '" font-size="9" font-weight="bold">' + pooled.toFixed(2) + ' [' + pooledLo.toFixed(2) + ', ' + pooledHi.toFixed(2) + ']</text>';
+    const dx = xScale(pooledVal);
+    const dlo = xScale(Math.max(0, pooledCI[0]));
+    const dhi = xScale(Math.min(1, pooledCI[1]));
+    svg += '<polygon points="' + dlo + ',' + dy + ' ' + dx + ',' + (dy - 8) + ' ' + dhi + ',' + dy + ' ' + dx + ',' + (dy + 8) + '" fill="var(--danger)" opacity="0.8"/>';
+    svg += '<text x="10" y="' + (dy + 4) + '" font-size="10" font-weight="bold">Pooled</text>';
+    svg += '<text x="580" y="' + (dy + 4) + '" font-size="9" font-weight="bold">' + (pooledVal * 100).toFixed(1) + ' [' + (pooledCI[0] * 100).toFixed(1) + ', ' + (pooledCI[1] * 100).toFixed(1) + ']</text>';
 
-    // X-axis
+    // X-axis (0 to 100%)
     const axisY = headerH + k * rowH + 40;
     svg += '<line x1="' + plotLeft + '" y1="' + axisY + '" x2="' + plotRight + '" y2="' + axisY + '" stroke="var(--text)" stroke-width="1"/>';
-    const ticks = isRatio ? [0.1, 0.25, 0.5, 1, 2, 4].filter(v => v >= xMin && v <= xMax) : [];
-    if (!isRatio) {
-      const range = xMax - xMin;
-      const step = Math.pow(10, Math.floor(Math.log10(range))) / 2;
-      for (let v = Math.ceil(xMin / step) * step; v <= xMax; v += step) ticks.push(parseFloat(v.toFixed(4)));
-    }
-    ticks.forEach(v => {
+    [0, 0.25, 0.5, 0.75, 1].forEach(v => {
       const tx = xScale(v);
       svg += '<line x1="' + tx + '" y1="' + axisY + '" x2="' + tx + '" y2="' + (axisY + 5) + '" stroke="var(--text)"/>';
-      svg += '<text x="' + tx + '" y="' + (axisY + 15) + '" text-anchor="middle" font-size="9">' + v + '</text>';
+      svg += '<text x="' + tx + '" y="' + (axisY + 15) + '" text-anchor="middle" font-size="9">' + (v * 100) + '%</text>';
     });
-
-    // Favours labels
-    const favoursY = axisY + 28;
-    svg += '<text x="' + (plotLeft + 10) + '" y="' + favoursY + '" font-size="9" fill="var(--text-muted)">Favours intervention</text>';
-    svg += '<text x="' + (plotRight - 10) + '" y="' + favoursY + '" text-anchor="end" font-size="9" fill="var(--text-muted)">Favours control</text>';
-
     svg += '</svg>';
     return svg;
   }
 
+  // Legacy aliases
+  function renderForestPlot(result) { return renderDTAForestPlot(result, 'sens'); }
+
   // ============================================================
-  // FUNNEL PLOT (SVG)
+  // SROC PLOT (SVG)
   // ============================================================
-  function renderFunnelPlot(result) {
-    if (!result) return '';
-    const { studyResults, muRE, isRatio, zCrit } = result;
-    const w = 500, h = 400, pad = 50;
-
-    const ses = studyResults.map(d => d.sei);
-    const maxSE = Math.max(...ses) * 1.2;
-
-    const xScale = (v) => pad + (v - (muRE - 3 * maxSE)) / (6 * maxSE) * (w - 2 * pad);
-    const yScale = (se) => pad + (se / maxSE) * (h - 2 * pad);
-
-    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Funnel plot for publication bias assessment" style="max-width:500px;width:100%;font-family:var(--font)">';
-    svg += '<text x="' + (w/2) + '" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="var(--text)">Funnel Plot</text>';
-
-    // Funnel triangle
-    const topX = xScale(muRE);
-    const z = zCrit ?? normalQuantile(0.975);
-    const bottomLo = xScale(muRE - z * maxSE);
-    const bottomHi = xScale(muRE + z * maxSE);
-    svg += '<polygon points="' + topX + ',' + pad + ' ' + bottomLo + ',' + (h - pad) + ' ' + bottomHi + ',' + (h - pad) + '" fill="var(--bg-alt, #f0f0f0)" stroke="var(--border)"/>';
-
-    // Vertical center line
-    svg += '<line x1="' + topX + '" y1="' + pad + '" x2="' + topX + '" y2="' + (h - pad) + '" stroke="var(--text-muted)" stroke-dasharray="4"/>';
-
-    // Study points
-    studyResults.forEach(d => {
-      const cx = xScale(d.yi);
-      const cy = yScale(d.sei);
-      svg += '<circle cx="' + cx + '" cy="' + cy + '" r="4" fill="var(--primary)" opacity="0.7"/>';
+  function renderSROCPlot(result) {
+    if (!result || !result.studyData) return '';
+    const w = 500, h = 500, pad = 50;
+    const xScale = v => pad + (1 - v) * (w - 2 * pad); // 1-Spec on x-axis (FPR)
+    const yScale = v => pad + (1 - v) * (h - 2 * pad); // Sens on y-axis
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SROC plot" style="max-width:500px;width:100%;font-family:var(--font)">';
+    svg += '<text x="' + (w / 2) + '" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="var(--text)">Summary ROC Curve</text>';
+    // Diagonal reference (chance line)
+    svg += '<line x1="' + xScale(1) + '" y1="' + yScale(0) + '" x2="' + xScale(0) + '" y2="' + yScale(1) + '" stroke="var(--border)" stroke-dasharray="4"/>';
+    // SROC curve
+    if (result.srocCurve && result.srocCurve.length > 1) {
+      const pts = result.srocCurve.map(p => xScale(1 - p.fpr) + ',' + yScale(p.sens)).join(' ');
+      svg += '<polyline points="' + pts + '" fill="none" stroke="var(--danger)" stroke-width="2"/>';
+    }
+    // Study points (size by total N)
+    result.studyData.forEach(s => {
+      const cx = xScale(s.spec);
+      const cy = yScale(s.sens);
+      const r = Math.max(3, Math.min(8, Math.sqrt(s.n / 50)));
+      svg += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r.toFixed(1) + '" fill="var(--primary)" opacity="0.6" stroke="var(--primary)" stroke-width="0.5"/>';
     });
-
+    // Pooled summary point
+    const sx = xScale(result.pooledSpec);
+    const sy = yScale(result.pooledSens);
+    svg += '<rect x="' + (sx - 6) + '" y="' + (sy - 6) + '" width="12" height="12" fill="var(--danger)" transform="rotate(45 ' + sx + ' ' + sy + ')"/>';
     // Axes
-    svg += '<text x="' + (w/2) + '" y="' + (h - 5) + '" text-anchor="middle" font-size="10">Effect size' + (isRatio ? ' (log scale)' : '') + '</text>';
-    svg += '<text x="15" y="' + (h/2) + '" text-anchor="middle" font-size="10" transform="rotate(-90,15,' + (h/2) + ')">Standard Error</text>';
-
+    svg += '<text x="' + (w / 2) + '" y="' + (h - 5) + '" text-anchor="middle" font-size="10">1 - Specificity (FPR)</text>';
+    svg += '<text x="12" y="' + (h / 2) + '" text-anchor="middle" font-size="10" transform="rotate(-90,12,' + (h / 2) + ')">Sensitivity</text>';
+    [0, 0.2, 0.4, 0.6, 0.8, 1].forEach(v => {
+      const tx = xScale(1 - v); // v is FPR
+      svg += '<text x="' + tx + '" y="' + (h - pad + 15) + '" text-anchor="middle" font-size="8">' + (v * 100).toFixed(0) + '%</text>';
+      const ty = yScale(v);
+      svg += '<text x="' + (pad - 8) + '" y="' + (ty + 3) + '" text-anchor="end" font-size="8">' + (v * 100).toFixed(0) + '%</text>';
+    });
     svg += '</svg>';
     return svg;
   }
 
   // ============================================================
-  // ANALYSIS DASHBOARD
+  // DEEKS' FUNNEL PLOT (SVG)
+  // ============================================================
+  function renderDeeksFunnel(result) {
+    if (!result || !result.deeks) return '';
+    const dk = result.deeks;
+    if (!dk.logDOR || dk.logDOR.length === 0) return '';
+    const w = 500, h = 400, pad = 50;
+    const ess = dk.ess;
+    const logDOR = dk.logDOR;
+    const sqrtESS = ess.map(e => Math.sqrt(e));
+    const minX = Math.min(...logDOR) - 0.5, maxX = Math.max(...logDOR) + 0.5;
+    const maxY = Math.max(...sqrtESS) * 1.1;
+    const xScale = v => pad + (v - minX) / (maxX - minX) * (w - 2 * pad);
+    const yScale = v => h - pad - (v / maxY) * (h - 2 * pad);
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Deeks funnel plot" style="max-width:500px;width:100%;font-family:var(--font)">';
+    svg += '<text x="' + (w / 2) + '" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="var(--text)">Deeks\' Funnel Plot</text>';
+    // Regression line
+    if (isFinite(dk.slope) && isFinite(dk.intercept)) {
+      const x1 = Math.min(...dk.x), x2 = Math.max(...dk.x);
+      const y1 = dk.intercept + dk.slope * x1, y2 = dk.intercept + dk.slope * x2;
+      // x-axis is logDOR, y-axis is sqrt(ESS), but Deeks regresses logDOR on 1/sqrt(ESS)
+      // For visualization, plot sqrt(ESS) vs logDOR with the line
+      const s1 = 1 / x1, s2 = 1 / x2; // sqrt(ESS)
+      svg += '<line x1="' + xScale(y1) + '" y1="' + yScale(s1) + '" x2="' + xScale(y2) + '" y2="' + yScale(s2) + '" stroke="var(--danger)" stroke-width="1.5" stroke-dasharray="6"/>';
+    }
+    // Study points
+    logDOR.forEach((ld, i) => {
+      svg += '<circle cx="' + xScale(ld) + '" cy="' + yScale(sqrtESS[i]) + '" r="4" fill="var(--primary)" opacity="0.7"/>';
+    });
+    svg += '<text x="' + (w / 2) + '" y="' + (h - 5) + '" text-anchor="middle" font-size="10">log(DOR)</text>';
+    svg += '<text x="12" y="' + (h / 2) + '" text-anchor="middle" font-size="10" transform="rotate(-90,12,' + (h / 2) + ')">sqrt(ESS)</text>';
+    svg += '</svg>';
+    return svg;
+  }
+
+  // Keep legacy function name working
+  function renderFunnelPlot(result) { return renderDeeksFunnel(result); }
+
+  // ============================================================
+  // DTA ANALYSIS DASHBOARD
   // ============================================================
   let lastAnalysisResult = null;
 
@@ -8423,46 +8263,22 @@ body.dark-mode .input-error { background: #451a1a !important; }
     try {
     await loadStudies();
     const confLevel = (v => isFinite(v) ? v : 0.95)(parseFloat(document.getElementById('confLevelSelect')?.value));
-    const method = document.getElementById('methodSelect')?.value || 'DL';
+    const methodMap = { 'bivariate': 'bivariate', 'hsroc': 'hsroc', 'univariate': 'bivariate' };
+    const method = methodMap[document.getElementById('methodSelect')?.value] ?? 'bivariate';
     const confPct = Math.round(confLevel * 100);
 
     // Validation warnings
     const warnEl = document.getElementById('analysisWarnings');
     const warnMsgs = [];
     const blockMsgs = [];
-    const strictGates = document.getElementById('publishableGateToggle')?.checked ?? true;
-    const valid = extractedStudies.filter(s => s.effectEstimate !== null && s.lowerCI !== null && s.upperCI !== null);
+    // Check for valid DTA data (TP/FP/FN/TN)
+    const valid = extractedStudies.filter(s => {
+      const tp = parseInt(s.tp), fp = parseInt(s.fp), fn = parseInt(s.fn), tn = parseInt(s.tn);
+      return [tp, fp, fn, tn].every(v => !isNaN(v) && v >= 0);
+    });
     const excluded = extractedStudies.length - valid.length;
-    if (excluded > 0) warnMsgs.push(excluded + ' study(ies) excluded (missing effect/CI data)');
-    const types = new Set(valid.map(s => s.effectType));
-    if (types.size > 1) {
-      warnMsgs.push('Mixed effect types: ' + [...types].join(', '));
-      blockMsgs.push('Cannot pool mixed effect types in one model. Split analyses by effect measure.');
-    }
-    const nonEmptyOutcome = valid.map(s => (s.outcomeId || '').trim()).filter(Boolean);
-    const nonEmptyTimepoint = valid.map(s => (s.timepoint || '').trim()).filter(Boolean);
-    const outcomeSet = new Set(nonEmptyOutcome);
-    const timepointSet = new Set(nonEmptyTimepoint);
-    const missingTrace = valid.filter(s => !(String(s.trialId || '').trim()));
-    const missingOutcome = valid.filter(s => !(String(s.outcomeId || '').trim()));
-    const missingTimepoint = valid.filter(s => !(String(s.timepoint || '').trim()));
-    if (outcomeSet.size > 1) {
-      warnMsgs.push('Mixed outcomes detected in analysis set: ' + [...outcomeSet].join(' | '));
-      blockMsgs.push('Cannot pool different outcomes in one analysis. Use one outcome per meta-analysis.');
-    }
-    if (timepointSet.size > 1) {
-      warnMsgs.push('Mixed timepoints detected in analysis set: ' + [...timepointSet].join(' | '));
-      blockMsgs.push('Cannot pool different timepoints in one analysis. Use one timepoint per meta-analysis.');
-    }
-    if (missingTrace.length > 0) warnMsgs.push(missingTrace.length + ' study(ies) missing Trial ID');
-    if (missingOutcome.length > 0) warnMsgs.push(missingOutcome.length + ' study(ies) missing Outcome');
-    if (missingTimepoint.length > 0) warnMsgs.push(missingTimepoint.length + ' study(ies) missing Timepoint');
-    if (valid.length < 2 && method !== 'FE') warnMsgs.push('k < 2: heterogeneity statistics unreliable');
-    if (strictGates) {
-      if (missingTrace.length > 0) blockMsgs.push('Strict gate: all studies must include a Trial ID (NCT/PMID/DOI).');
-      if (missingOutcome.length > 0) blockMsgs.push('Strict gate: all studies must include an Outcome label.');
-      if (missingTimepoint.length > 0) blockMsgs.push('Strict gate: all studies must include a Timepoint.');
-    }
+    if (excluded > 0) warnMsgs.push(excluded + ' study(ies) excluded (missing or invalid TP/FP/FN/TN data)');
+    if (valid.length < 2) blockMsgs.push('Need at least 2 studies with complete 2x2 data for DTA meta-analysis.');
     if (warnEl) {
       const warnHtml = warnMsgs.length > 0
         ? '<div style="background:#fef3c7;border:1px solid #f59e0b;border-radius:var(--radius);padding:8px;font-size:0.82rem;margin-bottom:' + (blockMsgs.length ? '6px' : '0') + '">' + warnMsgs.map(w => escapeHtml(w)).join('<br>') + '</div>'
@@ -8473,270 +8289,180 @@ body.dark-mode .input-error { background: #451a1a !important; }
       warnEl.innerHTML = warnHtml + blockHtml;
     }
     if (blockMsgs.length > 0) {
-      showToast('Analysis blocked by strict methodology gates. Resolve extraction issues first.', 'danger');
+      showToast('Analysis blocked: need at least 2 studies with valid 2x2 data.', 'danger');
       return;
     }
 
-    let result;
-    if (method === 'FE') {
-      result = computeFixedEffect(extractedStudies, confLevel);
-    } else {
-      result = computeMetaAnalysis(extractedStudies, confLevel);
-      if (result && method === 'DL-HKSJ') result = applyHKSJ(result);
-    }
-    if (!result) { showToast('No valid studies for analysis. Check that effect estimates have non-zero CI widths and positive values for ratio measures.', 'warning'); return; }
+    const result = computeDTAAnalysis(valid, confLevel, method);
+    if (!result) { showToast('DTA analysis failed. Check study data.', 'warning'); return; }
     lastAnalysisResult = result;
 
-    // Interpretation text
-    const i2Val = result.I2 ?? 0;
-    const hetLabel = result.k < 2 ? 'N/A' : i2Val < 25 ? 'low' : i2Val < 50 ? 'moderate' : i2Val < 75 ? 'substantial' : 'considerable';
-    const sigText = result.pValue < 0.05 ? 'statistically significant' : 'not statistically significant';
-    const nullVal = result.isRatio ? 1 : 0;
-    const favours = result.pooled > nullVal ? 'control/reference' : 'intervention';
+    // Summary cards
+    const het = result.heterogeneity ?? {};
+    const i2Sens = het.I2_sens ?? 0;
+    const i2Spec = het.I2_spec ?? 0;
+    const hetLabel = i2Sens < 25 && i2Spec < 25 ? 'low' : (i2Sens > 75 || i2Spec > 75) ? 'considerable' : 'moderate';
 
     let summaryHTML =
       '<div class="stat-card"><div class="stat-label">Studies (k)</div><div class="stat-value">' + result.k + '</div></div>' +
-      '<div class="stat-card"><div class="stat-label">Pooled Effect</div><div class="stat-value">' + result.pooled.toFixed(3) + '</div></div>' +
-      '<div class="stat-card"><div class="stat-label">' + confPct + '% CI</div><div class="stat-value">[' + result.pooledLo.toFixed(3) + ', ' + result.pooledHi.toFixed(3) + ']</div></div>' +
-      '<div class="stat-card"><div class="stat-label">I\u00B2</div><div class="stat-value">' + (result.I2 !== null ? result.I2.toFixed(1) + '%' : 'N/A') + '</div></div>' +
-      '<div class="stat-card"><div class="stat-label">\u03C4\u00B2</div><div class="stat-value">' + result.tau2.toFixed(4) + '</div></div>' +
-      '<div class="stat-card"><div class="stat-label">p-value</div><div class="stat-value">' + (result.pValue < 0.001 ? '< 0.001' : result.pValue.toFixed(3)) + '</div></div>' +
-      '<div class="stat-card"><div class="stat-label">Q (df=' + result.df + ')</div><div class="stat-value">' + result.Q.toFixed(2) + ' (p=' + (result.QpValue < 0.001 ? '<0.001' : result.QpValue.toFixed(3)) + ')</div></div>';
-    if (result.piLo !== null && result.piHi !== null) {
-      summaryHTML += '<div class="stat-card"><div class="stat-label">Prediction Int.</div><div class="stat-value">[' + result.piLo.toFixed(3) + ', ' + result.piHi.toFixed(3) + ']</div></div>';
+      '<div class="stat-card"><div class="stat-label">Pooled Sens</div><div class="stat-value">' + (result.pooledSens * 100).toFixed(1) + '%</div></div>' +
+      '<div class="stat-card"><div class="stat-label">Sens ' + confPct + '% CI</div><div class="stat-value">[' + (result.sensCI[0] * 100).toFixed(1) + ', ' + (result.sensCI[1] * 100).toFixed(1) + ']</div></div>' +
+      '<div class="stat-card"><div class="stat-label">Pooled Spec</div><div class="stat-value">' + (result.pooledSpec * 100).toFixed(1) + '%</div></div>' +
+      '<div class="stat-card"><div class="stat-label">Spec ' + confPct + '% CI</div><div class="stat-value">[' + (result.specCI[0] * 100).toFixed(1) + ', ' + (result.specCI[1] * 100).toFixed(1) + ']</div></div>' +
+      '<div class="stat-card"><div class="stat-label">PLR</div><div class="stat-value">' + result.plr.toFixed(2) + '</div></div>' +
+      '<div class="stat-card"><div class="stat-label">NLR</div><div class="stat-value">' + result.nlr.toFixed(3) + '</div></div>' +
+      '<div class="stat-card"><div class="stat-label">DOR</div><div class="stat-value">' + result.dor.toFixed(1) + '</div></div>';
+    if (result.auc != null) {
+      summaryHTML += '<div class="stat-card"><div class="stat-label">AUC</div><div class="stat-value">' + result.auc.toFixed(3) + '</div></div>';
     }
     summaryHTML += '<div style="width:100%;font-size:0.82rem;color:var(--text-muted);margin-top:8px;line-height:1.5">' +
-      '<strong>Method:</strong> ' + escapeHtml(result.method) + '. ' +
-      'The pooled effect is <strong>' + sigText + '</strong> (p ' +
-      (result.pValue < 0.001 ? '< 0.001' : '= ' + result.pValue.toFixed(3)) + '). ' +
-      'Heterogeneity is <strong>' + hetLabel + '</strong>' + (result.I2 !== null ? ' (I\u00B2 = ' + result.I2.toFixed(1) + '%)' : '') + '.' +
-      (result.piLo !== null ? ' The ' + confPct + '% prediction interval [' + result.piLo.toFixed(2) + ', ' + result.piHi.toFixed(2) + '] indicates the range of effects expected in a new study.' : '') +
+      '<strong>Method:</strong> ' + escapeHtml(result.method) + ' (' + result.k + ' studies). ' +
+      'Heterogeneity is <strong>' + hetLabel + '</strong> (I\u00B2 Sens=' + i2Sens.toFixed(0) + '%, I\u00B2 Spec=' + i2Spec.toFixed(0) + '%). ' +
+      '\u03C4\u00B2 Sens=' + (result.tau2_sens ?? 0).toFixed(3) + ', \u03C4\u00B2 Spec=' + (result.tau2_spec ?? 0).toFixed(3) + '.' +
+      (result.rho != null ? ' \u03C1=' + result.rho.toFixed(2) + '.' : '') +
       '</div>';
-    const analysisSummaryEl = document.getElementById('analysisSummary');
-    analysisSummaryEl.innerHTML = summaryHTML;
-    // Store result for Insights tab to consume
-    try {
-      const insightsData = {
-        studies: (result.studyResults ?? []).map(s => ({
-          label: s.label ?? s.studyId ?? '',
-          effect: s.yi !== undefined ? (result.isRatio ? Math.exp(s.yi) : s.yi) : s.effect,
-          sei: s.sei ?? 0.5,
-          n: s.n ?? null,
-          weight: s.wi ?? null,
-          studyId: s.studyId ?? '',
-          title: s.title ?? s.label ?? '',
-          authorYear: s.label ?? '',
-        })),
-        pooledEffect: result.pooled,
-        pooledCI: [result.pooledLo, result.pooledHi],
-        pooledSE: result.seMu ?? Math.abs(result.pooledHi - result.pooledLo) / 3.92,
-        effectType: result.effectType ?? 'OR',
-        I2: result.I2,
-        tau2: result.tau2,
-        ciWidth: Math.abs(result.pooledHi - result.pooledLo),
-        predictionInterval: (result.piLo !== null && result.piHi !== null) ? [result.piLo, result.piHi] : null,
-        pEgger: null, // set below if available
-        NNT: null,
-        NNH: null,
-      };
-      analysisSummaryEl.dataset.lastResult = JSON.stringify(insightsData);
-    } catch(e) { console.warn('Insights data store failed:', e.message); }
-    document.getElementById('forestPlotContainer').innerHTML = renderForestPlot(result);
-    document.getElementById('funnelPlotContainer').innerHTML = renderFunnelPlot(result);
+    document.getElementById('analysisSummary').innerHTML = summaryHTML;
+
+    // Render plots
+    const srocEl = document.getElementById('srocPlotContainer');
+    if (srocEl) srocEl.innerHTML = renderSROCPlot(result);
+    const forestSensEl = document.getElementById('forestSensContainer');
+    if (forestSensEl) forestSensEl.innerHTML = renderDTAForestPlot(result, 'sens');
+    const forestSpecEl = document.getElementById('forestSpecContainer');
+    if (forestSpecEl) forestSpecEl.innerHTML = renderDTAForestPlot(result, 'spec');
     document.getElementById('analysisExport').style.display = 'block';
 
-    // Run funnel asymmetry test (Egger for MD/SMD, Peters for OR/RR/HR)
-    // Cochrane ch.13: Egger invalid for logOR; gated by k>=10 AND tau2<0.1
-    if (result.k >= 10) {
-      const asymTest = chooseAsymmetryTest(result);
-      const eggerEl = document.getElementById('eggerContainer');
-      if (asymTest && asymTest.reason) {
-        // High heterogeneity — suppress test
-        eggerEl.innerHTML = '<p style="font-size:0.82rem;color:var(--text-muted)">' + escapeHtml(asymTest.reason) + '</p>';
-      } else if (asymTest && asymTest.test) {
-        // Update Insights data with Egger/Peters p-value
-        try {
-          const storedData = JSON.parse(analysisSummaryEl.dataset.lastResult ?? '{}');
-          storedData.pEgger = asymTest.pValue;
-          analysisSummaryEl.dataset.lastResult = JSON.stringify(storedData);
-        } catch(e) {}
-        const testName = asymTest.test === 'Peters' ? 'Peters\' Test (binary outcomes)' : 'Egger\'s Regression Test';
-        eggerEl.innerHTML = '<h3 style="font-size:0.95rem;margin-bottom:4px">' + escapeHtml(testName) + '</h3>' +
-          '<p style="font-size:0.82rem">' + (asymTest.test === 'Peters' ? 'Slope' : 'Intercept') + ' = ' + (asymTest.test === 'Peters' ? asymTest.slope : asymTest.intercept).toFixed(3) + ' (SE = ' + asymTest.seIntercept.toFixed(3) + '), ' +
-          't(' + asymTest.df + ') = ' + asymTest.tStat.toFixed(2) + ', p = ' + (asymTest.pValue < 0.001 ? '< 0.001' : asymTest.pValue.toFixed(3)) + '. ' +
-          (asymTest.pValue < 0.10 ? '<strong style="color:var(--warning)">Potential funnel plot asymmetry detected.</strong>' : 'No evidence of funnel plot asymmetry.') +
-          '</p>';
+    // Deeks' funnel
+    const deeksEl = document.getElementById('deeksContainer');
+    if (deeksEl && result.deeks) {
+      let deeksHtml = renderDeeksFunnel(result);
+      deeksHtml += '<h3 style="font-size:0.95rem;margin-top:8px">Deeks\' Funnel Plot Asymmetry Test</h3>';
+      if (result.deeks.warning) {
+        deeksHtml += '<p style="font-size:0.82rem;color:var(--text-muted)">' + escapeHtml(result.deeks.warning) + '</p>';
+      } else {
+        deeksHtml += '<p style="font-size:0.82rem">Slope = ' + result.deeks.slope.toFixed(3) + ', t = ' + result.deeks.t.toFixed(2) + ', p = ' + (result.deeks.pValue < 0.001 ? '< 0.001' : result.deeks.pValue.toFixed(3)) + '. ' +
+          (result.deeks.significant ? '<strong style="color:var(--warning)">Asymmetry detected (p < 0.10).</strong>' : 'No evidence of asymmetry.') + '</p>';
       }
-    } else {
-      document.getElementById('eggerContainer').innerHTML = result.k < 10
-        ? '<p style="font-size:0.82rem;color:var(--text-muted)">Asymmetry test requires k \u2265 10 (current k = ' + result.k + ')</p>'
-        : '';
+      deeksEl.innerHTML = deeksHtml;
     }
 
-    // === GRADE Certainty Assessment ===
-    var sValue = null;
-    if (result.k >= 3 && result.studyResults) {
-      var pbResult = pubBiasSensitivity(result.studyResults, result.tau2);
-      if (pbResult) sValue = pbResult.sValue;
-    }
-    var gradeInput = Object.assign({}, result, { sValue: sValue });
-    var gradeResult = computeGRADE(gradeInput, extractedStudies);
-    var gradeEl = document.getElementById('gradeContainer');
-    var nntEl = document.getElementById('nntContainer');
-    var gradeNntRow = document.getElementById('gradeNntRow');
-    if (gradeResult && gradeEl) {
-      gradeNntRow.style.display = 'flex';
-      var d = gradeResult.domains;
-      var domainLabel = function(val) {
-        if (val === 0) return '<span style="color:#10b981">No concern</span>';
-        if (val === -1) return '<span style="color:#f59e0b">Serious (-1)</span>';
-        if (val === -2) return '<span style="color:#ef4444">Very serious (-2)</span>';
-        if (val === 1) return '<span style="color:#3b82f6">Upgrade (+1)</span>';
-        if (val === 2) return '<span style="color:#3b82f6">Upgrade (+2)</span>';
-        return '<span style="color:var(--text-muted)">N/A</span>';
-      };
-      gradeEl.innerHTML =
-        '<h3 style="font-size:0.95rem;margin-bottom:8px">GRADE Certainty of Evidence</h3>' +
-        '<div style="display:inline-block;padding:6px 16px;border-radius:var(--radius);font-weight:700;font-size:1.1rem;color:#fff;background:' + gradeResult.color + ';margin-bottom:10px">' + escapeHtml(gradeResult.label) + '</div>' +
-        '<table style="width:100%;font-size:0.82rem;border-collapse:collapse">' +
-        '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px">1. Risk of Bias</td><td style="padding:4px 8px">' +
-          (d.robNotAssessed ? '<span style="color:var(--text-muted)">Not assessed (requires per-trial RoB 2)</span>' : domainLabel(d.riskOfBias)) + '</td></tr>' +
-        '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px">2. Inconsistency</td><td style="padding:4px 8px">' + domainLabel(d.inconsistency) +
-          ' <span style="opacity:0.6">(I\u00B2=' + (result.I2 !== null ? result.I2.toFixed(0) + '%' : 'N/A') +
-          (result.piLo != null ? ', PI [' + result.piLo.toFixed(2) + ', ' + result.piHi.toFixed(2) + ']' : '') + ')</span></td></tr>' +
-        '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px">3. Indirectness</td><td style="padding:4px 8px">' +
-          '<span style="color:var(--text-muted)">Not assessed (requires manual evaluation)</span></td></tr>' +
-        '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px">4. Imprecision</td><td style="padding:4px 8px">' + domainLabel(d.imprecision) +
-          ' <span style="opacity:0.6">(CI ' + (((result.isRatio ? result.pooledLo < 1 && result.pooledHi > 1 : result.pooledLo < 0 && result.pooledHi > 0) ? 'crosses' : 'excludes') + ' null') + ')</span></td></tr>' +
-        '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px">5. Publication Bias</td><td style="padding:4px 8px">' + domainLabel(d.publicationBias) +
-          (sValue != null ? ' <span style="opacity:0.6">(S-value=' + (isFinite(sValue) ? sValue.toFixed(1) : '\u221E') + ')</span>' : '') + '</td></tr>' +
-        (d.largeEffect > 0 ? '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px">Large Effect Upgrade</td><td style="padding:4px 8px">' + domainLabel(d.largeEffect) + '</td></tr>' : '') +
-        '</table>' +
-        '<p style="font-size:0.78rem;color:var(--text-muted);margin-top:6px">Starting certainty: HIGH (RCTs). ' +
-        'Domains 1 and 3 require manual assessment for complete GRADE evaluation.</p>';
+    // Threshold effect
+    const threshEl = document.getElementById('thresholdEffectContainer');
+    if (threshEl && result.thresholdEffect) {
+      const te = result.thresholdEffect;
+      threshEl.innerHTML = '<h3 style="font-size:0.95rem;margin-bottom:4px">Threshold Effect Test</h3>' +
+        '<p style="font-size:0.82rem">Spearman \u03C1 = ' + te.rho.toFixed(3) + ', p = ' + (te.pValue < 0.001 ? '< 0.001' : te.pValue.toFixed(3)) + '. ' +
+        (te.significant ? '<strong style="color:var(--warning)">Significant threshold effect detected.</strong> HSROC model recommended.' : 'No significant threshold effect.') + '</p>';
     }
 
-    // === NNT (Number Needed to Treat) ===
-    if (result.isRatio && nntEl) {
-      var effectType = extractedStudies.length > 0 ? (extractedStudies[0].effectType || 'OR') : 'OR';
-      var defaultRisk = 0.15;
-      var nntVal = computeNNT(result.pooled, true, defaultRisk, effectType);
-      // Store NNT in Insights data
-      try {
-        var storedData2 = JSON.parse(analysisSummaryEl.dataset.lastResult ?? '{}');
-        if (result.pooled <= 1) { storedData2.NNT = nntVal; } else { storedData2.NNH = nntVal; }
-        analysisSummaryEl.dataset.lastResult = JSON.stringify(storedData2);
-      } catch(e) {}
-      var buildNntDisplay = function(risk) {
-        var n = computeNNT(result.pooled, true, risk, effectType);
-        var nLo = computeNNT(result.pooledHi, true, risk, effectType);
-        var nHi = computeNNT(result.pooledLo, true, risk, effectType);
-        var isHarm = result.pooled > 1;
-        var label = isHarm ? 'NNH (Number Needed to Harm)' : 'NNT (Number Needed to Treat)';
-        var html = '<h3 style="font-size:0.95rem;margin-bottom:8px">' + label + '</h3>';
-        if (n != null) {
-          html += '<div id="nntValue" style="font-size:2rem;font-weight:700;color:' + (isHarm ? '#ef4444' : '#10b981') + '">' + n + '</div>';
-          html += '<div id="nntCIText" style="font-size:0.82rem;color:var(--text-muted)">' +
-            (nLo != null && nHi != null ? '(' + confPct + '% CI: ' + Math.min(nLo, nHi) + ' to ' + Math.max(nLo, nHi) + ')' : '') + '</div>';
-        } else {
-          html += '<div id="nntValue" style="font-size:1rem;color:var(--text-muted)">Not computable for this effect type/size</div>';
-          html += '<div id="nntCIText"></div>';
-        }
-        html += '<div style="margin-top:10px">' +
-          '<label for="baselineRiskSlider" style="font-size:0.82rem;color:var(--text-muted)">Baseline event rate: <strong id="riskLabel">' + (risk * 100).toFixed(0) + '%</strong></label>' +
-          '<input type="range" id="baselineRiskSlider" min="1" max="50" value="' + Math.round(risk * 100) + '" ' +
-          'style="width:100%;margin-top:4px" oninput="updateNNTDisplay(this.value)">' +
-          '</div>' +
-          '<p style="font-size:0.78rem;color:var(--text-muted);margin-top:6px">' +
-          'Effect type: ' + escapeHtml(effectType) + '. ' +
-          (effectType === 'OR' ? 'Sackett formula.' : 'RR approximation (low event rate).') +
-          ' Adjust slider to see NNT at different baseline risks.</p>';
-        return html;
-      };
-      nntEl.innerHTML = buildNntDisplay(defaultRisk);
-      // Store for slider updates
-      window._nntState = { pooled: result.pooled, pooledLo: result.pooledLo, pooledHi: result.pooledHi, isRatio: true, effectType: effectType, confPct: confPct };
-    } else if (nntEl) {
-      nntEl.innerHTML = result.isRatio ? '' : '<p style="font-size:0.82rem;color:var(--text-muted);margin-top:8px">NNT not applicable for continuous outcomes (MD/SMD).</p>';
-      if (!result.isRatio) gradeNntRow.style.display = 'flex';
+    // Clinical utility
+    const cuEl = document.getElementById('clinicalUtilityContainer');
+    if (cuEl && result.clinicalUtility) {
+      let cuHtml = '<h3 style="font-size:0.95rem;margin-bottom:8px">Clinical Utility (PPV/NPV by Prevalence)</h3>';
+      cuHtml += '<table style="width:100%;font-size:0.82rem;border-collapse:collapse">';
+      cuHtml += '<tr style="border-bottom:2px solid var(--border)"><th style="padding:4px 8px;text-align:left">Prevalence</th><th style="padding:4px 8px">PPV</th><th style="padding:4px 8px">NPV</th></tr>';
+      result.clinicalUtility.forEach(cu => {
+        cuHtml += '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px">' + (cu.prevalence * 100).toFixed(0) + '%</td>' +
+          '<td style="padding:4px 8px;text-align:center">' + (cu.ppv * 100).toFixed(1) + '%</td>' +
+          '<td style="padding:4px 8px;text-align:center">' + (cu.npv * 100).toFixed(1) + '%</td></tr>';
+      });
+      cuHtml += '</table>';
+      cuEl.innerHTML = cuHtml;
     }
 
-    // --- Subgroup analysis (if any studies have subgroup labels) ---
-    var hasSubgroups = extractedStudies.some(function(s) { return (s.subgroup || '').trim().length > 0; });
-    if (hasSubgroups) {
-      var subResult = computeSubgroupAnalysis(extractedStudies, confLevel, result.method);
-      renderSubgroupAnalysis(subResult, confLevel);
-    } else {
-      var subContainer = document.getElementById('subgroupContainer');
-      if (subContainer) subContainer.innerHTML = '';
+    // NND (Number Needed to Diagnose)
+    const nndEl = document.getElementById('nndContainer');
+    if (nndEl) {
+      const j = result.youdenJ;
+      const nnd = result.nnd;
+      nndEl.innerHTML = '<h3 style="font-size:0.95rem;margin-bottom:8px">Number Needed to Diagnose (NND)</h3>' +
+        '<div style="font-size:2rem;font-weight:700;color:#10b981">' + (nnd != null ? nnd : 'N/A') + '</div>' +
+        '<p style="font-size:0.82rem;color:var(--text-muted)">Youden\'s J = ' + (j != null ? j.toFixed(3) : 'N/A') + '. NND = 1/J = number of patients to test to correctly diagnose one additional patient.</p>';
     }
 
-    // --- Cumulative meta-analysis ---
-    var cumResults = computeCumulativeMA(extractedStudies, confLevel, result.method);
-    renderCumulativeMA(cumResults, result.isRatio);
-
-    // --- Trim-and-fill (publication bias adjustment, k >= 5) ---
-    if (result.k >= 5 && result.studyResults) {
-      var tfResult = trimAndFill(result.studyResults, result, confLevel, result.method);
-      renderTrimFill(tfResult);
-    } else {
-      var tfEl = document.getElementById('trimFillContainer');
-      if (tfEl) tfEl.innerHTML = '';
-    }
-
-    // --- Fragility Index (ratio measures only) ---
-    var fiResult = computeFragilityIndex(extractedStudies);
-    renderFragilityIndex(fiResult);
-
-    // --- Meta-Regression (moderator analysis) ---
-    renderMetaRegression(extractedStudies, result, result.tau2);
-
-    // --- NMA League Table (indirect comparisons from subgroups) ---
-    if (hasSubgroups && subResult) {
-      var nmaResult = computeSubgroupNMA(subResult, result.isRatio, confLevel);
-      renderNMALeagueTable(nmaResult, confLevel);
-    } else {
-      var nmaEl = document.getElementById('nmaLeagueContainer');
-      if (nmaEl) nmaEl.innerHTML = '';
+    // Heterogeneity details
+    const hetEl = document.getElementById('heterogeneityContainer');
+    if (hetEl) {
+      let hetHtml = '<h3 style="font-size:0.95rem;margin-bottom:8px">Heterogeneity Analysis</h3>';
+      hetHtml += '<table style="width:100%;font-size:0.82rem;border-collapse:collapse">';
+      hetHtml += '<tr style="border-bottom:2px solid var(--border)"><th style="padding:4px 8px;text-align:left"></th><th style="padding:4px 8px">Sensitivity</th><th style="padding:4px 8px">Specificity</th></tr>';
+      hetHtml += '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px">\u03C4\u00B2</td><td style="padding:4px 8px;text-align:center">' + (result.tau2_sens ?? 0).toFixed(4) + '</td><td style="padding:4px 8px;text-align:center">' + (result.tau2_spec ?? 0).toFixed(4) + '</td></tr>';
+      hetHtml += '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px">I\u00B2</td><td style="padding:4px 8px;text-align:center">' + i2Sens.toFixed(1) + '%</td><td style="padding:4px 8px;text-align:center">' + i2Spec.toFixed(1) + '%</td></tr>';
+      if (het.Q_sens != null) {
+        hetHtml += '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px">Q</td><td style="padding:4px 8px;text-align:center">' + het.Q_sens.toFixed(2) + ' (p=' + (het.pQ_sens < 0.001 ? '<0.001' : het.pQ_sens.toFixed(3)) + ')</td><td style="padding:4px 8px;text-align:center">' + het.Q_spec.toFixed(2) + ' (p=' + (het.pQ_spec < 0.001 ? '<0.001' : het.pQ_spec.toFixed(3)) + ')</td></tr>';
+      }
+      if (result.rho != null) {
+        hetHtml += '<tr style="border-bottom:1px solid var(--border)"><td style="padding:4px 8px">\u03C1 (correlation)</td><td colspan="2" style="padding:4px 8px;text-align:center">' + result.rho.toFixed(3) + '</td></tr>';
+      }
+      hetHtml += '</table>';
+      hetEl.innerHTML = hetHtml;
     }
 
     } catch (err) {
-      console.error('Meta-analysis failed:', err);
-      showToast('Meta-analysis failed: ' + (err.message || 'Unknown error'), 'danger');
+      console.error('DTA analysis failed:', err);
+      showToast('DTA analysis failed: ' + (err.message || 'Unknown error'), 'danger');
     }
   }
 
-  function updateNNTDisplay(pctVal) {
-    var s = window._nntState;
-    if (!s) return;
-    var risk = parseInt(pctVal, 10) / 100;
-    var rl = document.getElementById('riskLabel');
-    if (rl) rl.textContent = Math.round(risk * 100) + '%';
-    var n = computeNNT(s.pooled, true, risk, s.effectType);
-    var nLo = computeNNT(s.pooledHi, true, risk, s.effectType);
-    var nHi = computeNNT(s.pooledLo, true, risk, s.effectType);
-    var isHarm = s.pooled > 1;
-    var valEl = document.getElementById('nntValue');
-    var ciEl = document.getElementById('nntCIText');
-    if (valEl) {
-      if (n != null) {
-        valEl.style.fontSize = '2rem';
-        valEl.style.fontWeight = '700';
-        valEl.style.color = isHarm ? '#ef4444' : '#10b981';
-        valEl.textContent = n;
-      } else {
-        valEl.style.fontSize = '1rem';
-        valEl.style.fontWeight = '400';
-        valEl.style.color = 'var(--text-muted)';
-        valEl.textContent = 'Not computable at this baseline risk';
+  // --- DTA Leave-One-Out Sensitivity Analysis ---
+  async function runDTALeaveOneOut() {
+    try {
+      await loadStudies();
+      const confLevel = (v => isFinite(v) ? v : 0.95)(parseFloat(document.getElementById('confLevelSelect')?.value));
+      const method = document.getElementById('methodSelect')?.value ?? 'bivariate';
+      const valid = extractedStudies.filter(s =>
+        s.tp != null && s.fp != null && s.fn != null && s.tn != null &&
+        (s.tp + s.fp + s.fn + s.tn) > 0
+      );
+      if (valid.length < 3) { showToast('Need at least 3 studies for leave-one-out', 'warning'); return; }
+
+      const results = [];
+      for (let i = 0; i < valid.length; i++) {
+        const subset = valid.filter((_, j) => j !== i);
+        const r = computeDTAAnalysis(subset, confLevel, method);
+        if (r) {
+          results.push({
+            omitted: valid[i].authorYear || ('Study ' + (i + 1)),
+            sens: r.pooledSens, spec: r.pooledSpec,
+            sensCI: r.sensCI, specCI: r.specCI,
+            DOR: r.DOR, AUC: r.AUC, k: r.k
+          });
+        }
       }
-    }
-    if (ciEl) {
-      if (n != null && nLo != null && nHi != null) {
-        ciEl.textContent = '(' + s.confPct + '% CI: ' + Math.min(nLo, nHi) + ' to ' + Math.max(nLo, nHi) + ')';
-      } else {
-        ciEl.textContent = '';
+      if (results.length === 0) { showToast('LOO analysis failed', 'danger'); return; }
+
+      const container = document.getElementById('looContainer');
+      if (!container) { showToast('LOO container not found', 'warning'); return; }
+      const confPct = Math.round(confLevel * 100);
+      let html = '<h3 style="font-size:0.95rem;margin-bottom:8px">Leave-One-Out Sensitivity Analysis (DTA)</h3>' +
+        '<table class="extract-table" style="font-size:0.82rem"><thead><tr>' +
+        '<th>Omitted Study</th><th>Sens</th><th>Spec</th><th>DOR</th><th>AUC</th>' +
+        '</tr></thead><tbody>';
+      for (const r of results) {
+        html += '<tr><td>' + escapeHtml(r.omitted) + '</td>' +
+          '<td>' + (r.sens * 100).toFixed(1) + '% [' + (r.sensCI[0] * 100).toFixed(1) + ', ' + (r.sensCI[1] * 100).toFixed(1) + ']</td>' +
+          '<td>' + (r.spec * 100).toFixed(1) + '% [' + (r.specCI[0] * 100).toFixed(1) + ', ' + (r.specCI[1] * 100).toFixed(1) + ']</td>' +
+          '<td>' + r.DOR.toFixed(2) + '</td>' +
+          '<td>' + (r.AUC != null ? (r.AUC * 100).toFixed(1) + '%' : '-') + '</td></tr>';
       }
+      html += '</tbody></table>';
+
+      // Check for sensitivity direction changes
+      if (lastAnalysisResult && lastAnalysisResult.pooledSens != null) {
+        const baseSens = lastAnalysisResult.pooledSens;
+        const flips = results.filter(r => Math.abs(r.sens - baseSens) > 0.10);
+        if (flips.length > 0) {
+          html += '<p style="font-size:0.82rem;color:var(--warning);margin-top:6px"><strong>Influential studies:</strong> ' +
+            flips.map(f => escapeHtml(f.omitted)).join(', ') + ' (sensitivity changes >10 percentage points when omitted).</p>';
+        } else {
+          html += '<p style="font-size:0.82rem;color:var(--success);margin-top:6px">Results appear robust: no study omission changes pooled sensitivity by more than 10 percentage points.</p>';
+        }
+      }
+      container.innerHTML = html;
+      showToast('DTA LOO analysis complete', 'success');
+    } catch (err) {
+      console.error('DTA leave-one-out failed:', err);
+      showToast('LOO analysis failed: ' + (err.message || 'Unknown error'), 'danger');
     }
   }
 
@@ -8800,74 +8526,6 @@ body.dark-mode .input-error { background: #451a1a !important; }
     };
   }
 
-  function renderSubgroupAnalysis(subgroupResult, confLevel) {
-    var container = document.getElementById('subgroupContainer');
-    if (!container) return;
-    if (!subgroupResult) {
-      container.innerHTML = '';
-      return;
-    }
-    var sr = subgroupResult;
-    var isRatio = sr.overall?.isRatio;
-    var confPct = Math.round((confLevel ?? 0.95) * 100);
-    var pFmt = sr.pInteraction < 0.001 ? '< 0.001' : sr.pInteraction.toFixed(3);
-    var sigClass = sr.pInteraction < 0.10 ? 'color:#ef4444;font-weight:700' : 'color:var(--text-muted)';
-
-    var html = '<div style="border:1px solid var(--border);border-radius:8px;padding:16px;background:var(--bg-card)">' +
-      '<h3 style="font-size:0.95rem;margin:0 0 12px 0">Subgroup Analysis</h3>' +
-      '<table class="extract-table" style="font-size:0.82rem"><thead><tr>' +
-      '<th>Subgroup</th><th>k</th><th>Pooled Effect</th><th>' + confPct + '% CI</th>' +
-      '<th>I\u00B2</th><th>tau\u00B2</th><th>p</th>' +
-      '</tr></thead><tbody>';
-
-    for (var sg of sr.subgroups) {
-      var r = sg.result;
-      html += '<tr>' +
-        '<td style="font-weight:600">' + escapeHtml(sg.label) + '</td>' +
-        '<td>' + r.k + '</td>' +
-        '<td>' + r.pooled.toFixed(3) + '</td>' +
-        '<td>' + r.pooledLo.toFixed(3) + ' to ' + r.pooledHi.toFixed(3) + '</td>' +
-        '<td>' + (r.I2 != null ? r.I2.toFixed(1) + '%' : '-') + '</td>' +
-        '<td>' + r.tau2.toFixed(4) + '</td>' +
-        '<td>' + (r.pValue < 0.001 ? '< 0.001' : r.pValue.toFixed(3)) + '</td>' +
-        '</tr>';
-    }
-
-    // Overall row
-    if (sr.overall) {
-      var ov = sr.overall;
-      html += '<tr style="border-top:2px solid var(--border);font-weight:700">' +
-        '<td>Overall</td>' +
-        '<td>' + ov.k + '</td>' +
-        '<td>' + ov.pooled.toFixed(3) + '</td>' +
-        '<td>' + ov.pooledLo.toFixed(3) + ' to ' + ov.pooledHi.toFixed(3) + '</td>' +
-        '<td>' + (ov.I2 != null ? ov.I2.toFixed(1) + '%' : '-') + '</td>' +
-        '<td>' + ov.tau2.toFixed(4) + '</td>' +
-        '<td>' + (ov.pValue < 0.001 ? '< 0.001' : ov.pValue.toFixed(3)) + '</td>' +
-        '</tr>';
-    }
-    html += '</tbody></table>';
-
-    // Test for interaction
-    html += '<div style="margin-top:12px;padding:10px;border-radius:6px;background:var(--bg-hover)">' +
-      '<strong>Test for subgroup differences:</strong> ' +
-      'Q<sub>between</sub> = ' + sr.Qbetween.toFixed(2) +
-      ', df = ' + sr.dfBetween +
-      ', <span style="' + sigClass + '">p = ' + pFmt + '</span>' +
-      (sr.pInteraction < 0.10
-        ? ' &mdash; <span style="color:#ef4444">Evidence of subgroup interaction</span>'
-        : ' &mdash; <span style="color:var(--text-muted)">No significant subgroup interaction</span>') +
-      '</div>';
-
-    // Interpretation note
-    html += '<p style="font-size:0.78rem;color:var(--text-muted);margin-top:8px">' +
-      'Test for subgroup differences based on fixed-effect model (Cochrane Handbook v6.5, Section 10.11). ' +
-      'A p-value &lt; 0.10 suggests the treatment effect may differ across subgroups. ' +
-      'Note: subgroup analyses are typically exploratory and should be pre-specified in the protocol.</p>';
-
-    html += '</div>';
-    container.innerHTML = html;
-  }
 
   // ============================================================
   // CUMULATIVE META-ANALYSIS
@@ -8908,63 +8566,6 @@ body.dark-mode .input-error { background: #451a1a !important; }
     return cumResults.length >= 2 ? cumResults : null;
   }
 
-  function renderCumulativeMA(cumResults, isRatio) {
-    var container = document.getElementById('cumulativeContainer');
-    if (!container) return;
-    if (!cumResults || cumResults.length < 2) { container.innerHTML = ''; return; }
-
-    var W = 600, H = Math.max(200, cumResults.length * 28 + 60);
-    var margin = { top: 30, right: 20, bottom: 30, left: 160 };
-    var plotW = W - margin.left - margin.right;
-    var plotH = H - margin.top - margin.bottom;
-
-    // Compute axis range
-    var allVals = cumResults.flatMap(function(r) { return [r.pooledLo, r.pooledHi]; });
-    var nullLine = isRatio ? 1 : 0;
-    allVals.push(nullLine);
-    var xMin = Math.min.apply(null, allVals);
-    var xMax = Math.max.apply(null, allVals);
-    var xPad = (xMax - xMin) * 0.1;
-    xMin -= xPad; xMax += xPad;
-    var xScale = function(v) { return margin.left + (v - xMin) / (xMax - xMin) * plotW; };
-    var yScale = function(i) { return margin.top + (i + 0.5) / cumResults.length * plotH; };
-
-    var svg = '<svg width="' + W + '" height="' + H + '" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui;font-size:11px">';
-
-    // Null line
-    var nx = xScale(nullLine);
-    svg += '<line x1="' + nx + '" y1="' + margin.top + '" x2="' + nx + '" y2="' + (H - margin.bottom) + '" stroke="#94a3b8" stroke-dasharray="4,3"/>';
-
-    // Cumulative CI lines + diamonds
-    for (var i = 0; i < cumResults.length; i++) {
-      var r = cumResults[i];
-      var y = yScale(i);
-      var x1 = xScale(r.pooledLo), x2 = xScale(r.pooledHi), xc = xScale(r.pooled);
-      // CI line
-      svg += '<line x1="' + x1 + '" y1="' + y + '" x2="' + x2 + '" y2="' + y + '" stroke="#3b82f6" stroke-width="1.5"/>';
-      // Diamond
-      var dw = 5;
-      svg += '<polygon points="' + (xc - dw) + ',' + y + ' ' + xc + ',' + (y - dw) + ' ' + (xc + dw) + ',' + y + ' ' + xc + ',' + (y + dw) + '" fill="#3b82f6"/>';
-      // Label
-      svg += '<text x="' + (margin.left - 5) + '" y="' + (y + 4) + '" text-anchor="end" fill="var(--text-primary,#374151)" font-size="10">' + escapeHtml(r.label) + '</text>';
-    }
-
-    // X-axis
-    svg += '<line x1="' + margin.left + '" y1="' + (H - margin.bottom) + '" x2="' + (W - margin.right) + '" y2="' + (H - margin.bottom) + '" stroke="#94a3b8"/>';
-    var nTicks = 5;
-    for (var t = 0; t <= nTicks; t++) {
-      var val = xMin + t * (xMax - xMin) / nTicks;
-      var tx = xScale(val);
-      svg += '<line x1="' + tx + '" y1="' + (H - margin.bottom) + '" x2="' + tx + '" y2="' + (H - margin.bottom + 4) + '" stroke="#94a3b8"/>';
-      svg += '<text x="' + tx + '" y="' + (H - margin.bottom + 16) + '" text-anchor="middle" fill="var(--text-muted,#6b7280)" font-size="10">' + val.toFixed(2) + '</text>';
-    }
-
-    // Title
-    svg += '<text x="' + (W / 2) + '" y="16" text-anchor="middle" font-weight="600" font-size="12" fill="var(--text-primary,#374151)">Cumulative Meta-Analysis</text>';
-    svg += '</svg>';
-
-    container.innerHTML = '<div style="border:1px solid var(--border);border-radius:8px;padding:12px;background:var(--bg-card);overflow-x:auto">' + svg + '</div>';
-  }
 
   // ============================================================
   // TRIM-AND-FILL (Duval & Tweedie 2000)
@@ -9051,34 +8652,6 @@ body.dark-mode .input-error { background: #451a1a !important; }
     };
   }
 
-  function renderTrimFill(tfResult) {
-    var container = document.getElementById('trimFillContainer');
-    if (!container) return;
-    if (!tfResult) { container.innerHTML = ''; return; }
-
-    var html = '<div style="border:1px solid var(--border);border-radius:8px;padding:16px;background:var(--bg-card)">' +
-      '<h3 style="font-size:0.95rem;margin:0 0 10px 0">Trim-and-Fill Publication Bias Adjustment</h3>';
-
-    if (tfResult.nImputed === 0) {
-      html += '<p style="font-size:0.85rem;color:var(--text-muted)">No funnel plot asymmetry detected. No studies imputed.</p>';
-    } else {
-      var dirStr = tfResult.adjustedPooled < tfResult.originalPooled ? 'attenuated' : 'strengthened';
-      html += '<table class="extract-table" style="font-size:0.82rem"><tbody>' +
-        '<tr><td style="font-weight:600">Studies imputed</td><td>' + tfResult.nImputed + '</td></tr>' +
-        '<tr><td style="font-weight:600">Original pooled</td><td>' + tfResult.originalPooled.toFixed(4) + '</td></tr>' +
-        '<tr><td style="font-weight:600">Adjusted pooled</td><td style="font-weight:700;color:#3b82f6">' + tfResult.adjustedPooled.toFixed(4) +
-        ' (' + tfResult.adjustedLo.toFixed(4) + ' to ' + tfResult.adjustedHi.toFixed(4) + ')</td></tr>' +
-        '<tr><td style="font-weight:600">Direction</td><td>Effect ' + dirStr + ' after adjustment</td></tr>' +
-        '</tbody></table>';
-    }
-
-    html += '<p style="font-size:0.78rem;color:var(--text-muted);margin-top:8px">' +
-      'Duval &amp; Tweedie (2000) trim-and-fill method using the L0 estimator. ' +
-      'Imputes hypothetical missing studies to correct funnel plot asymmetry. ' +
-      'Results should be interpreted cautiously as the method assumes asymmetry is due to publication bias.</p>';
-    html += '</div>';
-    container.innerHTML = html;
-  }
 
   // ============================================================
   // FRAGILITY INDEX (Walsh et al. 2014)
@@ -9125,85 +8698,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     };
   }
 
-  function renderFragilityIndex(fiResult) {
-    var container = document.getElementById('fragilityContainer');
-    if (!container) return;
-    if (!fiResult) { container.innerHTML = ''; return; }
 
-    var fiColor = fiResult.fragilityIndex === 0 ? '#10b981'
-      : fiResult.fragilityIndex <= 2 ? '#f59e0b' : '#ef4444';
-    var robustLabel = fiResult.fragilityIndex === 0 ? 'Robust'
-      : fiResult.fragilityIndex <= 2 ? 'Moderately fragile' : 'Fragile';
-
-    var html = '<div style="border:1px solid var(--border);border-radius:8px;padding:16px;background:var(--bg-card)">' +
-      '<h3 style="font-size:0.95rem;margin:0 0 10px 0">Fragility Index</h3>' +
-      '<div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">' +
-      '<div style="text-align:center">' +
-      '<div style="font-size:2.2rem;font-weight:700;color:' + fiColor + '">' + fiResult.fragilityIndex + '</div>' +
-      '<div style="font-size:0.82rem;color:var(--text-muted)">of ' + fiResult.k + ' studies</div>' +
-      '</div>' +
-      '<div>' +
-      '<p style="font-size:0.85rem;margin:0 0 4px 0"><strong>Status:</strong> ' +
-      (fiResult.isSignificant ? 'Pooled result is statistically significant (p &lt; 0.05)' : 'Pooled result is not statistically significant') + '</p>' +
-      '<p style="font-size:0.85rem;margin:0 0 4px 0"><strong>Fragility:</strong> ' +
-      '<span style="color:' + fiColor + ';font-weight:600">' + robustLabel + '</span> &mdash; ' +
-      (fiResult.fragilityIndex === 0
-        ? 'No single study removal changes significance'
-        : fiResult.fragilityIndex + ' study removal(s) would flip statistical significance') + '</p>' +
-      '<p style="font-size:0.85rem;margin:0 0 4px 0"><strong>Fragility Quotient:</strong> ' +
-      (fiResult.fragQuotient * 100).toFixed(1) + '% (' + fiResult.fragilityIndex + '/' + fiResult.k + ')</p>' +
-      (fiResult.fragileStudy ? '<p style="font-size:0.85rem;margin:0"><strong>Most influential:</strong> ' + escapeHtml(fiResult.fragileStudy) + '</p>' : '') +
-      '</div></div>' +
-      '<p style="font-size:0.78rem;color:var(--text-muted);margin-top:10px">' +
-      'Fragility Index: number of study removals needed to change statistical significance (study-level leave-one-out approach). ' +
-      'Fragility Quotient (FQ) = FI/k. FQ &gt; 0.33 suggests the meta-analysis conclusion is sensitive to individual studies. ' +
-      'Ref: Walsh et al. (2014) J Clin Epidemiol.</p>' +
-      '</div>';
-    container.innerHTML = html;
-  }
-
-  async function runLOOAnalysis() {
-    try {
-    await loadStudies();
-    const confLevel = (v => isFinite(v) ? v : 0.95)(parseFloat(document.getElementById('confLevelSelect')?.value));
-    const method = document.getElementById('methodSelect')?.value || 'DL';
-    const valid = extractedStudies.filter(s => s.effectEstimate !== null && s.lowerCI !== null && s.upperCI !== null);
-    if (valid.length < 2) { showToast('Need at least 2 studies for leave-one-out', 'warning'); return; }
-    const looResults = leaveOneOut(valid, confLevel, method);
-    if (!looResults.length) { showToast('LOO analysis failed', 'danger'); return; }
-    const isRatio = ['OR', 'RR', 'HR'].includes(valid[0].effectType);
-    const container = document.getElementById('looContainer');
-    let html = '<h3 style="font-size:0.95rem;margin-bottom:8px">Leave-One-Out Sensitivity Analysis</h3>' +
-      '<table class="extract-table" style="font-size:0.82rem"><thead><tr>' +
-      '<th>Omitted Study</th><th>Pooled Effect</th><th>CI</th><th>I\u00B2</th><th>p-value</th>' +
-      '</tr></thead><tbody>';
-    for (const r of looResults) {
-      html += '<tr><td>' + escapeHtml(r.omitted) + '</td>' +
-        '<td>' + r.pooled.toFixed(3) + '</td>' +
-        '<td>[' + r.pooledLo.toFixed(3) + ', ' + r.pooledHi.toFixed(3) + ']</td>' +
-        '<td>' + (r.I2 !== null ? r.I2.toFixed(1) + '%' : 'N/A') + '</td>' +
-        '<td>' + (r.pValue < 0.001 ? '< 0.001' : r.pValue.toFixed(3)) + '</td></tr>';
-    }
-    html += '</tbody></table>';
-    // Check for direction changes
-    if (lastAnalysisResult) {
-      const nullVal = isRatio ? 1 : 0;
-      const baseDir = lastAnalysisResult.pooled > nullVal ? 'above' : 'below';
-      const flips = looResults.filter(r => (r.pooled > nullVal ? 'above' : 'below') !== baseDir);
-      if (flips.length > 0) {
-        html += '<p style="font-size:0.82rem;color:var(--warning);margin-top:6px"><strong>Direction change in ' + flips.length + '/' + looResults.length + ' analyses</strong> when omitting: ' +
-          flips.map(f => escapeHtml(f.omitted)).join(', ') + '. These studies may be influential.</p>';
-      } else {
-        html += '<p style="font-size:0.82rem;color:var(--success);margin-top:6px">No direction changes detected. Results appear robust.</p>';
-      }
-    }
-    container.innerHTML = html;
-    showToast('LOO analysis complete', 'success');
-    } catch (err) {
-      console.error('Leave-one-out analysis failed:', err);
-      showToast('Leave-one-out analysis failed: ' + (err.message || 'Unknown error'), 'danger');
-    }
-  }
 
   // ============================================================
   // SEARCH ENGINE — Cardio-mode sources (PubMed, OpenAlex, CT.gov, AACT)
@@ -10815,6 +10310,33 @@ body.dark-mode .input-error { background: #451a1a !important; }
     }
   }
 
+  // Zoom to a specific Ayat node by ID (used by Tafsir pill clicks)
+  function zoomToAyatNode(nodeId) {
+    if (!_lastAyatClusters || _lastAyatClusters.length === 0) return;
+    var target = null;
+    for (var i = 0; i < _lastAyatClusters.length; i++) {
+      if (_lastAyatClusters[i].id === nodeId) { target = _lastAyatClusters[i]; break; }
+    }
+    if (!target) return;
+    // Switch to Ayat view if needed
+    if (currentUniverseView !== 'ayat') {
+      var btns = document.querySelectorAll('.view-switch-btn');
+      btns.forEach(function(b) { b.classList.toggle('active', b.dataset.view === 'ayat'); });
+      currentUniverseView = 'ayat';
+    }
+    // Center on target node at zoom level 2 (glyph detail)
+    var canvas = document.getElementById('ayatCanvas');
+    if (!canvas) return;
+    var W = canvas.width, H = canvas.height;
+    if (!_ayatState) _ayatState = { zoom: 1, panX: 0, panY: 0 };
+    _ayatState.zoom = 2;
+    _ayatState.panX = -(target.x - W / 2) * _ayatState.zoom;
+    _ayatState.panY = -(target.y - H / 2) * _ayatState.zoom;
+    renderAyatUniverse(universeTrialsCache);
+    // Also drill down into the node
+    drillDownAyatNode(target);
+  }
+
   // ============================================================
   // LAYER 2: TAFSIR (Cross-References) — Ayat-as-Signs
   // ============================================================
@@ -11111,7 +10633,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       var voids = computeVoidScores(_bayanMatrix);
       var match = voids.find(function(v) { return v.ivIdx === ivIdx && v.ocIdx === ocIdx; });
       var html = '<div style="text-align:center;padding:16px">';
-      html += '<div style="font-size:1.2rem;font-weight:700;color:#d97706;margin-bottom:8px">Research Void Detected</div>';
+      html += '<div style="font-size:1.2rem;font-weight:700;color:#d97706;margin-bottom:8px">Research Opportunity</div>';
       html += '<div style="font-size:0.9rem"><strong>' + escapeHtml(iv) + '</strong> x <strong>' + escapeHtml(oc) + '</strong></div>';
       if (match) {
         html += '<div style="margin-top:8px;font-size:0.82rem;color:var(--text-muted)">Void score: ' + match.voidScore + '</div>';
@@ -11123,6 +10645,98 @@ body.dark-mode .input-error { background: #451a1a !important; }
       showDrillDownPanel('Research Void: ' + iv + ' x ' + oc, html);
     }
   }
+
+  // ============================================================
+  // LAYER 4: HUKM (Judgment) — Evidence Verdicts
+  // ============================================================
+
+  function computeHukm(node, alBurhanClusters) {
+    const signals = {};
+
+    // Trial volume
+    const tc = node.trialCount ?? 0;
+    signals.trialVolume = tc > 15 ? 'high' : tc > 5 ? 'moderate' : 'low';
+
+    // Phase maturity
+    const phases = node.phases || {};
+    const totalPhased = (phases[1] ?? 0) + (phases[2] ?? 0) + (phases[3] ?? 0) + (phases[4] ?? 0);
+    const latePhaseFrac = totalPhased > 0 ? ((phases[3] ?? 0) + (phases[4] ?? 0)) / totalPhased : 0;
+    signals.phaseMaturity = latePhaseFrac > 0.5 ? 'mature' : latePhaseFrac > 0.2 ? 'emerging' : 'early';
+
+    // Recent activity
+    const recent = node.recentCount ?? 0;
+    signals.recentActivity = recent > 3 ? 'active' : recent > 0 ? 'stale' : 'dormant';
+
+    // Enrollment mass
+    const enr = node.enrollment ?? 0;
+    signals.enrollmentMass = enr > 5000 ? 'large' : enr > 1000 ? 'medium' : 'small';
+
+    // Outcome consistency (from Al-Burhan if available)
+    signals.outcomeConsistency = 'unknown';
+    let matchedCluster = null;
+    if (alBurhanClusters) {
+      const nodeLabelLow = (node.label || '').toLowerCase();
+      const nodeScId = node.subcatId || '';
+      matchedCluster = alBurhanClusters.find(c => {
+        const clsLow = (c.drug_class || '').toLowerCase();
+        return c.subcategory === nodeScId && (clsLow.includes(nodeLabelLow) || nodeLabelLow.includes(clsLow));
+      });
+      if (matchedCluster && matchedCluster.pooled) {
+        const i2 = matchedCluster.pooled.i2 ?? null;
+        if (i2 != null) {
+          signals.outcomeConsistency = i2 > 75 ? 'contradictory' : i2 > 50 ? 'mixed' : 'consistent';
+        }
+      }
+    }
+
+    // Compute verdict
+    let verdict, confidence, reasoning;
+
+    if (signals.outcomeConsistency === 'contradictory') {
+      verdict = 'CONTRADICTORY';
+      confidence = 0.85;
+      reasoning = 'High heterogeneity (I\u00B2>' + (matchedCluster?.pooled?.i2 ?? '75') + '%) suggests conflicting evidence across trials.';
+    } else if (tc < 3 && signals.recentActivity === 'dormant') {
+      verdict = 'DESERT';
+      confidence = 0.90;
+      reasoning = 'Fewer than 3 trials with no recent activity. This area is an evidence desert.';
+    } else if (signals.phaseMaturity === 'mature' && tc > 10 && enr > 5000 && signals.outcomeConsistency !== 'mixed') {
+      verdict = 'SUFFICIENT';
+      confidence = 0.88;
+      reasoning = 'Mature Phase 3/4 evidence (' + tc + ' trials, ' + enr.toLocaleString() + ' patients) with consistent outcomes.';
+    } else if (tc >= 5 && signals.recentActivity === 'active') {
+      verdict = 'GROWING';
+      confidence = 0.75;
+      reasoning = 'Active research frontier (' + recent + ' recent trials). Evidence is accumulating.';
+    } else {
+      verdict = 'INCONCLUSIVE';
+      confidence = 0.65;
+      reasoning = tc > 5
+        ? 'Mostly early-phase trials or insufficient enrollment to draw conclusions.'
+        : 'Too few trials (' + tc + ') to assess evidence maturity.';
+    }
+
+    return { verdict, confidence, signals, reasoning };
+  }
+
+  function computeAllHukm(ayatNodes) {
+    const alBurhanClusters = (typeof EMBEDDED_AL_BURHAN_DATA !== 'undefined' && EMBEDDED_AL_BURHAN_DATA.clusters)
+      ? EMBEDDED_AL_BURHAN_DATA.clusters : null;
+
+    _hukmVerdicts = new Map();
+    for (const node of ayatNodes) {
+      _hukmVerdicts.set(node.id, computeHukm(node, alBurhanClusters));
+    }
+    return _hukmVerdicts;
+  }
+
+  const HUKM_ICONS = {
+    SUFFICIENT:    { symbol: '\u2713', color: '#22c55e' },
+    GROWING:       { symbol: '\u2191', color: '#3b82f6' },
+    INCONCLUSIVE:  { symbol: '?',      color: '#f59e0b' },
+    CONTRADICTORY: { symbol: '!',      color: '#ef4444' },
+    DESERT:        { symbol: '\u25CB', color: '#9ca3af' }
+  };
 
   // ============================================================
   // NETWORK GRAPH — Force-Directed Layout
@@ -11648,6 +11262,20 @@ body.dark-mode .input-error { background: #451a1a !important; }
     html += ' | ' + node.trialCount + ' in cluster | Enrollment: ' + (node.enrollment > 1000 ? Math.round(node.enrollment/1000) + 'K' : node.enrollment);
     html += '</div>';
 
+    // Hukm verdict banner
+    var hukm = _hukmVerdicts.get(node.id);
+    if (hukm) {
+      var icon = HUKM_ICONS[hukm.verdict] || HUKM_ICONS.INCONCLUSIVE;
+      html += '<div style="margin-bottom:10px;padding:8px 12px;border-radius:6px;background:' + icon.color + '18;border-left:4px solid ' + icon.color + '">';
+      html += '<div style="font-weight:700;color:' + icon.color + ';font-size:0.85rem">Hukm: ' + escapeHtml(hukm.verdict) + '</div>';
+      html += '<div style="font-size:0.78rem;color:var(--text-muted);margin-top:2px">' + escapeHtml(hukm.reasoning) + '</div>';
+      html += '<div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px">';
+      html += 'Volume: ' + hukm.signals.trialVolume + ' | Phase: ' + hukm.signals.phaseMaturity;
+      html += ' | Activity: ' + hukm.signals.recentActivity + ' | Enrollment: ' + hukm.signals.enrollmentMass;
+      if (hukm.signals.outcomeConsistency !== 'unknown') html += ' | Consistency: ' + hukm.signals.outcomeConsistency;
+      html += '</div></div>';
+    }
+
     html += '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:0.82rem">';
     html += '<thead><tr style="background:var(--bg-alt,#f8fafc);text-align:left">';
     html += '<th style="padding:6px 8px;border-bottom:2px solid var(--border)">NCT ID</th>';
@@ -11701,20 +11329,34 @@ body.dark-mode .input-error { background: #451a1a !important; }
       html += '<div style="margin-top:6px;font-size:0.8rem;color:var(--text-muted)">Showing 50 of ' + matchTrials.length + ' trials</div>';
     }
 
-    // Tafsir: Related Signs
+    // Tafsir: Related Signs — grouped by type, colored pills, clickable zoom
     if (_tafsirLinks.length > 0) {
       var relLinks = _tafsirLinks.filter(function(l) { return l.sourceId === node.id || l.targetId === node.id; });
       if (relLinks.length > 0) {
         html += '<div style="margin-top:12px;padding-top:8px;border-top:1px solid var(--border)">';
         html += '<div style="font-weight:600;font-size:0.82rem;margin-bottom:4px">Related Signs (Tafsir)</div>';
+        var typeColors = { drug: '#a78bfa', outcome: '#fbbf24', mechanism: '#2dd4bf' };
+        var typeLabels = { drug: 'Drug Siblings', outcome: 'Outcome Bridges', mechanism: 'Mechanism Overlap' };
+        var grouped = {};
         for (var ri = 0; ri < relLinks.length; ri++) {
           var rl = relLinks[ri];
-          var sibId = rl.sourceId === node.id ? rl.targetId : rl.sourceId;
-          var parts = sibId.split(':');
-          var typeLabel = rl.linkType === 'drug' ? 'Drug' : rl.linkType === 'outcome' ? 'Outcome' : 'Mechanism';
-          html += '<span style="display:inline-block;margin:2px 6px 2px 0;padding:2px 8px;background:var(--surface);border-radius:12px;font-size:0.75rem;cursor:pointer" title="' + escapeHtml(typeLabel) + ': ' + escapeHtml(rl.label || '') + '">';
-          html += escapeHtml(typeLabel) + ': ' + escapeHtml(parts[1] || sibId) + ' (' + escapeHtml(parts[0] || '') + ')';
-          html += '</span>';
+          if (!grouped[rl.linkType]) grouped[rl.linkType] = [];
+          grouped[rl.linkType].push(rl);
+        }
+        var typeOrder = ['drug', 'outcome', 'mechanism'];
+        for (var ti = 0; ti < typeOrder.length; ti++) {
+          var lt = typeOrder[ti];
+          if (!grouped[lt] || grouped[lt].length === 0) continue;
+          html += '<div style="margin-top:4px;font-size:0.75rem;color:var(--text-muted)">' + escapeHtml(typeLabels[lt]) + ':</div>';
+          for (var gi = 0; gi < grouped[lt].length; gi++) {
+            var gl = grouped[lt][gi];
+            var sibId = gl.sourceId === node.id ? gl.targetId : gl.sourceId;
+            var parts = sibId.split(':');
+            var bgColor = typeColors[lt];
+            html += '<span onclick="zoomToAyatNode(\'' + escapeHtml(sibId) + '\')" style="display:inline-block;margin:2px 6px 2px 0;padding:2px 8px;background:' + bgColor + '22;border:1px solid ' + bgColor + ';color:' + bgColor + ';border-radius:12px;font-size:0.75rem;cursor:pointer" title="' + escapeHtml(gl.label || '') + '">';
+            html += escapeHtml(parts[1] || sibId) + ' <span style="opacity:0.7">(' + escapeHtml(parts[0] || '') + ')</span>';
+            html += '</span>';
+          }
         }
         html += '</div>';
       }
@@ -12527,6 +12169,24 @@ body.dark-mode .input-error { background: #451a1a !important; }
           ctx.fillText(phLabels[p], lx + 5, y + r + 27);
           lx += 12;
         }
+      }
+    }
+
+    // Hukm verdict badge (LOD 2+)
+    if (_kitabLayers.verdicts && lod >= 2) {
+      const hukm = _hukmVerdicts.get(node.id);
+      if (hukm) {
+        const icon = HUKM_ICONS[hukm.verdict] || HUKM_ICONS.INCONCLUSIVE;
+        const bx = x - r * 0.65, by = y + r * 0.55;
+        ctx.beginPath();
+        ctx.arc(bx, by, 5, 0, Math.PI * 2);
+        ctx.fillStyle = icon.color;
+        ctx.fill();
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 7px system-ui';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(icon.symbol, bx, by);
       }
     }
   }
@@ -13434,8 +13094,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     return nodes;
   }
 
-  // ===== TRIAL SEQUENTIAL ANALYSIS (TSA) =====
-  // "And if you counted the favor of Allah, you could not enumerate them" — 16:18
+  // ===== UTILITY: Pooled Result Normalization =====
 
   /**
    * Normalize a pooled result to canonical format.
@@ -13469,179 +13128,6 @@ body.dark-mode .input-error { background: #451a1a !important; }
    * @param {object} pooledResult - Output from computeMetaAnalysis or pipeline pooled object
    * @param {object} options - {alpha: 0.05, beta: 0.20, anticipatedEffect: null, cluster: null}
    * @returns {object} {ris, cumulativeZ, boundaries, conclusion, accrued_info, info_fraction}
-   */
-  function computeTSA(studies, pooledResult, options = {}) {
-    pooledResult = _normalizePooled(pooledResult, options.cluster);
-    const alpha = options.alpha ?? 0.05;
-    const beta = options.beta ?? 0.20;
-    const isRatio = pooledResult.isRatio;
-
-    if (!studies || studies.length < 2 || !pooledResult) return null;
-
-    // Sort studies chronologically (handles ISO dates and year-only)
-    // P1-12 fix: year-only fallback uses Date constructor for consistent scale
-    const parseDate = (d) => {
-      if (!d) return new Date(2000, 0, 1).getTime();
-      const s = String(d).replace(/\+\d{2}:\d{2}$/, '');  // Strip TZ suffix for Python <3.11
-      const t = new Date(s).getTime();
-      if (!isNaN(t)) return t;
-      // Year-only fallback: construct actual Date for consistent ordering
-      const year = parseInt(d);
-      return year ? new Date(year, 0, 1).getTime() : new Date(2000, 0, 1).getTime();
-    };
-    const sorted = [...studies].sort((a, b) => parseDate(a.start_date) - parseDate(b.start_date));
-
-    // Anticipated effect: prefer user-specified; warn if defaulting to observed pooled (circular)
-    const anticipatedFromUser = options.anticipatedEffect != null;
-    const anticipated = anticipatedFromUser ? options.anticipatedEffect : pooledResult.pooled;
-    // Guard: anticipated could be 0 or negative if user-supplied (safeLog floors at 1e-10)
-    const logAnticipated = isRatio ? safeLog(anticipated) : anticipated;
-
-    // Z-critical values
-    const zAlpha = normalQuantile(1 - alpha / 2);
-    const zBeta = normalQuantile(1 - beta);
-
-    // Required Information Size (RIS) with heterogeneity adjustment
-    // Ref: Wetterslev et al. (2008), Thorlund et al. (2011)
-    // RIS_adj = RIS_naive * (1 + D^2) where D^2 = I^2 / (1 - I^2)
-    const I2 = pooledResult.I2 ?? 0;
-    const D2 = I2 < 100 ? (I2 / 100) / (1 - I2 / 100) : 10;  // Diversity (capped)
-    const risNaive = logAnticipated !== 0
-      ? Math.pow(zAlpha + zBeta, 2) / Math.pow(logAnticipated, 2)
-      : 1e12;
-    const ris = risNaive * (1 + D2);  // Heterogeneity-adjusted RIS
-
-    // Use pooled tau2 for random-effects cumulative meta-analysis
-    const tau2 = pooledResult.tau2 ?? 0;
-
-    // SE derivation should use study CI level (typically 95%), not TSA alpha
-    const studyCiZ = normalQuantile(0.975);  // Studies report 95% CIs
-
-    // Cumulative meta-analysis (random-effects with estimated tau2)
-    const cumulativeZ = [];
-    let cumW = 0, cumWY = 0;
-
-    for (let i = 0; i < sorted.length; i++) {
-      const s = sorted[i];
-      // P1-9: Guard against null/NaN/undefined effect estimates
-      if (s.effect_estimate == null || !isFinite(s.effect_estimate)) continue;
-      if (s.upper_ci == null || s.lower_ci == null) continue;
-      const yi = isRatio ? safeLog(s.effect_estimate) : s.effect_estimate;
-      if (!isFinite(yi)) continue;  // Guard non-ratio NaN
-      const ciWidth = isRatio
-        ? (safeLog(s.upper_ci) - safeLog(s.lower_ci))
-        : (s.upper_ci - s.lower_ci);
-      const sei = ciWidth / (2 * studyCiZ);  // Use study CI z-value, not TSA alpha
-      const vi = sei * sei;
-      if (vi <= 0 || !isFinite(vi)) continue;
-
-      // Random-effects weight: incorporate tau2 (heterogeneity)
-      const wi = 1 / (vi + tau2);
-      cumW += wi;
-      cumWY += wi * yi;
-
-      const cumMu = cumWY / cumW;
-      const cumSE = 1 / Math.sqrt(cumW);
-      const z = cumMu / cumSE;
-
-      // P1-9: Cap info_fraction at 2.0 to prevent boundary degeneracy
-      const rawIF = ris > 0 && isFinite(ris) ? cumW / ris : null;
-      const cappedIF = rawIF !== null ? Math.min(rawIF, 2.0) : null;
-
-      cumulativeZ.push({
-        study_index: i,
-        k: i + 1,
-        year: parseInt(sorted[i].start_date) || null,
-        cum_effect: isRatio ? Math.exp(cumMu) : cumMu,
-        cum_se: cumSE,
-        z: z,
-        info: cumW,
-        info_fraction: cappedIF,
-      });
-    }
-
-    // P1-8: Direction of anticipated effect determines benefit vs harm
-    const benefitDirection = logAnticipated >= 0 ? 1 : -1;
-
-    // O'Brien-Fleming monitoring boundaries (Lan-DeMets spending function)
-    // Classic O'B-F boundary: c(t) = z_{alpha/2} / sqrt(t)
-    // Equivalent Lan-DeMets alpha spending: a(t) = 2 - 2*Phi(z_{alpha/2} / sqrt(t))
-    // Ref: Lan & DeMets (1983), Biometrika 70(3):659-663
-    const boundaries = cumulativeZ.map(pt => {
-      const t = pt.info_fraction ?? 0;
-      if (t <= 0 || t > 2.0) return { ...pt, upper: Infinity, lower: -Infinity, futility: 0, harm: -Infinity };
-
-      // O'Brien-Fleming boundary at information fraction t
-      const upperBound = zAlpha / Math.sqrt(Math.max(0.01, t));
-      const lowerBound = -upperBound;
-
-      // Futility boundary (O'Brien-Fleming analog for beta-spending)
-      // Continuous: zBeta / sqrt(t), converges to zBeta at t=1
-      const futilityBound = zBeta / Math.sqrt(Math.max(0.01, t));
-
-      // P1-8: Harm boundary — mirror of efficacy boundary in opposite direction
-      // If anticipated benefit is positive z, harm threshold is negative crossing
-      const harmBound = -upperBound;  // Symmetric to efficacy boundary
-
-      return {
-        ...pt,
-        upper: upperBound,
-        lower: lowerBound,
-        futility: futilityBound,
-        harm: harmBound,
-      };
-    });
-
-    // Conclusion — now distinguishes benefit from harm
-    // P1-8: 'firm' = benefit conclusive, 'harmful' = intervention causes harm
-    let conclusion = 'insufficient';  // Default
-    const lastPt = boundaries[boundaries.length - 1];
-    if (lastPt) {
-      const directedZ = lastPt.z * benefitDirection;  // Positive = benefit direction
-
-      if (directedZ >= lastPt.upper) {
-        conclusion = 'firm';  // Crossed efficacy boundary in benefit direction
-      } else if (directedZ <= -lastPt.upper) {
-        conclusion = 'harmful';  // Crossed boundary in harm direction — stop for harm
-      } else if (lastPt.info_fraction >= 1.0 && directedZ >= zAlpha) {
-        conclusion = 'firm';  // Reached RIS AND z exceeds final boundary (benefit)
-      } else if (lastPt.info_fraction >= 1.0 && directedZ <= -zAlpha) {
-        conclusion = 'harmful';  // Reached RIS AND z exceeds final boundary (harm)
-      } else if (lastPt.info_fraction >= 1.0) {
-        conclusion = 'futile';  // Reached RIS but did not cross boundary
-      } else if (directedZ >= 0 && directedZ < lastPt.futility) {
-        conclusion = 'futile';  // Below futility boundary in benefit direction
-      }
-    }
-
-    return {
-      ris,
-      accrued_info: cumW,
-      info_fraction: ris > 0 && isFinite(ris) ? Math.min(cumW / ris, 2.0) : null,
-      cumulative_z: cumulativeZ,
-      boundaries,
-      conclusion,  // 'firm', 'harmful', 'insufficient', or 'futile'
-      benefit_direction: benefitDirection,
-      anticipated_from_observed: !anticipatedFromUser,  // circular reasoning warning
-      alpha,
-      beta,
-      anticipated_effect: anticipated,
-    };
-  }
-
-  // ===== CROSS-CONDITION BORROWING (IJMA — Consensus) =====
-  // "And their affair is [determined by] consultation among themselves" — 42:38
-
-  /**
-   * Empirical Bayes hierarchical model for borrowing strength across conditions.
-   * Groups clusters by drug_class, estimates class-level effect, shrinks sparse conditions.
-   *
-   * Model: theta_j ~ N(mu_class, sigma_class^2 + tau_j^2)
-   * Shrinkage: theta_j_eb = B_j * mu_class + (1 - B_j) * theta_j_obs
-   *   where B_j = sigma_class^2 / (sigma_class^2 + se_j^2 + tau_j^2)
-   *
-   * @param {Array} clusterResults - Al-Burhan pooled results with same effect_type
-   * @returns {object} {class_effect, class_se, condition_effects: [{subcategory, observed, shrunk, B}], borrowing_strength}
    */
   function crossConditionBorrowing(clusterResults) {
     if (!clusterResults || clusterResults.length < 2) return null;
@@ -13749,135 +13235,6 @@ body.dark-mode .input-error { background: #451a1a !important; }
     }
 
     return results;
-  }
-
-  // ===== NETWORK META-ANALYSIS (QIYAS — Analogical Reasoning) =====
-  // "Then take a lesson, O you who have eyes" — 59:2
-
-  /**
-   * Bucher indirect comparison method for simple NMA (Bucher et al., 1997).
-   * Assumes all drug classes share an implicit common comparator (placebo/SOC).
-   * theta_AB = theta_AC - theta_BC;  SE_AB = sqrt(SE_AC^2 + SE_BC^2)
-   *
-   * WARNING: Results are only valid when all clusters share the same comparator arm.
-   * Al-Burhan auto-clusters by condition+effect_type, so comparator homogeneity
-   * depends on the quality of CT.gov data extraction.
-   *
-   * @param {Array} clusterResults - Al-Burhan pooled results (same outcome, same subcategory)
-   * @returns {object} {direct_comparisons, indirect_comparisons, network_graph, comparator_assumption}
-   */
-  function computeNMA(clusterResults) {
-    if (!clusterResults || clusterResults.length < 2) return null;
-
-    // Group by subcategory + outcome + effect_type (same evidence network)
-    const networks = {};
-    for (const r of clusterResults) {
-      if (!r.pooled) continue;
-      const netKey = r.subcategory + '|' + (r.outcome ?? r.outcome_normalized) + '|' + r.effect_type;
-      if (!networks[netKey]) networks[netKey] = [];
-      networks[netKey].push(r);
-    }
-
-    const allResults = {};
-
-    for (const [netKey, clusters] of Object.entries(networks)) {
-      if (clusters.length < 2) continue;
-
-      const isRatio = clusters[0].is_ratio;
-
-      // Build direct comparisons (each cluster = drug_class vs implicit comparator)
-      const direct = clusters.map(c => {
-        const p = c.pooled;
-        const theta = isRatio ? safeLog(p.effect) : p.effect;
-        const se = isRatio
-          ? (safeLog(p.ci_hi) - safeLog(p.ci_lo)) / (2 * normalQuantile(1 - (1 - (p.ci_level ?? 0.95)) / 2))
-          : (p.ci_hi - p.ci_lo) / (2 * normalQuantile(1 - (1 - (p.ci_level ?? 0.95)) / 2));
-        // Guard: se<=0 from zero-width CI → Bucher SE would be 0, z=Infinity
-        if (se <= 0 || !isFinite(se)) return null;
-        return {
-          drug_class: c.drug_class,
-          theta,
-          se,
-          k: p.k ?? c.k,
-          id: c.id,
-        };
-      }).filter(d => d !== null);
-      if (direct.length < 2) continue;  // Need >=2 direct comparisons
-
-      // Compute indirect comparisons (Bucher method: all pairs)
-      const indirect = [];
-      for (let i = 0; i < direct.length; i++) {
-        for (let j = i + 1; j < direct.length; j++) {
-          const a = direct[i], b = direct[j];
-
-          // Indirect: A vs B = A vs placebo - B vs placebo
-          const thetaAB = a.theta - b.theta;
-          const seAB = Math.sqrt(a.se * a.se + b.se * b.se);
-          const zAB = seAB > 0 ? thetaAB / seAB : 0;
-          const pAB = 2 * (1 - normalCDF(Math.abs(zAB)));
-
-          const ciLevel = clusters[0].pooled?.ci_level ?? 0.95;
-          const zCI = normalQuantile(1 - (1 - ciLevel) / 2);
-          const effectAB = isRatio ? Math.exp(thetaAB) : thetaAB;
-          const loAB = isRatio ? Math.exp(thetaAB - zCI * seAB) : thetaAB - zCI * seAB;
-          const hiAB = isRatio ? Math.exp(thetaAB + zCI * seAB) : thetaAB + zCI * seAB;
-
-          indirect.push({
-            comparison: a.drug_class + ' vs ' + b.drug_class,
-            drug_a: a.drug_class,
-            drug_b: b.drug_class,
-            effect: effectAB,
-            ci_lo: loAB,
-            ci_hi: hiAB,
-            p_value: pAB,
-            se: seAB,
-            favors: thetaAB < 0 ? a.drug_class : b.drug_class,
-            k_a: a.k,
-            k_b: b.k,
-            method: 'Bucher',
-          });
-        }
-      }
-
-      // Build network graph (which drugs are connected)
-      const drugSet = new Set(direct.map(d => d.drug_class));
-      const graph = {
-        nodes: [...drugSet].map(d => ({
-          id: d,
-          k: direct.find(x => x.drug_class === d)?.k ?? 0,
-        })),
-        edges: indirect.map(ic => ({
-          source: ic.drug_a,
-          target: ic.drug_b,
-          weight: Math.min(ic.k_a, ic.k_b),
-          effect: ic.effect,
-          significant: ic.p_value < 0.05,
-        })),
-      };
-
-      // Rank drugs by effect magnitude (best first for benefit outcomes)
-      const ranking = direct
-        .map(d => ({
-          drug_class: d.drug_class,
-          effect: isRatio ? Math.exp(d.theta) : d.theta,
-          k: d.k,
-        }))
-        .sort((a, b) => isRatio ? a.effect - b.effect : b.effect - a.effect);  // Lower HR = better for ratios
-
-      allResults[netKey] = {
-        subcategory: clusters[0].subcategory,
-        outcome: clusters[0].outcome ?? clusters[0].outcome_normalized,
-        effect_type: clusters[0].effect_type,
-        n_drugs: drugSet.size,
-        direct_comparisons: direct.length,
-        indirect_comparisons: indirect,
-        ranking,
-        network_graph: graph,
-        comparator_assumption: 'implicit_common',  // All clusters assumed to share same comparator
-      };
-    }
-
-    return allResults;
   }
 
   // ===== GHOST PROTOCOL SENSITIVITY (GHAYB — The Unseen) =====
@@ -14258,6 +13615,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     _lastAyatClusters = clusters;
     _fihrisIndex = buildFihrisIndex(trials, clusters);
     _tafsirLinks = computeTafsirLinks(clusters);
+    computeAllHukm(clusters);
     renderAyatUniverseOnCanvas(canvas, clusters, 'ayat');
   }
 
@@ -14569,6 +13927,25 @@ body.dark-mode .input-error { background: #451a1a !important; }
       ctx.textAlign = 'right';
       const lodLabels = ['Overview', 'Clusters', 'Glyphs', 'Full Detail'];
       ctx.fillText('LOD: ' + lodLabels[lod] + ' (' + st.zoom.toFixed(1) + 'x)', W - 12, 16);
+
+      // Hukm verdict summary (if enabled)
+      if (_kitabLayers.verdicts && _hukmVerdicts.size > 0) {
+        const counts = { SUFFICIENT: 0, GROWING: 0, INCONCLUSIVE: 0, CONTRADICTORY: 0, DESERT: 0 };
+        for (const [, v] of _hukmVerdicts) counts[v.verdict]++;
+        const labels = Object.entries(counts).filter(([, c]) => c > 0);
+        let hx = 10;
+        ctx.font = '9px system-ui';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'top';
+        for (const [verdict, count] of labels) {
+          const icon = HUKM_ICONS[verdict];
+          ctx.fillStyle = icon.color;
+          ctx.fillRect(hx, H - 18, 8, 8);
+          ctx.fillStyle = tc.text;
+          ctx.fillText(verdict[0] + ': ' + count, hx + 10, H - 18);
+          hx += ctx.measureText(verdict[0] + ': ' + count).width + 18;
+        }
+      }
     }
 
     // --- Tooltip ---
