@@ -1171,6 +1171,20 @@ body.dark-mode .input-error { background: #451a1a !important; }
           </label>
           <span style="font-size:0.72rem;color:var(--text-muted)">(Gap score thresholds)</span>
         </div>
+        <div id="kitabSearchRow" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">
+          <div style="position:relative;flex:1;min-width:200px">
+            <input type="text" id="fihrisSearch" placeholder="Search the evidence... (e.g., SGLT2 mortality, empagliflozin)" style="width:100%;padding:6px 32px 6px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.82rem;background:var(--surface);color:var(--text)" oninput="debounceFihrisSearch(this.value)">
+            <span id="fihrisSearchClear" onclick="clearFihrisSearch()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:1rem;color:var(--text-muted);display:none" title="Clear search">&times;</span>
+          </div>
+          <span id="fihrisResultBadge" style="font-size:0.78rem;color:var(--text-muted);white-space:nowrap"></span>
+          <label style="font-size:0.75rem;color:var(--text-muted);display:flex;align-items:center;gap:3px;margin-left:8px">
+            <input type="checkbox" id="kitabCrossRefs" onchange="toggleKitabLayer('crossRefs',this.checked)"> Cross-refs
+          </label>
+          <label style="font-size:0.75rem;color:var(--text-muted);display:flex;align-items:center;gap:3px">
+            <input type="checkbox" id="kitabVerdicts" onchange="toggleKitabLayer('verdicts',this.checked)"> Verdicts
+          </label>
+        </div>
+        <div id="fihrisResultSummary" style="display:none;margin-top:6px;font-size:0.78rem;color:var(--text-muted);padding:4px 8px;background:var(--surface);border-radius:4px"></div>
       </div>
       <div id="universeGrid"></div>
 
@@ -3805,6 +3819,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       if (trials.length > 0) {
         // Cache trials for all 6 views
         universeTrialsCache = trials;
+        _fihrisIndex = buildFihrisIndex(trials, null);
 
         const gapData = await computeAllGapScores(trials, (msg) => {
           if (statusEl) statusEl.textContent = msg;
@@ -10565,6 +10580,226 @@ body.dark-mode .input-error { background: #451a1a !important; }
   }
 
   // ============================================================
+  // KITAB AL-AYAT — Shared Outcome Taxonomy
+  // ============================================================
+  const OUTCOME_TAXONOMY = {
+    mortality:        ['death', 'mortality', 'survival', 'all-cause death', 'cv death', 'cardiovascular death'],
+    mace:             ['mace', 'major adverse cardiovascular', 'composite endpoint', 'cv events'],
+    hospitalization:  ['hospitalization', 'hospital admission', 'readmission', 'hf hospitalization'],
+    bleeding:         ['bleeding', 'hemorrhage', 'major bleeding', 'timi bleeding', 'barc'],
+    stroke:           ['stroke', 'cerebrovascular', 'ischemic stroke', 'tia'],
+    mi:               ['myocardial infarction', 'heart attack', 'stemi', 'nstemi', 'acute coronary'],
+    renal:            ['renal', 'kidney', 'egfr', 'creatinine', 'dialysis', 'ckd progression'],
+    bp:               ['blood pressure', 'systolic', 'diastolic', 'hypertension', 'mmhg'],
+    hr:               ['heart rate', 'ventricular rate', 'rate control'],
+    ef:               ['ejection fraction', 'lvef', 'lv function', 'systolic function'],
+    biomarker:        ['bnp', 'nt-probnp', 'troponin', 'biomarker', 'hs-crp'],
+    qol:              ['quality of life', 'qol', 'sf-36', 'kccq', 'eq-5d', 'patient-reported'],
+    arrhythmia:       ['arrhythmia', 'atrial fibrillation', 'af recurrence', 'sinus rhythm'],
+    thromboembolism:  ['thromboembolism', 'dvt', 'pe', 'vte', 'embolism'],
+    safety:           ['adverse event', 'ae', 'sae', 'discontinuation', 'tolerability', 'side effect']
+  };
+
+  function classifyOutcome(outcomeStr) {
+    if (!outcomeStr) return null;
+    const low = outcomeStr.toLowerCase();
+    for (const [cat, terms] of Object.entries(OUTCOME_TAXONOMY)) {
+      if (terms.some(t => low.includes(t))) return cat;
+    }
+    return null;
+  }
+
+  // Kitab al-Ayat global state
+  let _fihrisIndex = null;
+  let _tafsirLinks = [];
+  let _bayanMatrix = null;
+  let _hukmVerdicts = new Map();
+  let _kitabSearchQuery = '';
+  let _kitabLayers = { crossRefs: false, verdicts: false, voids: false };
+
+  // ============================================================
+  // LAYER 1: FIHRIS (Index) — Tafakkur (guided reflection)
+  // ============================================================
+
+  function buildFihrisIndex(trials, ayatNodes) {
+    const tokens = new Map();
+    const nodeMap = new Map();
+    const trialToNode = new Map();
+
+    if (ayatNodes) {
+      for (const node of ayatNodes) {
+        node._trialIndices = new Set();
+      }
+    }
+
+    for (let i = 0; i < trials.length; i++) {
+      const t = trials[i];
+      const fields = [
+        t.title || '',
+        (t.conditions || []).join(' '),
+        (t.interventions || []).map(iv => typeof iv === 'string' ? iv : (iv.name || '')).join(' '),
+        (t.primaryOutcomes || []).join(' '),
+        t.phase || '',
+        t.nctId || ''
+      ].join(' ');
+
+      const toks = tokenize(fields);
+      for (const tok of toks) {
+        if (!tokens.has(tok)) tokens.set(tok, new Set());
+        tokens.get(tok).add(i);
+      }
+
+      if (ayatNodes) {
+        const sc = t.subcategory || 'general';
+        const ivNames = getTrialInterventionNames(t, { excludeComparators: true, maxItems: 3, fallbackLabel: '' })
+          .map(n => n.slice(0, 30)).filter(n => n.length > 2);
+        const ivKey = ivNames.length > 0 ? ivNames[0] : 'Other';
+        const nodeId = sc + ':' + ivKey;
+        trialToNode.set(t.nctId, nodeId);
+        const matchNode = ayatNodes.find(n => n.id === nodeId);
+        if (matchNode) matchNode._trialIndices.add(i);
+      }
+    }
+
+    if (ayatNodes) {
+      for (const node of ayatNodes) {
+        for (const ti of node._trialIndices) {
+          const t = trials[ti];
+          const fields = [t.title || '', (t.conditions || []).join(' '),
+            (t.interventions || []).map(iv => typeof iv === 'string' ? iv : (iv.name || '')).join(' '),
+            (t.primaryOutcomes || []).join(' ')].join(' ');
+          for (const tok of tokenize(fields)) {
+            if (!nodeMap.has(tok)) nodeMap.set(tok, new Set());
+            nodeMap.get(tok).add(node.id);
+          }
+        }
+      }
+    }
+
+    return { tokens, nodeMap, trialToNode, trialCount: trials.length };
+  }
+
+  function queryFihris(queryString, index, ayatNodes) {
+    if (!index || !queryString || queryString.trim().length < 2) {
+      return { matchedTrialIndices: new Set(), matchedNodeIds: new Set(), matchIntensity: new Map() };
+    }
+    const qTokens = tokenize(queryString);
+    if (qTokens.length === 0) {
+      return { matchedTrialIndices: new Set(), matchedNodeIds: new Set(), matchIntensity: new Map() };
+    }
+
+    let trialSets = qTokens.map(qt => {
+      if (qt.length <= 3) {
+        const merged = new Set();
+        for (const [tok, s] of index.tokens) {
+          if (tok.startsWith(qt)) for (const v of s) merged.add(v);
+        }
+        return merged;
+      }
+      return index.tokens.get(qt) || new Set();
+    });
+
+    let matched = new Set(trialSets[0]);
+    for (let i = 1; i < trialSets.length; i++) {
+      const next = trialSets[i];
+      matched = new Set([...matched].filter(x => next.has(x)));
+    }
+
+    const matchedNodeIds = new Set();
+    const nodeMatchCounts = new Map();
+    for (const ti of matched) {
+      for (const node of (ayatNodes || [])) {
+        if (node._trialIndices && node._trialIndices.has(ti)) {
+          matchedNodeIds.add(node.id);
+          nodeMatchCounts.set(node.id, (nodeMatchCounts.get(node.id) || 0) + 1);
+        }
+      }
+    }
+
+    const matchIntensity = new Map();
+    for (const node of (ayatNodes || [])) {
+      if (nodeMatchCounts.has(node.id)) {
+        matchIntensity.set(node.id, nodeMatchCounts.get(node.id) / Math.max(1, node.trialCount));
+      }
+    }
+
+    return { matchedTrialIndices: matched, matchedNodeIds, matchIntensity };
+  }
+
+  let _fihrisDebounceTimer = null;
+  let _lastFihrisResult = null;
+  let _lastAyatClusters = null;
+
+  function debounceFihrisSearch(val) {
+    clearTimeout(_fihrisDebounceTimer);
+    _fihrisDebounceTimer = setTimeout(() => executeFihrisSearch(val), 300);
+  }
+
+  function executeFihrisSearch(val) {
+    _kitabSearchQuery = (val || '').trim();
+    const clearBtn = document.getElementById('fihrisSearchClear');
+    const badge = document.getElementById('fihrisResultBadge');
+    const summary = document.getElementById('fihrisResultSummary');
+
+    if (_kitabSearchQuery.length < 2) {
+      if (clearBtn) clearBtn.style.display = 'none';
+      if (badge) badge.textContent = '';
+      if (summary) summary.style.display = 'none';
+      _lastFihrisResult = null;
+      if (currentUniverseView === 'ayat' && universeTrialsCache.length > 0) {
+        renderAyatUniverse(universeTrialsCache);
+      }
+      return;
+    }
+
+    if (clearBtn) clearBtn.style.display = 'inline';
+
+    const result = queryFihris(_kitabSearchQuery, _fihrisIndex, _lastAyatClusters);
+    const matchCount = result.matchedTrialIndices.size;
+    const nodeCount = result.matchedNodeIds.size;
+
+    if (badge) badge.textContent = matchCount + ' trials in ' + nodeCount + ' clusters';
+
+    if (summary && _lastAyatClusters) {
+      const subcatCounts = {};
+      for (const nid of result.matchedNodeIds) {
+        const node = _lastAyatClusters.find(n => n.id === nid);
+        if (node) {
+          const sc = node.subcatLabel || node.subcatId;
+          subcatCounts[sc] = (subcatCounts[sc] || 0) + (result.matchIntensity.get(nid) || 0);
+        }
+      }
+      const parts = Object.entries(subcatCounts)
+        .sort((a, b) => b[1] - a[1])
+        .map(([k, v]) => k + ': ' + Math.round(v * 100) + '%');
+      if (parts.length > 0) {
+        summary.textContent = parts.join(' | ');
+        summary.style.display = 'block';
+      } else {
+        summary.style.display = 'none';
+      }
+    }
+
+    _lastFihrisResult = result;
+    if (currentUniverseView === 'ayat' && universeTrialsCache.length > 0) {
+      renderAyatUniverse(universeTrialsCache);
+    }
+  }
+
+  function clearFihrisSearch() {
+    const input = document.getElementById('fihrisSearch');
+    if (input) input.value = '';
+    executeFihrisSearch('');
+  }
+
+  function toggleKitabLayer(layer, enabled) {
+    _kitabLayers[layer] = enabled;
+    if (currentUniverseView === 'ayat' && universeTrialsCache.length > 0) {
+      renderAyatUniverse(universeTrialsCache);
+    }
+  }
+
+  // ============================================================
   // NETWORK GRAPH — Force-Directed Layout
   // ============================================================
   let networkNodes = [];
@@ -13676,6 +13911,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
     if (!canvas) return;
     const clusters = buildAyatClusters(trials);
     if (clusters.length === 0) return;
+    _lastAyatClusters = clusters;
+    _fihrisIndex = buildFihrisIndex(universeTrialsCache, clusters);
     renderAyatUniverseOnCanvas(canvas, clusters, 'ayat');
   }
 
@@ -13855,9 +14092,26 @@ body.dark-mode .input-error { background: #451a1a !important; }
       // Layer 2: Connections (silat)
       renderAyatEdges(ctx, edges, clusters, lod);
 
-      // Layer 3: Nodes (ayat)
+      // Layer 3: Nodes (ayat) — with Fihris search highlighting
+      const hasSearch = _kitabSearchQuery.length >= 2 && _lastFihrisResult;
       for (const node of clusters) {
-        renderAyatGlyph(ctx, node, lod);
+        if (hasSearch) {
+          const intensity = _lastFihrisResult.matchIntensity.get(node.id);
+          if (intensity != null) {
+            renderAyatGlyph(ctx, node, lod);
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, node.r + 4, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(251,191,36,' + Math.min(1, 0.4 + intensity * 0.6) + ')';
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+          } else {
+            ctx.globalAlpha = 0.15;
+            renderAyatGlyph(ctx, node, lod);
+            ctx.globalAlpha = 1;
+          }
+        } else {
+          renderAyatGlyph(ctx, node, lod);
+        }
       }
 
       // Layer 4: Subcategory orbit labels
