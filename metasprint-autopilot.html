@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MetaSprint Autopilot — Zero-Install Systematic Review and Meta-Analysis Platform</title>
+<title>MetaSprint DTA Autopilot — Cardiovascular Diagnostic Test Accuracy Review Platform</title>
 <style>
 :root {
   --primary: #2563eb;
@@ -891,15 +891,15 @@ body.dark-mode .input-error { background: #451a1a !important; }
   <!-- Onboarding Modal (shown on first run) -->
   <div id="onboardOverlay" class="onboard-overlay" style="display:none" role="dialog" aria-modal="true" aria-labelledby="onboardTitle">
     <div class="onboard-modal">
-      <h2 id="onboardTitle">Welcome to MetaSprint Autopilot</h2>
-      <p>This tool guides you through a complete systematic review and meta-analysis in a structured <strong>40-day sprint</strong>.</p>
+      <h2 id="onboardTitle">Welcome to MetaSprint DTA Autopilot</h2>
+      <p>This tool guides you through a complete <strong>Diagnostic Test Accuracy (DTA)</strong> systematic review in a structured <strong>40-day sprint</strong>.</p>
       <ol>
-        <li><strong>Discover</strong> -- Explore the RCT landscape and find a meta-analysis gap</li>
-        <li><strong>Protocol</strong> -- Define your PICO and register on PROSPERO</li>
-        <li><strong>Search</strong> -- Search cardiology RCT sources (PubMed, OpenAlex, CT.gov, AACT)</li>
+        <li><strong>Discover</strong> -- Explore the cardiovascular DTA landscape and find review gaps</li>
+        <li><strong>Protocol</strong> -- Define your PIRD (Population, Index Test, Reference Standard, Diagnosis) and register on PROSPERO</li>
+        <li><strong>Search</strong> -- Search DTA study sources (PubMed, OpenAlex, CT.gov, AACT)</li>
         <li><strong>Screen</strong> -- Screen titles/abstracts with keyboard shortcuts (I=Include, E=Exclude, M=Maybe)</li>
-        <li><strong>Extract</strong> -- Enter effect sizes, confidence intervals, and risk of bias</li>
-        <li><strong>Analyze</strong> -- Run random-effects meta-analysis with forest and funnel plots</li>
+        <li><strong>Extract</strong> -- Enter TP/FP/FN/TN counts and QUADAS-2 quality assessment</li>
+        <li><strong>Analyze</strong> -- Run bivariate GLMM / HSROC meta-analysis with SROC curves and forest plots</li>
         <li><strong>Write</strong> -- Auto-generate Methods and Results sections</li>
       </ol>
       <p>The <strong>Dashboard</strong> tracks your progress across 5 quality gates (Definition of Done). Use the <strong>Checkpoints</strong> tab to sign off each gate.</p>
@@ -938,37 +938,37 @@ body.dark-mode .input-error { background: #451a1a !important; }
       <p style="font-size:0.82rem">Follow tabs left to right: Discover -> Protocol -> Search -> Screen -> Extract -> Analyze -> Write. The Dashboard and Checkpoints track your progress.</p>
     </section>
     <section>
-      <h4 style="font-size:0.85rem;margin-bottom:6px">Effect Types</h4>
+      <h4 style="font-size:0.85rem;margin-bottom:6px">DTA Measures</h4>
       <dl>
-        <dt>OR (Odds Ratio)</dt><dd>Binary outcomes, case-control or cross-sectional</dd>
-        <dt>RR (Risk Ratio)</dt><dd>Binary outcomes, cohort or RCT</dd>
-        <dt>HR (Hazard Ratio)</dt><dd>Time-to-event outcomes</dd>
-        <dt>MD (Mean Difference)</dt><dd>Continuous outcomes, same measurement scale</dd>
-        <dt>SMD (Standardized Mean Difference)</dt><dd>Continuous outcomes, different scales</dd>
-        <dt>RD (Risk Difference)</dt><dd>Absolute difference in binary outcomes</dd>
+        <dt>Sensitivity</dt><dd>Proportion of true positives correctly identified (TP / (TP + FN))</dd>
+        <dt>Specificity</dt><dd>Proportion of true negatives correctly identified (TN / (TN + FP))</dd>
+        <dt>PLR (Positive Likelihood Ratio)</dt><dd>Sens / (1 - Spec). PLR &gt; 10 is strong rule-in</dd>
+        <dt>NLR (Negative Likelihood Ratio)</dt><dd>(1 - Sens) / Spec. NLR &lt; 0.1 is strong rule-out</dd>
+        <dt>DOR (Diagnostic Odds Ratio)</dt><dd>(TP * TN) / (FP * FN). Summary accuracy on log scale</dd>
+        <dt>AUC (Area Under SROC Curve)</dt><dd>Overall discriminatory ability. AUC &gt; 0.9 = excellent</dd>
       </dl>
     </section>
     <section>
       <h4 style="font-size:0.85rem;margin-bottom:6px">Analysis Interpretation</h4>
       <dl>
-        <dt>I-squared</dt><dd>&lt;25% Low, 25-50% Moderate, 50-75% Substantial, &gt;75% Considerable heterogeneity</dd>
-        <dt>Prediction Interval</dt><dd>Range where the true effect of a future study is expected to fall</dd>
-        <dt>Egger's / Peters' test</dt><dd>Funnel asymmetry test: Egger's for continuous (MD/SMD), Peters' for binary (OR/RR/HR). p &lt; 0.10 suggests asymmetry. Requires k&ge;10 and tau&sup2;&lt;0.1</dd>
-        <dt>HKSJ</dt><dd>Knapp-Hartung modification: uses t-distribution for CIs (wider, more honest for small k)</dd>
-        <dt>REML</dt><dd>Restricted Maximum Likelihood: Cochrane's default tau-squared estimator since Jan 2025</dd>
-        <dt>DL vs REML</dt><dd>Pooled estimates use DerSimonian-Laird weights with HKSJ-corrected CIs (primary). REML &tau;&sup2; is computed separately and displayed for comparison. When DL &tau;&sup2; and REML &tau;&sup2; diverge substantially (>20%), interpret heterogeneity cautiously</dd>
+        <dt>Bivariate GLMM</dt><dd>Reitsma et al. 2005: jointly models logit(Sens) and logit(Spec) with random effects. Primary model for DTA meta-analysis</dd>
+        <dt>HSROC</dt><dd>Rutter-Gatsonis 2001: Hierarchical SROC model. Equivalent to bivariate under certain conditions. Models accuracy (Lambda) and threshold (Theta)</dd>
+        <dt>I-squared</dt><dd>&lt;25% Low, 25-50% Moderate, 50-75% Substantial, &gt;75% Considerable heterogeneity. Computed separately for Sens and Spec</dd>
+        <dt>Threshold Effect</dt><dd>Spearman correlation between Sens and 1-Spec. Significant positive correlation indicates threshold effect (studies use different cutoffs)</dd>
+        <dt>Deeks' Test</dt><dd>DTA-specific funnel asymmetry test. Regresses logDOR on 1/sqrt(ESS). p &lt; 0.10 suggests publication bias. Requires k&ge;10</dd>
+        <dt>HKSJ</dt><dd>Knapp-Hartung modification: uses t-distribution for CIs when k&lt;30 (wider, more honest for small meta-analyses)</dd>
+        <dt>Prediction Region</dt><dd>Bivariate prediction ellipse in ROC space using chi-squared quantile (df=2). Shows where a future study's Sens/Spec is expected to fall</dd>
       </dl>
     </section>
     <section>
       <h4 style="font-size:0.85rem;margin-bottom:6px">Al-Burhan Analysis Engines</h4>
       <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:4px">Engine names use Arabic evidence terminology (Al-Burhan = "the proof")</p>
       <dl>
-        <dt>TSA (Trial Sequential Analysis)</dt><dd>Sequential monitoring with O'Brien-Fleming boundaries. Determines if evidence is "firm" (benefit), "harmful" (stop for harm), "insufficient", or "futile"</dd>
-        <dt>IJMA ("consensus") &mdash; Cross-Condition Borrowing</dt><dd>Empirical Bayes hierarchical shrinkage across drug classes for the same outcome</dd>
-        <dt>QIYAS ("analogical reasoning") &mdash; NMA/Indirect Comparison</dt><dd>Bucher method for indirect comparisons via common comparator</dd>
-        <dt>GHAYB ("the unseen") &mdash; Ghost Protocol Sensitivity</dt><dd>Publication bias tipping point analysis using registered-but-unpublished trials</dd>
-        <dt>TAWATUR ("continuous transmission") &mdash; Evidence Velocity</dt><dd>Cumulative meta-analysis trajectory showing how evidence evolves over time</dd>
-        <dt>HIJRA ("migration") &mdash; Transportability</dt><dd>Population representativeness scoring against real-world epidemiology baselines</dd>
+        <dt>Bivariate GLMM</dt><dd>Joint model for logit(Sens) and logit(Spec) with correlated random effects (Reitsma 2005). Primary analysis method</dd>
+        <dt>HSROC</dt><dd>Hierarchical Summary ROC model (Rutter-Gatsonis 2001). Models accuracy and threshold variation across studies</dd>
+        <dt>GHAYB ("the unseen") &mdash; Ghost Protocol Sensitivity</dt><dd>Publication bias tipping point analysis using registered-but-unpublished DTA studies</dd>
+        <dt>TAWATUR ("continuous transmission") &mdash; Evidence Velocity</dt><dd>Cumulative meta-analysis trajectory showing how diagnostic accuracy evolves over time</dd>
+        <dt>HIJRA ("migration") &mdash; Transportability</dt><dd>Population representativeness scoring — do DTA studies represent real clinical populations?</dd>
       </dl>
     </section>
     <section>
@@ -988,7 +988,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
   </div>
 
   <header class="app-header">
-    <h1>MetaSprint <span style="color:var(--text-muted);font-weight:400;font-size:0.85rem">Cardiovascular</span></h1>
+    <h1>MetaSprint DTA <span style="color:var(--text-muted);font-weight:400;font-size:0.85rem">Cardio Diagnostics</span></h1>
     <div class="header-actions">
       <select id="projectSelect" aria-label="Select project" onchange="switchProject(this.value)"></select>
       <button onclick="createProject()">New Project</button>
@@ -1087,31 +1087,32 @@ body.dark-mode .input-error { background: #451a1a !important; }
     <section id="phase-discover" class="phase" role="tabpanel" aria-labelledby="tab-discover" tabindex="-1">
       <div id="opportunityBanner" class="opportunity-banner" style="display:none"></div>
       <div style="background:var(--bg-alt);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;margin-bottom:12px;font-size:0.78rem;color:var(--text-muted)">
-        <strong>Scoping phase</strong> (PRISMA 2020): Explore the RCT landscape to identify gaps and formulate your review question.
-        Define your PICO in the <strong>Protocol</strong> tab before proceeding to formal Search. Discovery findings should inform — not determine — your research question.
+        <strong>Scoping phase</strong> (PRISMA-DTA): Explore the cardiovascular DTA landscape to identify gaps and formulate your review question.
+        Define your PIRD in the <strong>Protocol</strong> tab before proceeding to formal Search. Discovery findings should inform — not determine — your research question.
       </div>
       <div id="subcatPicker" style="margin-bottom:16px">
-        <label style="font-weight:600;font-size:0.95rem;margin-bottom:8px;display:block">Choose a cardiovascular area to explore</label>
+        <label style="font-weight:600;font-size:0.95rem;margin-bottom:8px;display:block">Choose a cardiovascular diagnostic area to explore</label>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <select id="subcatSelect" style="padding:8px 14px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.9rem;background:var(--surface);min-width:220px">
-            <option value="">-- Select subspecialty --</option>
-            <option value="hf">Heart Failure</option>
-            <option value="acs">ACS / Coronary / PCI</option>
-            <option value="af">Atrial Fibrillation</option>
-            <option value="htn">Hypertension</option>
-            <option value="valve">Valve Disease / TAVI</option>
-            <option value="pad">PAD / Vascular</option>
-            <option value="lipids">Lipids / CV Prevention</option>
-            <option value="rhythm">Heart Rhythm / Devices</option>
-            <option value="ph">Pulmonary Hypertension</option>
-            <option value="all">All Cardiovascular (slower)</option>
+            <option value="">-- Select diagnostic area --</option>
+            <option value="acs_biomarker">ACS Biomarkers (Troponin / CK-MB)</option>
+            <option value="hf_biomarker">HF Biomarkers (BNP / NT-proBNP)</option>
+            <option value="echo">Echocardiography / TTE / TEE</option>
+            <option value="ct_angio">CT Angiography / CCTA</option>
+            <option value="cmr">Cardiac MRI (CMR)</option>
+            <option value="stress_test">Stress Testing (Exercise / Pharmacologic)</option>
+            <option value="ecg">ECG / Holter / Loop Recorder</option>
+            <option value="nuclear">Nuclear Imaging (SPECT / PET)</option>
+            <option value="vascular_us">Vascular Ultrasound / ABI</option>
+            <option value="coag">Coagulation Tests (D-dimer / INR)</option>
+            <option value="all">All Cardiovascular DTA (slower)</option>
           </select>
           <button class="btn-success" onclick="loadSelectedUniverse()">Load Trials</button>
           <span class="text-muted" style="font-size:0.8rem" id="pickerHint">Pick a subspecialty for fast loading (~10-30 sec)</span>
         </div>
       </div>
       <div class="universe-panel" id="universePanel" style="display:none">
-        <div class="universe-title">Cardiovascular RCT Universe</div>
+        <div class="universe-title">Cardiovascular DTA Universe</div>
         <div class="universe-subtitle" id="universeStatus">Loading...</div>
         <div id="universeOnboardHint" style="display:none;margin-bottom:8px;padding:6px 12px;background:var(--bg-alt);border:1px solid var(--border);border-radius:6px;font-size:0.78rem;color:var(--text-muted)">
           <strong>Start here:</strong> Ayat Universe (overview) &rarr; Treemap (volume) &rarr; Gap Scatter (find gaps) &rarr; Al-Burhan (auto-meta-analysis). Hover any tab for details.
@@ -1174,7 +1175,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <div id="kitabSearchRow" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">
           <div style="position:relative;flex:1;min-width:200px">
             <input type="text" id="fihrisSearch" placeholder="Search the evidence... (e.g., SGLT2 mortality, empagliflozin)" style="width:100%;padding:6px 32px 6px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.82rem;background:var(--surface);color:var(--text)" oninput="debounceFihrisSearch(this.value)">
-            <span id="fihrisSearchClear" onclick="clearFihrisSearch()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:1rem;color:var(--text-muted);display:none" title="Clear search">&times;</span>
+            <span id="fihrisSearchClear" role="button" tabindex="0" onclick="clearFihrisSearch()" onkeydown="if(event.key==='Enter'||event.key===' ')clearFihrisSearch()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:1rem;color:var(--text-muted);display:none" title="Clear search">&times;</span>
           </div>
           <span id="fihrisResultBadge" style="font-size:0.78rem;color:var(--text-muted);white-space:nowrap"></span>
           <label style="font-size:0.75rem;color:var(--text-muted);display:flex;align-items:center;gap:3px;margin-left:8px">
@@ -1206,17 +1207,17 @@ body.dark-mode .input-error { background: #451a1a !important; }
 
     <!-- Phase 2: Protocol -->
     <section id="phase-protocol" class="phase" role="tabpanel" aria-labelledby="tab-protocol" tabindex="-1">
-      <h2>PROSPERO Protocol</h2>
-      <p style="margin-bottom:12px;font-size:0.85rem;color:var(--text-muted)">Define your review question using PICO (Population, Intervention, Comparator, Outcomes). The generated protocol can be submitted to <a href="https://www.crd.york.ac.uk/prospero/" target="_blank" rel="noopener">PROSPERO</a>.</p>
+      <h2>PROSPERO Protocol (DTA)</h2>
+      <p style="margin-bottom:12px;font-size:0.85rem;color:var(--text-muted)">Define your review question using PIRD (Population, Index test, Reference standard, Diagnosis/target condition). The generated protocol can be submitted to <a href="https://www.crd.york.ac.uk/prospero/" target="_blank" rel="noopener">PROSPERO</a>.</p>
       <div class="protocol-form">
         <div class="form-group"><label for="protTitle">Review Title:</label>
-          <input id="protTitle" maxlength="500" placeholder="e.g., Efficacy of X vs Y in patients with Z: a systematic review"></div>
-        <div class="form-group"><label for="protP">Population:</label><input id="protP" maxlength="500" placeholder="e.g., adults with type 2 diabetes"></div>
-        <div class="form-group"><label for="protI">Intervention:</label><input id="protI" maxlength="500" placeholder="e.g., SGLT2 inhibitors"></div>
-        <div class="form-group"><label for="protC">Comparator:</label><input id="protC" maxlength="500" placeholder="e.g., placebo or standard care"></div>
-        <div class="form-group"><label for="protO">Outcomes:</label><input id="protO" maxlength="500" placeholder="e.g., HbA1c reduction, cardiovascular events"></div>
+          <input id="protTitle" maxlength="500" placeholder="e.g., Diagnostic accuracy of high-sensitivity troponin for acute MI: a systematic review"></div>
+        <div class="form-group"><label for="protP">Population:</label><input id="protP" maxlength="500" placeholder="e.g., adults presenting to ED with suspected ACS"></div>
+        <div class="form-group"><label for="protI">Index Test:</label><input id="protI" maxlength="500" placeholder="e.g., high-sensitivity cardiac troponin I or T"></div>
+        <div class="form-group"><label for="protC">Reference Standard:</label><input id="protC" maxlength="500" placeholder="e.g., coronary angiography, adjudicated diagnosis"></div>
+        <div class="form-group"><label for="protO">Target Condition:</label><input id="protO" maxlength="500" placeholder="e.g., acute myocardial infarction (Type 1 MI)"></div>
         <div class="form-group"><label for="protStudyType">Study Types:</label>
-          <select id="protStudyType"><option>RCTs only</option><option>RCTs and observational</option></select></div>
+          <select id="protStudyType"><option>Cross-sectional DTA studies</option><option>Cohort DTA studies</option><option>Case-control DTA studies</option><option>All DTA study designs</option></select></div>
         <div style="display:flex;gap:8px">
           <button onclick="generateProtocol()">Generate Protocol</button>
         </div>
@@ -1228,10 +1229,10 @@ body.dark-mode .input-error { background: #451a1a !important; }
     <section id="phase-search" class="phase" role="tabpanel" aria-labelledby="tab-search" tabindex="-1">
       <h2>Search Strategy</h2>
       <div class="pico-builder">
-        <div class="pico-row"><label for="picoP">Population (P):</label><input id="picoP" maxlength="500" oninput="_debouncedSavePICO()" onchange="savePICO()"></div>
-        <div class="pico-row"><label for="picoI">Intervention (I):</label><input id="picoI" maxlength="500" oninput="_debouncedSavePICO()" onchange="savePICO()"></div>
-        <div class="pico-row"><label for="picoC">Comparator (C):</label><input id="picoC" maxlength="500" oninput="_debouncedSavePICO()" onchange="savePICO()"></div>
-        <div class="pico-row"><label for="picoO">Outcomes (O):</label><input id="picoO" maxlength="500" oninput="_debouncedSavePICO()" onchange="savePICO()"></div>
+        <div class="pico-row"><label for="picoP">Population (P):</label><input id="picoP" maxlength="500" placeholder="e.g., adults with suspected ACS" oninput="_debouncedSavePICO()" onchange="savePICO()"></div>
+        <div class="pico-row"><label for="picoI">Index Test (I):</label><input id="picoI" maxlength="500" placeholder="e.g., high-sensitivity troponin" oninput="_debouncedSavePICO()" onchange="savePICO()"></div>
+        <div class="pico-row"><label for="picoC">Reference Standard (R):</label><input id="picoC" maxlength="500" placeholder="e.g., coronary angiography" oninput="_debouncedSavePICO()" onchange="savePICO()"></div>
+        <div class="pico-row"><label for="picoO">Target Condition (D):</label><input id="picoO" maxlength="500" placeholder="e.g., acute myocardial infarction" oninput="_debouncedSavePICO()" onchange="savePICO()"></div>
       </div>
       <div class="search-actions">
         <button onclick="searchPubMed()">PubMed</button>
@@ -1242,7 +1243,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <button class="btn-danger btn-sm" id="cancelSearchBtn" onclick="cancelActiveFlow()" style="display:none">Cancel</button>
       </div>
       <p class="text-muted" style="font-size:0.75rem;margin-top:4px">
-        Cardio-only sources: PubMed, OpenAlex, CT.gov + optional AACT PostgreSQL (run <code>python aact_proxy.py</code> for local AACT)
+        Cardio DTA sources: PubMed, OpenAlex, CT.gov + optional AACT PostgreSQL (run <code>python aact_proxy.py</code> for local AACT). Queries auto-include diagnostic accuracy filters.
       </p>
       <div id="searchStatus"></div>
       <div id="searchResults"></div>
@@ -1347,36 +1348,43 @@ body.dark-mode .input-error { background: #451a1a !important; }
       </div>
     </section>
 
-    <!-- Phase 5: Extract -->
+    <!-- Phase 5: Extract (DTA 2x2) -->
     <section id="phase-extract" class="phase" role="tabpanel" aria-labelledby="tab-extract" tabindex="-1">
       <div class="extract-header">
-        <h2>Data Extraction</h2>
+        <h2>DTA Data Extraction</h2>
         <button onclick="addStudyRow()">Add Study</button>
         <button class="btn-outline btn-sm" onclick="undo()" title="Undo (Ctrl+Z)">Undo</button>
         <button class="btn-outline btn-sm" onclick="redo()" title="Redo (Ctrl+Y)">Redo</button>
         <button onclick="autoPopulateFromIncluded()">Import from Screening</button>
-        <button class="btn-outline" onclick="exportToMetaSprint('pairwise')">Export Pairwise CSV</button>
-        <button class="btn-outline" onclick="exportToMetaSprint('nma')">Export NMA JSON</button>
         <button class="btn-outline" onclick="exportStudiesCSV()">Export CSV</button>
-        <button class="btn-info" onclick="showExtractorModal()">Extract from PDF</button>
+        <button class="btn-outline" onclick="importStudiesCSV()">Import CSV</button>
+        <button class="btn-info" onclick="loadDemoData()">Load Demo Data</button>
       </div>
       <div style="margin-bottom:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-        <label style="font-size:0.82rem;color:var(--text-muted)">Input mode:</label>
-        <label style="font-size:0.82rem;cursor:pointer"><input type="radio" name="inputMode" value="effect" checked onchange="setInputMode('effect')"> Pre-computed effect + CI</label>
-        <label style="font-size:0.82rem;cursor:pointer"><input type="radio" name="inputMode" value="2x2" onchange="setInputMode('2x2')"> Raw 2x2 counts (events/totals)</label>
+        <label style="font-size:0.82rem;color:var(--text-muted)">Continuity correction:</label>
+        <select id="continuityCorrection" style="padding:4px 8px;font-size:0.82rem;border:1px solid var(--border);border-radius:var(--radius)">
+          <option value="0.5" selected>0.5 (standard)</option>
+          <option value="0.25">0.25</option>
+          <option value="0.1">0.1</option>
+          <option value="reciprocal">Reciprocal (1/total)</option>
+          <option value="exclude">Exclude zero-cell studies</option>
+        </select>
         <label style="font-size:0.82rem;cursor:pointer"><input type="checkbox" id="publishableGateToggle" checked> Strict publishability gates</label>
-        <span id="inputModeHelp" style="font-size:0.78rem;color:var(--text-muted)">Enter the effect size and 95% CI from each study. For ratio measures (OR, RR, HR), values must be positive.</span>
+        <span id="inputModeHelp" style="font-size:0.78rem;color:var(--text-muted)">Enter TP, FP, FN, TN counts from each study's 2x2 diagnostic table. Zero-cell studies get continuity correction.</span>
       </div>
       <div class="extract-table-wrap" style="overflow-x:auto">
       <table class="extract-table" id="extractTable">
-        <caption class="sr-only">Data extraction table for included studies</caption>
+        <caption class="sr-only">DTA data extraction table — 2x2 diagnostic accuracy counts</caption>
         <thead><tr id="extractHead">
-          <th scope="col">Study ID</th><th scope="col">Trial ID *</th><th scope="col">NCT</th><th scope="col">PMID</th><th scope="col">DOI</th>
-          <th scope="col">Outcome *</th><th scope="col">Timepoint *</th><th scope="col">Population</th><th scope="col">Verify</th><th scope="col">N Total</th><th scope="col">N Int</th><th scope="col">N Ctrl</th>
-          <th scope="col" title="Point estimate of the effect size (e.g., odds ratio, mean difference). Required for analysis.">Effect *</th>
-          <th scope="col" title="Lower bound of the confidence interval. Required for analysis.">Lower CI *</th>
-          <th scope="col" title="Upper bound of the confidence interval. Required for analysis.">Upper CI *</th>
-          <th scope="col" title="Type of effect measure">Type</th>
+          <th scope="col">Study ID</th><th scope="col">Author/Year *</th><th scope="col">PMID</th><th scope="col">DOI</th>
+          <th scope="col">Index Test</th><th scope="col">Threshold</th><th scope="col">Population</th>
+          <th scope="col" title="True Positives: diseased patients correctly identified">TP *</th>
+          <th scope="col" title="False Positives: non-diseased incorrectly classified positive">FP *</th>
+          <th scope="col" title="False Negatives: diseased patients missed">FN *</th>
+          <th scope="col" title="True Negatives: non-diseased correctly classified negative">TN *</th>
+          <th scope="col" title="Sensitivity (auto-calculated)">Sens</th>
+          <th scope="col" title="Specificity (auto-calculated)">Spec</th>
+          <th scope="col" title="Covariate for meta-regression">Covariate</th>
           <th scope="col" title="Subgroup label for stratified analysis">Subgroup</th>
           <th scope="col">Notes</th><th scope="col"></th>
         </tr></thead>
@@ -1385,15 +1393,15 @@ body.dark-mode .input-error { background: #451a1a !important; }
       </div>
       <div id="extractValidation" style="margin-top:6px" role="alert" aria-live="assertive"></div>
       <div id="extractVerification" style="margin-top:8px"></div>
-      <!-- RoB 2 Risk of Bias Assessment -->
+      <!-- QUADAS-2 Quality Assessment -->
       <div style="margin-top:20px;border-top:2px solid var(--border);padding-top:16px">
         <h3 style="cursor:pointer;display:flex;align-items:center;gap:8px" tabindex="0" role="button" onclick="toggleRoBSection()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleRoBSection()}">
-          Risk of Bias (RoB 2) <span id="robArrow" style="font-size:0.8rem">&#9660;</span>
+          Quality Assessment (QUADAS-2) <span id="robArrow" style="font-size:0.8rem">&#9660;</span>
         </h3>
         <div id="robBody" style="display:none;margin-top:10px">
           <p class="text-muted" style="margin-bottom:10px">
-            Assess 5 bias domains per study: Randomization, Deviations, Missing Data, Measurement, Selection.
-            Results auto-feed into GRADE assessment.
+            Assess 4 bias domains per study: Patient Selection, Index Test, Reference Standard, Flow &amp; Timing.
+            Each domain rated Low / High / Unclear risk. Results auto-feed into GRADE-DTA certainty assessment.
           </p>
           <div id="robSummaryTable"></div>
           <div class="rob-entry-panel" id="robEntryPanel">
@@ -1403,19 +1411,19 @@ body.dark-mode .input-error { background: #451a1a !important; }
           </div>
           <div class="rob-grade-banner" id="robGradeBanner" style="display:none"></div>
           <div style="display:flex;gap:8px;margin-top:10px">
-            <button class="btn-warning" onclick="applyProvisionalRoBAssessments()">Auto-Fill Provisional RoB</button>
-            <button class="btn-outline" onclick="clearRoBAssessments()">Clear RoB</button>
-            <button class="btn-outline" onclick="exportRoBSummary()">Copy RoB Summary</button>
+            <button class="btn-warning" onclick="applyProvisionalRoBAssessments()">Auto-Fill Provisional QUADAS-2</button>
+            <button class="btn-outline" onclick="clearRoBAssessments()">Clear QUADAS-2</button>
+            <button class="btn-outline" onclick="exportRoBSummary()">Copy QUADAS-2 Summary</button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Phase 6: Analyze -->
+    <!-- Phase 6: Analyze (DTA) -->
     <section id="phase-analyze" class="phase" role="tabpanel" aria-labelledby="tab-analyze" tabindex="-1">
-      <h2>Analysis Dashboard</h2>
+      <h2>DTA Analysis Dashboard</h2>
       <div style="margin-bottom:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-        <button class="btn-success" onclick="runAnalysis()">Run Meta-Analysis</button>
+        <button class="btn-success" onclick="runAnalysis()">Run DTA Meta-Analysis</button>
         <button class="btn-outline" onclick="handoffToTruthCert()">Send to TruthCert</button>
         <button onclick="runLOOAnalysis()">Leave-One-Out</button>
         <label for="confLevelSelect" style="font-size:0.8rem;color:var(--text-muted)">Confidence:</label>
@@ -1424,36 +1432,43 @@ body.dark-mode .input-error { background: #451a1a !important; }
           <option value="0.95" selected>95%</option>
           <option value="0.99">99%</option>
         </select>
-        <label for="methodSelect" style="font-size:0.8rem;color:var(--text-muted)">Method:</label>
+        <label for="methodSelect" style="font-size:0.8rem;color:var(--text-muted)">Model:</label>
         <select id="methodSelect" style="padding:4px 8px;font-size:0.82rem;border:1px solid var(--border);border-radius:var(--radius)">
-          <option value="DL" selected>DL (DerSimonian-Laird)</option>
-          <option value="DL-HKSJ">DL + HKSJ adjustment</option>
-          <option value="FE">Fixed Effect (IV)</option>
+          <option value="bivariate" selected>Bivariate GLMM (Reitsma 2005)</option>
+          <option value="hsroc">HSROC (Rutter-Gatsonis 2001)</option>
+          <option value="univariate">Univariate RE (DL + HKSJ)</option>
         </select>
+        <label style="font-size:0.82rem;cursor:pointer"><input type="checkbox" id="showSROCToggle" checked> SROC Curve</label>
+        <label style="font-size:0.82rem;cursor:pointer"><input type="checkbox" id="showPredRegionToggle" checked> Prediction Region</label>
+        <label style="font-size:0.82rem;cursor:pointer"><input type="checkbox" id="showConfRegionToggle"> Confidence Region</label>
       </div>
       <div id="analysisWarnings" style="margin-bottom:8px"></div>
       <div class="analysis-summary" id="analysisSummary"></div>
       <div class="analysis-plots">
-        <div id="forestPlotContainer"></div>
+        <div id="srocPlotContainer"></div>
+        <div id="forestSensContainer"></div>
+        <div id="forestSpecContainer"></div>
         <div id="funnelPlotContainer"></div>
       </div>
       <div id="analysisExport" style="margin-top:12px;display:none">
-        <button class="btn-outline" onclick="exportPlotSVG('forestPlotContainer','forest-plot.svg')">Export Forest SVG</button>
-        <button class="btn-outline" onclick="exportPlotSVG('funnelPlotContainer','funnel-plot.svg')">Export Funnel SVG</button>
+        <button class="btn-outline" onclick="exportPlotSVG('srocPlotContainer','sroc-plot.svg')">Export SROC SVG</button>
+        <button class="btn-outline" onclick="exportPlotSVG('forestSensContainer','forest-sens.svg')">Export Sens Forest SVG</button>
+        <button class="btn-outline" onclick="exportPlotSVG('forestSpecContainer','forest-spec.svg')">Export Spec Forest SVG</button>
+        <button class="btn-outline" onclick="exportPlotSVG('funnelPlotContainer','deeks-funnel.svg')">Export Deeks Funnel SVG</button>
         <button class="btn-outline" onclick="copyAnalysisSummary()">Copy Statistics</button>
       </div>
+      <div id="clinicalUtilityContainer" style="margin-top:20px"></div>
       <div id="looContainer" style="margin-top:20px"></div>
-      <div id="eggerContainer" style="margin-top:12px"></div>
+      <div id="deeksContainer" style="margin-top:12px"></div>
       <div id="gradeNntRow" style="margin-top:20px;display:none;gap:16px;flex-wrap:wrap">
         <div id="gradeContainer" style="flex:1;min-width:320px"></div>
-        <div id="nntContainer" style="flex:1;min-width:280px"></div>
+        <div id="nndContainer" style="flex:1;min-width:280px"></div>
       </div>
+      <div id="thresholdEffectContainer" style="margin-top:20px"></div>
       <div id="subgroupContainer" style="margin-top:20px"></div>
       <div id="cumulativeContainer" style="margin-top:20px"></div>
-      <div id="trimFillContainer" style="margin-top:20px"></div>
-      <div id="fragilityContainer" style="margin-top:20px"></div>
       <div id="metaRegressionContainer" style="margin-top:20px"></div>
-      <div id="nmaLeagueContainer" style="margin-top:20px"></div>
+      <div id="heterogeneityContainer" style="margin-top:20px"></div>
     </section>
 
     <!-- Phase 7: Write -->
@@ -2097,11 +2112,10 @@ body.dark-mode .input-error { background: #451a1a !important; }
   };
 
   const ROB2_DOMAINS = [
-    { key: 'd1', label: 'Randomization process', short: 'D1' },
-    { key: 'd2', label: 'Deviations from intended interventions', short: 'D2' },
-    { key: 'd3', label: 'Missing outcome data', short: 'D3' },
-    { key: 'd4', label: 'Measurement of the outcome', short: 'D4' },
-    { key: 'd5', label: 'Selection of the reported result', short: 'D5' },
+    { key: 'd1', label: 'Patient Selection', short: 'D1' },
+    { key: 'd2', label: 'Index Test', short: 'D2' },
+    { key: 'd3', label: 'Reference Standard', short: 'D3' },
+    { key: 'd4', label: 'Flow and Timing', short: 'D4' },
     { key: 'overall', label: 'Overall', short: 'Overall' }
   ];
 
@@ -2110,84 +2124,86 @@ body.dark-mode .input-error { background: #451a1a !important; }
   // ============================================================
   const CARDIO_SUBCATEGORIES = [
     {
-      id: 'hf', label: 'Heart Failure',
-      keywords: ['heart failure', 'hfref', 'hfpef', 'hfmref', 'cardiomyopathy', 'lvef',
-                 'left ventricular', 'cardiac failure', 'congestive heart', 'ejection fraction',
-                 'sacubitril', 'entresto', 'sglt2', 'dapagliflozin', 'empagliflozin',
-                 'ivabradine', 'vericiguat', 'omecamtiv', 'nyha',
-                 'carvedilol', 'nebivolol', 'bisoprolol', 'metoprolol',
-                 'eplerenone', 'torsemide', 'furosemide', 'lcz696', 'levosimendan',
-                 'bnp', 'nt-probnp', 'b-natriuretic', 'finerenone'],
-      color: '#ef4444', meshTerms: ['Heart Failure']
+      id: 'acs_biomarker', label: 'ACS Biomarkers (Troponin / CK-MB)',
+      keywords: ['troponin', 'high-sensitivity troponin', 'hs-troponin', 'hs-ctni', 'hs-ctnt',
+                 'cardiac troponin', 'ck-mb', 'creatine kinase', 'myoglobin', 'copeptin',
+                 'acute coronary syndrome', 'myocardial infarction', 'nstemi', 'stemi',
+                 'chest pain', 'rule out', 'rule in', 'diagnostic accuracy', 'sensitivity',
+                 'specificity', 'npv', 'ppv', 'auc', 'roc'],
+      color: '#ef4444', meshTerms: ['Troponin', 'Acute Coronary Syndrome', 'Sensitivity and Specificity']
     },
     {
-      id: 'acs', label: 'ACS / Coronary',
-      keywords: ['acute coronary', 'myocardial infarction', 'stemi', 'nstemi', 'unstable angina',
-                 'percutaneous coronary', 'pci', 'cabg', 'coronary artery disease', 'acs',
-                 'troponin', 'angioplasty', 'stent', 'coronary bypass', 'angina pectoris',
-                 'ticagrelor', 'prasugrel', 'cangrelor', 'dual antiplatelet', 'dapt',
-                 'bivalirudin', 'thrombolysis', 'fibrinolysis', 'clopidogrel'],
-      color: '#f97316', meshTerms: ['Acute Coronary Syndrome', 'Myocardial Infarction', 'Coronary Artery Disease']
+      id: 'hf_biomarker', label: 'HF Biomarkers (BNP / NT-proBNP)',
+      keywords: ['bnp', 'nt-probnp', 'b-natriuretic', 'natriuretic peptide', 'galectin',
+                 'st2', 'heart failure', 'hfref', 'hfpef', 'dyspnea', 'screening',
+                 'diagnosis', 'prognosis', 'diagnostic accuracy', 'cutoff', 'threshold',
+                 'sensitivity', 'specificity', 'rule out'],
+      color: '#f97316', meshTerms: ['Natriuretic Peptide, Brain', 'Heart Failure', 'Sensitivity and Specificity']
     },
     {
-      id: 'af', label: 'Atrial Fibrillation',
-      keywords: ['atrial fibrillation', 'atrial flutter', 'af ablation', 'anticoagul',
-                 'apixaban', 'rivaroxaban', 'edoxaban', 'dabigatran', 'doac', 'noac',
-                 'stroke prevention', 'left atrial appendage',
-                 'catheter ablation', 'pulmonary vein isolation', 'pvi', 'cardioversion',
-                 'persistent af', 'paroxysmal af', 'nonvalvular af',
-                 'cryoablation', 'left atrial', 'cardiac ablation',
-                 'af recurrence', 'af burden'],
-      color: '#a855f7', meshTerms: ['Atrial Fibrillation']
+      id: 'echo', label: 'Echocardiography / TTE / TEE',
+      keywords: ['echocardiography', 'echocardiogram', 'tte', 'tee', 'transesophageal',
+                 'transthoracic', 'speckle tracking', 'strain imaging', 'gls',
+                 'diastolic dysfunction', 'wall motion', 'ejection fraction',
+                 'valvular', 'doppler', 'tissue doppler', 'e/e prime',
+                 'diagnostic accuracy', 'sensitivity', 'specificity'],
+      color: '#a855f7', meshTerms: ['Echocardiography', 'Sensitivity and Specificity']
     },
     {
-      id: 'htn', label: 'Hypertension',
-      keywords: ['hypertension', 'blood pressure', 'antihypertensive', 'resistant hypertension',
-                 'amlodipine', 'losartan', 'valsartan', 'ace inhibitor',
-                 'calcium channel', 'diuretic', 'renal denervation',
-                 'telmisartan', 'azilsartan', 'aliskiren', 'hydrochlorothiazide',
-                 'chlorthalidone', 'nifedipine', 'olmesartan', 'candesartan',
-                 'irbesartan', 'lisinopril', 'enalapril'],
-      color: '#3b82f6', meshTerms: ['Hypertension']
+      id: 'ct_angio', label: 'CT Angiography / CCTA',
+      keywords: ['ct angiography', 'ccta', 'coronary ct', 'computed tomography angiography',
+                 'calcium score', 'cacs', 'agatston', 'fractional flow reserve',
+                 'ffrct', 'coronary artery', 'stenosis', 'plaque', 'ct perfusion',
+                 'diagnostic accuracy', 'sensitivity', 'specificity'],
+      color: '#3b82f6', meshTerms: ['Computed Tomography Angiography', 'Coronary Artery Disease', 'Sensitivity and Specificity']
     },
     {
-      id: 'valve', label: 'Valve Disease',
-      keywords: ['aortic stenosis', 'mitral regurgitation', 'tavr', 'tavi', 'savr',
-                 'transcatheter aortic', 'mitraclip', 'valve replacement', 'valve repair',
-                 'prosthetic valve', 'tricuspid', 'endocarditis'],
-      color: '#ec4899', meshTerms: ['Heart Valve Diseases', 'Aortic Valve Stenosis']
+      id: 'cmr', label: 'Cardiac MRI (CMR)',
+      keywords: ['cardiac mri', 'cmr', 'cardiac magnetic resonance', 'late gadolinium',
+                 'lge', 't1 mapping', 't2 mapping', 'myocardial fibrosis',
+                 'stress perfusion', 'adenosine', 'dobutamine', 'viability',
+                 'diagnostic accuracy', 'sensitivity', 'specificity'],
+      color: '#ec4899', meshTerms: ['Magnetic Resonance Imaging', 'Heart', 'Sensitivity and Specificity']
     },
     {
-      id: 'pad', label: 'PAD / Vascular',
-      keywords: ['peripheral artery', 'peripheral arterial', 'claudication', 'critical limb',
-                 'aortic aneurysm', 'carotid', 'endovascular', 'pad', 'pvd',
-                 'intermittent claudication', 'limb ischemia'],
-      color: '#14b8a6', meshTerms: ['Peripheral Arterial Disease']
+      id: 'stress_test', label: 'Stress Testing',
+      keywords: ['stress test', 'exercise test', 'treadmill', 'ergometry', 'bruce protocol',
+                 'pharmacologic stress', 'dobutamine stress', 'adenosine stress',
+                 'dipyridamole', 'regadenoson', 'st depression', 'exercise ecg',
+                 'stress echo', 'diagnostic accuracy', 'sensitivity', 'specificity'],
+      color: '#14b8a6', meshTerms: ['Exercise Test', 'Sensitivity and Specificity']
     },
     {
-      id: 'lipids', label: 'Lipids / Prevention',
-      keywords: ['cholesterol', 'ldl', 'statin', 'pcsk9', 'lipid lowering', 'dyslipidemia',
-                 'hyperlipidemia', 'atherosclerosis', 'cardiovascular prevention',
-                 'ezetimibe', 'inclisiran', 'bempedoic',
-                 'simvastatin', 'atorvastatin', 'rosuvastatin', 'pravastatin',
-                 'evolocumab', 'alirocumab'],
-      color: '#eab308', meshTerms: ['Dyslipidemias', 'Hypercholesterolemia']
+      id: 'ecg', label: 'ECG / Holter / Loop Recorder',
+      keywords: ['electrocardiography', 'ecg', 'ekg', 'holter', 'loop recorder',
+                 'arrhythmia detection', 'atrial fibrillation', 'qt interval',
+                 'st segment', 'brugada', 'smartwatch', 'wearable',
+                 'screening', 'diagnostic accuracy', 'sensitivity', 'specificity'],
+      color: '#eab308', meshTerms: ['Electrocardiography', 'Sensitivity and Specificity']
     },
     {
-      id: 'rhythm', label: 'Heart Rhythm',
-      keywords: ['ventricular tachycardia', 'sudden cardiac', 'icd', 'implantable cardioverter',
-                 'cardiac resynchronization', 'crt', 'pacemaker',
-                 'supraventricular', 'bradycardia', 'ventricular arrhythmia',
-                 'antiarrhythmic drug', 'defibrillator'],
-      color: '#6366f1', meshTerms: ['Arrhythmias, Cardiac']
+      id: 'nuclear', label: 'Nuclear Imaging (SPECT / PET)',
+      keywords: ['spect', 'pet', 'myocardial perfusion', 'nuclear cardiology',
+                 'thallium', 'technetium', 'sestamibi', 'rubidium', 'fdg',
+                 'myocardial viability', 'ischemia', 'perfusion imaging',
+                 'diagnostic accuracy', 'sensitivity', 'specificity'],
+      color: '#6366f1', meshTerms: ['Tomography, Emission-Computed, Single-Photon', 'Sensitivity and Specificity']
     },
     {
-      id: 'ph', label: 'Pulmonary Hypertension',
-      keywords: ['pulmonary arterial hypertension', 'pah', 'pulmonary hypertension',
-                 'right ventricular', 'bosentan', 'ambrisentan', 'sildenafil', 'tadalafil',
-                 'riociguat', 'selexipag', 'macitentan', 'treprostinil', 'epoprostenol',
-                 'cteph', 'chronic thromboembolic', 'sotatercept', 'pulmonary vascular'],
-      color: '#0ea5e9', meshTerms: ['Hypertension, Pulmonary']
+      id: 'vascular_us', label: 'Vascular Ultrasound / ABI',
+      keywords: ['carotid ultrasound', 'duplex', 'ankle brachial index', 'abi',
+                 'intima media thickness', 'imt', 'peripheral artery',
+                 'venous thrombosis', 'dvt', 'compression ultrasound',
+                 'diagnostic accuracy', 'sensitivity', 'specificity'],
+      color: '#0ea5e9', meshTerms: ['Ultrasonography, Doppler', 'Peripheral Arterial Disease', 'Sensitivity and Specificity']
+    },
+    {
+      id: 'coag', label: 'Coagulation Tests (D-dimer / INR)',
+      keywords: ['d-dimer', 'fibrinogen', 'inr', 'pt', 'aptt', 'coagulation',
+                 'pulmonary embolism', 'venous thromboembolism', 'dvt',
+                 'wells score', 'geneva score', 'perc', 'diagnostic accuracy',
+                 'sensitivity', 'specificity', 'rule out'],
+      color: '#10b981', meshTerms: ['Fibrin Fibrinogen Degradation Products', 'Pulmonary Embolism', 'Sensitivity and Specificity']
     },
     {
       id: 'general', label: 'General CV',
@@ -10766,12 +10782,12 @@ body.dark-mode .input-error { background: #451a1a !important; }
         const node = _lastAyatClusters.find(n => n.id === nid);
         if (node) {
           const sc = node.subcatLabel || node.subcatId;
-          subcatCounts[sc] = (subcatCounts[sc] || 0) + (result.matchIntensity.get(nid) || 0);
+          subcatCounts[sc] = (subcatCounts[sc] || 0) + 1;
         }
       }
       const parts = Object.entries(subcatCounts)
         .sort((a, b) => b[1] - a[1])
-        .map(([k, v]) => k + ': ' + Math.round(v * 100) + '%');
+        .map(([k, v]) => k + ': ' + v);
       if (parts.length > 0) {
         summary.textContent = parts.join(' | ');
         summary.style.display = 'block';
@@ -13912,7 +13928,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const clusters = buildAyatClusters(trials);
     if (clusters.length === 0) return;
     _lastAyatClusters = clusters;
-    _fihrisIndex = buildFihrisIndex(universeTrialsCache, clusters);
+    _fihrisIndex = buildFihrisIndex(trials, clusters);
     renderAyatUniverseOnCanvas(canvas, clusters, 'ayat');
   }
 
