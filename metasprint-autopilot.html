@@ -456,7 +456,7 @@ button:hover { background: var(--primary-hover); }
 @media (prefers-color-scheme: dark) {
   body:not(.light-forced) {
     --bg: #0f172a; --surface: #1e293b; --text: #e2e8f0;
-    --text-muted: #bdc8d6; --border: #334155;
+    --text-muted: #bdc8d6; --border: #334155; --bg-alt: #1a2332;
     --primary: #3b82f6; --primary-hover: #2563eb;
     --success: #10b981; --warning: #f59e0b; --danger: #ef4444;
     --info: #818cf8;
@@ -472,7 +472,7 @@ button:hover { background: var(--primary-hover); }
 /* --- Dark Mode: manual toggle --- */
 body.dark-mode {
   --bg: #0f172a; --surface: #1e293b; --text: #e2e8f0;
-  --text-muted: #bdc8d6; --border: #334155;
+  --text-muted: #bdc8d6; --border: #334155; --bg-alt: #1a2332;
   --primary: #3b82f6; --primary-hover: #2563eb;
   --success: #10b981; --warning: #f59e0b; --danger: #ef4444;
   --info: #818cf8;
@@ -1149,7 +1149,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <div class="gap-scatter-tooltip" id="gapScatterTooltip"></div>
       </div>
       <!-- Drill-down detail panel (expands below canvas on node/edge click) -->
-      <div id="drillDownPanel" style="display:none;margin-top:8px;border:1px solid var(--border);border-radius:8px;background:var(--surface);max-height:60vh;overflow-y:auto">
+      <div id="drillDownPanel" role="region" aria-label="Evidence drill-down detail" style="display:none;margin-top:8px;border:1px solid var(--border);border-radius:8px;background:var(--surface);max-height:60vh;overflow-y:auto">
         <div style="display:flex;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);z-index:2">
           <strong id="drillDownTitle" style="flex:1"></strong>
           <button onclick="document.getElementById('drillDownPanel').style.display='none'" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1.2rem;padding:0 4px" aria-label="Close drill-down">&times;</button>
@@ -1174,14 +1174,14 @@ body.dark-mode .input-error { background: #451a1a !important; }
         </div>
         <div id="kitabSearchRow" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">
           <div style="position:relative;flex:1;min-width:200px">
-            <input type="text" id="fihrisSearch" placeholder="Search the evidence... (e.g., SGLT2 mortality, empagliflozin)" style="width:100%;padding:6px 32px 6px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.82rem;background:var(--surface);color:var(--text)" oninput="debounceFihrisSearch(this.value)">
-            <span id="fihrisSearchClear" role="button" tabindex="0" onclick="clearFihrisSearch()" onkeydown="if(event.key==='Enter'||event.key===' ')clearFihrisSearch()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:1rem;color:var(--text-muted);display:none" title="Clear search">&times;</span>
+            <input type="text" id="fihrisSearch" aria-label="Search evidence universe" placeholder="Search the evidence... (e.g., SGLT2 mortality, empagliflozin)" style="width:100%;padding:6px 32px 6px 10px;border:1px solid var(--border);border-radius:6px;font-size:0.82rem;background:var(--surface);color:var(--text)" oninput="debounceFihrisSearch(this.value)">
+            <span id="fihrisSearchClear" role="button" tabindex="0" aria-label="Clear search" onclick="clearFihrisSearch()" onkeydown="if(event.key==='Enter'||event.key===' ')clearFihrisSearch()" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:1rem;color:var(--text-muted);display:none" title="Clear search">&times;</span>
           </div>
-          <span id="fihrisResultBadge" style="font-size:0.78rem;color:var(--text-muted);white-space:nowrap"></span>
-          <label style="font-size:0.75rem;color:var(--text-muted);display:flex;align-items:center;gap:3px;margin-left:8px">
+          <span id="fihrisResultBadge" aria-live="polite" aria-atomic="true" style="font-size:0.78rem;color:var(--text-muted);white-space:nowrap"></span>
+          <label style="font-size:0.75rem;color:var(--text-muted);display:flex;align-items:center;gap:3px;margin-left:8px" title="Show dashed lines between related evidence clusters across subcategories">
             <input type="checkbox" id="kitabCrossRefs" onchange="toggleKitabLayer('crossRefs',this.checked)"> Cross-refs
           </label>
-          <label style="font-size:0.75rem;color:var(--text-muted);display:flex;align-items:center;gap:3px">
+          <label style="font-size:0.75rem;color:var(--text-muted);display:flex;align-items:center;gap:3px" title="Show evidence verdict badges on each cluster">
             <input type="checkbox" id="kitabVerdicts" onchange="toggleKitabLayer('verdicts',this.checked)"> Verdicts
           </label>
         </div>
@@ -1270,12 +1270,12 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <span id="refCount" class="text-muted">0 references</span>
       </div>
       <div id="autoScreenPanel" class="autoscreen-panel" style="display:none">
-        <h3>CardioRCT Auto-Screener</h3>
-        <p style="font-size:0.82rem;color:var(--text-muted);margin:0 0 8px">Universe-aware screening with deterministic safety gates, calibrated probability model, and recall-first guardrails. Hard-gates use trial registry matching; soft scoring uses BM25 + PICO + Pillar + RCT/Cardio signals.</p>
+        <h3>CardioDTA Auto-Screener</h3>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin:0 0 8px">Universe-aware screening with deterministic safety gates, calibrated probability model, and recall-first guardrails. Hard-gates use trial registry matching; soft scoring uses BM25 + PIRD + Pillar + DTA/Cardio signals.</p>
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:8px;align-items:center">
           <label style="font-size:0.82rem;display:flex;align-items:center;gap:4px">
-            <input type="checkbox" id="cardioRCTToggle" checked onchange="_cardioRCTMode=this.checked;document.getElementById('autoScreenBtn').textContent=this.checked?'Run CardioRCT Screening':'Run Legacy Screening'">
-            <strong>CardioRCT Mode</strong>
+            <input type="checkbox" id="cardioRCTToggle" checked onchange="_cardioRCTMode=this.checked;document.getElementById('autoScreenBtn').textContent=this.checked?'Run CardioDTA Screening':'Run Legacy Screening'">
+            <strong>CardioDTA Mode</strong>
           </label>
           <label style="font-size:0.82rem;display:flex;align-items:center;gap:4px">
             <input type="checkbox" id="strictRecallToggle" checked>
@@ -1303,7 +1303,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
           <label>Exclude threshold: <strong id="exclThreshLabel">0.20</strong></label>
           <input type="range" id="exclThresh" min="0.05" max="0.4" step="0.05" value="0.20" oninput="document.getElementById('exclThreshLabel').textContent=this.value">
         </div>
-        <button id="autoScreenBtn" class="btn-success" onclick="runAutoScreen()">Run CardioRCT Screening</button>
+        <button id="autoScreenBtn" class="btn-success" onclick="runAutoScreen()">Run CardioDTA Screening</button>
         <button class="btn-outline" onclick="document.getElementById('autoScreenPanel').style.display='none'">Close</button>
         <div id="autoScreenProgress" style="display:none">
           <div class="autoscreen-bar"><div class="autoscreen-bar-fill" id="autoScreenFill" style="width:0%"></div></div>
@@ -3189,12 +3189,13 @@ body.dark-mode .input-error { background: #451a1a !important; }
   }
 
   function _inferProvisionalOverallRoB(study) {
-    const hasRegistryId = /\bNCT\d{8}\b/i.test(String(study.nctId || study.trialId || ''));
-    const hasEffect = Number.isFinite(Number(study.effectEstimate));
-    const hasCI = Number.isFinite(Number(study.lowerCI)) && Number.isFinite(Number(study.upperCI));
+    const hasRegistryId = /\bNCT\d{8}\b/i.test(String(study.nctId || study.trialId || study.pmid || ''));
+    // DTA: check 2x2 data completeness
+    const tp = parseInt(study.tp), fp = parseInt(study.fp), fn = parseInt(study.fn), tn = parseInt(study.tn);
+    const has2x2 = [tp, fp, fn, tn].every(v => !isNaN(v) && v >= 0);
     const verified = String(study.verificationStatus || '') === 'verified';
-    if (verified && hasRegistryId && hasEffect && hasCI) return 'some';
-    if (hasRegistryId && (verified || String(study.verificationStatus || '') === 'needs-check')) return 'some';
+    if (verified && has2x2 && String(study.indexTest || '').trim()) return 'some';
+    if (has2x2 && (verified || String(study.verificationStatus || '') === 'needs-check')) return 'some';
     return 'high';
   }
 
@@ -3835,6 +3836,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       if (trials.length > 0) {
         // Cache trials for all 6 views
         universeTrialsCache = trials;
+        _ayatDataVersion++;
         _fihrisIndex = buildFihrisIndex(trials, null);
 
         const gapData = await computeAllGapScores(trials, (msg) => {
@@ -4934,88 +4936,60 @@ body.dark-mode .input-error { background: #451a1a !important; }
 
   function buildPICOKnowledgeBase() {
     if (_picoKnowledgeBase) return _picoKnowledgeBase;
-    if (typeof EMBEDDED_AL_BURHAN_DATA === 'undefined' || !EMBEDDED_AL_BURHAN_DATA.clusters) {
-      _picoKnowledgeBase = { populations: {}, interventions: {}, comparators: [], outcomes: {} };
-      return _picoKnowledgeBase;
-    }
 
-    // Build population pillar: subcategory → condition synonyms
+    // Population pillar: condition synonyms (same as pairwise — disease categories)
     const populations = {
+      acs: ['acute coronary', 'myocardial infarction', 'stemi', 'nstemi', 'unstable angina', 'heart attack', 'chest pain', 'acs '],
       hf: ['heart failure', 'hfref', 'hfpef', 'cardiac failure', 'left ventricular', 'cardiomyopathy', 'lvef', 'ejection fraction', 'nyha', 'congesti'],
-      af: ['atrial fibrillation', 'atrial flutter', 'af ', 'a-fib', 'afib', 'nonvalvular', 'anticoagul'],
-      acs: ['acute coronary', 'myocardial infarction', 'stemi', 'nstemi', 'unstable angina', 'heart attack', 'troponin', 'acs '],
-      htn: ['hypertension', 'blood pressure', 'systolic', 'diastolic', 'antihypertens', 'bp '],
-      cad: ['coronary artery', 'coronary heart', 'angina', 'ischemic heart', 'ischaemic heart', 'atheroscler', 'pci', 'cabg', 'stent'],
-      vte: ['venous thromboembol', 'deep vein', 'pulmonary embol', 'dvt', 'pe ', 'anticoagul', 'thromboprophyla'],
-      pad: ['peripheral arter', 'peripheral vascul', 'claudication', 'limb ischemi', 'limb ischaemi'],
-      stroke: ['stroke', 'cerebrovascul', 'ischemic stroke', 'ischaemic stroke', 'tia', 'transient ischemic'],
-      lipid: ['cholesterol', 'ldl', 'hdl', 'statin', 'lipid', 'dyslipid', 'triglycerid', 'hyperlipid'],
+      af: ['atrial fibrillation', 'atrial flutter', 'arrhythm', 'af '],
+      cad: ['coronary artery', 'coronary heart', 'angina', 'ischemic heart', 'ischaemic heart', 'atheroscler', 'stenosis'],
+      vte: ['venous thromboembol', 'deep vein', 'pulmonary embol', 'dvt', 'pe '],
+      pad: ['peripheral arter', 'peripheral vascul', 'claudication', 'limb ischemi'],
+      stroke: ['stroke', 'cerebrovascul', 'ischemic stroke', 'ischaemic stroke', 'tia'],
       general: ['cardiovascul', 'cardiac', 'heart', 'vascular']
     };
 
-    // Build intervention pillar: drug class → drug names from clusters
-    const interventions = {};
-    for (const c of EMBEDDED_AL_BURHAN_DATA.clusters) {
-      const cls = (c.drug_class || '').toLowerCase();
-      if (!cls) continue;
-      if (!interventions[cls]) interventions[cls] = new Set();
-      for (const name of (c.interventions || [])) {
-        const clean = name.toLowerCase().replace(/[,;]/g, '').trim();
-        if (clean.length > 2) interventions[cls].add(clean);
-      }
-      // Also add individual study intervention names
-      for (const s of (c.studies || [])) {
-        if (s.title) {
-          // Extract drug names from trial titles (common patterns)
-          const titleLow = s.title.toLowerCase();
-          for (const drugWord of (c.interventions || [])) {
-            const dw = drugWord.toLowerCase().replace(/[,;]/g, '').trim();
-            if (dw.length > 3 && titleLow.includes(dw)) interventions[cls].add(dw);
-          }
-        }
-      }
-    }
-    // Convert Sets to arrays with additional synonyms
-    const interventionArrays = {};
-    for (const [cls, names] of Object.entries(interventions)) {
-      interventionArrays[cls] = [...names, cls];
-    }
+    // Index test pillar (I): DTA-specific — maps test categories to synonyms
+    const indexTests = {
+      troponin: ['troponin', 'hs-troponin', 'hs-ctni', 'hs-ctnt', 'cardiac troponin', 'hstni', 'hstnt', 'ctni', 'ctnt', 'high-sensitivity'],
+      bnp: ['bnp', 'nt-probnp', 'natriuretic peptide', 'b-natriuretic', 'galectin', 'st2'],
+      echo: ['echocardiography', 'echocardiogram', 'tte', 'tee', 'transthoracic', 'transesophageal', 'speckle', 'strain imaging', 'gls', 'doppler', 'e/e prime'],
+      ccta: ['ct angiography', 'ccta', 'coronary ct', 'computed tomography', 'calcium score', 'cacs', 'agatston', 'ffrct', 'ct perfusion'],
+      cmr: ['cardiac mri', 'cmr', 'cardiac magnetic resonance', 'late gadolinium', 'lge', 't1 mapping', 't2 mapping', 'stress perfusion'],
+      stress: ['stress test', 'exercise test', 'treadmill', 'bruce protocol', 'dobutamine stress', 'adenosine stress', 'dipyridamole', 'regadenoson', 'exercise ecg', 'stress echo'],
+      ecg: ['electrocardiography', 'ecg', 'ekg', 'holter', 'loop recorder', 'wearable', 'smartwatch', 'qt interval', 'st segment'],
+      nuclear: ['spect', 'pet', 'myocardial perfusion', 'nuclear', 'thallium', 'technetium', 'sestamibi', 'rubidium'],
+      ultrasound: ['carotid ultrasound', 'duplex', 'ankle brachial', 'abi', 'intima media', 'imt', 'compression ultrasound'],
+      coag: ['d-dimer', 'fibrinogen', 'inr', 'coagulation', 'wells score', 'geneva score', 'perc'],
+      general: ['diagnostic accuracy', 'sensitivity', 'specificity', 'roc', 'auc', 'cutoff', 'threshold', 'biomarker']
+    };
 
-    // Common comparator terms
-    const comparators = [
-      'placebo', 'standard care', 'standard of care', 'usual care', 'control',
-      'conventional', 'active control', 'sham', 'no treatment', 'best medical',
-      'guideline', 'comparator', 'standard therapy', 'open label'
+    // Reference standard pillar (C): gold-standard diagnostic methods
+    const refStandards = [
+      'coronary angiography', 'angiograph', 'catheterization', 'catheterisation',
+      'adjudicated', 'adjudication', 'expert panel', 'reference standard',
+      'gold standard', 'biopsy', 'histopatholog', 'autopsy',
+      'clinical follow-up', 'clinical outcome', '30-day outcome', '30 day',
+      'index event', 'confirmed diagnosis', 'final diagnosis',
+      'venography', 'ctpa', 'v/q scan', 'pulmonary angiography',
+      'holter monitoring', 'implantable loop', 'electrophysiology study',
+      'endomyocardial biopsy', 'surgical confirmation'
     ];
 
-    // Build outcome pillar: outcome_category → outcome terms from clusters
-    const outcomes = {};
-    for (const c of EMBEDDED_AL_BURHAN_DATA.clusters) {
-      const cat = (c.outcome_category || 'other').toLowerCase();
-      if (!outcomes[cat]) outcomes[cat] = new Set();
-      const outLow = (c.outcome || '').toLowerCase();
-      if (outLow.length > 3) outcomes[cat].add(outLow);
-    }
-    // Add common outcome synonyms per category
-    const outSynonyms = {
-      mortality: ['death', 'mortality', 'survival', 'fatal', 'all-cause', 'cardiovascular death', 'cv death'],
-      hospitalization: ['hospitalization', 'hospitalisation', 'admission', 'readmission', 'emergency', 'urgent'],
-      safety: ['bleeding', 'hemorrhag', 'haemorrhag', 'adverse', 'side effect', 'safety', 'tolerability', 'discontinu'],
-      efficacy: ['efficacy', 'primary endpoint', 'primary outcome', 'composite', 'mace', 'major adverse'],
-      renal: ['kidney', 'renal', 'egfr', 'creatinine', 'dialysis', 'nephropathy', 'ckd'],
-      other: ['quality of life', 'qol', 'functional', 'exercise', 'biomarker', 'nt-probnp', 'bnp']
+    // Target condition pillar (O): diagnostic endpoints (not treatment outcomes)
+    const targetConditions = {
+      mi: ['myocardial infarction', 'acute mi', 'type 1 mi', 'type 2 mi', 'nstemi', 'stemi', 'heart attack'],
+      hf: ['heart failure', 'acute heart failure', 'decompensated', 'hfref', 'hfpef', 'systolic dysfunction', 'diastolic dysfunction'],
+      af: ['atrial fibrillation', 'paroxysmal af', 'persistent af', 'arrhythmia', 'supraventricular'],
+      cad: ['coronary artery disease', 'obstructive cad', 'significant stenosis', 'ischemia', 'ischaemia'],
+      pe: ['pulmonary embolism', 'venous thromboembolism', 'deep vein thrombosis', 'dvt'],
+      aortic: ['aortic stenosis', 'aortic regurgitation', 'aortic dissection', 'valvular'],
+      cardiomyopathy: ['cardiomyopathy', 'dilated', 'hypertrophic', 'hcm', 'dcm', 'amyloid', 'myocarditis'],
+      general: ['diagnosis', 'detection', 'screening', 'rule out', 'rule in', 'classification']
     };
-    for (const [cat, syns] of Object.entries(outSynonyms)) {
-      if (!outcomes[cat]) outcomes[cat] = new Set();
-      for (const s of syns) outcomes[cat].add(s);
-    }
-    const outcomeArrays = {};
-    for (const [cat, names] of Object.entries(outcomes)) {
-      outcomeArrays[cat] = [...names];
-    }
 
     _picoKnowledgeBase = {
-      populations, interventions: interventionArrays, comparators, outcomes: outcomeArrays
+      populations, interventions: indexTests, comparators: refStandards, outcomes: targetConditions
     };
     return _picoKnowledgeBase;
   }
@@ -5037,36 +5011,35 @@ body.dark-mode .input-error { background: #451a1a !important; }
     return Math.min(1, bestScore + matchCount * 0.05);
   }
 
-  // Score a reference abstract against user's PICO using pillar matching
+  // Score a reference abstract against user's PIRD using pillar matching
+  // P = Population, I = Index test, R = Reference standard, D = Target condition
   function screenerCPillarScore(text, pico) {
     const kb = buildPICOKnowledgeBase();
     const textLow = (text || '').toLowerCase();
     if (textLow.length < 20) return { combined: 0, pillars: { P: 0, I: 0, C: 0, O: 0 }, matchedPillars: 0 };
 
-    // Population pillar: match user's P terms against KB population synonyms
+    // Population pillar (P): match user's P terms against KB population synonyms
     let pScore = 0;
     const pTerms = (pico.P || '').toLowerCase().split(/[,;]\s*/).filter(t => t.length > 2);
     for (const [subcat, synonyms] of Object.entries(kb.populations)) {
-      // Does user's P mention this subcategory?
       const userMentions = pTerms.some(pt => synonyms.some(s => pt.includes(s) || s.includes(pt)));
       if (userMentions) {
         pScore = Math.max(pScore, pillarMatch(textLow, synonyms));
       }
     }
-    // Fallback: direct term matching if KB doesn't cover user's population
     if (pScore === 0) {
       for (const pt of pTerms) {
         if (pt.length > 3 && textLow.includes(pt)) pScore = Math.max(pScore, 0.6);
       }
     }
 
-    // Intervention pillar: match user's I terms against KB drug classes
+    // Index test pillar (I): match user's index test against KB test categories
     let iScore = 0;
     const iTerms = (pico.I || '').toLowerCase().split(/[,;]\s*/).filter(t => t.length > 2);
-    for (const [cls, drugNames] of Object.entries(kb.interventions)) {
-      const userMentions = iTerms.some(it => drugNames.some(d => it.includes(d) || d.includes(it)) || it.includes(cls) || cls.includes(it));
+    for (const [testCat, synonyms] of Object.entries(kb.interventions)) {
+      const userMentions = iTerms.some(it => synonyms.some(s => it.includes(s) || s.includes(it)) || it.includes(testCat) || testCat.includes(it));
       if (userMentions) {
-        iScore = Math.max(iScore, pillarMatch(textLow, drugNames));
+        iScore = Math.max(iScore, pillarMatch(textLow, synonyms));
       }
     }
     if (iScore === 0) {
@@ -5074,21 +5047,25 @@ body.dark-mode .input-error { background: #451a1a !important; }
         if (it.length > 3 && textLow.includes(it)) iScore = Math.max(iScore, 0.6);
       }
     }
+    // Bonus: abstract mentions DTA-specific terms
+    const dtaTerms = ['sensitivity', 'specificity', 'diagnostic accuracy', 'roc', 'auc', 'true positive', 'false positive', 'predictive value'];
+    const dtaHits = dtaTerms.filter(t => textLow.includes(t)).length;
+    if (dtaHits >= 2) iScore = Math.min(1, iScore + 0.1);
 
-    // Comparator pillar: check if abstract mentions any comparator term
+    // Reference standard pillar (C): match against gold-standard terms
     let cScore = pillarMatch(textLow, kb.comparators);
     const cTerms = (pico.C || '').toLowerCase().split(/[,;]\s*/).filter(t => t.length > 2);
     for (const ct of cTerms) {
       if (ct.length > 3 && textLow.includes(ct)) cScore = Math.max(cScore, 0.7);
     }
 
-    // Outcome pillar: match user's O terms against KB outcome categories
+    // Target condition pillar (O): match user's target condition against KB
     let oScore = 0;
     const oTerms = (pico.O || '').toLowerCase().split(/[,;]\s*/).filter(t => t.length > 2);
-    for (const [cat, outcomeNames] of Object.entries(kb.outcomes)) {
-      const userMentions = oTerms.some(ot => outcomeNames.some(o => ot.includes(o) || o.includes(ot)));
+    for (const [cat, conditionNames] of Object.entries(kb.outcomes)) {
+      const userMentions = oTerms.some(ot => conditionNames.some(c => ot.includes(c) || c.includes(ot)));
       if (userMentions) {
-        oScore = Math.max(oScore, pillarMatch(textLow, outcomeNames));
+        oScore = Math.max(oScore, pillarMatch(textLow, conditionNames));
       }
     }
     if (oScore === 0) {
@@ -5100,13 +5077,12 @@ body.dark-mode .input-error { background: #451a1a !important; }
     // Count matched pillars (threshold 0.3 for "present")
     const matchedPillars = [pScore, iScore, cScore, oScore].filter(s => s >= 0.3).length;
 
-    // Pillar-based scoring: each pillar is binary-ish, weighted by importance
-    // Unlike BM25 which is continuous, this rewards structural completeness
+    // PIRD weighting: Index test (I) most important for DTA, then target condition (D/O)
     const bonus = matchedPillars === 4 ? 0.15
                : matchedPillars === 3 ? 0.10
                : matchedPillars === 2 ? 0.05
                : 0;
-    const combined = Math.min(1, (pScore * 0.25 + iScore * 0.35 + cScore * 0.10 + oScore * 0.20) + bonus);
+    const combined = Math.min(1, (pScore * 0.20 + iScore * 0.35 + cScore * 0.15 + oScore * 0.25) + bonus);
 
     return { combined, pillars: { P: pScore, I: iScore, C: cScore, O: oScore }, matchedPillars };
   }
@@ -5240,16 +5216,35 @@ body.dark-mode .input-error { background: #451a1a !important; }
     /\bmelanoma\b/i, /\bsarcoma\b/i, /\bcarcinoma\b/i,
   ];
 
+  // DTA study design patterns (supplements RCT_PATTERNS for diagnostic accuracy studies)
+  const DTA_PATTERNS = [
+    /\bdiagnostic accuracy\b/i, /\bsensitivity and specificity\b/i,
+    /\breceiver operating\b/i, /\broc curve/i, /\bauc\b/i,
+    /\btrue positive/i, /\bfalse positive/i, /\btrue negative/i, /\bfalse negative/i,
+    /\blikelihood ratio/i, /\bpredictive value/i, /\bnpv\b/i, /\bppv\b/i,
+    /\breference standard/i, /\bgold standard/i, /\bindex test/i,
+    /\bcutoff\b/i, /\bcut.off\b/i, /\bthreshold\b/i,
+    /\b2.?x.?2\s*table/i, /\bcontingency table/i,
+    /\bquadas/i, /\bstard\b/i, /\bprisma.dta/i
+  ];
+
   function computeRCTSignal(text) {
     if (!text) return 0;
     let score = 0;
-    const matches = RCT_PATTERNS.filter(p => p.test(text));
-    score = Math.min(1, matches.length * 0.15);
-    // Strong RCT signals
+    // Check RCT patterns (still relevant — some DTA studies are embedded in RCTs)
+    const rctMatches = RCT_PATTERNS.filter(p => p.test(text));
+    score = Math.min(1, rctMatches.length * 0.15);
     if (/\brandomized controlled trial\b/i.test(text)) score = Math.max(score, 0.9);
     if (/\brct\b/i.test(text) && /\bplacebo\b/i.test(text)) score = Math.max(score, 0.85);
     if (/\bdouble.blind/i.test(text) && /\brandom/i.test(text)) score = Math.max(score, 0.9);
-    return score;
+    // Check DTA patterns — diagnostic accuracy study designs
+    const dtaMatches = DTA_PATTERNS.filter(p => p.test(text));
+    const dtaScore = Math.min(1, dtaMatches.length * 0.15);
+    if (/\bdiagnostic accuracy\b/i.test(text) && /\bsensitivity\b/i.test(text)) score = Math.max(score, dtaScore, 0.85);
+    if (/\breference standard\b/i.test(text) && /\bindex test\b/i.test(text)) score = Math.max(score, dtaScore, 0.85);
+    if (/\broc\b/i.test(text) && /\bsensitivity\b/i.test(text) && /\bspecificity\b/i.test(text)) score = Math.max(score, dtaScore, 0.9);
+    // Take max of RCT and DTA signals
+    return Math.max(score, dtaScore);
   }
 
   function computeCardioSignal(text) {
@@ -5265,7 +5260,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
   }
 
   function hardGateDecision(features) {
-    const { universeMatch = { matched: false, score: 0 }, rctSignal, cardioSignal, nonCardioSignal, sourceTrust, hasRegistryId } = features;
+    const { universeMatch = { matched: false, score: 0 }, rctSignal = 0, cardioSignal = 0, nonCardioSignal = 0, sourceTrust = 0, hasRegistryId = false } = features;
     const strictRecall = features.strictRecall ?? true;
 
     // HARD AUTO-INCLUDE: Universe match + RCT signal + Cardio signal
@@ -5561,7 +5556,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const allPIncludes = []; // for threshold calibration
     const pendingModelDecisions = [];
 
-    status.textContent = 'Applying CardioRCT screening...';
+    status.textContent = 'Applying CardioDTA screening...';
     fill.style.width = '80%';
     await new Promise(r => setTimeout(r, 0));
 
@@ -5760,7 +5755,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       msaLog('error', 'screener', 'Auto-screen failed', { error: err.message });
       showToast('Auto-screening failed: ' + (err.message || 'Unknown error'), 'danger');
     } finally {
-      if (btn) { btn.disabled = false; btn.innerHTML = _cardioRCTMode ? 'Run CardioRCT Screening' : 'Run Dual Screening'; }
+      if (btn) { btn.disabled = false; btn.innerHTML = _cardioRCTMode ? 'Run CardioDTA Screening' : 'Run Dual Screening'; }
     }
   }
 
@@ -6530,85 +6525,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
   // ============================================================
   // DATA EXTRACTION
   // ============================================================
+  // Legacy effect type set — kept for TruthCert bridge compatibility
   const VALID_EFFECT_TYPES_SET = new Set(['OR', 'RR', 'HR', 'MD', 'SMD', 'RD', 'Other']);
-  const VALID_EFFECT_TYPES = [...VALID_EFFECT_TYPES_SET];  // Array form for <option> iteration
   let extractedStudies = [];
-  let extractInputMode = 'effect';  // 'effect' or '2x2'
-
-  // --- 2x2 table → effect size computation ---
-  // Returns {effect, lowerCI, upperCI} or null
-  function compute2x2Effect(eI, nI, eC, nC, effectType) {
-    if (eI == null || nI == null || eC == null || nC == null) return null;
-    if (nI <= 0 || nC <= 0) return null;
-    if (eI < 0 || eC < 0 || eI > nI || eC > nC) return null;
-    var et = String(effectType || 'OR').toUpperCase();
-    // Zero-event handling: add 0.5 continuity correction when needed
-    var aI = eI, aN = nI, aC = eC, cN = nC;
-    var needsCC = (eI === 0 || eC === 0 || eI === nI || eC === nC);
-    if (needsCC && (et === 'OR' || et === 'RR')) {
-      // Both-zero: cannot compute (return null per RevMan convention)
-      if (eI === 0 && eC === 0) return null;
-      if (eI === nI && eC === nC) return null;
-      // Single-zero: add 0.5 continuity correction
-      aI = eI + 0.5; aN = nI + 1; aC = eC + 0.5; cN = nC + 1;
-    }
-    var z = 1.96;  // 95% CI
-    if (et === 'OR') {
-      var or = (aI * (cN - aC)) / (aC * (aN - aI));
-      if (!isFinite(or) || or <= 0) return null;
-      var logOR = Math.log(or);
-      // Woolf's method SE
-      var se = Math.sqrt(1/aI + 1/(aN - aI) + 1/aC + 1/(cN - aC));
-      return { effect: or, lowerCI: Math.exp(logOR - z * se), upperCI: Math.exp(logOR + z * se) };
-    }
-    if (et === 'RR') {
-      var pI = aI / aN, pC = aC / cN;
-      var rr = pI / pC;
-      if (!isFinite(rr) || rr <= 0) return null;
-      var logRR = Math.log(rr);
-      // Log method SE
-      var se = Math.sqrt(1/aI - 1/aN + 1/aC - 1/cN);
-      return { effect: rr, lowerCI: Math.exp(logRR - z * se), upperCI: Math.exp(logRR + z * se) };
-    }
-    if (et === 'RD') {
-      var pI = eI / nI, pC = eC / nC;
-      var rd = pI - pC;
-      var se = Math.sqrt(pI * (1 - pI) / nI + pC * (1 - pC) / nC);
-      if (se <= 0 || !isFinite(se)) return null;
-      return { effect: rd, lowerCI: rd - z * se, upperCI: rd + z * se };
-    }
-    return null;  // HR, MD, SMD don't come from 2x2 tables
-  }
-
-  function setInputMode(mode) {
-    extractInputMode = mode;
-    var helpEl = document.getElementById('inputModeHelp');
-    if (helpEl) {
-      helpEl.textContent = mode === '2x2'
-        ? 'Enter events and totals for each arm. Effect + CI will be auto-computed. Use OR, RR, or RD for binary outcomes.'
-        : 'Enter the effect size and 95% CI from each study. For ratio measures (OR, RR, HR), values must be positive.';
-    }
-    // When switching to 2x2 mode, auto-compute effects for studies that have 2x2 data
-    if (mode === '2x2') {
-      for (var s of extractedStudies) {
-        if (s.eventsInt != null && s.totalInt != null && s.eventsCtrl != null && s.totalCtrl != null) {
-          // Ensure effect type is binary-compatible
-          if (!['OR', 'RR', 'RD'].includes(s.effectType)) s.effectType = 'OR';
-          var computed = compute2x2Effect(s.eventsInt, s.totalInt, s.eventsCtrl, s.totalCtrl, s.effectType);
-          if (computed) {
-            s.effectEstimate = Math.round(computed.effect * 10000) / 10000;
-            s.lowerCI = Math.round(computed.lowerCI * 10000) / 10000;
-            s.upperCI = Math.round(computed.upperCI * 10000) / 10000;
-            s.nIntervention = s.totalInt;
-            s.nControl = s.totalCtrl;
-            s.nTotal = (s.totalInt ?? 0) + (s.totalCtrl ?? 0);
-            saveStudy(s);
-          }
-        }
-      }
-    }
-    renderExtractTable();
-  }
 
   // --- Undo/Redo stack for study data table ---
   const _undoStack = [];
@@ -6686,61 +6605,31 @@ body.dark-mode .input-error { background: #451a1a !important; }
 
   function addStudyRow(data) {
     data = data || {};
-    const proj = projects.find(p => p.id === currentProjectId);
-    const defaultOutcome = (proj?.pico?.O || '').trim();
-    const parsedNct = ((data.nctId || (String(data.trialId || '').match(/\bNCT\d{8}\b/i) || [])[0] || '') + '').toUpperCase();
     const parsedPmid = String(data.pmid || ((String(data.trialId || '').match(/\bPMID[:\s]*(\d+)\b/i) || [])[1] || '') || '').replace(/\D/g, '');
     const parsedDoi = normalizeDOI(data.doi || extractDOI(String(data.trialId || '')));
-    const trialId = String(
-      data.trialId ||
-      parsedNct ||
-      (parsedPmid ? ('PMID:' + parsedPmid) : '') ||
-      parsedDoi ||
-      ''
-    ).trim();
     const study = {
       id: data.id || generateId(),
       projectId: currentProjectId,
       authorYear: data.authorYear || '',
-      trialId: trialId,
-      nctId: parsedNct || '',
       pmid: parsedPmid || '',
       doi: parsedDoi || '',
-      outcomeId: data.outcomeId || defaultOutcome || 'primary outcome',
-      timepoint: data.timepoint || 'primary endpoint',
-      analysisPopulation: data.analysisPopulation || 'ITT',
+      // DTA-specific fields
+      indexTest: data.indexTest || '',
+      threshold: data.threshold || '',
+      analysisPopulation: data.analysisPopulation || 'consecutive',
       verificationStatus: data.verificationStatus || 'unverified',
-      verifiedCtgov: !!data.verifiedCtgov,
-      verifiedAact: !!data.verifiedAact,
-      nTotal: data.nTotal ?? null,
-      nIntervention: data.nIntervention ?? null,
-      nControl: data.nControl ?? null,
-      effectEstimate: data.effectEstimate ?? null,
-      lowerCI: data.lowerCI ?? null,
-      upperCI: data.upperCI ?? null,
-      effectType: VALID_EFFECT_TYPES_SET.has(data.effectType) ? data.effectType : 'OR',
-      weight: data.weight ?? null,
-      notes: data.notes || '',
-      // 2x2 raw counts (used when extractInputMode === '2x2')
-      eventsInt: data.eventsInt ?? null,
-      totalInt: data.totalInt ?? null,
-      eventsCtrl: data.eventsCtrl ?? null,
-      totalCtrl: data.totalCtrl ?? null,
+      // 2x2 diagnostic accuracy table
+      tp: data.tp ?? null,
+      fp: data.fp ?? null,
+      fn: data.fn ?? null,
+      tn: data.tn ?? null,
+      // Optional metadata
+      covariate: data.covariate || '',
       subgroup: data.subgroup || '',
-      rob: { d1: '', d2: '', d3: '', d4: '', d5: '', overall: '' }
+      notes: data.notes || '',
+      // QUADAS-2 domains (4 domains + overall)
+      rob: { d1: '', d2: '', d3: '', d4: '', overall: '' }
     };
-    // Auto-compute effect from 2x2 counts if available
-    if (study.eventsInt != null && study.totalInt != null && study.eventsCtrl != null && study.totalCtrl != null) {
-      var computed = compute2x2Effect(study.eventsInt, study.totalInt, study.eventsCtrl, study.totalCtrl, study.effectType);
-      if (computed) {
-        study.effectEstimate = Math.round(computed.effect * 10000) / 10000;
-        study.lowerCI = Math.round(computed.lowerCI * 10000) / 10000;
-        study.upperCI = Math.round(computed.upperCI * 10000) / 10000;
-        study.nIntervention = study.totalInt;
-        study.nControl = study.totalCtrl;
-        study.nTotal = (study.totalInt ?? 0) + (study.totalCtrl ?? 0);
-      }
-    }
     extractedStudies.push(study);
     saveStudy(study);
     pushUndo({ type: 'add', study: JSON.parse(JSON.stringify(study)) });
@@ -6753,115 +6642,32 @@ body.dark-mode .input-error { background: #451a1a !important; }
 
   function renderExtractTable() {
     const body = document.getElementById('extractBody');
-    const head = document.getElementById('extractHead');
     if (!body) return;
-    const is2x2 = extractInputMode === '2x2';
-    const BINARY_TYPES = ['OR', 'RR', 'RD'];
-    // Update table header
-    if (head) {
-      if (is2x2) {
-        head.innerHTML =
-          '<th scope="col">Study ID</th>' +
-          '<th scope="col" title="Primary registry/record identifier (NCT/PMID/DOI)">Trial ID *</th>' +
-          '<th scope="col" title="ClinicalTrials.gov registration number">NCT</th>' +
-          '<th scope="col" title="PubMed identifier">PMID</th>' +
-          '<th scope="col" title="Digital object identifier">DOI</th>' +
-          '<th scope="col" title="Outcome label used in this pooled estimate">Outcome *</th>' +
-          '<th scope="col" title="Outcome timepoint (e.g., 30d, 12mo)">Timepoint *</th>' +
-          '<th scope="col" title="Analysis population (e.g., ITT, PP)">Population</th>' +
-          '<th scope="col" title="Extraction verification status">Verify</th>' +
-          '<th scope="col" title="Number of events in intervention arm">Ev. Int</th>' +
-          '<th scope="col" title="Total participants in intervention arm">Tot. Int</th>' +
-          '<th scope="col" title="Number of events in control arm">Ev. Ctrl</th>' +
-          '<th scope="col" title="Total participants in control arm">Tot. Ctrl</th>' +
-          '<th scope="col" title="Effect measure type (OR, RR, or RD for 2x2 data)">Type</th>' +
-          '<th scope="col" title="Auto-computed effect estimate">Effect</th>' +
-          '<th scope="col" title="Auto-computed 95% confidence interval">95% CI</th>' +
-          '<th scope="col" title="Subgroup label for stratified analysis">Subgroup</th>' +
-          '<th scope="col">Notes</th><th scope="col"></th>';
-      } else {
-        head.innerHTML =
-          '<th scope="col">Study ID</th>' +
-          '<th scope="col" title="Primary registry/record identifier (NCT/PMID/DOI)">Trial ID *</th>' +
-          '<th scope="col" title="ClinicalTrials.gov registration number">NCT</th>' +
-          '<th scope="col" title="PubMed identifier">PMID</th>' +
-          '<th scope="col" title="Digital object identifier">DOI</th>' +
-          '<th scope="col" title="Outcome label used in this pooled estimate">Outcome *</th>' +
-          '<th scope="col" title="Outcome timepoint (e.g., 30d, 12mo)">Timepoint *</th>' +
-          '<th scope="col" title="Analysis population (e.g., ITT, PP)">Population</th>' +
-          '<th scope="col" title="Extraction verification status">Verify</th>' +
-          '<th scope="col">N Total</th><th scope="col">N Int</th><th scope="col">N Ctrl</th>' +
-          '<th scope="col" title="Point estimate of the effect size (e.g., odds ratio, mean difference). Required for analysis.">Effect *</th>' +
-          '<th scope="col" title="Lower bound of the confidence interval. Required for analysis.">Lower CI *</th>' +
-          '<th scope="col" title="Upper bound of the confidence interval. Required for analysis.">Upper CI *</th>' +
-          '<th scope="col" title="Type of effect measure">Type</th>' +
-          '<th scope="col" title="Subgroup label for stratified analysis">Subgroup</th>' +
-          '<th scope="col">Notes</th><th scope="col"></th>';
-      }
-    }
-    // Render table body
-    if (is2x2) {
-      body.innerHTML = extractedStudies.map(s => {
-        var computed = compute2x2Effect(s.eventsInt, s.totalInt, s.eventsCtrl, s.totalCtrl, s.effectType);
-        var effDisp = computed ? (Math.round(computed.effect * 10000) / 10000) : '-';
-        var ciDisp = computed
-          ? (Math.round(computed.lowerCI * 10000) / 10000) + ' to ' + (Math.round(computed.upperCI * 10000) / 10000)
-          : '-';
-        return '<tr data-study-id="' + s.id + '">' +
-          '<td><input type="text" value="' + escapeHtml(s.authorYear) + '" maxlength="200" aria-label="Study ID" data-field="authorYear"></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.trialId || '') + '" maxlength="120" aria-label="Trial ID" data-field="trialId" placeholder="NCT..., PMID..., DOI..."></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.nctId || '') + '" maxlength="20" aria-label="NCT ID" data-field="nctId" style="width:90px"></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.pmid || '') + '" maxlength="20" aria-label="PMID" data-field="pmid" style="width:80px"></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.doi || '') + '" maxlength="120" aria-label="DOI" data-field="doi" style="width:150px"></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.outcomeId || '') + '" maxlength="160" aria-label="Outcome ID" data-field="outcomeId" placeholder="e.g. CV death/HF hospitalization"></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.timepoint || '') + '" maxlength="80" aria-label="Timepoint" data-field="timepoint" placeholder="e.g. 12 months" style="width:100px"></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.analysisPopulation || '') + '" maxlength="60" aria-label="Analysis population" data-field="analysisPopulation" placeholder="e.g. ITT" style="width:80px"></td>' +
-          '<td><select aria-label="Verification status" data-field="verificationStatus" style="width:96px">' +
-            ['verified','needs-check','unverified'].map(v => '<option value="' + v + '"' + ((s.verificationStatus || 'unverified') === v ? ' selected' : '') + '>' + v + '</option>').join('') +
-          '</select></td>' +
-          '<td><input type="number" min="0" value="' + (s.eventsInt ?? '') + '" aria-label="Events intervention" data-field="eventsInt" style="width:60px"></td>' +
-          '<td><input type="number" min="0" value="' + (s.totalInt ?? '') + '" aria-label="Total intervention" data-field="totalInt" style="width:60px"></td>' +
-          '<td><input type="number" min="0" value="' + (s.eventsCtrl ?? '') + '" aria-label="Events control" data-field="eventsCtrl" style="width:60px"></td>' +
-          '<td><input type="number" min="0" value="' + (s.totalCtrl ?? '') + '" aria-label="Total control" data-field="totalCtrl" style="width:60px"></td>' +
-          '<td><select aria-label="Effect type" data-field="effectType">' +
-            BINARY_TYPES.map(t => '<option value="' + t + '"' + (s.effectType === t ? ' selected' : '') + '>' + t + '</option>').join('') +
-          '</select></td>' +
-          '<td style="text-align:center;font-family:monospace;font-size:0.82rem;color:var(--text-muted)" data-field="effectEstimate">' + effDisp + '</td>' +
-          '<td style="text-align:center;font-family:monospace;font-size:0.82rem;color:var(--text-muted)" data-field="lowerCI">' + ciDisp + '</td>' +
-          '<td><input type="text" value="' + escapeHtml(s.subgroup || '') + '" maxlength="100" aria-label="Subgroup" data-field="subgroup" placeholder="e.g. High dose" style="width:80px"></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.notes) + '" maxlength="500" aria-label="Notes" data-field="notes"></td>' +
-          '<td><button class="btn-sm btn-danger" aria-label="Delete study" data-action="delete">X</button></td>' +
-        '</tr>';
-      }).join('');
-    } else {
-      body.innerHTML = extractedStudies.map(s =>
-        '<tr data-study-id="' + s.id + '">' +
-          '<td><input type="text" value="' + escapeHtml(s.authorYear) + '" maxlength="200" aria-label="Study ID" data-field="authorYear"></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.trialId || '') + '" maxlength="120" aria-label="Trial ID" data-field="trialId" placeholder="NCT..., PMID..., DOI..."></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.nctId || '') + '" maxlength="20" aria-label="NCT ID" data-field="nctId" style="width:90px"></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.pmid || '') + '" maxlength="20" aria-label="PMID" data-field="pmid" style="width:80px"></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.doi || '') + '" maxlength="120" aria-label="DOI" data-field="doi" style="width:150px"></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.outcomeId || '') + '" maxlength="160" aria-label="Outcome ID" data-field="outcomeId" placeholder="e.g. CV death/HF hospitalization"></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.timepoint || '') + '" maxlength="80" aria-label="Timepoint" data-field="timepoint" placeholder="e.g. 12 months" style="width:100px"></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.analysisPopulation || '') + '" maxlength="60" aria-label="Analysis population" data-field="analysisPopulation" placeholder="e.g. ITT" style="width:80px"></td>' +
-          '<td><select aria-label="Verification status" data-field="verificationStatus" style="width:96px">' +
-            ['verified','needs-check','unverified'].map(v => '<option value="' + v + '"' + ((s.verificationStatus || 'unverified') === v ? ' selected' : '') + '>' + v + '</option>').join('') +
-          '</select></td>' +
-          '<td><input type="number" min="0" value="' + (s.nTotal ?? '') + '" aria-label="Total sample size" data-field="nTotal"></td>' +
-          '<td><input type="number" min="0" value="' + (s.nIntervention ?? '') + '" aria-label="Intervention group size" data-field="nIntervention"></td>' +
-          '<td><input type="number" min="0" value="' + (s.nControl ?? '') + '" aria-label="Control group size" data-field="nControl"></td>' +
-          '<td><input type="number" step="any" value="' + (s.effectEstimate ?? '') + '" aria-label="Effect estimate" data-field="effectEstimate"></td>' +
-          '<td><input type="number" step="any" value="' + (s.lowerCI ?? '') + '" aria-label="Lower CI" data-field="lowerCI"></td>' +
-          '<td><input type="number" step="any" value="' + (s.upperCI ?? '') + '" aria-label="Upper CI" data-field="upperCI"></td>' +
-          '<td><select aria-label="Effect type" data-field="effectType">' +
-            VALID_EFFECT_TYPES.map(t => '<option value="' + t + '"' + (s.effectType === t ? ' selected' : '') + '>' + t + '</option>').join('') +
-          '</select></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.subgroup || '') + '" maxlength="100" aria-label="Subgroup" data-field="subgroup" placeholder="e.g. High dose" style="width:80px"></td>' +
-          '<td><input type="text" value="' + escapeHtml(s.notes) + '" maxlength="500" aria-label="Notes" data-field="notes"></td>' +
-          '<td><button class="btn-sm btn-danger" aria-label="Delete study" data-action="delete">X</button></td>' +
-        '</tr>'
-      ).join('');
-    }
+    // DTA mode: always render TP/FP/FN/TN columns with auto-computed Sens/Spec
+    body.innerHTML = extractedStudies.map(s => {
+      const tp = parseInt(s.tp), fp = parseInt(s.fp), fn = parseInt(s.fn), tn = parseInt(s.tn);
+      const hasData = [tp, fp, fn, tn].every(v => !isNaN(v) && v >= 0);
+      const sens = hasData && (tp + fn) > 0 ? (tp / (tp + fn) * 100).toFixed(1) + '%' : '-';
+      const spec = hasData && (tn + fp) > 0 ? (tn / (tn + fp) * 100).toFixed(1) + '%' : '-';
+      return '<tr data-study-id="' + s.id + '">' +
+        '<td><input type="text" value="' + escapeHtml(s.authorYear) + '" maxlength="200" aria-label="Author/Year" data-field="authorYear" style="width:120px"></td>' +
+        '<td><input type="text" value="' + escapeHtml(s.pmid || '') + '" maxlength="20" aria-label="PMID" data-field="pmid" style="width:80px"></td>' +
+        '<td><input type="text" value="' + escapeHtml(s.doi || '') + '" maxlength="120" aria-label="DOI" data-field="doi" style="width:120px"></td>' +
+        '<td><input type="text" value="' + escapeHtml(s.indexTest || '') + '" maxlength="100" aria-label="Index Test" data-field="indexTest" placeholder="e.g. hs-cTnT" style="width:100px"></td>' +
+        '<td><input type="text" value="' + escapeHtml(s.threshold || '') + '" maxlength="60" aria-label="Threshold" data-field="threshold" placeholder="e.g. 14 ng/L" style="width:80px"></td>' +
+        '<td><input type="text" value="' + escapeHtml(s.analysisPopulation || '') + '" maxlength="60" aria-label="Population" data-field="analysisPopulation" placeholder="e.g. consecutive" style="width:80px"></td>' +
+        '<td><input type="number" min="0" value="' + (s.tp ?? '') + '" aria-label="True Positives" data-field="tp" style="width:55px"></td>' +
+        '<td><input type="number" min="0" value="' + (s.fp ?? '') + '" aria-label="False Positives" data-field="fp" style="width:55px"></td>' +
+        '<td><input type="number" min="0" value="' + (s.fn ?? '') + '" aria-label="False Negatives" data-field="fn" style="width:55px"></td>' +
+        '<td><input type="number" min="0" value="' + (s.tn ?? '') + '" aria-label="True Negatives" data-field="tn" style="width:55px"></td>' +
+        '<td style="text-align:center;font-family:monospace;font-size:0.82rem;color:var(--text-muted)">' + sens + '</td>' +
+        '<td style="text-align:center;font-family:monospace;font-size:0.82rem;color:var(--text-muted)">' + spec + '</td>' +
+        '<td><input type="text" value="' + escapeHtml(s.covariate || '') + '" maxlength="60" aria-label="Covariate" data-field="covariate" placeholder="e.g. ED" style="width:60px"></td>' +
+        '<td><input type="text" value="' + escapeHtml(s.subgroup || '') + '" maxlength="100" aria-label="Subgroup" data-field="subgroup" placeholder="e.g. ACS" style="width:70px"></td>' +
+        '<td><input type="text" value="' + escapeHtml(s.notes || '') + '" maxlength="500" aria-label="Notes" data-field="notes" style="width:100px"></td>' +
+        '<td><button class="btn-sm btn-danger" aria-label="Delete study" data-action="delete">X</button></td>' +
+      '</tr>';
+    }).join('');
     validateExtraction();
     renderExtractVerificationPanel();
   }
@@ -6946,32 +6752,24 @@ body.dark-mode .input-error { background: #451a1a !important; }
     showToast('Added ' + added + ' studies from screening', 'success');
   }
 
-  // Event delegation for extract table (replaces inline onchange/onclick handlers)
+  // Event delegation for extract table — DTA fields
   const _extractFieldParsers = {
-    trialId: v => (v || '').slice(0, 120),
-    nctId: v => (v || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 20),
     pmid: v => (v || '').replace(/\D/g, '').slice(0, 20),
     doi: v => normalizeDOI(v).slice(0, 120),
-    outcomeId: v => (v || '').slice(0, 160),
-    timepoint: v => (v || '').slice(0, 80),
+    indexTest: v => (v || '').slice(0, 200),
+    threshold: v => (v || '').slice(0, 120),
     analysisPopulation: v => (v || '').slice(0, 60),
     verificationStatus: v => ['verified', 'needs-check', 'unverified'].includes(v) ? v : 'unverified',
-    nTotal: v => toSafeInt(v, null),
-    nIntervention: v => toSafeInt(v, null),
-    nControl: v => toSafeInt(v, null),
-    effectEstimate: v => toSafeFloat(v),
-    lowerCI: v => toSafeFloat(v),
-    upperCI: v => toSafeFloat(v),
+    tp: v => toSafeInt(v, null),
+    fp: v => toSafeInt(v, null),
+    fn: v => toSafeInt(v, null),
+    tn: v => toSafeInt(v, null),
     notes: v => (v || '').slice(0, 500),
     authorYear: v => v,
-    effectType: v => v,
-    eventsInt: v => toSafeInt(v, null),
-    totalInt: v => toSafeInt(v, null),
-    eventsCtrl: v => toSafeInt(v, null),
-    totalCtrl: v => toSafeInt(v, null),
+    covariate: v => (v || '').slice(0, 200),
     subgroup: v => (v || '').slice(0, 100)
   };
-  const _2x2Fields = new Set(['eventsInt', 'totalInt', 'eventsCtrl', 'totalCtrl', 'effectType']);
+  const _dtaCellFields = new Set(['tp', 'fp', 'fn', 'tn']);
   (function initExtractDelegation() {
     const body = document.getElementById('extractBody');
     if (!body) return;
@@ -6985,31 +6783,16 @@ body.dark-mode .input-error { background: #451a1a !important; }
         const parser = _extractFieldParsers[field];
         const value = parser ? parser(target.value) : target.value;
         updateStudy(studyId, field, value);
-        // Auto-compute effect from 2x2 counts when in 2x2 mode
-        if (extractInputMode === '2x2' && _2x2Fields.has(field)) {
+        // Auto-update Sens/Spec display when 2x2 cell changes
+        if (_dtaCellFields.has(field)) {
           const s = extractedStudies.find(x => x.id === studyId);
           if (s) {
-            const computed = compute2x2Effect(s.eventsInt, s.totalInt, s.eventsCtrl, s.totalCtrl, s.effectType);
-            if (computed) {
-              s.effectEstimate = Math.round(computed.effect * 10000) / 10000;
-              s.lowerCI = Math.round(computed.lowerCI * 10000) / 10000;
-              s.upperCI = Math.round(computed.upperCI * 10000) / 10000;
-              s.nIntervention = s.totalInt;
-              s.nControl = s.totalCtrl;
-              s.nTotal = (s.totalInt ?? 0) + (s.totalCtrl ?? 0);
-              saveStudy(s);
-            } else {
-              s.effectEstimate = null; s.lowerCI = null; s.upperCI = null;
-              saveStudy(s);
-            }
-            // Update computed display in the row (2x2 mode shows effect + CI in read-only cells)
-            var effEl = row.querySelector('[data-field="effectEstimate"]');
-            var ciEl = row.querySelector('[data-field="lowerCI"]');
-            if (effEl) effEl.textContent = s.effectEstimate != null ? s.effectEstimate : '-';
-            if (ciEl) {
-              ciEl.textContent = (s.lowerCI != null && s.upperCI != null)
-                ? s.lowerCI + ' to ' + s.upperCI : '-';
-            }
+            const tp = parseInt(s.tp), fp = parseInt(s.fp), fn = parseInt(s.fn), tn = parseInt(s.tn);
+            const ok = [tp, fp, fn, tn].every(v => !isNaN(v) && v >= 0);
+            const sensEl = row.querySelector('.auto-sens');
+            const specEl = row.querySelector('.auto-spec');
+            if (sensEl) sensEl.textContent = ok && (tp + fn) > 0 ? (tp / (tp + fn) * 100).toFixed(1) + '%' : '-';
+            if (specEl) specEl.textContent = ok && (tn + fp) > 0 ? (tn / (tn + fp) * 100).toFixed(1) + '%' : '-';
           }
         }
       }
@@ -7038,42 +6821,47 @@ body.dark-mode .input-error { background: #451a1a !important; }
 
   function exportToMetaSprint(format) {
     if (!extractedStudies.length) { showToast('No studies to export', 'warning'); return; }
-    if (format === 'pairwise') {
-      const header = 'Study ID,Trial ID,NCT ID,PMID,DOI,Outcome,Timepoint,Population,Verification,N Total,N Intervention,N Control,Effect,Lower CI,Upper CI,Type,Weight,Notes';
-      const rows = extractedStudies.map(s =>
-        [csvSafeCell(s.authorYear), csvSafeCell(s.trialId || ''), csvSafeCell(s.nctId || ''), csvSafeCell(s.pmid || ''), csvSafeCell(s.doi || ''),
-         csvSafeCell(s.outcomeId || ''), csvSafeCell(s.timepoint || ''), csvSafeCell(s.analysisPopulation || ''), csvSafeCell(s.verificationStatus || ''),
-         s.nTotal ?? '', s.nIntervention ?? '', s.nControl ?? '',
-         s.effectEstimate ?? '', s.lowerCI ?? '', s.upperCI ?? '',
-         csvSafeCell(s.effectType), s.weight ?? '', '"' + (s.notes || '').replace(/"/g, '""') + '"'].join(',')
-      );
-      downloadFile(header + '\n' + rows.join('\n'), 'metasprint-pairwise-export.csv', 'text/csv');
-    } else if (format === 'nma') {
+    if (format === 'dta' || format === 'pairwise') {
+      const header = 'Study,PMID,DOI,Index Test,Threshold,Population,TP,FP,FN,TN,Sens,Spec,Covariate,Subgroup,Notes';
+      const rows = extractedStudies.map(s => {
+        const tp = parseInt(s.tp), fp = parseInt(s.fp), fn = parseInt(s.fn), tn = parseInt(s.tn);
+        const ok = [tp, fp, fn, tn].every(v => !isNaN(v) && v >= 0);
+        const sens = ok && (tp + fn) > 0 ? (tp / (tp + fn)).toFixed(4) : '';
+        const spec = ok && (tn + fp) > 0 ? (tn / (tn + fp)).toFixed(4) : '';
+        return [csvSafeCell(s.authorYear), csvSafeCell(s.pmid || ''), csvSafeCell(s.doi || ''),
+         csvSafeCell(s.indexTest || ''), csvSafeCell(s.threshold || ''), csvSafeCell(s.analysisPopulation || ''),
+         s.tp ?? '', s.fp ?? '', s.fn ?? '', s.tn ?? '', sens, spec,
+         csvSafeCell(s.covariate || ''), csvSafeCell(s.subgroup || ''),
+         '"' + (s.notes || '').replace(/"/g, '""') + '"'].join(',');
+      });
+      downloadFile(header + '\n' + rows.join('\n'), 'metasprint-dta-export.csv', 'text/csv');
+    } else if (format === 'json') {
       const data = extractedStudies.map(s => ({
-        id: s.id, authorYear: s.authorYear,
-        nTotal: s.nTotal, effectEstimate: s.effectEstimate,
-        lowerCI: s.lowerCI, upperCI: s.upperCI, effectType: s.effectType
+        id: s.id, authorYear: s.authorYear, pmid: s.pmid, doi: s.doi,
+        indexTest: s.indexTest, threshold: s.threshold,
+        tp: s.tp, fp: s.fp, fn: s.fn, tn: s.tn,
+        covariate: s.covariate, subgroup: s.subgroup
       }));
-      downloadFile(JSON.stringify(data, null, 2), 'metasprint-nma-export.json', 'application/json');
+      downloadFile(JSON.stringify(data, null, 2), 'metasprint-dta-export.json', 'application/json');
     }
     showToast('Exported ' + extractedStudies.length + ' studies', 'success');
   }
 
   function exportStudiesCSV() {
     if (!extractedStudies.length) { showToast('No studies to export', 'warning'); return; }
-    var has2x2 = extractedStudies.some(s => s.eventsInt != null || s.totalInt != null);
-    var header = 'Study ID,Trial ID,NCT ID,PMID,DOI,Outcome,Timepoint,Population,Verification,N Total,N Intervention,N Control,Effect,Lower CI,Upper CI,Type,Weight,Notes';
-    if (has2x2) header += ',Events Int,Total Int,Events Ctrl,Total Ctrl';
+    const header = 'Study,PMID,DOI,Index Test,Threshold,Population,TP,FP,FN,TN,Sens,Spec,Covariate,Subgroup,Notes';
     const rows = extractedStudies.map(s => {
-      var base = [csvSafeCell(s.authorYear), csvSafeCell(s.trialId || ''), csvSafeCell(s.nctId || ''), csvSafeCell(s.pmid || ''), csvSafeCell(s.doi || ''),
-       csvSafeCell(s.outcomeId || ''), csvSafeCell(s.timepoint || ''), csvSafeCell(s.analysisPopulation || ''), csvSafeCell(s.verificationStatus || ''),
-       s.nTotal ?? '', s.nIntervention ?? '', s.nControl ?? '',
-       s.effectEstimate ?? '', s.lowerCI ?? '', s.upperCI ?? '',
-       csvSafeCell(s.effectType), s.weight ?? '', '"' + (s.notes || '').replace(/"/g, '""') + '"'];
-      if (has2x2) base.push(s.eventsInt ?? '', s.totalInt ?? '', s.eventsCtrl ?? '', s.totalCtrl ?? '');
-      return base.join(',');
+      const tp = parseInt(s.tp), fp = parseInt(s.fp), fn = parseInt(s.fn), tn = parseInt(s.tn);
+      const ok = [tp, fp, fn, tn].every(v => !isNaN(v) && v >= 0);
+      const sens = ok && (tp + fn) > 0 ? (tp / (tp + fn)).toFixed(4) : '';
+      const spec = ok && (tn + fp) > 0 ? (tn / (tn + fp)).toFixed(4) : '';
+      return [csvSafeCell(s.authorYear), csvSafeCell(s.pmid || ''), csvSafeCell(s.doi || ''),
+       csvSafeCell(s.indexTest || ''), csvSafeCell(s.threshold || ''), csvSafeCell(s.analysisPopulation || ''),
+       s.tp ?? '', s.fp ?? '', s.fn ?? '', s.tn ?? '', sens, spec,
+       csvSafeCell(s.covariate || ''), csvSafeCell(s.subgroup || ''),
+       '"' + (s.notes || '').replace(/"/g, '""') + '"'].join(',');
     });
-    downloadFile(header + '\n' + rows.join('\n'), 'studies-export.csv', 'text/csv');
+    downloadFile(header + '\n' + rows.join('\n'), 'dta-studies-export.csv', 'text/csv');
   }
 
   // ============================================================
@@ -7969,24 +7757,25 @@ body.dark-mode .input-error { background: #451a1a !important; }
   // --- Input validation for extraction table ---
   function validateExtraction() {
     const warnings = [];
-    const types = new Set();
+    let zeroCellCount = 0;
     let unverifiedCount = 0;
     for (const s of extractedStudies) {
-      if (s.effectType) types.add(s.effectType);
-      if (!String(s.trialId || '').trim()) warnings.push((s.authorYear || 'Unnamed study') + ': Trial ID is required (NCT/PMID/DOI)');
-      if (!String(s.outcomeId || '').trim()) warnings.push((s.authorYear || 'Unnamed study') + ': Outcome is required');
-      if (!String(s.timepoint || '').trim()) warnings.push((s.authorYear || 'Unnamed study') + ': Timepoint is required');
+      const label = s.authorYear || 'Unnamed study';
+      if (!String(s.indexTest || '').trim()) warnings.push(label + ': Index test is required');
       if ((s.verificationStatus || 'unverified') !== 'verified') unverifiedCount++;
-      const e = s.effectEstimate, lo = s.lowerCI, hi = s.upperCI;
-      if (e !== null && lo !== null && hi !== null) {
-        const isR = ['OR', 'RR', 'HR'].includes(s.effectType);
-        if (isR && e <= 0) warnings.push(s.authorYear + ': ' + s.effectType + ' must be positive (got ' + e + ')');
-        if (isR && lo <= 0) warnings.push(s.authorYear + ': Lower CI must be positive for ' + s.effectType);
-        if (lo > hi) warnings.push(s.authorYear + ': Lower CI > Upper CI');
-        if (lo > e || e > hi) warnings.push(s.authorYear + ': Effect estimate outside CI bounds');
+      const tp = parseInt(s.tp), fp = parseInt(s.fp), fn = parseInt(s.fn), tn = parseInt(s.tn);
+      const cells = [tp, fp, fn, tn];
+      const hasAll = cells.every(v => !isNaN(v));
+      if (!hasAll) {
+        if (cells.some(v => !isNaN(v))) warnings.push(label + ': Incomplete 2x2 data (all of TP/FP/FN/TN required)');
+        continue;
       }
+      if (cells.some(v => v < 0)) warnings.push(label + ': Negative cell count detected');
+      if (tp + fn === 0) warnings.push(label + ': No diseased subjects (TP + FN = 0)');
+      if (fp + tn === 0) warnings.push(label + ': No non-diseased subjects (FP + TN = 0)');
+      if (cells.some(v => v === 0)) zeroCellCount++;
     }
-    if (types.size > 1) warnings.push('Mixed effect types detected: ' + [...types].join(', ') + '. Analysis will use the first study\'s type.');
+    if (zeroCellCount > 0) warnings.push(zeroCellCount + ' study(ies) have zero cells — continuity correction will be applied.');
     if (unverifiedCount > 0) warnings.push(unverifiedCount + ' study(ies) not yet registry-verified.');
     const el = document.getElementById('extractValidation');
     if (el) {
@@ -10327,7 +10116,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
     // Center on target node at zoom level 2 (glyph detail)
     var canvas = document.getElementById('ayatCanvas');
     if (!canvas) return;
-    var W = canvas.width, H = canvas.height;
+    // Use logical (CSS) dimensions, not DPR-scaled canvas.width
+    var rect = canvas.getBoundingClientRect();
+    var W = rect.width, H = rect.height;
     if (!_ayatState) _ayatState = { zoom: 1, panX: 0, panY: 0 };
     _ayatState.zoom = 2;
     _ayatState.panX = -(target.x - W / 2) * _ayatState.zoom;
@@ -10541,6 +10332,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     _bayanMatrix = buildBayanMatrix(trials);
     if (!_bayanMatrix) return;
 
+    const isDark = document.body.classList.contains('dark-mode') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !document.body.classList.contains('light-forced'));
     const voids = computeVoidScores(_bayanMatrix);
     const { interventions, outcomeLabels, cells } = _bayanMatrix;
     const canvas = document.getElementById('matrixCanvas');
@@ -10581,20 +10373,28 @@ body.dark-mode .input-error { background: #451a1a !important; }
         let bg, fg, title;
         if (count > 0) {
           const intensity = Math.min(1, count / maxCount);
-          const g = Math.round(180 + (1 - intensity) * 75);
-          bg = 'rgb(' + Math.round(220 - intensity * 100) + ',' + g + ',' + Math.round(220 - intensity * 100) + ')';
-          fg = intensity > 0.6 ? '#fff' : 'var(--text)';
+          if (isDark) {
+            // Dark mode: deeper greens
+            bg = 'rgb(' + Math.round(20 + intensity * 30) + ',' + Math.round(50 + intensity * 80) + ',' + Math.round(20 + intensity * 30) + ')';
+            fg = intensity > 0.4 ? '#d1fae5' : 'var(--text)';
+          } else {
+            const g = Math.round(180 + (1 - intensity) * 75);
+            bg = 'rgb(' + Math.round(220 - intensity * 100) + ',' + g + ',' + Math.round(220 - intensity * 100) + ')';
+            fg = intensity > 0.6 ? '#fff' : 'var(--text)';
+          }
           title = interventions[iv] + ' x ' + outcomeLabels[oc] + ': ' + count + ' trials';
         } else if (voidInfo) {
-          bg = voidInfo.voidScore > 5 ? '#fca5a5' : voidInfo.voidScore > 2 ? '#fed7aa' : '#fef3c7';
-          fg = '#92400e';
+          bg = isDark
+            ? (voidInfo.voidScore > 5 ? '#7f1d1d' : voidInfo.voidScore > 2 ? '#78350f' : '#713f12')
+            : (voidInfo.voidScore > 5 ? '#fca5a5' : voidInfo.voidScore > 2 ? '#fed7aa' : '#fef3c7');
+          fg = isDark ? '#fbbf24' : '#92400e';
           title = 'VOID: ' + interventions[iv] + ' x ' + outcomeLabels[oc] + ' (score ' + voidInfo.voidScore + ')';
         } else {
           bg = 'var(--surface)';
           fg = 'var(--text-muted)';
           title = interventions[iv] + ' x ' + outcomeLabels[oc] + ': 0 trials';
         }
-        html += '<td style="padding:2px;border:1px solid var(--border);text-align:center;background:' + bg + ';color:' + fg + ';cursor:pointer;min-width:28px" title="' + escapeHtml(title) + '" onclick="clickBayanCell(' + iv + ',' + oc + ',' + count + ')">';
+        html += '<td tabindex="0" role="button" style="padding:2px;border:1px solid var(--border);text-align:center;background:' + bg + ';color:' + fg + ';cursor:pointer;min-width:28px" title="' + escapeHtml(title) + '" onclick="clickBayanCell(' + iv + ',' + oc + ',' + count + ')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();clickBayanCell(' + iv + ',' + oc + ',' + count + ')}">';
         html += count > 0 ? count : (voidInfo ? '<span style="font-size:0.65rem">&#x25CB;</span>' : '');
         html += '</td>';
       }
@@ -10682,7 +10482,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         return c.subcategory === nodeScId && (clsLow.includes(nodeLabelLow) || nodeLabelLow.includes(clsLow));
       });
       if (matchedCluster && matchedCluster.pooled) {
-        const i2 = matchedCluster.pooled.i2 ?? null;
+        const i2 = matchedCluster.pooled.I2 ?? null;
         if (i2 != null) {
           signals.outcomeConsistency = i2 > 75 ? 'contradictory' : i2 > 50 ? 'mixed' : 'consistent';
         }
@@ -10695,7 +10495,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     if (signals.outcomeConsistency === 'contradictory') {
       verdict = 'CONTRADICTORY';
       confidence = 0.85;
-      reasoning = 'High heterogeneity (I\u00B2>' + (matchedCluster?.pooled?.i2 ?? '75') + '%) suggests conflicting evidence across trials.';
+      reasoning = 'High heterogeneity (I\u00B2>' + (matchedCluster?.pooled?.I2 ?? '75') + '%) suggests conflicting evidence across trials.';
     } else if (tc < 3 && signals.recentActivity === 'dormant') {
       verdict = 'DESERT';
       confidence = 0.90;
@@ -11068,7 +10868,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
           sparkYears.map(v => '<div class="sparkline-bar" style="height:' + Math.max(2, (v/maxSpk)*100) + '%"></div>').join('') +
         '</div>' +
         '<div class="card-actions">' +
-          '<button class="opp-start-btn" onclick="startReviewFromUniverse(\'' + escapeHtml(c.label.replace(/'/g, '\\&#39;')) + '\',\'' + escapeHtml(subcatNode.id) + '\')">Start Review</button>' +
+          '<button class="opp-start-btn" onclick="startReviewFromUniverse(\'' + escapeHtml(c.label) + '\',\'' + escapeHtml(subcatNode.id) + '\')">Start Review</button>' +
         '</div>' +
       '</div>';
     }).join('');
@@ -11077,6 +10877,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
   // === DRILL-DOWN PANEL (click-to-expand provenance system) ===
   // "Read! In the name of your Lord who created" — 96:1
 
+  let _drillDownEscHandler = null;
   function showDrillDownPanel(title, bodyHtml) {
     const panel = document.getElementById('drillDownPanel');
     const titleEl = document.getElementById('drillDownTitle');
@@ -11086,8 +10887,20 @@ body.dark-mode .input-error { background: #451a1a !important; }
     bodyEl.innerHTML = bodyHtml;
     panel.style.display = 'block';
     panel.scrollTop = 0;
-    // Scroll panel into view
     panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // Focus the close button for keyboard users
+    const closeBtn = panel.querySelector('button[aria-label="Close drill-down"]');
+    if (closeBtn) closeBtn.focus();
+    // Escape key closes the panel
+    if (_drillDownEscHandler) document.removeEventListener('keydown', _drillDownEscHandler);
+    _drillDownEscHandler = function(e) {
+      if (e.key === 'Escape') {
+        panel.style.display = 'none';
+        document.removeEventListener('keydown', _drillDownEscHandler);
+        _drillDownEscHandler = null;
+      }
+    };
+    document.addEventListener('keydown', _drillDownEscHandler);
   }
 
   // Drill-down for Al-Burhan cluster: shows every individual study with provenance
@@ -11315,9 +11128,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
       html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)" title="' + escapeHtml(titleTooltip) + '">' + escapeHtml(titleShort) + '</td>';
       html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border);font-size:0.78rem" title="' + escapeHtml(ivs) + '">' + escapeHtml(ivs) + '</td>';
       html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border);font-size:0.78rem" title="' + escapeHtml(ocs) + '">' + escapeHtml(ocs) + '</td>';
-      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border);text-align:right">' + (t.enrollment || '?') + '</td>';
-      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)">' + (t.phase || '?') + '</td>';
-      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)">' + (t.startYear || '?') + '</td>';
+      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border);text-align:right">' + escapeHtml(String(t.enrollment || '?')) + '</td>';
+      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)">' + escapeHtml(String(t.phase || '?')) + '</td>';
+      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)">' + escapeHtml(String(t.startYear || '?')) + '</td>';
       var srcBadge = t.source === 'aact'
         ? '<span style="background:#22d3ee;color:#0e1b27;padding:1px 5px;border-radius:3px;font-size:0.7rem;font-weight:600">AACT</span>'
         : '<span style="background:#94a3b8;color:#fff;padding:1px 5px;border-radius:3px;font-size:0.7rem">CT.gov</span>';
@@ -11335,7 +11148,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
       if (relLinks.length > 0) {
         html += '<div style="margin-top:12px;padding-top:8px;border-top:1px solid var(--border)">';
         html += '<div style="font-weight:600;font-size:0.82rem;margin-bottom:4px">Related Signs (Tafsir)</div>';
-        var typeColors = { drug: '#a78bfa', outcome: '#fbbf24', mechanism: '#2dd4bf' };
+        var typeColors = { drug: '#7c3aed', outcome: '#b45309', mechanism: '#0d9488' };
+        var typeBgColors = { drug: '#a78bfa22', outcome: '#fbbf2422', mechanism: '#2dd4bf22' };
         var typeLabels = { drug: 'Drug Siblings', outcome: 'Outcome Bridges', mechanism: 'Mechanism Overlap' };
         var grouped = {};
         for (var ri = 0; ri < relLinks.length; ri++) {
@@ -11353,7 +11167,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
             var sibId = gl.sourceId === node.id ? gl.targetId : gl.sourceId;
             var parts = sibId.split(':');
             var bgColor = typeColors[lt];
-            html += '<span onclick="zoomToAyatNode(\'' + escapeHtml(sibId) + '\')" style="display:inline-block;margin:2px 6px 2px 0;padding:2px 8px;background:' + bgColor + '22;border:1px solid ' + bgColor + ';color:' + bgColor + ';border-radius:12px;font-size:0.75rem;cursor:pointer" title="' + escapeHtml(gl.label || '') + '">';
+            html += '<span tabindex="0" role="button" onclick="zoomToAyatNode(\'' + escapeHtml(sibId) + '\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();zoomToAyatNode(\'' + escapeHtml(sibId) + '\')}" style="display:inline-block;margin:2px 6px 2px 0;padding:2px 8px;background:' + (typeBgColors[lt] || bgColor + '22') + ';border:1px solid ' + bgColor + ';color:' + bgColor + ';border-radius:12px;font-size:0.75rem;cursor:pointer" title="' + escapeHtml(gl.label || '') + '">';
             html += escapeHtml(parts[1] || sibId) + ' <span style="opacity:0.7">(' + escapeHtml(parts[0] || '') + ')</span>';
             html += '</span>';
           }
@@ -11527,9 +11341,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
       html += '<tr style="' + rowBg + '"><td style="padding:5px 8px;border-bottom:1px solid var(--border);white-space:nowrap">' + nctLink + '</td>';
       html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)" title="' + escapeHtml(t.title || '') + '">' + escapeHtml(titleShort) + '</td>';
       html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border);font-size:0.78rem">' + escapeHtml(ivs) + '</td>';
-      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border);text-align:right">' + (t.enrollment || '?') + '</td>';
-      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)">' + (t.phase || '?') + '</td>';
-      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)">' + (t.startYear || '?') + '</td></tr>';
+      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border);text-align:right">' + escapeHtml(String(t.enrollment || '?')) + '</td>';
+      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)">' + escapeHtml(String(t.phase || '?')) + '</td>';
+      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)">' + escapeHtml(String(t.startYear || '?')) + '</td></tr>';
     }
     html += '</tbody></table></div>';
     if (trials.length > 50) {
@@ -11559,15 +11373,25 @@ body.dark-mode .input-error { background: #451a1a !important; }
     }
     const project = projects.find(p => p.id === currentProjectId);
     if (project) {
+      // DTA: auto-populate PIRD from diagnostic subcategory
+      const dtaConditionMap = {
+        acs_biomarker: { I: 'high-sensitivity cardiac troponin', C: 'coronary angiography or adjudicated diagnosis', O: 'acute myocardial infarction' },
+        hf_biomarker: { I: 'BNP / NT-proBNP', C: 'echocardiography + clinical diagnosis', O: 'heart failure' },
+        echo: { I: 'transthoracic echocardiography', C: 'cardiac catheterization or clinical gold standard', O: 'structural heart disease' },
+        ct_angio: { I: 'coronary CT angiography (CCTA)', C: 'invasive coronary angiography', O: 'obstructive coronary artery disease' },
+        cmr: { I: 'cardiac magnetic resonance imaging', C: 'endomyocardial biopsy or clinical diagnosis', O: 'myocardial disease' },
+        stress_test: { I: 'exercise or pharmacologic stress test', C: 'coronary angiography', O: 'myocardial ischemia' },
+        ecg: { I: 'ECG / Holter monitoring', C: 'electrophysiology study or clinical diagnosis', O: 'cardiac arrhythmia' },
+        nuclear: { I: 'SPECT / PET myocardial perfusion imaging', C: 'coronary angiography', O: 'myocardial ischemia' },
+        vascular_us: { I: 'vascular ultrasound / ABI', C: 'angiography or clinical diagnosis', O: 'peripheral arterial disease' },
+        coag: { I: 'D-dimer assay', C: 'CTPA or venography', O: 'pulmonary embolism / VTE' }
+      };
+      const dtaDefaults = dtaConditionMap[subcatId] || { I: 'diagnostic test of interest', C: 'clinical reference standard', O: 'cardiovascular diagnosis' };
       project.pico = {
-        P: cat.label.toLowerCase().includes('hypertension') ? 'adults with hypertension' :
-           'adults with ' + cat.label.toLowerCase(),
-        I: pickedIntervention,
-        C: 'placebo or standard care',
-        O: cat.id === 'hf' ? 'CV death or HF hospitalization' :
-           cat.id === 'acs' ? 'MACE (CV death, MI, stroke)' :
-           cat.id === 'af' ? 'stroke or systemic embolism' :
-           'cardiovascular outcomes'
+        P: 'adults with suspected ' + cat.label.toLowerCase().replace(/\s*\(.*\)/, ''),
+        I: dtaDefaults.I,
+        C: dtaDefaults.C,
+        O: dtaDefaults.O
       };
       idbPut('projects', project);
     }
@@ -12179,11 +12003,11 @@ body.dark-mode .input-error { background: #451a1a !important; }
         const icon = HUKM_ICONS[hukm.verdict] || HUKM_ICONS.INCONCLUSIVE;
         const bx = x - r * 0.65, by = y + r * 0.55;
         ctx.beginPath();
-        ctx.arc(bx, by, 5, 0, Math.PI * 2);
+        ctx.arc(bx, by, 7, 0, Math.PI * 2);
         ctx.fillStyle = icon.color;
         ctx.fill();
         ctx.fillStyle = '#fff';
-        ctx.font = 'bold 7px system-ui';
+        ctx.font = 'bold 9px system-ui';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(icon.symbol, bx, by);
@@ -13607,16 +13431,23 @@ body.dark-mode .input-error { background: #451a1a !important; }
   let _ayatState = null; // persistent zoom/pan state
   let _alBurhanState = null; // persistent zoom/pan state for Al-Burhan
 
+  let _ayatDataVersion = 0; // incremented when universeTrialsCache changes
+  let _ayatLastBuiltVersion = -1; // tracks which version was last built
+
   function renderAyatUniverse(trials) {
     let canvas = document.getElementById('ayatCanvas');
     if (!canvas) return;
-    const clusters = buildAyatClusters(trials);
-    if (clusters.length === 0) return;
-    _lastAyatClusters = clusters;
-    _fihrisIndex = buildFihrisIndex(trials, clusters);
-    _tafsirLinks = computeTafsirLinks(clusters);
-    computeAllHukm(clusters);
-    renderAyatUniverseOnCanvas(canvas, clusters, 'ayat');
+    // Only rebuild expensive data pipeline when trials actually changed
+    if (_ayatLastBuiltVersion !== _ayatDataVersion || !_lastAyatClusters) {
+      const clusters = buildAyatClusters(trials);
+      if (clusters.length === 0) return;
+      _lastAyatClusters = clusters;
+      _fihrisIndex = buildFihrisIndex(trials, clusters);
+      _tafsirLinks = computeTafsirLinks(clusters);
+      computeAllHukm(clusters);
+      _ayatLastBuiltVersion = _ayatDataVersion;
+    }
+    renderAyatUniverseOnCanvas(canvas, _lastAyatClusters, 'ayat');
   }
 
   async function renderAlBurhanUniverse() {
@@ -13928,11 +13759,12 @@ body.dark-mode .input-error { background: #451a1a !important; }
       const lodLabels = ['Overview', 'Clusters', 'Glyphs', 'Full Detail'];
       ctx.fillText('LOD: ' + lodLabels[lod] + ' (' + st.zoom.toFixed(1) + 'x)', W - 12, 16);
 
-      // Hukm verdict summary (if enabled)
+      // Hukm verdict summary (if enabled) — positioned above phase legend to avoid overlap
       if (_kitabLayers.verdicts && _hukmVerdicts.size > 0) {
         const counts = { SUFFICIENT: 0, GROWING: 0, INCONCLUSIVE: 0, CONTRADICTORY: 0, DESERT: 0 };
         for (const [, v] of _hukmVerdicts) counts[v.verdict]++;
         const labels = Object.entries(counts).filter(([, c]) => c > 0);
+        const hukmY = H - 82;
         let hx = 10;
         ctx.font = '9px system-ui';
         ctx.textAlign = 'left';
@@ -13940,9 +13772,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
         for (const [verdict, count] of labels) {
           const icon = HUKM_ICONS[verdict];
           ctx.fillStyle = icon.color;
-          ctx.fillRect(hx, H - 18, 8, 8);
+          ctx.fillRect(hx, hukmY, 8, 8);
           ctx.fillStyle = tc.text;
-          ctx.fillText(verdict[0] + ': ' + count, hx + 10, H - 18);
+          ctx.fillText(verdict[0] + ': ' + count, hx + 10, hukmY);
           hx += ctx.measureText(verdict[0] + ': ' + count).width + 18;
         }
       }
@@ -14247,9 +14079,10 @@ body.dark-mode .input-error { background: #451a1a !important; }
 
     freshCanvas.style.cursor = 'grab';
 
-    // Zoom control buttons (overlaid on canvas)
+    // Zoom control buttons (overlaid on canvas) — recreate each time to avoid stale closures
     let zoomBar = freshCanvas.parentElement.querySelector('.ayat-zoom-bar');
-    if (!zoomBar) {
+    if (zoomBar) zoomBar.remove();
+    {
       zoomBar = document.createElement('div');
       zoomBar.className = 'ayat-zoom-bar';
       zoomBar.style.cssText = 'position:absolute;bottom:12px;right:12px;display:flex;gap:4px;z-index:5;';
@@ -14611,8 +14444,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
         var titleShort = (t.title || '').length > 50 ? t.title.substring(0, 47) + '...' : (t.title || '');
         html += '<tr><td style="padding:3px 6px;border-bottom:1px solid var(--border)">' + nctLink + '</td>';
         html += '<td style="padding:3px 6px;border-bottom:1px solid var(--border)" title="' + escapeHtml(t.title || '') + '">' + escapeHtml(titleShort) + '</td>';
-        html += '<td style="padding:3px 6px;border-bottom:1px solid var(--border);text-align:right">' + (t.enrollment || '?') + '</td>';
-        html += '<td style="padding:3px 6px;border-bottom:1px solid var(--border)">' + (t.phase || '?') + '</td></tr>';
+        html += '<td style="padding:3px 6px;border-bottom:1px solid var(--border);text-align:right">' + escapeHtml(String(t.enrollment || '?')) + '</td>';
+        html += '<td style="padding:3px 6px;border-bottom:1px solid var(--border)">' + escapeHtml(String(t.phase || '?')) + '</td></tr>';
       }
       html += '</tbody></table></div>';
       if (catTrials.length > 20) html += '<div style="font-size:0.75rem;color:var(--text-muted)">+' + (catTrials.length - 20) + ' more</div>';
@@ -14796,9 +14629,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
         var rowBg = i % 2 === 0 ? '' : 'background:var(--bg-alt,#f8fafc);';
         html += '<tr style="' + rowBg + '"><td style="padding:5px 8px;border-bottom:1px solid var(--border);white-space:nowrap">' + nctLink + '</td>';
         html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)" title="' + escapeHtml(t.title || '') + '">' + escapeHtml(titleShort) + '</td>';
-        html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border);text-align:right">' + (t.enrollment || '?') + '</td>';
-        html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)">' + (t.phase || '?') + '</td>';
-        html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)">' + (t.startYear || '?') + '</td></tr>';
+        html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border);text-align:right">' + escapeHtml(String(t.enrollment || '?')) + '</td>';
+        html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)">' + escapeHtml(String(t.phase || '?')) + '</td>';
+        html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)">' + escapeHtml(String(t.startYear || '?')) + '</td></tr>';
       }
       html += '</tbody></table></div>';
       if (matchTrials.length > 30) html += '<div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px">Showing 30 of ' + matchTrials.length + '</div>';
@@ -15069,8 +14902,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
       html += '<tr style="' + rowBg + '"><td style="padding:5px 8px;border-bottom:1px solid var(--border);white-space:nowrap">' + nctLink + '</td>';
       html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)" title="' + escapeHtml(t.title || '') + '">' + escapeHtml(titleShort) + '</td>';
       html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border);color:' + cat.color + '">' + escapeHtml(cat.label) + '</td>';
-      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border);text-align:right">' + (t.enrollment || '?') + '</td>';
-      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)">' + (t.startYear || '?') + '</td></tr>';
+      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border);text-align:right">' + escapeHtml(String(t.enrollment || '?')) + '</td>';
+      html += '<td style="padding:5px 8px;border-bottom:1px solid var(--border)">' + escapeHtml(String(t.startYear || '?')) + '</td></tr>';
     }
     html += '</tbody></table></div>';
     if (matchTrials.length > 50) html += '<div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px">Showing 50 of ' + matchTrials.length + '</div>';
@@ -15088,24 +14921,24 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const titleRaw = document.getElementById('protTitle').value || '';
     const title = titleRaw.trim() || 'Untitled Review';
     const P = (document.getElementById('protP').value || '').trim() || '[Population]';
-    const I = (document.getElementById('protI').value || '').trim() || '[Intervention]';
-    const C = (document.getElementById('protC').value || '').trim() || '[Comparator]';
-    const O = (document.getElementById('protO').value || '').trim() || '[Outcomes]';
+    const I = (document.getElementById('protI').value || '').trim() || '[Index test]';
+    const C = (document.getElementById('protC').value || '').trim() || '[Reference standard]';
+    const O = (document.getElementById('protO').value || '').trim() || '[Target condition]';
     const studyType = document.getElementById('protStudyType').value;
     const now = new Date();
     const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     const monthYear = now.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-    const cardioFocused = /\b(cardio|heart|atrial|hypertension|lipid|coronary|vascular|myocard)\b/i.test([P, I, O].join(' '));
+    const cardioFocused = /\b(cardio|heart|atrial|hypertension|lipid|coronary|vascular|myocard|troponin|bnp|echocardiogr|ccta|cmr)\b/i.test([P, I, O].join(' '));
     const checklist = [
       { label: 'Review title is specific', ok: titleRaw.trim().length >= 15 },
       { label: 'Population specified', ok: P !== '[Population]' },
-      { label: 'Intervention specified', ok: I !== '[Intervention]' },
-      { label: 'Comparator specified', ok: C !== '[Comparator]' },
-      { label: 'Primary outcomes specified', ok: O !== '[Outcomes]' },
-      { label: 'Cardiology focus explicit', ok: cardioFocused },
+      { label: 'Index test specified', ok: I !== '[Index test]' },
+      { label: 'Reference standard specified', ok: C !== '[Reference standard]' },
+      { label: 'Target condition specified', ok: O !== '[Target condition]' },
+      { label: 'Cardiology/DTA focus explicit', ok: cardioFocused },
       { label: 'Study type pre-specified', ok: !!studyType },
       { label: 'Dual-reviewer workflow specified', ok: true },
-      { label: 'Planned RoB + GRADE specified', ok: true },
+      { label: 'Planned QUADAS-2 + GRADE specified', ok: true },
       { label: 'Planned sensitivity analyses specified', ok: true }
     ];
     const complete = checklist.filter(c => c.ok).length;
@@ -15113,52 +14946,51 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const readinessColor = readiness >= 85 ? '#16a34a' : readiness >= 70 ? '#d97706' : '#ef4444';
 
     const protocol =
-      '# PROSPERO Protocol (Registration-Ready Draft)\n\n' +
+      '# PROSPERO Protocol (Registration-Ready Draft) -- Diagnostic Test Accuracy Review\n\n' +
       '## Administrative Information\n' +
       '- Review title: ' + title + '\n' +
       '- Registration target: PROSPERO (CRD42026XXXXXX placeholder)\n' +
-      '- Review type: Intervention systematic review with meta-analysis\n' +
-      '- Clinical area: ' + (cardioFocused ? 'Cardiology / cardiovascular medicine' : 'General clinical medicine') + '\n' +
+      '- Review type: Diagnostic test accuracy systematic review with meta-analysis\n' +
+      '- Clinical area: ' + (cardioFocused ? 'Cardiology / cardiovascular diagnostics' : 'General clinical medicine') + '\n' +
       '- Planned start date: ' + dateStr + '\n' +
       '- Anticipated completion window: ' + monthYear + ' to ' + new Date(now.getTime() + 90 * 24 * 3600 * 1000).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) + '\n\n' +
       '## Review Question and Objective\n' +
-      'Primary question: In ' + P + ', what is the effect of ' + I + ' versus ' + C + ' on ' + O + '?\n\n' +
-      'Objective: To estimate pooled treatment effects and quantify between-study heterogeneity using pre-specified effect measures and robust sensitivity analyses.\n\n' +
-      '## Eligibility Criteria (PICOS)\n' +
+      'Primary question: In ' + P + ', what is the diagnostic accuracy of ' + I + ' for the detection of ' + O + ' compared against ' + C + '?\n\n' +
+      'Objective: To estimate pooled sensitivity and specificity with summary receiver operating characteristic (SROC) curve analysis, and to assess sources of heterogeneity in diagnostic accuracy.\n\n' +
+      '## Eligibility Criteria (PIRD)\n' +
       '- Population: ' + P + '\n' +
-      '- Intervention: ' + I + '\n' +
-      '- Comparator: ' + C + '\n' +
-      '- Outcomes: ' + O + ' (primary), plus safety outcomes where reported\n' +
+      '- Index test: ' + I + '\n' +
+      '- Reference standard: ' + C + '\n' +
+      '- Target condition: ' + O + '\n' +
       '- Study design: ' + (studyType === 'RCTs only'
-        ? 'Randomized controlled trials (parallel, cluster, or factorial) only.'
-        : 'Randomized controlled trials and prospective observational studies (analyzed separately by design).') + '\n' +
-      '- Setting/language: No language restriction; translation will be sought when feasible.\n\n' +
+        ? 'Cross-sectional diagnostic accuracy studies only (consecutive or random sampling preferred).'
+        : 'Cross-sectional and cohort studies evaluating diagnostic accuracy. Case-control designs included but flagged for spectrum bias.') + '\n' +
+      '- Setting/language: No language restriction; translation will be sought when feasible.\n' +
+      '- Inclusion requirement: sufficient data to construct a 2x2 contingency table (TP, FP, FN, TN).\n\n' +
       '## Information Sources\n' +
       'Databases and registries searched from inception to ' + dateStr + ':\n' +
       '- PubMed/MEDLINE\n' +
       '- OpenAlex\n' +
-      '- ClinicalTrials.gov API\n' +
-      '- AACT PostgreSQL mirror (when available)\n\n' +
-      'Reference lists of included studies and relevant reviews will be hand-searched for additional eligible trials.\n\n' +
+      '- ClinicalTrials.gov API\n\n' +
+      'Reference lists of included studies and relevant reviews will be hand-searched for additional eligible studies.\n\n' +
       '## Search Strategy\n' +
-      'Search strings will combine controlled vocabulary and free text for the population (' + P + '), intervention (' + I + '), comparator (' + C + '), and outcomes (' + O + '), plus a validated cardiology RCT filter. Example filter terms: random*, placebo, double-blind, trial, NCT\\d{8}, cardiovascular, coronary, heart failure, atrial fibrillation.\n\n' +
+      'Search strings will combine controlled vocabulary and free text for the population (' + P + '), index test (' + I + '), reference standard (' + C + '), and target condition (' + O + '), plus a validated diagnostic accuracy filter. Example filter terms: sensitivity, specificity, diagnostic accuracy, ROC, predictive value, likelihood ratio.\n\n' +
       '## Study Records and Selection Process\n' +
-      'Records will be deduplicated across sources before screening. Two reviewers will independently screen titles/abstracts and full texts, with disagreements resolved by consensus or third-reviewer adjudication. Screening decisions and exclusion reasons will be logged for PRISMA reporting.\n\n' +
+      'Records will be deduplicated across sources before screening. Two reviewers will independently screen titles/abstracts and full texts, with disagreements resolved by consensus or third-reviewer adjudication. Screening decisions and exclusion reasons will be logged for PRISMA-DTA reporting.\n\n' +
       '## Data Extraction and Data Management\n' +
-      'A structured extraction form will capture trial identifiers (NCT/PMID/DOI), outcome/timepoint definitions, analysis population, effect estimate, and confidence intervals. Registry verification against CT.gov/AACT will be documented per study as verified/needs-check/unverified. Versioned exports (CSV/JSON) will be archived for reproducibility.\n\n' +
-      '## Risk of Bias and Certainty Assessment\n' +
-      'Risk of bias will be evaluated using RoB 2 domains for randomized trials. Certainty of evidence will be rated with GRADE (risk of bias, inconsistency, indirectness, imprecision, publication bias), including upgrade criteria where appropriate.\n\n' +
-      '## Effect Measures and Synthesis Plan\n' +
-      'Primary synthesis uses random-effects meta-analysis (DerSimonian-Laird), with optional HKSJ adjustment for small-study uncertainty. Ratio outcomes will be analyzed on log scale and back-transformed. Heterogeneity will be reported using Q, I-squared, tau-squared, and prediction intervals when estimable.\n\n' +
+      'A structured extraction form will capture study identifiers (PMID/DOI), 2x2 contingency table data (TP, FP, FN, TN), index test type and threshold/cutoff, reference standard used, and population characteristics. Versioned exports (CSV/JSON) will be archived for reproducibility.\n\n' +
+      '## Quality Assessment and Certainty\n' +
+      'Methodological quality will be assessed using QUADAS-2 across four domains: patient selection, index test, reference standard, and flow and timing. Certainty of evidence will be rated following the GRADE approach for diagnostic test accuracy studies.\n\n' +
+      '## Statistical Analysis Plan\n' +
+      'Primary synthesis uses a bivariate random-effects model (Reitsma 2005) to jointly estimate pooled sensitivity and specificity, accounting for their correlation. Alternative: HSROC model (Rutter-Gatsonis 2001). Heterogeneity assessed using I-squared for sensitivity and specificity separately. Summary ROC curve with confidence and prediction regions. Diagnostic odds ratio (DOR), positive/negative likelihood ratios (PLR/NLR), and area under the SROC curve (AUC) will be reported.\n\n' +
       '## Additional and Sensitivity Analyses\n' +
-      '- Fixed-effect sensitivity analysis\n' +
       '- Leave-one-out influence analysis\n' +
-      '- Cumulative meta-analysis by study year\n' +
-      '- Publication-bias assessment (Peters for ratio outcomes; Egger for continuous outcomes when k >= 10)\n' +
-      '- Trim-and-fill exploratory adjustment (k >= 5)\n' +
-      '- Subgroup analyses by pre-specified clinical strata and follow-up windows\n\n' +
+      '- Threshold effect assessment (Spearman rank correlation between sensitivity and 1-specificity)\n' +
+      '- Publication bias assessment (Deeks\' funnel plot asymmetry test)\n' +
+      '- Subgroup analyses by index test type, threshold, and patient population\n' +
+      '- Clinical utility: Youden index and number needed to diagnose (NND)\n\n' +
       '## Meta-bias, Dissemination, and Ethics\n' +
-      'Selective reporting and small-study effects will be assessed with funnel asymmetry diagnostics under predefined conditions. Results will be disseminated via peer-reviewed publication and conference presentation. No primary patient data will be collected; formal ethics approval is therefore not required.\n\n' +
+      'Publication bias will be assessed using Deeks\' funnel plot asymmetry test. Results will be disseminated via peer-reviewed publication and conference presentation. No primary patient data will be collected; formal ethics approval is therefore not required.\n\n' +
       '## Amendments\n' +
       'Protocol amendments after registration will be dated, justified, and explicitly reported in the final manuscript and supplementary materials.';
 
@@ -15245,14 +15077,14 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const C = (document.getElementById('protC')?.value || '').trim();
     const O = (document.getElementById('protO')?.value || '').trim();
     const studyType = document.getElementById('protStudyType')?.value || '';
-    const cardioFocused = /\b(cardio|heart|atrial|hypertension|lipid|coronary|vascular|myocard)\b/i.test([P, I, O].join(' '));
+    const cardioFocused = /\b(cardio|heart|atrial|hypertension|lipid|coronary|vascular|myocard|troponin|bnp|echocardiogr|ccta|cmr)\b/i.test([P, I, O].join(' '));
     const checklist = [
       { label: 'Review title is specific', ok: titleRaw.trim().length >= 15 },
       { label: 'Population specified', ok: P.length > 0 },
-      { label: 'Intervention specified', ok: I.length > 0 },
-      { label: 'Comparator specified', ok: C.length > 0 },
-      { label: 'Primary outcomes specified', ok: O.length > 0 },
-      { label: 'Cardiology focus explicit', ok: cardioFocused },
+      { label: 'Index test specified', ok: I.length > 0 },
+      { label: 'Reference standard specified', ok: C.length > 0 },
+      { label: 'Target condition specified', ok: O.length > 0 },
+      { label: 'Cardiology/DTA focus explicit', ok: cardioFocused },
       { label: 'Study type pre-specified', ok: !!studyType },
       { label: 'Dual-reviewer workflow specified', ok: true },
       { label: 'Planned RoB + GRADE specified', ok: true },
@@ -15452,15 +15284,16 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const truthPayload = window._truthCertWriteback || _loadTruthCertWritebackFromStorage();
     if (!window._truthCertWriteback && truthPayload) window._truthCertWriteback = truthPayload;
     const confLevel = (v => isFinite(v) ? v : 0.95)(parseFloat(document.getElementById('confLevelSelect')?.value));
-    const methodVal = document.getElementById('methodSelect')?.value || 'DL';
+    const methodVal = document.getElementById('methodSelect')?.value || 'bivariate';
     const confPct = Math.round(confLevel * 100);
-    const validStudies = extractedStudies.filter(s => s.effectEstimate !== null && s.lowerCI !== null && s.upperCI !== null);
-    let result;
-    if (methodVal === 'FE') result = computeFixedEffect(validStudies, confLevel);
-    else {
-      result = computeMetaAnalysis(validStudies, confLevel);
-      if (result && methodVal === 'DL-HKSJ') result = applyHKSJ(result);
-    }
+
+    // DTA valid studies: must have all four 2x2 cells
+    const validStudies = extractedStudies.filter(s => {
+      const cells = [parseInt(s.tp), parseInt(s.fp), parseInt(s.fn), parseInt(s.tn)];
+      return cells.every(v => !isNaN(v) && v >= 0);
+    });
+    const result = validStudies.length >= 2 ? computeDTAAnalysis(validStudies, confLevel, methodVal) : null;
+
     const pico = project.pico || {};
     const prisma = project.prisma || {};
     const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -15472,54 +15305,51 @@ body.dark-mode .input-error { background: #451a1a !important; }
       acc[key] = (acc[key] || 0) + 1;
       return acc;
     }, { verified: 0, 'needs-check': 0, unverified: 0 });
-    const registryLinked = extractedStudies.filter(s => /\bNCT\d{8}\b/i.test((s.nctId || s.trialId || ''))).length;
-    const totalN = extractedStudies.reduce((a, s) => a + (s.nTotal || 0), 0);
     const robAssessed = getRoBAssessedStudyCount();
-    const asymmetry = result ? chooseAsymmetryTest(result) : null;
-    const loo = validStudies.length >= 3 ? leaveOneOut(validStudies, confLevel, methodVal) : [];
-    const looPooledVals = loo.map(x => x.pooled).filter(v => isFinite(v));
-    const looRange = looPooledVals.length > 0 ? [Math.min(...looPooledVals), Math.max(...looPooledVals)] : null;
-    const methodForSensitivity = result?.method || methodVal;
-    const cumulative = validStudies.length >= 2 ? computeCumulativeMA(validStudies, confLevel, methodForSensitivity) : null;
-    const fragility = result?.isRatio ? computeFragilityIndex(validStudies) : null;
-    const tfMethod = methodVal === 'DL-HKSJ' ? 'HKSJ' : methodVal;
-    const trimFill = (result && result.k >= 5 && result.studyResults) ? trimAndFill(result.studyResults, result, confLevel, tfMethod) : null;
+    const totalDiseased = validStudies.reduce((a, s) => a + parseInt(s.tp) + parseInt(s.fn), 0);
+    const totalNonDiseased = validStudies.reduce((a, s) => a + parseInt(s.fp) + parseInt(s.tn), 0);
+    const totalN = totalDiseased + totalNonDiseased;
+    const indexTests = [...new Set(extractedStudies.map(s => s.indexTest).filter(Boolean))];
+    const thresholds = [...new Set(extractedStudies.map(s => s.threshold).filter(Boolean))];
+
+    const methodName = methodVal === 'hsroc' ? 'HSROC (Rutter-Gatsonis 2001)'
+      : methodVal === 'univariate' ? 'univariate random-effects'
+      : 'bivariate GLMM (Reitsma 2005)';
+
     const prismaIdentified = prisma.identified || allReferences.length || '[N]';
     const prismaDuplicates = prisma.duplicates || 0;
     const prismaScreened = prisma.screened || allReferences.length || '[N]';
     const prismaExcluded = prisma.excludedScreen || (screenedRefs.filter(r => r.decision !== 'include').length);
     const prismaIncluded = prisma.included || includeRefs.length || extractedStudies.length;
-    const methodVersion = methodVal === 'FE'
-      ? 'fixed-effect inverse-variance model'
-      : (methodVal === 'DL-HKSJ' ? 'DerSimonian-Laird random-effects with Hartung-Knapp-Sidik-Jonkman adjustment' : 'DerSimonian-Laird random-effects model');
-
-    const methodName = methodVal === 'FE' ? 'fixed-effect (inverse-variance)' :
-      methodVal === 'DL-HKSJ' ? 'DerSimonian-Laird with Hartung-Knapp-Sidik-Jonkman adjustment' :
-      'DerSimonian-Laird random-effects';
 
     const methods =
       '## Methods\n\n' +
       '### Design and Reporting Standard\n' +
-      'This review was conducted as a protocol-driven systematic review and meta-analysis aligned to PRISMA 2020 reporting principles. The prespecified clinical question was structured using PICO: population (' + escapeHtml(pico.P || '[population]') + '), intervention (' + escapeHtml(pico.I || '[intervention]') + '), comparator (' + escapeHtml(pico.C || '[comparator]') + '), and primary outcome (' + escapeHtml(pico.O || '[outcome]') + ').\n\n' +
+      'This systematic review of diagnostic test accuracy was conducted according to PRISMA-DTA 2018 reporting guidelines. The research question was structured using PIRD: population (' + escapeHtml(pico.P || '[population]') + '), index test (' + escapeHtml(pico.I || '[index test]') + '), reference standard (' + escapeHtml(pico.C || '[reference standard]') + '), and target condition (' + escapeHtml(pico.O || '[target condition]') + ').\n\n' +
       '### Information Sources and Search Strategy\n' +
-      'Electronic searches covered PubMed, OpenAlex, ClinicalTrials.gov, and AACT-supported registry metadata (when available) from database inception to ' + today + '. Search strings combined controlled vocabulary and free-text terms for PICO concepts with cardiology randomized-trial filters. Cross-source deduplication was performed before screening.\n\n' +
+      'Electronic searches covered PubMed, OpenAlex, and ClinicalTrials.gov from database inception to ' + today + '. Search strings combined controlled vocabulary (MeSH) and free-text terms for index test, target condition, and diagnostic accuracy concepts. Cross-source deduplication was performed before screening.\n\n' +
       '### Eligibility Criteria\n' +
-      'Eligible studies were randomized controlled trials comparing ' + escapeHtml(pico.I || '[intervention]') + ' against ' + escapeHtml(pico.C || '[comparator]') + ' in ' + escapeHtml(pico.P || '[population]') + '. Prespecified synthesis units required a harmonized outcome definition and timepoint per analysis. Records lacking extractable effect estimates with confidence intervals were not entered into quantitative pooling.\n\n' +
+      'Eligible studies were cross-sectional or cohort studies evaluating the diagnostic accuracy of ' + escapeHtml(pico.I || '[index test]') + ' against ' + escapeHtml(pico.C || '[reference standard]') + ' in ' + escapeHtml(pico.P || '[population]') + ' for the detection of ' + escapeHtml(pico.O || '[target condition]') + '. Studies were required to report sufficient data for construction of a 2x2 contingency table (TP, FP, FN, TN). Case-control designs were included but flagged for potential spectrum bias.\n\n' +
       '### Screening Workflow\n' +
-      'Title/abstract screening used a cardiology-optimized auto-screener (BM25 + PICO component matching + cardiology/RCT signal models + registry-aware hard gates) followed by reviewer adjudication of unresolved conflicts. During this run, ' + screenedRefs.length + ' records had explicit screening decisions and ' + autoScreenedDecisions + ' decisions were model-assisted.\n\n' +
-      '### Data Extraction and Registry Verification\n' +
-      'Data were extracted into structured fields (trial identifier, outcome, timepoint, analysis population, effect estimate, confidence interval, and arm sizes). Each extracted study was cross-checked against CT.gov/AACT when an NCT identifier was available. At draft generation, verification status was: verified=' + (verificationCounts.verified || 0) + ', needs-check=' + (verificationCounts['needs-check'] || 0) + ', unverified=' + (verificationCounts.unverified || 0) + '. Registry-linked studies: ' + registryLinked + '.\n\n' +
-      '### Risk of Bias and Certainty\n' +
-      'Risk of bias was assessed with RoB 2 domains where available; ' + robAssessed + '/' + extractedStudies.length + ' extracted studies currently have non-empty overall RoB judgments. Certainty grading is designed to follow GRADE domains (risk of bias, inconsistency, indirectness, imprecision, publication bias).\n\n' +
+      'Title/abstract screening used a DTA-optimized auto-screener (BM25 + PIRD component matching + cardiology/DTA signal models) followed by reviewer adjudication. During this run, ' + screenedRefs.length + ' records had explicit screening decisions and ' + autoScreenedDecisions + ' decisions were model-assisted.\n\n' +
+      '### Data Extraction\n' +
+      'Data were extracted into structured 2x2 contingency tables (TP, FP, FN, TN) along with index test type, threshold/cutoff, and population characteristics. At draft generation, verification status was: verified=' + (verificationCounts.verified || 0) + ', needs-check=' + (verificationCounts['needs-check'] || 0) + ', unverified=' + (verificationCounts.unverified || 0) + '.\n\n' +
+      '### Quality Assessment\n' +
+      'Methodological quality was assessed using QUADAS-2 across four domains: patient selection, index test, reference standard, and flow and timing. ' + robAssessed + '/' + extractedStudies.length + ' extracted studies currently have non-empty overall quality judgments. Certainty grading followed the GRADE approach for diagnostic test accuracy.\n\n' +
       '### Statistical Analysis\n' +
-      'Primary pooling used a ' + methodVersion + '. Effect sizes were analyzed as ' +
-      (result?.isRatio ? 'ratio measures on the log scale with back-transformation (e.g., OR/RR/HR)' : 'difference measures (MD/SMD)') +
-      ' and summarized with ' + confPct + '% confidence intervals. Heterogeneity was quantified using Cochran Q, I-squared, and tau-squared. ' +
-      (result && result.piLo !== null ? 'Prediction intervals were reported for random-effects synthesis. ' : '') +
-      'Small-study effects were evaluated using ' + (result && result.k >= 10 ? (result.isRatio ? 'Peters regression' : 'Egger regression') : 'prespecified funnel asymmetry diagnostics when enough studies were available') +
-      '. Sensitivity analyses included leave-one-out, cumulative meta-analysis, and trim-and-fill/fragility analyses when assumptions were met.\n\n' +
+      'Summary sensitivity and specificity were estimated using a ' + methodName + ' to account for the bivariate nature of DTA data and the correlation between sensitivity and specificity. ' +
+      'Individual study sensitivity and specificity were calculated from 2x2 tables with Wilson confidence intervals. ' +
+      (result && result.zeroCellStudies > 0 ? 'Continuity correction (0.5) was applied to ' + result.zeroCellStudies + ' studies with zero cells. ' : '') +
+      'Heterogeneity was assessed using I-squared statistics for sensitivity and specificity separately. ' +
+      'A summary receiver operating characteristic (SROC) curve was constructed' + (methodVal !== 'univariate' ? ' from the bivariate model parameters' : '') + '. ' +
+      'The area under the SROC curve (AUC) and diagnostic odds ratio (DOR) were computed. ' +
+      'Positive and negative likelihood ratios (PLR, NLR) were derived from pooled sensitivity and specificity. ' +
+      'Clinical utility was assessed via Youden index (J = Sens + Spec - 1) and number needed to diagnose (NND = 1/J). ' +
+      'Publication bias was evaluated using Deeks\' funnel plot asymmetry test (regression of logDOR on 1/sqrt(ESS)). ' +
+      'The threshold effect was tested using Spearman rank correlation between sensitivity and 1-specificity. ' +
+      'Sensitivity analyses included leave-one-out analysis to identify influential studies.\n\n' +
       '### Reproducibility and Audit Trail\n' +
-      'Analyses were executed in MetaSprint Autopilot (local browser build) on ' + today + ' with prespecified settings (model=' + escapeHtml(methodName) + ', confidence level=' + confPct + '%, strict publishability gates=' + (document.getElementById('publishableGateToggle')?.checked ? 'on' : 'off') + '). Structured extraction and analysis outputs were retained as versioned table exports (CSV/JSON/Markdown) to support independent rerun and editorial audit.';
+      'Analyses were executed in MetaSprint DTA Autopilot (local browser build) on ' + today + ' with prespecified settings (model=' + escapeHtml(methodName) + ', confidence level=' + confPct + '%). Structured extraction and analysis outputs were retained as versioned table exports (CSV/JSON/Markdown) to support independent rerun and editorial audit.';
 
     const results =
       '## Results\n\n' +
@@ -15528,39 +15358,44 @@ body.dark-mode .input-error { background: #451a1a !important; }
       prismaScreened + ' records underwent title/abstract screening; ' + prismaExcluded + ' were excluded at screening and ' +
       prismaIncluded + ' studies were retained for quantitative synthesis.\n\n' +
       '### Study Characteristics\n' +
-      extractedStudies.length + ' studies were extracted (' + validStudies.length + ' with complete effect + CI data), representing ' + totalN +
-      ' participants with analyzable denominators. Registry-linked identifiers were present for ' + registryLinked + ' studies.\n\n' +
-      '### Primary Meta-analysis\n' +
+      extractedStudies.length + ' studies were extracted (' + validStudies.length + ' with complete 2x2 data), totaling ' + totalN +
+      ' participants (' + totalDiseased + ' diseased, ' + totalNonDiseased + ' non-diseased). ' +
+      (indexTests.length > 0 ? 'Index tests included: ' + indexTests.map(t => escapeHtml(t)).join(', ') + '. ' : '') +
+      (thresholds.length > 0 ? 'Thresholds/cutoffs: ' + thresholds.map(t => escapeHtml(t)).join(', ') + '. ' : '') + '\n\n' +
+      '### Summary Diagnostic Accuracy\n' +
       (result
-        ? 'The pooled effect (' + methodName + ') was ' + result.pooled.toFixed(3) + ' (' + confPct + '% CI ' + result.pooledLo.toFixed(3) +
-          ' to ' + result.pooledHi.toFixed(3) + '; p ' + (result.pValue < 0.001 ? '< 0.001' : '= ' + result.pValue.toFixed(3)) + ').'
-        : 'No quantitative synthesis was produced because no valid studies with complete effect and CI data were available.') + '\n\n' +
-      '### Heterogeneity and Model Diagnostics\n' +
+        ? 'Using the ' + methodName + ', pooled sensitivity was ' + (result.pooledSens * 100).toFixed(1) + '% (' + confPct + '% CI ' +
+          (result.sensCI[0] * 100).toFixed(1) + ' to ' + (result.sensCI[1] * 100).toFixed(1) + ') and pooled specificity was ' +
+          (result.pooledSpec * 100).toFixed(1) + '% (' + confPct + '% CI ' + (result.specCI[0] * 100).toFixed(1) + ' to ' +
+          (result.specCI[1] * 100).toFixed(1) + '). ' +
+          'The diagnostic odds ratio was ' + result.DOR.toFixed(2) +
+          ', positive likelihood ratio ' + result.PLR.toFixed(2) +
+          ', and negative likelihood ratio ' + result.NLR.toFixed(3) + '. ' +
+          (result.AUC != null ? 'The area under the SROC curve was ' + result.AUC.toFixed(3) + '. ' : '')
+        : 'No quantitative synthesis was produced because fewer than 2 studies had complete 2x2 data.') + '\n\n' +
+      '### Heterogeneity\n' +
       (result
-        ? 'Between-study heterogeneity was ' +
-          ((result.I2 ?? 0) < 25 ? 'low' : (result.I2 ?? 0) < 50 ? 'moderate' : (result.I2 ?? 0) < 75 ? 'substantial' : 'considerable') +
-          ' (I-squared=' + (result.I2 != null ? result.I2.toFixed(1) + '%' : 'N/A') +
-          ', tau-squared=' + result.tau2.toFixed(4) +
-          ', Q(' + result.df + ')=' + result.Q.toFixed(2) +
-          ', p=' + (result.QpValue < 0.001 ? '<0.001' : result.QpValue.toFixed(3)) + ').' +
-          (result.piLo != null ? ' The ' + confPct + '% prediction interval was ' + result.piLo.toFixed(3) + ' to ' + result.piHi.toFixed(3) + '.' : '')
+        ? 'Between-study heterogeneity for sensitivity was ' +
+          ((result.I2_sens ?? 0) < 25 ? 'low' : (result.I2_sens ?? 0) < 50 ? 'moderate' : (result.I2_sens ?? 0) < 75 ? 'substantial' : 'considerable') +
+          ' (I-squared=' + (result.I2_sens != null ? result.I2_sens.toFixed(1) + '%' : 'N/A') + '). ' +
+          'Heterogeneity for specificity was ' +
+          ((result.I2_spec ?? 0) < 25 ? 'low' : (result.I2_spec ?? 0) < 50 ? 'moderate' : (result.I2_spec ?? 0) < 75 ? 'substantial' : 'considerable') +
+          ' (I-squared=' + (result.I2_spec != null ? result.I2_spec.toFixed(1) + '%' : 'N/A') + ').'
         : '[Awaiting quantitative synthesis]') + '\n\n' +
-      '### Publication Bias and Robustness Analyses\n' +
-      (result && result.k >= 10 && asymmetry && asymmetry.test
-        ? asymmetry.test + ' test showed p=' + (asymmetry.pValue < 0.001 ? '<0.001' : asymmetry.pValue.toFixed(3)) + '. '
-        : 'Formal asymmetry testing was not definitive (typically requires k >= 10 and acceptable heterogeneity). ') +
-      (looRange
-        ? 'Leave-one-out pooled estimates ranged from ' + looRange[0].toFixed(3) + ' to ' + looRange[1].toFixed(3) + '. '
-        : 'Leave-one-out analysis was not estimable for the current data volume. ') +
-      (cumulative && cumulative.length
-        ? 'Cumulative synthesis stabilized at step ' + cumulative[cumulative.length - 1].step + ' with final pooled estimate ' + cumulative[cumulative.length - 1].pooled.toFixed(3) + '. '
+      '### Publication Bias and Sensitivity Analyses\n' +
+      (result && result.deeksP != null
+        ? 'Deeks\' funnel plot asymmetry test yielded p=' + (result.deeksP < 0.001 ? '<0.001' : result.deeksP.toFixed(3)) +
+          (result.deeksP < 0.05 ? ', suggesting potential publication bias.' : ', providing no evidence of significant publication bias.') + ' '
+        : 'Publication bias assessment was not performed (Deeks\' test requires sufficient study count). ') +
+      (result && result.thresholdRho != null
+        ? 'The threshold effect test showed Spearman rho=' + result.thresholdRho.toFixed(3) + ' (p=' +
+          (result.thresholdP < 0.001 ? '<0.001' : result.thresholdP.toFixed(3)) + ')' +
+          (result.thresholdP < 0.05 ? ', indicating a significant threshold effect.' : ', suggesting no significant threshold effect.') + ' '
         : '') +
-      (trimFill && trimFill.nImputed > 0
-        ? 'Trim-and-fill imputed ' + trimFill.nImputed + ' potentially missing studies; adjusted pooled effect was ' + trimFill.adjustedPooled.toFixed(3) + '. '
-        : (trimFill && trimFill.nImputed === 0 ? 'Trim-and-fill did not impute additional studies. ' : '')) +
-      (fragility
-        ? 'Fragility index (study-removal approach) was ' + fragility.fragilityIndex + ' (fragility quotient ' + fragility.fragQuotient.toFixed(3) + ').'
-        : 'Fragility index was not applicable for the current outcome scale.');
+      (result && result.youdenJ != null
+        ? 'Youden index was ' + result.youdenJ.toFixed(3) + ' and number needed to diagnose was ' +
+          (result.youdenJ > 0 ? (1 / result.youdenJ).toFixed(1) : 'undefined (J <= 0)') + '.'
+        : '');
 
     let methodsFinal = methods;
     let resultsFinal = results;
@@ -15630,13 +15465,15 @@ body.dark-mode .input-error { background: #451a1a !important; }
     if (!lastAnalysisResult) { showToast('Run analysis first', 'warning'); return; }
     const r = lastAnalysisResult;
     const confPct = Math.round((r.confLevel ?? 0.95) * 100);
-    const text = 'Meta-Analysis Summary (' + r.method + ')\n' +
+    const text = 'DTA Meta-Analysis Summary (' + (r.method || 'bivariate') + ')\n' +
       'Studies (k): ' + r.k + '\n' +
-      'Pooled effect: ' + r.pooled.toFixed(3) + ' (' + confPct + '% CI: ' + r.pooledLo.toFixed(3) + ' to ' + r.pooledHi.toFixed(3) + ')\n' +
-      'I\u00B2: ' + (r.I2 !== null ? r.I2.toFixed(1) + '%' : 'N/A') + ', \u03C4\u00B2: ' + r.tau2.toFixed(4) + '\n' +
-      'Q(' + r.df + '): ' + r.Q.toFixed(2) + ', p = ' + (r.QpValue < 0.001 ? '< 0.001' : r.QpValue.toFixed(3)) + '\n' +
-      'Overall p-value: ' + (r.pValue < 0.001 ? '< 0.001' : r.pValue.toFixed(3)) + '\n' +
-      (r.piLo !== null ? 'Prediction interval: ' + r.piLo.toFixed(3) + ' to ' + r.piHi.toFixed(3) + '\n' : '');
+      'Pooled Sensitivity: ' + ((r.pooledSens ?? 0) * 100).toFixed(1) + '% (' + confPct + '% CI: ' + ((r.sensCI?.[0] ?? 0) * 100).toFixed(1) + ' to ' + ((r.sensCI?.[1] ?? 0) * 100).toFixed(1) + ')\n' +
+      'Pooled Specificity: ' + ((r.pooledSpec ?? 0) * 100).toFixed(1) + '% (' + confPct + '% CI: ' + ((r.specCI?.[0] ?? 0) * 100).toFixed(1) + ' to ' + ((r.specCI?.[1] ?? 0) * 100).toFixed(1) + ')\n' +
+      'DOR: ' + (r.DOR ?? 0).toFixed(2) + ', PLR: ' + (r.PLR ?? 0).toFixed(2) + ', NLR: ' + (r.NLR ?? 0).toFixed(3) + '\n' +
+      (r.AUC != null ? 'AUC: ' + r.AUC.toFixed(3) + '\n' : '') +
+      'I2 (Sens): ' + (r.I2_sens != null ? r.I2_sens.toFixed(1) + '%' : 'N/A') +
+      ', I2 (Spec): ' + (r.I2_spec != null ? r.I2_spec.toFixed(1) + '%' : 'N/A') + '\n' +
+      (r.youdenJ != null ? 'Youden J: ' + r.youdenJ.toFixed(3) + ', NND: ' + (r.youdenJ > 0 ? (1 / r.youdenJ).toFixed(1) : 'N/A') + '\n' : '');
     navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard', 'success'));
   }
 
@@ -18651,6 +18488,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
             }
             if (cachedTrials.length > 0) {
               universeTrialsCache = cachedTrials;
+              _ayatDataVersion++;
+              _fihrisIndex = buildFihrisIndex(cachedTrials, null);
               const gapData = await computeAllGapScores(cachedTrials, () => {}, { skipRemote: true });
               buildNetworkGraph(cachedTrials, gapData);
               const statusEl = document.getElementById('universeStatus');
@@ -18693,6 +18532,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
             }
             if (embeddedTrials.length > 0) {
               universeTrialsCache = embeddedTrials;
+              _ayatDataVersion++;
+              _fihrisIndex = buildFihrisIndex(embeddedTrials, null);
               // Build network graph so Network tab has content on first load
               const gapData = await computeAllGapScores(embeddedTrials, () => {}, { skipRemote: true });
               buildNetworkGraph(embeddedTrials, gapData);
