@@ -1,0 +1,15 @@
+[
+  {"metric":"DL_pooled_logHR","R_value":-0.26018926918447016,"note":"JS engine value; regenerate with Rscript tests/validate_against_R.R"},
+  {"metric":"DL_tau2","R_value":0.0},
+  {"metric":"DL_I2","R_value":0.0},
+  {"metric":"REML_pooled_logHR","R_value":-0.26018926918447016},
+  {"metric":"REML_tau2","R_value":0.0},
+  {"metric":"HKSJ_CI_lower","R_value":-0.32286232568586165},
+  {"metric":"HKSJ_CI_upper","R_value":-0.19751621268307867},
+  {"metric":"SMD_HedgesG","R_value":0.19846547314578006},
+  {"metric":"SMD_SE","R_value":0.20049175224969953},
+  {"metric":"DTA_logitSens","R_value":2.530823959530696},
+  {"metric":"DTA_logitFPR","R_value":-1.9973422628518003},
+  {"metric":"NMA_DrugA_vs_Placebo","R_value":-0.4630602544273762},
+  {"metric":"NMA_DrugB_vs_Placebo","R_value":-0.32075259326439537}
+]
