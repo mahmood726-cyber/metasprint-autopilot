@@ -1315,6 +1315,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       <div style="margin-bottom:10px;font-size:0.82rem;color:var(--text-muted)">Enter cost and effectiveness (QALYs) for each strategy. ICER = incremental cost / incremental QALY vs comparator. NMB = QALY &times; WTP &minus; Cost.</div>
       <div style="margin-bottom:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
         <label style="font-size:0.82rem">WTP threshold (/QALY): <input type="number" id="icerWTP" value="50000" min="0" step="1000" style="width:100px;font-size:0.82rem"></label>
+        <span style="font-size:0.7rem;color:var(--text-muted)" title="International WTP thresholds">(US: $50-100k; NICE: &pound;20-30k; WHO: 1-3&times; GDP/capita)</span>
         <label style="font-size:0.82rem">Currency: <select id="icerCurrency" style="font-size:0.82rem"><option value="$">$ (USD)</option><option value="£">£ (GBP)</option><option value="€">€ (EUR)</option><option value="OMR">OMR</option></select></label>
         <label style="font-size:0.82rem">Discount rate: <input type="number" id="icerDiscount" value="3.0" min="0" max="15" step="0.5" style="width:60px;font-size:0.82rem">%</label>
       </div>
@@ -1483,6 +1484,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <div class="form-group"><label for="protO">Outcomes:</label><input id="protO" maxlength="500" placeholder="e.g., HbA1c reduction, cardiovascular events"></div>
         <div class="form-group"><label for="protStudyType">Study Types:</label>
           <select id="protStudyType"><option>RCTs only</option><option>RCTs and observational</option></select></div>
+        <div class="form-group"><label for="protPROSPERO">PROSPERO Registration ID:</label>
+          <input id="protPROSPERO" maxlength="30" placeholder="e.g., CRD42024xxxxxx" style="width:220px" pattern="CRD\d+" title="Format: CRD followed by digits"></div>
         <div style="display:flex;gap:8px">
           <button onclick="generateProtocol()">Generate Protocol</button>
         </div>
@@ -1717,12 +1720,14 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <label style="font-size:0.82rem;cursor:pointer"><input type="checkbox" id="publishableGateToggle" checked> Strict publishability gates</label>
         <span id="inputModeHelp" style="font-size:0.78rem;color:var(--text-muted)">Enter the effect size and 95% CI from each study. For ratio measures (OR, RR, HR), values must be positive.</span>
       </div>
-      <div id="csvDropZone" style="border:2px dashed var(--border);border-radius:8px;padding:16px;text-align:center;margin-bottom:10px;cursor:pointer;transition:border-color 0.2s,background 0.2s"
+      <div id="csvDropZone" tabindex="0" role="button" aria-label="Import CSV data: drop file, click to browse, or paste CSV text" style="border:2px dashed var(--border);border-radius:8px;padding:16px;text-align:center;margin-bottom:10px;cursor:pointer;transition:border-color 0.2s,background 0.2s"
         ondragover="event.preventDefault();this.style.borderColor='var(--primary)';this.style.background='rgba(59,130,246,0.06)'"
         ondragleave="this.style.borderColor='var(--border)';this.style.background=''"
         ondrop="event.preventDefault();this.style.borderColor='var(--border)';this.style.background='';handleCSVDrop(event)"
-        onclick="document.getElementById('csvFileInput').click()">
-        <div style="font-size:0.85rem;color:var(--text-muted)">Drop CSV/TSV file here or click to import study data</div>
+        onclick="document.getElementById('csvFileInput').click()"
+        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();document.getElementById('csvFileInput').click()}"
+        onpaste="handleCSVPaste(event)">
+        <div style="font-size:0.85rem;color:var(--text-muted)">Drop CSV/TSV file here, click to browse, or paste (Ctrl+V)</div>
         <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px">Columns: study, effect, lowerCI, upperCI, type, subgroup, nTotal, nInt, nCtrl, outcome, timepoint, covariate</div>
         <input type="file" id="csvFileInput" accept=".csv,.tsv,.txt" style="display:none" onchange="handleCSVFileSelect(event)">
       </div>
@@ -1794,7 +1799,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
           <option value="MH">Mantel-Haenszel (2x2 data)</option>
           <option value="Peto">Peto OR (rare events, 2x2)</option>
         </select>
-        <span id="methodGuide" style="cursor:help;font-size:0.75rem;color:var(--text-muted);margin-left:4px" title="REML (recommended): Cochrane Handbook v6.5 default, less biased tau-squared. HKSJ: Use with k&lt;10 studies for wider, more honest CIs. MH: Best for binary outcomes with raw 2x2 counts, no continuity correction needed. Peto: Best for rare events (&lt;1%); requires OR + 2x2 data. DL: Legacy method, may underestimate CI width. FE: Only when true homogeneity is expected.">&#9432;</span>
+        <span id="methodGuide" tabindex="0" role="button" aria-label="Show method guidance" aria-expanded="false" style="cursor:pointer;font-size:0.75rem;color:var(--text-muted);margin-left:4px;position:relative" onclick="toggleMethodGuide()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleMethodGuide()}">&#9432;<span id="methodGuidePopover" role="tooltip" style="display:none;position:absolute;left:0;top:22px;z-index:100;background:var(--bg-card,#fff);border:1px solid var(--border);border-radius:8px;padding:10px 14px;width:320px;font-size:0.78rem;color:var(--text);line-height:1.5;box-shadow:0 4px 16px rgba(0,0,0,0.12)"><strong>REML</strong> (recommended): Cochrane Handbook v6.5 default, less biased tau-squared.<br><strong>HKSJ</strong>: Use with k&lt;10 studies for wider, more honest CIs.<br><strong>MH</strong>: Best for binary outcomes with raw 2x2 counts.<br><strong>Peto</strong>: Best for rare events (&lt;1%); requires OR + 2x2 data.<br><strong>DL</strong>: Legacy method, may underestimate CI width.<br><strong>FE</strong>: Only when true homogeneity is expected.</span></span>
         <label for="outcomeFilterSelect" style="font-size:0.8rem;color:var(--text-muted)">Outcome:</label>
         <select id="outcomeFilterSelect" style="padding:4px 8px;font-size:0.82rem;border:1px solid var(--border);border-radius:var(--radius)">
           <option value="__all__">All outcomes</option>
@@ -2423,6 +2428,22 @@ body.dark-mode .input-error { background: #451a1a !important; }
   function safeGetStorage(key, fallback) {
     try { const v = localStorage.getItem(key); return v !== null ? v : fallback; }
     catch(e) { return fallback; }
+  }
+
+  function toggleMethodGuide() {
+    const pop = document.getElementById('methodGuidePopover');
+    const btn = document.getElementById('methodGuide');
+    if (!pop || !btn) return;
+    const showing = pop.style.display !== 'none';
+    pop.style.display = showing ? 'none' : 'block';
+    btn.setAttribute('aria-expanded', String(!showing));
+    if (!showing) {
+      // Close on click outside
+      const close = function(e) {
+        if (!btn.contains(e.target)) { pop.style.display = 'none'; btn.setAttribute('aria-expanded', 'false'); document.removeEventListener('click', close); }
+      };
+      setTimeout(function() { document.addEventListener('click', close); }, 0);
+    }
   }
 
   function showToast(msg, type = 'info', duration = 3000) {
@@ -8396,6 +8417,63 @@ body.dark-mode .input-error { background: #451a1a !important; }
     if (file) parseCSVFile(file);
     event.target.value = '';
   }
+  function handleCSVPaste(event) {
+    const text = (event.clipboardData || window.clipboardData)?.getData('text');
+    if (text && text.trim().length > 0) {
+      event.preventDefault();
+      try {
+        const rows = parseCSVText(text);
+        if (rows.length < 2) { showToast('Pasted text has no data rows', 'warning'); return; }
+        const header = rows[0].map(function(h) { return h.trim().toLowerCase().replace(/[^a-z0-9]/g, ''); });
+        const colMap = buildCSVColumnMap(header);
+        if (colMap.effect < 0 && colMap.eventsInt < 0) {
+          showToast('Pasted CSV must have at least an "effect" column or event count columns', 'warning');
+          return;
+        }
+        let imported = 0;
+        for (let i = 1; i < rows.length; i++) {
+          const r = rows[i];
+          if (r.length < 2 || r.every(function(c) { return c.trim() === ''; })) continue;
+          const val = function(idx) { return idx >= 0 && idx < r.length ? r[idx].trim() : ''; };
+          const num = function(idx) {
+            if (idx < 0 || idx >= r.length) return null;
+            const v = parseFloat(r[idx]);
+            return isFinite(v) ? v : null;
+          };
+          addStudyRow({
+            authorYear: val(colMap.study) || val(colMap.studyid) || val(colMap.author) || ('Study ' + i),
+            trialId: val(colMap.trialid) || val(colMap.nctid) || '',
+            outcomeId: val(colMap.outcome) || '',
+            timepoint: val(colMap.timepoint) || '',
+            nTotal: num(colMap.ntotal),
+            nIntervention: num(colMap.nint) || num(colMap.nintervention),
+            nControl: num(colMap.nctrl) || num(colMap.ncontrol),
+            effectEstimate: num(colMap.effect),
+            lowerCI: num(colMap.lowerci) || num(colMap.lcl) || num(colMap.cilo),
+            upperCI: num(colMap.upperci) || num(colMap.ucl) || num(colMap.cihi),
+            effectType: val(colMap.type) || val(colMap.effecttype) || val(colMap.measure) || 'HR',
+            subgroup: val(colMap.subgroup) || val(colMap.group) || '',
+            notes: val(colMap.notes) || val(colMap.comment) || '',
+            covariate1: num(colMap.covariate) || num(colMap.covariate1) || num(colMap.moderator),
+            eventsInt: num(colMap.eventsint),
+            totalInt: num(colMap.totalint),
+            eventsCtrl: num(colMap.eventsctrl),
+            totalCtrl: num(colMap.totalctrl),
+            analysisPopulation: val(colMap.population) || ''
+          });
+          imported++;
+        }
+        if (imported > 0) {
+          showToast('Pasted ' + imported + ' studies from clipboard', 'success');
+          saveToIndexedDB();
+        } else {
+          showToast('No valid data rows in pasted text', 'warning');
+        }
+      } catch (e) {
+        showToast('Failed to parse pasted CSV: ' + e.message, 'danger');
+      }
+    }
+  }
   function parseCSVFile(file) {
     const reader = new FileReader();
     reader.onload = function(e) {
@@ -13342,7 +13420,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const plotW = w - padL - padR;
     const colors = ['#22c55e','#3b82f6','#eab308','#f97316','#ef4444','#8b5cf6','#06b6d4','#ec4899'];
 
-    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:550px;width:100%">';
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:550px;width:100%" role="img" aria-label="Rankogram: P-score bar chart showing treatment rankings">';
     svg += '<style>.rk-label{font-family:system-ui;font-size:10px;fill:var(--text)}.rk-val{font-family:monospace;font-size:10px;fill:var(--text)}</style>';
     svg += '<text style="font-family:system-ui;font-size:12px;font-weight:bold;fill:var(--text)" x="' + (w/2) + '" y="18" text-anchor="middle">P-score Ranking (SUCRA equivalent)</text>';
 
@@ -13403,7 +13481,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
 
     const toX = v => padL + (v - minX) / (maxX - minX) * plotW;
 
-    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;width:100%">';
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;width:100%" role="img" aria-label="NMA Forest Plot: all treatments versus ' + escapeHtml(ref) + ' with ' + confPct + '% confidence intervals">';
     svg += '<style>.nf-label{font-family:system-ui;font-size:10px;fill:var(--text)}.nf-est{font-family:monospace;font-size:9px;fill:var(--text)}</style>';
     svg += '<text style="font-family:system-ui;font-size:12px;font-weight:bold;fill:var(--text)" x="' + (w/2) + '" y="18" text-anchor="middle">NMA Forest: All vs ' + escapeHtml(ref) + '</text>';
 
@@ -13792,14 +13870,17 @@ body.dark-mode .input-error { background: #451a1a !important; }
       }
     }
 
-    // Nelder-Mead simplex (2 params)
+    // Nelder-Mead simplex (2 params) with convergence tracking
     let simplex = [bestP, [bestP[0] * 1.1 + 0.01, bestP[1]], [bestP[0], bestP[1] * 1.1 + 0.01]];
     let fVals = simplex.map(sse);
+    let emaxIters = 0, emaxSSEDelta = Infinity;
     for (let iter = 0; iter < 500; iter++) {
+      emaxIters = iter + 1;
       const order = [0, 1, 2].sort((a, b) => fVals[a] - fVals[b]);
       simplex = order.map(i => simplex[i]);
       fVals = order.map(i => fVals[i]);
-      if (Math.abs(fVals[2] - fVals[0]) < 1e-10) break;
+      emaxSSEDelta = Math.abs(fVals[2] - fVals[0]);
+      if (emaxSSEDelta < 1e-10) break;
 
       const centroid = [0, 1].map(d => (simplex[0][d] + simplex[1][d]) / 2);
       const reflected = centroid.map((c, d) => 2 * c - simplex[2][d]);
@@ -13825,6 +13906,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         }
       }
     }
+    const converged = emaxSSEDelta < 1e-10;
 
     const [emax, ed50] = simplex[0];
     const finalSSE = fVals[0];
@@ -13847,7 +13929,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       });
     }
 
-    return { model: 'emax', beta: [emax, ed50], seBeta: [0, 0], curvePoints, nonlinPvalue: null, aic, sse: finalSSE, params: { emax, ed50 } };
+    return { model: 'emax', beta: [emax, ed50], seBeta: [0, 0], curvePoints, nonlinPvalue: null, aic, sse: finalSSE, params: { emax, ed50 }, convergence: { iterations: emaxIters, sseDelta: emaxSSEDelta, converged } };
   }
 
   // --- Hill/Sigmoid Emax Model: logRR = emax * dose^h / (ed50^h + dose^h) ---
@@ -13875,25 +13957,37 @@ body.dark-mode .input-error { background: #451a1a !important; }
       return s;
     }
 
-    // Random search + refinement (3 params)
+    // Seeded random search + refinement (3 params) — deterministic via xoshiro128**
     let bestSSE = Infinity, bestP = [0, 1, 1];
     const emaxRange = Math.max(...ys.map(Math.abs)) * 3;
+    var hs0 = 0x9E3779B9, hs1 = 0x243F6A88, hs2 = 0xB7E15162, hs3 = 0x85EBCA6B ^ 0xDEAD;
+    function hillRand() {
+      var result = Math.imul(hs1 * 5, 7) >>> 0;
+      result = ((result << 9) | (result >>> 23)) * 9 >>> 0;
+      var t = hs1 << 9;
+      hs2 ^= hs0; hs3 ^= hs1; hs1 ^= hs2; hs0 ^= hs3;
+      hs2 ^= t; hs3 = (hs3 << 11) | (hs3 >>> 21);
+      return result / 4294967296;
+    }
     for (let trial = 0; trial < 300; trial++) {
-      const em = (Math.random() * 2 - 1) * emaxRange;
-      const ed = Math.exp(Math.log(minD || 0.01) + Math.random() * (Math.log(maxD || 1) - Math.log(minD || 0.01)));
-      const h = 0.3 + Math.random() * 4.7;
+      const em = (hillRand() * 2 - 1) * emaxRange;
+      const ed = Math.exp(Math.log(minD || 0.01) + hillRand() * (Math.log(maxD || 1) - Math.log(minD || 0.01)));
+      const h = 0.3 + hillRand() * 4.7;
       const val = sse([em, ed, h]);
       if (val < bestSSE) { bestSSE = val; bestP = [em, ed, h]; }
     }
 
-    // Simplex refinement
+    // Simplex refinement with convergence tracking
     let simplex = [bestP, [bestP[0]*1.05+0.01, bestP[1], bestP[2]], [bestP[0], bestP[1]*1.05+0.01, bestP[2]], [bestP[0], bestP[1], bestP[2]*1.05+0.01]];
     let fVals = simplex.map(sse);
+    let hillIters = 0, hillSSEDelta = Infinity;
     for (let iter = 0; iter < 500; iter++) {
+      hillIters = iter + 1;
       const order = [0, 1, 2, 3].sort((a, b) => fVals[a] - fVals[b]);
       simplex = order.map(i => simplex[i]);
       fVals = order.map(i => fVals[i]);
-      if (Math.abs(fVals[3] - fVals[0]) < 1e-10) break;
+      hillSSEDelta = Math.abs(fVals[3] - fVals[0]);
+      if (hillSSEDelta < 1e-10) break;
 
       const nd = 3;
       const centroid = Array(nd).fill(0);
@@ -13941,7 +14035,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
       });
     }
 
-    return { model: 'hill', beta: [emax, ed50, h], seBeta: [0, 0, 0], curvePoints, nonlinPvalue: null, aic, sse: finalSSE, params: { emax, ed50, hill: h } };
+    const hillConverged = hillSSEDelta < 1e-10;
+    return { model: 'hill', beta: [emax, ed50, h], seBeta: [0, 0, 0], curvePoints, nonlinPvalue: null, aic, sse: finalSSE, params: { emax, ed50, hill: h }, convergence: { iterations: hillIters, sseDelta: hillSSEDelta, converged: hillConverged } };
   }
 
   // --- Dose-Response Plot ---
@@ -13961,7 +14056,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const toX = d => pad + (d - minD) / (maxD - minD) * (w - 2 * pad);
     const toY = rr => h - pad - (Math.log(rr) - Math.log(minRR)) / (Math.log(maxRR) - Math.log(minRR)) * (h - 2 * pad);
 
-    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:550px;width:100%">';
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:550px;width:100%" role="img" aria-label="Dose-response curve showing relative risk across dose levels">';
     svg += '<style>.dr-label{font-family:system-ui;font-size:10px;fill:var(--text)}</style>';
 
     // Axes
@@ -14162,6 +14257,14 @@ body.dark-mode .input-error { background: #451a1a !important; }
         html += '</table>';
       }
 
+      // Convergence diagnostics for non-linear models
+      if (pooled.convergence) {
+        const cv = pooled.convergence;
+        html += '<p style="font-size:0.82rem;margin-top:8px"><strong>Convergence:</strong> ' +
+          cv.iterations + ' iterations, final SSE delta = ' + cv.sseDelta.toExponential(2) +
+          (cv.converged ? ' <span style="color:#22c55e">(converged)</span>' : ' <span style="color:#f97316">(max iterations reached — interpret with caution)</span>') + '</p>';
+      }
+
       if (pooled.nonlinPvalue != null) {
         html += '<p style="font-size:0.82rem;margin-top:8px">Non-linearity test: p = ' + (pooled.nonlinPvalue < 0.001 ? '<0.001' : pooled.nonlinPvalue.toFixed(3)) +
           (pooled.nonlinPvalue < 0.05 ? ' <span style="color:#ef4444">(significant non-linearity)</span>' : ' <span style="color:#22c55e">(linear model adequate)</span>') + '</p>';
@@ -14221,17 +14324,18 @@ body.dark-mode .input-error { background: #451a1a !important; }
       body.innerHTML = '<tr><td colspan="7" style="padding:16px;text-align:center;color:var(--text-muted)">No strategies. Click <strong>Add Strategy</strong> to enter cost-effectiveness data.</td></tr>';
       return;
     }
-    body.innerHTML = icerStrategies.map(s =>
-      '<tr data-icer-id="' + s.id + '">' +
-        '<td><input type="text" value="' + escapeHtml(s.name || '') + '" data-field="name" placeholder="e.g. Drug A" style="width:120px"></td>' +
-        '<td><input type="number" step="any" value="' + (s.cost ?? '') + '" data-field="cost" style="width:90px"></td>' +
-        '<td><input type="number" step="any" value="' + (s.qaly ?? '') + '" data-field="qaly" style="width:80px"></td>' +
-        '<td><input type="number" step="any" min="0" value="' + (s.sdCost ?? '') + '" data-field="sdCost" style="width:80px"></td>' +
-        '<td><input type="number" step="any" min="0" value="' + (s.sdQaly ?? '') + '" data-field="sdQaly" style="width:70px"></td>' +
-        '<td><input type="text" value="' + escapeHtml(s.notes || '') + '" data-field="notes" style="width:80px"></td>' +
-        '<td><button class="btn-sm btn-danger" onclick="deleteICERStrategy(\'' + s.id + '\')">X</button></td>' +
-      '</tr>'
-    ).join('');
+    body.innerHTML = icerStrategies.map((s, idx) => {
+      const lbl = escapeHtml(s.name || 'Strategy ' + (idx + 1));
+      return '<tr data-icer-id="' + s.id + '">' +
+        '<td><input type="text" value="' + escapeHtml(s.name || '') + '" data-field="name" placeholder="e.g. Drug A" style="width:120px" aria-label="Strategy name"></td>' +
+        '<td><input type="number" step="any" value="' + (s.cost ?? '') + '" data-field="cost" style="width:90px" aria-label="Cost for ' + lbl + '"></td>' +
+        '<td><input type="number" step="any" value="' + (s.qaly ?? '') + '" data-field="qaly" style="width:80px" aria-label="QALYs for ' + lbl + '"></td>' +
+        '<td><input type="number" step="any" min="0" value="' + (s.sdCost ?? '') + '" data-field="sdCost" style="width:80px" aria-label="SD Cost for ' + lbl + '"></td>' +
+        '<td><input type="number" step="any" min="0" value="' + (s.sdQaly ?? '') + '" data-field="sdQaly" style="width:70px" aria-label="SD QALYs for ' + lbl + '"></td>' +
+        '<td><input type="text" value="' + escapeHtml(s.notes || '') + '" data-field="notes" style="width:80px" aria-label="Notes for ' + lbl + '"></td>' +
+        '<td><button class="btn-sm btn-danger" onclick="deleteICERStrategy(\'' + s.id + '\')" aria-label="Delete ' + lbl + '">X</button></td>' +
+      '</tr>';
+    }).join('');
     body.querySelectorAll('input').forEach(inp => {
       inp.addEventListener('change', function() {
         const id = this.closest('tr')?.dataset.icerId;
@@ -14335,7 +14439,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const toX = q => pad + (q + rangeQ) / (2 * rangeQ) * (w - 2 * pad);
     const toY = c => pad + (rangeC - c) / (2 * rangeC) * (h - 2 * pad);
 
-    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;width:100%">';
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;width:100%" role="img" aria-label="Cost-effectiveness plane showing incremental cost versus incremental QALYs for each strategy">';
     svg += '<style>.ce-label{font-family:system-ui;font-size:10px;fill:var(--text)}</style>';
     svg += '<text style="font-family:system-ui;font-size:12px;font-weight:bold;fill:var(--text)" x="' + (w/2) + '" y="18" text-anchor="middle">Cost-Effectiveness Plane</text>';
 
@@ -14391,9 +14495,16 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const nIter = 1000;
     const incCosts = [], incQalys = [];
 
-    // Seeded PRNG for reproducibility (Box-Muller)
-    let _s = 42;
-    function rand() { _s = (_s * 1103515245 + 12345) & 0x7fffffff; return _s / 0x7fffffff; }
+    // Seeded xoshiro128** PRNG for reproducibility (seed=42, period ~2^128)
+    var ps0 = 0x9E3779B9 ^ 42, ps1 = 0x243F6A88 ^ 42, ps2 = 0xB7E15162, ps3 = 0x85EBCA6B;
+    function rand() {
+      var result = Math.imul(ps1 * 5, 7) >>> 0;
+      result = ((result << 9) | (result >>> 23)) * 9 >>> 0;
+      var t = ps1 << 9;
+      ps2 ^= ps0; ps3 ^= ps1; ps1 ^= ps2; ps0 ^= ps3;
+      ps2 ^= t; ps3 = (ps3 << 11) | (ps3 >>> 21);
+      return result / 4294967296;
+    }
     function randn() { const u1 = rand() || 1e-10, u2 = rand(); return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2); }
 
     for (let i = 0; i < nIter; i++) {
@@ -14429,7 +14540,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const toX = q => pad + (q + rangeQ) / (2 * rangeQ) * (w - 2 * pad);
     const toY = c => pad + (rangeC - c) / (2 * rangeC) * (h - 2 * pad);
 
-    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;width:100%">';
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;width:100%" role="img" aria-label="Probabilistic sensitivity analysis scatter plot: ' + escapeHtml(intName) + ' versus ' + escapeHtml(compName) + ', 1000 Monte Carlo iterations">';
     svg += '<style>.psa-label{font-family:system-ui;font-size:10px;fill:var(--text)}</style>';
     svg += '<text style="font-family:system-ui;font-size:12px;font-weight:bold;fill:var(--text)" x="' + (w/2) + '" y="18" text-anchor="middle">CE Plane (PSA: ' + escapeHtml(intName) + ' vs ' + escapeHtml(compName) + ')</text>';
 
@@ -14491,7 +14602,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const toX = w_ => pad + (w_ / wtpMax) * plotW;
     const toY = p => pad + (1 - p) * plotH;
 
-    let svg = '<svg viewBox="0 0 ' + svgW + ' ' + svgH + '" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;width:100%">';
+    let svg = '<svg viewBox="0 0 ' + svgW + ' ' + svgH + '" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;width:100%" role="img" aria-label="Cost-effectiveness acceptability curve for ' + escapeHtml(intName) + '">';
     svg += '<style>.ceac-label{font-family:system-ui;font-size:10px;fill:var(--text)}</style>';
     svg += '<text style="font-family:system-ui;font-size:12px;font-weight:bold;fill:var(--text)" x="' + (svgW/2) + '" y="18" text-anchor="middle">CEAC: ' + escapeHtml(intName) + '</text>';
 
@@ -14561,7 +14672,13 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const maxX = Math.max(...allVals) * 1.1;
     const toX = v => padL + (v - minX) / (maxX - minX) * plotW;
 
-    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;width:100%">';
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;width:100%" role="img" aria-label="Tornado diagram showing one-way sensitivity analysis of ICER parameters">';
+    svg += '<defs>';
+    svg += '<pattern id="hatch0" patternUnits="userSpaceOnUse" width="6" height="6"><path d="M0,6 L6,0" stroke="#1e40af" stroke-width="1" opacity="0.3"/></pattern>';
+    svg += '<pattern id="hatch1" patternUnits="userSpaceOnUse" width="6" height="6"><path d="M0,0 L6,6" stroke="#1e40af" stroke-width="1" opacity="0.3"/></pattern>';
+    svg += '<pattern id="hatch2" patternUnits="userSpaceOnUse" width="4" height="4"><rect width="4" height="4" fill="none"/><rect width="2" height="2" fill="#1e40af" opacity="0.2"/></pattern>';
+    svg += '<pattern id="hatch3" patternUnits="userSpaceOnUse" width="6" height="6"><path d="M0,3 L6,3 M3,0 L3,6" stroke="#1e40af" stroke-width="0.8" opacity="0.25"/></pattern>';
+    svg += '</defs>';
     svg += '<style>.torn-label{font-family:system-ui;font-size:10px;fill:var(--text)}</style>';
     svg += '<text style="font-family:system-ui;font-size:12px;font-weight:bold;fill:var(--text)" x="' + (w/2) + '" y="18" text-anchor="middle">Tornado Diagram (One-Way Sensitivity)</text>';
 
@@ -14574,6 +14691,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       const x1 = toX(r.minICER), x2 = toX(r.maxICER);
       svg += '<text class="torn-label" x="' + (padL - 6) + '" y="' + (y + barH / 2 + 4) + '" text-anchor="end">' + r.label + '</text>';
       svg += '<rect x="' + x1.toFixed(1) + '" y="' + y + '" width="' + (x2 - x1).toFixed(1) + '" height="' + barH + '" fill="#3b82f6" rx="3" opacity="0.7"/>';
+      svg += '<rect x="' + x1.toFixed(1) + '" y="' + y + '" width="' + (x2 - x1).toFixed(1) + '" height="' + barH + '" fill="url(#hatch' + (i % 4) + ')" rx="3"/>';
       svg += '<text style="font-size:8px;fill:var(--text-muted)" x="' + (x1 - 4).toFixed(1) + '" y="' + (y + barH / 2 + 3) + '" text-anchor="end">' + currency + Math.round(r.minICER).toLocaleString() + '</text>';
       svg += '<text style="font-size:8px;fill:var(--text-muted)" x="' + (x2 + 4).toFixed(1) + '" y="' + (y + barH / 2 + 3) + '">' + currency + Math.round(r.maxICER).toLocaleString() + '</text>';
     });
@@ -23573,7 +23691,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       '# PROSPERO Protocol (Registration-Ready Draft)\n\n' +
       '## Administrative Information\n' +
       '- Review title: ' + title + '\n' +
-      '- Registration target: PROSPERO (CRD42026XXXXXX placeholder)\n' +
+      '- Registration: ' + ((document.getElementById('protPROSPERO')?.value || '').trim() || 'PROSPERO (CRD42026XXXXXX — to be assigned)') + '\n' +
       '- Review type: Intervention systematic review with meta-analysis\n' +
       '- Clinical area: ' + (cardioFocused ? 'Cardiology / cardiovascular medicine' : 'General clinical medicine') + '\n' +
       '- Planned start date: ' + dateStr + '\n' +
@@ -23633,6 +23751,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       '<div style="display:flex;gap:8px;margin-top:8px">' +
         '<button onclick="copyToClipboard(document.querySelector(\'.protocol-text\').textContent)">Copy to Clipboard</button>' +
         '<button class="btn-outline" onclick="downloadProtocol()">Download .txt</button>' +
+        '<button class="btn-outline" onclick="exportPRISMAChecklist()">PRISMA 2020 Checklist</button>' +
       '</div>';
 
     // Store protocol text for download
@@ -23644,6 +23763,44 @@ body.dark-mode .input-error { background: #451a1a !important; }
     if (window._lastProtocol) {
       downloadFile(window._lastProtocol, 'prospero-protocol.txt', 'text/plain');
     }
+  }
+
+  function exportPRISMAChecklist() {
+    const items = [
+      ['1','Title','Identify the report as a systematic review',''],
+      ['2','Abstract','Structured summary (background, objectives, data sources, eligibility, participants, interventions, appraisal, synthesis, results, limitations, conclusions, registration number)',''],
+      ['3','Rationale','Describe the rationale for the review in the context of existing knowledge',''],
+      ['4','Objectives','Provide an explicit statement of the questions being addressed (PICO)',''],
+      ['5','Eligibility criteria','Specify inclusion and exclusion criteria, including study characteristics and report characteristics',''],
+      ['6','Information sources','Describe all information sources searched and date last searched',''],
+      ['7','Search strategy','Present the full search strategy for at least one database',''],
+      ['8','Selection process','State the process for selecting studies (screening, eligibility, included)',''],
+      ['9','Data collection process','Describe methods for extracting data from reports',''],
+      ['10','Data items','List and define all variables for which data were sought',''],
+      ['11','Study risk of bias assessment','Describe methods used for assessing risk of bias of individual studies',''],
+      ['12','Effect measures','Specify the principal summary measures (e.g. risk ratio, mean difference)',''],
+      ['13','Synthesis methods','Describe methods of handling data and combining results',''],
+      ['14','Reporting bias assessment','Describe any assessment of risk of bias due to missing results in a synthesis',''],
+      ['15','Certainty assessment','Describe any methods used to assess certainty in the body of evidence (e.g. GRADE)',''],
+      ['16','Study selection','Give numbers at each stage (searched, screened, assessed for eligibility, included), with reasons for exclusions',''],
+      ['17','Study characteristics','Present characteristics of each study from which data were extracted',''],
+      ['18','Risk of bias in studies','Present assessments of risk of bias for each included study',''],
+      ['19','Results of individual studies','Present, for all outcomes, simple summary data for each group and effect estimates and CIs',''],
+      ['20','Results of syntheses','Present results of each meta-analysis, with CIs and measures of heterogeneity',''],
+      ['21','Reporting biases','Present assessments of risk of bias due to missing results',''],
+      ['22','Certainty of evidence','Present assessments of certainty for each outcome',''],
+      ['23','Discussion - Summary','Provide a general interpretation in the context of other evidence',''],
+      ['24','Discussion - Limitations','Discuss limitations at study and outcome level, and at review level',''],
+      ['25','Discussion - Conclusions','Provide a general interpretation of the results and implications',''],
+      ['26','Registration and protocol','Provide registration information including registration number, and where protocol can be accessed',''],
+      ['27','Support','Describe sources of financial or non-financial support for the review, and any role of funders','']
+    ];
+    let csv = 'Item,Section/Topic,Checklist Item,Reported on Page\n';
+    items.forEach(function(row) {
+      csv += row.map(function(c) { return '"' + c.replace(/"/g, '""') + '"'; }).join(',') + '\n';
+    });
+    downloadFile(csv, 'PRISMA-2020-checklist.csv', 'text/csv');
+    showToast('PRISMA 2020 checklist exported (27 items)', 'success');
   }
 
   function copyToClipboard(text) {
@@ -28801,6 +28958,18 @@ function checkLivingEvidence(){
       });
       html += '</tbody></table>';
     }
+
+    // Al-Burhan stopping rules documentation
+    html += '<div style="margin-top:14px;padding:10px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)">';
+    html += '<h4 style="font-size:0.88rem;margin-bottom:6px">Al-Burhan Living Evidence: Update &amp; Stopping Rules</h4>';
+    html += '<ul style="font-size:0.78rem;margin:0;padding-left:20px;line-height:1.6">';
+    html += '<li><strong>Trigger update when:</strong> New RCT with N &ge; 50 is published matching the PICO, OR &ge; 6 months since last verification.</li>';
+    html += '<li><strong>Re-run analysis when:</strong> New trial changes pooled effect by &gt; 10% or shifts significance boundary (TSA monitoring).</li>';
+    html += '<li><strong>Stop updating when:</strong> TSA monitoring boundary crossed (futility or efficacy), OR information size reached, OR 3 consecutive updates show &lt; 2% effect change and I&sup2; stable.</li>';
+    html += '<li><strong>Downgrade to archived when:</strong> No new trials registered on ClinicalTrials.gov in &gt; 24 months for this PICO.</li>';
+    html += '</ul>';
+    html += '<p style="font-size:0.7rem;color:var(--text-muted);margin-top:6px;margin-bottom:0">Ref: Elliott et al., J Clin Epidemiol 2017 (Living Systematic Reviews). Cochrane Handbook v6.5 Ch 22.</p>';
+    html += '</div>';
 
     // Mark as verified
     safeSetStorage('msa-living-last-verified', now.toISOString());

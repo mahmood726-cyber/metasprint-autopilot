@@ -4130,15 +4130,21 @@ featTest.describe('Publication Export, RevMan XML & i18n', () => {
   });
 
   // --- Method Guidance ---
-  featTest('293 - method guidance tooltip present', async ({ page }) => {
-    const title = await page.evaluate(() => {
-      const el = document.getElementById('methodGuide');
-      return el ? el.getAttribute('title') : null;
+  featTest('293 - method guidance popover present and accessible', async ({ page }) => {
+    // Popover should exist as hidden child of #methodGuide
+    const popover = await page.evaluate(() => {
+      const el = document.getElementById('methodGuidePopover');
+      return el ? el.textContent : null;
     });
-    featExpect(title).toContain('REML');
-    featExpect(title).toContain('Cochrane');
-    featExpect(title).toContain('HKSJ');
-    featExpect(title).toContain('Peto');
+    featExpect(popover).toContain('REML');
+    featExpect(popover).toContain('Cochrane');
+    featExpect(popover).toContain('HKSJ');
+    featExpect(popover).toContain('Peto');
+    // Check accessibility attributes
+    const ariaLabel = await page.evaluate(() => document.getElementById('methodGuide')?.getAttribute('aria-label'));
+    featExpect(ariaLabel).toContain('method guidance');
+    const role = await page.evaluate(() => document.getElementById('methodGuide')?.getAttribute('role'));
+    featExpect(role).toBe('button');
   });
 });
 
