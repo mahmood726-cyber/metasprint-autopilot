@@ -1111,6 +1111,13 @@ body.dark-mode .input-error { background: #451a1a !important; }
       </div>
       <button class="btn-outline" onclick="exportProject()">Export</button>
       <button class="btn-outline" onclick="importProject()">Import</button>
+      <select id="langSelect" onchange="setLanguage(this.value)" style="padding:2px 6px;font-size:0.75rem;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);cursor:pointer" title="Language / Langue / Idioma" aria-label="Select language">
+        <option value="en">EN</option>
+        <option value="fr">FR</option>
+        <option value="es">ES</option>
+        <option value="ar">AR</option>
+        <option value="zh">ZH</option>
+      </select>
       <button class="dark-toggle-btn" id="darkModeBtn" onclick="toggleDarkMode()" title="Toggle dark mode" aria-label="Toggle dark mode">&#127769;</button>
       <button class="btn-outline btn-sm" onclick="toggleHelp()" title="Help" aria-label="Help">?</button>
     </div>
@@ -1542,7 +1549,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <button onclick="importFromPMIDList()">Paste PMIDs</button>
         <button onclick="runDeduplication()">Find Duplicates</button>
         <button class="btn-info" onclick="showAutoScreenPanel()">Auto-Screen</button>
-        <input type="file" id="risFileInput" accept=".ris,.bib,.nbib,.xml,.csv,.txt"
+        <input type="file" id="risFileInput" accept=".ris,.bib,.nbib,.xml,.csv,.txt,.rm5"
                style="display:none" onchange="handleFileImport(event)" multiple>
         <span id="refCount" class="text-muted">0 references</span>
       </div>
@@ -1627,6 +1634,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <div id="prismaFlow"></div>
         <div id="prisma2020Flow" style="display:none"></div>
         <button onclick="exportPRISMASVG()" style="margin-top:8px">Export SVG</button>
+        <button onclick="exportPRISMAPNG()" style="margin-top:8px;margin-left:8px">Export PNG 300dpi</button>
       </div>
     </section>
 
@@ -1641,6 +1649,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <button class="btn-outline" onclick="exportToMetaSprint('pairwise')">Export Pairwise CSV</button>
         <button class="btn-outline" onclick="exportToMetaSprint('nma')">Export NMA JSON</button>
         <button class="btn-outline" onclick="exportStudiesCSV()">Export CSV</button>
+        <button class="btn-outline" onclick="exportRevManXML()">Export RevMan XML</button>
         <button class="btn-info" onclick="showExtractorModal()">Extract from PDF</button>
         <button class="btn-info" onclick="openPdfExtractOverlay(null)" title="Open embedded PDF viewer with data extraction">PDF Viewer</button>
         <button class="btn-outline" onclick="batchAutoFillFromCurated()" title="Auto-fill all studies from curated CVOT reference data">Batch Auto-Fill</button>
@@ -1741,6 +1750,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
           <option value="MH">Mantel-Haenszel (2x2 data)</option>
           <option value="Peto">Peto OR (rare events, 2x2)</option>
         </select>
+        <span id="methodGuide" style="cursor:help;font-size:0.75rem;color:var(--text-muted);margin-left:4px" title="REML (recommended): Cochrane Handbook v6.5 default, less biased tau-squared. HKSJ: Use with k&lt;10 studies for wider, more honest CIs. MH: Best for binary outcomes with raw 2x2 counts, no continuity correction needed. Peto: Best for rare events (&lt;1%); requires OR + 2x2 data. DL: Legacy method, may underestimate CI width. FE: Only when true homogeneity is expected.">&#9432;</span>
         <label for="outcomeFilterSelect" style="font-size:0.8rem;color:var(--text-muted)">Outcome:</label>
         <select id="outcomeFilterSelect" style="padding:4px 8px;font-size:0.82rem;border:1px solid var(--border);border-radius:var(--radius)">
           <option value="__all__">All outcomes</option>
@@ -1754,8 +1764,10 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <div id="funnelPlotContainer"></div>
       </div>
       <div id="analysisExport" style="margin-top:12px;display:none">
-        <button class="btn-outline" onclick="exportPlotSVG('forestPlotContainer','forest-plot.svg')">Export Forest SVG</button>
-        <button class="btn-outline" onclick="exportPlotSVG('funnelPlotContainer','funnel-plot.svg')">Export Funnel SVG</button>
+        <button class="btn-outline" onclick="exportPlotSVG('forestPlotContainer','forest-plot.svg')">Forest SVG</button>
+        <button class="btn-outline" onclick="exportPlotPNG('forestPlotContainer','forest-plot-300dpi.png',300)">Forest PNG 300dpi</button>
+        <button class="btn-outline" onclick="exportPlotSVG('funnelPlotContainer','funnel-plot.svg')">Funnel SVG</button>
+        <button class="btn-outline" onclick="exportPlotPNG('funnelPlotContainer','funnel-plot-300dpi.png',300)">Funnel PNG 300dpi</button>
         <button class="btn-outline" onclick="copyAnalysisSummary()">Copy Statistics</button>
         <button class="btn-outline" onclick="exportRCode()">Export R Code</button>
         <button class="btn-outline" onclick="exportPythonCode()">Export Python Code</button>
@@ -2163,6 +2175,146 @@ body.dark-mode .input-error { background: #451a1a !important; }
       (!filter.level || e.level === filter.level) &&
       (!filter.module || e.module === filter.module)
     );
+  }
+
+  // ============================================================
+  // INTERNATIONALIZATION (i18n)
+  // ============================================================
+  const _i18n = {
+    currentLang: localStorage.getItem('msa_lang') || 'en',
+    strings: {
+      en: {
+        'app.title': 'MetaSprint Autopilot',
+        'nav.studies': 'Studies', 'nav.analysis': 'Analysis', 'nav.search': 'Search',
+        'nav.screening': 'Screening', 'nav.rob': 'Risk of Bias', 'nav.prisma': 'PRISMA',
+        'nav.nma': 'Network MA', 'nav.settings': 'Settings', 'nav.export': 'Export',
+        'nav.living': 'Living Review', 'nav.advanced': 'Advanced', 'nav.grade': 'GRADE/NNT',
+        'nav.covariate': 'Covariate',
+        'method.label': 'Method:', 'method.dl': 'DL (DerSimonian-Laird)',
+        'method.dlhksj': 'DL + HKSJ adjustment', 'method.reml': 'REML (Cochrane default)',
+        'method.remlhksj': 'REML + HKSJ adjustment', 'method.fe': 'Fixed Effect (IV)',
+        'method.mh': 'Mantel-Haenszel (2x2 data)', 'method.peto': 'Peto OR (rare events, 2x2)',
+        'outcome.label': 'Outcome:', 'outcome.all': 'All outcomes',
+        'conf.label': 'Confidence:', 'btn.run': 'Run Analysis',
+        'export.forestSvg': 'Forest SVG', 'export.forestPng': 'Forest PNG 300dpi',
+        'export.funnelSvg': 'Funnel SVG', 'export.funnelPng': 'Funnel PNG 300dpi',
+        'export.copyStats': 'Copy Statistics', 'export.rCode': 'Export R Code',
+        'export.pythonCode': 'Export Python Code',
+        'toast.imported': 'Imported {n} references',
+        'toast.noPlot': 'No plot to export', 'toast.plotExported': 'Plot exported',
+        'toast.analysisFirst': 'Run analysis first',
+        'study.label': 'Study', 'study.effect': 'Effect', 'study.ci': 'CI',
+        'study.weight': 'Weight', 'study.add': 'Add Study', 'study.clear': 'Clear All',
+        'search.ctgov': 'ClinicalTrials.gov', 'search.pubmed': 'PubMed',
+        'lang.en': 'English', 'lang.fr': 'French', 'lang.es': 'Spanish',
+        'lang.ar': 'Arabic', 'lang.zh': 'Chinese'
+      },
+      fr: {
+        'app.title': 'MetaSprint Autopilote',
+        'nav.studies': 'Etudes', 'nav.analysis': 'Analyse', 'nav.search': 'Recherche',
+        'nav.screening': 'Criblage', 'nav.rob': 'Risque de biais', 'nav.prisma': 'PRISMA',
+        'nav.nma': 'MA en reseau', 'nav.settings': 'Parametres', 'nav.export': 'Exporter',
+        'nav.living': 'Revue vivante', 'nav.advanced': 'Avance', 'nav.grade': 'GRADE/NNT',
+        'nav.covariate': 'Covariable',
+        'method.label': 'Methode :', 'method.dl': 'DL (DerSimonian-Laird)',
+        'method.dlhksj': 'DL + ajustement HKSJ', 'method.reml': 'REML (defaut Cochrane)',
+        'method.remlhksj': 'REML + ajustement HKSJ', 'method.fe': 'Effet fixe (VI)',
+        'method.mh': 'Mantel-Haenszel (donnees 2x2)', 'method.peto': 'Peto OR (evenements rares, 2x2)',
+        'outcome.label': 'Issue :', 'outcome.all': 'Tous les criteres',
+        'conf.label': 'Confiance :', 'btn.run': 'Lancer l\'analyse',
+        'export.forestSvg': 'Foret SVG', 'export.forestPng': 'Foret PNG 300dpi',
+        'export.funnelSvg': 'Entonnoir SVG', 'export.funnelPng': 'Entonnoir PNG 300dpi',
+        'export.copyStats': 'Copier statistiques', 'export.rCode': 'Exporter code R',
+        'export.pythonCode': 'Exporter code Python',
+        'toast.imported': '{n} references importees',
+        'toast.noPlot': 'Aucun graphique a exporter', 'toast.plotExported': 'Graphique exporte',
+        'toast.analysisFirst': 'Lancez d\'abord l\'analyse',
+        'study.label': 'Etude', 'study.effect': 'Effet', 'study.ci': 'IC',
+        'study.weight': 'Poids', 'study.add': 'Ajouter etude', 'study.clear': 'Tout effacer',
+        'search.ctgov': 'ClinicalTrials.gov', 'search.pubmed': 'PubMed',
+        'lang.en': 'Anglais', 'lang.fr': 'Francais', 'lang.es': 'Espagnol',
+        'lang.ar': 'Arabe', 'lang.zh': 'Chinois'
+      },
+      es: {
+        'app.title': 'MetaSprint Autopiloto',
+        'nav.studies': 'Estudios', 'nav.analysis': 'Analisis', 'nav.search': 'Busqueda',
+        'nav.screening': 'Cribado', 'nav.rob': 'Riesgo de sesgo', 'nav.prisma': 'PRISMA',
+        'nav.nma': 'MA en red', 'nav.settings': 'Ajustes', 'nav.export': 'Exportar',
+        'nav.living': 'Revision viva', 'nav.advanced': 'Avanzado', 'nav.grade': 'GRADE/NNT',
+        'nav.covariate': 'Covariable',
+        'method.label': 'Metodo:', 'method.dl': 'DL (DerSimonian-Laird)',
+        'method.dlhksj': 'DL + ajuste HKSJ', 'method.reml': 'REML (defecto Cochrane)',
+        'method.remlhksj': 'REML + ajuste HKSJ', 'method.fe': 'Efecto fijo (VI)',
+        'method.mh': 'Mantel-Haenszel (datos 2x2)', 'method.peto': 'Peto OR (eventos raros, 2x2)',
+        'outcome.label': 'Desenlace:', 'outcome.all': 'Todos los desenlaces',
+        'conf.label': 'Confianza:', 'btn.run': 'Ejecutar analisis',
+        'export.forestSvg': 'Bosque SVG', 'export.forestPng': 'Bosque PNG 300dpi',
+        'export.funnelSvg': 'Embudo SVG', 'export.funnelPng': 'Embudo PNG 300dpi',
+        'export.copyStats': 'Copiar estadisticas', 'export.rCode': 'Exportar codigo R',
+        'export.pythonCode': 'Exportar codigo Python',
+        'toast.imported': '{n} referencias importadas',
+        'toast.noPlot': 'No hay grafico para exportar', 'toast.plotExported': 'Grafico exportado',
+        'toast.analysisFirst': 'Ejecute primero el analisis',
+        'study.label': 'Estudio', 'study.effect': 'Efecto', 'study.ci': 'IC',
+        'study.weight': 'Peso', 'study.add': 'Agregar estudio', 'study.clear': 'Borrar todo',
+        'search.ctgov': 'ClinicalTrials.gov', 'search.pubmed': 'PubMed',
+        'lang.en': 'Ingles', 'lang.fr': 'Frances', 'lang.es': 'Espanol',
+        'lang.ar': 'Arabe', 'lang.zh': 'Chino'
+      },
+      ar: {
+        'app.title': 'MetaSprint Autopilot',
+        'nav.studies': '\u062F\u0631\u0627\u0633\u0627\u062A', 'nav.analysis': '\u062A\u062D\u0644\u064A\u0644', 'nav.search': '\u0628\u062D\u062B',
+        'nav.screening': '\u0641\u0631\u0632', 'nav.rob': '\u062E\u0637\u0631 \u0627\u0644\u062A\u062D\u064A\u0632', 'nav.prisma': 'PRISMA',
+        'nav.nma': '\u062A\u062D\u0644\u064A\u0644 \u0634\u0628\u0643\u064A', 'nav.settings': '\u0625\u0639\u062F\u0627\u062F\u0627\u062A', 'nav.export': '\u062A\u0635\u062F\u064A\u0631',
+        'nav.living': '\u0645\u0631\u0627\u062C\u0639\u0629 \u062D\u064A\u0629', 'nav.advanced': '\u0645\u062A\u0642\u062F\u0645', 'nav.grade': 'GRADE/NNT',
+        'nav.covariate': '\u0645\u062A\u063A\u064A\u0631 \u0645\u0634\u062A\u0631\u0643',
+        'method.label': ':\u0627\u0644\u0637\u0631\u064A\u0642\u0629', 'btn.run': '\u062A\u0634\u063A\u064A\u0644 \u0627\u0644\u062A\u062D\u0644\u064A\u0644',
+        'study.label': '\u062F\u0631\u0627\u0633\u0629', 'study.effect': '\u0627\u0644\u0623\u062B\u0631', 'study.ci': '\u0641\u062A\u0631\u0629 \u0627\u0644\u062B\u0642\u0629',
+        'study.weight': '\u0627\u0644\u0648\u0632\u0646',
+        'lang.en': '\u0627\u0644\u0625\u0646\u062C\u0644\u064A\u0632\u064A\u0629', 'lang.fr': '\u0627\u0644\u0641\u0631\u0646\u0633\u064A\u0629', 'lang.es': '\u0627\u0644\u0625\u0633\u0628\u0627\u0646\u064A\u0629',
+        'lang.ar': '\u0627\u0644\u0639\u0631\u0628\u064A\u0629', 'lang.zh': '\u0627\u0644\u0635\u064A\u0646\u064A\u0629'
+      },
+      zh: {
+        'app.title': 'MetaSprint \u81EA\u52A8\u5BFC\u822A',
+        'nav.studies': '\u7814\u7A76', 'nav.analysis': '\u5206\u6790', 'nav.search': '\u641C\u7D22',
+        'nav.screening': '\u7B5B\u9009', 'nav.rob': '\u504F\u503A\u98CE\u9669', 'nav.prisma': 'PRISMA',
+        'nav.nma': '\u7F51\u72B6Meta\u5206\u6790', 'nav.settings': '\u8BBE\u7F6E', 'nav.export': '\u5BFC\u51FA',
+        'nav.living': '\u6D3B\u7684\u7EFC\u8FF0', 'nav.advanced': '\u9AD8\u7EA7', 'nav.grade': 'GRADE/NNT',
+        'nav.covariate': '\u534F\u53D8\u91CF',
+        'method.label': '\u65B9\u6CD5\uFF1A', 'btn.run': '\u8FD0\u884C\u5206\u6790',
+        'study.label': '\u7814\u7A76', 'study.effect': '\u6548\u5E94', 'study.ci': '\u7F6E\u4FE1\u533A\u95F4',
+        'study.weight': '\u6743\u91CD',
+        'lang.en': '\u82F1\u8BED', 'lang.fr': '\u6CD5\u8BED', 'lang.es': '\u897F\u73ED\u7259\u8BED',
+        'lang.ar': '\u963F\u62C9\u4F2F\u8BED', 'lang.zh': '\u4E2D\u6587'
+      }
+    }
+  };
+
+  function t(key, params) {
+    const lang = _i18n.currentLang;
+    const str = (_i18n.strings[lang] && _i18n.strings[lang][key]) || (_i18n.strings.en[key]) || key;
+    if (!params) return str;
+    return str.replace(/\{(\w+)\}/g, function (_, k) { return params[k] !== undefined ? params[k] : '{' + k + '}'; });
+  }
+
+  function setLanguage(lang) {
+    if (!_i18n.strings[lang]) lang = 'en';
+    _i18n.currentLang = lang;
+    localStorage.setItem('msa_lang', lang);
+    document.documentElement.lang = lang;
+    if (lang === 'ar') { document.documentElement.dir = 'rtl'; } else { document.documentElement.dir = 'ltr'; }
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      const key = el.getAttribute('data-i18n');
+      if (el.tagName === 'OPTION') { el.textContent = t(key); }
+      else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') { el.placeholder = t(key); }
+      else { el.textContent = t(key); }
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(function (el) {
+      el.title = t(el.getAttribute('data-i18n-title'));
+    });
+    const langSelect = document.getElementById('langSelect');
+    if (langSelect) langSelect.value = lang;
+    msaLog('info', 'i18n', 'Language set to ' + lang);
   }
 
   // ============================================================
@@ -4977,6 +5129,83 @@ body.dark-mode .input-error { background: #451a1a !important; }
     return result;
   }
 
+  // --- RevMan XML Parser (Cochrane Review Manager 5 .rm5 files) ---
+  function parseRevManXML(content) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(content, 'text/xml');
+    const references = [];
+    const studies = doc.querySelectorAll('INCLUDED_STUDIES STUDY, STUDIES_AND_REFERENCES STUDY');
+    for (const study of studies) {
+      const record = { id: generateId(), keywords: [], projectId: currentProjectId };
+      const nameEl = study.querySelector('NAME, STUDY_ID');
+      record.title = nameEl ? nameEl.textContent.trim() : (study.getAttribute('NAME') || study.getAttribute('ID') || '');
+      const yearEl = study.querySelector('YEAR');
+      if (yearEl) record.year = yearEl.textContent.trim();
+      const refs = study.querySelectorAll('REFERENCE');
+      if (refs.length > 0) {
+        const ref = refs[0];
+        const au = ref.querySelector('AU');
+        if (au) record.authors = au.textContent.trim();
+        const ti = ref.querySelector('TI');
+        if (ti) record.title = ti.textContent.trim();
+        const so = ref.querySelector('SO');
+        if (so) record.journal = so.textContent.trim();
+        const yr = ref.querySelector('YR');
+        if (yr) record.year = yr.textContent.trim();
+      }
+      if (record.title) references.push(record);
+    }
+    return references;
+  }
+
+  function parseRevManStudyData(content) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(content, 'text/xml');
+    const imported = [];
+    const dichotomous = doc.querySelectorAll('DICH_DATA');
+    for (const d of dichotomous) {
+      const studyId = d.closest('STUDY') ? d.closest('STUDY').getAttribute('NAME') || d.closest('STUDY').getAttribute('ID') : '';
+      const outcome = d.closest('DICH_OUTCOME');
+      const outcomeName = outcome ? (outcome.getAttribute('NAME') || '') : '';
+      const eventsInt = parseInt(d.getAttribute('EVENTS_1') || d.getAttribute('E1'), 10);
+      const totalInt = parseInt(d.getAttribute('TOTAL_1') || d.getAttribute('N1'), 10);
+      const eventsCtrl = parseInt(d.getAttribute('EVENTS_2') || d.getAttribute('E2'), 10);
+      const totalCtrl = parseInt(d.getAttribute('TOTAL_2') || d.getAttribute('N2'), 10);
+      if (isFinite(eventsInt) && isFinite(totalInt) && isFinite(eventsCtrl) && isFinite(totalCtrl)) {
+        imported.push({
+          label: studyId || ('Study ' + (imported.length + 1)),
+          eventsInt, totalInt, eventsCtrl, totalCtrl,
+          effectType: 'OR', outcome: outcomeName,
+          effectEstimate: null, lowerCI: null, upperCI: null, se: null
+        });
+      }
+    }
+    const continuous = doc.querySelectorAll('CONT_DATA');
+    for (const c of continuous) {
+      const studyId = c.closest('STUDY') ? c.closest('STUDY').getAttribute('NAME') || c.closest('STUDY').getAttribute('ID') : '';
+      const outcome = c.closest('CONT_OUTCOME');
+      const outcomeName = outcome ? (outcome.getAttribute('NAME') || '') : '';
+      const mean1 = parseFloat(c.getAttribute('MEAN_1'));
+      const sd1 = parseFloat(c.getAttribute('SD_1'));
+      const n1 = parseInt(c.getAttribute('TOTAL_1') || c.getAttribute('N1'), 10);
+      const mean2 = parseFloat(c.getAttribute('MEAN_2'));
+      const sd2 = parseFloat(c.getAttribute('SD_2'));
+      const n2 = parseInt(c.getAttribute('TOTAL_2') || c.getAttribute('N2'), 10);
+      if (isFinite(mean1) && isFinite(sd1) && isFinite(n1) && isFinite(mean2) && isFinite(sd2) && isFinite(n2)) {
+        const md = mean1 - mean2;
+        const seMD = Math.sqrt(sd1*sd1/n1 + sd2*sd2/n2);
+        imported.push({
+          label: studyId || ('Study ' + (imported.length + 1)),
+          effectEstimate: md, se: seMD, effectType: 'MD', outcome: outcomeName,
+          lowerCI: md - 1.96 * seMD, upperCI: md + 1.96 * seMD,
+          totalInt: n1, totalCtrl: n2,
+          eventsInt: null, eventsCtrl: null
+        });
+      }
+    }
+    return imported;
+  }
+
   // ============================================================
   // FILE IMPORT HANDLER
   // ============================================================
@@ -4992,6 +5221,18 @@ body.dark-mode .input-error { background: #451a1a !important; }
       if (ext === 'ris' || ext === 'txt') records = parseRIS(content);
       else if (ext === 'bib') records = parseBibTeX(content);
       else if (ext === 'nbib') records = parsePubMedNBib(content);
+      else if (ext === 'xml' && content.includes('<COCHRANE_REVIEW') || ext === 'rm5') {
+        records = parseRevManXML(content);
+        const studyData = parseRevManStudyData(content);
+        if (studyData.length > 0) {
+          for (const s of studyData) {
+            s.id = generateId();
+            extractedStudies.push(s);
+          }
+          showToast('Also imported ' + studyData.length + ' study data records for meta-analysis', 'info');
+          renderStudyTable();
+        }
+      }
       else if (ext === 'xml') records = parseEndNoteXML(content);
       else if (ext === 'csv') records = parseCSVReferences(content);
       else { showToast('Unknown format: .' + ext, 'warning'); continue; }
@@ -7147,6 +7388,11 @@ body.dark-mode .input-error { background: #451a1a !important; }
     downloadFile(svgStr, 'prisma-2020-flow.svg', 'image/svg+xml');
   }
 
+  function exportPRISMAPNG() {
+    const containerId = document.querySelector('#prisma2020Flow svg') ? 'prisma2020Flow' : 'prismaFlow';
+    exportPlotPNG(containerId, 'prisma-2020-flow-300dpi.png', 300);
+  }
+
   // --- PRISMA 2020 Flow Diagram (Page et al. BMJ 2021;372:n71) ---
   // 27-item compliant flow with databases, registers, other sources
   function renderPRISMA2020Flow(prismaData) {
@@ -8038,6 +8284,60 @@ body.dark-mode .input-error { background: #451a1a !important; }
       return base.join(',');
     });
     downloadFile(header + '\n' + rows.join('\n'), 'studies-export.csv', 'text/csv');
+  }
+
+  function exportRevManXML() {
+    if (!extractedStudies.length) { showToast('No studies to export', 'warning'); return; }
+    let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<COCHRANE_REVIEW>\n';
+    xml += '  <INCLUDED_STUDIES>\n';
+    const dichStudies = [];
+    const contStudies = [];
+    for (const s of extractedStudies) {
+      const name = escapeHtml(s.label || s.authorYear || 'Study');
+      xml += '    <STUDY NAME="' + name + '">\n';
+      xml += '      <REFERENCE>\n';
+      if (s.authorYear) xml += '        <AU>' + escapeHtml(s.authorYear) + '</AU>\n';
+      if (s.title) xml += '        <TI>' + escapeHtml(s.title) + '</TI>\n';
+      if (s.journal) xml += '        <SO>' + escapeHtml(s.journal) + '</SO>\n';
+      if (s.year) xml += '        <YR>' + escapeHtml(String(s.year)) + '</YR>\n';
+      xml += '      </REFERENCE>\n';
+      xml += '    </STUDY>\n';
+      if (s.eventsInt != null && s.totalInt != null && s.eventsCtrl != null && s.totalCtrl != null) {
+        dichStudies.push(s);
+      } else if (s.effectEstimate != null && s.se != null) {
+        contStudies.push(s);
+      }
+    }
+    xml += '  </INCLUDED_STUDIES>\n';
+    if (dichStudies.length > 0) {
+      xml += '  <DICH_OUTCOME NAME="' + escapeHtml(dichStudies[0].outcome || 'Primary') + '">\n';
+      for (const s of dichStudies) {
+        xml += '    <STUDY NAME="' + escapeHtml(s.label || s.authorYear || '') + '">\n';
+        xml += '      <DICH_DATA EVENTS_1="' + s.eventsInt + '" TOTAL_1="' + s.totalInt +
+               '" EVENTS_2="' + s.eventsCtrl + '" TOTAL_2="' + s.totalCtrl + '"/>\n';
+        xml += '    </STUDY>\n';
+      }
+      xml += '  </DICH_OUTCOME>\n';
+    }
+    if (contStudies.length > 0) {
+      xml += '  <CONT_OUTCOME NAME="' + escapeHtml(contStudies[0].outcome || 'Primary') + '">\n';
+      for (const s of contStudies) {
+        const n1 = s.totalInt ?? 50;
+        const n2 = s.totalCtrl ?? 50;
+        const md = s.effectEstimate ?? 0;
+        const seMD = s.se ?? 1;
+        const sd1 = seMD * Math.sqrt(n1);
+        const sd2 = sd1;
+        xml += '    <STUDY NAME="' + escapeHtml(s.label || s.authorYear || '') + '">\n';
+        xml += '      <CONT_DATA MEAN_1="' + md.toFixed(4) + '" SD_1="' + sd1.toFixed(4) +
+               '" TOTAL_1="' + n1 + '" MEAN_2="0" SD_2="' + sd2.toFixed(4) + '" TOTAL_2="' + n2 + '"/>\n';
+        xml += '    </STUDY>\n';
+      }
+      xml += '  </CONT_OUTCOME>\n';
+    }
+    xml += '</COCHRANE_REVIEW>\n';
+    downloadFile(xml, 'metasprint-revman-export.rm5', 'application/xml');
+    showToast('Exported ' + extractedStudies.length + ' studies to RevMan XML', 'success');
   }
 
   // ============================================================
@@ -22608,6 +22908,74 @@ body.dark-mode .input-error { background: #451a1a !important; }
     showToast('Plot exported', 'success');
   }
 
+  function exportPlotPNG(containerId, filename, dpi) {
+    dpi = dpi ?? 300;
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const svg = container.querySelector('svg');
+    if (!svg) { showToast('No plot to export', 'warning'); return; }
+    const serializer = new XMLSerializer();
+    let svgStr = serializer.serializeToString(svg);
+    const vb = svg.getAttribute('viewBox');
+    if (!vb) { showToast('SVG missing viewBox', 'warning'); return; }
+    const [, , vbW, vbH] = vb.split(/[\s,]+/).map(Number);
+    const scale = dpi / 96;
+    const canvasW = Math.round(vbW * scale);
+    const canvasH = Math.round(vbH * scale);
+    if (!svgStr.includes('xmlns=')) {
+      svgStr = svgStr.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+    }
+    svgStr = svgStr.replace(/viewBox="[^"]*"/, 'viewBox="' + vb + '" width="' + canvasW + '" height="' + canvasH + '"');
+    const cs = getComputedStyle(document.documentElement);
+    const bgColor = cs.getPropertyValue('--bg').trim() || '#ffffff';
+    const textColor = cs.getPropertyValue('--text').trim() || '#1a1a2e';
+    const borderColor = cs.getPropertyValue('--border').trim() || '#e0e0e0';
+    const mutedColor = cs.getPropertyValue('--text-muted').trim() || '#666';
+    const bgAlt = cs.getPropertyValue('--bg-alt').trim() || '#f0f0f0';
+    svgStr = svgStr.replace(/var\(--bg-alt[^)]*\)/g, bgAlt);
+    svgStr = svgStr.replace(/var\(--bg[^)]*\)/g, bgColor);
+    svgStr = svgStr.replace(/var\(--text-muted[^)]*\)/g, mutedColor);
+    svgStr = svgStr.replace(/var\(--text[^)]*\)/g, textColor);
+    svgStr = svgStr.replace(/var\(--border[^)]*\)/g, borderColor);
+    svgStr = svgStr.replace(/var\(--font[^)]*\)/g, 'system-ui, sans-serif');
+    svgStr = svgStr.replace(/var\(--primary[^)]*\)/g, '#2563eb');
+    svgStr = svgStr.replace(/var\(--accent[^)]*\)/g, '#059669');
+    svgStr = svgStr.replace(/var\(--danger[^)]*\)/g, '#dc2626');
+    const blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = function () {
+      const canvas = document.createElement('canvas');
+      canvas.width = canvasW;
+      canvas.height = canvasH;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, canvasW, canvasH);
+      ctx.drawImage(img, 0, 0, canvasW, canvasH);
+      URL.revokeObjectURL(url);
+      canvas.toBlob(function (pngBlob) {
+        if (!pngBlob) { showToast('PNG conversion failed', 'danger'); return; }
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(pngBlob);
+        a.download = filename;
+        document.body.appendChild(a); a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+        showToast('Exported ' + dpi + ' DPI PNG (' + canvasW + 'x' + canvasH + 'px)', 'success');
+      }, 'image/png');
+    };
+    img.onerror = function () {
+      URL.revokeObjectURL(url);
+      showToast('PNG export failed — try SVG instead', 'danger');
+    };
+    img.src = url;
+  }
+
+  function exportPlotTIFF(containerId, filename, dpi) {
+    showToast('TIFF: exporting as high-DPI PNG (browsers lack native TIFF). Convert with any image editor.', 'info');
+    exportPlotPNG(containerId, filename.replace(/\.tiff?$/i, '.png'), dpi ?? 300);
+  }
+
   function copyAnalysisSummary() {
     if (!lastAnalysisResult) { showToast('Run analysis first', 'warning'); return; }
     const r = lastAnalysisResult;
@@ -27609,6 +27977,13 @@ function checkLivingEvidence(){
   document.addEventListener('DOMContentLoaded', async () => {
     try {
       loadDarkMode();
+      // Initialize i18n language
+      const savedLang = localStorage.getItem('msa_lang');
+      if (savedLang && _i18n.strings[savedLang]) {
+        const sel = document.getElementById('langSelect');
+        if (sel) sel.value = savedLang;
+        if (savedLang !== 'en') setLanguage(savedLang);
+      }
       // Arrow key navigation for reference list items
       document.getElementById('refList').addEventListener('keydown', function(e) {
         var items = Array.from(e.currentTarget.querySelectorAll('.ref-item'));

@@ -3988,3 +3988,156 @@ mhTest.describe('Mantel-Haenszel & Peto Pooling', () => {
     mhExpect(has.peto).toBe(true);
   });
 });
+
+// ============================================================================
+// Publication Export, RevMan XML, i18n — Feature tests
+// ============================================================================
+const { test: featTest, expect: featExpect } = require('@playwright/test');
+
+featTest.describe('Publication Export, RevMan XML & i18n', () => {
+  featTest.beforeEach(async ({ page }) => {
+    await page.goto('file:///C:/Users/user/Downloads/metasprint-autopilot/metasprint-autopilot.html', { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(2000);
+  });
+
+  // --- PNG Export ---
+  featTest('277 - exportPlotPNG function exists on window', async ({ page }) => {
+    const has = await page.evaluate(() => typeof window.exportPlotPNG === 'function');
+    featExpect(has).toBe(true);
+  });
+
+  featTest('278 - exportPlotTIFF function exists on window', async ({ page }) => {
+    const has = await page.evaluate(() => typeof window.exportPlotTIFF === 'function');
+    featExpect(has).toBe(true);
+  });
+
+  featTest('279 - PNG export buttons present in analysisExport', async ({ page }) => {
+    const html = await page.evaluate(() => document.getElementById('analysisExport').innerHTML);
+    featExpect(html).toContain('Forest PNG 300dpi');
+    featExpect(html).toContain('Funnel PNG 300dpi');
+  });
+
+  // --- RevMan XML Parser ---
+  featTest('280 - parseRevManXML function exists', async ({ page }) => {
+    const has = await page.evaluate(() => typeof window.parseRevManXML === 'function');
+    featExpect(has).toBe(true);
+  });
+
+  featTest('281 - parseRevManStudyData function exists', async ({ page }) => {
+    const has = await page.evaluate(() => typeof window.parseRevManStudyData === 'function');
+    featExpect(has).toBe(true);
+  });
+
+  featTest('282 - parseRevManStudyData extracts dichotomous data', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const xml = '<COCHRANE_REVIEW><DICH_OUTCOME NAME="Mortality"><STUDY NAME="Trial2020"><DICH_DATA EVENTS_1="10" TOTAL_1="100" EVENTS_2="20" TOTAL_2="100"/></STUDY></DICH_OUTCOME></COCHRANE_REVIEW>';
+      return parseRevManStudyData(xml);
+    });
+    featExpect(result.length).toBe(1);
+    featExpect(result[0].eventsInt).toBe(10);
+    featExpect(result[0].totalInt).toBe(100);
+    featExpect(result[0].eventsCtrl).toBe(20);
+    featExpect(result[0].totalCtrl).toBe(100);
+    featExpect(result[0].label).toBe('Trial2020');
+    featExpect(result[0].outcome).toBe('Mortality');
+  });
+
+  featTest('283 - parseRevManStudyData extracts continuous data', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const xml = '<COCHRANE_REVIEW><CONT_OUTCOME NAME="BP"><STUDY NAME="SPRINT"><CONT_DATA MEAN_1="-12" SD_1="8" TOTAL_1="50" MEAN_2="-5" SD_2="7" TOTAL_2="50"/></STUDY></CONT_OUTCOME></COCHRANE_REVIEW>';
+      return parseRevManStudyData(xml);
+    });
+    featExpect(result.length).toBe(1);
+    featExpect(result[0].effectType).toBe('MD');
+    featExpect(Math.abs(result[0].effectEstimate - (-7))).toBeLessThan(0.001);
+    featExpect(result[0].label).toBe('SPRINT');
+  });
+
+  featTest('284 - parseRevManXML extracts references', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const xml = '<COCHRANE_REVIEW><INCLUDED_STUDIES><STUDY NAME="Smith 2020"><REFERENCE><AU>Smith J</AU><TI>Test trial</TI><YR>2020</YR><SO>Lancet</SO></REFERENCE></STUDY></INCLUDED_STUDIES></COCHRANE_REVIEW>';
+      return parseRevManXML(xml);
+    });
+    featExpect(result.length).toBe(1);
+    featExpect(result[0].authors).toBe('Smith J');
+    featExpect(result[0].title).toBe('Test trial');
+    featExpect(result[0].year).toBe('2020');
+    featExpect(result[0].journal).toBe('Lancet');
+  });
+
+  featTest('285 - file input accepts .rm5 extension', async ({ page }) => {
+    const accept = await page.evaluate(() => document.getElementById('risFileInput').getAttribute('accept'));
+    featExpect(accept).toContain('.rm5');
+  });
+
+  // --- i18n ---
+  featTest('286 - i18n: t() returns English string by default', async ({ page }) => {
+    const result = await page.evaluate(() => t('nav.studies'));
+    featExpect(result).toBe('Studies');
+  });
+
+  featTest('287 - i18n: t() returns French after setLanguage("fr")', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      setLanguage('fr');
+      return t('nav.studies');
+    });
+    featExpect(result).toBe('Etudes');
+  });
+
+  featTest('288 - i18n: t() returns Spanish after setLanguage("es")', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      setLanguage('es');
+      return t('nav.studies');
+    });
+    featExpect(result).toBe('Estudios');
+  });
+
+  featTest('289 - i18n: t() with params substitutes placeholders', async ({ page }) => {
+    const result = await page.evaluate(() => t('toast.imported', { n: 42 }));
+    featExpect(result).toBe('Imported 42 references');
+  });
+
+  featTest('290 - i18n: setLanguage("ar") sets dir=rtl', async ({ page }) => {
+    await page.evaluate(() => setLanguage('ar'));
+    const dir = await page.evaluate(() => document.documentElement.dir);
+    featExpect(dir).toBe('rtl');
+    // Reset
+    await page.evaluate(() => setLanguage('en'));
+  });
+
+  featTest('291 - i18n: language selector present in header', async ({ page }) => {
+    const exists = await page.evaluate(() => !!document.getElementById('langSelect'));
+    featExpect(exists).toBe(true);
+  });
+
+  featTest('292 - i18n: all 5 languages produce different nav.studies', async ({ page }) => {
+    const results = await page.evaluate(() => {
+      const langs = ['en', 'fr', 'es', 'ar', 'zh'];
+      const out = {};
+      for (const l of langs) {
+        setLanguage(l);
+        out[l] = t('nav.studies');
+      }
+      setLanguage('en');
+      return out;
+    });
+    featExpect(results.en).toBe('Studies');
+    featExpect(results.fr).toBe('Etudes');
+    featExpect(results.es).toBe('Estudios');
+    featExpect(results.ar).toBeTruthy();
+    featExpect(results.zh).toBeTruthy();
+    featExpect(new Set(Object.values(results)).size).toBe(5);
+  });
+
+  // --- Method Guidance ---
+  featTest('293 - method guidance tooltip present', async ({ page }) => {
+    const title = await page.evaluate(() => {
+      const el = document.getElementById('methodGuide');
+      return el ? el.getAttribute('title') : null;
+    });
+    featExpect(title).toContain('REML');
+    featExpect(title).toContain('Cochrane');
+    featExpect(title).toContain('HKSJ');
+    featExpect(title).toContain('Peto');
+  });
+});
