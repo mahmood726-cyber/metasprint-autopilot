@@ -22514,6 +22514,187 @@ body.dark-mode .input-error { background: #451a1a !important; }
     showToast('Python code exported (numpy/scipy/matplotlib)', 'success');
   }
 
+
+  // ============================================================================
+  // META2 GOVERNANCE — Conservative Arbitration, Bias Decomposition,
+  //                    Question Contracts, Decision Regret
+  // Ported from TruthCert Meta2 prototype (Python → JavaScript)
+  // ============================================================================
+
+  // --- Witness Panel ---
+  function buildWitnessPanel(classicMeta, enginePropagated, selectionResult) {
+    const classic = {
+      name: 'classic', mu: classicMeta.mu, se: classicMeta.se,
+      ci_low: classicMeta.ci_low, ci_high: classicMeta.ci_high,
+      k: classicMeta.k ?? 0
+    };
+    const delta = {
+      name: 'delta_engine',
+      mu: enginePropagated.mu_median,
+      se: Number.isFinite(enginePropagated.mu_cri_high - enginePropagated.mu_cri_low)
+        ? (enginePropagated.mu_cri_high - enginePropagated.mu_cri_low) / 3.92 : NaN,
+      ci_low: enginePropagated.mu_cri_low,
+      ci_high: enginePropagated.mu_cri_high,
+      k: enginePropagated.k ?? 0,
+      extra: { p_benefit: enginePropagated.p_benefit, p_harm: enginePropagated.p_harm }
+    };
+    const selection = {
+      name: 'selection', mu: selectionResult.mu, se: selectionResult.se,
+      ci_low: selectionResult.ci_low, ci_high: selectionResult.ci_high,
+      k: selectionResult.k ?? 0, converged: selectionResult.converged ?? false
+    };
+    return { classic, delta_engine: delta, selection };
+  }
+
+  // --- Conservative Arbitration ---
+  // Never shrinks the CI. Inflates when witnesses disagree.
+  function conservativeArbitration(panel, opts) {
+    const threshLow = opts?.thresh_low ?? 0.05;
+    const threshHigh = opts?.thresh_high ?? 0.15;
+    const inflateMid = opts?.inflate_mid ?? 1.3;
+    const inflateHigh = opts?.inflate_high ?? 2.0;
+
+    const witnesses = Object.values(panel);
+    const finiteMus = witnesses.map(w => w.mu).filter(Number.isFinite);
+
+    if (finiteMus.length < 2) {
+      const base = panel.delta_engine ?? witnesses[0];
+      return {
+        mu: base?.mu ?? NaN, se: base?.se ?? NaN,
+        ci_low: base?.ci_low ?? NaN, ci_high: base?.ci_high ?? NaN,
+        disagreement: 0, level: finiteMus.length < 1 ? 'insufficient' : 'low',
+        inflation_factor: 1.0, decision_downgrade: false
+      };
+    }
+
+    // Disagreement = standard deviation of witness point estimates
+    const mean = finiteMus.reduce((a, b) => a + b, 0) / finiteMus.length;
+    const disagreement = Math.sqrt(finiteMus.reduce((a, v) => a + (v - mean) ** 2, 0) / finiteMus.length);
+
+    let level, factor, downgrade;
+    if (disagreement <= threshLow) {
+      level = 'low'; factor = 1.0; downgrade = false;
+    } else if (disagreement <= threshHigh) {
+      level = 'mid'; factor = inflateMid; downgrade = false;
+    } else {
+      level = 'high'; factor = inflateHigh; downgrade = true;
+    }
+
+    // Use delta_engine as base (or first available)
+    const base = panel.delta_engine ?? witnesses[0];
+    const baseLo = base.ci_low;
+    const baseHi = base.ci_high;
+    const baseSe = base.se;
+
+    const mid = (baseLo + baseHi) / 2;
+    const halfWidth = (baseHi - baseLo) / 2;
+    const newHalf = halfWidth * factor;
+
+    return {
+      mu: base.mu,
+      se: Number.isFinite(baseSe) ? baseSe * factor : NaN,
+      ci_low: Math.min(baseLo, mid - newHalf),
+      ci_high: Math.max(baseHi, mid + newHalf),
+      disagreement, level, inflation_factor: factor, decision_downgrade: downgrade
+    };
+  }
+
+  // --- Bias Decomposition ---
+  // Decomposes missingness into 3 orthogonal bias rates per node.
+  function computeBiasProfile(nodeDenom) {
+    const nReg = nodeDenom.n_registered ?? 0;
+    const nObs = nodeDenom.n_observed_any ?? 0;
+    const nPosted = nodeDenom.n_results_posted ?? 0;
+    const nPub = nodeDenom.n_published ?? 0;
+    const epRate = nodeDenom.endpoint_report_rate ?? 1.0;
+    const indRate = nodeDenom.industry_rate ?? 0.0;
+
+    return {
+      silent_trial_rate: nReg > 0 ? 1 - nObs / nReg : 0,
+      endpoint_missing_rate: nPosted > 0 ? 1 - epRate : 0,
+      publication_missing_rate: nObs > 0 ? 1 - nPub / nObs : 0,
+      industry_fraction: indRate,
+      n_registered: nReg
+    };
+  }
+
+  // --- Question Contract ---
+  // Immutable estimand specification with SHA-256 provenance hash.
+  function createQuestionContract(spec) {
+    return {
+      population: spec.population ?? '',
+      intervention_classes: spec.intervention_classes ?? [],
+      comparator: spec.comparator ?? '',
+      endpoints: spec.endpoints ?? [],
+      effect_measure: spec.effect_measure ?? 'logRR',
+      missingness_policy: spec.missingness_policy ?? 'denominator_delta',
+      decision_utility: spec.decision_utility ?? 'conservative',
+      mapping_confidence_rules: spec.mapping_confidence_rules ?? {}
+    };
+  }
+
+  async function questionContractHash(contract) {
+    const json = JSON.stringify(contract, Object.keys(contract).sort());
+    const encoded = new TextEncoder().encode(json);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', encoded);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 16);
+  }
+
+  // --- Decision Regret ---
+  // Scores decision quality: penalizes FP, FN, and research deferrals.
+  function computeDecisionRegret(nodeResults, opts) {
+    const wFP = opts?.w_fp ?? 1.0;
+    const wFN = opts?.w_fn ?? 1.0;
+    const wResearch = opts?.w_research ?? 0.5;
+
+    const BENEFIT_DECISIONS = new Set(['Recommend', 'Consider-benefit', 'Recommend-denom']);
+    const BLOCK_DECISIONS = new Set(['DoNot', 'Consider-harm']);
+
+    let regretClassic = 0, regretDelta = 0, regretArb = 0, nScorable = 0;
+
+    for (const node of nodeResults) {
+      if (!Number.isFinite(node.oracle_mu)) continue;
+      nScorable++;
+      const oracleBenefit = node.oracle_mu < 0; // logRR < 0 = protective
+
+      for (const [method, regretRef] of [
+        ['classic_decision', { add: v => regretClassic += v }],
+        ['delta_decision',   { add: v => regretDelta += v }],
+        ['arb_decision',     { add: v => regretArb += v }]
+      ]) {
+        const decision = node[method];
+        if (!decision || decision === 'Insufficient') continue;
+
+        if (BENEFIT_DECISIONS.has(decision) && !oracleBenefit) {
+          regretRef.add(wFP);  // False positive
+        } else if (BLOCK_DECISIONS.has(decision) && oracleBenefit) {
+          regretRef.add(wFN);  // False negative (hard block)
+        } else if (decision === 'Research' && oracleBenefit) {
+          regretRef.add(wFN * wResearch);  // False negative (soft deferral)
+        }
+      }
+    }
+
+    if (nScorable === 0) return { regret_classic: NaN, regret_delta: NaN, regret_arb: NaN, n_scorable: 0 };
+    return {
+      regret_classic: regretClassic / nScorable,
+      regret_delta: regretDelta / nScorable,
+      regret_arb: regretArb / nScorable,
+      n_scorable: nScorable
+    };
+  }
+
+  function aggregateRegret(repRegrets) {
+    const keys = ['regret_classic', 'regret_delta', 'regret_arb'];
+    const result = { n_reps: repRegrets.length };
+    for (const key of keys) {
+      const vals = repRegrets.filter(r => r.n_scorable > 0 && Number.isFinite(r[key])).map(r => r[key]);
+      result[key] = vals.length > 0 ? vals.reduce((a, b) => a + b, 0) / vals.length : NaN;
+    }
+    return result;
+  }
+
   const TRUTHCERT_BRIDGE_STORAGE_KEY = 'metasprint_truthcert_bridge_payload_v1';
   const DEFAULT_TRUTHCERT_URL = 'file:///C:/Users/user/Downloads/metasprint-autopilot/truthcert1_work/TruthCert-PairwisePro-v1.0.html#metasprint-bridge';
 

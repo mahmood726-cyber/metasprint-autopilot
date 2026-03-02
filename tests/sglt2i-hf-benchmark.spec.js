@@ -3656,3 +3656,161 @@ benchTest.describe('SGLT2i Benchmark Validation', () => {
     benchExpect(exists).toBe(true);
   });
 });
+
+// ============================================================================
+// META2 GOVERNANCE TESTS (246-257)
+// ============================================================================
+
+const { test: govTest, expect: govExpect } = require('@playwright/test');
+
+govTest.describe('Meta2 Governance Functions', () => {
+  govTest.beforeEach(async ({ page }) => {
+    await page.goto('file:///C:/Users/user/Downloads/metasprint-autopilot/metasprint-autopilot.html');
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(2000);
+  });
+
+  govTest('246 - Governance: conservativeArbitration exists', async ({ page }) => {
+    const exists = await page.evaluate(() => typeof conservativeArbitration === 'function');
+    govExpect(exists).toBe(true);
+  });
+
+  govTest('247 - Governance: arbitration inflates CI on high disagreement', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const panel = {
+        classic: { mu: -0.5, se: 0.05, ci_low: -0.6, ci_high: -0.4 },
+        delta_engine: { mu: 0.0, se: 0.06, ci_low: -0.12, ci_high: 0.12 },
+        selection: { mu: 0.3, se: 0.08, ci_low: 0.14, ci_high: 0.46 }
+      };
+      return conservativeArbitration(panel);
+    });
+    govExpect(result.level).toBe('high');
+    govExpect(result.inflation_factor).toBe(2.0);
+    govExpect(result.decision_downgrade).toBe(true);
+    govExpect(result.ci_high).toBeGreaterThan(0.02);
+  });
+
+  govTest('248 - Governance: arbitration preserves CI on low disagreement', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const panel = {
+        classic: { mu: -0.26, se: 0.04, ci_low: -0.34, ci_high: -0.18 },
+        delta_engine: { mu: -0.25, se: 0.04, ci_low: -0.33, ci_high: -0.17 },
+        selection: { mu: -0.27, se: 0.05, ci_low: -0.37, ci_high: -0.17 }
+      };
+      return conservativeArbitration(panel);
+    });
+    govExpect(result.level).toBe('low');
+    govExpect(result.inflation_factor).toBe(1.0);
+    govExpect(result.decision_downgrade).toBe(false);
+  });
+
+  govTest('249 - Governance: computeBiasProfile decomposes missingness', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      return computeBiasProfile({
+        n_registered: 100, n_observed_any: 70,
+        n_results_posted: 50, n_published: 40,
+        endpoint_report_rate: 0.8, industry_rate: 0.6
+      });
+    });
+    govExpect(result.silent_trial_rate).toBeCloseTo(0.30, 2);
+    govExpect(result.endpoint_missing_rate).toBeCloseTo(0.20, 2);
+    govExpect(result.publication_missing_rate).toBeCloseTo(1 - 40/70, 2);
+    govExpect(result.industry_fraction).toBeCloseTo(0.60, 2);
+  });
+
+  govTest('250 - Governance: createQuestionContract has defaults', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      return createQuestionContract({ population: 'HFrEF', endpoints: ['CV death', 'HF hosp'] });
+    });
+    govExpect(result.population).toBe('HFrEF');
+    govExpect(result.endpoints.length).toBe(2);
+    govExpect(result.effect_measure).toBe('logRR');
+    govExpect(result.decision_utility).toBe('conservative');
+  });
+
+  govTest('251 - Governance: questionContractHash is deterministic', async ({ page }) => {
+    const result = await page.evaluate(async () => {
+      const contract = createQuestionContract({ population: 'HFrEF', endpoints: ['CV death'] });
+      const hash1 = await questionContractHash(contract);
+      const hash2 = await questionContractHash(contract);
+      return { hash1, hash2, len: hash1.length };
+    });
+    govExpect(result.hash1).toBe(result.hash2);
+    govExpect(result.len).toBe(16);
+  });
+
+  govTest('252 - Governance: computeDecisionRegret scores FP/FN correctly', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      return computeDecisionRegret([
+        { oracle_mu: -0.3, classic_decision: 'Recommend', delta_decision: 'DoNot', arb_decision: 'Research' },
+        { oracle_mu: 0.1, classic_decision: 'Recommend', delta_decision: 'DoNot', arb_decision: 'Research' },
+      ]);
+    });
+    govExpect(result.n_scorable).toBe(2);
+    // Classic: node1 correct (benefit → recommend), node2 FP (no benefit → recommend) → 0.5
+    govExpect(result.regret_classic).toBeCloseTo(0.5, 2);
+    // Delta: node1 FN (benefit → DoNot) → wFN, node2 correct → 0.5
+    govExpect(result.regret_delta).toBeCloseTo(0.5, 2);
+  });
+
+  govTest('253 - Governance: aggregateRegret averages across reps', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      return aggregateRegret([
+        { regret_classic: 0.4, regret_delta: 0.2, regret_arb: 0.1, n_scorable: 5 },
+        { regret_classic: 0.6, regret_delta: 0.3, regret_arb: 0.2, n_scorable: 5 },
+      ]);
+    });
+    govExpect(result.regret_classic).toBeCloseTo(0.5, 2);
+    govExpect(result.regret_delta).toBeCloseTo(0.25, 2);
+    govExpect(result.n_reps).toBe(2);
+  });
+
+  govTest('254 - Governance: buildWitnessPanel creates 3 witnesses', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const panel = buildWitnessPanel(
+        { mu: -0.26, se: 0.04, ci_low: -0.34, ci_high: -0.18, k: 5 },
+        { mu_median: -0.24, mu_cri_low: -0.35, mu_cri_high: -0.13, p_benefit: 0.95, p_harm: 0.01 },
+        { mu: -0.28, se: 0.05, ci_low: -0.38, ci_high: -0.18, k: 5, converged: true }
+      );
+      return {
+        hasClassic: !!panel.classic,
+        hasDelta: !!panel.delta_engine,
+        hasSelection: !!panel.selection,
+        deltaHasExtra: !!panel.delta_engine.extra,
+        deltaPBenefit: panel.delta_engine.extra.p_benefit
+      };
+    });
+    govExpect(result.hasClassic).toBe(true);
+    govExpect(result.hasDelta).toBe(true);
+    govExpect(result.hasSelection).toBe(true);
+    govExpect(result.deltaHasExtra).toBe(true);
+    govExpect(result.deltaPBenefit).toBeCloseTo(0.95, 2);
+  });
+
+  govTest('255 - Governance: arbitration never shrinks CI', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const panel = {
+        classic: { mu: -0.30, se: 0.05, ci_low: -0.40, ci_high: -0.20 },
+        delta_engine: { mu: -0.10, se: 0.06, ci_low: -0.22, ci_high: 0.02 },
+        selection: { mu: 0.3, se: 0.08, ci_low: 0.14, ci_high: 0.46 }
+      };
+      const arb = conservativeArbitration(panel);
+      return { arbLo: arb.ci_low, arbHi: arb.ci_high, baseLo: -0.12, baseHi: 0.12 };
+    });
+    govExpect(result.arbLo).toBeLessThanOrEqual(result.baseLo);
+    govExpect(result.arbHi).toBeGreaterThanOrEqual(result.baseHi);
+  });
+
+  govTest('256 - Governance: regret returns NaN for empty input', async ({ page }) => {
+    const result = await page.evaluate(() => computeDecisionRegret([]));
+    govExpect(result.n_scorable).toBe(0);
+    govExpect(Number.isNaN(result.regret_classic)).toBe(true);
+  });
+
+  govTest('257 - Governance: bias profile handles zero denominator', async ({ page }) => {
+    const result = await page.evaluate(() => computeBiasProfile({ n_registered: 0 }));
+    govExpect(result.silent_trial_rate).toBe(0);
+    govExpect(result.endpoint_missing_rate).toBe(0);
+    govExpect(result.publication_missing_rate).toBe(0);
+  });
+});
