@@ -1,6 +1,6 @@
 // MetaSprint Autopilot Service Worker — PWA offline support
 // IMPORTANT: Increment version on each release to bust stale caches
-const CACHE_NAME = 'metasprint-autopilot-v2';
+const CACHE_NAME = 'metasprint-autopilot-v3';
 const ASSETS = [
   './',
   './metasprint-autopilot.html',

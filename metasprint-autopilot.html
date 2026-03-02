@@ -1314,7 +1314,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       </div>
       <div style="margin-bottom:10px;font-size:0.82rem;color:var(--text-muted)">Enter cost and effectiveness (QALYs) for each strategy. ICER = incremental cost / incremental QALY vs comparator. NMB = QALY &times; WTP &minus; Cost.</div>
       <div style="margin-bottom:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-        <label style="font-size:0.82rem">WTP threshold (/QALY): <input type="number" id="icerWTP" value="50000" min="0" step="1000" style="width:100px;font-size:0.82rem"></label>
+        <label style="font-size:0.82rem">WTP threshold (/QALY): <input type="number" id="icerWTP" value="50000" min="1000" max="1000000" step="1000" style="width:100px;font-size:0.82rem"></label>
         <span style="font-size:0.7rem;color:var(--text-muted)" title="International WTP thresholds">(US: $50-100k; NICE: &pound;20-30k; WHO: 1-3&times; GDP/capita)</span>
         <label style="font-size:0.82rem">Currency: <select id="icerCurrency" style="font-size:0.82rem"><option value="$">$ (USD)</option><option value="£">£ (GBP)</option><option value="€">€ (EUR)</option><option value="OMR">OMR</option></select></label>
         <label style="font-size:0.82rem">Discount rate: <input type="number" id="icerDiscount" value="3.0" min="0" max="15" step="0.5" style="width:60px;font-size:0.82rem">%</label>
@@ -1485,7 +1485,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <div class="form-group"><label for="protStudyType">Study Types:</label>
           <select id="protStudyType"><option>RCTs only</option><option>RCTs and observational</option></select></div>
         <div class="form-group"><label for="protPROSPERO">PROSPERO Registration ID:</label>
-          <input id="protPROSPERO" maxlength="30" placeholder="e.g., CRD42024xxxxxx" style="width:220px" pattern="CRD\d+" title="Format: CRD followed by digits"></div>
+          <input id="protPROSPERO" maxlength="30" placeholder="e.g., CRD42024xxxxxx" style="width:220px" pattern="CRD\d{8,}" title="Format: CRD followed by 8+ digits (e.g., CRD42024123456)"></div>
         <div style="display:flex;gap:8px">
           <button onclick="generateProtocol()">Generate Protocol</button>
         </div>
@@ -2195,6 +2195,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
   <div id="undoContainer"></div>
 
   <script>
+  'use strict';
   // ============================================================
   // OBSERVABILITY — Central structured logger
   // ============================================================
@@ -2416,8 +2417,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
     return Math.min(max, Math.max(min, n));
   }
 
+  var _idCounter = 0;
   function generateId() {
-    return 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+    return 'r' + Date.now().toString(36) + (++_idCounter).toString(36).padStart(4, '0');
   }
 
   // P1-7: Safe localStorage wrappers (Safari Private Mode blocks localStorage)
@@ -5256,13 +5258,15 @@ body.dark-mode .input-error { background: #451a1a !important; }
       const mean2 = parseFloat(c.getAttribute('MEAN_2'));
       const sd2 = parseFloat(c.getAttribute('SD_2'));
       const n2 = parseInt(c.getAttribute('TOTAL_2') || c.getAttribute('N2'), 10);
-      if (isFinite(mean1) && isFinite(sd1) && isFinite(n1) && isFinite(mean2) && isFinite(sd2) && isFinite(n2)) {
+      if (isFinite(mean1) && isFinite(sd1) && isFinite(n1) && isFinite(mean2) && isFinite(sd2) && isFinite(n2) && n1 >= 1 && n2 >= 1) {
         const md = mean1 - mean2;
         const seMD = Math.sqrt(sd1*sd1/n1 + sd2*sd2/n2);
+        const cl = parseFloat(document.getElementById('confLevel')?.value) || 0.95;
+        const zCrit = normalQuantile(1 - (1 - cl) / 2);
         imported.push({
           label: studyId || ('Study ' + (imported.length + 1)),
           effectEstimate: md, se: seMD, effectType: 'MD', outcome: outcomeName,
-          lowerCI: md - 1.96 * seMD, upperCI: md + 1.96 * seMD,
+          lowerCI: md - zCrit * seMD, upperCI: md + zCrit * seMD,
           totalInt: n1, totalCtrl: n2,
           eventsInt: null, eventsCtrl: null
         });
@@ -9318,14 +9322,16 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const ryMax = reg.intercept + reg.slope * rxMax;
     svg += '<line x1="' + sx(rxMin) + '" y1="' + sy(ryMin) + '" x2="' + sx(rxMax) + '" y2="' + sy(ryMax) + '" stroke="var(--primary)" stroke-width="2" opacity="0.8"/>';
 
-    // Confidence band (approximate: +/- 1.96*SE of fitted values)
+    // Confidence band (confLevel-aware)
+    const regConfLevel = parseFloat(document.getElementById('confLevel')?.value) || 0.95;
+    const regZCrit = normalQuantile(1 - (1 - regConfLevel) / 2);
     const nBand = 20;
     let bandUp = [], bandDown = [];
     for (let i = 0; i <= nBand; i++) {
       const xv = rxMin + (rxMax - rxMin) * i / nBand;
       const fitted = reg.intercept + reg.slope * xv;
       const seFitted = reg.seSlope * Math.abs(xv - (pts.reduce((a, p) => a + p.x, 0) / pts.length));
-      const margin = 1.96 * Math.max(seFitted, reg.seSlope * 0.3);
+      const margin = regZCrit * Math.max(seFitted, reg.seSlope * 0.3);
       bandUp.push(sx(xv) + ',' + sy(fitted + margin));
       bandDown.push(sx(xv) + ',' + sy(fitted - margin));
     }
@@ -10359,6 +10365,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     // Guard: C=0 when all weights are equal (degenerate case); fall back to tau2=0
     let tau2 = C > 1e-15 ? Math.max(0, (Q - (k - 1)) / C) : 0;
 
+    let remlConverged = false;
     for (let iter = 0; iter < maxIter; iter++) {
       const w = studyData.map(d => 1 / (d.vi + tau2));
       const sW = w.reduce((a, b) => a + b, 0);
@@ -10373,9 +10380,10 @@ body.dark-mode .input-error { background: #451a1a !important; }
       if (sW2 < 1e-30 || sW < 1e-30) break;
 
       const tau2New = Math.max(0, num / sW2 + 1 / sW);
-      if (Math.abs(tau2New - tau2) < tol) { tau2 = tau2New; break; }
+      if (Math.abs(tau2New - tau2) < tol) { tau2 = tau2New; remlConverged = true; break; }
       tau2 = tau2New;
     }
+    if (!remlConverged && typeof console !== 'undefined') console.warn('REML did not converge after ' + maxIter + ' iterations; tau2=' + tau2.toFixed(6));
     return tau2;
   }
 
@@ -10789,6 +10797,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
     let xMin = Math.min(...allVals) * (isRatio ? 0.8 : 1) - (isRatio ? 0 : 0.2);
     let xMax = Math.max(...allVals) * (isRatio ? 1.2 : 1) + (isRatio ? 0 : 0.2);
     if (isRatio) xMin = Math.max(0.01, xMin);
+    // Guard: identical values → force a visible range to prevent division by zero
+    if (Math.abs(xMax - xMin) < 1e-10) { xMin -= 0.5; xMax += 0.5; }
+    if (isRatio && Math.abs(Math.log(xMax) - Math.log(xMin)) < 1e-10) { xMin *= 0.5; xMax *= 2; }
 
     const xScale = isRatio
       ? (v) => plotLeft + (Math.log(v) - Math.log(xMin)) / (Math.log(xMax) - Math.log(xMin)) * plotW
@@ -13021,7 +13032,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
 
   function addDTAStudyRow(data) {
     const s = Object.assign({
-      id: 'dta-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+      id: 'dta-' + Date.now() + '-' + (++_idCounter).toString(36).padStart(4, '0'),
       authorYear: '', tp: null, fp: null, fn: null, tn: null,
       quadas2: {}, notes: ''
     }, data || {});
@@ -13560,7 +13571,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
 
   function addNMAContrastRow(data) {
     const c = Object.assign({
-      id: 'nma-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+      id: 'nma-' + Date.now() + '-' + (++_idCounter).toString(36).padStart(4, '0'),
       study: '', treatA: '', treatB: '', effect: null, se: null, notes: ''
     }, data || {});
     nmaContrasts.push(c);
@@ -14109,7 +14120,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
   function addDoseStudyRow() {
     doseStudyCounter++;
     const s = {
-      id: 'dose-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+      id: 'dose-' + Date.now() + '-' + (++_idCounter).toString(36).padStart(4, '0'),
       authorYear: 'Study ' + doseStudyCounter,
       doses: [
         { dose: 0, cases: null, total: null },
@@ -14309,7 +14320,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
 
   function addICERStrategyRow(data) {
     const s = Object.assign({
-      id: 'icer-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+      id: 'icer-' + Date.now() + '-' + (++_idCounter).toString(36).padStart(4, '0'),
       name: '', cost: null, qaly: null, sdCost: null, sdQaly: null, notes: ''
     }, data || {});
     icerStrategies.push(s);
@@ -18286,7 +18297,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
         html += '<div style="margin-top:4px"><span style="background:' + p.grade.color + ';color:#fff;padding:1px 6px;border-radius:3px;font-size:0.75rem;font-weight:700">GRADE: ' + escapeHtml(p.grade.label) + '</span></div>';
       }
       if (p.nnt != null) {
-        html += '<div style="font-size:0.82rem;margin-top:2px">NNT = ' + p.nnt + ' (baseline risk 15%)</div>';
+        var nntRiskPct = (document.getElementById('baselineRiskSlider') ? parseFloat(document.getElementById('baselineRiskSlider').value) : 15);
+        html += '<div style="font-size:0.82rem;margin-top:2px">NNT = ' + p.nnt + ' (baseline risk ' + nntRiskPct + '%)</div>';
       }
       html += '<div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px">Method: ' + escapeHtml(p.method || 'DL+HKSJ') + '</div>';
       html += '</div>';
@@ -20522,6 +20534,19 @@ body.dark-mode .input-error { background: #451a1a !important; }
       showToast('Invalid Al-Burhan data: clusters must be an array', 'danger');
       return null;
     }
+    // Validate each cluster has required fields
+    var schemaWarnings = [];
+    (data.clusters ?? []).forEach(function(cl, i) {
+      if (!cl.studies || !Array.isArray(cl.studies)) schemaWarnings.push('Cluster ' + i + ': missing or invalid "studies" array');
+      if (cl.effect_type && typeof cl.effect_type !== 'string') schemaWarnings.push('Cluster ' + i + ': "effect_type" must be a string');
+      (cl.studies ?? []).forEach(function(s, j) {
+        if (s.yi == null || s.sei == null) schemaWarnings.push('Cluster ' + i + ' study ' + j + ': missing yi or sei');
+      });
+    });
+    if (schemaWarnings.length > 0) {
+      console.warn('Al-Burhan schema warnings:', schemaWarnings);
+      if (schemaWarnings.length > 5) showToast(schemaWarnings.length + ' schema warnings in imported data — check console', 'warning');
+    }
 
     // Store in IndexedDB (or in-memory fallback)
     try {
@@ -20678,8 +20703,10 @@ body.dark-mode .input-error { background: #451a1a !important; }
             ? proportionBenefit(maResult.muRE, maResult.tau2, maResult.seRE, maResult.isRatio)
             : null;
 
-          // NNT for binary outcomes
-          const nnt = isRatio ? computeNNT(maResult.pooled, true, 0.15, cluster.effect_type) : null;
+          // NNT for binary outcomes — use slider value if available
+          const nntSliderEl = document.getElementById('baselineRiskSlider');
+          const nntBaseRisk = nntSliderEl ? parseFloat(nntSliderEl.value) / 100 : 0.15;
+          const nnt = isRatio ? computeNNT(maResult.pooled, true, nntBaseRisk, cluster.effect_type) : null;
 
           results.push({
             ...cluster,
@@ -24953,7 +24980,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
       const grade = computeGRADE(gradeInput, result.studyResults);
 
       // Gather NNT
-      const nntResult = result.isRatio ? computeNNT(result.pooled, true, 0.2, result.effectType) : null;
+      const patientRiskEl = document.getElementById('baselineRiskSlider');
+      const patientBaseRisk = patientRiskEl ? parseFloat(patientRiskEl.value) / 100 : 0.2;
+      const nntResult = result.isRatio ? computeNNT(result.pooled, true, patientBaseRisk, result.effectType) : null;
 
       // Gather sensitivity battery
       const battery = computeSensitivityBattery(extractedStudies, confLevel);
@@ -25329,7 +25358,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
       var nnt = Math.round(data.nnt.nnt);
       if (nnt > 0) {
         html += '<p style="font-size:1rem;margin-bottom:12px">For every <strong>' + nnt + '</strong> patients treated, one additional patient would benefit.</p>';
-        html += '<p style="font-size:0.78rem;color:var(--muted);margin-bottom:12px">NNT assumes a 20% baseline risk (typical for cardiovascular composite outcomes). Your doctor can adjust this to your personal risk level.</p>';
+        var patRiskPct = (document.getElementById('baselineRiskSlider') ? parseFloat(document.getElementById('baselineRiskSlider').value) : 20);
+        html += '<p style="font-size:0.78rem;color:var(--muted);margin-bottom:12px">NNT assumes a ' + patRiskPct + '% baseline risk. Your doctor can adjust this to your personal risk level.</p>';
       }
     }
 
