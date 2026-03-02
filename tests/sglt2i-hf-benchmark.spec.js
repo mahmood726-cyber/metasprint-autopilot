@@ -3526,3 +3526,133 @@ test.describe('SGLT2i in Heart Failure — Cardiology Benchmark', () => {
     }
   });
 });
+
+// ============================================================================
+// SGLT2i BENCHMARK VALIDATION TESTS (234-245)
+// ============================================================================
+
+const { test: benchTest, expect: benchExpect } = require('@playwright/test');
+
+benchTest.describe('SGLT2i Benchmark Validation', () => {
+  benchTest.beforeEach(async ({ page }) => {
+    await page.goto('file:///C:/Users/user/Downloads/metasprint-autopilot/metasprint-autopilot.html');
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(2000);
+  });
+
+  benchTest('234 - Benchmark: SGLT2I_BENCHMARK constant exists', async ({ page }) => {
+    const exists = await page.evaluate(() => typeof SGLT2I_BENCHMARK === 'object' && SGLT2I_BENCHMARK !== null);
+    benchExpect(exists).toBe(true);
+  });
+
+  benchTest('235 - Benchmark: loadSGLT2iBenchmark function exists', async ({ page }) => {
+    const exists = await page.evaluate(() => typeof loadSGLT2iBenchmark === 'function');
+    benchExpect(exists).toBe(true);
+  });
+
+  benchTest('236 - Benchmark: composite outcome returns 5 studies', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const studies = loadSGLT2iBenchmark('composite');
+      return studies ? studies.length : 0;
+    });
+    benchExpect(result).toBe(5);
+  });
+
+  benchTest('237 - Benchmark: renal outcome returns 3 studies', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const studies = loadSGLT2iBenchmark('renal');
+      return studies ? studies.length : 0;
+    });
+    benchExpect(result).toBe(3);
+  });
+
+  benchTest('238 - Benchmark: invalid outcome returns null', async ({ page }) => {
+    const result = await page.evaluate(() => loadSGLT2iBenchmark('nonexistent'));
+    benchExpect(result).toBeNull();
+  });
+
+  benchTest('239 - Benchmark: composite HR matches golden ±0.03', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const studies = loadSGLT2iBenchmark('composite');
+      if (!studies) return null;
+      const ma = computeMetaAnalysis(studies);
+      return ma ? { hr: ma.pooled, k: ma.k } : null;
+    });
+    benchExpect(result).not.toBeNull();
+    benchExpect(result.k).toBe(5);
+    benchExpect(result.hr).toBeGreaterThan(0.74);
+    benchExpect(result.hr).toBeLessThan(0.80);
+  });
+
+  benchTest('240 - Benchmark: ACM HR matches golden ±0.03', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const studies = loadSGLT2iBenchmark('acm');
+      if (!studies) return null;
+      const ma = computeMetaAnalysis(studies);
+      return ma ? { hr: ma.pooled, I2: ma.I2 } : null;
+    });
+    benchExpect(result).not.toBeNull();
+    benchExpect(result.hr).toBeGreaterThan(0.89);
+    benchExpect(result.hr).toBeLessThan(0.95);
+  });
+
+  benchTest('241 - Benchmark: HF hosp HR matches golden ±0.03', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const studies = loadSGLT2iBenchmark('hfHosp');
+      if (!studies) return null;
+      const ma = computeMetaAnalysis(studies);
+      return ma ? ma.pooled : null;
+    });
+    benchExpect(result).not.toBeNull();
+    benchExpect(result).toBeGreaterThan(0.68);
+    benchExpect(result).toBeLessThan(0.74);
+  });
+
+  benchTest('242 - Benchmark: renal HR matches golden ±0.03', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const studies = loadSGLT2iBenchmark('renal');
+      if (!studies) return null;
+      const ma = computeMetaAnalysis(studies);
+      return ma ? ma.pooled : null;
+    });
+    benchExpect(result).not.toBeNull();
+    benchExpect(result).toBeGreaterThan(0.65);
+    benchExpect(result).toBeLessThan(0.71);
+  });
+
+  benchTest('243 - Benchmark: study fields are complete', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const study = loadSGLT2iBenchmark('composite')[0];
+      return {
+        hasId: !!study.id,
+        hasAuthorYear: !!study.authorYear,
+        hasEffect: isFinite(study.effectEstimate),
+        hasLower: isFinite(study.lowerCI),
+        hasUpper: isFinite(study.upperCI),
+        hasType: study.effectType === 'HR',
+        hasSubgroup: !!study.subgroup,
+        hasNTotal: study.nTotal > 0,
+        hasVerify: study.verificationStatus === 'benchmark-golden'
+      };
+    });
+    benchExpect(result.hasId).toBe(true);
+    benchExpect(result.hasAuthorYear).toBe(true);
+    benchExpect(result.hasEffect).toBe(true);
+    benchExpect(result.hasLower).toBe(true);
+    benchExpect(result.hasUpper).toBe(true);
+    benchExpect(result.hasType).toBe(true);
+    benchExpect(result.hasSubgroup).toBe(true);
+    benchExpect(result.hasNTotal).toBe(true);
+    benchExpect(result.hasVerify).toBe(true);
+  });
+
+  benchTest('244 - Benchmark: benchmark dropdown exists in Extract UI', async ({ page }) => {
+    const exists = await page.evaluate(() => !!document.getElementById('benchmarkOutcome'));
+    benchExpect(exists).toBe(true);
+  });
+
+  benchTest('245 - Benchmark: loadBenchmarkIntoExtract function exists', async ({ page }) => {
+    const exists = await page.evaluate(() => typeof loadBenchmarkIntoExtract === 'function');
+    benchExpect(exists).toBe(true);
+  });
+});
