@@ -1738,6 +1738,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
           <option value="REML" selected>REML (Cochrane default)</option>
           <option value="REML-HKSJ">REML + HKSJ adjustment</option>
           <option value="FE">Fixed Effect (IV)</option>
+          <option value="MH">Mantel-Haenszel (2x2 data)</option>
+          <option value="Peto">Peto OR (rare events, 2x2)</option>
         </select>
         <label for="outcomeFilterSelect" style="font-size:0.8rem;color:var(--text-muted)">Outcome:</label>
         <select id="outcomeFilterSelect" style="padding:4px 8px;font-size:0.82rem;border:1px solid var(--border);border-radius:var(--radius)">
@@ -8333,6 +8335,259 @@ body.dark-mode .input-error { background: #451a1a !important; }
     };
   }
 
+  // === MANTEL-HAENSZEL POOLING (OR, RR, RD) ===
+  // Requires raw 2x2 data (eventsInt, totalInt, eventsCtrl, totalCtrl).
+  // References: Mantel & Haenszel (1959), Greenland & Robins (1985), Robins-Breslow-Greenland (1986)
+  function computeMHPooling(studies, confLevel) {
+    confLevel = confLevel ?? 0.95;
+    const alpha = 1 - confLevel;
+    const zCrit = normalQuantile(1 - alpha / 2);
+    const studyCiZ = normalQuantile(0.975);
+
+    // Filter studies with complete 2x2 data
+    const valid = studies.filter(s =>
+      s.eventsInt != null && s.totalInt != null && s.eventsCtrl != null && s.totalCtrl != null &&
+      s.totalInt > 0 && s.totalCtrl > 0
+    );
+    if (valid.length === 0) return null;
+
+    const effectType = valid[0].effectType ?? 'OR';
+    const isRatio = ['OR', 'RR', 'HR'].includes(effectType);
+
+    // Compute 2x2 cell values
+    const cells = valid.map(s => {
+      const a = s.eventsInt;       // events in intervention
+      const b = s.eventsCtrl;      // events in control
+      const c = s.totalInt - a;    // non-events in intervention
+      const d = s.totalCtrl - b;   // non-events in control
+      const n1 = s.totalInt;       // total intervention
+      const n0 = s.totalCtrl;      // total control
+      const N = n1 + n0;           // total
+      return { ...s, a, b, c, d, n1, n0, N };
+    });
+
+    let lnPooled, seLn, pooledRD, seRD;
+
+    if (effectType === 'OR') {
+      // MH OR = sum(a*d/N) / sum(b*c/N)
+      const sumR = cells.reduce((s, x) => s + x.a * x.d / x.N, 0);
+      const sumS = cells.reduce((s, x) => s + x.b * x.c / x.N, 0);
+      if (sumR <= 0 || sumS <= 0) return null;
+      const mhOR = sumR / sumS;
+      lnPooled = Math.log(mhOR);
+
+      // Robins-Breslow-Greenland variance for ln(MH OR)
+      let sumPR = 0, sumPS_QR = 0, sumQS = 0;
+      for (const x of cells) {
+        const R = x.a * x.d / x.N;
+        const S = x.b * x.c / x.N;
+        const P = (x.a + x.d) / x.N;
+        const Q = (x.b + x.c) / x.N;
+        sumPR += P * R;
+        sumPS_QR += P * S + Q * R;
+        sumQS += Q * S;
+      }
+      seLn = Math.sqrt(sumPR / (2 * sumR * sumR) + sumPS_QR / (2 * sumR * sumS) + sumQS / (2 * sumS * sumS));
+
+    } else if (effectType === 'RR') {
+      // MH RR = sum(a*n0/N) / sum(b*n1/N)
+      const sumR = cells.reduce((s, x) => s + x.a * x.n0 / x.N, 0);
+      const sumS = cells.reduce((s, x) => s + x.b * x.n1 / x.N, 0);
+      if (sumR <= 0 || sumS <= 0) return null;
+      const mhRR = sumR / sumS;
+      lnPooled = Math.log(mhRR);
+
+      // Greenland-Robins variance for ln(MH RR)
+      let sumV = 0;
+      for (const x of cells) {
+        sumV += (x.n1 * x.n0 * (x.a + x.b) - x.a * x.b * x.N) / (x.N * x.N);
+      }
+      seLn = Math.sqrt(sumV / (sumR * sumS));
+
+    } else if (effectType === 'RD') {
+      // MH RD = sum(w*RD_i) / sum(w), where w = n1*n0/N
+      const data = cells.map(x => {
+        const w = x.n1 * x.n0 / x.N;
+        const rd = x.a / x.n1 - x.b / x.n0;
+        return { ...x, w, rd };
+      });
+      const sumW = data.reduce((s, x) => s + x.w, 0);
+      if (sumW <= 0) return null;
+      pooledRD = data.reduce((s, x) => s + x.w * x.rd, 0) / sumW;
+
+      // Sato variance for MH RD
+      let sumVarNum = 0;
+      for (const x of data) {
+        sumVarNum += x.w * x.w * (x.a * (x.n1 - x.a) / (x.n1 * x.n1 * x.n1)
+                                 + x.b * (x.n0 - x.b) / (x.n0 * x.n0 * x.n0));
+      }
+      seRD = Math.sqrt(sumVarNum / (sumW * sumW));
+    }
+
+    // Compute result object compatible with the pipeline
+    const isMHRatio = effectType !== 'RD';
+    let pooled, pooledLo, pooledHi, mu, se;
+
+    if (isMHRatio) {
+      mu = lnPooled;
+      se = seLn;
+      pooled = Math.exp(lnPooled);
+      pooledLo = Math.exp(lnPooled - zCrit * seLn);
+      pooledHi = Math.exp(lnPooled + zCrit * seLn);
+    } else {
+      mu = pooledRD;
+      se = seRD;
+      pooled = pooledRD;
+      pooledLo = pooledRD - zCrit * seRD;
+      pooledHi = pooledRD + zCrit * seRD;
+    }
+    if (!isFinite(mu) || !isFinite(se) || se <= 0) return null;
+
+    const z = mu / se;
+    const pValue = 2 * (1 - normalCDF(Math.abs(z)));
+
+    // Cochran Q for heterogeneity (using study-level log-effects)
+    const studyData = cells.map(x => {
+      let yi, sei_s;
+      if (effectType === 'OR') {
+        if (x.a === 0 || x.b === 0 || x.c === 0 || x.d === 0) {
+          const a2 = x.a + 0.5, b2 = x.b + 0.5, c2 = x.c + 0.5, d2 = x.d + 0.5;
+          yi = Math.log(a2 * d2 / (b2 * c2));
+          sei_s = Math.sqrt(1/a2 + 1/b2 + 1/c2 + 1/d2);
+        } else {
+          yi = Math.log(x.a * x.d / (x.b * x.c));
+          sei_s = Math.sqrt(1/x.a + 1/x.b + 1/x.c + 1/x.d);
+        }
+      } else if (effectType === 'RR') {
+        if (x.a === 0 || x.b === 0) {
+          const a2 = x.a + 0.5, b2 = x.b + 0.5, n1a = x.n1 + 1, n0a = x.n0 + 1;
+          yi = Math.log(a2 / n1a) - Math.log(b2 / n0a);
+          sei_s = Math.sqrt(1/a2 - 1/n1a + 1/b2 - 1/n0a);
+        } else {
+          yi = Math.log(x.a / x.n1) - Math.log(x.b / x.n0);
+          sei_s = Math.sqrt(1/x.a - 1/x.n1 + 1/x.b - 1/x.n0);
+        }
+      } else {
+        yi = x.a / x.n1 - x.b / x.n0;
+        sei_s = Math.sqrt(x.a*(x.n1-x.a)/(x.n1*x.n1*x.n1) + x.b*(x.n0-x.b)/(x.n0*x.n0*x.n0));
+      }
+      if (!isFinite(yi) || !isFinite(sei_s) || sei_s <= 0) return null;
+      const wi = 1 / (sei_s * sei_s);
+      return { ...x, yi, sei: sei_s, vi: sei_s * sei_s, wi, wi_re: wi };
+    }).filter(d => d !== null);
+
+    const k = studyData.length;
+    if (k === 0) return null;
+    const df = k - 1;
+    const sumW_q = studyData.reduce((s, d) => s + d.wi, 0);
+    const Q = studyData.reduce((s, d) => s + d.wi * (d.yi - mu) ** 2, 0);
+    const I2 = df > 0 && Q > 0 ? Math.max(0, (Q - df) / Q * 100) : (df > 0 ? 0 : null);
+    const QpValue = df > 0 ? 1 - chi2CDF(Q, df) : 1;
+
+    // Study-level display (always 95% CIs)
+    const totalW = studyData.reduce((s, d) => s + d.wi, 0);
+    const studyResults = studyData.map(d => ({
+      ...d,
+      weightPct: (d.wi / totalW * 100).toFixed(1),
+      display: isMHRatio ? Math.exp(d.yi) : d.yi,
+      displayLo: isMHRatio ? Math.exp(d.yi - studyCiZ * d.sei) : d.yi - studyCiZ * d.sei,
+      displayHi: isMHRatio ? Math.exp(d.yi + studyCiZ * d.sei) : d.yi + studyCiZ * d.sei
+    }));
+
+    return {
+      pooled, pooledLo, pooledHi, tau2: 0, tau2REML: 0, I2, I2_REML: I2, Q, QpValue, df, pValue,
+      k, isRatio: isMHRatio, studyResults,
+      muRE: mu, seRE: se, seCI: se, muFE: mu, confLevel, zCrit,
+      piLo: null, piHi: null,
+      method: 'MH',
+      effectType
+    };
+  }
+
+  // === PETO ODDS RATIO ===
+  // Fixed-effect method for rare binary events. Uses hypergeometric expectation.
+  // Reference: Yusuf et al. (1985), Cochrane Handbook v6.5 Section 10.4.4.2
+  function computePetoPooling(studies, confLevel) {
+    confLevel = confLevel ?? 0.95;
+    const alpha = 1 - confLevel;
+    const zCrit = normalQuantile(1 - alpha / 2);
+    const studyCiZ = normalQuantile(0.975);
+
+    const valid = studies.filter(s =>
+      s.eventsInt != null && s.totalInt != null && s.eventsCtrl != null && s.totalCtrl != null &&
+      s.totalInt > 0 && s.totalCtrl > 0
+    );
+    if (valid.length === 0) return null;
+
+    const cells = valid.map(s => {
+      const a = s.eventsInt;
+      const b = s.eventsCtrl;
+      const c = s.totalInt - a;
+      const d = s.totalCtrl - b;
+      const n1 = s.totalInt;
+      const n0 = s.totalCtrl;
+      const N = n1 + n0;
+      const m1 = a + b;   // total events
+      const m0 = c + d;   // total non-events
+      // Expected events in intervention under null
+      const E = n1 * m1 / N;
+      // Hypergeometric variance
+      const V = N > 1 ? n1 * n0 * m1 * m0 / (N * N * (N - 1)) : 0;
+      const OminusE = a - E;
+      return { ...s, a, b, c, d, n1, n0, N, E, V, OminusE };
+    }).filter(x => x.V > 0);
+
+    if (cells.length === 0) return null;
+
+    const sumOE = cells.reduce((s, x) => s + x.OminusE, 0);
+    const sumV = cells.reduce((s, x) => s + x.V, 0);
+    if (sumV <= 0) return null;
+
+    const lnPetoOR = sumOE / sumV;
+    const seLn = 1 / Math.sqrt(sumV);
+    const petoOR = Math.exp(lnPetoOR);
+    const pooledLo = Math.exp(lnPetoOR - zCrit * seLn);
+    const pooledHi = Math.exp(lnPetoOR + zCrit * seLn);
+
+    const z = lnPetoOR / seLn;
+    const pValue = 2 * (1 - normalCDF(Math.abs(z)));
+
+    // Q statistic for heterogeneity
+    const Q = cells.reduce((s, x) => s + (x.V > 0 ? x.OminusE * x.OminusE / x.V : 0), 0)
+              - sumOE * sumOE / sumV;
+    const k = cells.length;
+    const df = k - 1;
+    const I2 = df > 0 && Q > 0 ? Math.max(0, (Q - df) / Q * 100) : (df > 0 ? 0 : null);
+    const QpValue = df > 0 ? 1 - chi2CDF(Math.max(0, Q), df) : 1;
+
+    // Study-level display (use Peto log-OR per study)
+    const studyData = cells.map(x => {
+      const yi = x.V > 0 ? x.OminusE / x.V : 0;
+      const sei = x.V > 0 ? 1 / Math.sqrt(x.V) : Infinity;
+      const wi = x.V;
+      return { ...x, yi, sei, vi: sei * sei, wi, wi_re: wi };
+    }).filter(d => isFinite(d.sei) && d.sei > 0);
+
+    const totalW = studyData.reduce((s, d) => s + d.wi, 0);
+    const studyResults = studyData.map(d => ({
+      ...d,
+      weightPct: (d.wi / totalW * 100).toFixed(1),
+      display: Math.exp(d.yi),
+      displayLo: Math.exp(d.yi - studyCiZ * d.sei),
+      displayHi: Math.exp(d.yi + studyCiZ * d.sei)
+    }));
+
+    return {
+      pooled: petoOR, pooledLo, pooledHi, tau2: 0, tau2REML: 0, I2, I2_REML: I2,
+      Q: Math.max(0, Q), QpValue, df, pValue,
+      k, isRatio: true, studyResults,
+      muRE: lnPetoOR, seRE: seLn, seCI: seLn, muFE: lnPetoOR, confLevel, zCrit,
+      piLo: null, piHi: null,
+      method: 'Peto',
+      effectType: 'OR'
+    };
+  }
+
   // === ADVANCED STATISTICAL METHODS (Loops 1-8) ===
 
   // --- Q-Profile confidence interval for tau-squared (Viechtbauer 2007) ---
@@ -12947,7 +13202,26 @@ body.dark-mode .input-error { background: #451a1a !important; }
     }
 
     let result;
-    if (method === 'FE') {
+    if (method === 'MH') {
+      const has2x2 = analysisStudies.some(s => s.eventsInt != null && s.totalInt != null && s.eventsCtrl != null && s.totalCtrl != null);
+      if (!has2x2) {
+        showToast('Mantel-Haenszel requires raw 2x2 data (events + totals per arm). Enter counts in Extract tab or switch to DL/REML.', 'warning');
+        return;
+      }
+      result = computeMHPooling(analysisStudies, confLevel);
+    } else if (method === 'Peto') {
+      const has2x2 = analysisStudies.some(s => s.eventsInt != null && s.totalInt != null && s.eventsCtrl != null && s.totalCtrl != null);
+      if (!has2x2) {
+        showToast('Peto method requires raw 2x2 data (events + totals per arm). Enter counts in Extract tab or switch to DL/REML.', 'warning');
+        return;
+      }
+      const effectType = analysisStudies.find(s => s.effectType)?.effectType;
+      if (effectType && effectType !== 'OR') {
+        showToast('Peto method is only applicable to odds ratios. Current effect type: ' + effectType + '. Use Mantel-Haenszel for RR/RD.', 'warning');
+        return;
+      }
+      result = computePetoPooling(analysisStudies, confLevel);
+    } else if (method === 'FE') {
       result = computeFixedEffect(analysisStudies, confLevel);
     } else {
       result = computeMetaAnalysis(analysisStudies, confLevel);

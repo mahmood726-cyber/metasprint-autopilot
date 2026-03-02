@@ -3814,3 +3814,177 @@ govTest.describe('Meta2 Governance Functions', () => {
     govExpect(result.publication_missing_rate).toBe(0);
   });
 });
+
+// ============================================================================
+// Mantel-Haenszel & Peto Pooling Methods — Cross-validated against Python reference
+// ============================================================================
+// Test data: 5 binary outcome studies
+// Python reference values computed from standard MH/Peto formulas
+// ai = [49, 44, 102, 32, 85], n1i = [615, 758, 832, 317, 810]
+// ci = [67, 64, 126, 38, 52], n0i = [624, 771, 850, 309, 406]
+
+const { test: mhTest, expect: mhExpect } = require('@playwright/test');
+
+mhTest.describe('Mantel-Haenszel & Peto Pooling', () => {
+  const MH_STUDIES = [
+    { eventsInt: 49, totalInt: 615, eventsCtrl: 67, totalCtrl: 624 },
+    { eventsInt: 44, totalInt: 758, eventsCtrl: 64, totalCtrl: 771 },
+    { eventsInt: 102, totalInt: 832, eventsCtrl: 126, totalCtrl: 850 },
+    { eventsInt: 32, totalInt: 317, eventsCtrl: 38, totalCtrl: 309 },
+    { eventsInt: 85, totalInt: 810, eventsCtrl: 52, totalCtrl: 406 }
+  ];
+
+  // Inject studies and run MH/Peto via page.evaluate
+  async function runPoolingTest(page, studies, method, effectType) {
+    return await page.evaluate(({ studies, method, effectType }) => {
+      const studyObjects = studies.map((s, i) => ({
+        ...s,
+        effectType: effectType,
+        effectEstimate: null, lowerCI: null, upperCI: null,
+        label: 'Study ' + (i + 1)
+      }));
+      if (method === 'MH') return computeMHPooling(studyObjects, 0.95);
+      if (method === 'Peto') return computePetoPooling(studyObjects, 0.95);
+      return null;
+    }, { studies, method, effectType });
+  }
+
+  mhTest.beforeEach(async ({ page }) => {
+    await page.goto('file:///C:/Users/user/Downloads/metasprint-autopilot/metasprint-autopilot.html');
+    await page.waitForLoadState('domcontentloaded');
+    await page.waitForTimeout(2000);
+  });
+
+  // --- MH OR ---
+  mhTest('258 - MH OR: pooled estimate matches Python reference (0.7639)', async ({ page }) => {
+    const r = await runPoolingTest(page, MH_STUDIES, 'MH', 'OR');
+    mhExpect(r).not.toBeNull();
+    mhExpect(r.method).toBe('MH');
+    mhExpect(r.k).toBe(5);
+    mhExpect(Math.abs(r.pooled - 0.763857)).toBeLessThan(0.001);
+  });
+
+  mhTest('259 - MH OR: 95% CI matches Python reference [0.648, 0.900]', async ({ page }) => {
+    const r = await runPoolingTest(page, MH_STUDIES, 'MH', 'OR');
+    mhExpect(Math.abs(r.pooledLo - 0.648359)).toBeLessThan(0.002);
+    mhExpect(Math.abs(r.pooledHi - 0.899929)).toBeLessThan(0.002);
+  });
+
+  mhTest('260 - MH OR: I-squared = 0% (homogeneous)', async ({ page }) => {
+    const r = await runPoolingTest(page, MH_STUDIES, 'MH', 'OR');
+    mhExpect(r.I2).toBeLessThan(1);
+  });
+
+  mhTest('261 - MH OR: Q statistic matches reference (0.623)', async ({ page }) => {
+    const r = await runPoolingTest(page, MH_STUDIES, 'MH', 'OR');
+    mhExpect(Math.abs(r.Q - 0.623497)).toBeLessThan(0.05);
+  });
+
+  mhTest('262 - MH OR: tau-squared = 0 (fixed-effect method)', async ({ page }) => {
+    const r = await runPoolingTest(page, MH_STUDIES, 'MH', 'OR');
+    mhExpect(r.tau2).toBe(0);
+  });
+
+  mhTest('263 - MH OR: no prediction intervals (fixed-effect)', async ({ page }) => {
+    const r = await runPoolingTest(page, MH_STUDIES, 'MH', 'OR');
+    mhExpect(r.piLo).toBeNull();
+    mhExpect(r.piHi).toBeNull();
+  });
+
+  // --- MH RR ---
+  mhTest('264 - MH RR: pooled estimate matches Python reference (0.7869)', async ({ page }) => {
+    const r = await runPoolingTest(page, MH_STUDIES, 'MH', 'RR');
+    mhExpect(r).not.toBeNull();
+    mhExpect(r.k).toBe(5);
+    mhExpect(Math.abs(r.pooled - 0.786937)).toBeLessThan(0.001);
+  });
+
+  mhTest('265 - MH RR: 95% CI matches reference [0.680, 0.911]', async ({ page }) => {
+    const r = await runPoolingTest(page, MH_STUDIES, 'MH', 'RR');
+    mhExpect(Math.abs(r.pooledLo - 0.680075)).toBeLessThan(0.002);
+    mhExpect(Math.abs(r.pooledHi - 0.910591)).toBeLessThan(0.002);
+  });
+
+  // --- MH RD ---
+  mhTest('266 - MH RD: pooled estimate matches Python reference (-0.0251)', async ({ page }) => {
+    const r = await runPoolingTest(page, MH_STUDIES, 'MH', 'RD');
+    mhExpect(r).not.toBeNull();
+    mhExpect(r.isRatio).toBe(false);
+    mhExpect(Math.abs(r.pooled - (-0.025079))).toBeLessThan(0.001);
+  });
+
+  mhTest('267 - MH RD: 95% CI matches reference [-0.040, -0.010]', async ({ page }) => {
+    const r = await runPoolingTest(page, MH_STUDIES, 'MH', 'RD');
+    mhExpect(Math.abs(r.pooledLo - (-0.040380))).toBeLessThan(0.002);
+    mhExpect(Math.abs(r.pooledHi - (-0.009778))).toBeLessThan(0.002);
+  });
+
+  // --- Peto OR ---
+  mhTest('268 - Peto OR: pooled estimate matches Python reference (0.7639)', async ({ page }) => {
+    const r = await runPoolingTest(page, MH_STUDIES, 'Peto', 'OR');
+    mhExpect(r).not.toBeNull();
+    mhExpect(r.method).toBe('Peto');
+    mhExpect(r.k).toBe(5);
+    mhExpect(Math.abs(r.pooled - 0.763886)).toBeLessThan(0.001);
+  });
+
+  mhTest('269 - Peto OR: 95% CI matches reference [0.649, 0.900]', async ({ page }) => {
+    const r = await runPoolingTest(page, MH_STUDIES, 'Peto', 'OR');
+    mhExpect(Math.abs(r.pooledLo - 0.648528)).toBeLessThan(0.002);
+    mhExpect(Math.abs(r.pooledHi - 0.899762)).toBeLessThan(0.002);
+  });
+
+  mhTest('270 - Peto OR: Q and I-squared match reference', async ({ page }) => {
+    const r = await runPoolingTest(page, MH_STUDIES, 'Peto', 'OR');
+    mhExpect(Math.abs(r.Q - 0.593699)).toBeLessThan(0.05);
+    mhExpect(r.I2).toBeLessThan(1);
+  });
+
+  // --- Edge cases ---
+  mhTest('271 - MH: returns null for empty study array', async ({ page }) => {
+    const r = await page.evaluate(() => {
+      return window.computeMHPooling ? window.computeMHPooling([], 0.95) : 'no_fn';
+    });
+    mhExpect(r).toBeNull();
+  });
+
+  mhTest('272 - Peto: returns null for empty study array', async ({ page }) => {
+    const r = await page.evaluate(() => {
+      return window.computePetoPooling ? window.computePetoPooling([], 0.95) : 'no_fn';
+    });
+    mhExpect(r).toBeNull();
+  });
+
+  mhTest('273 - MH: handles single study', async ({ page }) => {
+    const r = await runPoolingTest(page, [MH_STUDIES[0]], 'MH', 'OR');
+    mhExpect(r).not.toBeNull();
+    mhExpect(r.k).toBe(1);
+    mhExpect(r.pooled).toBeGreaterThan(0);
+  });
+
+  mhTest('274 - Peto: handles zero-event study (continuity)', async ({ page }) => {
+    const studies = [
+      { eventsInt: 0, totalInt: 50, eventsCtrl: 5, totalCtrl: 50 },
+      { eventsInt: 3, totalInt: 100, eventsCtrl: 8, totalCtrl: 100 }
+    ];
+    const r = await runPoolingTest(page, studies, 'Peto', 'OR');
+    mhExpect(r).not.toBeNull();
+    mhExpect(r.pooled).toBeGreaterThan(0);
+    mhExpect(r.pooled).toBeLessThan(1);
+  });
+
+  mhTest('275 - MH: study results have correct weight percentages', async ({ page }) => {
+    const r = await runPoolingTest(page, MH_STUDIES, 'MH', 'OR');
+    const totalPct = r.studyResults.reduce((s, d) => s + parseFloat(d.weightPct), 0);
+    mhExpect(Math.abs(totalPct - 100)).toBeLessThan(0.5);
+  });
+
+  mhTest('276 - MH/Peto: functions are exposed on window', async ({ page }) => {
+    const has = await page.evaluate(() => ({
+      mh: typeof window.computeMHPooling === 'function',
+      peto: typeof window.computePetoPooling === 'function'
+    }));
+    mhExpect(has.mh).toBe(true);
+    mhExpect(has.peto).toBe(true);
+  });
+});
