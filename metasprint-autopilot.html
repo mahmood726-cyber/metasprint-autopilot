@@ -1135,6 +1135,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     <button class="tab" id="tab-dta" data-phase="dta" role="tab" aria-selected="false" aria-controls="phase-dta">DTA</button>
     <button class="tab" id="tab-nma" data-phase="nma" role="tab" aria-selected="false" aria-controls="phase-nma">NMA</button>
     <button class="tab" id="tab-doseresponse" data-phase="doseresponse" role="tab" aria-selected="false" aria-controls="phase-doseresponse">Dose-Resp</button>
+    <button class="tab" id="tab-icer" data-phase="icer" role="tab" aria-selected="false" aria-controls="phase-icer">ICER/QALY</button>
     <button class="tab" id="tab-checkpoints" data-phase="checkpoints" role="tab" aria-selected="false" aria-controls="phase-checkpoints">Checkpoints</button>
     <button class="tab" id="tab-insights" data-phase="insights" role="tab" aria-selected="false" aria-controls="phase-insights">Insights</button>
   </nav>
@@ -1271,6 +1272,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       <div id="nmaNetworkGraphContainer" style="margin-top:20px"></div>
       <div id="nmaSummaryContainer" style="margin-top:20px"></div>
       <div id="nmaLeagueTableContainer" style="margin-top:20px"></div>
+      <div id="nmaRankogramContainer" style="margin-top:20px"></div>
       <div id="nmaRankingContainer" style="margin-top:20px"></div>
       <div id="nmaConsistencyContainer" style="margin-top:20px"></div>
       <div id="nmaForestContainer" style="margin-top:20px"></div>
@@ -1288,7 +1290,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       </div>
       <div style="margin-bottom:10px;font-size:0.82rem;color:var(--text-muted)">Enter dose-level data per study (dose, cases, total or RR + CI). Uses Greenland-Longnecker two-stage method with restricted cubic splines.</div>
       <div style="margin-bottom:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-        <label style="font-size:0.82rem">Model: <select id="doseModel" style="font-size:0.82rem"><option value="linear">Linear</option><option value="rcs3" selected>RCS (3 knots)</option><option value="rcs4">RCS (4 knots)</option></select></label>
+        <label style="font-size:0.82rem">Model: <select id="doseModel" style="font-size:0.82rem"><option value="linear">Linear</option><option value="rcs3" selected>RCS (3 knots)</option><option value="rcs4">RCS (4 knots)</option><option value="emax">Emax</option><option value="hill">Hill/Sigmoid Emax</option><option value="auto">Auto (best AIC)</option></select></label>
         <label style="font-size:0.82rem">Confidence level: <select id="doseConfLevel" style="font-size:0.82rem"><option value="0.95" selected>95%</option><option value="0.90">90%</option><option value="0.99">99%</option></select></label>
       </div>
       <div id="doseDataEntry" style="margin-bottom:16px">
@@ -1297,6 +1299,47 @@ body.dark-mode .input-error { background: #451a1a !important; }
       <div id="doseSummaryContainer" style="margin-top:20px"></div>
       <div id="dosePlotContainer" style="margin-top:20px"></div>
       <div id="doseNonlinearityContainer" style="margin-top:20px"></div>
+    </section>
+
+    <!-- ICER/QALY Calculator -->
+    <section id="phase-icer" class="phase" role="tabpanel" aria-labelledby="tab-icer" tabindex="-1">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px">
+        <h2>ICER/QALY Calculator</h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn-success" onclick="addICERStrategyRow()">Add Strategy</button>
+          <button class="btn-info" onclick="runICERAnalysis()">Calculate</button>
+          <button class="btn-outline" onclick="runPSAAnalysis()">Run PSA (1000 iter)</button>
+          <button class="btn-outline" onclick="exportICERCSV()">Export CSV</button>
+        </div>
+      </div>
+      <div style="margin-bottom:10px;font-size:0.82rem;color:var(--text-muted)">Enter cost and effectiveness (QALYs) for each strategy. ICER = incremental cost / incremental QALY vs comparator. NMB = QALY &times; WTP &minus; Cost.</div>
+      <div style="margin-bottom:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <label style="font-size:0.82rem">WTP threshold (/QALY): <input type="number" id="icerWTP" value="50000" min="0" step="1000" style="width:100px;font-size:0.82rem"></label>
+        <label style="font-size:0.82rem">Currency: <select id="icerCurrency" style="font-size:0.82rem"><option value="$">$ (USD)</option><option value="£">£ (GBP)</option><option value="€">€ (EUR)</option><option value="OMR">OMR</option></select></label>
+        <label style="font-size:0.82rem">Discount rate: <input type="number" id="icerDiscount" value="3.0" min="0" max="15" step="0.5" style="width:60px;font-size:0.82rem">%</label>
+      </div>
+      <div class="extract-table-wrap" style="overflow-x:auto">
+        <table class="extract-table" style="width:100%">
+          <thead><tr>
+            <th scope="col">Strategy</th>
+            <th scope="col" title="Total cost">Cost</th>
+            <th scope="col" title="Quality-Adjusted Life Years">QALYs</th>
+            <th scope="col" title="Standard deviation of cost (for PSA)">SD Cost</th>
+            <th scope="col" title="Standard deviation of QALYs (for PSA)">SD QALYs</th>
+            <th scope="col">Notes</th>
+            <th scope="col"></th>
+          </tr></thead>
+          <tbody id="icerExtractBody">
+            <tr><td colspan="7" style="padding:16px;text-align:center;color:var(--text-muted)">No strategies. Click <strong>Add Strategy</strong> to enter cost-effectiveness data.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="icerSummaryContainer" style="margin-top:20px"></div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:20px">
+        <div id="icerCEPlaneContainer" style="flex:1;min-width:400px"></div>
+        <div id="icerCEACContainer" style="flex:1;min-width:400px"></div>
+      </div>
+      <div id="icerTornadoContainer" style="margin-top:20px"></div>
     </section>
 
     <!-- Checkpoints -->
@@ -1548,6 +1591,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <button onclick="document.getElementById('risFileInput').click()">Import RIS/BibTeX</button>
         <button onclick="importFromPMIDList()">Paste PMIDs</button>
         <button onclick="runDeduplication()">Find Duplicates</button>
+        <button onclick="rankByRelevance()" title="TF-IDF relevance ranking: learns from your include/exclude decisions to prioritize remaining references">Rank by Relevance</button>
         <button class="btn-info" onclick="showAutoScreenPanel()">Auto-Screen</button>
         <input type="file" id="risFileInput" accept=".ris,.bib,.nbib,.xml,.csv,.txt,.rm5"
                style="display:none" onchange="handleFileImport(event)" multiple>
@@ -10752,6 +10796,326 @@ body.dark-mode .input-error { background: #451a1a !important; }
   }
 
   // ============================================================
+  // SUBGROUP FOREST PLOT (combined plot with headers + sub-diamonds)
+  // ============================================================
+  function renderSubgroupForestPlot(subgroupResult) {
+    if (!subgroupResult || !subgroupResult.subgroups || subgroupResult.subgroups.length === 0) return '';
+    const sr = subgroupResult;
+    const ov = sr.overall;
+    if (!ov) return '';
+    const isRatio = ov.isRatio;
+    const confPct = Math.round((ov.confLevel ?? 0.95) * 100);
+    const nullLine = isRatio ? 1 : 0;
+    const rowH = 26, headerH = 40, sgHeaderH = 30, sgFooterH = 28, overallH = 35, pad = 40;
+    let totalRows = 0;
+    for (const sg of sr.subgroups) { totalRows += sg.result.studyResults.length; }
+    const h = headerH + sr.subgroups.length * (sgHeaderH + sgFooterH) + totalRows * rowH + overallH + pad + 30;
+    const plotLeft = 250, plotRight = 550, plotW = plotRight - plotLeft;
+    const allVals = [];
+    for (const sg of sr.subgroups) {
+      for (const s of sg.result.studyResults) { allVals.push(s.displayLo, s.displayHi); }
+      allVals.push(sg.result.pooledLo, sg.result.pooledHi);
+    }
+    allVals.push(ov.pooledLo, ov.pooledHi, nullLine);
+    let xMin = Math.min(...allVals) * (isRatio ? 0.8 : 1) - (isRatio ? 0 : 0.2);
+    let xMax = Math.max(...allVals) * (isRatio ? 1.2 : 1) + (isRatio ? 0 : 0.2);
+    if (isRatio) xMin = Math.max(0.01, xMin);
+    const xScale = isRatio
+      ? (v) => plotLeft + (Math.log(v) - Math.log(xMin)) / (Math.log(xMax) - Math.log(xMin)) * plotW
+      : (v) => plotLeft + (v - xMin) / (xMax - xMin) * plotW;
+    let svg = '<svg viewBox="0 0 750 ' + h + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Subgroup forest plot" style="max-width:750px;width:100%;font-family:var(--font)">';
+    svg += '<text x="10" y="25" font-size="11" font-weight="bold">Study</text>';
+    svg += '<text x="' + (plotLeft + plotW/2) + '" y="25" text-anchor="middle" font-size="11" font-weight="bold">Effect (' + confPct + '% CI)</text>';
+    svg += '<text x="570" y="25" font-size="11" font-weight="bold">Weight</text>';
+    svg += '<text x="620" y="25" font-size="11" font-weight="bold">Est [CI]</text>';
+    let curY = headerH;
+    const nullX = xScale(nullLine);
+    svg += '<line x1="' + nullX + '" y1="' + headerH + '" x2="' + nullX + '" y2="' + (h - pad) + '" stroke="var(--border)" stroke-dasharray="4"/>';
+    for (const sg of sr.subgroups) {
+      svg += '<rect x="5" y="' + curY + '" width="740" height="' + sgHeaderH + '" fill="var(--bg-hover,#f5f5f5)" rx="3"/>';
+      svg += '<text x="10" y="' + (curY + 18) + '" font-size="11" font-weight="bold" fill="var(--primary)">' + escapeHtml(sg.label) + '</text>';
+      curY += sgHeaderH;
+      const r = sg.result;
+      const totalW = r.studyResults.reduce((a, d) => a + parseFloat(d.weightPct), 0);
+      r.studyResults.forEach(function (s) {
+        const y = curY + rowH / 2;
+        const cx = xScale(s.display);
+        const x1 = xScale(Math.max(s.displayLo, xMin));
+        const x2 = xScale(Math.min(s.displayHi, xMax));
+        const size = Math.max(3, Math.min(10, Math.sqrt(parseFloat(s.weightPct)) * 2));
+        svg += '<text x="20" y="' + (y + 4) + '" font-size="9">' + escapeHtml((s.authorYear || s.label || '').slice(0, 28)) + '</text>';
+        svg += '<line x1="' + Math.max(plotLeft, x1) + '" y1="' + y + '" x2="' + Math.min(plotRight, x2) + '" y2="' + y + '" stroke="var(--primary)" stroke-width="1.5"/>';
+        svg += '<rect x="' + (cx - size/2) + '" y="' + (y - size/2) + '" width="' + size + '" height="' + size + '" fill="var(--primary)" transform="rotate(45 ' + cx + ' ' + y + ')"/>';
+        svg += '<text x="570" y="' + (y + 4) + '" font-size="8">' + s.weightPct + '%</text>';
+        svg += '<text x="620" y="' + (y + 4) + '" font-size="8">' + s.display.toFixed(2) + ' [' + s.displayLo.toFixed(2) + ', ' + s.displayHi.toFixed(2) + ']</text>';
+        curY += rowH;
+      });
+      const dy = curY + sgFooterH / 2;
+      const dx = xScale(r.pooled);
+      const dlo = xScale(Math.max(r.pooledLo, xMin));
+      const dhi = xScale(Math.min(r.pooledHi, xMax));
+      svg += '<polygon points="' + dlo + ',' + dy + ' ' + dx + ',' + (dy-6) + ' ' + dhi + ',' + dy + ' ' + dx + ',' + (dy+6) + '" fill="var(--primary)" opacity="0.6"/>';
+      svg += '<text x="20" y="' + (dy + 4) + '" font-size="9" font-weight="bold" font-style="italic">Subtotal (k=' + r.k + ', I\u00B2=' + (r.I2 != null ? r.I2.toFixed(0) : '?') + '%)</text>';
+      svg += '<text x="620" y="' + (dy + 4) + '" font-size="8" font-weight="bold">' + r.pooled.toFixed(2) + ' [' + r.pooledLo.toFixed(2) + ', ' + r.pooledHi.toFixed(2) + ']</text>';
+      curY += sgFooterH;
+    }
+    const ody = curY + overallH / 2;
+    svg += '<line x1="5" y1="' + (curY + 2) + '" x2="745" y2="' + (curY + 2) + '" stroke="var(--text)" stroke-width="1.5"/>';
+    const odx = xScale(ov.pooled);
+    const odlo = xScale(Math.max(ov.pooledLo, xMin));
+    const odhi = xScale(Math.min(ov.pooledHi, xMax));
+    svg += '<polygon points="' + odlo + ',' + ody + ' ' + odx + ',' + (ody-8) + ' ' + odhi + ',' + ody + ' ' + odx + ',' + (ody+8) + '" fill="var(--danger)" opacity="0.8"/>';
+    svg += '<text x="10" y="' + (ody + 4) + '" font-size="10" font-weight="bold">Overall (k=' + ov.k + ')</text>';
+    svg += '<text x="620" y="' + (ody + 4) + '" font-size="9" font-weight="bold">' + ov.pooled.toFixed(2) + ' [' + ov.pooledLo.toFixed(2) + ', ' + ov.pooledHi.toFixed(2) + ']</text>';
+    svg += '<text x="10" y="' + (ody + 18) + '" font-size="8" fill="var(--text-muted)">Interaction p = ' + (sr.pInteraction < 0.001 ? '< 0.001' : sr.pInteraction.toFixed(3)) + '</text>';
+    svg += '</svg>';
+    return svg;
+  }
+
+  // ============================================================
+  // RISK OF BIAS VISUALIZATIONS (traffic light + summary bar)
+  // ============================================================
+  function renderRoBTrafficLight(studies) {
+    if (!studies || studies.length === 0) return '';
+    const domains = ['D1', 'D2', 'D3', 'D4', 'D5'];
+    const domainLabels = {
+      D1: 'Randomization', D2: 'Deviations', D3: 'Missing data',
+      D4: 'Measurement', D5: 'Selection'
+    };
+    const colors = { low: '#22c55e', some: '#f59e0b', high: '#ef4444', unclear: '#94a3b8' };
+    const rowH = 24, headerH = 50, leftW = 180, dotR = 8, colW = 80;
+    const w = leftW + domains.length * colW + 40;
+    const h = headerH + studies.length * rowH + 20;
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Risk of bias traffic light plot" style="max-width:' + w + 'px;width:100%;font-family:var(--font)">';
+    svg += '<text x="' + (w/2) + '" y="16" text-anchor="middle" font-size="12" font-weight="bold" fill="var(--text)">Risk of Bias Traffic Light</text>';
+    domains.forEach(function (d, i) {
+      const x = leftW + i * colW + colW / 2;
+      svg += '<text x="' + x + '" y="38" text-anchor="middle" font-size="9" fill="var(--text)">' + (domainLabels[d] || d) + '</text>';
+    });
+    studies.forEach(function (s, idx) {
+      const y = headerH + idx * rowH + rowH / 2;
+      svg += '<text x="5" y="' + (y + 4) + '" font-size="9" fill="var(--text)">' + escapeHtml((s.label || s.authorYear || 'Study ' + (idx+1)).slice(0, 25)) + '</text>';
+      const rob = s.rob || {};
+      domains.forEach(function (d, i) {
+        const x = leftW + i * colW + colW / 2;
+        const judgment = (rob[d.toLowerCase()] || rob[d] || 'unclear').toLowerCase();
+        const fill = colors[judgment] || colors.unclear;
+        svg += '<circle cx="' + x + '" cy="' + y + '" r="' + dotR + '" fill="' + fill + '" stroke="#fff" stroke-width="1.5"/>';
+        const symbol = judgment === 'low' ? '+' : judgment === 'high' ? '-' : judgment === 'some' ? '!' : '?';
+        svg += '<text x="' + x + '" y="' + (y + 3.5) + '" text-anchor="middle" font-size="8" font-weight="bold" fill="#fff">' + symbol + '</text>';
+      });
+    });
+    svg += '</svg>';
+    return svg;
+  }
+
+  function renderRoBSummaryBar(studies) {
+    if (!studies || studies.length === 0) return '';
+    const domains = ['D1', 'D2', 'D3', 'D4', 'D5'];
+    const domainLabels = {
+      D1: 'Randomization', D2: 'Deviations', D3: 'Missing data',
+      D4: 'Measurement', D5: 'Selection'
+    };
+    const colors = { low: '#22c55e', some: '#f59e0b', high: '#ef4444', unclear: '#94a3b8' };
+    const barH = 24, headerH = 30, leftW = 140, barW = 400;
+    const h = headerH + domains.length * (barH + 8) + 50;
+    const w = leftW + barW + 100;
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Risk of bias summary" style="max-width:' + w + 'px;width:100%;font-family:var(--font)">';
+    svg += '<text x="' + (w/2) + '" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="var(--text)">Risk of Bias Summary</text>';
+    domains.forEach(function (d, i) {
+      const y = headerH + i * (barH + 8);
+      svg += '<text x="' + (leftW - 8) + '" y="' + (y + barH/2 + 4) + '" text-anchor="end" font-size="10" fill="var(--text)">' + (domainLabels[d] || d) + '</text>';
+      const counts = { low: 0, some: 0, high: 0, unclear: 0 };
+      studies.forEach(function (s) {
+        const rob = s.rob || {};
+        const j = (rob[d.toLowerCase()] || rob[d] || 'unclear').toLowerCase();
+        if (counts[j] !== undefined) counts[j]++;
+        else counts.unclear++;
+      });
+      const n = studies.length;
+      let cx = leftW;
+      ['low', 'some', 'high', 'unclear'].forEach(function (level) {
+        const pct = counts[level] / n;
+        const bw = pct * barW;
+        if (bw > 0) {
+          svg += '<rect x="' + cx + '" y="' + y + '" width="' + bw + '" height="' + barH + '" fill="' + colors[level] + '" rx="2"/>';
+          if (bw > 20) {
+            svg += '<text x="' + (cx + bw/2) + '" y="' + (y + barH/2 + 4) + '" text-anchor="middle" font-size="9" fill="#fff" font-weight="bold">' + Math.round(pct * 100) + '%</text>';
+          }
+          cx += bw;
+        }
+      });
+    });
+    const legY = headerH + domains.length * (barH + 8) + 10;
+    let legX = leftW;
+    [['low', 'Low'], ['some', 'Some concerns'], ['high', 'High'], ['unclear', 'Unclear']].forEach(function (pair) {
+      svg += '<rect x="' + legX + '" y="' + legY + '" width="12" height="12" fill="' + colors[pair[0]] + '" rx="2"/>';
+      svg += '<text x="' + (legX + 16) + '" y="' + (legY + 10) + '" font-size="9" fill="var(--text)">' + pair[1] + '</text>';
+      legX += 90;
+    });
+    svg += '</svg>';
+    return svg;
+  }
+
+  // ============================================================
+  // TF-IDF SCREENING RANKER (browser-based, no API key)
+  // ============================================================
+  const _tfidf = { vocab: null, idf: null, trained: false };
+
+  function _tokenize(text) {
+    if (!text) return [];
+    return text.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(function (w) { return w.length > 2; });
+  }
+
+  function trainScreeningModel() {
+    const included = allReferences.filter(function (r) { return r.decision === 'include'; });
+    const excluded = allReferences.filter(function (r) { return r.decision === 'exclude'; });
+    if (included.length < 3 || excluded.length < 3) {
+      showToast('Need at least 3 included and 3 excluded references to train', 'warning');
+      return false;
+    }
+    const docs = allReferences.filter(function (r) { return r.decision === 'include' || r.decision === 'exclude'; });
+    const N = docs.length;
+    const df = {};
+    docs.forEach(function (r) {
+      const tokens = new Set(_tokenize((r.title || '') + ' ' + (r.abstract || '') + ' ' + (r.keywords || []).join(' ')));
+      tokens.forEach(function (t) { df[t] = (df[t] || 0) + 1; });
+    });
+    const vocab = Object.keys(df).filter(function (t) { return df[t] >= 2 && df[t] <= N * 0.9; });
+    const idf = {};
+    vocab.forEach(function (t) { idf[t] = Math.log((N + 1) / (df[t] + 1)) + 1; });
+    const inclVec = {};
+    const exclVec = {};
+    vocab.forEach(function (t) { inclVec[t] = 0; exclVec[t] = 0; });
+    included.forEach(function (r) {
+      const tokens = _tokenize((r.title || '') + ' ' + (r.abstract || '') + ' ' + (r.keywords || []).join(' '));
+      const tf = {};
+      tokens.forEach(function (t) { tf[t] = (tf[t] || 0) + 1; });
+      vocab.forEach(function (t) { if (tf[t]) inclVec[t] += (tf[t] / tokens.length) * idf[t]; });
+    });
+    excluded.forEach(function (r) {
+      const tokens = _tokenize((r.title || '') + ' ' + (r.abstract || '') + ' ' + (r.keywords || []).join(' '));
+      const tf = {};
+      tokens.forEach(function (t) { tf[t] = (tf[t] || 0) + 1; });
+      vocab.forEach(function (t) { if (tf[t]) exclVec[t] += (tf[t] / tokens.length) * idf[t]; });
+    });
+    vocab.forEach(function (t) {
+      inclVec[t] /= included.length;
+      exclVec[t] /= excluded.length;
+    });
+    _tfidf.vocab = vocab;
+    _tfidf.idf = idf;
+    _tfidf.inclVec = inclVec;
+    _tfidf.exclVec = exclVec;
+    _tfidf.trained = true;
+    showToast('Screening model trained on ' + included.length + ' included + ' + excluded.length + ' excluded references (' + vocab.length + ' features)', 'success');
+    return true;
+  }
+
+  function scoreReference(ref) {
+    if (!_tfidf.trained) return 0.5;
+    const text = (ref.title || '') + ' ' + (ref.abstract || '') + ' ' + (ref.keywords || []).join(' ');
+    const tokens = _tokenize(text);
+    if (tokens.length === 0) return 0.5;
+    const tf = {};
+    tokens.forEach(function (t) { tf[t] = (tf[t] || 0) + 1; });
+    let inclScore = 0, exclScore = 0;
+    _tfidf.vocab.forEach(function (t) {
+      if (tf[t]) {
+        const tfidf = (tf[t] / tokens.length) * (_tfidf.idf[t] || 0);
+        inclScore += tfidf * (_tfidf.inclVec[t] || 0);
+        exclScore += tfidf * (_tfidf.exclVec[t] || 0);
+      }
+    });
+    const total = inclScore + exclScore;
+    return total > 0 ? inclScore / total : 0.5;
+  }
+
+  function rankByRelevance() {
+    if (!_tfidf.trained) {
+      if (!trainScreeningModel()) return;
+    }
+    const pending = allReferences.filter(function (r) { return !r.decision || r.decision === 'maybe'; });
+    if (pending.length === 0) { showToast('No pending references to rank', 'info'); return; }
+    pending.forEach(function (r) { r._relevanceScore = scoreReference(r); });
+    pending.sort(function (a, b) { return b._relevanceScore - a._relevanceScore; });
+    const reordered = [];
+    for (const r of allReferences) {
+      if (r.decision && r.decision !== 'maybe') reordered.push(r);
+    }
+    reordered.push(...pending);
+    allReferences.length = 0;
+    allReferences.push(...reordered);
+    renderReferenceList();
+    showToast('Ranked ' + pending.length + ' references by predicted relevance (top = most likely relevant)', 'success');
+  }
+
+  // ============================================================
+  // DRAG-AND-DROP CSV → INSTANT FOREST PLOT
+  // ============================================================
+  function setupAnalysisDropZone() {
+    const analyzeSection = document.getElementById('phase-analyze');
+    if (!analyzeSection) return;
+    analyzeSection.addEventListener('dragover', function (e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'copy';
+      analyzeSection.style.outline = '2px dashed var(--primary)';
+    });
+    analyzeSection.addEventListener('dragleave', function () {
+      analyzeSection.style.outline = '';
+    });
+    analyzeSection.addEventListener('drop', function (e) {
+      e.preventDefault();
+      analyzeSection.style.outline = '';
+      const file = e.dataTransfer.files[0];
+      if (!file) return;
+      const ext = file.name.split('.').pop().toLowerCase();
+      if (ext !== 'csv' && ext !== 'tsv' && ext !== 'txt') {
+        showToast('Drop a CSV/TSV file to generate a forest plot', 'warning');
+        return;
+      }
+      file.text().then(function (content) {
+        const sep = ext === 'tsv' ? '\t' : ',';
+        const lines = content.split(/\r?\n/).filter(function (l) { return l.trim(); });
+        if (lines.length < 2) { showToast('CSV needs a header row + data', 'warning'); return; }
+        const headers = lines[0].split(sep).map(function (h) { return h.trim().toLowerCase().replace(/['"]/g, ''); });
+        const studyCol = headers.findIndex(function (h) { return /^(study|author|label|name|id)$/i.test(h); });
+        const effectCol = headers.findIndex(function (h) { return /^(effect|estimate|or|rr|hr|md|smd|yi|point)$/i.test(h); });
+        const loCol = headers.findIndex(function (h) { return /^(lower|lo|ci_lo|lci|low|ci\.lb|lb)$/i.test(h); });
+        const hiCol = headers.findIndex(function (h) { return /^(upper|hi|ci_hi|uci|high|ci\.ub|ub)$/i.test(h); });
+        if (effectCol < 0 || loCol < 0 || hiCol < 0) {
+          showToast('CSV must have columns: effect/estimate, lower/lo, upper/hi', 'warning');
+          return;
+        }
+        const typeCol = headers.findIndex(function (h) { return /^(type|measure|effecttype)$/i.test(h); });
+        extractedStudies.length = 0;
+        for (let i = 1; i < lines.length; i++) {
+          const vals = lines[i].split(sep).map(function (v) { return v.trim().replace(/^['"]|['"]$/g, ''); });
+          const eff = parseFloat(vals[effectCol]);
+          const lo = parseFloat(vals[loCol]);
+          const hi = parseFloat(vals[hiCol]);
+          if (!isFinite(eff) || !isFinite(lo) || !isFinite(hi)) continue;
+          const et = typeCol >= 0 ? vals[typeCol] || 'OR' : (eff > 0 && lo > 0 ? 'OR' : 'MD');
+          extractedStudies.push({
+            id: generateId(),
+            label: studyCol >= 0 ? vals[studyCol] : 'Study ' + i,
+            authorYear: studyCol >= 0 ? vals[studyCol] : 'Study ' + i,
+            effectEstimate: eff, lowerCI: lo, upperCI: hi,
+            effectType: et.toUpperCase(), se: null,
+            eventsInt: null, totalInt: null, eventsCtrl: null, totalCtrl: null
+          });
+        }
+        if (extractedStudies.length === 0) { showToast('No valid rows found', 'warning'); return; }
+        showToast('Imported ' + extractedStudies.length + ' studies from CSV — running analysis', 'success');
+        renderStudyTable();
+        if (typeof runAnalysis === 'function') {
+          setTimeout(function () { runAnalysis(); }, 300);
+        }
+      });
+    });
+  }
+
+  // ============================================================
   // FUNNEL PLOT (SVG)
   // ============================================================
   function renderFunnelPlot(result) {
@@ -11754,6 +12118,19 @@ body.dark-mode .input-error { background: #451a1a !important; }
     html += '</div></div>';
 
     html += '</div>';
+
+    // Exportable SVG versions
+    html += '<div style="margin-top:16px;display:flex;gap:16px;flex-wrap:wrap">';
+    html += '<div id="robTrafficLightSVG">' + renderRoBTrafficLight(valid) + '</div>';
+    html += '<div id="robSummaryBarSVG">' + renderRoBSummaryBar(valid) + '</div>';
+    html += '</div>';
+    html += '<div style="margin-top:8px">' +
+      '<button class="btn-outline" onclick="exportPlotSVG(\'robTrafficLightSVG\',\'rob-traffic-light.svg\')">Traffic Light SVG</button> ' +
+      '<button class="btn-outline" onclick="exportPlotPNG(\'robTrafficLightSVG\',\'rob-traffic-light-300dpi.png\',300)">Traffic Light PNG</button> ' +
+      '<button class="btn-outline" onclick="exportPlotSVG(\'robSummaryBarSVG\',\'rob-summary.svg\')">Summary SVG</button> ' +
+      '<button class="btn-outline" onclick="exportPlotPNG(\'robSummaryBarSVG\',\'rob-summary-300dpi.png\',300)">Summary PNG</button>' +
+      '</div>';
+
     el.innerHTML = html;
   }
 
@@ -12951,6 +13328,155 @@ body.dark-mode .input-error { background: #451a1a !important; }
     el.innerHTML = html;
   }
 
+  // --- Rankogram (P-score bar chart SVG) ---
+  function renderNMARankogram(nmaResult) {
+    const el = document.getElementById('nmaRankogramContainer');
+    if (!el || !nmaResult || !nmaResult.pScores) { if (el) el.innerHTML = ''; return; }
+
+    const ranked = nmaResult.treatments
+      .map(t => ({ treat: t, pScore: nmaResult.pScores[t] ?? 0 }))
+      .sort((a, b) => b.pScore - a.pScore);
+
+    const w = 550, h = 320, padL = 120, padR = 30, padT = 30, padB = 50;
+    const barH = Math.min(28, (h - padT - padB) / ranked.length - 4);
+    const plotW = w - padL - padR;
+    const colors = ['#22c55e','#3b82f6','#eab308','#f97316','#ef4444','#8b5cf6','#06b6d4','#ec4899'];
+
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:550px;width:100%">';
+    svg += '<style>.rk-label{font-family:system-ui;font-size:10px;fill:var(--text)}.rk-val{font-family:monospace;font-size:10px;fill:var(--text)}</style>';
+    svg += '<text style="font-family:system-ui;font-size:12px;font-weight:bold;fill:var(--text)" x="' + (w/2) + '" y="18" text-anchor="middle">P-score Ranking (SUCRA equivalent)</text>';
+
+    ranked.forEach((r, i) => {
+      const y = padT + i * (barH + 4);
+      const barW = r.pScore * plotW;
+      const col = colors[i % colors.length];
+      svg += '<text class="rk-label" x="' + (padL - 6) + '" y="' + (y + barH/2 + 4) + '" text-anchor="end">' + escapeHtml(r.treat) + '</text>';
+      svg += '<rect x="' + padL + '" y="' + y + '" width="' + barW.toFixed(1) + '" height="' + barH + '" fill="' + col + '" rx="3" opacity="0.85"/>';
+      svg += '<text class="rk-val" x="' + (padL + barW + 5).toFixed(1) + '" y="' + (y + barH/2 + 4) + '">' + (r.pScore * 100).toFixed(1) + '%</text>';
+    });
+
+    // Axis
+    svg += '<line x1="' + padL + '" y1="' + padT + '" x2="' + padL + '" y2="' + (padT + ranked.length * (barH + 4)) + '" stroke="var(--text)" stroke-width="1" opacity="0.3"/>';
+    for (let tick = 0; tick <= 100; tick += 25) {
+      const x = padL + (tick / 100) * plotW;
+      svg += '<text style="font-size:9px;fill:var(--text-muted)" x="' + x + '" y="' + (padT + ranked.length * (barH + 4) + 14) + '" text-anchor="middle">' + tick + '%</text>';
+    }
+    svg += '</svg>';
+    el.innerHTML = '<h4 style="font-size:0.92rem;margin-bottom:6px">Rankogram</h4>' + svg;
+  }
+
+  // --- NMA Forest Plot (all treatments vs reference) ---
+  function renderNMAForestPlot(nmaResult) {
+    const el = document.getElementById('nmaForestContainer');
+    if (!el || !nmaResult) { if (el) el.innerHTML = ''; return; }
+
+    const isRatio = document.getElementById('nmaEffectType')?.value === 'ratio';
+    const ref = nmaResult.reference;
+    const nonRef = nmaResult.treatments.filter(t => t !== ref);
+    if (nonRef.length === 0) return;
+
+    const confPct = Math.round((nmaResult.confLevel ?? 0.95) * 100);
+    const items = nonRef.map(t => {
+      const key = t + ' vs ' + ref;
+      const entry = nmaResult.leagueTable[key];
+      if (!entry) return null;
+      return {
+        label: t,
+        est: isRatio ? Math.exp(entry.effect) : entry.effect,
+        lo: isRatio ? Math.exp(entry.lo) : entry.lo,
+        hi: isRatio ? Math.exp(entry.hi) : entry.hi,
+        pValue: entry.pValue
+      };
+    }).filter(Boolean);
+
+    const w = 600, rowH = 28, padL = 140, padR = 100, padT = 40, padB = 40;
+    const h = padT + items.length * rowH + padB;
+    const plotW = w - padL - padR;
+    const nullVal = isRatio ? 1 : 0;
+
+    const allVals = items.flatMap(d => [d.lo, d.hi]);
+    let minX = Math.min(...allVals, nullVal * 0.9);
+    let maxX = Math.max(...allVals, nullVal * 1.1);
+    const rangeX = maxX - minX || 1;
+    minX -= rangeX * 0.05;
+    maxX += rangeX * 0.05;
+
+    const toX = v => padL + (v - minX) / (maxX - minX) * plotW;
+
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;width:100%">';
+    svg += '<style>.nf-label{font-family:system-ui;font-size:10px;fill:var(--text)}.nf-est{font-family:monospace;font-size:9px;fill:var(--text)}</style>';
+    svg += '<text style="font-family:system-ui;font-size:12px;font-weight:bold;fill:var(--text)" x="' + (w/2) + '" y="18" text-anchor="middle">NMA Forest: All vs ' + escapeHtml(ref) + '</text>';
+
+    // Null line
+    const nullX = toX(nullVal);
+    svg += '<line x1="' + nullX.toFixed(1) + '" y1="' + padT + '" x2="' + nullX.toFixed(1) + '" y2="' + (padT + items.length * rowH) + '" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4"/>';
+
+    items.forEach((d, i) => {
+      const y = padT + i * rowH + rowH / 2;
+      const xEst = toX(d.est);
+      const xLo = toX(d.lo);
+      const xHi = toX(d.hi);
+      const sig = d.pValue < 0.05;
+
+      svg += '<text class="nf-label" x="' + (padL - 6) + '" y="' + (y + 4) + '" text-anchor="end"' + (sig ? ' font-weight="bold"' : '') + '>' + escapeHtml(d.label) + '</text>';
+      svg += '<line x1="' + xLo.toFixed(1) + '" y1="' + y + '" x2="' + xHi.toFixed(1) + '" y2="' + y + '" stroke="var(--primary)" stroke-width="2"/>';
+      svg += '<polygon points="' + (xEst - 5).toFixed(1) + ',' + y + ' ' + xEst.toFixed(1) + ',' + (y - 5) + ' ' + (xEst + 5).toFixed(1) + ',' + y + ' ' + xEst.toFixed(1) + ',' + (y + 5) + '" fill="' + (sig ? '#22c55e' : 'var(--primary)') + '"/>';
+      svg += '<text class="nf-est" x="' + (w - padR + 6) + '" y="' + (y + 3) + '">' + d.est.toFixed(2) + ' [' + d.lo.toFixed(2) + ', ' + d.hi.toFixed(2) + ']</text>';
+    });
+
+    // X-axis label
+    svg += '<text style="font-size:10px;fill:var(--text-muted)" x="' + (padL + plotW / 2) + '" y="' + (h - 10) + '" text-anchor="middle">' + (isRatio ? 'Effect (ratio scale)' : 'Effect (difference)') + ' — ' + confPct + '% CI</text>';
+    svg += '</svg>';
+    el.innerHTML = '<h4 style="font-size:0.92rem;margin-bottom:6px">NMA Forest Plot</h4>' + svg;
+  }
+
+  // --- Node-splitting consistency table ---
+  function renderNMAConsistencyTable(nmaResult, contrasts) {
+    const el = document.getElementById('nmaConsistencyContainer');
+    if (!el || !nmaResult) { if (el) el.innerHTML = ''; return; }
+
+    // Find all directly compared pairs
+    const directPairs = new Set();
+    contrasts.forEach(c => {
+      const key = [c.treatA, c.treatB].sort().join('|');
+      directPairs.add(key);
+    });
+
+    const results = [];
+    directPairs.forEach(key => {
+      const [a, b] = key.split('|');
+      const ns = computeNodeSplit(contrasts, a, b);
+      if (ns) results.push(ns);
+    });
+
+    if (results.length === 0) {
+      el.innerHTML = '<h4 style="font-size:0.92rem;margin-bottom:6px">Consistency Assessment (Node-Splitting)</h4><p style="font-size:0.82rem;color:var(--text-muted)">Not enough data for consistency assessment.</p>';
+      return;
+    }
+
+    let html = '<h4 style="font-size:0.92rem;margin-bottom:8px">Consistency Assessment (Node-Splitting)</h4>';
+    html += '<div style="overflow-x:auto"><table style="font-size:0.78rem;border-collapse:collapse">';
+    html += '<thead><tr><th style="padding:4px 8px;border-bottom:2px solid var(--border)">Comparison</th><th style="padding:4px 8px;border-bottom:2px solid var(--border)">k</th>';
+    html += '<th style="padding:4px 8px;border-bottom:2px solid var(--border)">Direct</th><th style="padding:4px 8px;border-bottom:2px solid var(--border)">Indirect</th>';
+    html += '<th style="padding:4px 8px;border-bottom:2px solid var(--border)">Difference</th><th style="padding:4px 8px;border-bottom:2px solid var(--border)">p-value</th></tr></thead><tbody>';
+
+    results.forEach(r => {
+      const sig = r.pValue < 0.05;
+      html += '<tr' + (sig ? ' style="background:rgba(239,68,68,0.1)"' : '') + '>';
+      html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border)">' + escapeHtml(r.compA) + ' vs ' + escapeHtml(r.compB) + '</td>';
+      html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border);text-align:center">' + r.directK + '</td>';
+      html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border);font-family:monospace">' + r.directEst.toFixed(3) + '</td>';
+      html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border);font-family:monospace">' + r.indirectEst.toFixed(3) + '</td>';
+      html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border);font-family:monospace">' + r.diff.toFixed(3) + '</td>';
+      html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border);font-family:monospace;' + (sig ? 'color:#ef4444;font-weight:bold' : '') + '">' +
+        (r.pValue < 0.001 ? '<0.001' : r.pValue.toFixed(3)) + '</td>';
+      html += '</tr>';
+    });
+    html += '</tbody></table></div>';
+    html += '<p style="font-size:0.72rem;color:var(--text-muted);margin-top:6px">Node-splitting: tests agreement between direct and indirect evidence. p<0.05 suggests inconsistency.</p>';
+    el.innerHTML = html;
+  }
+
   // NMA study storage and UI
   let nmaContrasts = [];
 
@@ -13016,6 +13542,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
     window._lastNMAResult = nma;
     renderNetworkGraph(nma);
     renderNMATabLeagueTable(nma);
+    renderNMARankogram(nma);
+    renderNMAForestPlot(nma);
+    renderNMAConsistencyTable(nma, valid);
     showToast('NMA complete: ' + nma.treatments.length + ' treatments, ' + nma.nContrasts + ' contrasts', 'success');
   }
 
@@ -13226,6 +13755,195 @@ body.dark-mode .input-error { background: #451a1a !important; }
     return { model: modelType, beta, seBeta, curvePoints, nonlinPvalue, knots };
   }
 
+  // --- Emax Model: logRR = emax * dose / (ed50 + dose) ---
+  // Nelder-Mead optimization for non-linear dose-response
+  function fitEmaxDoseResponse(allNonRef, confLevel) {
+    confLevel = confLevel ?? 0.95;
+    const alpha = 1 - confLevel;
+    const zCrit = normalQuantile(1 - alpha / 2);
+    if (!allNonRef || allNonRef.length < 3) return null;
+
+    const doses = allNonRef.map(d => d.dose);
+    const ys = allNonRef.map(d => d.logRR);
+    const ws = allNonRef.map(d => d.se > 0 ? 1 / (d.se * d.se) : 0);
+    const minD = Math.min(...doses), maxD = Math.max(...doses);
+
+    // Objective: weighted sum of squares
+    function sse(params) {
+      const [emax, ed50] = params;
+      if (ed50 <= 0) return 1e12;
+      let s = 0;
+      for (let i = 0; i < doses.length; i++) {
+        const pred = emax * doses[i] / (ed50 + doses[i]);
+        s += ws[i] * (ys[i] - pred) ** 2;
+      }
+      return s;
+    }
+
+    // Grid search initialization
+    let bestSSE = Infinity, bestP = [0, 1];
+    const emaxRange = Math.max(...ys.map(Math.abs)) * 3;
+    for (let gi = 0; gi < 8; gi++) {
+      for (let gj = 1; gj <= 8; gj++) {
+        const em = -emaxRange + (2 * emaxRange * gi / 7);
+        const ed = (maxD * gj / 8) || 1;
+        const val = sse([em, ed]);
+        if (val < bestSSE) { bestSSE = val; bestP = [em, ed]; }
+      }
+    }
+
+    // Nelder-Mead simplex (2 params)
+    let simplex = [bestP, [bestP[0] * 1.1 + 0.01, bestP[1]], [bestP[0], bestP[1] * 1.1 + 0.01]];
+    let fVals = simplex.map(sse);
+    for (let iter = 0; iter < 500; iter++) {
+      const order = [0, 1, 2].sort((a, b) => fVals[a] - fVals[b]);
+      simplex = order.map(i => simplex[i]);
+      fVals = order.map(i => fVals[i]);
+      if (Math.abs(fVals[2] - fVals[0]) < 1e-10) break;
+
+      const centroid = [0, 1].map(d => (simplex[0][d] + simplex[1][d]) / 2);
+      const reflected = centroid.map((c, d) => 2 * c - simplex[2][d]);
+      const fReflected = sse(reflected);
+
+      if (fReflected < fVals[0]) {
+        const expanded = centroid.map((c, d) => c + 2 * (reflected[d] - c));
+        const fExpanded = sse(expanded);
+        simplex[2] = fExpanded < fReflected ? expanded : reflected;
+        fVals[2] = Math.min(fExpanded, fReflected);
+      } else if (fReflected < fVals[1]) {
+        simplex[2] = reflected; fVals[2] = fReflected;
+      } else {
+        const contracted = centroid.map((c, d) => c + 0.5 * (simplex[2][d] - c));
+        const fContracted = sse(contracted);
+        if (fContracted < fVals[2]) {
+          simplex[2] = contracted; fVals[2] = fContracted;
+        } else {
+          for (let i = 1; i < 3; i++) {
+            simplex[i] = simplex[i].map((v, d) => 0.5 * (v + simplex[0][d]));
+            fVals[i] = sse(simplex[i]);
+          }
+        }
+      }
+    }
+
+    const [emax, ed50] = simplex[0];
+    const finalSSE = fVals[0];
+    const n = allNonRef.length;
+    const p = 2; // number of parameters
+    const aic = n * Math.log(finalSSE / n) + 2 * p;
+
+    // Generate curve
+    const nPoints = 50;
+    const curvePoints = [];
+    for (let i = 0; i <= nPoints; i++) {
+      const dose = minD + (maxD - minD) * i / nPoints;
+      const logRR = emax * dose / (ed50 + dose);
+      // Approximate SE via delta method (simplified)
+      const sePred = Math.sqrt(finalSSE / (n - p)) * Math.abs(dose / (ed50 + dose));
+      curvePoints.push({
+        dose, rr: Math.exp(logRR),
+        rrLo: Math.exp(logRR - zCrit * sePred),
+        rrHi: Math.exp(logRR + zCrit * sePred)
+      });
+    }
+
+    return { model: 'emax', beta: [emax, ed50], seBeta: [0, 0], curvePoints, nonlinPvalue: null, aic, sse: finalSSE, params: { emax, ed50 } };
+  }
+
+  // --- Hill/Sigmoid Emax Model: logRR = emax * dose^h / (ed50^h + dose^h) ---
+  function fitHillDoseResponse(allNonRef, confLevel) {
+    confLevel = confLevel ?? 0.95;
+    const alpha = 1 - confLevel;
+    const zCrit = normalQuantile(1 - alpha / 2);
+    if (!allNonRef || allNonRef.length < 4) return null;
+
+    const doses = allNonRef.map(d => d.dose);
+    const ys = allNonRef.map(d => d.logRR);
+    const ws = allNonRef.map(d => d.se > 0 ? 1 / (d.se * d.se) : 0);
+    const minD = Math.min(...doses), maxD = Math.max(...doses);
+
+    function sse(params) {
+      const [emax, ed50, h] = params;
+      if (ed50 <= 0 || h <= 0) return 1e12;
+      let s = 0;
+      for (let i = 0; i < doses.length; i++) {
+        const dh = Math.pow(Math.max(doses[i], 1e-10), h);
+        const ed50h = Math.pow(ed50, h);
+        const pred = emax * dh / (ed50h + dh);
+        s += ws[i] * (ys[i] - pred) ** 2;
+      }
+      return s;
+    }
+
+    // Random search + refinement (3 params)
+    let bestSSE = Infinity, bestP = [0, 1, 1];
+    const emaxRange = Math.max(...ys.map(Math.abs)) * 3;
+    for (let trial = 0; trial < 300; trial++) {
+      const em = (Math.random() * 2 - 1) * emaxRange;
+      const ed = Math.exp(Math.log(minD || 0.01) + Math.random() * (Math.log(maxD || 1) - Math.log(minD || 0.01)));
+      const h = 0.3 + Math.random() * 4.7;
+      const val = sse([em, ed, h]);
+      if (val < bestSSE) { bestSSE = val; bestP = [em, ed, h]; }
+    }
+
+    // Simplex refinement
+    let simplex = [bestP, [bestP[0]*1.05+0.01, bestP[1], bestP[2]], [bestP[0], bestP[1]*1.05+0.01, bestP[2]], [bestP[0], bestP[1], bestP[2]*1.05+0.01]];
+    let fVals = simplex.map(sse);
+    for (let iter = 0; iter < 500; iter++) {
+      const order = [0, 1, 2, 3].sort((a, b) => fVals[a] - fVals[b]);
+      simplex = order.map(i => simplex[i]);
+      fVals = order.map(i => fVals[i]);
+      if (Math.abs(fVals[3] - fVals[0]) < 1e-10) break;
+
+      const nd = 3;
+      const centroid = Array(nd).fill(0);
+      for (let i = 0; i < nd; i++) for (let d = 0; d < nd; d++) centroid[d] += simplex[i][d] / nd;
+
+      const reflected = centroid.map((c, d) => 2 * c - simplex[nd][d]);
+      const fR = sse(reflected);
+      if (fR < fVals[0]) {
+        const expanded = centroid.map((c, d) => c + 2 * (reflected[d] - c));
+        simplex[nd] = sse(expanded) < fR ? expanded : reflected;
+        fVals[nd] = sse(simplex[nd]);
+      } else if (fR < fVals[nd - 1]) {
+        simplex[nd] = reflected; fVals[nd] = fR;
+      } else {
+        const contracted = centroid.map((c, d) => c + 0.5 * (simplex[nd][d] - c));
+        if (sse(contracted) < fVals[nd]) {
+          simplex[nd] = contracted; fVals[nd] = sse(contracted);
+        } else {
+          for (let i = 1; i <= nd; i++) {
+            simplex[i] = simplex[i].map((v, d) => 0.5 * (v + simplex[0][d]));
+            fVals[i] = sse(simplex[i]);
+          }
+        }
+      }
+    }
+
+    const [emax, ed50, h] = simplex[0];
+    const finalSSE = fVals[0];
+    const n = allNonRef.length;
+    const p = 3;
+    const aic = n * Math.log(finalSSE / n) + 2 * p;
+
+    const nPoints = 50;
+    const curvePoints = [];
+    for (let i = 0; i <= nPoints; i++) {
+      const dose = minD + (maxD - minD) * i / nPoints;
+      const dh = Math.pow(Math.max(dose, 1e-10), h);
+      const ed50h = Math.pow(ed50, h);
+      const logRR = emax * dh / (ed50h + dh);
+      const sePred = Math.sqrt(finalSSE / (n - p)) * Math.abs(dh / (ed50h + dh));
+      curvePoints.push({
+        dose, rr: Math.exp(logRR),
+        rrLo: Math.exp(logRR - zCrit * sePred),
+        rrHi: Math.exp(logRR + zCrit * sePred)
+      });
+    }
+
+    return { model: 'hill', beta: [emax, ed50, h], seBeta: [0, 0, 0], curvePoints, nonlinPvalue: null, aic, sse: finalSSE, params: { emax, ed50, hill: h } };
+  }
+
   // --- Dose-Response Plot ---
   function renderDoseResponsePlot(pooledResult, studyCurves) {
     const el = document.getElementById('dosePlotContainer');
@@ -13376,7 +14094,39 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const studyCurves = doseStudies.map(s => computeDoseResponsePerStudy(s)).filter(c => c !== null);
     if (studyCurves.length === 0) { showToast('No valid dose-response data', 'warning'); return; }
 
-    const pooled = poolDoseResponse(studyCurves, modelType, null, confLevel);
+    const allNonRef = studyCurves.flatMap(sc => sc.nonRef);
+    let pooled = null;
+    let allModels = null;
+
+    if (modelType === 'emax') {
+      pooled = fitEmaxDoseResponse(allNonRef, confLevel);
+    } else if (modelType === 'hill') {
+      pooled = fitHillDoseResponse(allNonRef, confLevel);
+    } else if (modelType === 'auto') {
+      // Fit all models and select by AIC
+      const candidates = [];
+      const lin = poolDoseResponse(studyCurves, 'linear', null, confLevel);
+      if (lin) { const n = allNonRef.length; lin.aic = n * Math.log((lin.sse ?? 1) / n) + 2; candidates.push(lin); }
+      const rcs3 = poolDoseResponse(studyCurves, 'rcs3', null, confLevel);
+      if (rcs3) { const n = allNonRef.length, p = rcs3.beta.length; rcs3.aic = n * Math.log((rcs3.sse ?? 1) / n) + 2 * p; candidates.push(rcs3); }
+      const emx = fitEmaxDoseResponse(allNonRef, confLevel);
+      if (emx) candidates.push(emx);
+      const hll = fitHillDoseResponse(allNonRef, confLevel);
+      if (hll) candidates.push(hll);
+
+      if (candidates.length === 0) { showToast('All models failed', 'danger'); return; }
+      // Compute AIC for linear/RCS if not already done
+      if (lin && lin.aic == null) {
+        let s = 0; allNonRef.forEach(d => { const w = d.se > 0 ? 1 / (d.se * d.se) : 0; const pred = lin.beta[0] * d.dose; s += w * (d.logRR - pred) ** 2; });
+        lin.sse = s; lin.aic = allNonRef.length * Math.log(s / allNonRef.length) + 2;
+      }
+      candidates.sort((a, b) => (a.aic ?? Infinity) - (b.aic ?? Infinity));
+      pooled = candidates[0];
+      allModels = candidates;
+    } else {
+      pooled = poolDoseResponse(studyCurves, modelType, null, confLevel);
+    }
+
     if (!pooled) { showToast('Dose-response pooling failed', 'danger'); return; }
 
     renderDoseResponsePlot(pooled, studyCurves);
@@ -13385,24 +14135,57 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const summEl = document.getElementById('doseSummaryContainer');
     if (summEl) {
       let html = '<h4 style="font-size:0.92rem;margin-bottom:8px">Dose-Response Summary</h4>';
-      html += '<p style="font-size:0.85rem">Model: <strong>' + pooled.model + '</strong>, k = ' + studyCurves.length + ' studies</p>';
-      html += '<table style="font-size:0.82rem;border-collapse:collapse;margin-top:8px">';
-      html += '<tr><th style="padding:3px 8px;border-bottom:2px solid var(--border)">Coefficient</th><th style="padding:3px 8px;border-bottom:2px solid var(--border)">Estimate</th><th style="padding:3px 8px;border-bottom:2px solid var(--border)">SE</th></tr>';
-      pooled.beta.forEach((b, i) => {
-        html += '<tr><td style="padding:3px 8px;border-bottom:1px solid var(--border)">\u03B2<sub>' + (i + 1) + '</sub></td>';
-        html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border);font-family:monospace">' + b.toFixed(4) + '</td>';
-        html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border);font-family:monospace">' + pooled.seBeta[i].toFixed(4) + '</td></tr>';
-      });
-      html += '</table>';
+      const modelLabels = { linear: 'Linear', rcs3: 'RCS (3 knots)', rcs4: 'RCS (4 knots)', emax: 'Emax', hill: 'Hill/Sigmoid' };
+      html += '<p style="font-size:0.85rem">Model: <strong>' + (modelLabels[pooled.model] ?? pooled.model) + '</strong>, k = ' + studyCurves.length + ' studies</p>';
+
+      if (pooled.params) {
+        html += '<table style="font-size:0.82rem;border-collapse:collapse;margin-top:8px">';
+        if (pooled.model === 'emax') {
+          html += '<tr><th style="padding:3px 8px;border-bottom:2px solid var(--border)">Parameter</th><th style="padding:3px 8px;border-bottom:2px solid var(--border)">Value</th></tr>';
+          html += '<tr><td style="padding:3px 8px;border-bottom:1px solid var(--border)">E<sub>max</sub></td><td style="padding:3px 8px;font-family:monospace">' + pooled.params.emax.toFixed(4) + '</td></tr>';
+          html += '<tr><td style="padding:3px 8px;border-bottom:1px solid var(--border)">ED<sub>50</sub></td><td style="padding:3px 8px;font-family:monospace">' + pooled.params.ed50.toFixed(4) + '</td></tr>';
+        } else if (pooled.model === 'hill') {
+          html += '<tr><th style="padding:3px 8px;border-bottom:2px solid var(--border)">Parameter</th><th style="padding:3px 8px;border-bottom:2px solid var(--border)">Value</th></tr>';
+          html += '<tr><td style="padding:3px 8px;border-bottom:1px solid var(--border)">E<sub>max</sub></td><td style="padding:3px 8px;font-family:monospace">' + pooled.params.emax.toFixed(4) + '</td></tr>';
+          html += '<tr><td style="padding:3px 8px;border-bottom:1px solid var(--border)">ED<sub>50</sub></td><td style="padding:3px 8px;font-family:monospace">' + pooled.params.ed50.toFixed(4) + '</td></tr>';
+          html += '<tr><td style="padding:3px 8px;border-bottom:1px solid var(--border)">Hill coefficient (h)</td><td style="padding:3px 8px;font-family:monospace">' + pooled.params.hill.toFixed(3) + '</td></tr>';
+        }
+        html += '</table>';
+      } else {
+        html += '<table style="font-size:0.82rem;border-collapse:collapse;margin-top:8px">';
+        html += '<tr><th style="padding:3px 8px;border-bottom:2px solid var(--border)">Coefficient</th><th style="padding:3px 8px;border-bottom:2px solid var(--border)">Estimate</th><th style="padding:3px 8px;border-bottom:2px solid var(--border)">SE</th></tr>';
+        pooled.beta.forEach((b, i) => {
+          html += '<tr><td style="padding:3px 8px;border-bottom:1px solid var(--border)">\u03B2<sub>' + (i + 1) + '</sub></td>';
+          html += '<td style="padding:3px 8px;font-family:monospace">' + b.toFixed(4) + '</td>';
+          html += '<td style="padding:3px 8px;font-family:monospace">' + pooled.seBeta[i].toFixed(4) + '</td></tr>';
+        });
+        html += '</table>';
+      }
+
       if (pooled.nonlinPvalue != null) {
         html += '<p style="font-size:0.82rem;margin-top:8px">Non-linearity test: p = ' + (pooled.nonlinPvalue < 0.001 ? '<0.001' : pooled.nonlinPvalue.toFixed(3)) +
           (pooled.nonlinPvalue < 0.05 ? ' <span style="color:#ef4444">(significant non-linearity)</span>' : ' <span style="color:#22c55e">(linear model adequate)</span>') + '</p>';
       }
+
+      // Model comparison table (auto mode)
+      if (allModels && allModels.length > 1) {
+        html += '<h4 style="font-size:0.88rem;margin-top:14px;margin-bottom:6px">Model Comparison (AIC)</h4>';
+        html += '<table style="font-size:0.78rem;border-collapse:collapse">';
+        html += '<tr><th style="padding:3px 8px;border-bottom:2px solid var(--border)">Model</th><th style="padding:3px 8px;border-bottom:2px solid var(--border)">AIC</th><th style="padding:3px 8px;border-bottom:2px solid var(--border)">Selected</th></tr>';
+        allModels.forEach((m, i) => {
+          const name = modelLabels[m.model] ?? m.model;
+          html += '<tr' + (i === 0 ? ' style="font-weight:bold"' : '') + '><td style="padding:3px 8px;border-bottom:1px solid var(--border)">' + name + '</td>';
+          html += '<td style="padding:3px 8px;font-family:monospace;border-bottom:1px solid var(--border)">' + (m.aic != null ? m.aic.toFixed(1) : 'N/A') + '</td>';
+          html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border)">' + (i === 0 ? '\u2713' : '') + '</td></tr>';
+        });
+        html += '</table>';
+      }
+
       html += '<p style="font-size:0.72rem;color:var(--text-muted);margin-top:6px">Ref: Greenland & Longnecker, Am J Epidemiol 1992. Berlin et al., Stat Med 2014.</p>';
       summEl.innerHTML = html;
     }
 
-    showToast('Dose-response analysis complete: ' + pooled.model + ' model', 'success');
+    showToast('Dose-response analysis complete: ' + (pooled.model) + ' model', 'success');
   }
 
   function exportDTACSV() {
@@ -13414,6 +14197,391 @@ body.dark-mode .input-error { background: #451a1a !important; }
       return [csvSafeCell(s.authorYear || ''), s.tp ?? '', s.fp ?? '', s.fn ?? '', s.tn ?? '', sens, spec, '"' + (s.notes || '').replace(/"/g, '""') + '"'].join(',');
     });
     downloadFile(header + '\n' + rows.join('\n'), 'dta-studies.csv', 'text/csv');
+  }
+
+  // ============================================================
+  // ICER / QALY CALCULATOR
+  // ============================================================
+  let icerStrategies = [];
+
+  function addICERStrategyRow(data) {
+    const s = Object.assign({
+      id: 'icer-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+      name: '', cost: null, qaly: null, sdCost: null, sdQaly: null, notes: ''
+    }, data || {});
+    icerStrategies.push(s);
+    renderICERTable();
+    return s;
+  }
+
+  function renderICERTable() {
+    const body = document.getElementById('icerExtractBody');
+    if (!body) return;
+    if (icerStrategies.length === 0) {
+      body.innerHTML = '<tr><td colspan="7" style="padding:16px;text-align:center;color:var(--text-muted)">No strategies. Click <strong>Add Strategy</strong> to enter cost-effectiveness data.</td></tr>';
+      return;
+    }
+    body.innerHTML = icerStrategies.map(s =>
+      '<tr data-icer-id="' + s.id + '">' +
+        '<td><input type="text" value="' + escapeHtml(s.name || '') + '" data-field="name" placeholder="e.g. Drug A" style="width:120px"></td>' +
+        '<td><input type="number" step="any" value="' + (s.cost ?? '') + '" data-field="cost" style="width:90px"></td>' +
+        '<td><input type="number" step="any" value="' + (s.qaly ?? '') + '" data-field="qaly" style="width:80px"></td>' +
+        '<td><input type="number" step="any" min="0" value="' + (s.sdCost ?? '') + '" data-field="sdCost" style="width:80px"></td>' +
+        '<td><input type="number" step="any" min="0" value="' + (s.sdQaly ?? '') + '" data-field="sdQaly" style="width:70px"></td>' +
+        '<td><input type="text" value="' + escapeHtml(s.notes || '') + '" data-field="notes" style="width:80px"></td>' +
+        '<td><button class="btn-sm btn-danger" onclick="deleteICERStrategy(\'' + s.id + '\')">X</button></td>' +
+      '</tr>'
+    ).join('');
+    body.querySelectorAll('input').forEach(inp => {
+      inp.addEventListener('change', function() {
+        const id = this.closest('tr')?.dataset.icerId;
+        const field = this.dataset.field;
+        const row = icerStrategies.find(s => s.id === id);
+        if (!row || !field) return;
+        row[field] = ['cost', 'qaly', 'sdCost', 'sdQaly'].includes(field) ? (this.value === '' ? null : parseFloat(this.value)) : this.value;
+      });
+    });
+  }
+
+  function deleteICERStrategy(id) {
+    icerStrategies = icerStrategies.filter(s => s.id !== id);
+    renderICERTable();
+  }
+
+  function exportICERCSV() {
+    if (icerStrategies.length === 0) { showToast('No strategies', 'warning'); return; }
+    const header = 'Strategy,Cost,QALYs,SD_Cost,SD_QALYs,Notes';
+    const rows = icerStrategies.map(s => [csvSafeCell(s.name), s.cost ?? '', s.qaly ?? '', s.sdCost ?? '', s.sdQaly ?? '', '"' + (s.notes || '').replace(/"/g, '""') + '"'].join(','));
+    downloadFile(header + '\n' + rows.join('\n'), 'icer-strategies.csv', 'text/csv');
+  }
+
+  function runICERAnalysis() {
+    const wtp = parseFloat(document.getElementById('icerWTP')?.value) || 50000;
+    const currency = document.getElementById('icerCurrency')?.value || '$';
+    const valid = icerStrategies.filter(s => s.name && s.cost != null && s.qaly != null);
+    if (valid.length < 2) { showToast('Need at least 2 strategies with cost and QALYs', 'warning'); return; }
+
+    // Sort by cost (comparator is cheapest)
+    const sorted = [...valid].sort((a, b) => a.cost - b.cost);
+    const comparator = sorted[0];
+
+    // Compute ICERs and NMB for each strategy vs comparator
+    const results = sorted.map((s, i) => {
+      const incCost = s.cost - comparator.cost;
+      const incQaly = s.qaly - comparator.qaly;
+      const icer = Math.abs(incQaly) < 1e-10 ? (incCost >= 0 ? Infinity : -Infinity) : incCost / incQaly;
+      const nmb = incQaly * wtp - incCost;
+      return {
+        name: s.name, cost: s.cost, qaly: s.qaly,
+        incCost, incQaly, icer, nmb,
+        costEffective: nmb >= 0,
+        dominated: incCost > 0 && incQaly <= 0,
+        dominant: incCost <= 0 && incQaly >= 0 && i > 0
+      };
+    });
+
+    // Render summary
+    const el = document.getElementById('icerSummaryContainer');
+    if (el) {
+      let html = '<h4 style="font-size:0.92rem;margin-bottom:8px">Cost-Effectiveness Results (vs ' + escapeHtml(comparator.name) + ')</h4>';
+      html += '<div style="overflow-x:auto"><table style="font-size:0.78rem;border-collapse:collapse">';
+      html += '<thead><tr><th style="padding:4px 8px;border-bottom:2px solid var(--border)">Strategy</th>';
+      html += '<th style="padding:4px 8px;border-bottom:2px solid var(--border)">Cost</th>';
+      html += '<th style="padding:4px 8px;border-bottom:2px solid var(--border)">QALYs</th>';
+      html += '<th style="padding:4px 8px;border-bottom:2px solid var(--border)">\u0394 Cost</th>';
+      html += '<th style="padding:4px 8px;border-bottom:2px solid var(--border)">\u0394 QALY</th>';
+      html += '<th style="padding:4px 8px;border-bottom:2px solid var(--border)">ICER</th>';
+      html += '<th style="padding:4px 8px;border-bottom:2px solid var(--border)">NMB (WTP=' + currency + wtp.toLocaleString() + ')</th>';
+      html += '<th style="padding:4px 8px;border-bottom:2px solid var(--border)">Decision</th></tr></thead><tbody>';
+
+      results.forEach(r => {
+        const dec = r.dominated ? '<span style="color:#ef4444">Dominated</span>' :
+          r.dominant ? '<span style="color:#22c55e;font-weight:bold">Dominant</span>' :
+          r.costEffective ? '<span style="color:#22c55e">Cost-effective</span>' : '<span style="color:#ef4444">Not CE</span>';
+        const icerStr = !isFinite(r.icer) ? (r.incCost > 0 ? '\u221E' : '\u2014') : currency + Math.round(r.icer).toLocaleString();
+        html += '<tr' + (r.costEffective ? ' style="background:rgba(34,197,94,0.05)"' : '') + '>';
+        html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border);font-weight:bold">' + escapeHtml(r.name) + '</td>';
+        html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border);font-family:monospace">' + currency + r.cost.toLocaleString() + '</td>';
+        html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border);font-family:monospace">' + r.qaly.toFixed(3) + '</td>';
+        html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border);font-family:monospace">' + (r.incCost >= 0 ? '+' : '') + currency + Math.round(r.incCost).toLocaleString() + '</td>';
+        html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border);font-family:monospace">' + (r.incQaly >= 0 ? '+' : '') + r.incQaly.toFixed(3) + '</td>';
+        html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border);font-family:monospace">' + icerStr + '</td>';
+        html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border);font-family:monospace">' + currency + Math.round(r.nmb).toLocaleString() + '</td>';
+        html += '<td style="padding:3px 8px;border-bottom:1px solid var(--border)">' + dec + '</td>';
+        html += '</tr>';
+      });
+      html += '</tbody></table></div>';
+      html += '<p style="font-size:0.72rem;color:var(--text-muted);margin-top:6px">ICER = incremental cost / incremental QALY. NMB = \u0394QALY \u00D7 WTP \u2212 \u0394Cost. Dominant = cheaper and more effective.</p>';
+      el.innerHTML = html;
+    }
+
+    // CE Plane (scatter of incremental cost vs incremental QALY)
+    renderCEPlane(results, comparator, currency, wtp);
+    showToast('ICER analysis: ' + valid.length + ' strategies evaluated', 'success');
+  }
+
+  function renderCEPlane(results, comparator, currency, wtp) {
+    const el = document.getElementById('icerCEPlaneContainer');
+    if (!el) return;
+
+    const nonComp = results.filter(r => r.name !== comparator.name);
+    if (nonComp.length === 0) { el.innerHTML = ''; return; }
+
+    const w = 500, h = 400, pad = 60;
+    const maxAbsC = Math.max(...nonComp.map(r => Math.abs(r.incCost)), 1);
+    const maxAbsQ = Math.max(...nonComp.map(r => Math.abs(r.incQaly)), 0.01);
+    const rangeC = maxAbsC * 1.3, rangeQ = maxAbsQ * 1.3;
+
+    const toX = q => pad + (q + rangeQ) / (2 * rangeQ) * (w - 2 * pad);
+    const toY = c => pad + (rangeC - c) / (2 * rangeC) * (h - 2 * pad);
+
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;width:100%">';
+    svg += '<style>.ce-label{font-family:system-ui;font-size:10px;fill:var(--text)}</style>';
+    svg += '<text style="font-family:system-ui;font-size:12px;font-weight:bold;fill:var(--text)" x="' + (w/2) + '" y="18" text-anchor="middle">Cost-Effectiveness Plane</text>';
+
+    // Quadrant labels
+    const cx = toX(0), cy = toY(0);
+    svg += '<line x1="' + pad + '" y1="' + cy.toFixed(1) + '" x2="' + (w-pad) + '" y2="' + cy.toFixed(1) + '" stroke="var(--text)" stroke-width="0.5" opacity="0.3"/>';
+    svg += '<line x1="' + cx.toFixed(1) + '" y1="' + pad + '" x2="' + cx.toFixed(1) + '" y2="' + (h-pad) + '" stroke="var(--text)" stroke-width="0.5" opacity="0.3"/>';
+
+    // WTP line
+    const wtpX1 = toX(-rangeQ), wtpY1 = toY(-rangeQ * wtp);
+    const wtpX2 = toX(rangeQ), wtpY2 = toY(rangeQ * wtp);
+    svg += '<line x1="' + wtpX1.toFixed(1) + '" y1="' + Math.max(pad, Math.min(h-pad, wtpY1)).toFixed(1) + '" x2="' + wtpX2.toFixed(1) + '" y2="' + Math.max(pad, Math.min(h-pad, wtpY2)).toFixed(1) + '" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6" opacity="0.6"/>';
+
+    // Quadrant background shading
+    svg += '<rect x="' + cx.toFixed(1) + '" y="' + pad + '" width="' + (w - pad - cx).toFixed(1) + '" height="' + (cy - pad).toFixed(1) + '" fill="rgba(234,179,8,0.05)"/>'; // NE
+    svg += '<rect x="' + pad + '" y="' + cy.toFixed(1) + '" width="' + (cx - pad).toFixed(1) + '" height="' + (h - pad - cy).toFixed(1) + '" fill="rgba(234,179,8,0.05)"/>'; // SW
+    svg += '<rect x="' + cx.toFixed(1) + '" y="' + cy.toFixed(1) + '" width="' + (w - pad - cx).toFixed(1) + '" height="' + (h - pad - cy).toFixed(1) + '" fill="rgba(34,197,94,0.08)"/>'; // SE (dominant)
+    svg += '<rect x="' + pad + '" y="' + pad + '" width="' + (cx - pad).toFixed(1) + '" height="' + (cy - pad).toFixed(1) + '" fill="rgba(239,68,68,0.05)"/>'; // NW (dominated)
+
+    // Data points
+    const colors = ['#3b82f6','#22c55e','#eab308','#ef4444','#8b5cf6','#06b6d4','#ec4899'];
+    nonComp.forEach((r, i) => {
+      const x = toX(r.incQaly), y = toY(r.incCost);
+      svg += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="6" fill="' + colors[i % colors.length] + '" stroke="#fff" stroke-width="1.5">';
+      svg += '<title>' + escapeHtml(r.name) + ': \u0394QALY=' + r.incQaly.toFixed(3) + ', \u0394Cost=' + currency + Math.round(r.incCost).toLocaleString() + '</title></circle>';
+      svg += '<text class="ce-label" x="' + (x + 10).toFixed(1) + '" y="' + (y + 4).toFixed(1) + '">' + escapeHtml(r.name) + '</text>';
+    });
+
+    // Axis labels
+    svg += '<text class="ce-label" x="' + (w/2) + '" y="' + (h - 10) + '" text-anchor="middle">Incremental QALYs</text>';
+    svg += '<text class="ce-label" x="15" y="' + (h/2) + '" text-anchor="middle" transform="rotate(-90,15,' + (h/2) + ')">Incremental Cost</text>';
+    svg += '</svg>';
+    el.innerHTML = '<h4 style="font-size:0.92rem;margin-bottom:6px">CE Plane</h4>' + svg;
+  }
+
+  // --- PSA (Probabilistic Sensitivity Analysis) ---
+  function runPSAAnalysis() {
+    const wtp = parseFloat(document.getElementById('icerWTP')?.value) || 50000;
+    const currency = document.getElementById('icerCurrency')?.value || '$';
+    const valid = icerStrategies.filter(s => s.name && s.cost != null && s.qaly != null);
+    if (valid.length < 2) { showToast('Need 2+ strategies', 'warning'); return; }
+
+    const sorted = [...valid].sort((a, b) => a.cost - b.cost);
+    const comp = sorted[0];
+    const intervention = sorted.length > 1 ? sorted[1] : sorted[0];
+
+    // Default SDs: 20% of mean if not specified
+    const sdC_comp = comp.sdCost ?? Math.abs(comp.cost * 0.2);
+    const sdQ_comp = comp.sdQaly ?? Math.abs(comp.qaly * 0.1);
+    const sdC_int = intervention.sdCost ?? Math.abs(intervention.cost * 0.2);
+    const sdQ_int = intervention.sdQaly ?? Math.abs(intervention.qaly * 0.1);
+
+    const nIter = 1000;
+    const incCosts = [], incQalys = [];
+
+    // Seeded PRNG for reproducibility (Box-Muller)
+    let _s = 42;
+    function rand() { _s = (_s * 1103515245 + 12345) & 0x7fffffff; return _s / 0x7fffffff; }
+    function randn() { const u1 = rand() || 1e-10, u2 = rand(); return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2); }
+
+    for (let i = 0; i < nIter; i++) {
+      const cComp = comp.cost + sdC_comp * randn();
+      const qComp = comp.qaly + sdQ_comp * randn();
+      const cInt = intervention.cost + sdC_int * randn();
+      const qInt = intervention.qaly + sdQ_int * randn();
+      incCosts.push(cInt - cComp);
+      incQalys.push(qInt - qComp);
+    }
+
+    // CE Plane scatter (PSA cloud)
+    renderPSACEPlane(incCosts, incQalys, currency, wtp, intervention.name, comp.name);
+
+    // CEAC
+    renderCEAC(incCosts, incQalys, currency, wtp, intervention.name);
+
+    // Tornado (one-way: vary each parameter ±20%)
+    renderTornado(sorted, wtp, currency);
+
+    showToast('PSA complete: ' + nIter + ' iterations, ' + intervention.name + ' vs ' + comp.name, 'success');
+  }
+
+  function renderPSACEPlane(incCosts, incQalys, currency, wtp, intName, compName) {
+    const el = document.getElementById('icerCEPlaneContainer');
+    if (!el) return;
+
+    const w = 500, h = 400, pad = 60;
+    const maxAbsC = Math.max(...incCosts.map(Math.abs), 1);
+    const maxAbsQ = Math.max(...incQalys.map(Math.abs), 0.01);
+    const rangeC = maxAbsC * 1.2, rangeQ = maxAbsQ * 1.2;
+
+    const toX = q => pad + (q + rangeQ) / (2 * rangeQ) * (w - 2 * pad);
+    const toY = c => pad + (rangeC - c) / (2 * rangeC) * (h - 2 * pad);
+
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;width:100%">';
+    svg += '<style>.psa-label{font-family:system-ui;font-size:10px;fill:var(--text)}</style>';
+    svg += '<text style="font-family:system-ui;font-size:12px;font-weight:bold;fill:var(--text)" x="' + (w/2) + '" y="18" text-anchor="middle">CE Plane (PSA: ' + escapeHtml(intName) + ' vs ' + escapeHtml(compName) + ')</text>';
+
+    const cx = toX(0), cy = toY(0);
+    svg += '<line x1="' + pad + '" y1="' + cy.toFixed(1) + '" x2="' + (w-pad) + '" y2="' + cy.toFixed(1) + '" stroke="var(--text)" stroke-width="0.5" opacity="0.3"/>';
+    svg += '<line x1="' + cx.toFixed(1) + '" y1="' + pad + '" x2="' + cx.toFixed(1) + '" y2="' + (h-pad) + '" stroke="var(--text)" stroke-width="0.5" opacity="0.3"/>';
+
+    // WTP line
+    const wtpSlope = wtp;
+    svg += '<line x1="' + toX(-rangeQ).toFixed(1) + '" y1="' + Math.max(pad, Math.min(h - pad, toY(-rangeQ * wtpSlope))).toFixed(1) + '" x2="' + toX(rangeQ).toFixed(1) + '" y2="' + Math.max(pad, Math.min(h - pad, toY(rangeQ * wtpSlope))).toFixed(1) + '" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6" opacity="0.5"/>';
+
+    // Scatter points (sample max 500 for SVG performance)
+    const step = Math.max(1, Math.floor(incCosts.length / 500));
+    for (let i = 0; i < incCosts.length; i += step) {
+      const x = toX(incQalys[i]), y = toY(incCosts[i]);
+      if (x >= pad && x <= w - pad && y >= pad && y <= h - pad) {
+        svg += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="2" fill="#3b82f6" opacity="0.25"/>';
+      }
+    }
+
+    // Mean point
+    const meanC = incCosts.reduce((a, b) => a + b, 0) / incCosts.length;
+    const meanQ = incQalys.reduce((a, b) => a + b, 0) / incQalys.length;
+    svg += '<circle cx="' + toX(meanQ).toFixed(1) + '" cy="' + toY(meanC).toFixed(1) + '" r="5" fill="#ef4444" stroke="#fff" stroke-width="2"/>';
+
+    svg += '<text class="psa-label" x="' + (w/2) + '" y="' + (h - 10) + '" text-anchor="middle">Incremental QALYs</text>';
+    svg += '<text class="psa-label" x="15" y="' + (h/2) + '" text-anchor="middle" transform="rotate(-90,15,' + (h/2) + ')">Incremental Cost</text>';
+
+    // Quadrant percentages
+    let ne = 0, nw = 0, se = 0, sw = 0;
+    incCosts.forEach((c, i) => { const q = incQalys[i]; if (q >= 0 && c >= 0) ne++; else if (q >= 0 && c < 0) se++; else if (q < 0 && c >= 0) nw++; else sw++; });
+    const n = incCosts.length;
+    svg += '<text style="font-size:9px;fill:var(--text-muted)" x="' + (w - pad - 5) + '" y="' + (pad + 12) + '" text-anchor="end">NE ' + (ne / n * 100).toFixed(0) + '%</text>';
+    svg += '<text style="font-size:9px;fill:var(--text-muted)" x="' + (pad + 5) + '" y="' + (pad + 12) + '">NW ' + (nw / n * 100).toFixed(0) + '%</text>';
+    svg += '<text style="font-size:9px;fill:var(--text-muted)" x="' + (w - pad - 5) + '" y="' + (h - pad - 5) + '" text-anchor="end">SE ' + (se / n * 100).toFixed(0) + '%</text>';
+    svg += '<text style="font-size:9px;fill:var(--text-muted)" x="' + (pad + 5) + '" y="' + (h - pad - 5) + '">SW ' + (sw / n * 100).toFixed(0) + '%</text>';
+
+    svg += '</svg>';
+    el.innerHTML = '<h4 style="font-size:0.92rem;margin-bottom:6px">CE Plane (PSA)</h4>' + svg;
+  }
+
+  function renderCEAC(incCosts, incQalys, currency, wtp, intName) {
+    const el = document.getElementById('icerCEACContainer');
+    if (!el) return;
+
+    const n = incCosts.length;
+    const wtpMin = 0, wtpMax = wtp * 3, wtpStep = Math.max(1, Math.round(wtp * 3 / 50));
+    const points = [];
+    for (let w_ = wtpMin; w_ <= wtpMax; w_ += wtpStep) {
+      let count = 0;
+      for (let i = 0; i < n; i++) {
+        if (incQalys[i] * w_ - incCosts[i] >= 0) count++;
+      }
+      points.push({ wtp: w_, prob: count / n });
+    }
+
+    const svgW = 500, svgH = 350, pad = 55;
+    const plotW = svgW - 2 * pad, plotH = svgH - 2 * pad;
+    const toX = w_ => pad + (w_ / wtpMax) * plotW;
+    const toY = p => pad + (1 - p) * plotH;
+
+    let svg = '<svg viewBox="0 0 ' + svgW + ' ' + svgH + '" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;width:100%">';
+    svg += '<style>.ceac-label{font-family:system-ui;font-size:10px;fill:var(--text)}</style>';
+    svg += '<text style="font-family:system-ui;font-size:12px;font-weight:bold;fill:var(--text)" x="' + (svgW/2) + '" y="18" text-anchor="middle">CEAC: ' + escapeHtml(intName) + '</text>';
+
+    // Grid
+    for (let p = 0; p <= 1; p += 0.25) {
+      const y = toY(p);
+      svg += '<line x1="' + pad + '" y1="' + y.toFixed(1) + '" x2="' + (svgW - pad) + '" y2="' + y.toFixed(1) + '" stroke="var(--border)" stroke-width="0.5"/>';
+      svg += '<text class="ceac-label" x="' + (pad - 5) + '" y="' + (y + 4).toFixed(1) + '" text-anchor="end">' + (p * 100).toFixed(0) + '%</text>';
+    }
+
+    // WTP threshold line
+    const wtpX = toX(wtp);
+    svg += '<line x1="' + wtpX.toFixed(1) + '" y1="' + pad + '" x2="' + wtpX.toFixed(1) + '" y2="' + (svgH - pad) + '" stroke="#ef4444" stroke-width="1" stroke-dasharray="4" opacity="0.6"/>';
+    svg += '<text style="font-size:8px;fill:#ef4444" x="' + (wtpX + 3).toFixed(1) + '" y="' + (pad + 12) + '">WTP=' + currency + (wtp / 1000).toFixed(0) + 'k</text>';
+
+    // CEAC curve
+    const path = points.map((p, i) => (i === 0 ? 'M' : 'L') + toX(p.wtp).toFixed(1) + ' ' + toY(p.prob).toFixed(1)).join(' ');
+    svg += '<path d="' + path + '" fill="none" stroke="#3b82f6" stroke-width="2.5"/>';
+
+    // 50% reference line
+    svg += '<line x1="' + pad + '" y1="' + toY(0.5).toFixed(1) + '" x2="' + (svgW - pad) + '" y2="' + toY(0.5).toFixed(1) + '" stroke="var(--text-muted)" stroke-width="0.5" stroke-dasharray="4"/>';
+
+    // Probability at WTP
+    const probAtWTP = points.find(p => p.wtp >= wtp)?.prob ?? 0;
+    svg += '<circle cx="' + wtpX.toFixed(1) + '" cy="' + toY(probAtWTP).toFixed(1) + '" r="4" fill="#ef4444" stroke="#fff" stroke-width="1.5"/>';
+    svg += '<text style="font-size:9px;fill:var(--text);font-weight:bold" x="' + (wtpX + 10).toFixed(1) + '" y="' + (toY(probAtWTP) - 6).toFixed(1) + '">' + (probAtWTP * 100).toFixed(1) + '%</text>';
+
+    svg += '<text class="ceac-label" x="' + (svgW/2) + '" y="' + (svgH - 10) + '" text-anchor="middle">Willingness to Pay (' + currency + ')</text>';
+    svg += '<text class="ceac-label" x="15" y="' + (svgH/2) + '" text-anchor="middle" transform="rotate(-90,15,' + (svgH/2) + ')">Probability Cost-Effective</text>';
+    svg += '</svg>';
+    el.innerHTML = '<h4 style="font-size:0.92rem;margin-bottom:6px">CEAC (Cost-Effectiveness Acceptability Curve)</h4>' + svg;
+  }
+
+  function renderTornado(strategies, wtp, currency) {
+    const el = document.getElementById('icerTornadoContainer');
+    if (!el || strategies.length < 2) { if (el) el.innerHTML = ''; return; }
+
+    const comp = strategies[0];
+    const int = strategies[1];
+    const baseICER = Math.abs(int.qaly - comp.qaly) > 1e-10 ? (int.cost - comp.cost) / (int.qaly - comp.qaly) : 0;
+
+    // Parameters to vary
+    const params = [
+      { label: escapeHtml(int.name) + ' Cost', base: int.cost, low: int.cost * 0.8, high: int.cost * 1.2, which: 'intCost' },
+      { label: escapeHtml(comp.name) + ' Cost', base: comp.cost, low: comp.cost * 0.8, high: comp.cost * 1.2, which: 'compCost' },
+      { label: escapeHtml(int.name) + ' QALY', base: int.qaly, low: int.qaly * 0.8, high: int.qaly * 1.2, which: 'intQaly' },
+      { label: escapeHtml(comp.name) + ' QALY', base: comp.qaly, low: comp.qaly * 0.8, high: comp.qaly * 1.2, which: 'compQaly' },
+    ];
+
+    // Calculate ICER for each variation
+    const results = params.map(p => {
+      const calcICER = (ic, cC, iQ, cQ) => Math.abs(iQ - cQ) > 1e-10 ? (ic - cC) / (iQ - cQ) : 0;
+      let lowICER, highICER;
+      if (p.which === 'intCost') { lowICER = calcICER(p.low, comp.cost, int.qaly, comp.qaly); highICER = calcICER(p.high, comp.cost, int.qaly, comp.qaly); }
+      else if (p.which === 'compCost') { lowICER = calcICER(int.cost, p.low, int.qaly, comp.qaly); highICER = calcICER(int.cost, p.high, int.qaly, comp.qaly); }
+      else if (p.which === 'intQaly') { lowICER = calcICER(int.cost, comp.cost, p.low, comp.qaly); highICER = calcICER(int.cost, comp.cost, p.high, comp.qaly); }
+      else { lowICER = calcICER(int.cost, comp.cost, int.qaly, p.low); highICER = calcICER(int.cost, comp.cost, int.qaly, p.high); }
+      const swing = Math.abs(highICER - lowICER);
+      return { ...p, lowICER, highICER, swing, minICER: Math.min(lowICER, highICER), maxICER: Math.max(lowICER, highICER) };
+    }).sort((a, b) => b.swing - a.swing);
+
+    const w = 600, barH = 28, padL = 140, padR = 40, padT = 40, padB = 40;
+    const h = padT + results.length * (barH + 6) + padB;
+    const plotW = w - padL - padR;
+    const allVals = results.flatMap(r => [r.minICER, r.maxICER, baseICER]);
+    const minX = Math.min(...allVals) * 0.9;
+    const maxX = Math.max(...allVals) * 1.1;
+    const toX = v => padL + (v - minX) / (maxX - minX) * plotW;
+
+    let svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;width:100%">';
+    svg += '<style>.torn-label{font-family:system-ui;font-size:10px;fill:var(--text)}</style>';
+    svg += '<text style="font-family:system-ui;font-size:12px;font-weight:bold;fill:var(--text)" x="' + (w/2) + '" y="18" text-anchor="middle">Tornado Diagram (One-Way Sensitivity)</text>';
+
+    // Base ICER line
+    const baseX = toX(baseICER);
+    svg += '<line x1="' + baseX.toFixed(1) + '" y1="' + padT + '" x2="' + baseX.toFixed(1) + '" y2="' + (h - padB) + '" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4"/>';
+
+    results.forEach((r, i) => {
+      const y = padT + i * (barH + 6);
+      const x1 = toX(r.minICER), x2 = toX(r.maxICER);
+      svg += '<text class="torn-label" x="' + (padL - 6) + '" y="' + (y + barH / 2 + 4) + '" text-anchor="end">' + r.label + '</text>';
+      svg += '<rect x="' + x1.toFixed(1) + '" y="' + y + '" width="' + (x2 - x1).toFixed(1) + '" height="' + barH + '" fill="#3b82f6" rx="3" opacity="0.7"/>';
+      svg += '<text style="font-size:8px;fill:var(--text-muted)" x="' + (x1 - 4).toFixed(1) + '" y="' + (y + barH / 2 + 3) + '" text-anchor="end">' + currency + Math.round(r.minICER).toLocaleString() + '</text>';
+      svg += '<text style="font-size:8px;fill:var(--text-muted)" x="' + (x2 + 4).toFixed(1) + '" y="' + (y + barH / 2 + 3) + '">' + currency + Math.round(r.maxICER).toLocaleString() + '</text>';
+    });
+
+    svg += '<text class="torn-label" x="' + (padL + plotW / 2) + '" y="' + (h - 10) + '" text-anchor="middle">ICER (' + currency + '/QALY)</text>';
+    svg += '</svg>';
+    el.innerHTML = '<h4 style="font-size:0.92rem;margin-bottom:6px">Tornado Diagram</h4>' + svg +
+      '<p style="font-size:0.72rem;color:var(--text-muted);margin-top:6px">Parameters varied \u00B120%. Red dashed line = base-case ICER (' + currency + Math.round(baseICER).toLocaleString() + '/QALY).</p>';
   }
 
   // ============================================================
@@ -13774,6 +14942,13 @@ body.dark-mode .input-error { background: #451a1a !important; }
     if (hasSubgroups) {
       subResult = computeSubgroupAnalysis(analysisStudies, confLevel, result.method);
       renderSubgroupAnalysis(subResult, confLevel);
+      const sgForestHTML = renderSubgroupForestPlot(subResult);
+      if (sgForestHTML) {
+        const sgContainer = document.getElementById('subgroupContainer');
+        if (sgContainer) sgContainer.innerHTML += '<div id="subgroupForestContainer" style="margin-top:16px">' + sgForestHTML + '</div>' +
+          '<div style="margin-top:8px"><button class="btn-outline" onclick="exportPlotSVG(\'subgroupForestContainer\',\'subgroup-forest.svg\')">Subgroup Forest SVG</button>' +
+          '<button class="btn-outline" onclick="exportPlotPNG(\'subgroupForestContainer\',\'subgroup-forest-300dpi.png\',300)" style="margin-left:8px">Subgroup Forest PNG</button></div>';
+      }
     } else {
       const subContainer = document.getElementById('subgroupContainer');
       if (subContainer) subContainer.innerHTML = '';
@@ -22771,13 +23946,26 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const prismaScreened = prisma.screened || allReferences.length || '[N]';
     const prismaExcluded = prisma.excludedScreen || (screenedRefs.filter(r => r.decision !== 'include').length);
     const prismaIncluded = prisma.included || includeRefs.length || extractedStudies.length;
-    const methodVersion = methodVal === 'FE'
-      ? 'fixed-effect inverse-variance model'
-      : (methodVal === 'DL-HKSJ' ? 'DerSimonian-Laird random-effects with Hartung-Knapp-Sidik-Jonkman adjustment' : 'DerSimonian-Laird random-effects model');
-
-    const methodName = methodVal === 'FE' ? 'fixed-effect (inverse-variance)' :
-      methodVal === 'DL-HKSJ' ? 'DerSimonian-Laird with Hartung-Knapp-Sidik-Jonkman adjustment' :
-      'DerSimonian-Laird random-effects';
+    const _methodVersionMap = {
+      'FE': 'fixed-effect inverse-variance model',
+      'DL': 'DerSimonian-Laird random-effects model',
+      'DL-HKSJ': 'DerSimonian-Laird random-effects with Hartung-Knapp-Sidik-Jonkman adjustment',
+      'REML': 'restricted maximum-likelihood (REML) random-effects model (Cochrane Handbook v6.5 default)',
+      'REML-HKSJ': 'REML random-effects with Hartung-Knapp-Sidik-Jonkman adjustment',
+      'MH': 'Mantel-Haenszel fixed-effect model (Robins-Breslow-Greenland variance for OR, Greenland-Robins for RR, Sato for RD)',
+      'Peto': 'Peto fixed-effect model for rare events (Yusuf et al. 1985)'
+    };
+    const _methodNameMap = {
+      'FE': 'fixed-effect (inverse-variance)',
+      'DL': 'DerSimonian-Laird random-effects',
+      'DL-HKSJ': 'DerSimonian-Laird with Hartung-Knapp-Sidik-Jonkman adjustment',
+      'REML': 'REML random-effects (Cochrane default)',
+      'REML-HKSJ': 'REML with HKSJ adjustment',
+      'MH': 'Mantel-Haenszel fixed-effect',
+      'Peto': 'Peto fixed-effect (odds ratio)'
+    };
+    const methodVersion = _methodVersionMap[methodVal] || 'DerSimonian-Laird random-effects model';
+    const methodName = _methodNameMap[methodVal] || 'DerSimonian-Laird random-effects';
 
     const methods =
       '## Methods\n\n' +
@@ -22801,7 +23989,12 @@ body.dark-mode .input-error { background: #451a1a !important; }
       'Small-study effects were evaluated using ' + (result && result.k >= 10 ? (result.isRatio ? 'Peters regression' : 'Egger regression') : 'prespecified funnel asymmetry diagnostics when enough studies were available') +
       '. Sensitivity analyses included leave-one-out, cumulative meta-analysis, and trim-and-fill/fragility analyses when assumptions were met.\n\n' +
       '### Reproducibility and Audit Trail\n' +
-      'Analyses were executed in MetaSprint Autopilot (local browser build) on ' + today + ' with prespecified settings (model=' + escapeHtml(methodName) + ', confidence level=' + confPct + '%, strict publishability gates=' + (document.getElementById('publishableGateToggle')?.checked ? 'on' : 'off') + '). Structured extraction and analysis outputs were retained as versioned table exports (CSV/JSON/Markdown) to support independent rerun and editorial audit.';
+      'Analyses were executed in MetaSprint Autopilot (local browser build, version 2.0) on ' + today + ' with prespecified settings (model=' + escapeHtml(methodName) + ', confidence level=' + confPct + '%, strict publishability gates=' + (document.getElementById('publishableGateToggle')?.checked ? 'on' : 'off') + '). Structured extraction and analysis outputs were retained as versioned table exports (CSV/JSON/Markdown) to support independent rerun and editorial audit.\n\n' +
+      '### Software\n' +
+      'MetaSprint Autopilot is an open-access, browser-based systematic review and meta-analysis platform requiring no installation or server-side computation. ' +
+      'It implements DerSimonian-Laird, REML, HKSJ, Mantel-Haenszel, and Peto pooling methods with Cochrane Handbook v6.5 defaults. ' +
+      'Publication-quality forest plots, funnel plots, and PRISMA 2020 diagrams are exported as SVG or 300-DPI PNG. ' +
+      'All computations execute client-side in the browser; no patient or study data leaves the user\'s device.';
 
     const results =
       '## Results\n\n' +
@@ -27977,6 +29170,8 @@ function checkLivingEvidence(){
   document.addEventListener('DOMContentLoaded', async () => {
     try {
       loadDarkMode();
+      // Initialize drag-and-drop CSV on Analyze tab
+      setupAnalysisDropZone();
       // Initialize i18n language
       const savedLang = localStorage.getItem('msa_lang');
       if (savedLang && _i18n.strings[savedLang]) {

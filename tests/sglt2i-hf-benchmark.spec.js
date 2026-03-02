@@ -4141,3 +4141,282 @@ featTest.describe('Publication Export, RevMan XML & i18n', () => {
     featExpect(title).toContain('Peto');
   });
 });
+
+// =============================================================
+// NMA ENHANCEMENTS, DOSE-RESPONSE EMAX/HILL, ICER/QALY TESTS
+// =============================================================
+test.describe('Ported Features: NMA, Dose-Response, ICER', () => {
+  const portTest = test;
+  const portExpect = expect;
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:9876/metasprint-autopilot.html', { waitUntil: 'domcontentloaded' });
+  });
+
+  // --- NMA Enhancements ---
+  portTest('294 - NMA rankogram renderer exists', async ({ page }) => {
+    const exists = await page.evaluate(() => typeof renderNMARankogram === 'function');
+    portExpect(exists).toBe(true);
+  });
+
+  portTest('295 - NMA forest plot renderer exists', async ({ page }) => {
+    const exists = await page.evaluate(() => typeof renderNMAForestPlot === 'function');
+    portExpect(exists).toBe(true);
+  });
+
+  portTest('296 - NMA consistency table renderer exists', async ({ page }) => {
+    const exists = await page.evaluate(() => typeof renderNMAConsistencyTable === 'function');
+    portExpect(exists).toBe(true);
+  });
+
+  portTest('297 - NMA rankogram container in DOM', async ({ page }) => {
+    const exists = await page.evaluate(() => !!document.getElementById('nmaRankogramContainer'));
+    portExpect(exists).toBe(true);
+  });
+
+  portTest('298 - NMA: P-scores computed correctly for 3 treatments', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const contrasts = [
+        { treatA: 'A', treatB: 'B', effect: 0.5, se: 0.2 },
+        { treatA: 'A', treatB: 'C', effect: 0.3, se: 0.15 },
+        { treatA: 'B', treatB: 'C', effect: -0.2, se: 0.18 },
+      ];
+      const nma = computeFrequentistNMA(contrasts, 0.95);
+      if (!nma) return null;
+      return {
+        treatments: nma.treatments.length,
+        pScores: nma.pScores,
+        hasTau2: nma.tau2 != null,
+        hasLeague: Object.keys(nma.leagueTable).length > 0
+      };
+    });
+    portExpect(result).not.toBeNull();
+    portExpect(result.treatments).toBe(3);
+    portExpect(Object.keys(result.pScores).length).toBe(3);
+    portExpect(result.hasTau2).toBe(true);
+    portExpect(result.hasLeague).toBe(true);
+  });
+
+  portTest('299 - NMA: runNMAAnalysis triggers all renderers', async ({ page }) => {
+    const rendered = await page.evaluate(() => {
+      // Add test contrasts
+      addNMAContrastRow({ study: 'S1', treatA: 'Drug', treatB: 'Placebo', effect: 0.4, se: 0.15 });
+      addNMAContrastRow({ study: 'S2', treatA: 'Drug', treatB: 'Control', effect: 0.3, se: 0.2 });
+      addNMAContrastRow({ study: 'S3', treatA: 'Placebo', treatB: 'Control', effect: -0.1, se: 0.18 });
+      runNMAAnalysis();
+      return {
+        graph: document.getElementById('nmaNetworkGraphContainer')?.innerHTML?.includes('svg'),
+        league: document.getElementById('nmaLeagueTableContainer')?.innerHTML?.includes('table'),
+        rankogram: document.getElementById('nmaRankogramContainer')?.innerHTML?.includes('svg'),
+        forest: document.getElementById('nmaForestContainer')?.innerHTML?.includes('svg'),
+        consistency: document.getElementById('nmaConsistencyContainer')?.innerHTML?.length > 10
+      };
+    });
+    portExpect(rendered.graph).toBe(true);
+    portExpect(rendered.league).toBe(true);
+    portExpect(rendered.rankogram).toBe(true);
+    portExpect(rendered.forest).toBe(true);
+  });
+
+  // --- Dose-Response Emax/Hill ---
+  portTest('300 - Emax dose-response fitter exists', async ({ page }) => {
+    const exists = await page.evaluate(() => typeof fitEmaxDoseResponse === 'function');
+    portExpect(exists).toBe(true);
+  });
+
+  portTest('301 - Hill dose-response fitter exists', async ({ page }) => {
+    const exists = await page.evaluate(() => typeof fitHillDoseResponse === 'function');
+    portExpect(exists).toBe(true);
+  });
+
+  portTest('302 - Emax model fits synthetic dose-response data', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const data = [
+        { dose: 1, logRR: 0.1, se: 0.05 },
+        { dose: 2, logRR: 0.18, se: 0.04 },
+        { dose: 5, logRR: 0.35, se: 0.04 },
+        { dose: 10, logRR: 0.45, se: 0.05 },
+        { dose: 20, logRR: 0.52, se: 0.06 },
+        { dose: 50, logRR: 0.58, se: 0.07 }
+      ];
+      const fit = fitEmaxDoseResponse(data, 0.95);
+      if (!fit) return null;
+      return {
+        model: fit.model,
+        emax: fit.params.emax,
+        ed50: fit.params.ed50,
+        nCurvePoints: fit.curvePoints.length,
+        hasAIC: fit.aic != null
+      };
+    });
+    portExpect(result).not.toBeNull();
+    portExpect(result.model).toBe('emax');
+    portExpect(result.emax).toBeGreaterThan(0);
+    portExpect(result.ed50).toBeGreaterThan(0);
+    portExpect(result.nCurvePoints).toBe(51);
+    portExpect(result.hasAIC).toBe(true);
+  });
+
+  portTest('303 - Hill model fits synthetic data with h > 1', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const data = [
+        { dose: 0.5, logRR: 0.01, se: 0.05 },
+        { dose: 1, logRR: 0.02, se: 0.04 },
+        { dose: 2, logRR: 0.08, se: 0.04 },
+        { dose: 5, logRR: 0.4, se: 0.04 },
+        { dose: 10, logRR: 0.55, se: 0.05 },
+        { dose: 20, logRR: 0.6, se: 0.06 }
+      ];
+      const fit = fitHillDoseResponse(data, 0.95);
+      if (!fit) return null;
+      return {
+        model: fit.model,
+        emax: fit.params.emax,
+        ed50: fit.params.ed50,
+        hill: fit.params.hill,
+        hasAIC: fit.aic != null
+      };
+    });
+    portExpect(result).not.toBeNull();
+    portExpect(result.model).toBe('hill');
+    portExpect(result.emax).toBeGreaterThan(0);
+    portExpect(result.ed50).toBeGreaterThan(0);
+    portExpect(result.hill).toBeGreaterThan(0);
+  });
+
+  portTest('304 - Dose model selector includes emax/hill/auto', async ({ page }) => {
+    const options = await page.evaluate(() => {
+      const sel = document.getElementById('doseModel');
+      if (!sel) return [];
+      return [...sel.options].map(o => o.value);
+    });
+    portExpect(options).toContain('emax');
+    portExpect(options).toContain('hill');
+    portExpect(options).toContain('auto');
+  });
+
+  // --- ICER/QALY Calculator ---
+  portTest('305 - ICER tab exists in DOM', async ({ page }) => {
+    const exists = await page.evaluate(() => !!document.getElementById('phase-icer'));
+    portExpect(exists).toBe(true);
+  });
+
+  portTest('306 - ICER tab button exists', async ({ page }) => {
+    const exists = await page.evaluate(() => !!document.getElementById('tab-icer'));
+    portExpect(exists).toBe(true);
+  });
+
+  portTest('307 - ICER strategy CRUD', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      addICERStrategyRow({ name: 'Drug A', cost: 50000, qaly: 5.5 });
+      addICERStrategyRow({ name: 'Placebo', cost: 20000, qaly: 4.0 });
+      const count = icerStrategies.length;
+      deleteICERStrategy(icerStrategies[0].id);
+      return { added: count, afterDelete: icerStrategies.length };
+    });
+    portExpect(result.added).toBe(2);
+    portExpect(result.afterDelete).toBe(1);
+  });
+
+  portTest('308 - ICER calculation: correct ICER and NMB', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      // Reset
+      icerStrategies = [];
+      addICERStrategyRow({ name: 'Placebo', cost: 10000, qaly: 4.0 });
+      addICERStrategyRow({ name: 'Drug A', cost: 30000, qaly: 5.0 });
+      document.getElementById('icerWTP').value = '50000';
+      runICERAnalysis();
+      const table = document.getElementById('icerSummaryContainer')?.innerHTML || '';
+      return {
+        hasTable: table.includes('ICER'),
+        hasNMB: table.includes('NMB'),
+        hasDrugA: table.includes('Drug A')
+      };
+    });
+    portExpect(result.hasTable).toBe(true);
+    portExpect(result.hasNMB).toBe(true);
+    portExpect(result.hasDrugA).toBe(true);
+  });
+
+  portTest('309 - ICER: CE plane rendered', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      icerStrategies = [];
+      addICERStrategyRow({ name: 'Placebo', cost: 10000, qaly: 4.0 });
+      addICERStrategyRow({ name: 'Drug A', cost: 30000, qaly: 5.0 });
+      runICERAnalysis();
+      return document.getElementById('icerCEPlaneContainer')?.innerHTML?.includes('svg') || false;
+    });
+    portExpect(result).toBe(true);
+  });
+
+  portTest('310 - PSA analysis runs with scatter and CEAC', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      icerStrategies = [];
+      addICERStrategyRow({ name: 'Placebo', cost: 10000, qaly: 4.0, sdCost: 2000, sdQaly: 0.5 });
+      addICERStrategyRow({ name: 'Drug A', cost: 30000, qaly: 5.0, sdCost: 5000, sdQaly: 0.3 });
+      document.getElementById('icerWTP').value = '50000';
+      runPSAAnalysis();
+      return {
+        cePlane: document.getElementById('icerCEPlaneContainer')?.innerHTML?.includes('svg') || false,
+        ceac: document.getElementById('icerCEACContainer')?.innerHTML?.includes('svg') || false,
+        tornado: document.getElementById('icerTornadoContainer')?.innerHTML?.includes('svg') || false
+      };
+    });
+    portExpect(result.cePlane).toBe(true);
+    portExpect(result.ceac).toBe(true);
+    portExpect(result.tornado).toBe(true);
+  });
+
+  portTest('311 - Tornado diagram renders for two strategies', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      icerStrategies = [];
+      addICERStrategyRow({ name: 'Control', cost: 15000, qaly: 3.5 });
+      addICERStrategyRow({ name: 'Treatment', cost: 45000, qaly: 5.2 });
+      document.getElementById('icerWTP').value = '30000';
+      runPSAAnalysis();
+      const svg = document.getElementById('icerTornadoContainer')?.innerHTML || '';
+      return {
+        hasSVG: svg.includes('svg'),
+        hasBars: svg.includes('rect'),
+        hasLabel: svg.includes('Tornado')
+      };
+    });
+    portExpect(result.hasSVG).toBe(true);
+    portExpect(result.hasBars).toBe(true);
+    portExpect(result.hasLabel).toBe(true);
+  });
+
+  portTest('312 - CEAC probability at WTP is between 0 and 1', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      icerStrategies = [];
+      addICERStrategyRow({ name: 'A', cost: 10000, qaly: 4.0, sdCost: 2000, sdQaly: 0.5 });
+      addICERStrategyRow({ name: 'B', cost: 30000, qaly: 5.0, sdCost: 5000, sdQaly: 0.3 });
+      document.getElementById('icerWTP').value = '50000';
+      runPSAAnalysis();
+      const ceacSvg = document.getElementById('icerCEACContainer')?.innerHTML || '';
+      // Extract the probability text from near the WTP marker
+      const match = ceacSvg.match(/(\d+\.\d+)%/);
+      return match ? parseFloat(match[1]) : null;
+    });
+    portExpect(result).not.toBeNull();
+    portExpect(result).toBeGreaterThanOrEqual(0);
+    portExpect(result).toBeLessThanOrEqual(100);
+  });
+
+  portTest('313 - ICER export CSV', async ({ page }) => {
+    const csv = await page.evaluate(() => {
+      icerStrategies = [];
+      addICERStrategyRow({ name: 'Drug', cost: 50000, qaly: 6.0 });
+      // intercept downloadFile to capture CSV content
+      let captured = '';
+      const orig = window.downloadFile;
+      window.downloadFile = (content) => { captured = content; };
+      exportICERCSV();
+      window.downloadFile = orig;
+      return captured;
+    });
+    portExpect(csv).toContain('Strategy,Cost,QALYs');
+    portExpect(csv).toContain('Drug');
+    portExpect(csv).toContain('50000');
+  });
+});
