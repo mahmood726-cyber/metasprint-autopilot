@@ -499,6 +499,9 @@ body.dark-mode .keyword { background: #1e3a5f; }
 body.dark-mode #clinicalDisclaimer { background: #4a2008 !important; border-color: #92400e !important; color: #fbbf24 !important; }
 body.dark-mode #clinicalDisclaimer strong { color: #fbbf24 !important; }
 body.dark-mode #clinicalDisclaimer button { border-color: #fbbf24 !important; color: #fbbf24 !important; }
+body.dark-mode .lma-toast.lma-toast-warn { background:#3d3200; color:#ffc107; }
+body.dark-mode .lma-toast.lma-toast-alert { background:#3d0a0a; color:#f5c6cb; }
+body.dark-mode .lma-toast.lma-toast-info { background:#0a2e36; color:#bee5eb; }
 
 /* --- Insights Sub-Tab Navigation --- */
 .insights-nav {
@@ -1899,25 +1902,25 @@ body.dark-mode .input-error { background: #451a1a !important; }
       <h2>Evidence Insights</h2>
       <p class="text-muted" style="margin-bottom:12px">Deep evidence analysis inspired by Quranic epistemological principles. Select a sub-tab to explore.</p>
       <div class="insights-nav" role="tablist" aria-label="Insight sub-tabs">
-        <button class="insights-tab active" data-insight="tawakkul" role="tab" aria-selected="true" title="Trust Decomposition: 8-axis radar of evidence trustworthiness">Tawakkul <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Trust</span></button>
-        <button class="insights-tab" data-insight="mizan" role="tab" aria-selected="false" title="Harm-Benefit Equipoise: Balance-scale visualization">Mizan <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Balance</span></button>
-        <button class="insights-tab" data-insight="shura" role="tab" aria-selected="false" title="Multiverse Specification Curve: Sensitivity to analytic choices">Shura <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Multiverse</span></button>
-        <button class="insights-tab" data-insight="hikmah" role="tab" aria-selected="false" title="Clinical Decision Context: Personalized NNT calculator">Hikmah <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">NNT</span></button>
-        <button class="insights-tab" data-insight="fitrah" role="tab" aria-selected="false" title="Natural Query Interface: Ask questions in plain language">Fitrah <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Query</span></button>
-        <button class="insights-tab" data-insight="ihsan" role="tab" aria-selected="false" title="Excellence Visualization: Icon arrays, quantile dots, timelines">Ihsan <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Visualize</span></button>
-        <button class="insights-tab" data-insight="amanah" role="tab" aria-selected="false" title="Evidence Gap Registry: Structured gap accountability">Amanah <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Gaps</span></button>
-        <button class="insights-tab" data-insight="taqwa" role="tab" aria-selected="false" title="Integrity Sentinel: GRIM test, retraction checks, funding bias">Taqwa <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Integrity</span></button>
-        <button class="insights-tab" data-insight="dhulm" role="tab" aria-selected="false" title="Health Equity Detector: Representation justice analysis">Dhulm <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Equity</span></button>
-        <button class="insights-tab" data-insight="rahma" role="tab" aria-selected="false" title="Patient-Facing Translation: Plain-language summaries">Rahma <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Patient</span></button>
-        <button class="insights-tab" data-insight="tabayyun" role="tab" aria-selected="false" title="Verification Engine: Cross-source verification states (49:6)">Tabayyun <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Verify</span></button>
-        <button class="insights-tab" data-insight="living" role="tab" aria-selected="false" title="Living Evidence: Currency tracking, update triggers, version deltas">Living <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Updates</span></button>
-        <button class="insights-tab" data-insight="conflict" role="tab" aria-selected="false" title="Conflict Detector: Contradictory outcomes across sources">Conflicts <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Contradictions</span></button>
-        <button class="insights-tab" data-insight="radar" role="tab" aria-selected="false" title="Opportunity Radar: New evidence since last meta-analysis">Radar <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">New Evidence</span></button>
-        <button class="insights-tab" data-insight="registry" role="tab" aria-selected="false" title="Registry Graph: NCT/PMID/DOI canonical record linking">Registry <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Linking</span></button>
+        <button class="insights-tab active" data-insight="tawakkul" role="tab" aria-selected="true" aria-controls="insight-tawakkul" tabindex="0" title="Trust Decomposition: 8-axis radar of evidence trustworthiness">Tawakkul <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Trust</span></button>
+        <button class="insights-tab" data-insight="mizan" role="tab" aria-selected="false" aria-controls="insight-mizan" tabindex="-1" title="Harm-Benefit Equipoise: Balance-scale visualization">Mizan <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Balance</span></button>
+        <button class="insights-tab" data-insight="shura" role="tab" aria-selected="false" aria-controls="insight-shura" tabindex="-1" title="Multiverse Specification Curve: Sensitivity to analytic choices">Shura <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Multiverse</span></button>
+        <button class="insights-tab" data-insight="hikmah" role="tab" aria-selected="false" aria-controls="insight-hikmah" tabindex="-1" title="Clinical Decision Context: Personalized NNT calculator">Hikmah <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">NNT</span></button>
+        <button class="insights-tab" data-insight="fitrah" role="tab" aria-selected="false" aria-controls="insight-fitrah" tabindex="-1" title="Natural Query Interface: Ask questions in plain language">Fitrah <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Query</span></button>
+        <button class="insights-tab" data-insight="ihsan" role="tab" aria-selected="false" aria-controls="insight-ihsan" tabindex="-1" title="Excellence Visualization: Icon arrays, quantile dots, timelines">Ihsan <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Visualize</span></button>
+        <button class="insights-tab" data-insight="amanah" role="tab" aria-selected="false" aria-controls="insight-amanah" tabindex="-1" title="Evidence Gap Registry: Structured gap accountability">Amanah <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Gaps</span></button>
+        <button class="insights-tab" data-insight="taqwa" role="tab" aria-selected="false" aria-controls="insight-taqwa" tabindex="-1" title="Integrity Sentinel: GRIM test, retraction checks, funding bias">Taqwa <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Integrity</span></button>
+        <button class="insights-tab" data-insight="dhulm" role="tab" aria-selected="false" aria-controls="insight-dhulm" tabindex="-1" title="Health Equity Detector: Representation justice analysis">Dhulm <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Equity</span></button>
+        <button class="insights-tab" data-insight="rahma" role="tab" aria-selected="false" aria-controls="insight-rahma" tabindex="-1" title="Patient-Facing Translation: Plain-language summaries">Rahma <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Patient</span></button>
+        <button class="insights-tab" data-insight="tabayyun" role="tab" aria-selected="false" aria-controls="insight-tabayyun" tabindex="-1" title="Verification Engine: Cross-source verification states (49:6)">Tabayyun <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Verify</span></button>
+        <button class="insights-tab" data-insight="living" role="tab" aria-selected="false" aria-controls="insight-living" tabindex="-1" title="Living Evidence: Currency tracking, update triggers, version deltas">Living <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Updates</span></button>
+        <button class="insights-tab" data-insight="conflict" role="tab" aria-selected="false" aria-controls="insight-conflict" tabindex="-1" title="Conflict Detector: Contradictory outcomes across sources">Conflicts <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Contradictions</span></button>
+        <button class="insights-tab" data-insight="radar" role="tab" aria-selected="false" aria-controls="insight-radar" tabindex="-1" title="Opportunity Radar: New evidence since last meta-analysis">Radar <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">New Evidence</span></button>
+        <button class="insights-tab" data-insight="registry" role="tab" aria-selected="false" aria-controls="insight-registry" tabindex="-1" title="Registry Graph: NCT/PMID/DOI canonical record linking">Registry <span style="font-size:0.65rem;color:var(--text-muted);display:block;font-weight:400">Linking</span></button>
       </div>
 
       <!-- Tawakkul: Trust Decomposition -->
-      <div class="insight-panel active" id="insight-tawakkul">
+      <div class="insight-panel active" id="insight-tawakkul" role="tabpanel" tabindex="-1">
         <h3>Tawakkul — Trust Decomposition</h3>
         <p class="text-muted" style="margin-bottom:10px">8-axis radar showing trustworthiness dimensions of the current evidence base. Each axis maps to a GRADE or methodological quality domain.</p>
         <div id="tawakkulNoData" class="placeholder" style="display:none">Run an analysis first (Analyze tab) to see trust decomposition.</div>
@@ -2092,11 +2095,11 @@ body.dark-mode .input-error { background: #451a1a !important; }
           <label style="font-size:0.8rem">Auto-update interval: <select id="lmaAutoInterval" style="padding:3px 6px;font-size:0.8rem;border:1px solid var(--border);border-radius:var(--radius)"><option value="0" selected>Manual only</option><option value="86400000">Daily</option><option value="604800000">Weekly</option><option value="2592000000">Monthly</option></select></label>
           <button id="lmaAutoToggle" class="btn btn-sm" style="padding:4px 14px;font-size:0.8rem;background:var(--surface-alt,#6c757d);color:#fff;border:none;border-radius:var(--radius);cursor:pointer" onclick="toggleLMAAutoUpdate()">Enable Auto-Update</button>
           <span id="lmaLastUpdated" class="text-muted" style="font-size:0.75rem"></span>
-          <span id="lmaStaleWarning" style="display:none;font-size:0.75rem;color:#dc3545;font-weight:600">Evidence may be stale</span>
+          <span id="lmaStaleWarning" style="display:none;font-size:0.75rem;color:#dc3545;font-weight:600" role="status" aria-live="polite">Evidence may be stale</span>
         </div>
         <div id="lmaInfoFractionBar" style="margin-bottom:12px;display:none">
           <div style="font-size:0.78rem;margin-bottom:4px"><strong>Information Fraction:</strong> <span id="lmaInfoPct">0%</span> of RIS</div>
-          <div style="height:12px;background:var(--border);border-radius:6px;overflow:hidden"><div id="lmaInfoFill" style="height:100%;background:var(--primary);border-radius:6px;transition:width 0.4s;width:0%"></div></div>
+          <div style="height:12px;background:var(--border);border-radius:6px;overflow:hidden" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Information fraction" id="lmaInfoBarOuter"><div id="lmaInfoFill" style="height:100%;background:var(--primary);border-radius:6px;transition:width 0.4s;width:0%"></div></div>
         </div>
         <div id="lmaCusumChart" style="margin-bottom:16px"></div>
         <div id="lmaSequentialChart" style="margin-bottom:16px"></div>
@@ -5422,8 +5425,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
   let _refScrollListenerAttached = false;
 
   function _renderSingleRefItem(r) {
+    const safeDecision = r.decision && /^[a-z]+$/.test(r.decision) ? r.decision : '';
     return '<div class="ref-item' + (r.id === selectedRefId ? ' selected' : '') +
-      (r.decision ? ' decision-' + r.decision : '') + '"' +
+      (safeDecision ? ' decision-' + safeDecision : '') + '"' +
       ' data-id="' + r.id + '"' +
       ' tabindex="0" role="option" aria-selected="' + (r.id === selectedRefId) + '"' +
       ' onclick="selectReference(\'' + r.id + '\')"' +
@@ -8344,7 +8348,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
          csvSafeCell(s.outcomeId || ''), csvSafeCell(s.timepoint || ''), csvSafeCell(s.analysisPopulation || ''), csvSafeCell(s.verificationStatus || ''),
          s.nTotal ?? '', s.nIntervention ?? '', s.nControl ?? '',
          s.effectEstimate ?? '', s.lowerCI ?? '', s.upperCI ?? '',
-         csvSafeCell(s.effectType), s.weight ?? '', '"' + (s.notes || '').replace(/"/g, '""') + '"'].join(',')
+         csvSafeCell(s.effectType), s.weight ?? '', csvSafeCell(s.notes || '')].join(',')
       );
       downloadFile(header + '\n' + rows.join('\n'), 'metasprint-pairwise-export.csv', 'text/csv');
     } else if (format === 'nma') {
@@ -8368,7 +8372,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
        csvSafeCell(s.outcomeId || ''), csvSafeCell(s.timepoint || ''), csvSafeCell(s.analysisPopulation || ''), csvSafeCell(s.verificationStatus || ''),
        s.nTotal ?? '', s.nIntervention ?? '', s.nControl ?? '',
        s.effectEstimate ?? '', s.lowerCI ?? '', s.upperCI ?? '',
-       csvSafeCell(s.effectType), s.weight ?? '', csvSafeCell(s.subgroup || ''), csvSafeCell(s.rob?.overall || ''), '"' + (s.notes || '').replace(/"/g, '""') + '"'];
+       csvSafeCell(s.effectType), s.weight ?? '', csvSafeCell(s.subgroup || ''), csvSafeCell(s.rob?.overall || ''), csvSafeCell(s.notes || '')];
       if (has2x2) base.push(s.eventsInt ?? '', s.totalInt ?? '', s.eventsCtrl ?? '', s.totalCtrl ?? '');
       return base.join(',');
     });
@@ -9643,11 +9647,14 @@ body.dark-mode .input-error { background: #451a1a !important; }
 
   // --- Galbraith (Radial) Plot: Outlier detection ---
   // x = precision (1/SE), y = standardized effect (yi/SE)
-  // Regression line slope = pooled effect; ±1.96 bands = outlier bounds
+  // Regression line slope = pooled effect; ±zCrit bands = outlier bounds
   // Ref: Galbraith RF. Statistics in Medicine 1988;7:889-894
-  function renderGalbraithPlot(studyResults, pooledTheta) {
+  function renderGalbraithPlot(studyResults, pooledTheta, confLevel) {
     const el = document.getElementById('galbraithContainer');
     if (!el || !studyResults || studyResults.length < 3) { if (el) el.innerHTML = ''; return; }
+    confLevel = confLevel ?? 0.95;
+    const zCrit = normalQuantile((1 + confLevel) / 2);
+    const confPct = Math.round(confLevel * 100);
 
     const k = studyResults.length;
     const yi = studyResults.map(s => s.yi);
@@ -9659,7 +9666,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const W = 520, H = 360, pad = { l: 60, r: 30, t: 30, b: 50 };
     const pw = W - pad.l - pad.r, ph = H - pad.t - pad.b;
     const maxP = Math.max(...precision) * 1.15;
-    const allZ = [...zScores, 1.96 + pooledTheta * maxP, -1.96 + pooledTheta * maxP];
+    const allZ = [...zScores, zCrit + pooledTheta * maxP, -zCrit + pooledTheta * maxP];
     const minZ = Math.min(...allZ) * 1.1, maxZ = Math.max(...allZ) * 1.1;
     const zRange = maxZ - minZ;
 
@@ -9678,9 +9685,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
     // Regression line (slope = pooled effect through origin)
     svg += `<line x1="${sx(0)}" y1="${sy(0)}" x2="${sx(maxP)}" y2="${sy(pooledTheta * maxP)}" stroke="var(--danger)" stroke-width="1.5"/>`;
 
-    // ±1.96 confidence bands
-    svg += `<line x1="${sx(0)}" y1="${sy(1.96)}" x2="${sx(maxP)}" y2="${sy(1.96 + pooledTheta * maxP)}" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4,4"/>`;
-    svg += `<line x1="${sx(0)}" y1="${sy(-1.96)}" x2="${sx(maxP)}" y2="${sy(-1.96 + pooledTheta * maxP)}" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4,4"/>`;
+    // ±zCrit confidence bands
+    svg += `<line x1="${sx(0)}" y1="${sy(zCrit)}" x2="${sx(maxP)}" y2="${sy(zCrit + pooledTheta * maxP)}" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4,4"/>`;
+    svg += `<line x1="${sx(0)}" y1="${sy(-zCrit)}" x2="${sx(maxP)}" y2="${sy(-zCrit + pooledTheta * maxP)}" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4,4"/>`;
 
     // Zero line
     svg += `<line x1="${sx(0)}" y1="${sy(0)}" x2="${sx(maxP)}" y2="${sy(0)}" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="2,2"/>`;
@@ -9689,13 +9696,13 @@ body.dark-mode .input-error { background: #451a1a !important; }
     for (let i = 0; i < k; i++) {
       const cx = sx(precision[i]), cy = sy(zScores[i]);
       const expected = pooledTheta * precision[i];
-      const isOutlier = Math.abs(zScores[i] - expected) > 1.96;
+      const isOutlier = Math.abs(zScores[i] - expected) > zCrit;
       svg += `<circle cx="${cx}" cy="${cy}" r="4" fill="${isOutlier ? 'var(--danger)' : 'var(--accent)'}" opacity="0.8"/>`;
       svg += `<text x="${cx + 6}" y="${cy - 4}" fill="var(--text-primary)" font-size="8">${escapeHtml(names[i])}</text>`;
     }
 
     svg += '</svg>';
-    svg += '<p style="font-size:0.78rem;color:var(--text-muted);margin-top:4px">Points outside dashed bands (±1.96) are potential outliers. Red line = pooled effect. Ref: Galbraith 1988.</p>';
+    svg += `<p style="font-size:0.78rem;color:var(--text-muted);margin-top:4px">Points outside dashed bands (\u00b1${zCrit.toFixed(2)}, ${confPct}% CI) are potential outliers. Red line = pooled effect. Ref: Galbraith 1988.</p>`;
     el.innerHTML = svg;
   }
 
@@ -10068,7 +10075,12 @@ body.dark-mode .input-error { background: #451a1a !important; }
       ? (pooledResult.pooledLo < 1 && pooledResult.pooledHi > 1)
       : (pooledResult.pooledLo < 0 && pooledResult.pooledHi > 0);
     const totalN = studyData ? studyData.reduce((s, d) => s + (d.nTotal ?? d.enrollment ?? 0), 0) : 0;
-    const oisMet = totalN >= 400;  // Simplified OIS threshold
+    // Dynamic OIS: (zAlpha + zBeta)^2 * 2 / delta^2 for continuous; event-rate-based for ratio
+    const zB = normalQuantile(0.80); // 80% power
+    const zAG = normalQuantile(0.975);
+    const absEffect = isRatio ? Math.abs(Math.log(Math.max(1e-10, pooledResult.pooled))) : Math.abs(pooledResult.pooled);
+    const dynamicOIS = absEffect > 1e-6 ? Math.ceil(Math.pow(zAG + zB, 2) * 2 / (absEffect * absEffect)) : 10000;
+    const oisMet = totalN >= Math.max(200, dynamicOIS); // Floor of 200 for very large effects
     if (!oisMet && ciCrossesNull) domains.imprecision = -2;
     else if (!oisMet || ciCrossesNull) domains.imprecision = -1;
     else domains.imprecision = 0;
@@ -10088,15 +10100,25 @@ body.dark-mode .input-error { background: #451a1a !important; }
     domains.indirectness = 0;
     certainty += domains.indirectness;
 
-    // Upgrade: large effect (only for ratio measures per GRADE handbook)
-    if (certainty >= 3 && pooledResult.pooled != null && isRatio) {
-      const effectMag = Math.abs(Math.log(pooledResult.pooled));
+    // Upgrades: large effect, dose-response, plausible confounding (GRADE Handbook)
+    // Large effect applies to ratio AND continuous measures (no certainty gate — upgrades are for observational evidence starting at LOW)
+    if (pooledResult.pooled != null && isRatio) {
+      const effectMag = Math.abs(Math.log(Math.max(1e-10, pooledResult.pooled)));
       if (effectMag > Math.log(5)) { domains.largeEffect = 2; certainty += 2; }
       else if (effectMag > Math.log(2)) { domains.largeEffect = 1; certainty += 1; }
+      else domains.largeEffect = 0;
+    } else if (pooledResult.pooled != null && !isRatio) {
+      // For continuous outcomes (SMD): large (>0.8) or very large (>1.2)
+      const absMD = Math.abs(pooledResult.pooled);
+      if (absMD > 1.2) { domains.largeEffect = 2; certainty += 2; }
+      else if (absMD > 0.8) { domains.largeEffect = 1; certainty += 1; }
       else domains.largeEffect = 0;
     } else {
       domains.largeEffect = 0;
     }
+    // Dose-response and plausible confounding: require manual assessment (set to 0)
+    domains.doseResponse = 0;
+    domains.plausibleConfounding = 0;
 
     certainty = Math.max(1, Math.min(4, certainty));
     const labels = { 4: 'HIGH', 3: 'MODERATE', 2: 'LOW', 1: 'VERY LOW' };
@@ -10517,6 +10539,12 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const zCrit = normalQuantile(1 - (1 - confLevel) / 2);
     const isR = result.isRatio;
     const vTypical = reData.reduce((a, d) => a + d.vi, 0) / reData.length;
+    // Recalculate prediction interval with REML tau2 (Cochrane Handbook v6.5 §10.10.4.4)
+    const piDf = Math.max(1, reData.length - 1);
+    const tCritPI = tQuantile(1 - (1 - confLevel) / 2, piDf);
+    const piSE = Math.sqrt(tau2R + se * se);
+    const piLo = isR ? Math.exp(mu - tCritPI * piSE) : mu - tCritPI * piSE;
+    const piHi = isR ? Math.exp(mu + tCritPI * piSE) : mu + tCritPI * piSE;
     return {
       ...result,
       tau2: tau2R, tau2REML: tau2R,
@@ -10526,6 +10554,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       pValue: 2 * (1 - normalCDF(Math.abs(mu / se))),
       I2: Math.max(0, tau2R / (tau2R + vTypical) * 100),
       muRE: mu, seRE: se,
+      piLo, piHi,
       method: 'REML',
       studyResults: reData
     };
@@ -12633,7 +12662,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         sumWYSpec += wP * d.logitSpec;
       });
       const muSens = sumWSens > 0 ? sumWYSens / sumWSens : meanLogitSens;
-      const muSpec = sumWSpec > 0 ? sumWYSpec / sumWSens : meanLogitSpec;
+      const muSpec = sumWSpec > 0 ? sumWYSpec / sumWSpec : meanLogitSpec;
 
       // Update tau2 (method of moments iteration)
       let Qsens = 0, Qspec = 0, Csens = 0, Cspec = 0;
@@ -12727,7 +12756,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const curvePoints = [];
     for (let t = -6; t <= 6; t += 0.2) {
       const logitSpec = t;
-      const logitSens = Lambda - logitSpec * (1 - 2 * Theta / Lambda);
+      const slopeFactor = Math.abs(Lambda) > 1e-10 ? (1 - 2 * Theta / Lambda) : 1;
+      const logitSens = Lambda - logitSpec * slopeFactor;
       const fpr = 1 - 1 / (1 + Math.exp(-logitSpec));
       const sens = 1 / (1 + Math.exp(-logitSens));
       if (fpr >= 0 && fpr <= 1 && sens >= 0 && sens <= 1) {
@@ -12738,12 +12768,18 @@ body.dark-mode .input-error { background: #451a1a !important; }
 
     // Confidence region (ellipse) — bivariate chi2 with df=2
     // Per lessons.md: use sqrt(chi2_{alpha,2}) NOT univariate z
-    const chi2_05_2 = 5.991; // chi2 critical value, alpha=0.05, df=2
-    const confRadius = Math.sqrt(chi2_05_2);
+    const chi2Crit2 = chi2Quantile(br.confLevel, 2);
+    const confRadius = Math.sqrt(chi2Crit2);
+    const rho = br.Sigma?.rho ?? 0;
+    // Cholesky decomposition for correlated ellipse: Sigma = L * L^T
+    const confL11 = br.seLogitSpec;
+    const confL21 = rho * br.seLogitSens;
+    const confL22 = br.seLogitSens * Math.sqrt(Math.max(0, 1 - rho * rho));
     const confEllipsePoints = [];
     for (let angle = 0; angle <= 2 * Math.PI; angle += 0.05) {
-      const x = br.pooledLogitSpec + confRadius * br.seLogitSpec * Math.cos(angle);
-      const y = br.pooledLogitSens + confRadius * br.seLogitSens * Math.sin(angle);
+      const u = Math.cos(angle), v = Math.sin(angle);
+      const x = br.pooledLogitSpec + confRadius * (confL11 * u);
+      const y = br.pooledLogitSens + confRadius * (confL21 * u + confL22 * v);
       const fpr = 1 - 1 / (1 + Math.exp(-x));
       const sens = 1 / (1 + Math.exp(-y));
       if (fpr >= 0 && fpr <= 1 && sens >= 0 && sens <= 1) {
@@ -12751,14 +12787,20 @@ body.dark-mode .input-error { background: #451a1a !important; }
       }
     }
 
-    // Prediction region (uses tau2 + within-study variance)
-    const predRadius = Math.sqrt(chi2_05_2);
-    const predEllipsePoints = [];
-    const predSESens = Math.sqrt(br.tau2Sens + br.seLogitSens ** 2);
+    // Prediction region (uses tau2 + within-study variance, with correlation)
+    const predRadius = Math.sqrt(chi2Crit2);
     const predSESpec = Math.sqrt(br.tau2Spec + br.seLogitSpec ** 2);
+    const predSESens = Math.sqrt(br.tau2Sens + br.seLogitSens ** 2);
+    const predCov = (br.covTau ?? 0) + rho * br.seLogitSens * br.seLogitSpec;
+    const predRho = (predSESens > 0 && predSESpec > 0) ? predCov / (predSESens * predSESpec) : 0;
+    const predL11 = predSESpec;
+    const predL21 = predRho * predSESens;
+    const predL22 = predSESens * Math.sqrt(Math.max(0, 1 - predRho * predRho));
+    const predEllipsePoints = [];
     for (let angle = 0; angle <= 2 * Math.PI; angle += 0.05) {
-      const x = br.pooledLogitSpec + predRadius * predSESpec * Math.cos(angle);
-      const y = br.pooledLogitSens + predRadius * predSESens * Math.sin(angle);
+      const u = Math.cos(angle), v = Math.sin(angle);
+      const x = br.pooledLogitSpec + predRadius * (predL11 * u);
+      const y = br.pooledLogitSens + predRadius * (predL21 * u + predL22 * v);
       const fpr = 1 - 1 / (1 + Math.exp(-x));
       const sens = 1 / (1 + Math.exp(-y));
       if (fpr >= 0 && fpr <= 1 && sens >= 0 && sens <= 1) {
@@ -13636,7 +13678,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
   function exportNMACSV() {
     if (nmaContrasts.length === 0) { showToast('No NMA data', 'warning'); return; }
     const header = 'Study,TreatA,TreatB,Effect,SE,Notes';
-    const rows = nmaContrasts.map(c => [csvSafeCell(c.study), csvSafeCell(c.treatA), csvSafeCell(c.treatB), c.effect ?? '', c.se ?? '', '"' + (c.notes || '').replace(/"/g, '""') + '"'].join(','));
+    const rows = nmaContrasts.map(c => [csvSafeCell(c.study), csvSafeCell(c.treatA), csvSafeCell(c.treatB), c.effect ?? '', c.se ?? '', csvSafeCell(c.notes || '')].join(','));
     downloadFile(header + '\n' + rows.join('\n'), 'nma-contrasts.csv', 'text/csv');
   }
 
@@ -14328,7 +14370,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const rows = dtaStudies.map(s => {
       const sens = (s.tp != null && s.fn != null && (s.tp + s.fn) > 0) ? (s.tp / (s.tp + s.fn)).toFixed(4) : '';
       const spec = (s.tn != null && s.fp != null && (s.fp + s.tn) > 0) ? (s.tn / (s.fp + s.tn)).toFixed(4) : '';
-      return [csvSafeCell(s.authorYear || ''), s.tp ?? '', s.fp ?? '', s.fn ?? '', s.tn ?? '', sens, spec, '"' + (s.notes || '').replace(/"/g, '""') + '"'].join(',');
+      return [csvSafeCell(s.authorYear || ''), s.tp ?? '', s.fp ?? '', s.fn ?? '', s.tn ?? '', sens, spec, csvSafeCell(s.notes || '')].join(',');
     });
     downloadFile(header + '\n' + rows.join('\n'), 'dta-studies.csv', 'text/csv');
   }
@@ -14386,7 +14428,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
   function exportICERCSV() {
     if (icerStrategies.length === 0) { showToast('No strategies', 'warning'); return; }
     const header = 'Strategy,Cost,QALYs,SD_Cost,SD_QALYs,Notes';
-    const rows = icerStrategies.map(s => [csvSafeCell(s.name), s.cost ?? '', s.qaly ?? '', s.sdCost ?? '', s.sdQaly ?? '', '"' + (s.notes || '').replace(/"/g, '""') + '"'].join(','));
+    const rows = icerStrategies.map(s => [csvSafeCell(s.name), s.cost ?? '', s.qaly ?? '', s.sdCost ?? '', s.sdQaly ?? '', csvSafeCell(s.notes || '')].join(','));
     downloadFile(header + '\n' + rows.join('\n'), 'icer-strategies.csv', 'text/csv');
   }
 
@@ -15176,7 +15218,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
 
     // --- Galbraith (Radial) Plot (outlier detection, k >= 3) ---
     if (result.k >= 3 && result.studyResults) {
-      renderGalbraithPlot(result.studyResults, result.muRE);
+      renderGalbraithPlot(result.studyResults, result.muRE, confLevel);
     } else {
       const gEl = document.getElementById('galbraithContainer');
       if (gEl) gEl.innerHTML = '';
@@ -15735,9 +15777,10 @@ body.dark-mode .input-error { background: #451a1a !important; }
   }
 
   // ============================================================
-  // FRAGILITY INDEX (Walsh et al. 2014)
+  // STUDY REMOVAL SENSITIVITY INDEX
   // ============================================================
-  // For binary outcomes: minimum events to add/remove to flip statistical significance
+  // LOO approach: count how many single-study removals flip significance
+  // Note: This is NOT the Walsh et al. (2014) event-level Fragility Index
   function computeFragilityIndex(studies) {
     if (!studies || studies.length < 2) return null;
     var valid = studies.filter(function(s) {
@@ -15790,7 +15833,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       : fiResult.fragilityIndex <= 2 ? 'Moderately fragile' : 'Fragile';
 
     var html = '<div style="border:1px solid var(--border);border-radius:8px;padding:16px;background:var(--bg-card)">' +
-      '<h3 style="font-size:0.95rem;margin:0 0 10px 0">Fragility Index</h3>' +
+      '<h3 style="font-size:0.95rem;margin:0 0 10px 0">Study Removal Sensitivity</h3>' +
       '<div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">' +
       '<div style="text-align:center">' +
       '<div style="font-size:2.2rem;font-weight:700;color:' + fiColor + '">' + fiResult.fragilityIndex + '</div>' +
@@ -15809,9 +15852,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
       (fiResult.fragileStudy ? '<p style="font-size:0.85rem;margin:0"><strong>Most influential:</strong> ' + escapeHtml(fiResult.fragileStudy) + '</p>' : '') +
       '</div></div>' +
       '<p style="font-size:0.78rem;color:var(--text-muted);margin-top:10px">' +
-      'Fragility Index: number of study removals needed to change statistical significance (study-level leave-one-out approach). ' +
-      'Fragility Quotient (FQ) = FI/k. FQ &gt; 0.33 suggests the meta-analysis conclusion is sensitive to individual studies. ' +
-      'Ref: Walsh et al. (2014) J Clin Epidemiol.</p>' +
+      'Study Removal Sensitivity: number of single-study removals that change statistical significance (leave-one-out approach). ' +
+      'Sensitivity Quotient (SQ) = count/k. SQ &gt; 0.33 suggests the conclusion is sensitive to individual studies. ' +
+      'Note: This is a LOO robustness metric, distinct from the event-level Fragility Index of Walsh et al. (2014).</p>' +
       '</div>';
     container.innerHTML = html;
   }
@@ -17091,11 +17134,11 @@ body.dark-mode .input-error { background: #451a1a !important; }
     const rows = searchResultsCache.map(r => {
       const regIds = r.registryIds ? Object.entries(r.registryIds).map(([k, v]) => k + ':' + v.join('|')).join('; ') : '';
       return [
-        '"' + csvSafeCell((r.title || '').replace(/"/g, '""')) + '"',
-        '"' + csvSafeCell((r.authors || '').replace(/"/g, '""')) + '"',
+        csvSafeCell(r.title || ''),
+        csvSafeCell(r.authors || ''),
         r.year || '', csvSafeCell(r.source || ''), r.doi || '', r.pmid || '', r.nctId || '',
-        '"' + csvSafeCell((r.journal || '').replace(/"/g, '""')) + '"',
-        '"' + regIds + '"'
+        csvSafeCell(r.journal || ''),
+        csvSafeCell(regIds)
       ].join(',');
     });
     downloadFile(header + '\n' + rows.join('\n'), 'search-results.csv', 'text/csv');
@@ -19414,7 +19457,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
           { trial: 'EMPEROR-Reduced',   eT: 361, nT: 1863, eC: 462, nC: 1867, hr: 0.75, ciLo: 0.65, ciHi: 0.86 },
           { trial: 'EMPEROR-Preserved', eT: 415, nT: 2997, eC: 511, nC: 2991, hr: 0.79, ciLo: 0.69, ciHi: 0.90 },
           { trial: 'DELIVER',           eT: 512, nT: 3131, eC: 610, nC: 3132, hr: 0.82, ciLo: 0.73, ciHi: 0.92 },
-          { trial: 'SOLOIST-WHF',       eT: 245, nT: 608,  eC: 355, nC: 614,  hr: 0.67, ciLo: 0.52, ciHi: 0.85 },
+          { trial: 'SOLOIST-WHF',       eT: 165, nT: 608,  eC: 207, nC: 614,  hr: 0.71, ciLo: 0.56, ciHi: 0.89 },
         ],
         golden: { hr: 0.77, ciLo: 0.72, ciHi: 0.82, I2: 50 },
         source: 'Vaduganathan et al. Lancet 2022'
@@ -19437,7 +19480,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
           { trial: 'DAPA-HF',          eT: 231, nT: 2373, eC: 318, nC: 2371, hr: 0.70, ciLo: 0.59, ciHi: 0.83 },
           { trial: 'EMPEROR-Reduced',   eT: 246, nT: 1863, eC: 342, nC: 1867, hr: 0.69, ciLo: 0.59, ciHi: 0.81 },
           { trial: 'EMPEROR-Preserved', eT: 259, nT: 2997, eC: 352, nC: 2991, hr: 0.71, ciLo: 0.60, ciHi: 0.83 },
-          { trial: 'DELIVER',           eT: 567, nT: 3131, eC: 742, nC: 3132, hr: 0.77, ciLo: 0.67, ciHi: 0.89 },
+          { trial: 'DELIVER',           eT: 368, nT: 3131, eC: 455, nC: 3132, hr: 0.77, ciLo: 0.67, ciHi: 0.89 },
           { trial: 'SOLOIST-WHF',       eT: 40,  nT: 608,  eC: 64,  nC: 614,  hr: 0.64, ciLo: 0.43, ciHi: 0.95 },
         ],
         golden: { hr: 0.71, ciLo: 0.65, ciHi: 0.78, I2: 0 },
@@ -21228,6 +21271,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
         fillEl.style.width = Math.min(parseFloat(pct), 100) + '%';
         fillEl.style.background = infoResult.fraction >= 1 ? '#28a745' : infoResult.fraction >= 0.5 ? '#ffc107' : 'var(--primary)';
       }
+      var barOuter = document.getElementById('lmaInfoBarOuter');
+      if (barOuter) barOuter.setAttribute('aria-valuenow', Math.round(Math.min(parseFloat(pct), 100)));
     }
 
     renderCUSUMChart(cusumResult);
@@ -21272,7 +21317,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     var xS = function(i) { return padL + (i / Math.max(data.length - 1, 1)) * plotW; };
     var yS = function(v) { return padT + plotH - (v / maxVal) * plotH; };
 
-    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;max-width:600px;font-family:system-ui" role="img" aria-label="CUSUM control chart">';
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;max-width:600px;font-family:system-ui" role="img" aria-label="CUSUM control chart" tabindex="0" focusable="true"><title>CUSUM control chart</title>';
     svg += '<rect x="' + padL + '" y="' + padT + '" width="' + plotW + '" height="' + plotH + '" fill="var(--bg-alt,#f8f9fa)" rx="4"/>';
     var threshY = yS(cusumResult.threshold);
     svg += '<line x1="' + padL + '" y1="' + threshY + '" x2="' + (W - padR) + '" y2="' + threshY + '" stroke="#dc3545" stroke-dasharray="4,3" stroke-width="1.5"/>';
@@ -21325,7 +21370,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     var xS = function(frac) { return padL + (frac / maxFrac) * plotW; };
     var yS = function(z) { return padT + plotH / 2 - (z / maxZ) * (plotH / 2); };
 
-    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;max-width:600px;font-family:system-ui" role="img" aria-label="Sequential monitoring boundaries">';
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;max-width:600px;font-family:system-ui" role="img" aria-label="Sequential monitoring boundaries" tabindex="0" focusable="true"><title>Sequential monitoring boundaries</title>';
     svg += '<rect x="' + padL + '" y="' + padT + '" width="' + plotW + '" height="' + plotH + '" fill="var(--bg-alt,#f8f9fa)" rx="4"/>';
     svg += '<line x1="' + padL + '" y1="' + yS(0) + '" x2="' + (W - padR) + '" y2="' + yS(0) + '" stroke="var(--text-muted)" stroke-width="0.5"/>';
 
@@ -21432,7 +21477,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
     var html = '<h4 style="font-size:0.85rem;margin-bottom:6px">Alert Log</h4><ul style="font-size:0.8rem;margin:0;padding-left:18px">';
     for (var a = 0; a < alerts.length; a++) {
       var icon = alerts[a].severity === 'alert' ? '\u26a0' : alerts[a].severity === 'warn' ? '\u25b2' : '\u2139';
-      html += '<li style="margin-bottom:4px"><strong>' + icon + '</strong> ' + alerts[a].message + '</li>';
+      html += '<li style="margin-bottom:4px"><span aria-hidden="true"><strong>' + icon + '</strong></span> ' + escapeHtml(alerts[a].message) + '</li>';
     }
     html += '</ul>';
     el.innerHTML = html;
@@ -22025,6 +22070,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
           direction: cusumPlus >= threshold ? 'positive' : 'negative',
           value: cusumPlus >= threshold ? cusumPlus : cusumMinus
         });
+        // Reset after crossing (standard CUSUM protocol — Page 1954)
+        if (cusumPlus >= threshold) cusumPlus = 0;
+        if (cusumMinus >= threshold) cusumMinus = 0;
       }
 
       chartData.push({
@@ -22129,10 +22177,14 @@ body.dark-mode .input-error { background: #451a1a !important; }
     var power = opts.power ?? 0.80;
     var zAlpha = normalQuantile(1 - alpha / 2);
     var zBeta = normalQuantile(power);
+    var studyCiZ = normalQuantile(0.975);  // Studies report 95% CIs regardless of TSA alpha
 
     if (!pooledResult || !studies || studies.length < 2) return null;
 
-    var delta = opts.anticipatedEffect ?? pooledResult.pooled ?? 0;
+    // For ratio measures (OR, RR, HR), delta must be on log scale
+    var rawDelta = opts.anticipatedEffect ?? pooledResult.pooled ?? 0;
+    var isRatio = pooledResult.isRatio;
+    var delta = isRatio ? Math.log(Math.max(1e-10, Math.abs(rawDelta))) : rawDelta;
     if (Math.abs(delta) < 1e-10) return null;
 
     var I2 = (pooledResult.I2 ?? 0) / 100;
@@ -22148,7 +22200,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         if (se == null) {
           var lo = s.lower_ci ?? s.effect_estimate;
           var hi = s.upper_ci ?? s.effect_estimate;
-          se = Math.abs(hi - lo) > 0 ? (hi - lo) / (2 * zAlpha) : 0.5;
+          se = Math.abs(hi - lo) > 0 ? (hi - lo) / (2 * studyCiZ) : 0.5;
         }
         var yr = typeof s.start_date === 'number' ? s.start_date
           : parseInt(String(s.start_date ?? '2020').replace(/\D.*/, ''), 10);
@@ -25496,7 +25548,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
         localStorage.setItem(TRUTHCERT_BRIDGE_STORAGE_KEY, JSON.stringify(envelope));
       } catch (_) {}
 
-      const truthCertUrl = safeGetStorage('msa-truthcert-url', DEFAULT_TRUTHCERT_URL) || DEFAULT_TRUTHCERT_URL;
+      let truthCertUrl = safeGetStorage('msa-truthcert-url', DEFAULT_TRUTHCERT_URL) || DEFAULT_TRUTHCERT_URL;
+      // Validate URL scheme (only allow file: and https:)
+      try { const u = new URL(truthCertUrl); if (u.protocol !== 'file:' && u.protocol !== 'https:') truthCertUrl = DEFAULT_TRUTHCERT_URL; } catch (_) { truthCertUrl = DEFAULT_TRUTHCERT_URL; }
       // Derive strict target origin from validated URL (avoid wildcard postMessage)
       let targetOrigin;
       try { targetOrigin = new URL(truthCertUrl).origin; } catch (_) { targetOrigin = '*'; }
@@ -26086,8 +26140,9 @@ function checkLivingEvidence(){
   var terms=[(pico.population||""),(pico.intervention||""),(pico.outcome||"")].filter(function(t){return t.trim().length>0;}).join(" AND ");
   if(!terms){document.getElementById("livingResults").innerHTML='<p style="color:var(--warn)">No PICO terms available for search.</p>';return;}
   var genDate=d.meta.generated?d.meta.generated.split("T")[0]:"";
+  if(genDate&&!/^\d{4}-\d{2}-\d{2}$/.test(genDate))genDate="";
   var url="https://clinicaltrials.gov/api/v2/studies?query.cond="+encodeURIComponent(terms)+"&filter.overallStatus=COMPLETED&pageSize=10";
-  if(genDate)url+="&filter.advanced=AREA[StartDate]RANGE["+genDate+",MAX]";
+  if(genDate)url+="&filter.advanced=AREA[StartDate]RANGE["+encodeURIComponent(genDate)+",MAX]";
   var el=document.getElementById("livingResults");
   el.innerHTML="<p>Searching ClinicalTrials.gov...</p>";
   fetch(url).then(function(res){
@@ -27665,12 +27720,29 @@ function checkLivingEvidence(){
   let _currentInsightTab = 'tawakkul';
 
   function initInsightsPhase() {
-    // Wire up sub-tab clicks
+    // Wire up sub-tab clicks and keyboard navigation (WAI-ARIA tablist pattern)
+    const navEl = document.querySelector('.insights-nav');
     document.querySelectorAll('.insights-tab').forEach(btn => {
       btn.addEventListener('click', () => {
         switchInsightsSubTab(btn.dataset.insight);
       });
     });
+    if (navEl) {
+      navEl.addEventListener('keydown', e => {
+        const tabs = Array.from(navEl.querySelectorAll('.insights-tab'));
+        const idx = tabs.indexOf(document.activeElement);
+        if (idx < 0) return;
+        let next = idx;
+        if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') next = (idx - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') next = 0;
+        else if (e.key === 'End') next = tabs.length - 1;
+        else return;
+        e.preventDefault();
+        tabs[next].focus();
+        switchInsightsSubTab(tabs[next].dataset.insight);
+      });
+    }
     // Initialize the active sub-tab
     switchInsightsSubTab(_currentInsightTab);
   }
@@ -27678,8 +27750,10 @@ function checkLivingEvidence(){
   function switchInsightsSubTab(tab) {
     _currentInsightTab = tab;
     document.querySelectorAll('.insights-tab').forEach(t => {
-      t.classList.toggle('active', t.dataset.insight === tab);
-      t.setAttribute('aria-selected', t.dataset.insight === tab ? 'true' : 'false');
+      const isActive = t.dataset.insight === tab;
+      t.classList.toggle('active', isActive);
+      t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      t.setAttribute('tabindex', isActive ? '0' : '-1');
     });
     document.querySelectorAll('.insight-panel').forEach(p => {
       p.classList.toggle('active', p.id === 'insight-' + tab);
