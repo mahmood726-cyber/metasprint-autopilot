@@ -21580,6 +21580,221 @@ body.dark-mode .input-error { background: #451a1a !important; }
     };
   }
 
+  // ===== LIVING META-ANALYSIS: Sequential Monitoring =====
+
+  /**
+   * CUSUM monitoring for sequential evidence surveillance.
+   * Detects shifts in pooled effect as studies accumulate chronologically.
+   * Uses two-sided CUSUM (C+ for positive shift, C- for negative shift).
+   * Reference: Page ES (1954). Continuous Inspection Schemes. Biometrika 41:100-115.
+   * @param {Array} studies - [{effect_estimate, lower_ci, upper_ci, start_date}]
+   * @param {object} options - {threshold: 4, targetEffect: null, confLevel: 0.95}
+   * @returns {object} {cusumPlus, cusumMinus, crossings, alertStatus, chartData} or null if <3 studies
+   */
+  function computeCUSUM(studies, options) {
+    'use strict';
+    var opts = options ?? {};
+    var threshold = opts.threshold ?? 4;
+    var confLevel = opts.confLevel ?? 0.95;
+    var zCrit = normalQuantile(1 - (1 - confLevel) / 2);
+
+    // Sort chronologically
+    var dated = studies
+      .filter(function(s) { return s.effect_estimate != null && s.start_date != null; })
+      .map(function(s) {
+        var yr = typeof s.start_date === 'number' ? s.start_date
+          : parseInt(String(s.start_date).replace(/\D.*/, ''), 10);
+        var lo = s.lower_ci ?? s.effect_estimate;
+        var hi = s.upper_ci ?? s.effect_estimate;
+        var se = Math.abs(hi - lo) > 0 ? (hi - lo) / (2 * zCrit) : 0.5;
+        return { effect: s.effect_estimate, se: Math.max(se, 0.001), year: yr || 2020 };
+      })
+      .sort(function(a, b) { return a.year - b.year; });
+
+    if (dated.length < 3) return null;
+
+    // Target effect: use overall inverse-variance weighted mean if not specified
+    var targetEffect = opts.targetEffect;
+    if (targetEffect == null) {
+      var sw = 0, swe = 0;
+      for (var d = 0; d < dated.length; d++) {
+        var w = 1 / (dated[d].se * dated[d].se);
+        sw += w; swe += w * dated[d].effect;
+      }
+      targetEffect = sw > 0 ? swe / sw : 0;
+    }
+
+    var chartData = [];
+    var cusumPlus = 0, cusumMinus = 0;
+    var crossings = [];
+
+    for (var i = 0; i < dated.length; i++) {
+      var z = (dated[i].effect - targetEffect) / dated[i].se;
+      cusumPlus = Math.max(0, cusumPlus + z - 0.5);
+      cusumMinus = Math.max(0, cusumMinus - z - 0.5);
+
+      var crossed = cusumPlus >= threshold || cusumMinus >= threshold;
+      if (crossed) {
+        crossings.push({
+          index: i,
+          year: dated[i].year,
+          direction: cusumPlus >= threshold ? 'positive' : 'negative',
+          value: cusumPlus >= threshold ? cusumPlus : cusumMinus
+        });
+      }
+
+      chartData.push({
+        index: i,
+        year: dated[i].year,
+        cusumPlus: cusumPlus,
+        cusumMinus: cusumMinus,
+        threshold: threshold,
+        crossed: crossed
+      });
+    }
+
+    return {
+      cusumPlus: cusumPlus,
+      cusumMinus: cusumMinus,
+      crossings: crossings,
+      alertStatus: crossings.length > 0 ? 'SHIFT_DETECTED' : 'STABLE',
+      threshold: threshold,
+      targetEffect: targetEffect,
+      k: dated.length,
+      chartData: chartData
+    };
+  }
+
+  /**
+   * Alpha spending functions for sequential monitoring boundaries.
+   * @param {number} infoFraction - Information fraction (0 to 1+)
+   * @param {number} alpha - Overall significance level (default 0.05)
+   * @param {string} type - 'obrien-fleming' | 'pocock' | 'lan-demets'
+   * @returns {number} Cumulative alpha spent at this information fraction
+   */
+  function alphaSpending(infoFraction, alpha, type) {
+    'use strict';
+    alpha = alpha ?? 0.05;
+    type = type ?? 'obrien-fleming';
+    var t = Math.max(0, Math.min(infoFraction, 1.5));
+    if (t <= 0) return 0;
+    if (t >= 1) return alpha;
+
+    switch (type) {
+      case 'obrien-fleming':
+        // Lan-DeMets O'Brien-Fleming spending: 2*(1 - Phi(z_{alpha/2}/sqrt(t)))
+        return 2 * (1 - normalCDF(normalQuantile(1 - alpha / 2) / Math.sqrt(t)));
+      case 'pocock':
+        // alpha * ln(1 + (e-1)*t)
+        return alpha * Math.log(1 + (Math.E - 1) * t);
+      case 'lan-demets':
+        // Same as OBF spending (Lan-DeMets approximation to OBF)
+        return 2 * (1 - normalCDF(normalQuantile(1 - alpha / 2) / Math.sqrt(t)));
+      default:
+        return alpha * t; // Linear spending
+    }
+  }
+
+  /**
+   * Compute sequential monitoring boundaries at each interim look.
+   * @param {Array<number>} infoFractions - e.g. [0.25, 0.5, 0.75, 1.0]
+   * @param {number} alpha - Overall two-sided alpha (default 0.05)
+   * @param {string} spendingType - 'obrien-fleming' | 'pocock' | 'lan-demets'
+   * @returns {Array<object>} [{infoFraction, alphaSpent, incrementalAlpha, zBoundary}]
+   */
+  function computeSequentialBoundaries(infoFractions, alpha, spendingType) {
+    'use strict';
+    alpha = alpha ?? 0.05;
+    spendingType = spendingType ?? 'obrien-fleming';
+    if (!infoFractions || infoFractions.length === 0) return [];
+
+    var sorted = infoFractions.slice().sort(function(a, b) { return a - b; });
+    var boundaries = [];
+    var prevSpent = 0;
+
+    for (var i = 0; i < sorted.length; i++) {
+      var t = sorted[i];
+      var cumSpent = alphaSpending(t, alpha, spendingType);
+      var incremental = Math.max(0, cumSpent - prevSpent);
+      // Two-sided z-boundary from incremental alpha
+      var zBound = incremental > 1e-15 ? normalQuantile(1 - incremental / 2) : 20;
+      boundaries.push({
+        infoFraction: t,
+        alphaSpent: cumSpent,
+        incrementalAlpha: incremental,
+        zBoundary: Math.min(zBound, 20) // Cap at 20 for display
+      });
+      prevSpent = cumSpent;
+    }
+
+    return boundaries;
+  }
+
+  /**
+   * Compute Required Information Size (RIS) and running information fraction.
+   * RIS = (z_alpha + z_beta)^2 / delta^2 * (1 + D2) where D2 = I2/(1-I2)
+   * @param {Array} studies - Chronologically sorted study data
+   * @param {object} pooledResult - From computeMetaAnalysis {pooled, I2, tau2}
+   * @param {object} options - {alpha: 0.05, power: 0.80, anticipatedEffect: null}
+   * @returns {object} {ris, accrued, fraction, perStudy} or null if <2 studies or zero effect
+   */
+  function computeInformationFraction(studies, pooledResult, options) {
+    'use strict';
+    var opts = options ?? {};
+    var alpha = opts.alpha ?? 0.05;
+    var power = opts.power ?? 0.80;
+    var zAlpha = normalQuantile(1 - alpha / 2);
+    var zBeta = normalQuantile(power);
+
+    if (!pooledResult || !studies || studies.length < 2) return null;
+
+    var delta = opts.anticipatedEffect ?? pooledResult.pooled ?? 0;
+    if (Math.abs(delta) < 1e-10) return null;
+
+    var I2 = (pooledResult.I2 ?? 0) / 100;
+    var D2 = I2 < 1 ? I2 / (1 - I2) : 10;
+    var risNaive = Math.pow(zAlpha + zBeta, 2) / Math.pow(delta, 2);
+    var ris = risNaive * (1 + D2);
+
+    // Cumulative information = sum(1/vi)
+    var dated = studies
+      .filter(function(s) { return s.effect_estimate != null; })
+      .map(function(s) {
+        var se = s.se;
+        if (se == null) {
+          var lo = s.lower_ci ?? s.effect_estimate;
+          var hi = s.upper_ci ?? s.effect_estimate;
+          se = Math.abs(hi - lo) > 0 ? (hi - lo) / (2 * zAlpha) : 0.5;
+        }
+        var yr = typeof s.start_date === 'number' ? s.start_date
+          : parseInt(String(s.start_date ?? '2020').replace(/\D.*/, ''), 10);
+        return { se: Math.max(se, 0.001), year: yr || 2020 };
+      })
+      .sort(function(a, b) { return a.year - b.year; });
+
+    var accrued = 0;
+    var perStudy = [];
+    for (var i = 0; i < dated.length; i++) {
+      accrued += 1 / (dated[i].se * dated[i].se);
+      perStudy.push({
+        k: i + 1,
+        year: dated[i].year,
+        accrued: accrued,
+        fraction: accrued / ris
+      });
+    }
+
+    return {
+      ris: ris,
+      risNaive: risNaive,
+      D2: D2,
+      accrued: accrued,
+      fraction: accrued / ris,
+      anticipatedEffect: delta,
+      perStudy: perStudy
+    };
+  }
+
   // ===== CROSS-CONDITION BORROWING (IJMA — Consensus) =====
   // "And their affair is [determined by] consultation among themselves" — 42:38
 
