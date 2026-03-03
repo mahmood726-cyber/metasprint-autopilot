@@ -477,6 +477,9 @@ body.dark .db-badge.searched { background: #14532d; border-color: #22c55e; color
   body:not(.light-forced) .abstract-content mark { background: #854d0e; color: #fef3c7; }
   body:not(.light-forced) .autoscreen-bar { background: #334155; }
   body:not(.light-forced) .keyword { background: #1e3a5f; }
+  .lma-toast.lma-toast-warn{background:#3d3200;color:#ffc107}
+  .lma-toast.lma-toast-alert{background:#3d0a0a;color:#f5c6cb}
+  .lma-toast.lma-toast-info{background:#0a2e36;color:#bee5eb}
 }
 
 /* --- Dark Mode: manual toggle --- */
@@ -985,6 +988,12 @@ body.dark-mode .input-error { background: #451a1a !important; }
   .pdf-viewer-container { flex-direction: column; width: 100vw; height: 100vh; margin: 0; }
   .pdf-results-pane { max-width: none; min-width: 0; border-left: none; border-top: 1px solid var(--border); max-height: 40vh; }
 }
+/* Living MA Toast Notifications */
+.lma-toast{position:fixed;top:16px;right:16px;z-index:10003;padding:12px 20px;border-radius:8px;font-size:0.85rem;line-height:1.4;max-width:360px;box-shadow:0 4px 16px rgba(0,0,0,0.15);animation:lmaToastIn 0.3s ease-out;transition:opacity 0.3s}
+.lma-toast.lma-toast-warn{background:#fff3cd;color:#856404;border-left:4px solid #ffc107}
+.lma-toast.lma-toast-alert{background:#f8d7da;color:#721c24;border-left:4px solid #dc3545}
+.lma-toast.lma-toast-info{background:#d1ecf1;color:#0c5460;border-left:4px solid #17a2b8}
+@keyframes lmaToastIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer crossorigin="anonymous"></script>
 </head>
@@ -2069,19 +2078,30 @@ body.dark-mode .input-error { background: #451a1a !important; }
         </div>
       </div>
 
-      <!-- Living Evidence Mode -->
+      <!-- Living Evidence Mode — Sequential Monitoring Dashboard -->
       <div class="insight-panel" id="insight-living">
-        <h3>Living Evidence Mode</h3>
-        <p class="text-muted" style="margin-bottom:10px">PRISMA-LSR compliant currency tracking. Shows when evidence was last verified, what changed, and what needs updating.</p>
-        <div id="livingNoData" class="placeholder" style="display:none">Load universe data to enable living evidence tracking.</div>
-        <div id="livingContent" style="display:none">
-          <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
-            <button onclick="runLivingEvidenceCheck()">Check Currency</button>
-            <button class="btn-outline" onclick="exportLivingReport()">Export Report</button>
-          </div>
-          <div id="livingDashboard"></div>
-          <div id="livingTimeline" style="margin-top:16px"></div>
+        <h3 style="font-size:1rem;margin-bottom:8px">Sequential Monitoring Dashboard</h3>
+        <p class="text-muted" style="font-size:0.8rem;margin-bottom:12px">Living meta-analysis surveillance: CUSUM control charts, alpha spending boundaries, and stopping recommendations.</p>
+        <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;align-items:center">
+          <label style="font-size:0.8rem">Spending function: <select id="lmaSpendingType" style="padding:3px 6px;font-size:0.8rem;border:1px solid var(--border);border-radius:var(--radius)"><option value="obrien-fleming" selected>O'Brien-Fleming</option><option value="pocock">Pocock</option><option value="lan-demets">Lan-DeMets</option></select></label>
+          <label style="font-size:0.8rem">CUSUM threshold (h): <input type="number" id="lmaCusumThreshold" value="4" min="1" max="10" step="0.5" style="width:56px;padding:3px 6px;font-size:0.8rem;border:1px solid var(--border);border-radius:var(--radius)"></label>
+          <label style="font-size:0.8rem">Power: <select id="lmaPower" style="padding:3px 6px;font-size:0.8rem;border:1px solid var(--border);border-radius:var(--radius)"><option value="0.80" selected>80%</option><option value="0.90">90%</option></select></label>
+          <button id="lmaRunBtn" class="btn btn-sm" style="padding:4px 14px;font-size:0.8rem;background:var(--primary);color:#fff;border:none;border-radius:var(--radius);cursor:pointer" onclick="runLivingMADashboard()">Run Surveillance</button>
         </div>
+        <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;align-items:center;padding:8px 12px;background:var(--bg-alt,#f8f9fa);border-radius:var(--radius)">
+          <label style="font-size:0.8rem">Auto-update interval: <select id="lmaAutoInterval" style="padding:3px 6px;font-size:0.8rem;border:1px solid var(--border);border-radius:var(--radius)"><option value="0" selected>Manual only</option><option value="86400000">Daily</option><option value="604800000">Weekly</option><option value="2592000000">Monthly</option></select></label>
+          <button id="lmaAutoToggle" class="btn btn-sm" style="padding:4px 14px;font-size:0.8rem;background:var(--surface-alt,#6c757d);color:#fff;border:none;border-radius:var(--radius);cursor:pointer" onclick="toggleLMAAutoUpdate()">Enable Auto-Update</button>
+          <span id="lmaLastUpdated" class="text-muted" style="font-size:0.75rem"></span>
+          <span id="lmaStaleWarning" style="display:none;font-size:0.75rem;color:#dc3545;font-weight:600">Evidence may be stale</span>
+        </div>
+        <div id="lmaInfoFractionBar" style="margin-bottom:12px;display:none">
+          <div style="font-size:0.78rem;margin-bottom:4px"><strong>Information Fraction:</strong> <span id="lmaInfoPct">0%</span> of RIS</div>
+          <div style="height:12px;background:var(--border);border-radius:6px;overflow:hidden"><div id="lmaInfoFill" style="height:100%;background:var(--primary);border-radius:6px;transition:width 0.4s;width:0%"></div></div>
+        </div>
+        <div id="lmaCusumChart" style="margin-bottom:16px"></div>
+        <div id="lmaSequentialChart" style="margin-bottom:16px"></div>
+        <div id="lmaStoppingRecommendation" style="margin-bottom:12px"></div>
+        <div id="lmaAlertLog" style="margin-bottom:12px"></div>
       </div>
 
       <!-- Conflict Detector -->
@@ -21105,6 +21125,370 @@ body.dark-mode .input-error { background: #451a1a !important; }
       '<div style="font-size:0.78rem;font-weight:600;margin-bottom:2px">' + escapeHtml(cluster.drug_class) + ' (' + escapeHtml(cluster.subcategory) + ')</div>' +
       '<div style="font-size:0.7rem;color:var(--text-muted)">' + escapeHtml(cluster.outcome || '') + ' | ' + cluster.effect_type + ' | k=' + last.k + ' | ' + velStr + convStr + '</div>' +
       svg + '</div>';
+  }
+
+  // ===== LIVING MA DASHBOARD — UI Rendering =====
+
+  var _lmaAutoTimer = null;
+  var _lmaLastUpdateTime = null;
+
+  function showLMAToast(message, severity, duration) {
+    'use strict';
+    severity = severity ?? 'info';
+    duration = duration ?? 6000;
+    var toast = document.createElement('div');
+    toast.className = 'lma-toast lma-toast-' + severity;
+    toast.setAttribute('role', 'alert');
+    toast.setAttribute('aria-live', 'assertive');
+    toast.textContent = message;
+    var existing = document.querySelectorAll('.lma-toast');
+    var offset = 16 + existing.length * 56;
+    toast.style.top = offset + 'px';
+    document.body.appendChild(toast);
+    if (typeof announceToScreenReader === 'function') announceToScreenReader(message);
+    setTimeout(function() {
+      toast.style.opacity = '0';
+      setTimeout(function() { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
+    }, duration);
+  }
+
+  function evaluateLMAAlerts(cusumResult, infoResult, trajectory) {
+    'use strict';
+    var alerts = [];
+    if (cusumResult && cusumResult.alertStatus === 'SHIFT_DETECTED') {
+      var last = cusumResult.crossings[cusumResult.crossings.length - 1];
+      alerts.push({
+        type: 'cusum_shift',
+        severity: 'alert',
+        message: 'CUSUM shift detected (' + last.direction + ', year ' + last.year + '). The pooled effect may have changed direction or magnitude.'
+      });
+    }
+    if (infoResult) {
+      if (infoResult.fraction >= 1.0) {
+        alerts.push({ type: 'ris_reached', severity: 'info', message: 'Required Information Size reached (' + (infoResult.fraction * 100).toFixed(0) + '%). Sequential monitoring boundaries are fully powered.' });
+      } else if (infoResult.fraction >= 0.5) {
+        alerts.push({ type: 'ris_interim', severity: 'warn', message: 'Information fraction at ' + (infoResult.fraction * 100).toFixed(0) + '% of RIS. Interim analysis may be warranted.' });
+      }
+    }
+    if (trajectory && trajectory.length >= 3) {
+      var tLast = trajectory[trajectory.length - 1];
+      var tPrev = trajectory[trajectory.length - 2];
+      if (tLast && tPrev) {
+        var lastSign = tLast.effect > 0 ? 1 : tLast.effect < 0 ? -1 : 0;
+        var prevSign = tPrev.effect > 0 ? 1 : tPrev.effect < 0 ? -1 : 0;
+        if (lastSign !== 0 && prevSign !== 0 && lastSign !== prevSign) {
+          alerts.push({ type: 'direction_change', severity: 'alert', message: 'Direction change detected: pooled effect crossed null between k=' + (trajectory.length - 1) + ' and k=' + trajectory.length + '.' });
+        }
+      }
+    }
+    return alerts;
+  }
+
+  function runLivingMADashboard() {
+    'use strict';
+    var spendingType = (document.getElementById('lmaSpendingType') ?? {}).value ?? 'obrien-fleming';
+    var cusumH = parseFloat((document.getElementById('lmaCusumThreshold') ?? {}).value) ?? 4;
+    var power = parseFloat((document.getElementById('lmaPower') ?? {}).value) ?? 0.80;
+    var confLevel = parseFloat((document.getElementById('confLevelSelect') ?? {}).value) ?? 0.95;
+    var alpha = 1 - confLevel;
+
+    var studies = [];
+    var result = window._lastAnalysisResult;
+    if (result && result.studies && result.studies.length >= 3) {
+      studies = result.studies.map(function(s, i) {
+        return {
+          effect_estimate: s.effectEstimate ?? s.yi,
+          lower_ci: s.lowerCI ?? s.ci_lo,
+          upper_ci: s.upperCI ?? s.ci_hi,
+          start_date: s.year ?? (2000 + i),
+          se: s.se ?? s.sei
+        };
+      });
+    }
+
+    if (studies.length < 3) {
+      var el = document.getElementById('lmaCusumChart');
+      if (el) el.innerHTML = '<p class="text-muted" style="font-size:0.8rem">Need at least 3 dated studies for sequential monitoring. Load data in the Analyze tab first.</p>';
+      return;
+    }
+
+    var cusumResult = computeCUSUM(studies, { threshold: cusumH, confLevel: confLevel });
+    var pooled = result ? { pooled: result.pooled ?? result.muRE, I2: result.I2, tau2: result.tau2, seMu: result.seMu } : null;
+    var infoResult = computeInformationFraction(studies, pooled, { alpha: alpha, power: power });
+
+    // Info fraction bar
+    var barWrap = document.getElementById('lmaInfoFractionBar');
+    if (barWrap && infoResult) {
+      barWrap.style.display = '';
+      var pct = Math.min(infoResult.fraction * 100, 150).toFixed(1);
+      var pctEl = document.getElementById('lmaInfoPct');
+      if (pctEl) pctEl.textContent = pct + '%';
+      var fillEl = document.getElementById('lmaInfoFill');
+      if (fillEl) {
+        fillEl.style.width = Math.min(parseFloat(pct), 100) + '%';
+        fillEl.style.background = infoResult.fraction >= 1 ? '#28a745' : infoResult.fraction >= 0.5 ? '#ffc107' : 'var(--primary)';
+      }
+    }
+
+    renderCUSUMChart(cusumResult);
+
+    if (infoResult) {
+      var fractions = infoResult.perStudy.map(function(s) { return s.fraction; });
+      var boundaries = computeSequentialBoundaries(fractions, alpha, spendingType);
+      renderSequentialChart(cusumResult, boundaries, infoResult, studies, pooled);
+    }
+
+    renderStoppingRecommendation(cusumResult, infoResult, pooled, alpha, spendingType);
+
+    var trajectory = null;
+    try {
+      if (typeof computeTemporalTrajectory === 'function') {
+        trajectory = computeTemporalTrajectory({ studies: studies });
+      }
+    } catch (_e) { /* ignore */ }
+    var alerts = evaluateLMAAlerts(cusumResult, infoResult, trajectory);
+    renderLMAAlertLog(alerts);
+
+    for (var a = 0; a < alerts.length; a++) {
+      showLMAToast(alerts[a].message, alerts[a].severity);
+    }
+  }
+
+  function renderCUSUMChart(cusumResult) {
+    'use strict';
+    var el = document.getElementById('lmaCusumChart');
+    if (!el || !cusumResult || !cusumResult.chartData || cusumResult.chartData.length === 0) {
+      if (el) el.innerHTML = '';
+      return;
+    }
+    var data = cusumResult.chartData;
+    var W = 600, H = 200, padL = 50, padR = 20, padT = 20, padB = 30;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var maxVal = Math.max(cusumResult.threshold * 1.3, 1);
+    for (var m = 0; m < data.length; m++) {
+      var mv = Math.max(data[m].cusumPlus, data[m].cusumMinus);
+      if (mv > maxVal) maxVal = mv;
+    }
+    var xS = function(i) { return padL + (i / Math.max(data.length - 1, 1)) * plotW; };
+    var yS = function(v) { return padT + plotH - (v / maxVal) * plotH; };
+
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;max-width:600px;font-family:system-ui" role="img" aria-label="CUSUM control chart">';
+    svg += '<rect x="' + padL + '" y="' + padT + '" width="' + plotW + '" height="' + plotH + '" fill="var(--bg-alt,#f8f9fa)" rx="4"/>';
+    var threshY = yS(cusumResult.threshold);
+    svg += '<line x1="' + padL + '" y1="' + threshY + '" x2="' + (W - padR) + '" y2="' + threshY + '" stroke="#dc3545" stroke-dasharray="4,3" stroke-width="1.5"/>';
+    svg += '<text x="' + (W - padR - 2) + '" y="' + (threshY - 4) + '" fill="#dc3545" font-size="10" text-anchor="end">h=' + cusumResult.threshold + '</text>';
+
+    var pathPlus = 'M';
+    for (var p = 0; p < data.length; p++) {
+      pathPlus += (p > 0 ? 'L' : '') + xS(p).toFixed(1) + ',' + yS(data[p].cusumPlus).toFixed(1);
+    }
+    svg += '<path d="' + pathPlus + '" fill="none" stroke="#0066cc" stroke-width="2"/>';
+
+    var pathMinus = 'M';
+    for (var q = 0; q < data.length; q++) {
+      pathMinus += (q > 0 ? 'L' : '') + xS(q).toFixed(1) + ',' + yS(data[q].cusumMinus).toFixed(1);
+    }
+    svg += '<path d="' + pathMinus + '" fill="none" stroke="#cc6600" stroke-width="2"/>';
+
+    for (var c = 0; c < cusumResult.crossings.length; c++) {
+      var cr = cusumResult.crossings[c];
+      var cx = xS(cr.index), cy = yS(cr.value);
+      svg += '<circle cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="5" fill="#dc3545" stroke="#fff" stroke-width="1.5"/>';
+    }
+
+    svg += '<text x="' + (padL + plotW / 2) + '" y="' + (H - 4) + '" fill="var(--text)" font-size="11" text-anchor="middle">Study index</text>';
+    svg += '<text x="14" y="' + (padT + plotH / 2) + '" fill="var(--text)" font-size="11" text-anchor="middle" transform="rotate(-90,14,' + (padT + plotH / 2) + ')">CUSUM</text>';
+    svg += '<circle cx="' + (padL + 10) + '" cy="' + (padT + 10) + '" r="4" fill="#0066cc"/>';
+    svg += '<text x="' + (padL + 18) + '" y="' + (padT + 14) + '" fill="var(--text)" font-size="9">CUSUM+</text>';
+    svg += '<circle cx="' + (padL + 70) + '" cy="' + (padT + 10) + '" r="4" fill="#cc6600"/>';
+    svg += '<text x="' + (padL + 78) + '" y="' + (padT + 14) + '" fill="var(--text)" font-size="9">CUSUM\u2212</text>';
+    svg += '</svg>';
+    el.innerHTML = '<h4 style="font-size:0.85rem;margin-bottom:6px">CUSUM Control Chart</h4>' + svg;
+  }
+
+  function renderSequentialChart(cusumResult, boundaries, infoResult, studies, pooled) {
+    'use strict';
+    var el = document.getElementById('lmaSequentialChart');
+    if (!el || !boundaries || boundaries.length === 0 || !infoResult) { if (el) el.innerHTML = ''; return; }
+
+    var W = 600, H = 220, padL = 50, padR = 20, padT = 20, padB = 30;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var maxFrac = 1.1;
+    for (var f = 0; f < infoResult.perStudy.length; f++) {
+      if (infoResult.perStudy[f].fraction > maxFrac) maxFrac = infoResult.perStudy[f].fraction;
+    }
+    var maxZ = 4;
+    for (var b = 0; b < boundaries.length; b++) {
+      var bz = Math.min(boundaries[b].zBoundary, 8);
+      if (bz > maxZ) maxZ = bz;
+    }
+    var xS = function(frac) { return padL + (frac / maxFrac) * plotW; };
+    var yS = function(z) { return padT + plotH / 2 - (z / maxZ) * (plotH / 2); };
+
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;max-width:600px;font-family:system-ui" role="img" aria-label="Sequential monitoring boundaries">';
+    svg += '<rect x="' + padL + '" y="' + padT + '" width="' + plotW + '" height="' + plotH + '" fill="var(--bg-alt,#f8f9fa)" rx="4"/>';
+    svg += '<line x1="' + padL + '" y1="' + yS(0) + '" x2="' + (W - padR) + '" y2="' + yS(0) + '" stroke="var(--text-muted)" stroke-width="0.5"/>';
+
+    if (maxFrac > 1) {
+      var risX = xS(1.0);
+      svg += '<line x1="' + risX + '" y1="' + padT + '" x2="' + risX + '" y2="' + (padT + plotH) + '" stroke="#28a745" stroke-dasharray="3,3" stroke-width="1"/>';
+      svg += '<text x="' + risX + '" y="' + (padT - 4) + '" fill="#28a745" font-size="9" text-anchor="middle">RIS</text>';
+    }
+
+    // Upper boundary
+    var pathUpper = 'M';
+    for (var u = 0; u < boundaries.length; u++) {
+      var bx = xS(boundaries[u].infoFraction);
+      var by = yS(Math.min(boundaries[u].zBoundary, maxZ));
+      pathUpper += (u > 0 ? 'L' : '') + bx.toFixed(1) + ',' + by.toFixed(1);
+    }
+    svg += '<path d="' + pathUpper + '" fill="none" stroke="#dc3545" stroke-width="2" stroke-dasharray="6,3"/>';
+
+    // Lower boundary (mirror)
+    var pathLower = 'M';
+    for (var l = 0; l < boundaries.length; l++) {
+      var lbx = xS(boundaries[l].infoFraction);
+      var lby = yS(-Math.min(boundaries[l].zBoundary, maxZ));
+      pathLower += (l > 0 ? 'L' : '') + lbx.toFixed(1) + ',' + lby.toFixed(1);
+    }
+    svg += '<path d="' + pathLower + '" fill="none" stroke="#dc3545" stroke-width="2" stroke-dasharray="6,3"/>';
+
+    // Cumulative z trajectory
+    var confLevel = parseFloat((document.getElementById('confLevelSelect') ?? {}).value) ?? 0.95;
+    var zCrit = normalQuantile(1 - (1 - confLevel) / 2);
+    if (studies.length >= 2 && infoResult.perStudy.length >= 2) {
+      var dated = studies.filter(function(s) { return s.effect_estimate != null; }).sort(function(a, b) { return (a.start_date ?? 0) - (b.start_date ?? 0); });
+      var sw = 0, swe = 0;
+      var pathZ = '';
+      for (var z = 0; z < dated.length; z++) {
+        var se = dated[z].se ?? 0.5;
+        var w = 1 / (se * se);
+        sw += w; swe += w * dated[z].effect_estimate;
+        if (z >= 1 && sw > 0) {
+          var pooledEst = swe / sw;
+          var seMu = 1 / Math.sqrt(sw);
+          var zStat = seMu > 0 ? pooledEst / seMu : 0;
+          var frac = infoResult.perStudy[Math.min(z, infoResult.perStudy.length - 1)].fraction ?? 0;
+          pathZ += (pathZ === '' ? 'M' : 'L') + xS(frac).toFixed(1) + ',' + yS(Math.max(-maxZ, Math.min(maxZ, zStat))).toFixed(1);
+        }
+      }
+      if (pathZ !== '') {
+        svg += '<path d="' + pathZ + '" fill="none" stroke="#0066cc" stroke-width="2.5"/>';
+      }
+    }
+
+    svg += '<text x="' + (padL + plotW / 2) + '" y="' + (H - 4) + '" fill="var(--text)" font-size="11" text-anchor="middle">Information fraction</text>';
+    svg += '<text x="14" y="' + (padT + plotH / 2) + '" fill="var(--text)" font-size="11" text-anchor="middle" transform="rotate(-90,14,' + (padT + plotH / 2) + ')">Cumulative Z</text>';
+    svg += '</svg>';
+    el.innerHTML = '<h4 style="font-size:0.85rem;margin-bottom:6px">Sequential Monitoring Boundaries</h4>' + svg;
+  }
+
+  function renderStoppingRecommendation(cusumResult, infoResult, pooled, alpha, spendingType) {
+    'use strict';
+    var el = document.getElementById('lmaStoppingRecommendation');
+    if (!el) return;
+    if (!infoResult || !cusumResult) { el.innerHTML = ''; return; }
+
+    var recommendation = 'CONTINUE';
+    var reason = '';
+    var color = '#0c5460';
+    var bg = '#d1ecf1';
+
+    var fraction = infoResult.fraction;
+    var boundaries = computeSequentialBoundaries([fraction], alpha ?? 0.05, spendingType);
+    var zBound = boundaries.length > 0 ? boundaries[0].zBoundary : Infinity;
+
+    var muRE = pooled?.pooled ?? 0;
+    var seRE = pooled?.seMu ?? (infoResult.accrued > 0 ? 1 / Math.sqrt(infoResult.accrued) : 1);
+    var currentZ = seRE > 0 ? Math.abs(muRE / seRE) : 0;
+
+    if (currentZ >= zBound && fraction >= 0.5) {
+      recommendation = 'STOP FOR EFFICACY';
+      reason = 'Cumulative Z (' + currentZ.toFixed(2) + ') exceeds monitoring boundary (' + zBound.toFixed(2) + ') at ' + (fraction * 100).toFixed(0) + '% information fraction.';
+      color = '#155724'; bg = '#d4edda';
+    } else if (fraction >= 1.0 && currentZ < normalQuantile(1 - (alpha ?? 0.05) / 2)) {
+      recommendation = 'STOP FOR FUTILITY';
+      reason = 'Full RIS reached but Z (' + currentZ.toFixed(2) + ') below significance threshold. Consider stopping.';
+      color = '#856404'; bg = '#fff3cd';
+    } else if (cusumResult.alertStatus === 'SHIFT_DETECTED') {
+      recommendation = 'INVESTIGATE';
+      reason = 'CUSUM detected an effect shift. Review recent studies for heterogeneity or population changes.';
+      color = '#721c24'; bg = '#f8d7da';
+    } else {
+      reason = 'Information fraction at ' + (fraction * 100).toFixed(0) + '%, Z = ' + currentZ.toFixed(2) + ', boundary = ' + zBound.toFixed(2) + '. Continue accumulating evidence.';
+    }
+
+    el.innerHTML = '<div style="padding:10px 16px;border-radius:8px;background:' + bg + ';color:' + color + ';font-size:0.85rem;border-left:4px solid ' + color + '"><strong>Recommendation: ' + recommendation + '</strong><br><span style="font-size:0.78rem">' + reason + '</span></div>';
+  }
+
+  function renderLMAAlertLog(alerts) {
+    'use strict';
+    var el = document.getElementById('lmaAlertLog');
+    if (!el) return;
+    if (!alerts || alerts.length === 0) {
+      el.innerHTML = '<p class="text-muted" style="font-size:0.78rem">No alerts triggered.</p>';
+      return;
+    }
+    var html = '<h4 style="font-size:0.85rem;margin-bottom:6px">Alert Log</h4><ul style="font-size:0.8rem;margin:0;padding-left:18px">';
+    for (var a = 0; a < alerts.length; a++) {
+      var icon = alerts[a].severity === 'alert' ? '\u26a0' : alerts[a].severity === 'warn' ? '\u25b2' : '\u2139';
+      html += '<li style="margin-bottom:4px"><strong>' + icon + '</strong> ' + alerts[a].message + '</li>';
+    }
+    html += '</ul>';
+    el.innerHTML = html;
+  }
+
+  function toggleLMAAutoUpdate() {
+    'use strict';
+    var btn = document.getElementById('lmaAutoToggle');
+    var intervalMs = parseInt((document.getElementById('lmaAutoInterval') ?? {}).value ?? '0', 10);
+
+    if (_lmaAutoTimer) {
+      clearInterval(_lmaAutoTimer);
+      _lmaAutoTimer = null;
+      if (btn) { btn.textContent = 'Enable Auto-Update'; btn.style.background = 'var(--surface-alt,#6c757d)'; }
+      return;
+    }
+
+    if (intervalMs <= 0) {
+      showLMAToast('Select an interval first (daily/weekly/monthly).', 'warn');
+      return;
+    }
+
+    runLivingMADashboard();
+    _lmaLastUpdateTime = Date.now();
+    updateLMATimestamp();
+
+    _lmaAutoTimer = setInterval(function() {
+      runLivingMADashboard();
+      _lmaLastUpdateTime = Date.now();
+      updateLMATimestamp();
+    }, intervalMs);
+
+    if (btn) { btn.textContent = 'Disable Auto-Update'; btn.style.background = '#28a745'; }
+    showLMAToast('Auto-update enabled. Next check in ' + formatInterval(intervalMs) + '.', 'info');
+  }
+
+  function updateLMATimestamp() {
+    'use strict';
+    var el = document.getElementById('lmaLastUpdated');
+    var warn = document.getElementById('lmaStaleWarning');
+    if (el && _lmaLastUpdateTime) {
+      el.textContent = 'Last updated: ' + new Date(_lmaLastUpdateTime).toLocaleString();
+    }
+    var intervalMs = parseInt((document.getElementById('lmaAutoInterval') ?? {}).value ?? '0', 10);
+    if (warn && intervalMs > 0 && _lmaLastUpdateTime) {
+      var elapsed = Date.now() - _lmaLastUpdateTime;
+      warn.style.display = elapsed > intervalMs * 1.5 ? '' : 'none';
+    }
+  }
+
+  function formatInterval(ms) {
+    'use strict';
+    if (ms >= 2592000000) return 'monthly';
+    if (ms >= 604800000) return 'weekly';
+    if (ms >= 86400000) return 'daily';
+    return (ms / 1000).toFixed(0) + 's';
   }
 
   // --- 3. Evidence Maturity Score ---
