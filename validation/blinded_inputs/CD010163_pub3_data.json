@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD010163_pub3_data",
+  "cd_number": "CD010163",
+  "analysis_name": "Tumour response",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Xu 2012",
+      "year": "2012",
+      "ee": 22.0,
+      "en": 25.0,
+      "ce": 14.0,
+      "cn": 25.0,
+      "effect_estimate": 5.761905,
+      "lower_ci": 1.362304,
+      "upper_ci": 24.370145,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Vogl 2022",
+      "year": "2022",
+      "ee": 6.0,
+      "en": 26.0,
+      "ce": 9.0,
+      "cn": 24.0,
+      "effect_estimate": 0.5,
+      "lower_ci": 0.145968,
+      "upper_ci": 1.712707,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

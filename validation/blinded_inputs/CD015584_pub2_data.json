@@ -1,0 +1,74 @@
+{
+  "dataset_name": "CD015584_pub2_data",
+  "cd_number": "CD015584",
+  "analysis_name": "Need for adjunctive placement measures: ultrasound guidance",
+  "effect_type": "OR",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Lathrop 2013",
+      "year": "2013",
+      "ee": 1.0,
+      "en": 37.0,
+      "ce": 0.0,
+      "cn": 36.0,
+      "effect_estimate": 3.0,
+      "lower_ci": 0.118195,
+      "upper_ci": 76.145557,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Swenson 2012",
+      "year": "2012",
+      "ee": 1.0,
+      "en": 54.0,
+      "ce": 3.0,
+      "cn": 51.0,
+      "effect_estimate": 0.301887,
+      "lower_ci": 0.030354,
+      "upper_ci": 3.002424,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Heikinheimo 2010",
+      "year": "2010",
+      "ee": 27.0,
+      "en": 43.0,
+      "ce": 30.0,
+      "cn": 46.0,
+      "effect_estimate": 0.9,
+      "lower_ci": 0.378375,
+      "upper_ci": 2.140733,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Mansy 2018",
+      "year": "2018",
+      "ee": 102.0,
+      "en": 200.0,
+      "ce": 103.0,
+      "cn": 200.0,
+      "effect_estimate": 0.980186,
+      "lower_ci": 0.662179,
+      "upper_ci": 1.450914,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Scavuzzi 2013",
+      "year": "2013",
+      "ee": 32.0,
+      "en": 86.0,
+      "ce": 62.0,
+      "cn": 93.0,
+      "effect_estimate": 0.296296,
+      "lower_ci": 0.16032,
+      "upper_ci": 0.547601,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

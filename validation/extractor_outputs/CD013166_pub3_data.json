@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013166_pub3_data",
+  "cd_number": "CD013166",
+  "analysis_name": "Erectile function",
+  "effect_type": "MD",
+  "k_input": 16,
+  "results": {
+    "I2": 61.059399534727085,
+    "Q": 38.52020724070998,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 16,
+    "funnel_dots": 16,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 16,
+    "p_value": 1.1324274851176597e-14,
+    "pooled": 3.778265126919216,
+    "pooled_hi": 4.73714615209475,
+    "pooled_lo": 2.819384101743681,
+    "pooled_log": 3.778265126919216,
+    "pooled_se": 0.48912645962142803,
+    "tau2": 1.9817052162218163
+  }
+}

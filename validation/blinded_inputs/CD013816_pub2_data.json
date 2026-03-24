@@ -1,0 +1,74 @@
+{
+  "dataset_name": "CD013816_pub2_data",
+  "cd_number": "CD013816",
+  "analysis_name": "Thromboembolic events (composite)",
+  "effect_type": "OR",
+  "k": 5,
+  "studies": [
+    {
+      "study": "BRUISE CONTROL 2013",
+      "year": "2013",
+      "ee": 0.0,
+      "en": 338.0,
+      "ce": 2.0,
+      "cn": 343.0,
+      "effect_estimate": 0.201773,
+      "lower_ci": 0.009645,
+      "upper_ci": 4.22127,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Cheng 2011",
+      "year": "2011",
+      "ee": 1.0,
+      "en": 50.0,
+      "ce": 0.0,
+      "cn": 50.0,
+      "effect_estimate": 3.060606,
+      "lower_ci": 0.121648,
+      "upper_ci": 77.003225,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "FinPAC 2013",
+      "year": "2013",
+      "ee": 1.0,
+      "en": 107.0,
+      "ce": 0.0,
+      "cn": 106.0,
+      "effect_estimate": 3.0,
+      "lower_ci": 0.12076,
+      "upper_ci": 74.5281,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "PACEBRIDGE 2014",
+      "year": "2014",
+      "ee": 0.0,
+      "en": 85.0,
+      "ce": 1.0,
+      "cn": 86.0,
+      "effect_estimate": 0.333333,
+      "lower_ci": 0.013381,
+      "upper_ci": 8.303768,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "BRUISE CONTROL-2 2018",
+      "year": "2018",
+      "ee": 1.0,
+      "en": 334.0,
+      "ce": 1.0,
+      "cn": 328.0,
+      "effect_estimate": 0.981982,
+      "lower_ci": 0.061127,
+      "upper_ci": 15.775097,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

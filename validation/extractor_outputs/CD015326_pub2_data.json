@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015326_pub2_data",
+  "cd_number": "CD015326",
+  "analysis_name": "BMI (Short-term)",
+  "effect_type": "MD",
+  "k_input": 7,
+  "results": {
+    "I2": 0,
+    "Q": 4.345098979467792,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 7,
+    "funnel_dots": 7,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 7,
+    "p_value": 0.25488029741716667,
+    "pooled": -0.10170230196328223,
+    "pooled_hi": 0.07340830724711381,
+    "pooled_lo": -0.27681291117367823,
+    "pooled_log": -0.10170230196328223,
+    "pooled_se": 0.08932414979173556,
+    "tau2": 0
+  }
+}

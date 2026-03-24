@@ -1,0 +1,87 @@
+{
+  "dataset_name": "CD009298_pub3_data",
+  "cd_number": "CD009298",
+  "analysis_name": "Operative delivery",
+  "effect_type": "OR",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Blanc 2021",
+      "year": "2021",
+      "ee": 37.0,
+      "en": 126.0,
+      "ce": 54.0,
+      "cn": 131.0,
+      "effect_estimate": 0.592801,
+      "lower_ci": 0.353204,
+      "upper_ci": 0.994929,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Broberg 2021",
+      "year": "2021",
+      "ee": 12.0,
+      "en": 33.0,
+      "ce": 9.0,
+      "cn": 32.0,
+      "effect_estimate": 1.460317,
+      "lower_ci": 0.512269,
+      "upper_ci": 4.162903,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Graham 2014",
+      "year": "2011",
+      "ee": 13.0,
+      "en": 15.0,
+      "ce": 12.0,
+      "cn": 15.0,
+      "effect_estimate": 1.625,
+      "lower_ci": 0.230249,
+      "upper_ci": 11.468559,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Phipps 2021",
+      "year": "2021",
+      "ee": 79.0,
+      "en": 127.0,
+      "ce": 90.0,
+      "cn": 127.0,
+      "effect_estimate": 0.67662,
+      "lower_ci": 0.400389,
+      "upper_ci": 1.143427,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Verhaeghe 2021",
+      "year": "2021",
+      "ee": 49.0,
+      "en": 117.0,
+      "ce": 48.0,
+      "cn": 119.0,
+      "effect_estimate": 1.06587,
+      "lower_ci": 0.634449,
+      "upper_ci": 1.790655,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "de Vries 2022",
+      "year": "2022",
+      "ee": 41.0,
+      "en": 80.0,
+      "ce": 40.0,
+      "cn": 80.0,
+      "effect_estimate": 1.051282,
+      "lower_ci": 0.565515,
+      "upper_ci": 1.954313,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

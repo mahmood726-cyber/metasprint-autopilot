@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD012572_pub3_data",
+  "cd_number": "CD012572",
+  "analysis_name": "All-cause mortality",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Burr 1977",
+      "year": "1977",
+      "ee": 3.0,
+      "en": 54.0,
+      "ce": 1.0,
+      "cn": 52.0,
+      "effect_estimate": 3.0,
+      "lower_ci": 0.301766,
+      "upper_ci": 29.824475,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Maland 1983",
+      "year": "1983",
+      "ee": 0.0,
+      "en": 31.0,
+      "ce": 1.0,
+      "cn": 31.0,
+      "effect_estimate": 0.322751,
+      "lower_ci": 0.012643,
+      "upper_ci": 8.239523,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Moonen 2015",
+      "year": "2015",
+      "ee": 1.0,
+      "en": 199.0,
+      "ce": 1.0,
+      "cn": 186.0,
+      "effect_estimate": 0.934343,
+      "lower_ci": 0.057985,
+      "upper_ci": 15.055501,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Myers 1982",
+      "year": "1982",
+      "ee": 8.0,
+      "en": 38.0,
+      "ce": 3.0,
+      "cn": 39.0,
+      "effect_estimate": 3.2,
+      "lower_ci": 0.778992,
+      "upper_ci": 13.145195,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

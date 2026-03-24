@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014833_pub2_data",
+  "cd_number": "CD014833",
+  "analysis_name": "Incidence of depression immediately post-intervention",
+  "effect_type": "OR",
+  "k_input": 2,
+  "results": {
+    "I2": 0,
+    "Q": 0.0695151306850195,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 2,
+    "funnel_dots": 2,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 2,
+    "p_value": 0.29573015974469397,
+    "pooled": 0.6000175903503946,
+    "pooled_hi": 1.5634023084579756,
+    "pooled_lo": 0.23028052778365932,
+    "pooled_log": -0.5107963069450752,
+    "pooled_se": 0.48850398052075455,
+    "tau2": 0
+  }
+}

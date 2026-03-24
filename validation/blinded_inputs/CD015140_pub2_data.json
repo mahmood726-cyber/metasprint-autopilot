@@ -1,0 +1,65 @@
+{
+  "dataset_name": "CD015140_pub2_data",
+  "cd_number": "CD015140",
+  "analysis_name": "Overall survival (OS) - fixed-effect model",
+  "effect_type": "MD",
+  "k": 7,
+  "studies": [
+    {
+      "study": "Goss 2013",
+      "year": "2013",
+      "effect_estimate": 1.150572,
+      "lower_ci": -0.497101,
+      "upper_ci": 2.798245,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Tsuboi 2023",
+      "year": "2022",
+      "effect_estimate": -0.71335,
+      "lower_ci": -1.074496,
+      "upper_ci": -0.352204,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wang 2024",
+      "year": "2024",
+      "effect_estimate": -0.5798,
+      "lower_ci": -1.129299,
+      "upper_ci": -0.030301,
+      "effect_type": "MD"
+    },
+    {
+      "study": "He 2021",
+      "year": "2021",
+      "effect_estimate": -0.094311,
+      "lower_ci": -0.859573,
+      "upper_ci": 0.670951,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Tada 2022",
+      "year": "2022",
+      "effect_estimate": 0.029559,
+      "lower_ci": -0.436323,
+      "upper_ci": 0.495441,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Yue 2022",
+      "year": "2022",
+      "effect_estimate": -0.994252,
+      "lower_ci": -1.66741,
+      "upper_ci": -0.321094,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Zhong 2021",
+      "year": "2021",
+      "effect_estimate": -0.083382,
+      "lower_ci": -0.476229,
+      "upper_ci": 0.309465,
+      "effect_type": "MD"
+    }
+  ]
+}

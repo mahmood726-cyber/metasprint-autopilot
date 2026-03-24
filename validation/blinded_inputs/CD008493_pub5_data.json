@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD008493_pub5_data",
+  "cd_number": "CD008493",
+  "analysis_name": "Short-term mortality",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Billings 2016",
+      "year": "2016",
+      "ee": 4.0,
+      "en": 308.0,
+      "ce": 1.0,
+      "cn": 307.0,
+      "effect_estimate": 4.026316,
+      "lower_ci": 0.447232,
+      "upper_ci": 36.247898,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Liakopoulos 2023",
+      "year": "2023",
+      "ee": 15.0,
+      "en": 1203.0,
+      "ce": 14.0,
+      "cn": 1203.0,
+      "effect_estimate": 1.07233,
+      "lower_ci": 0.515253,
+      "upper_ci": 2.231703,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Park 2016",
+      "year": "2016",
+      "ee": 1.0,
+      "en": 100.0,
+      "ce": 0.0,
+      "cn": 100.0,
+      "effect_estimate": 3.030151,
+      "lower_ci": 0.121884,
+      "upper_ci": 75.332124,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Zheng 2016",
+      "year": "2016",
+      "ee": 3.0,
+      "en": 960.0,
+      "ce": 1.0,
+      "cn": 962.0,
+      "effect_estimate": 3.012539,
+      "lower_ci": 0.312655,
+      "upper_ci": 29.026872,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

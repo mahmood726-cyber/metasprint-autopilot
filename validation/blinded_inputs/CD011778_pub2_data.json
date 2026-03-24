@@ -1,0 +1,345 @@
+{
+  "dataset_name": "CD011778_pub2_data",
+  "cd_number": "CD011778",
+  "analysis_name": "PPD (change from baseline (mm)); 3 months",
+  "effect_type": "MD",
+  "k": 42,
+  "studies": [
+    {
+      "study": "Al-Kheraif 2022b",
+      "year": "",
+      "effect_estimate": 0.91,
+      "lower_ci": 0.831584,
+      "upper_ci": 0.988416,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Al-Zahrani 2011",
+      "year": "2011.0",
+      "effect_estimate": 0.31,
+      "lower_ci": -0.003663,
+      "upper_ci": 0.623663,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Alwaeli 2015",
+      "year": "2015.0",
+      "effect_estimate": 1.11,
+      "lower_ci": 0.443466,
+      "upper_ci": 1.776534,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Amini 2014",
+      "year": "2014.0",
+      "effect_estimate": 0.2,
+      "lower_ci": -0.113663,
+      "upper_ci": 0.513663,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Annaji 2016",
+      "year": "2016.0",
+      "effect_estimate": 1.32,
+      "lower_ci": 1.123961,
+      "upper_ci": 1.516039,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Arya 2023",
+      "year": "",
+      "effect_estimate": 0.4,
+      "lower_ci": 0.145149,
+      "upper_ci": 0.654851,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Bechara Andere 2018",
+      "year": "2018.0",
+      "effect_estimate": 0.7,
+      "lower_ci": 0.209901,
+      "upper_ci": 1.190099,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Braun 2008",
+      "year": "2008.0",
+      "effect_estimate": 0.13,
+      "lower_ci": -0.203267,
+      "upper_ci": 0.463267,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Chitsazi 2014",
+      "year": "2014.0",
+      "effect_estimate": 0.59,
+      "lower_ci": 0.217525,
+      "upper_ci": 0.962475,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Christodoulides 2008",
+      "year": "2008.0",
+      "effect_estimate": 0.0,
+      "lower_ci": -0.333267,
+      "upper_ci": 0.333267,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Derikvand 2020",
+      "year": "2020.0",
+      "effect_estimate": 0.92,
+      "lower_ci": 0.331882,
+      "upper_ci": 1.508118,
+      "effect_type": "MD"
+    },
+    {
+      "study": "El Mobadder 2023",
+      "year": "",
+      "effect_estimate": 0.64,
+      "lower_ci": 0.169505,
+      "upper_ci": 1.110495,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Elsadek 2022",
+      "year": "2022.0",
+      "effect_estimate": 0.5,
+      "lower_ci": -0.303762,
+      "upper_ci": 1.303762,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Gandhi 2019",
+      "year": "2019.0",
+      "effect_estimate": 1.6,
+      "lower_ci": 1.364753,
+      "upper_ci": 1.835247,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hill 2019",
+      "year": "2019.0",
+      "effect_estimate": 0.39,
+      "lower_ci": -0.119703,
+      "upper_ci": 0.899703,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Joshi 2020",
+      "year": "2020.0",
+      "effect_estimate": 0.26,
+      "lower_ci": 0.122772,
+      "upper_ci": 0.397228,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Karmakar 2021",
+      "year": "2021.0",
+      "effect_estimate": 1.2,
+      "lower_ci": 0.866733,
+      "upper_ci": 1.533267,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Malgikar 2016",
+      "year": "2016.0",
+      "effect_estimate": 0.13,
+      "lower_ci": -0.046436,
+      "upper_ci": 0.306436,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Mallineni 2020",
+      "year": "2020.0",
+      "effect_estimate": 1.47,
+      "lower_ci": 1.058317,
+      "upper_ci": 1.881683,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Patyna 2021",
+      "year": "2021.0",
+      "effect_estimate": -0.23,
+      "lower_ci": -0.563267,
+      "upper_ci": 0.103267,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Polansky 2009",
+      "year": "2009.0",
+      "effect_estimate": 0.21,
+      "lower_ci": -0.397722,
+      "upper_ci": 0.817722,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Pourabbas 2014",
+      "year": "2014.0",
+      "effect_estimate": 0.07,
+      "lower_ci": 0.040594,
+      "upper_ci": 0.099406,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Pulikkotil 2016",
+      "year": "2016.0",
+      "effect_estimate": 0.08,
+      "lower_ci": -0.292475,
+      "upper_ci": 0.452475,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Queiroz 2015",
+      "year": "2015.0",
+      "effect_estimate": 0.23,
+      "lower_ci": -0.260099,
+      "upper_ci": 0.720099,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Sethi 2019",
+      "year": "2019.0",
+      "effect_estimate": 1.16,
+      "lower_ci": 0.454258,
+      "upper_ci": 1.865742,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Srikanth 2015",
+      "year": "2015.0",
+      "effect_estimate": 0.84,
+      "lower_ci": 0.565545,
+      "upper_ci": 1.114455,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Theodoro 2012",
+      "year": "2012.0",
+      "effect_estimate": -0.35,
+      "lower_ci": -0.761683,
+      "upper_ci": 0.061683,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Al-Kheraif 2022a",
+      "year": "2022.0",
+      "effect_estimate": 0.72,
+      "lower_ci": 0.641584,
+      "upper_ci": 0.798416,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Bassir 2013",
+      "year": "2013.0",
+      "effect_estimate": 0.03,
+      "lower_ci": -0.06802,
+      "upper_ci": 0.12802,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Borekci 2019",
+      "year": "2019.0",
+      "effect_estimate": -0.27,
+      "lower_ci": -0.877722,
+      "upper_ci": 0.337722,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Coelho 2023",
+      "year": "",
+      "effect_estimate": 0.44,
+      "lower_ci": 0.185149,
+      "upper_ci": 0.694851,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Courval 2020",
+      "year": "2020.0",
+      "effect_estimate": 0.07,
+      "lower_ci": -0.086832,
+      "upper_ci": 0.226832,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Moreira 2015",
+      "year": "2015.0",
+      "effect_estimate": 0.26,
+      "lower_ci": 0.024753,
+      "upper_ci": 0.495247,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Petelin 2015",
+      "year": "2015.0",
+      "effect_estimate": -0.1,
+      "lower_ci": -0.276436,
+      "upper_ci": 0.076436,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Rodrigues 2023",
+      "year": "",
+      "effect_estimate": 0.5,
+      "lower_ci": 0.225545,
+      "upper_ci": 0.774455,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Campos 2013",
+      "year": "2013.0",
+      "effect_estimate": 1.03,
+      "lower_ci": 0.304654,
+      "upper_ci": 1.755346,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Chondros 2009",
+      "year": "2009.0",
+      "effect_estimate": 0.0,
+      "lower_ci": -0.450891,
+      "upper_ci": 0.450891,
+      "effect_type": "MD"
+    },
+    {
+      "study": "R\u00fchling 2010",
+      "year": "2010.0",
+      "effect_estimate": -0.2,
+      "lower_ci": -0.533267,
+      "upper_ci": 0.133267,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Cosgarea 2021",
+      "year": "2021.0",
+      "effect_estimate": -0.07,
+      "lower_ci": -0.207228,
+      "upper_ci": 0.067228,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Grzech-Le\u015bniak 2019",
+      "year": "2019.0",
+      "effect_estimate": 0.04,
+      "lower_ci": -0.391287,
+      "upper_ci": 0.471287,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Monzavi 2016",
+      "year": "2016.0",
+      "effect_estimate": 1.91,
+      "lower_ci": 1.537525,
+      "upper_ci": 2.282475,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Al Rifaiy 2022",
+      "year": "2022.0",
+      "effect_estimate": -0.1,
+      "lower_ci": -0.573345,
+      "upper_ci": 0.373345,
+      "effect_type": "MD"
+    }
+  ]
+}

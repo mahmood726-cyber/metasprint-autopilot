@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014678_pub2_data",
+  "cd_number": "CD014678",
+  "analysis_name": "All-cause mortality (apixaban versus placebo)",
+  "effect_type": "OR",
+  "k_input": 6,
+  "results": {
+    "I2": 28.67782268972043,
+    "Q": 7.010442177400208,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 6,
+    "p_value": 0.35813047876954696,
+    "pooled": 0.9119013161340047,
+    "pooled_hi": 1.1101780212128314,
+    "pooled_lo": 0.7490366359968781,
+    "pooled_log": -0.09222350075591243,
+    "pooled_se": 0.10035931076598215,
+    "tau2": 0.016015853143191802
+  }
+}

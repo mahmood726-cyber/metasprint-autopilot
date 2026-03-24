@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD014923_pub2_data",
+  "cd_number": "CD014923",
+  "analysis_name": "Patient disability - number of participants who improved (unpaired, parallel assessment < 12 months)",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Kazui 2015",
+      "year": "2015",
+      "ee": 32.0,
+      "en": 46.0,
+      "ce": 2.0,
+      "cn": 42.0,
+      "effect_estimate": 45.714286,
+      "lower_ci": 9.67229,
+      "upper_ci": 216.060102,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Luciano 2023",
+      "year": "2023",
+      "ee": 5.0,
+      "en": 9.0,
+      "ce": 2.0,
+      "cn": 9.0,
+      "effect_estimate": 4.375,
+      "lower_ci": 0.563557,
+      "upper_ci": 33.963948,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Toma 2016",
+      "year": "2016",
+      "ee": 6.0,
+      "en": 8.0,
+      "ce": 0.0,
+      "cn": 7.0,
+      "effect_estimate": 39.0,
+      "lower_ci": 1.568251,
+      "upper_ci": 969.870239,
+      "effect_type": "OR",
+      "cc_applied": true
+    }
+  ]
+}

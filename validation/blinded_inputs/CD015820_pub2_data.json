@@ -1,0 +1,59 @@
+{
+  "dataset_name": "CD015820_pub2_data",
+  "cd_number": "CD015820",
+  "analysis_name": "Objective adherence (1 week to 3 months)",
+  "effect_type": "MD",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Tjiam 2013",
+      "year": "2013",
+      "en": 25.0,
+      "cn": 6.0,
+      "effect_estimate": 34.0,
+      "lower_ci": 0.519883,
+      "upper_ci": 67.480117,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wang 2020",
+      "year": "2020",
+      "en": 6.0,
+      "cn": 10.0,
+      "effect_estimate": -11.1,
+      "lower_ci": -38.244049,
+      "upper_ci": 16.044049,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Loudon 2006",
+      "year": "2006",
+      "en": 155.0,
+      "cn": 155.0,
+      "effect_estimate": 21.0,
+      "lower_ci": 12.933974,
+      "upper_ci": 29.066026,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Xiao 2022",
+      "year": "2022",
+      "en": 44.0,
+      "cn": 45.0,
+      "effect_estimate": 0.4,
+      "lower_ci": -2.699982,
+      "upper_ci": 3.499982,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kim 2018",
+      "year": "2018",
+      "en": 45.0,
+      "cn": 54.0,
+      "effect_estimate": 3.6,
+      "lower_ci": -3.512809,
+      "upper_ci": 10.712809,
+      "effect_type": "MD"
+    }
+  ]
+}

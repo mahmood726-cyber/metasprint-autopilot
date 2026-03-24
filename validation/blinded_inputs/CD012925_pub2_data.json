@@ -1,0 +1,73 @@
+{
+  "dataset_name": "CD012925_pub2_data",
+  "cd_number": "CD012925",
+  "analysis_name": "Provider adherence to recommended practice (dichotomous outcomes)",
+  "effect_type": "MD",
+  "k": 8,
+  "studies": [
+    {
+      "study": "Carmichael 2019",
+      "year": "2019",
+      "effect_estimate": 0.13,
+      "lower_ci": 0.059984,
+      "upper_ci": 0.200016,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Modi 2019",
+      "year": "2019",
+      "effect_estimate": 0.112,
+      "lower_ci": 0.072008,
+      "upper_ci": 0.151992,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Shiffman 2000",
+      "year": "2000",
+      "effect_estimate": -0.0091,
+      "lower_ci": -0.052425,
+      "upper_ci": 0.034225,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Prinja 2017",
+      "year": "2017",
+      "effect_estimate": 0.0075,
+      "lower_ci": -0.136981,
+      "upper_ci": 0.151981,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Patil 2022",
+      "year": "2022",
+      "effect_estimate": 0.1,
+      "lower_ci": 0.019983,
+      "upper_ci": 0.180017,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Yan 2021",
+      "year": "2021",
+      "effect_estimate": 0.09531,
+      "lower_ci": -0.004137,
+      "upper_ci": 0.194757,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Suryavanshi 2020",
+      "year": "2020",
+      "effect_estimate": 0.559616,
+      "lower_ci": -0.314281,
+      "upper_ci": 1.433513,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Venkateswaran 2022",
+      "year": "2022",
+      "effect_estimate": -0.527633,
+      "lower_ci": -1.004452,
+      "upper_ci": -0.050814,
+      "effect_type": "MD"
+    }
+  ]
+}

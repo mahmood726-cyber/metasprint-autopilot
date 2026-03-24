@@ -1,0 +1,57 @@
+{
+  "dataset_name": "CD015383_pub2_data",
+  "cd_number": "CD015383",
+  "analysis_name": "Anxiety on STAI-T (scale 20 to 80)",
+  "effect_type": "MD",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Griffiths 2016",
+      "year": "2016",
+      "effect_estimate": -6.1,
+      "lower_ci": -13.457415,
+      "upper_ci": 1.257415,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Grob 2011",
+      "year": "2011",
+      "effect_estimate": -5.6,
+      "lower_ci": -19.141397,
+      "upper_ci": 7.941397,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Ross 2016",
+      "year": "2016",
+      "effect_estimate": -10.0,
+      "lower_ci": -19.299708,
+      "upper_ci": -0.700292,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Gasser 2014",
+      "year": "2014",
+      "effect_estimate": -13.7,
+      "lower_ci": -24.943039,
+      "upper_ci": -2.456961,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Holze 2022",
+      "year": "2022",
+      "effect_estimate": -8.0,
+      "lower_ci": -21.35157,
+      "upper_ci": 5.35157,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wolfson 2020",
+      "year": "2020",
+      "effect_estimate": -14.7,
+      "lower_ci": -29.45138,
+      "upper_ci": 0.05138,
+      "effect_type": "MD"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD016147_data",
+  "cd_number": "CD016147",
+  "analysis_name": "Manual removal of the placenta (end of treatment)",
+  "effect_type": "OR",
+  "k_input": 5,
+  "results": {
+    "I2": 45.658183276013894,
+    "Q": 7.3608139019659005,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 5,
+    "funnel_dots": 5,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 5,
+    "p_value": 0.17297955958710776,
+    "pooled": 0.6579415342425871,
+    "pooled_hi": 1.2015627219255234,
+    "pooled_lo": 0.3602700504787473,
+    "pooled_log": -0.4186392053392169,
+    "pooled_se": 0.3072147239257037,
+    "tau2": 0.20095327757714274
+  }
+}

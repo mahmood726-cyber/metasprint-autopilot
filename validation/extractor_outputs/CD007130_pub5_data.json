@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD007130_pub5_data",
+  "cd_number": "CD007130",
+  "analysis_name": "Total mortality",
+  "effect_type": "OR",
+  "k_input": 7,
+  "results": {
+    "I2": 0,
+    "Q": 2.302327120498221,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 7,
+    "funnel_dots": 7,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 7,
+    "p_value": 0.5975890194340079,
+    "pooled": 1.192455360589993,
+    "pooled_hi": 2.2926156632182666,
+    "pooled_lo": 0.6202303376937343,
+    "pooled_log": 0.17601450961219836,
+    "pooled_se": 0.3334424413652425,
+    "tau2": 0
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014145_pub2_data",
+  "cd_number": "CD014145",
+  "analysis_name": "Failed apnea reduction after 2 to 7 days",
+  "effect_type": "OR",
+  "k_input": 5,
+  "results": {
+    "I2": 5.298559674562959,
+    "Q": 4.223800595064012,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 5,
+    "funnel_dots": 5,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 5,
+    "p_value": 0.04064976795186137,
+    "pooled": 0.38491375537331574,
+    "pooled_hi": 0.9603759284747201,
+    "pooled_lo": 0.15427146254164859,
+    "pooled_log": -0.9547359818061542,
+    "pooled_se": 0.4663884276076637,
+    "tau2": 0.0628701400770345
+  }
+}

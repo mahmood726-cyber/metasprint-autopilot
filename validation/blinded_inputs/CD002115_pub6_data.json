@@ -1,0 +1,39 @@
+{
+  "dataset_name": "CD002115_pub6_data",
+  "cd_number": "CD002115",
+  "analysis_name": "Self-reported improvement in faecal incontinence (continuous data)",
+  "effect_type": "MD",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Zhang 2018a",
+      "year": "2018.0",
+      "en": 92.0,
+      "cn": 92.0,
+      "effect_estimate": -0.89,
+      "lower_ci": -1.102177,
+      "upper_ci": -0.677823,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Che 2013",
+      "year": "2013.0",
+      "en": 40.0,
+      "cn": 40.0,
+      "effect_estimate": -5.42,
+      "lower_ci": -5.959037,
+      "upper_ci": -4.880963,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Harari 2004",
+      "year": "",
+      "en": 73.0,
+      "cn": 73.0,
+      "effect_estimate": -4.0,
+      "lower_ci": -12.618716,
+      "upper_ci": 4.618716,
+      "effect_type": "MD"
+    }
+  ]
+}

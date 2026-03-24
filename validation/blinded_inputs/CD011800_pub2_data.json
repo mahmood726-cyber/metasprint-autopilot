@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011800_pub2_data",
+  "cd_number": "CD011800",
+  "analysis_name": "Vitamin D status (achieved 25-hydroxyvitamin D level)",
+  "effect_type": "MD",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Wolf 2016",
+      "year": "2015",
+      "effect_estimate": 13.6,
+      "lower_ci": 7.93457,
+      "upper_ci": 19.26543,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Goldner 2009",
+      "year": "2009",
+      "effect_estimate": 0.0,
+      "lower_ci": -3.084591,
+      "upper_ci": 3.084591,
+      "effect_type": "MD"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015854_data",
+  "cd_number": "CD015854",
+  "analysis_name": "Achievement of definitions of improvement (assessed with IMACS DOI, measured at 8 weeks)",
+  "effect_type": "OR",
+  "k_input": 4,
+  "results": {
+    "I2": 0,
+    "Q": 1.2945020602908286,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 4,
+    "funnel_dots": 4,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 4,
+    "p_value": 0.06654138524418429,
+    "pooled": 0.5581971463383864,
+    "pooled_hi": 1.0407320353484122,
+    "pooled_lo": 0.29938931790065154,
+    "pooled_log": -0.5830430701495463,
+    "pooled_se": 0.3177764900631055,
+    "tau2": 0
+  }
+}

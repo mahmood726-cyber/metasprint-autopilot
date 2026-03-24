@@ -1,0 +1,89 @@
+{
+  "dataset_name": "CD015520_data",
+  "cd_number": "CD015520",
+  "analysis_name": "CRF \u2264 12 weeks",
+  "effect_type": "MD",
+  "k": 8,
+  "studies": [
+    {
+      "study": "Chaoul 2018",
+      "year": "2018.0",
+      "en": 63.0,
+      "cn": 70.0,
+      "effect_estimate": 0.1,
+      "lower_ci": -0.717074,
+      "upper_ci": 0.917074,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Jong 2018",
+      "year": "2018.0",
+      "en": 39.0,
+      "cn": 29.0,
+      "effect_estimate": 0.4,
+      "lower_ci": -1.681628,
+      "upper_ci": 2.481628,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Porter 2019",
+      "year": "2019.0",
+      "en": 34.0,
+      "cn": 18.0,
+      "effect_estimate": 0.2,
+      "lower_ci": -0.808264,
+      "upper_ci": 1.208264,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Cramer 2016",
+      "year": "2016.0",
+      "en": 27.0,
+      "cn": 27.0,
+      "effect_estimate": -3.02,
+      "lower_ci": -7.523538,
+      "upper_ci": 1.483538,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Lin 2019",
+      "year": "2019.0",
+      "en": 168.0,
+      "cn": 160.0,
+      "effect_estimate": -6.8,
+      "lower_ci": -11.235867,
+      "upper_ci": -2.364133,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Littman 2012",
+      "year": "2012.0",
+      "en": 30.0,
+      "cn": 27.0,
+      "effect_estimate": -1.9,
+      "lower_ci": -6.224256,
+      "upper_ci": 2.424256,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Moadel 2007",
+      "year": "2007.0",
+      "en": 84.0,
+      "cn": 44.0,
+      "effect_estimate": -0.55,
+      "lower_ci": -5.077018,
+      "upper_ci": 3.977018,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Zhi 2021",
+      "year": "2021.0",
+      "en": 16.0,
+      "cn": 19.0,
+      "effect_estimate": -0.34,
+      "lower_ci": -1.686196,
+      "upper_ci": 1.006196,
+      "effect_type": "MD"
+    }
+  ]
+}

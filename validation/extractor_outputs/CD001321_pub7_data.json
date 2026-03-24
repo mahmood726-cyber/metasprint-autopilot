@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD001321_pub7_data",
+  "cd_number": "CD001321",
+  "analysis_name": "Symptomatic UTI: culture-verified UTI",
+  "effect_type": "OR",
+  "k_input": 32,
+  "results": {
+    "I2": 66.02713286710753,
+    "Q": 91.24928984868,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 32,
+    "funnel_dots": 32,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 32,
+    "p_value": 2.2717910321379264e-05,
+    "pooled": 0.5941095981858243,
+    "pooled_hi": 0.7559748709865979,
+    "pooled_lo": 0.4669020468840148,
+    "pooled_log": -0.5206914679087905,
+    "pooled_se": 0.12290601400656627,
+    "tau2": 0.2626814803854527
+  }
+}

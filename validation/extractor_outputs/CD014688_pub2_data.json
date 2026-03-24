@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014688_pub2_data",
+  "cd_number": "CD014688",
+  "analysis_name": "Child/adolescent quality of life between baseline and 12 months (self-reported)",
+  "effect_type": "MD",
+  "k_input": 6,
+  "results": {
+    "I2": 98.41000513669024,
+    "Q": 314.46642472743326,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 6,
+    "p_value": 0.7526222176094248,
+    "pooled": 0.2975918723086888,
+    "pooled_hi": 2.1485675010799317,
+    "pooled_lo": -1.553383756462554,
+    "pooled_log": 0.2975918723086888,
+    "pooled_se": 0.9441850786240006,
+    "tau2": 4.9096673154558585
+  }
+}

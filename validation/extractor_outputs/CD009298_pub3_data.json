@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD009298_pub3_data",
+  "cd_number": "CD009298",
+  "analysis_name": "Operative delivery",
+  "effect_type": "OR",
+  "k_input": 6,
+  "results": {
+    "I2": 4.135556609821849,
+    "Q": 5.215698149573023,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 6,
+    "p_value": 0.22002383367726774,
+    "pooled": 0.8460390310765568,
+    "pooled_hi": 1.1052241353108827,
+    "pooled_lo": 0.6476351893126369,
+    "pooled_log": -0.16718978441584867,
+    "pooled_se": 0.13631841926084504,
+    "tau2": 0.004846176280608769
+  }
+}

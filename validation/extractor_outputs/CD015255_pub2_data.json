@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015255_pub2_data",
+  "cd_number": "CD015255",
+  "analysis_name": "Normal hearing (very short-term - up to 6 weeks)",
+  "effect_type": "OR",
+  "k_input": 2,
+  "results": {
+    "I2": 93.6546367146479,
+    "Q": 15.75953897404808,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 2,
+    "funnel_dots": 2,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 2,
+    "p_value": 0.49416338305782537,
+    "pooled": 0.4614983479566034,
+    "pooled_hi": 4.237438164164636,
+    "pooled_lo": 0.05026167153725556,
+    "pooled_log": -0.7732768047713072,
+    "pooled_se": 1.1310148101798645,
+    "tau2": 2.4008530837863367
+  }
+}

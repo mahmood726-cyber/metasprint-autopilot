@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD008349_pub5_data",
+  "cd_number": "CD008349",
+  "analysis_name": "Upper limb function post intervention (composite measure)",
+  "effect_type": "MD",
+  "k_input": 87,
+  "results": {
+    "I2": 90.66504990968302,
+    "Q": 921.2689855643334,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 87,
+    "funnel_dots": 87,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 87,
+    "p_value": 1.4432810631070936e-06,
+    "pooled": 2.5031783953466022,
+    "pooled_hi": 3.5214433865799784,
+    "pooled_lo": 1.4849134041132264,
+    "pooled_log": 2.5031783953466022,
+    "pooled_se": 0.5194182980388516,
+    "tau2": 9.538067104600529
+  }
+}

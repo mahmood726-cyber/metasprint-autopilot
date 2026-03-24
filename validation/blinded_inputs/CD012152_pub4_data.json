@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD012152_pub4_data",
+  "cd_number": "CD012152",
+  "analysis_name": "Hypoglycaemia",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Harding 2021",
+      "year": "2015",
+      "ee": 399.0,
+      "en": 1070.0,
+      "ce": 448.0,
+      "cn": 1063.0,
+      "effect_estimate": 0.816296,
+      "lower_ci": 0.686106,
+      "upper_ci": 0.971188,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Hegarty 2016a",
+      "year": "2016",
+      "ee": 114.0,
+      "en": 277.0,
+      "ce": 72.0,
+      "cn": 138.0,
+      "effect_estimate": 0.641104,
+      "lower_ci": 0.425057,
+      "upper_ci": 0.966964,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

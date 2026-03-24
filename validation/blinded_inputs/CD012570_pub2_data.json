@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD012570_pub2_data",
+  "cd_number": "CD012570",
+  "analysis_name": "All-cause mortality",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "ASSERTIVE 2010",
+      "year": "2010",
+      "ee": 0.0,
+      "en": 411.0,
+      "ce": 1.0,
+      "cn": 403.0,
+      "effect_estimate": 0.326043,
+      "lower_ci": 0.013234,
+      "upper_ci": 8.032806,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Oparil 2007",
+      "year": "2007",
+      "ee": 1.0,
+      "en": 437.0,
+      "ce": 1.0,
+      "cn": 455.0,
+      "effect_estimate": 1.041284,
+      "lower_ci": 0.064889,
+      "upper_ci": 16.709654,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Stanton 2003",
+      "year": "2003",
+      "ee": 0.0,
+      "en": 182.0,
+      "ce": 1.0,
+      "cn": 44.0,
+      "effect_estimate": 0.079452,
+      "lower_ci": 0.00318,
+      "upper_ci": 1.985265,
+      "effect_type": "OR",
+      "cc_applied": true
+    }
+  ]
+}

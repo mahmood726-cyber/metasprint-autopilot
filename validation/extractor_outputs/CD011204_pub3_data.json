@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011204_pub3_data",
+  "cd_number": "CD011204",
+  "analysis_name": "ADAS-cog, \u2265 4-point improvement at 3 months (ITT)",
+  "effect_type": "OR",
+  "k_input": 16,
+  "results": {
+    "I2": 87.4610769594152,
+    "Q": 119.62749872097801,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 16,
+    "funnel_dots": 16,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 16,
+    "p_value": 7.503233430417033e-05,
+    "pooled": 2.245649393682501,
+    "pooled_hi": 3.3518182392979936,
+    "pooled_lo": 1.5045389813269772,
+    "pooled_log": 0.8089947415853448,
+    "pooled_se": 0.2042997620292423,
+    "tau2": 0.5237842713647628
+  }
+}

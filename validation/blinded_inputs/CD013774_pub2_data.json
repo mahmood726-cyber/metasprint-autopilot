@@ -1,0 +1,49 @@
+{
+  "dataset_name": "CD013774_pub2_data",
+  "cd_number": "CD013774",
+  "analysis_name": "Time to death from any cause",
+  "effect_type": "MD",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Galsky 2020",
+      "year": "2020",
+      "effect_estimate": -0.01005,
+      "lower_ci": -0.190232,
+      "upper_ci": 0.170132,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Powles 2020",
+      "year": "2020",
+      "effect_estimate": -0.01005,
+      "lower_ci": -0.181755,
+      "upper_ci": 0.161655,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Powles 2021",
+      "year": "2021",
+      "effect_estimate": -0.083382,
+      "lower_ci": -0.266285,
+      "upper_ci": 0.099521,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Bellmunt 2017",
+      "year": "2017",
+      "effect_estimate": -0.34249,
+      "lower_ci": -0.530937,
+      "upper_ci": -0.154043,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Powles 2017",
+      "year": "2017",
+      "effect_estimate": -0.328504,
+      "lower_ci": -0.506635,
+      "upper_ci": -0.150373,
+      "effect_type": "MD"
+    }
+  ]
+}

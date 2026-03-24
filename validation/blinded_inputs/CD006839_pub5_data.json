@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD006839_pub5_data",
+  "cd_number": "CD006839",
+  "analysis_name": "Proportion of participants with clinical improvement in function at 3 months compared to baseline. Corticosteroid injection versus placebo",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "vanVeen 2015",
+      "year": "2015",
+      "ee": 9.0,
+      "en": 30.0,
+      "ce": 7.0,
+      "cn": 25.0,
+      "effect_estimate": 1.102041,
+      "lower_ci": 0.341504,
+      "upper_ci": 3.556311,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Pompe 2020",
+      "year": "2020",
+      "ee": 27.0,
+      "en": 37.0,
+      "ce": 32.0,
+      "cn": 46.0,
+      "effect_estimate": 1.18125,
+      "lower_ci": 0.452372,
+      "upper_ci": 3.084524,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

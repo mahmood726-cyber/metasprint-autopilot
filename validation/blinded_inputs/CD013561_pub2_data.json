@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD013561_pub2_data",
+  "cd_number": "CD013561",
+  "analysis_name": "Adverse events",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Karaca 2011",
+      "year": "2011",
+      "ee": 0.0,
+      "en": 11.0,
+      "ce": 5.0,
+      "cn": 11.0,
+      "effect_estimate": 0.051383,
+      "lower_ci": 0.00243,
+      "upper_ci": 1.0864,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Mao 2010",
+      "year": "2010",
+      "ee": 2.0,
+      "en": 49.0,
+      "ce": 1.0,
+      "cn": 49.0,
+      "effect_estimate": 2.042553,
+      "lower_ci": 0.179021,
+      "upper_ci": 23.304645,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

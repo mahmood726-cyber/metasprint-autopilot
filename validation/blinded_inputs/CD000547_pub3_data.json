@@ -1,0 +1,209 @@
+{
+  "dataset_name": "CD000547_pub3_data",
+  "cd_number": "CD000547",
+  "analysis_name": "Uterine volume (mL) (preoperative)",
+  "effect_type": "MD",
+  "k": 20,
+  "studies": [
+    {
+      "study": "Audebert 1994",
+      "year": "1994",
+      "en": 31.0,
+      "cn": 34.0,
+      "effect_estimate": -212.0,
+      "lower_ci": -305.372011,
+      "upper_ci": -118.627989,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Balasch 1995",
+      "year": "1995",
+      "en": 23.0,
+      "cn": 27.0,
+      "effect_estimate": -249.0,
+      "lower_ci": -399.833807,
+      "upper_ci": -98.166193,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Bustos L\u00f3pez 1995",
+      "year": "1995",
+      "en": 13.0,
+      "cn": 15.0,
+      "effect_estimate": -134.9,
+      "lower_ci": -321.708191,
+      "upper_ci": 51.908191,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Cagnacci 1994",
+      "year": "1994",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": -175.0,
+      "lower_ci": -255.530389,
+      "upper_ci": -94.469611,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Fedele 1990",
+      "year": "1990",
+      "en": 8.0,
+      "cn": 16.0,
+      "effect_estimate": -244.0,
+      "lower_ci": -330.57147,
+      "upper_ci": -157.42853,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Gerris 1996",
+      "year": "1996",
+      "en": 123.0,
+      "cn": 124.0,
+      "effect_estimate": -162.6,
+      "lower_ci": -236.804051,
+      "upper_ci": -88.395949,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Nikolov 1999",
+      "year": "1999",
+      "en": 17.0,
+      "cn": 17.0,
+      "effect_estimate": -132.0,
+      "lower_ci": -186.079902,
+      "upper_ci": -77.920098,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Seraccholi 2003",
+      "year": "2003",
+      "en": 31.0,
+      "cn": 31.0,
+      "effect_estimate": -199.0,
+      "lower_ci": -336.961957,
+      "upper_ci": -61.038043,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Stovall 1994",
+      "year": "1994",
+      "en": 45.0,
+      "cn": 45.0,
+      "effect_estimate": -350.1,
+      "lower_ci": -483.381226,
+      "upper_ci": -216.818774,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Vercellini 1998",
+      "year": "1998",
+      "en": 60.0,
+      "cn": 63.0,
+      "effect_estimate": -171.0,
+      "lower_ci": -216.841449,
+      "upper_ci": -125.158551,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Zullo 1998",
+      "year": "1996",
+      "en": 35.0,
+      "cn": 32.0,
+      "effect_estimate": -62.0,
+      "lower_ci": -103.25289,
+      "upper_ci": -20.74711,
+      "effect_type": "MD"
+    },
+    {
+      "study": "D'Anna 1994",
+      "year": "1994",
+      "en": 15.0,
+      "cn": 15.0,
+      "effect_estimate": -75.0,
+      "lower_ci": -412.654526,
+      "upper_ci": 262.654526,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Friedman 1989",
+      "year": "1989",
+      "en": 9.0,
+      "cn": 9.0,
+      "effect_estimate": -135.0,
+      "lower_ci": -384.925365,
+      "upper_ci": 114.925365,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Benagiano 1996",
+      "year": "1996",
+      "en": 55.0,
+      "cn": 59.0,
+      "effect_estimate": -10.5,
+      "lower_ci": -21.703069,
+      "upper_ci": 0.703069,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Shaw 1996",
+      "year": "1996",
+      "en": 90.0,
+      "cn": 92.0,
+      "effect_estimate": -2.6,
+      "lower_ci": -8.34631,
+      "upper_ci": 3.14631,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Campo 1999",
+      "year": "1999",
+      "en": 30.0,
+      "cn": 30.0,
+      "effect_estimate": 45.17,
+      "lower_ci": 12.055693,
+      "upper_ci": 78.284307,
+      "effect_type": "MD"
+    },
+    {
+      "study": "De Falco 2009",
+      "year": "2008",
+      "en": 33.0,
+      "cn": 29.0,
+      "effect_estimate": 7.9,
+      "lower_ci": -2.151851,
+      "upper_ci": 17.951851,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hudecek 2012",
+      "year": "2012",
+      "en": 42.0,
+      "cn": 48.0,
+      "effect_estimate": 18.0,
+      "lower_ci": 8.661753,
+      "upper_ci": 27.338247,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Favilli 2017",
+      "year": "2017",
+      "en": 42.0,
+      "cn": 42.0,
+      "effect_estimate": 5.91,
+      "lower_ci": -0.581983,
+      "upper_ci": 12.401983,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Muzii 2010",
+      "year": "2010",
+      "en": 20.0,
+      "cn": 19.0,
+      "effect_estimate": -5.4,
+      "lower_ci": -7.654544,
+      "upper_ci": -3.145456,
+      "effect_type": "MD"
+    }
+  ]
+}

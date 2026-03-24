@@ -1,0 +1,79 @@
+{
+  "dataset_name": "CD010856_pub3_data",
+  "cd_number": "CD010856",
+  "analysis_name": "Change in the number of decayed, missing or filled primary teeth (dmft)",
+  "effect_type": "MD",
+  "k": 7,
+  "studies": [
+    {
+      "study": "Adriasola 1959",
+      "year": "1956",
+      "en": 263.0,
+      "cn": 157.0,
+      "effect_estimate": 2.2,
+      "lower_ci": 0.847356,
+      "upper_ci": 3.552644,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Beal 1981",
+      "year": "1975",
+      "en": 361.0,
+      "cn": 367.0,
+      "effect_estimate": 1.45,
+      "lower_ci": 0.811571,
+      "upper_ci": 2.088429,
+      "effect_type": "MD"
+    },
+    {
+      "study": "DHSS England 1969",
+      "year": "1967",
+      "en": 654.0,
+      "cn": 557.0,
+      "effect_estimate": 2.05,
+      "lower_ci": 1.568827,
+      "upper_ci": 2.531173,
+      "effect_type": "MD"
+    },
+    {
+      "study": "DHSS Scotland 1969",
+      "year": "1969",
+      "en": 258.0,
+      "cn": 223.0,
+      "effect_estimate": 2.9,
+      "lower_ci": 1.946701,
+      "upper_ci": 3.853299,
+      "effect_type": "MD"
+    },
+    {
+      "study": "DHSS Wales 1969",
+      "year": "1965",
+      "en": 1910.0,
+      "cn": 959.0,
+      "effect_estimate": 2.23,
+      "lower_ci": 1.821264,
+      "upper_ci": 2.638736,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Blinkhorn 2015",
+      "year": "2015",
+      "en": 813.0,
+      "cn": 568.0,
+      "effect_estimate": 0.42,
+      "lower_ci": 0.0279,
+      "upper_ci": 0.8121,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Goodwin 2022",
+      "year": "2022",
+      "en": 654.0,
+      "cn": 873.0,
+      "effect_estimate": 0.13,
+      "lower_ci": -0.16029,
+      "upper_ci": 0.42029,
+      "effect_type": "MD"
+    }
+  ]
+}

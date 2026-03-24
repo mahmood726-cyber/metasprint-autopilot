@@ -1,0 +1,74 @@
+{
+  "dataset_name": "CD014889_pub2_data",
+  "cd_number": "CD014889",
+  "analysis_name": "All-cause mortality",
+  "effect_type": "OR",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Askarpoor 2021",
+      "year": "2021",
+      "ee": 0.0,
+      "en": 20.0,
+      "ce": 2.0,
+      "cn": 20.0,
+      "effect_estimate": 0.180488,
+      "lower_ci": 0.008119,
+      "upper_ci": 4.012126,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Daboos 2023",
+      "year": "2023",
+      "ee": 2.0,
+      "en": 32.0,
+      "ce": 8.0,
+      "cn": 32.0,
+      "effect_estimate": 0.2,
+      "lower_ci": 0.038789,
+      "upper_ci": 1.031224,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Rashid 2012",
+      "year": "2012",
+      "ee": 9.0,
+      "en": 81.0,
+      "ce": 8.0,
+      "cn": 35.0,
+      "effect_estimate": 0.421875,
+      "lower_ci": 0.147586,
+      "upper_ci": 1.205931,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Sharma 2007",
+      "year": "2007",
+      "ee": 5.0,
+      "en": 46.0,
+      "ce": 14.0,
+      "cn": 50.0,
+      "effect_estimate": 0.313589,
+      "lower_ci": 0.102812,
+      "upper_ci": 0.956484,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Upadhyaya 2007",
+      "year": "2007",
+      "ee": 4.0,
+      "en": 25.0,
+      "ce": 4.0,
+      "cn": 25.0,
+      "effect_estimate": 1.0,
+      "lower_ci": 0.220363,
+      "upper_ci": 4.53796,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015804_pub2_data",
+  "cd_number": "CD015804",
+  "analysis_name": "Change from baseline in best-corrected visual acuity (BCVA) at 8 to 12 weeks",
+  "effect_type": "MD",
+  "k_input": 8,
+  "results": {
+    "I2": 19.98429846824092,
+    "Q": 8.748282981961516,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 8,
+    "funnel_dots": 8,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 8,
+    "p_value": 0.08138163056909486,
+    "pooled": -0.5515789218112144,
+    "pooled_hi": 0.06889343408527471,
+    "pooled_lo": -1.1720512777077035,
+    "pooled_log": -0.5515789218112144,
+    "pooled_se": 0.3165037567377652,
+    "tau2": 0.15853517541773435
+  }
+}

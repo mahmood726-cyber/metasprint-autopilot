@@ -1,0 +1,105 @@
+{
+  "dataset_name": "CD016064_data",
+  "cd_number": "CD016064",
+  "analysis_name": "Rate of falls",
+  "effect_type": "MD",
+  "k": 12,
+  "studies": [
+    {
+      "study": "Becker 2003",
+      "year": "2003",
+      "effect_estimate": -0.6,
+      "lower_ci": -0.894059,
+      "upper_ci": -0.305941,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Dyer 2004",
+      "year": "2004",
+      "effect_estimate": -0.62,
+      "lower_ci": -0.874851,
+      "upper_ci": -0.365149,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Jensen 2002",
+      "year": "2002",
+      "effect_estimate": -0.29,
+      "lower_ci": -0.682079,
+      "upper_ci": 0.102079,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kerse 2004",
+      "year": "2004",
+      "effect_estimate": 0.29,
+      "lower_ci": 0.054753,
+      "upper_ci": 0.525247,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kerse 2009",
+      "year": "2009",
+      "effect_estimate": 0.1,
+      "lower_ci": -0.017624,
+      "upper_ci": 0.217624,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Logan 2021",
+      "year": "2021",
+      "effect_estimate": -0.46,
+      "lower_ci": -0.656039,
+      "upper_ci": -0.263961,
+      "effect_type": "MD"
+    },
+    {
+      "study": "McMurdo 2000",
+      "year": "2000",
+      "effect_estimate": -0.25,
+      "lower_ci": -0.720495,
+      "upper_ci": 0.220495,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Neyens 2009",
+      "year": "2009",
+      "effect_estimate": -0.24,
+      "lower_ci": -0.847722,
+      "upper_ci": 0.367722,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Rubenstein 1990",
+      "year": "1990",
+      "effect_estimate": -0.05,
+      "lower_ci": -0.246039,
+      "upper_ci": 0.146039,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Salv\u00e0 2016",
+      "year": "2016",
+      "effect_estimate": 0.8,
+      "lower_ci": 0.349109,
+      "upper_ci": 1.250891,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Walker 2016",
+      "year": "2016",
+      "effect_estimate": -0.73,
+      "lower_ci": -1.612178,
+      "upper_ci": 0.152178,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Whitney 2017",
+      "year": "2017",
+      "effect_estimate": 0.46,
+      "lower_ci": -0.402574,
+      "upper_ci": 1.322574,
+      "effect_type": "MD"
+    }
+  ]
+}

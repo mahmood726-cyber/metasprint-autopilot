@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014872_pub2_data",
+  "cd_number": "CD014872",
+  "analysis_name": "Progression-free survival",
+  "effect_type": "MD",
+  "k_input": 35,
+  "results": {
+    "I2": 57.64575104413277,
+    "Q": 80.27529902708868,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 35,
+    "funnel_dots": 35,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 35,
+    "p_value": 0,
+    "pooled": -0.4824570944920237,
+    "pooled_hi": -0.3893234064669688,
+    "pooled_lo": -0.5755907825170785,
+    "pooled_log": -0.4824570944920237,
+    "pooled_se": 0.04750761554265029,
+    "tau2": 0.04059064344645584
+  }
+}

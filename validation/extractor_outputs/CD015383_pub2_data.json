@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015383_pub2_data",
+  "cd_number": "CD015383",
+  "analysis_name": "Anxiety on STAI-T (scale 20 to 80)",
+  "effect_type": "MD",
+  "k_input": 6,
+  "results": {
+    "I2": 0,
+    "Q": 2.1502220190688863,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 6,
+    "p_value": 4.880059911238632e-05,
+    "pooled": -8.948035371236017,
+    "pooled_hi": -4.628932051007975,
+    "pooled_lo": -13.267138691464059,
+    "pooled_log": -8.948035371236017,
+    "pooled_se": 2.203180228095099,
+    "tau2": 0
+  }
+}

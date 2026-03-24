@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD012623_pub2_data",
+  "cd_number": "CD012623",
+  "analysis_name": "Macular hole closure",
+  "effect_type": "OR",
+  "k_input": 8,
+  "results": {
+    "I2": 0.0026963266254545802,
+    "Q": 7.000188747953043,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 8,
+    "funnel_dots": 8,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 8,
+    "p_value": 0.0037971844330031423,
+    "pooled": 2.309215521544122,
+    "pooled_hi": 4.070320599417143,
+    "pooled_lo": 1.3100875458566787,
+    "pooled_log": 0.8369078657930519,
+    "pooled_se": 0.28913250948625147,
+    "tau2": 1.9275625837315857e-05
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD007837_pub3_data",
+  "cd_number": "CD007837",
+  "analysis_name": "Cobb angle (\u00b0)",
+  "effect_type": "MD",
+  "k_input": 10,
+  "results": {
+    "I2": 92.32974029963191,
+    "Q": 117.33631391344028,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 10,
+    "funnel_dots": 10,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 10,
+    "p_value": 0.015539800745645316,
+    "pooled": -3.3045018972297737,
+    "pooled_hi": -0.6270892286453997,
+    "pooled_lo": -5.981914565814147,
+    "pooled_log": -3.3045018972297737,
+    "pooled_se": 1.3657516888401224,
+    "tau2": 15.329491144583088
+  }
+}

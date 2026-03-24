@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD006742_pub3_data",
+  "cd_number": "CD006742",
+  "analysis_name": "All-Cause Mortality",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "ANBP 1980",
+      "year": "1980",
+      "ee": 17.0,
+      "en": 958.0,
+      "ce": 13.0,
+      "cn": 874.0,
+      "effect_estimate": 1.196518,
+      "lower_ci": 0.577665,
+      "upper_ci": 2.478349,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "MRC 1985",
+      "year": "1985",
+      "ee": 58.0,
+      "en": 3012.0,
+      "ce": 77.0,
+      "cn": 3049.0,
+      "effect_estimate": 0.757837,
+      "lower_ci": 0.536917,
+      "upper_ci": 1.069656,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "PREVEND IT 2004",
+      "year": "2004",
+      "ee": 6.0,
+      "en": 112.0,
+      "ce": 6.0,
+      "cn": 100.0,
+      "effect_estimate": 0.886792,
+      "lower_ci": 0.276496,
+      "upper_ci": 2.844166,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "VA-NHLBI 1978",
+      "year": "1978",
+      "ee": 2.0,
+      "en": 508.0,
+      "ce": 0.0,
+      "cn": 504.0,
+      "effect_estimate": 4.980257,
+      "lower_ci": 0.238341,
+      "upper_ci": 104.064872,
+      "effect_type": "OR",
+      "cc_applied": true
+    }
+  ]
+}

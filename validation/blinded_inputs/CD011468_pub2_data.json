@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD011468_pub2_data",
+  "cd_number": "CD011468",
+  "analysis_name": "Secondary patency",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Jiang 2017",
+      "year": "2017",
+      "ee": 1.0,
+      "en": 27.0,
+      "ce": 1.0,
+      "cn": 39.0,
+      "effect_estimate": 1.461538,
+      "lower_ci": 0.087382,
+      "upper_ci": 24.445505,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Meng 2013",
+      "year": "2013",
+      "ee": 6.0,
+      "en": 41.0,
+      "ce": 12.0,
+      "cn": 27.0,
+      "effect_estimate": 0.214286,
+      "lower_ci": 0.067724,
+      "upper_ci": 0.678021,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

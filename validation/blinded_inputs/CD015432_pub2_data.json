@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD015432_pub2_data",
+  "cd_number": "CD015432",
+  "analysis_name": "Adverse events",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Datoo 2017",
+      "year": "2017",
+      "ee": 26.0,
+      "en": 77.0,
+      "ce": 45.0,
+      "cn": 77.0,
+      "effect_estimate": 0.362527,
+      "lower_ci": 0.188363,
+      "upper_ci": 0.697728,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Abdelbaser 2022a",
+      "year": "2022",
+      "ee": 9.0,
+      "en": 30.0,
+      "ce": 17.0,
+      "cn": 29.0,
+      "effect_estimate": 0.302521,
+      "lower_ci": 0.103215,
+      "upper_ci": 0.886685,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Pickering 2002",
+      "year": "2002",
+      "ee": 17.0,
+      "en": 40.0,
+      "ce": 27.0,
+      "cn": 40.0,
+      "effect_estimate": 0.355878,
+      "lower_ci": 0.143012,
+      "upper_ci": 0.885585,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "dataset_name": "CD015040_pub2_data",
+  "cd_number": "CD015040",
+  "analysis_name": "PTSD symptom severity: immediately after treatment, SMD (ITT, endpoint)",
+  "effect_type": "MD",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Leong 2020",
+      "year": "2020",
+      "en": 20.0,
+      "cn": 9.0,
+      "effect_estimate": 1.07,
+      "lower_ci": -16.629687,
+      "upper_ci": 18.769687,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Philip 2019a",
+      "year": "2019",
+      "en": 25.0,
+      "cn": 25.0,
+      "effect_estimate": -0.8,
+      "lower_ci": -7.818104,
+      "upper_ci": 6.218104,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Watts 2012",
+      "year": "2012",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": -7.8,
+      "lower_ci": -19.518178,
+      "upper_ci": 3.918178,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Fryml 2019",
+      "year": "2019",
+      "en": 5.0,
+      "cn": 3.0,
+      "effect_estimate": -17.0,
+      "lower_ci": -68.24258,
+      "upper_ci": 34.24258,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Isserles 2013",
+      "year": "2013",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": -15.2,
+      "lower_ci": -32.818889,
+      "upper_ci": 2.418889,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Isserles 2021",
+      "year": "2021",
+      "en": 60.0,
+      "cn": 65.0,
+      "effect_estimate": 3.57,
+      "lower_ci": -1.16304,
+      "upper_ci": 8.30304,
+      "effect_type": "MD"
+    }
+  ]
+}

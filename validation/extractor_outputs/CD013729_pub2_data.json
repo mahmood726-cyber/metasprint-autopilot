@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013729_pub2_data",
+  "cd_number": "CD013729",
+  "analysis_name": "Myocardial infarction (medium-term follow-up)",
+  "effect_type": "OR",
+  "k_input": 2,
+  "results": {
+    "I2": 0,
+    "Q": 0,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 2,
+    "funnel_dots": 2,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 2,
+    "p_value": 0.3424158904823724,
+    "pooled": 2.9999999999999996,
+    "pooled_hi": 28.99450208851095,
+    "pooled_lo": 0.3104036748941532,
+    "pooled_log": 1.0986122886681096,
+    "pooled_se": 1.1571617129819387,
+    "tau2": 0
+  }
+}

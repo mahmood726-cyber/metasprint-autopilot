@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013781_pub2_data",
+  "cd_number": "CD013781",
+  "analysis_name": "Primary outcome: all-cause mortality",
+  "effect_type": "OR",
+  "k_input": 20,
+  "results": {
+    "I2": 10.142046981919993,
+    "Q": 21.144483445084795,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 20,
+    "funnel_dots": 20,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 20,
+    "p_value": 0.009432567492972055,
+    "pooled": 0.6356466214079358,
+    "pooled_hi": 0.8949961646093143,
+    "pooled_lo": 0.45145068022017615,
+    "pooled_log": -0.453112496776823,
+    "pooled_se": 0.17454475511714934,
+    "tau2": 0.059325215769864756
+  }
+}

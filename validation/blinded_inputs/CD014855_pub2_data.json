@@ -1,0 +1,100 @@
+{
+  "dataset_name": "CD014855_pub2_data",
+  "cd_number": "CD014855",
+  "analysis_name": "Intraperitoneal abscess",
+  "effect_type": "OR",
+  "k": 7,
+  "studies": [
+    {
+      "study": "Dandapat 1992",
+      "year": "1992",
+      "ee": 5.0,
+      "en": 40.0,
+      "ce": 10.0,
+      "cn": 46.0,
+      "effect_estimate": 0.514286,
+      "lower_ci": 0.159576,
+      "upper_ci": 1.657452,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Haller 1973",
+      "year": "1973",
+      "ee": 3.0,
+      "en": 24.0,
+      "ce": 3.0,
+      "cn": 19.0,
+      "effect_estimate": 0.761905,
+      "lower_ci": 0.135371,
+      "upper_ci": 4.288209,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Human 2022",
+      "year": "2022",
+      "ee": 3.0,
+      "en": 17.0,
+      "ce": 5.0,
+      "cn": 17.0,
+      "effect_estimate": 0.514286,
+      "lower_ci": 0.10115,
+      "upper_ci": 2.614835,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Jani 2011",
+      "year": "2011",
+      "ee": 3.0,
+      "en": 45.0,
+      "ce": 0.0,
+      "cn": 45.0,
+      "effect_estimate": 7.494118,
+      "lower_ci": 0.375657,
+      "upper_ci": 149.5029,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Stone 1978",
+      "year": "1978",
+      "ee": 22.0,
+      "en": 49.0,
+      "ce": 6.0,
+      "cn": 45.0,
+      "effect_estimate": 5.296296,
+      "lower_ci": 1.895236,
+      "upper_ci": 14.800667,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Tander 2003",
+      "year": "2003",
+      "ee": 3.0,
+      "en": 70.0,
+      "ce": 5.0,
+      "cn": 70.0,
+      "effect_estimate": 0.58209,
+      "lower_ci": 0.133598,
+      "upper_ci": 2.536179,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Tran 2023",
+      "year": "2023",
+      "ee": 6.0,
+      "en": 91.0,
+      "ce": 6.0,
+      "cn": 93.0,
+      "effect_estimate": 1.023529,
+      "lower_ci": 0.317461,
+      "upper_ci": 3.299971,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

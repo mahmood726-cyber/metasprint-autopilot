@@ -1,0 +1,87 @@
+{
+  "dataset_name": "CD008564_pub3_data",
+  "cd_number": "CD008564",
+  "analysis_name": "Total mortality",
+  "effect_type": "OR",
+  "k": 6,
+  "studies": [
+    {
+      "study": "AASK 2002",
+      "year": "2002",
+      "ee": 39.0,
+      "en": 438.0,
+      "ce": 57.0,
+      "cn": 457.0,
+      "effect_estimate": 0.685925,
+      "lower_ci": 0.446042,
+      "upper_ci": 1.054819,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "ACCORD BP 2010",
+      "year": "2010",
+      "ee": 26.0,
+      "en": 207.0,
+      "ce": 20.0,
+      "cn": 196.0,
+      "effect_estimate": 1.264088,
+      "lower_ci": 0.680756,
+      "upper_ci": 2.347271,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "HOT 1998",
+      "year": "1998",
+      "ee": 39.0,
+      "en": 744.0,
+      "ce": 68.0,
+      "cn": 1431.0,
+      "effect_estimate": 1.108824,
+      "lower_ci": 0.740195,
+      "upper_ci": 1.661035,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "MDRD 1994",
+      "year": "1994",
+      "ee": 20.0,
+      "en": 432.0,
+      "ce": 14.0,
+      "cn": 408.0,
+      "effect_estimate": 1.366158,
+      "lower_ci": 0.680481,
+      "upper_ci": 2.742748,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "SPRINT 2015",
+      "year": "2015",
+      "ee": 71.0,
+      "en": 1332.0,
+      "ce": 95.0,
+      "cn": 1318.0,
+      "effect_estimate": 0.724847,
+      "lower_ci": 0.527692,
+      "upper_ci": 0.995662,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "SPS3 2013",
+      "year": "2013",
+      "ee": 32.0,
+      "en": 199.0,
+      "ce": 31.0,
+      "cn": 186.0,
+      "effect_estimate": 0.958084,
+      "lower_ci": 0.558178,
+      "upper_ci": 1.644502,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

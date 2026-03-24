@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD013158_pub2_data",
+  "cd_number": "CD013158",
+  "analysis_name": "Mortality prior to hospital discharge",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Osborn 2000",
+      "year": "2000",
+      "ee": 5.0,
+      "en": 63.0,
+      "ce": 9.0,
+      "cn": 63.0,
+      "effect_estimate": 0.517241,
+      "lower_ci": 0.163028,
+      "upper_ci": 1.641062,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Verder 2013",
+      "year": "2013",
+      "ee": 14.0,
+      "en": 192.0,
+      "ce": 6.0,
+      "cn": 188.0,
+      "effect_estimate": 2.385768,
+      "lower_ci": 0.896621,
+      "upper_ci": 6.348154,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+[project]
+name = "metasprint-autopilot"
+version = "1.0.0"
+description = "Zero-install systematic review and meta-analysis platform"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["validation", "pipeline"]
+addopts = "-q --tb=short"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]

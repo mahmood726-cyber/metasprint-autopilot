@@ -1,0 +1,33 @@
+{
+  "dataset_name": "CD007491_pub3_data",
+  "cd_number": "CD007491",
+  "analysis_name": "Mortality at 3 months using IPD",
+  "effect_type": "MD",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Davies 2000",
+      "year": "2000",
+      "effect_estimate": -0.066,
+      "lower_ci": -1.295168,
+      "upper_ci": 1.163168,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Harris 2005",
+      "year": "2005",
+      "effect_estimate": 2.0202,
+      "lower_ci": -0.780224,
+      "upper_ci": 4.820624,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wilson 1999",
+      "year": "1999",
+      "effect_estimate": -0.201,
+      "lower_ci": -0.736188,
+      "upper_ci": 0.334188,
+      "effect_type": "MD"
+    }
+  ]
+}

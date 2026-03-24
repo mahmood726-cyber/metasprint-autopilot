@@ -1,0 +1,74 @@
+{
+  "dataset_name": "CD011689_pub4_data",
+  "cd_number": "CD011689",
+  "analysis_name": "Death",
+  "effect_type": "OR",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Derman 2006",
+      "year": "2006.0",
+      "ee": 0.0,
+      "en": 812.0,
+      "ce": 1.0,
+      "cn": 808.0,
+      "effect_estimate": 0.331282,
+      "lower_ci": 0.013466,
+      "upper_ci": 8.14992,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Hoj 2005",
+      "year": "2005.0",
+      "ee": 1.0,
+      "en": 330.0,
+      "ce": 0.0,
+      "cn": 331.0,
+      "effect_estimate": 3.018209,
+      "lower_ci": 0.122422,
+      "upper_ci": 74.411133,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Gulmezoglu 2001",
+      "year": "2001.0",
+      "ee": 2.0,
+      "en": 9225.0,
+      "ce": 2.0,
+      "cn": 9230.0,
+      "effect_estimate": 1.000542,
+      "lower_ci": 0.140849,
+      "upper_ci": 7.107492,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Parsons 2007",
+      "year": "2007.0",
+      "ee": 0.0,
+      "en": 224.0,
+      "ce": 1.0,
+      "cn": 226.0,
+      "effect_estimate": 0.334818,
+      "lower_ci": 0.013558,
+      "upper_ci": 8.268679,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Widmer 2018",
+      "year": "2018.0",
+      "ee": 4.0,
+      "en": 14771.0,
+      "ce": 2.0,
+      "cn": 14768.0,
+      "effect_estimate": 1.999865,
+      "lower_ci": 0.366108,
+      "upper_ci": 10.924244,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

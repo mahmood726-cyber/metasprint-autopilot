@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015673_pub2_data",
+  "cd_number": "CD015673",
+  "analysis_name": "Number of participants with continuous abstinence",
+  "effect_type": "OR",
+  "k_input": 8,
+  "results": {
+    "I2": 27.867415457151218,
+    "Q": 9.704352123750402,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 8,
+    "funnel_dots": 8,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 8,
+    "p_value": 0.17982924771464948,
+    "pooled": 1.2171622125639612,
+    "pooled_hi": 1.6221551021526888,
+    "pooled_lo": 0.9132812575860267,
+    "pooled_log": 0.19652209400075285,
+    "pooled_se": 0.14651817277025922,
+    "tau2": 0.04404799963689554
+  }
+}

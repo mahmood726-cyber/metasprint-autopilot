@@ -1,0 +1,69 @@
+{
+  "dataset_name": "CD009531_pub3_data",
+  "cd_number": "CD009531",
+  "analysis_name": "Quality of life: average change in mental health component - 12 months",
+  "effect_type": "MD",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Kilbourne 2012",
+      "year": "2012.0",
+      "en": 32.0,
+      "cn": 33.0,
+      "effect_estimate": 2.2,
+      "lower_ci": -0.750582,
+      "upper_ci": 5.150582,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kilbourne 2013",
+      "year": "",
+      "en": 35.0,
+      "cn": 36.0,
+      "effect_estimate": -0.8,
+      "lower_ci": -4.39804,
+      "upper_ci": 2.79804,
+      "effect_type": "MD"
+    },
+    {
+      "study": "van der Voort 2015",
+      "year": "",
+      "en": 35.0,
+      "cn": 56.0,
+      "effect_estimate": -2.1,
+      "lower_ci": -9.640698,
+      "upper_ci": 5.440698,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Mishra 2017",
+      "year": "2017.0",
+      "en": 51.0,
+      "cn": 45.0,
+      "effect_estimate": 11.2,
+      "lower_ci": 6.095503,
+      "upper_ci": 16.304497,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Salman 2014",
+      "year": "2014.0",
+      "en": 41.0,
+      "cn": 39.0,
+      "effect_estimate": 11.5,
+      "lower_ci": 9.173745,
+      "upper_ci": 13.826255,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Bauer 2006",
+      "year": "2006.0",
+      "en": 148.0,
+      "cn": 158.0,
+      "effect_estimate": 0.5,
+      "lower_ci": -0.914503,
+      "upper_ci": 1.914503,
+      "effect_type": "MD"
+    }
+  ]
+}

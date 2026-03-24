@@ -1,0 +1,11 @@
+{
+  "keyword_accuracy": 0.9574,
+  "hybrid_accuracy": 0.9574,
+  "improvement": 0.0,
+  "weighted_f1": 0.959,
+  "macro_f1": 0.8771,
+  "misclassifications": 12,
+  "ml_model": "Xenova/all-MiniLM-L6-v2",
+  "ml_fixed": 0,
+  "ml_broke": 2
+}

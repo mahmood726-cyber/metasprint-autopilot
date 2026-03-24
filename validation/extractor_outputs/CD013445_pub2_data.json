@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013445_pub2_data",
+  "cd_number": "CD013445",
+  "analysis_name": "Stone-free rate",
+  "effect_type": "OR",
+  "k_input": 39,
+  "results": {
+    "I2": 40.511108610071304,
+    "Q": 63.87747209966211,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 39,
+    "funnel_dots": 39,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 39,
+    "p_value": 1.8065771101305472e-11,
+    "pooled": 2.496780833951278,
+    "pooled_hi": 3.2604503187038834,
+    "pooled_lo": 1.9119796112288523,
+    "pooled_log": 0.9150022356998876,
+    "pooled_se": 0.1361272070268962,
+    "tau2": 0.23755782415908974
+  }
+}

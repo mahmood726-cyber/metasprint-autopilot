@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD013358_pub2_data",
+  "cd_number": "CD013358",
+  "analysis_name": "Clinical CVD events (CVD mortality and non-fatal MI)",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Kopf 2014",
+      "year": "2012.0",
+      "ee": 7.0,
+      "en": 53.0,
+      "ce": 8.0,
+      "cn": 57.0,
+      "effect_estimate": 0.932065,
+      "lower_ci": 0.312903,
+      "upper_ci": 2.776405,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Schneider 2012",
+      "year": "2012.0",
+      "ee": 23.0,
+      "en": 99.0,
+      "ce": 26.0,
+      "cn": 102.0,
+      "effect_estimate": 0.884615,
+      "lower_ci": 0.464118,
+      "upper_ci": 1.686088,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

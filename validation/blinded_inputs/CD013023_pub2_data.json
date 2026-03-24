@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD013023_pub2_data",
+  "cd_number": "CD013023",
+  "analysis_name": "Arterial catheter failure",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Edwards 2014",
+      "year": "2014",
+      "ee": 6.0,
+      "en": 56.0,
+      "ce": 10.0,
+      "cn": 47.0,
+      "effect_estimate": 0.444,
+      "lower_ci": 0.148093,
+      "upper_ci": 1.331165,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Reynolds 2015a",
+      "year": "2015",
+      "ee": 2.0,
+      "en": 32.0,
+      "ce": 6.0,
+      "cn": 30.0,
+      "effect_estimate": 0.266667,
+      "lower_ci": 0.049289,
+      "upper_ci": 1.442731,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Healy 2018",
+      "year": "2018",
+      "ee": 44.0,
+      "en": 138.0,
+      "ce": 65.0,
+      "cn": 151.0,
+      "effect_estimate": 0.619313,
+      "lower_ci": 0.382567,
+      "upper_ci": 1.002566,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Larsen 2021",
+      "year": "2021",
+      "ee": 12.0,
+      "en": 53.0,
+      "ce": 6.0,
+      "cn": 52.0,
+      "effect_estimate": 2.243902,
+      "lower_ci": 0.772142,
+      "upper_ci": 6.520948,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

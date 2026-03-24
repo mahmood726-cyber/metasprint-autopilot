@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD005951_pub5_data",
+  "cd_number": "CD005951",
+  "analysis_name": "Death or dependence (mRS 4\u20136) at day 90",
+  "effect_type": "OR",
+  "k_input": 14,
+  "results": {
+    "I2": 35.71059738025003,
+    "Q": 20.221062057288965,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 14,
+    "funnel_dots": 14,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 14,
+    "p_value": 0.8085055894304709,
+    "pooled": 0.972564088076255,
+    "pooled_hi": 1.2179995916287767,
+    "pooled_lo": 0.7765855685967129,
+    "pooled_log": -0.027819305325386602,
+    "pooled_se": 0.11478765701240348,
+    "tau2": 0.04686733249076706
+  }
+}

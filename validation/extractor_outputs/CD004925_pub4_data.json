@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD004925_pub4_data",
+  "cd_number": "CD004925",
+  "analysis_name": "Urine leak and obstruction",
+  "effect_type": "OR",
+  "k_input": 11,
+  "results": {
+    "I2": 0,
+    "Q": 8.583917057395785,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 11,
+    "funnel_dots": 11,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 11,
+    "p_value": 0.00042471299430246745,
+    "pooled": 0.2520359925985353,
+    "pooled_hi": 0.5425015534042662,
+    "pooled_lo": 0.11709116990821401,
+    "pooled_log": -1.3781833738976632,
+    "pooled_se": 0.39105337252475625,
+    "tau2": 0
+  }
+}

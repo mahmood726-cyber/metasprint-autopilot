@@ -1,0 +1,39 @@
+{
+  "dataset_name": "CD013038_pub3_data",
+  "cd_number": "CD013038",
+  "analysis_name": "Time to reach full sucking feeds (days)",
+  "effect_type": "MD",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Beker 2017",
+      "year": "2017",
+      "en": 28.0,
+      "cn": 23.0,
+      "effect_estimate": 3.7,
+      "lower_ci": -7.806677,
+      "upper_ci": 15.206677,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Bloomfield 2023",
+      "year": "2023",
+      "en": 260.0,
+      "cn": 271.0,
+      "effect_estimate": -0.2,
+      "lower_ci": -2.16645,
+      "upper_ci": 1.76645,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Yildiz 2011",
+      "year": "2011",
+      "en": 40.0,
+      "cn": 40.0,
+      "effect_estimate": -2.9,
+      "lower_ci": -5.556498,
+      "upper_ci": -0.243502,
+      "effect_type": "MD"
+    }
+  ]
+}

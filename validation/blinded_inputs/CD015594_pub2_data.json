@@ -1,0 +1,29 @@
+{
+  "dataset_name": "CD015594_pub2_data",
+  "cd_number": "CD015594",
+  "analysis_name": "Neonatal Facial Coding System pain score during the procedure",
+  "effect_type": "MD",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Kaur 2003",
+      "year": "2003",
+      "en": 30.0,
+      "cn": 30.0,
+      "effect_estimate": -1.0,
+      "lower_ci": -1.11459,
+      "upper_ci": -0.88541,
+      "effect_type": "MD"
+    },
+    {
+      "study": "NCT00533468",
+      "year": "2007",
+      "en": 24.0,
+      "cn": 28.0,
+      "effect_estimate": 0.6,
+      "lower_ci": -2.528124,
+      "upper_ci": 3.728124,
+      "effect_type": "MD"
+    }
+  ]
+}

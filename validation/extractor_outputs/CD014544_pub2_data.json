@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014544_pub2_data",
+  "cd_number": "CD014544",
+  "analysis_name": "Annualized Bleeding Rates (ABR)",
+  "effect_type": "MD",
+  "k_input": 6,
+  "results": {
+    "I2": 0,
+    "Q": 3.855063922034496,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 6,
+    "p_value": 0,
+    "pooled": -15.562446389930873,
+    "pooled_hi": -11.936523907701282,
+    "pooled_lo": -19.188368872160463,
+    "pooled_log": -15.562446389930873,
+    "pooled_se": 1.8495877799542784,
+    "tau2": 0
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD012178_pub2_data",
+  "cd_number": "CD012178",
+  "analysis_name": "Incidence of ROP at any stage",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Dani 2012",
+      "year": "2012",
+      "ee": 11.0,
+      "en": 58.0,
+      "ce": 16.0,
+      "cn": 56.0,
+      "effect_estimate": 0.585106,
+      "lower_ci": 0.243658,
+      "upper_ci": 1.405038,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Manzoni 2013",
+      "year": "2013",
+      "ee": 23.0,
+      "en": 113.0,
+      "ce": 27.0,
+      "cn": 116.0,
+      "effect_estimate": 0.842387,
+      "lower_ci": 0.449213,
+      "upper_ci": 1.579684,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Romagnoli 2011",
+      "year": "2011",
+      "ee": 10.0,
+      "en": 31.0,
+      "ce": 11.0,
+      "cn": 32.0,
+      "effect_estimate": 0.909091,
+      "lower_ci": 0.318549,
+      "upper_ci": 2.594408,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Rubin 2012",
+      "year": "2012",
+      "ee": 13.0,
+      "en": 71.0,
+      "ce": 7.0,
+      "cn": 55.0,
+      "effect_estimate": 1.536946,
+      "lower_ci": 0.567974,
+      "upper_ci": 4.158999,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

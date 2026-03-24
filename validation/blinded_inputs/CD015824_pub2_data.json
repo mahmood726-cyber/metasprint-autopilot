@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD015824_pub2_data",
+  "cd_number": "CD015824",
+  "analysis_name": "Clinical worsening",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Barst 2011",
+      "year": "2011",
+      "ee": 9.0,
+      "en": 74.0,
+      "ce": 5.0,
+      "cn": 45.0,
+      "effect_estimate": 1.107692,
+      "lower_ci": 0.346462,
+      "upper_ci": 3.541462,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Gali\u00e8 2015",
+      "year": "2015",
+      "ee": 34.0,
+      "en": 121.0,
+      "ce": 43.0,
+      "cn": 126.0,
+      "effect_estimate": 0.754344,
+      "lower_ci": 0.43907,
+      "upper_ci": 1.296,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Pulido 2013",
+      "year": "2013",
+      "ee": 57.0,
+      "en": 190.0,
+      "ce": 26.0,
+      "cn": 88.0,
+      "effect_estimate": 1.021978,
+      "lower_ci": 0.587699,
+      "upper_ci": 1.777167,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

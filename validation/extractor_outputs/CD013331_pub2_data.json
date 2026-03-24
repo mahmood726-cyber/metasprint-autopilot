@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013331_pub2_data",
+  "cd_number": "CD013331",
+  "analysis_name": "Pain relief: high-frequency TENS versus placebo or no treatment",
+  "effect_type": "MD",
+  "k_input": 14,
+  "results": {
+    "I2": 84.07466931436038,
+    "Q": 81.63095797892917,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 14,
+    "funnel_dots": 14,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 14,
+    "p_value": 0.004684290058337037,
+    "pooled": -1.3256795087863935,
+    "pooled_hi": -0.40670251830376114,
+    "pooled_lo": -2.244656499269026,
+    "pooled_log": -1.3256795087863935,
+    "pooled_se": 0.46877135956052424,
+    "tau2": 2.473540743429326
+  }
+}

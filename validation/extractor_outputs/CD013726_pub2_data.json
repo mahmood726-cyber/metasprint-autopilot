@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013726_pub2_data",
+  "cd_number": "CD013726",
+  "analysis_name": "Pain",
+  "effect_type": "MD",
+  "k_input": 8,
+  "results": {
+    "I2": 73.12102947176908,
+    "Q": 26.042664069473627,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 8,
+    "funnel_dots": 8,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 8,
+    "p_value": 0.606447974125472,
+    "pooled": -0.16966283319607123,
+    "pooled_hi": 0.4759859285646001,
+    "pooled_lo": -0.8153115949567425,
+    "pooled_log": -0.16966283319607123,
+    "pooled_se": 0.32934627415444395,
+    "tau2": 0.5712022136536962
+  }
+}

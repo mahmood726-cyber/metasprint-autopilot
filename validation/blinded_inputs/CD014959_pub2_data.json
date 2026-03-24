@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD014959_pub2_data",
+  "cd_number": "CD014959",
+  "analysis_name": "All-cause mortality",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Sehgal 2000",
+      "year": "2000",
+      "ee": 0.0,
+      "en": 386.0,
+      "ce": 3.0,
+      "cn": 396.0,
+      "effect_estimate": 0.145444,
+      "lower_ci": 0.007483,
+      "upper_ci": 2.826957,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Alikhani 2018",
+      "year": "2018",
+      "ee": 8.0,
+      "en": 71.0,
+      "ce": 5.0,
+      "cn": 66.0,
+      "effect_estimate": 1.549206,
+      "lower_ci": 0.479976,
+      "upper_ci": 5.000338,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

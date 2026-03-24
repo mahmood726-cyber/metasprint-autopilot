@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD014920_pub2_data",
+  "cd_number": "CD014920",
+  "analysis_name": "Acute myocardial infarction (short term < 30 days)",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Illuminati 2010",
+      "year": "2010",
+      "ee": 0.0,
+      "en": 216.0,
+      "ce": 9.0,
+      "cn": 210.0,
+      "effect_estimate": 0.048985,
+      "lower_ci": 0.002831,
+      "upper_ci": 0.84761,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "McFalls 2004",
+      "year": "2004",
+      "ee": 26.0,
+      "en": 225.0,
+      "ce": 34.0,
+      "cn": 237.0,
+      "effect_estimate": 0.780077,
+      "lower_ci": 0.451466,
+      "upper_ci": 1.347875,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

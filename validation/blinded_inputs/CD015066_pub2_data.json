@@ -1,0 +1,39 @@
+{
+  "dataset_name": "CD015066_pub2_data",
+  "cd_number": "CD015066",
+  "analysis_name": "Personal attenuation rating (PAR; dB) (immediate, short-term, long-term)",
+  "effect_type": "MD",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Salmani 2014",
+      "year": "2014",
+      "en": 50.0,
+      "cn": 50.0,
+      "effect_estimate": 8.34,
+      "lower_ci": 7.317583,
+      "upper_ci": 9.362417,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Murphy 2007",
+      "year": "2007",
+      "en": 100.0,
+      "cn": 109.0,
+      "effect_estimate": 1.62,
+      "lower_ci": -0.929343,
+      "upper_ci": 4.169343,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Federman 2021",
+      "year": "2021",
+      "en": 105.0,
+      "cn": 55.0,
+      "effect_estimate": 8.9,
+      "lower_ci": 5.730191,
+      "upper_ci": 12.069809,
+      "effect_type": "MD"
+    }
+  ]
+}

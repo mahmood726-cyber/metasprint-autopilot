@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD012635_pub2_data",
+  "cd_number": "CD012635",
+  "analysis_name": "All-cause mortality at 24 hours",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Jost 2022",
+      "year": "2022",
+      "ee": 9.0,
+      "en": 68.0,
+      "ce": 6.0,
+      "cn": 66.0,
+      "effect_estimate": 1.525424,
+      "lower_ci": 0.51085,
+      "upper_ci": 4.554996,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Mitra 2023",
+      "year": "2023",
+      "ee": 1.0,
+      "en": 9.0,
+      "ce": 5.0,
+      "cn": 11.0,
+      "effect_estimate": 0.15,
+      "lower_ci": 0.013685,
+      "upper_ci": 1.644087,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Moore 2018",
+      "year": "2018",
+      "ee": 8.0,
+      "en": 65.0,
+      "ce": 6.0,
+      "cn": 60.0,
+      "effect_estimate": 1.263158,
+      "lower_ci": 0.411204,
+      "upper_ci": 3.88023,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Baksaas-Aasen 2021",
+      "year": "2021",
+      "ee": 29.0,
+      "en": 201.0,
+      "ce": 33.0,
+      "cn": 195.0,
+      "effect_estimate": 0.827696,
+      "lower_ci": 0.480805,
+      "upper_ci": 1.42486,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

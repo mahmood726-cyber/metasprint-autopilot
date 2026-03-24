@@ -1,0 +1,100 @@
+{
+  "dataset_name": "CD012609_pub2_data",
+  "cd_number": "CD012609",
+  "analysis_name": "Clinical relapse",
+  "effect_type": "OR",
+  "k": 7,
+  "studies": [
+    {
+      "study": "Hanauer 2002 (ACCENT I)",
+      "year": "",
+      "ee": 131.0,
+      "en": 225.0,
+      "ce": 87.0,
+      "cn": 110.0,
+      "effect_estimate": 0.368427,
+      "lower_ci": 0.216738,
+      "upper_ci": 0.626281,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Rutgeerts 1999",
+      "year": "",
+      "ee": 15.0,
+      "en": 37.0,
+      "ce": 23.0,
+      "cn": 36.0,
+      "effect_estimate": 0.385375,
+      "lower_ci": 0.149741,
+      "upper_ci": 0.991811,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Buhl 2022 (STOP IT)",
+      "year": "",
+      "ee": 7.0,
+      "en": 59.0,
+      "ce": 33.0,
+      "cn": 56.0,
+      "effect_estimate": 0.093823,
+      "lower_ci": 0.036209,
+      "upper_ci": 0.243107,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Louis 2022 (SPARE)",
+      "year": "",
+      "ee": 10.0,
+      "en": 69.0,
+      "ce": 13.0,
+      "cn": 71.0,
+      "effect_estimate": 0.756193,
+      "lower_ci": 0.307216,
+      "upper_ci": 1.86132,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Jorgensen 2017 (NORSWITCH)",
+      "year": "",
+      "ee": 37.0,
+      "en": 78.0,
+      "ce": 31.0,
+      "cn": 77.0,
+      "effect_estimate": 1.339103,
+      "lower_ci": 0.708579,
+      "upper_ci": 2.530693,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Schreiber 2021",
+      "year": "",
+      "ee": 17.0,
+      "en": 28.0,
+      "ce": 15.0,
+      "cn": 25.0,
+      "effect_estimate": 1.030303,
+      "lower_ci": 0.34203,
+      "upper_ci": 3.103601,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "VanAssche 2012 (SWITCH)",
+      "year": "2012.0",
+      "ee": 7.0,
+      "en": 37.0,
+      "ce": 10.0,
+      "cn": 36.0,
+      "effect_estimate": 0.606667,
+      "lower_ci": 0.20201,
+      "upper_ci": 1.82191,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

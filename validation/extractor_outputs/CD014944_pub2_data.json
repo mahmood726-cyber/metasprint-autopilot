@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014944_pub2_data",
+  "cd_number": "CD014944",
+  "analysis_name": "Proportion of participants without treatment success at the longest follow-up (1\u20134 years)",
+  "effect_type": "OR",
+  "k_input": 4,
+  "results": {
+    "I2": 65.83799841321625,
+    "Q": 8.78168684694579,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 4,
+    "funnel_dots": 4,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 4,
+    "p_value": 0.9422753644684096,
+    "pooled": 1.0347933507628568,
+    "pooled_hi": 2.612119650432084,
+    "pooled_lo": 0.40993423812186197,
+    "pooled_log": 0.03420174568371262,
+    "pooled_se": 0.4723335408914005,
+    "tau2": 0.5384314473103308
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014803_pub2_data",
+  "cd_number": "CD014803",
+  "analysis_name": "Attrition (dropouts)",
+  "effect_type": "OR",
+  "k_input": 5,
+  "results": {
+    "I2": 0,
+    "Q": 3.131670071133662,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 5,
+    "funnel_dots": 5,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 5,
+    "p_value": 0.8546011354347858,
+    "pooled": 0.9359628336666798,
+    "pooled_hi": 1.8998981678083786,
+    "pooled_lo": 0.46109125259902656,
+    "pooled_log": -0.0661795109139821,
+    "pooled_se": 0.36114141780683967,
+    "tau2": 0
+  }
+}

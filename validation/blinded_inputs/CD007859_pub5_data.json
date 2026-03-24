@@ -1,0 +1,169 @@
+{
+  "dataset_name": "CD007859_pub5_data",
+  "cd_number": "CD007859",
+  "analysis_name": "Alignment rate (LII reduction; mm): multistrand StSt versus conventional StSt",
+  "effect_type": "MD",
+  "k": 16,
+  "studies": [
+    {
+      "study": "Quint\u00e3o 2005",
+      "year": "2005",
+      "en": 11.0,
+      "cn": 11.0,
+      "effect_estimate": 0.89,
+      "lower_ci": -20.03356,
+      "upper_ci": 21.81356,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Ong 2011",
+      "year": "2011",
+      "en": 41.0,
+      "cn": 43.0,
+      "effect_estimate": -0.4,
+      "lower_ci": -2.306828,
+      "upper_ci": 1.506828,
+      "effect_type": "MD"
+    },
+    {
+      "study": "O'Brien 1990",
+      "year": "1990",
+      "en": 20.0,
+      "cn": 20.0,
+      "effect_estimate": -0.28,
+      "lower_ci": -0.891599,
+      "upper_ci": 0.331599,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Ayd\u0131n 2018",
+      "year": "2018",
+      "en": 36.0,
+      "cn": 30.0,
+      "effect_estimate": -0.2,
+      "lower_ci": -1.251826,
+      "upper_ci": 0.851826,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Jain 2021",
+      "year": "2021",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": -0.55,
+      "lower_ci": -1.00204,
+      "upper_ci": -0.09796,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Keerthana 2021",
+      "year": "2021",
+      "en": 15.0,
+      "cn": 15.0,
+      "effect_estimate": -0.47,
+      "lower_ci": -1.530982,
+      "upper_ci": 0.590982,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Mahmoudzadeh 2018",
+      "year": "2018",
+      "en": 30.0,
+      "cn": 29.0,
+      "effect_estimate": 0.33,
+      "lower_ci": -0.36436,
+      "upper_ci": 1.02436,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Nabbat 2020",
+      "year": "2020",
+      "en": 16.0,
+      "cn": 15.0,
+      "effect_estimate": -0.27,
+      "lower_ci": -1.153049,
+      "upper_ci": 0.613049,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Ren 2016",
+      "year": "2016",
+      "en": 21.0,
+      "cn": 22.0,
+      "effect_estimate": -0.22,
+      "lower_ci": -1.153999,
+      "upper_ci": 0.713999,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Azizi 2021",
+      "year": "2021",
+      "en": 44.0,
+      "cn": 44.0,
+      "effect_estimate": -0.31,
+      "lower_ci": -1.148216,
+      "upper_ci": 0.528216,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Atik 2019",
+      "year": "2019",
+      "en": 25.0,
+      "cn": 25.0,
+      "effect_estimate": -0.61,
+      "lower_ci": -1.899248,
+      "upper_ci": 0.679248,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Phermsang-Ngarm 2018",
+      "year": "2018",
+      "en": 16.0,
+      "cn": 16.0,
+      "effect_estimate": -2.2,
+      "lower_ci": -3.1516,
+      "upper_ci": -1.2484,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Sebastian 2012",
+      "year": "2011",
+      "en": 12.0,
+      "cn": 12.0,
+      "effect_estimate": -6.764,
+      "lower_ci": -7.981778,
+      "upper_ci": -5.546222,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Sebastian 2019",
+      "year": "2019",
+      "en": 20.0,
+      "cn": 20.0,
+      "effect_estimate": -0.87,
+      "lower_ci": -2.488395,
+      "upper_ci": 0.748395,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Erdin\u00e7 2004",
+      "year": "2004",
+      "en": 56.0,
+      "cn": 53.0,
+      "effect_estimate": 7.0,
+      "lower_ci": 4.640788,
+      "upper_ci": 9.359212,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Alhaija 2021",
+      "year": "2021",
+      "en": 20.0,
+      "cn": 20.0,
+      "effect_estimate": -1.1,
+      "lower_ci": -16.024838,
+      "upper_ci": 13.824838,
+      "effect_type": "MD"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "dataset_name": "CD014960_pub2_data",
+  "cd_number": "CD014960",
+  "analysis_name": "All-cause mortality",
+  "effect_type": "OR",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Costa 2003",
+      "year": "2003",
+      "ee": 15.0,
+      "en": 125.0,
+      "ce": 8.0,
+      "cn": 128.0,
+      "effect_estimate": 2.045455,
+      "lower_ci": 0.834603,
+      "upper_ci": 5.013023,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Daher 2000",
+      "year": "2000",
+      "ee": 1.0,
+      "en": 16.0,
+      "ce": 0.0,
+      "cn": 19.0,
+      "effect_estimate": 3.774194,
+      "lower_ci": 0.143432,
+      "upper_ci": 99.312057,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Edwards 1988",
+      "year": "1988",
+      "ee": 1.0,
+      "en": 38.0,
+      "ce": 3.0,
+      "cn": 41.0,
+      "effect_estimate": 0.342342,
+      "lower_ci": 0.034032,
+      "upper_ci": 3.443755,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Panaphut 2003",
+      "year": "2003",
+      "ee": 5.0,
+      "en": 86.0,
+      "ce": 5.0,
+      "cn": 87.0,
+      "effect_estimate": 1.012346,
+      "lower_ci": 0.282222,
+      "upper_ci": 3.631336,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Suputtamongkol 2004",
+      "year": "2004",
+      "ee": 2.0,
+      "en": 87.0,
+      "ce": 0.0,
+      "cn": 88.0,
+      "effect_estimate": 5.175439,
+      "lower_ci": 0.244725,
+      "upper_ci": 109.450199,
+      "effect_type": "OR",
+      "cc_applied": true
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD015462_pub2_data",
+  "cd_number": "CD015462",
+  "analysis_name": "All-cause mortality prior to hospital discharge",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Shivakumar 2017a",
+      "year": "2017",
+      "ee": 12.0,
+      "en": 120.0,
+      "ce": 10.0,
+      "cn": 120.0,
+      "effect_estimate": 1.222222,
+      "lower_ci": 0.506755,
+      "upper_ci": 2.947826,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Shivakumar 2017b",
+      "year": "2017",
+      "ee": 16.0,
+      "en": 78.0,
+      "ce": 15.0,
+      "cn": 78.0,
+      "effect_estimate": 1.083871,
+      "lower_ci": 0.493379,
+      "upper_ci": 2.381083,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

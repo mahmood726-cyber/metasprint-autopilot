@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD015215_pub2_data",
+  "cd_number": "CD015215",
+  "analysis_name": "Return to normal hearing, randomised by child (long-term)",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Paradise 2007",
+      "year": "2007.0",
+      "ee": 182.0,
+      "en": 195.0,
+      "ce": 186.0,
+      "cn": 196.0,
+      "effect_estimate": 0.752688,
+      "lower_ci": 0.321858,
+      "upper_ci": 1.760216,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "D'Eredita 2006",
+      "year": "",
+      "ee": 15.0,
+      "en": 15.0,
+      "ce": 15.0,
+      "cn": 15.0,
+      "effect_estimate": 1.0,
+      "lower_ci": 0.01862,
+      "upper_ci": 53.706093,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Yousaf 2016",
+      "year": "2016.0",
+      "ee": 41.0,
+      "en": 51.0,
+      "ce": 27.0,
+      "cn": 51.0,
+      "effect_estimate": 3.644444,
+      "lower_ci": 1.506416,
+      "upper_ci": 8.816936,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

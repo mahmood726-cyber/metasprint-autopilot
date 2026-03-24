@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD004904_pub4_data",
+  "cd_number": "CD004904",
+  "analysis_name": "Postpartum endometritis",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Katsulov 1983",
+      "year": "1983",
+      "ee": 0.0,
+      "en": 30.0,
+      "ce": 5.0,
+      "cn": 70.0,
+      "effect_estimate": 0.195231,
+      "lower_ci": 0.010452,
+      "upper_ci": 3.646757,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Rechlin 1988",
+      "year": "1988",
+      "ee": 7.0,
+      "en": 65.0,
+      "ce": 24.0,
+      "cn": 237.0,
+      "effect_estimate": 1.071121,
+      "lower_ci": 0.439527,
+      "upper_ci": 2.610305,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Safrai 2017",
+      "year": "2017",
+      "ee": 6.0,
+      "en": 313.0,
+      "ce": 1.0,
+      "cn": 94.0,
+      "effect_estimate": 1.81759,
+      "lower_ci": 0.215966,
+      "upper_ci": 15.296984,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Tandberg 1999",
+      "year": "1999",
+      "ee": 1.0,
+      "en": 61.0,
+      "ce": 2.0,
+      "cn": 104.0,
+      "effect_estimate": 0.85,
+      "lower_ci": 0.075427,
+      "upper_ci": 9.578847,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

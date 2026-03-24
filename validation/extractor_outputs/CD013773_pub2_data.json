@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013773_pub2_data",
+  "cd_number": "CD013773",
+  "analysis_name": "Refractive error (D)",
+  "effect_type": "MD",
+  "k_input": 5,
+  "results": {
+    "I2": 0,
+    "Q": 1.1375620441221634,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 5,
+    "funnel_dots": 5,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 5,
+    "p_value": 0.006740351363719421,
+    "pooled": 0.08823483318476429,
+    "pooled_hi": 0.15207713283684066,
+    "pooled_lo": 0.02439253353268793,
+    "pooled_log": 0.08823483318476429,
+    "pooled_se": 0.03256604018959908,
+    "tau2": 0
+  }
+}

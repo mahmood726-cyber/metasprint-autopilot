@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD003962_pub3_data",
+  "cd_number": "CD003962",
+  "analysis_name": "Kidney failure or doubling of serum creatinine",
+  "effect_type": "OR",
+  "k_input": 9,
+  "results": {
+    "I2": 58.29483159516939,
+    "Q": 19.182274777898705,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 9,
+    "funnel_dots": 9,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 9,
+    "p_value": 0.03439552612778396,
+    "pooled": 2.585462141901023,
+    "pooled_hi": 6.23515601602435,
+    "pooled_lo": 1.0720845589146397,
+    "pooled_log": 0.949904270279725,
+    "pooled_se": 0.44904183517168306,
+    "tau2": 0.9053451034901608
+  }
+}

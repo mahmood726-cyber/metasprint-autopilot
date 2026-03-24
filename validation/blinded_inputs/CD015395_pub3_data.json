@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD015395_pub3_data",
+  "cd_number": "CD015395",
+  "analysis_name": "All-cause mortality at day 28",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "EPIC-HR 2021",
+      "year": "2021",
+      "ee": 0.0,
+      "en": 1109.0,
+      "ce": 12.0,
+      "cn": 1115.0,
+      "effect_estimate": 0.039784,
+      "lower_ci": 0.002351,
+      "upper_ci": 0.673176,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Liu 2023",
+      "year": "2023",
+      "ee": 5.0,
+      "en": 132.0,
+      "ce": 8.0,
+      "cn": 132.0,
+      "effect_estimate": 0.610236,
+      "lower_ci": 0.194255,
+      "upper_ci": 1.917005,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

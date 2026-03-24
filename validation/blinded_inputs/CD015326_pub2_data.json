@@ -1,0 +1,65 @@
+{
+  "dataset_name": "CD015326_pub2_data",
+  "cd_number": "CD015326",
+  "analysis_name": "BMI (Short-term)",
+  "effect_type": "MD",
+  "k": 7,
+  "studies": [
+    {
+      "study": "Adamo 2017",
+      "year": "2017",
+      "effect_estimate": 0.318182,
+      "lower_ci": -0.159053,
+      "upper_ci": 0.795417,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Bonis 2014",
+      "year": "2014",
+      "effect_estimate": 0.0,
+      "lower_ci": -0.542416,
+      "upper_ci": 0.542416,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Dennison 2004",
+      "year": "2004",
+      "effect_estimate": -0.36,
+      "lower_ci": -1.222574,
+      "upper_ci": 0.502574,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Gao 2019",
+      "year": "2019",
+      "effect_estimate": 0.08,
+      "lower_ci": -0.874932,
+      "upper_ci": 1.034932,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Goldfield 2016",
+      "year": "2016",
+      "effect_estimate": -0.2,
+      "lower_ci": -0.435247,
+      "upper_ci": 0.035247,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Mo-Suwan 1998",
+      "year": "1998",
+      "effect_estimate": -0.18,
+      "lower_ci": -0.721836,
+      "upper_ci": 0.361836,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Tomayko 2016",
+      "year": "2016",
+      "effect_estimate": -0.1,
+      "lower_ci": -1.15077,
+      "upper_ci": 0.95077,
+      "effect_type": "MD"
+    }
+  ]
+}

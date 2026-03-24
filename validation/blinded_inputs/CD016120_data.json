@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD016120_data",
+  "cd_number": "CD016120",
+  "analysis_name": "Allogenic (donor) blood transfusion",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Geoghegan 2015",
+      "year": "2015",
+      "ee": 0.0,
+      "en": 30.0,
+      "ce": 1.0,
+      "cn": 27.0,
+      "effect_estimate": 0.289617,
+      "lower_ci": 0.011304,
+      "upper_ci": 7.419948,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Khan 2018",
+      "year": "2018",
+      "ee": 37.0,
+      "en": 1498.0,
+      "ce": 52.0,
+      "cn": 1492.0,
+      "effect_estimate": 0.701311,
+      "lower_ci": 0.457181,
+      "upper_ci": 1.075804,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Rainaldi 1998",
+      "year": "1998",
+      "ee": 1.0,
+      "en": 34.0,
+      "ce": 8.0,
+      "cn": 34.0,
+      "effect_estimate": 0.098485,
+      "lower_ci": 0.011565,
+      "upper_ci": 0.838673,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

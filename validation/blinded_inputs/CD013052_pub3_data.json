@@ -1,0 +1,74 @@
+{
+  "dataset_name": "CD013052_pub3_data",
+  "cd_number": "CD013052",
+  "analysis_name": "Resolution of ear discharge (1 to 2 weeks)",
+  "effect_type": "OR",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Onali 2018",
+      "year": "2018",
+      "ee": 49.0,
+      "en": 50.0,
+      "ce": 48.0,
+      "cn": 50.0,
+      "effect_estimate": 2.041667,
+      "lower_ci": 0.179066,
+      "upper_ci": 23.278565,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Ramos 2003",
+      "year": "2003 Aug-Sep",
+      "ee": 44.0,
+      "en": 50.0,
+      "ce": 42.0,
+      "cn": 50.0,
+      "effect_estimate": 1.396825,
+      "lower_ci": 0.446699,
+      "upper_ci": 4.367868,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Renukananda 2014",
+      "year": "2014 Jun",
+      "ee": 20.0,
+      "en": 50.0,
+      "ce": 18.0,
+      "cn": 50.0,
+      "effect_estimate": 1.185185,
+      "lower_ci": 0.527966,
+      "upper_ci": 2.660518,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Minja 2006",
+      "year": "2006 Jun",
+      "ee": 21.0,
+      "en": 49.0,
+      "ce": 35.0,
+      "cn": 87.0,
+      "effect_estimate": 1.114286,
+      "lower_ci": 0.547881,
+      "upper_ci": 2.266245,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Mondal 2020",
+      "year": "2020",
+      "ee": 20.0,
+      "en": 25.0,
+      "ce": 17.0,
+      "cn": 25.0,
+      "effect_estimate": 1.882353,
+      "lower_ci": 0.517525,
+      "upper_ci": 6.846532,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

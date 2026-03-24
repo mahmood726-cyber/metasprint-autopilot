@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD009788_pub3_data",
+  "cd_number": "CD009788",
+  "analysis_name": "Service use: hospitalization",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Puschner 2011",
+      "year": "2011",
+      "ee": 108.0,
+      "en": 168.0,
+      "ce": 103.0,
+      "cn": 155.0,
+      "effect_estimate": 0.908738,
+      "lower_ci": 0.574136,
+      "upper_ci": 1.438343,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Hanrahan 2014",
+      "year": "2014",
+      "ee": 10.0,
+      "en": 18.0,
+      "ce": 4.0,
+      "cn": 17.0,
+      "effect_estimate": 4.0625,
+      "lower_ci": 0.946856,
+      "upper_ci": 17.430226,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Khaleghparast 2014",
+      "year": "2014",
+      "ee": 0.0,
+      "en": 23.0,
+      "ce": 5.0,
+      "cn": 23.0,
+      "effect_estimate": 0.071567,
+      "lower_ci": 0.003712,
+      "upper_ci": 1.379863,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Kidd 2021",
+      "year": "2021",
+      "ee": 4.0,
+      "en": 31.0,
+      "ce": 2.0,
+      "cn": 27.0,
+      "effect_estimate": 1.851852,
+      "lower_ci": 0.311415,
+      "upper_ci": 11.012161,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD007374_pub3_data",
+  "cd_number": "CD007374",
+  "analysis_name": "Death",
+  "effect_type": "OR",
+  "k_input": 4,
+  "results": {
+    "I2": 0,
+    "Q": 0.860039242282135,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 4,
+    "funnel_dots": 4,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 4,
+    "p_value": 0.8780869797585025,
+    "pooled": 0.9225320003324611,
+    "pooled_hi": 2.5853599264002223,
+    "pooled_lo": 0.3291863863699666,
+    "pooled_log": -0.08063321496181917,
+    "pooled_se": 0.5256583461073188,
+    "tau2": 0
+  }
+}

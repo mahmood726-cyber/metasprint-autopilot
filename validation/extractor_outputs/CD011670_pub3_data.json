@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011670_pub3_data",
+  "cd_number": "CD011670",
+  "analysis_name": "Overall morbidity",
+  "effect_type": "OR",
+  "k_input": 4,
+  "results": {
+    "I2": 68.47533982834541,
+    "Q": 9.516359521925796,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 4,
+    "funnel_dots": 4,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 4,
+    "p_value": 0.8976273115966085,
+    "pooled": 0.8957051134070596,
+    "pooled_hi": 4.797688425416265,
+    "pooled_lo": 0.1672237917604964,
+    "pooled_log": -0.11014403467831932,
+    "pooled_se": 0.8560919251872642,
+    "tau2": 1.8171742386650473
+  }
+}

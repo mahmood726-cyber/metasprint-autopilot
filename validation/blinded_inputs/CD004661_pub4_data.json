@@ -1,0 +1,87 @@
+{
+  "dataset_name": "CD004661_pub4_data",
+  "cd_number": "CD004661",
+  "analysis_name": "Death (fetal, neonatal, or later (up to 2 years' corrected age))",
+  "effect_type": "OR",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Crowther 2003",
+      "year": "2003",
+      "ee": 87.0,
+      "en": 629.0,
+      "ce": 107.0,
+      "cn": 626.0,
+      "effect_estimate": 0.778581,
+      "lower_ci": 0.572448,
+      "upper_ci": 1.058939,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Crowther 2023",
+      "year": "2023",
+      "ee": 12.0,
+      "en": 837.0,
+      "ce": 7.0,
+      "cn": 796.0,
+      "effect_estimate": 1.639481,
+      "lower_ci": 0.642062,
+      "upper_ci": 4.186352,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Marret 2006",
+      "year": "2006",
+      "ee": 34.0,
+      "en": 352.0,
+      "ce": 38.0,
+      "cn": 336.0,
+      "effect_estimate": 0.838464,
+      "lower_ci": 0.514163,
+      "upper_ci": 1.367313,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Mittendorf 2002",
+      "year": "2002",
+      "ee": 2.0,
+      "en": 30.0,
+      "ce": 1.0,
+      "cn": 29.0,
+      "effect_estimate": 2.0,
+      "lower_ci": 0.1713,
+      "upper_ci": 23.350824,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Rouse 2008",
+      "year": "2008",
+      "ee": 103.0,
+      "en": 1188.0,
+      "ce": 96.0,
+      "cn": 1256.0,
+      "effect_estimate": 1.147081,
+      "lower_ci": 0.858171,
+      "upper_ci": 1.533256,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Wolf 2020",
+      "year": "2020",
+      "ee": 22.0,
+      "en": 343.0,
+      "ce": 24.0,
+      "cn": 337.0,
+      "effect_estimate": 0.893821,
+      "lower_ci": 0.49092,
+      "upper_ci": 1.627387,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

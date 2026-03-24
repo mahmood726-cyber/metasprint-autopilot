@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013613_pub2_data",
+  "cd_number": "CD013613",
+  "analysis_name": "PTSD severity at three months",
+  "effect_type": "MD",
+  "k_input": 6,
+  "results": {
+    "I2": 70.12655198036352,
+    "Q": 16.73727116037422,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 6,
+    "p_value": 0.2388189436336674,
+    "pooled": -5.110502865501928,
+    "pooled_hi": 3.3946565052302056,
+    "pooled_lo": -13.615662236234062,
+    "pooled_log": -5.110502865501928,
+    "pooled_se": 4.338492870646454,
+    "tau2": 74.00957341953273
+  }
+}

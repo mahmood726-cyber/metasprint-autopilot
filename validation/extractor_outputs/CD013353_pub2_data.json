@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013353_pub2_data",
+  "cd_number": "CD013353",
+  "analysis_name": "PIPP during endotracheal suctioning",
+  "effect_type": "MD",
+  "k_input": 5,
+  "results": {
+    "I2": 86.74314470460828,
+    "Q": 30.173068279552382,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 5,
+    "funnel_dots": 5,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 5,
+    "p_value": 0.09340063422035172,
+    "pooled": -1.7956479451916418,
+    "pooled_hi": 0.30253731230172165,
+    "pooled_lo": -3.8938332026850055,
+    "pooled_log": -1.7956479451916418,
+    "pooled_se": 1.0702870321578535,
+    "tau2": 4.893367310503511
+  }
+}

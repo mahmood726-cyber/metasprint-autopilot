@@ -1,0 +1,113 @@
+{
+  "dataset_name": "CD013748_pub2_data",
+  "cd_number": "CD013748",
+  "analysis_name": "Poor functional outcome",
+  "effect_type": "OR",
+  "k": 8,
+  "studies": [
+    {
+      "study": "Etminan 2013",
+      "year": "2013.0",
+      "ee": 12.0,
+      "en": 30.0,
+      "ce": 16.0,
+      "cn": 30.0,
+      "effect_estimate": 0.583333,
+      "lower_ci": 0.209517,
+      "upper_ci": 1.624103,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Findlay 1995",
+      "year": "1995.0",
+      "ee": 14.0,
+      "en": 51.0,
+      "ce": 13.0,
+      "cn": 49.0,
+      "effect_estimate": 1.047817,
+      "lower_ci": 0.433052,
+      "upper_ci": 2.535309,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Hamada 2003",
+      "year": "2003.0",
+      "ee": 5.0,
+      "en": 57.0,
+      "ce": 14.0,
+      "cn": 53.0,
+      "effect_estimate": 0.267857,
+      "lower_ci": 0.088936,
+      "upper_ci": 0.806732,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Kanamaru 1993",
+      "year": "1993.0",
+      "ee": 8.0,
+      "en": 26.0,
+      "ce": 16.0,
+      "cn": 37.0,
+      "effect_estimate": 0.583333,
+      "lower_ci": 0.20272,
+      "upper_ci": 1.678559,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Kramer 2014",
+      "year": "2014.0",
+      "ee": 3.0,
+      "en": 6.0,
+      "ce": 3.0,
+      "cn": 6.0,
+      "effect_estimate": 1.0,
+      "lower_ci": 0.103968,
+      "upper_ci": 9.618315,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Litrico 2013",
+      "year": "2013.0",
+      "ee": 7.0,
+      "en": 11.0,
+      "ce": 6.0,
+      "cn": 8.0,
+      "effect_estimate": 0.583333,
+      "lower_ci": 0.077545,
+      "upper_ci": 4.388117,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Nieuwkamp 2005",
+      "year": "",
+      "ee": 3.0,
+      "en": 3.0,
+      "ce": 1.0,
+      "cn": 1.0,
+      "effect_estimate": 2.333333,
+      "lower_ci": 0.029737,
+      "upper_ci": 183.084912,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Yamamoto 2010",
+      "year": "2010.0",
+      "ee": 8.0,
+      "en": 20.0,
+      "ce": 12.0,
+      "cn": 20.0,
+      "effect_estimate": 0.444444,
+      "lower_ci": 0.125386,
+      "upper_ci": 1.575384,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

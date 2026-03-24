@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD011575_pub3_data",
+  "cd_number": "CD011575",
+  "analysis_name": "All-cause mortality",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "JATOS 2008",
+      "year": "2008",
+      "ee": 42.0,
+      "en": 2206.0,
+      "ce": 54.0,
+      "cn": 2212.0,
+      "effect_estimate": 0.775621,
+      "lower_ci": 0.51592,
+      "upper_ci": 1.16605,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "VALISH 2010",
+      "year": "2010",
+      "ee": 30.0,
+      "en": 1534.0,
+      "ce": 24.0,
+      "cn": 1545.0,
+      "effect_estimate": 1.264129,
+      "lower_ci": 0.7355,
+      "upper_ci": 2.172703,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Wei 2013",
+      "year": "2013",
+      "ee": 87.0,
+      "en": 361.0,
+      "ce": 51.0,
+      "cn": 363.0,
+      "effect_estimate": 1.942465,
+      "lower_ci": 1.32581,
+      "upper_ci": 2.845936,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Zhang 2021",
+      "year": "2021",
+      "ee": 64.0,
+      "en": 4268.0,
+      "ce": 67.0,
+      "cn": 4243.0,
+      "effect_estimate": 0.948862,
+      "lower_ci": 0.67179,
+      "upper_ci": 1.340209,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

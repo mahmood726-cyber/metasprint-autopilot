@@ -1,0 +1,87 @@
+{
+  "dataset_name": "CD014678_pub2_data",
+  "cd_number": "CD014678",
+  "analysis_name": "All-cause mortality (apixaban versus placebo)",
+  "effect_type": "OR",
+  "k": 6,
+  "studies": [
+    {
+      "study": "APPRAISE 1",
+      "year": "2011",
+      "ee": 16.0,
+      "en": 635.0,
+      "ce": 12.0,
+      "cn": 611.0,
+      "effect_estimate": 1.290253,
+      "lower_ci": 0.605207,
+      "upper_ci": 2.750716,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "APPRAISE 2",
+      "year": "2015",
+      "ee": 155.0,
+      "en": 3705.0,
+      "ce": 143.0,
+      "cn": 3687.0,
+      "effect_estimate": 1.082084,
+      "lower_ci": 0.858011,
+      "upper_ci": 1.364675,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "ATLAS ACS",
+      "year": "2009",
+      "ee": 9.0,
+      "en": 611.0,
+      "ce": 16.0,
+      "cn": 1160.0,
+      "effect_estimate": 1.068937,
+      "lower_ci": 0.46949,
+      "upper_ci": 2.433762,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "ATLAS ACS 2",
+      "year": "2013",
+      "ee": 245.0,
+      "en": 10229.0,
+      "ce": 153.0,
+      "cn": 5113.0,
+      "effect_estimate": 0.795521,
+      "lower_ci": 0.648165,
+      "upper_ci": 0.976379,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "GEMINI-ACS",
+      "year": "2016",
+      "ee": 22.0,
+      "en": 1519.0,
+      "ce": 23.0,
+      "cn": 1518.0,
+      "effect_estimate": 0.955244,
+      "lower_ci": 0.530048,
+      "upper_ci": 1.721525,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "REDEEM",
+      "year": "2011",
+      "ee": 32.0,
+      "en": 1490.0,
+      "ce": 14.0,
+      "cn": 371.0,
+      "effect_estimate": 0.559671,
+      "lower_ci": 0.295477,
+      "upper_ci": 1.060086,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

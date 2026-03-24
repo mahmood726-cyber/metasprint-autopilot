@@ -1,0 +1,113 @@
+{
+  "dataset_name": "CD015673_pub2_data",
+  "cd_number": "CD015673",
+  "analysis_name": "Number of participants with continuous abstinence",
+  "effect_type": "OR",
+  "k": 8,
+  "studies": [
+    {
+      "study": "Anton 1999",
+      "year": "1999",
+      "ee": 32.0,
+      "en": 68.0,
+      "ce": 21.0,
+      "cn": 63.0,
+      "effect_estimate": 1.777778,
+      "lower_ci": 0.875723,
+      "upper_ci": 3.609012,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Kranzler 2004",
+      "year": "2004",
+      "ee": 28.0,
+      "en": 158.0,
+      "ce": 16.0,
+      "cn": 157.0,
+      "effect_estimate": 1.898077,
+      "lower_ci": 0.982012,
+      "upper_ci": 3.668687,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Krystal 2001",
+      "year": "2001",
+      "ee": 235.0,
+      "en": 378.0,
+      "ce": 104.0,
+      "cn": 187.0,
+      "effect_estimate": 1.311525,
+      "lower_ci": 0.919011,
+      "upper_ci": 1.871684,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "O'Malley 1992",
+      "year": "1992",
+      "ee": 8.0,
+      "en": 29.0,
+      "ce": 5.0,
+      "cn": 25.0,
+      "effect_estimate": 1.52381,
+      "lower_ci": 0.42604,
+      "upper_ci": 5.450186,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Pettinati 2014",
+      "year": "2014",
+      "ee": 3.0,
+      "en": 39.0,
+      "ce": 6.0,
+      "cn": 41.0,
+      "effect_estimate": 0.486111,
+      "lower_ci": 0.112641,
+      "upper_ci": 2.097859,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Ulrichsen 2010",
+      "year": "2010",
+      "ee": 5.0,
+      "en": 19.0,
+      "ce": 4.0,
+      "cn": 20.0,
+      "effect_estimate": 1.428571,
+      "lower_ci": 0.319383,
+      "upper_ci": 6.389877,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "De Wildt 2002",
+      "year": "2002",
+      "ee": 26.0,
+      "en": 164.0,
+      "ce": 10.0,
+      "cn": 77.0,
+      "effect_estimate": 1.262319,
+      "lower_ci": 0.575361,
+      "upper_ci": 2.769478,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Anton 2006",
+      "year": "2006",
+      "ee": 322.0,
+      "en": 463.0,
+      "ce": 115.0,
+      "cn": 153.0,
+      "effect_estimate": 0.75461,
+      "lower_ci": 0.497389,
+      "upper_ci": 1.14485,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

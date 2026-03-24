@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015219_pub2_data",
+  "cd_number": "CD015219",
+  "analysis_name": "All-cause mortality \u2013 at 28 to 30 days, or in\u2010hospital",
+  "effect_type": "OR",
+  "k_input": 11,
+  "results": {
+    "I2": 63.14650983539366,
+    "Q": 27.134472082114716,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 11,
+    "funnel_dots": 11,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 11,
+    "p_value": 0.5486222801812342,
+    "pooled": 0.8080373996588999,
+    "pooled_hi": 1.6217011084451671,
+    "pooled_lo": 0.4026170025088771,
+    "pooled_log": -0.213146934825679,
+    "pooled_se": 0.35534809545893026,
+    "tau2": 0.6163945918937854
+  }
+}

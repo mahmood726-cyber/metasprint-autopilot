@@ -1,0 +1,79 @@
+{
+  "dataset_name": "CD013822_pub2_data",
+  "cd_number": "CD013822",
+  "analysis_name": "Confidence - decisional conflict - continuous",
+  "effect_type": "MD",
+  "k": 7,
+  "studies": [
+    {
+      "study": "Mathieu 2007",
+      "year": "2007",
+      "en": 315.0,
+      "cn": 295.0,
+      "effect_estimate": -1.83,
+      "lower_ci": -4.133086,
+      "upper_ci": 0.473086,
+      "effect_type": "MD"
+    },
+    {
+      "study": "NCT04741503",
+      "year": "2022",
+      "en": 137.0,
+      "cn": 147.0,
+      "effect_estimate": 3.2,
+      "lower_ci": -1.363768,
+      "upper_ci": 7.763768,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Schapira 2019",
+      "year": "2019",
+      "en": 54.0,
+      "cn": 59.0,
+      "effect_estimate": -7.6,
+      "lower_ci": -15.876005,
+      "upper_ci": 0.676005,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Reder 2017",
+      "year": "2017",
+      "en": 386.0,
+      "cn": 321.0,
+      "effect_estimate": -0.24,
+      "lower_ci": -0.411342,
+      "upper_ci": -0.068658,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Gummersbach 2015",
+      "year": "2015",
+      "en": 178.0,
+      "cn": 175.0,
+      "effect_estimate": 0.37,
+      "lower_ci": 0.127249,
+      "upper_ci": 0.612751,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hersch 2021",
+      "year": "2021",
+      "en": 419.0,
+      "cn": 419.0,
+      "effect_estimate": 0.4,
+      "lower_ci": -2.050494,
+      "upper_ci": 2.850494,
+      "effect_type": "MD"
+    },
+    {
+      "study": "P\u00e9rez-Lacasta 2019",
+      "year": "2019",
+      "en": 70.0,
+      "cn": 68.0,
+      "effect_estimate": -4.76,
+      "lower_ci": -8.656825,
+      "upper_ci": -0.863175,
+      "effect_type": "MD"
+    }
+  ]
+}

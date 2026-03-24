@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD014999_pub2_data",
+  "cd_number": "CD014999",
+  "analysis_name": "Rebleeding",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Lau 2019",
+      "year": "2019",
+      "ee": 12.0,
+      "en": 118.0,
+      "ce": 14.0,
+      "cn": 123.0,
+      "effect_estimate": 0.881402,
+      "lower_ci": 0.38965,
+      "upper_ci": 1.99376,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Laursen 2014",
+      "year": "2014",
+      "ee": 2.0,
+      "en": 49.0,
+      "ce": 8.0,
+      "cn": 56.0,
+      "effect_estimate": 0.255319,
+      "lower_ci": 0.051487,
+      "upper_ci": 1.266107,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

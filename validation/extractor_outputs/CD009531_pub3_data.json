@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD009531_pub3_data",
+  "cd_number": "CD009531",
+  "analysis_name": "Quality of life: average change in mental health component - 12 months",
+  "effect_type": "MD",
+  "k_input": 6,
+  "results": {
+    "I2": 93.70705920749643,
+    "Q": 79.4541084186939,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 6,
+    "p_value": 0.11246940953571061,
+    "pooled": 3.902879743316671,
+    "pooled_hi": 8.7234626614605,
+    "pooled_lo": -0.9177031748271585,
+    "pooled_log": 3.902879743316671,
+    "pooled_se": 2.458985624031496,
+    "tau2": 31.98147776347733
+  }
+}

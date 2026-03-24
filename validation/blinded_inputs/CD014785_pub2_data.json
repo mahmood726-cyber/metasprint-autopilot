@@ -1,0 +1,29 @@
+{
+  "dataset_name": "CD014785_pub2_data",
+  "cd_number": "CD014785",
+  "analysis_name": "Mean weight-for-age z-score at 6 months",
+  "effect_type": "MD",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Marsh 2002",
+      "year": "2002",
+      "en": 114.0,
+      "cn": 118.0,
+      "effect_estimate": 0.14,
+      "lower_ci": -0.062081,
+      "upper_ci": 0.342081,
+      "effect_type": "MD"
+    },
+    {
+      "study": "George 1993",
+      "year": "1993",
+      "en": 197.0,
+      "cn": 177.0,
+      "effect_estimate": -0.02,
+      "lower_ci": -0.075788,
+      "upper_ci": 0.035788,
+      "effect_type": "MD"
+    }
+  ]
+}

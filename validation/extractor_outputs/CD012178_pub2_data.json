@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD012178_pub2_data",
+  "cd_number": "CD012178",
+  "analysis_name": "Incidence of ROP at any stage",
+  "effect_type": "OR",
+  "k_input": 4,
+  "results": {
+    "I2": 0,
+    "Q": 2.0606479502132244,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 4,
+    "funnel_dots": 4,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 4,
+    "p_value": 0.5209470767794575,
+    "pooled": 0.872377461107252,
+    "pooled_hi": 1.3237318523973425,
+    "pooled_lo": 0.574921902249047,
+    "pooled_log": -0.13653308049132612,
+    "pooled_se": 0.2127061162491162,
+    "tau2": 0
+  }
+}

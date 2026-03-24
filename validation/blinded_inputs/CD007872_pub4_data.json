@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD007872_pub4_data",
+  "cd_number": "CD007872",
+  "analysis_name": "Estimated blood loss \u2265 500 mL",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Sentilhes 2018",
+      "year": "2018",
+      "ee": 80.0,
+      "en": 557.0,
+      "ce": 92.0,
+      "cn": 545.0,
+      "effect_estimate": 0.825814,
+      "lower_ci": 0.596006,
+      "upper_ci": 1.144231,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "WOMAN-2 2024",
+      "year": "2024",
+      "ee": 539.0,
+      "en": 7575.0,
+      "ce": 536.0,
+      "cn": 7483.0,
+      "effect_estimate": 0.992877,
+      "lower_ci": 0.877004,
+      "upper_ci": 1.12406,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

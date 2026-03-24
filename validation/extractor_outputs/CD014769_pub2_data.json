@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014769_pub2_data",
+  "cd_number": "CD014769",
+  "analysis_name": "Any VTE",
+  "effect_type": "OR",
+  "k_input": 27,
+  "results": {
+    "I2": 4.405505200451257,
+    "Q": 27.19821895028492,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 27,
+    "funnel_dots": 27,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 27,
+    "p_value": 0.027203188042186133,
+    "pooled": 0.863488977128146,
+    "pooled_hi": 0.9836413110647426,
+    "pooled_lo": 0.7580133176947629,
+    "pooled_log": -0.14677414681776618,
+    "pooled_se": 0.06645608802256762,
+    "tau2": 0.005249893487785505
+  }
+}

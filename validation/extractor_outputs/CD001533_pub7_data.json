@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD001533_pub7_data",
+  "cd_number": "CD001533",
+  "analysis_name": "Number with frequent relapses by 12 to 24 months",
+  "effect_type": "OR",
+  "k_input": 30,
+  "results": {
+    "I2": 55.29198418043616,
+    "Q": 64.8653255314226,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 30,
+    "funnel_dots": 30,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 30,
+    "p_value": 0.002100556848614543,
+    "pooled": 0.6423830888218756,
+    "pooled_hi": 0.851734985688402,
+    "pooled_lo": 0.4844887667386478,
+    "pooled_log": -0.4425704416931743,
+    "pooled_se": 0.1438947780660953,
+    "tau2": 0.29572051683319645
+  }
+}

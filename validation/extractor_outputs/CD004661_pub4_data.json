@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD004661_pub4_data",
+  "cd_number": "CD004661",
+  "analysis_name": "Death (fetal, neonatal, or later (up to 2 years' corrected age))",
+  "effect_type": "OR",
+  "k_input": 6,
+  "results": {
+    "I2": 3.3201004179534963,
+    "Q": 5.171705826769913,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 6,
+    "p_value": 0.634472634564929,
+    "pooled": 0.9557175386833185,
+    "pooled_hi": 1.1519590901442167,
+    "pooled_lo": 0.7929066418778378,
+    "pooled_log": -0.04529287121645021,
+    "pooled_se": 0.095264948516037,
+    "tau2": 0.002066187081947532
+  }
+}

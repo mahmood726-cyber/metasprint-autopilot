@@ -1,0 +1,87 @@
+{
+  "dataset_name": "CD015721_pub2_data",
+  "cd_number": "CD015721",
+  "analysis_name": "Functional independence: mRS score < 3 within 90 days",
+  "effect_type": "OR",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Fischer 2022",
+      "year": "2022",
+      "ee": 135.0,
+      "en": 207.0,
+      "ce": 114.0,
+      "cn": 201.0,
+      "effect_estimate": 1.430921,
+      "lower_ci": 0.959498,
+      "upper_ci": 2.133965,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "LeCouffe 2021",
+      "year": "2021",
+      "ee": 136.0,
+      "en": 266.0,
+      "ce": 134.0,
+      "cn": 273.0,
+      "effect_estimate": 1.085189,
+      "lower_ci": 0.77406,
+      "upper_ci": 1.521376,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Mitchell 2022",
+      "year": "2022",
+      "ee": 88.0,
+      "en": 147.0,
+      "ce": 79.0,
+      "cn": 148.0,
+      "effect_estimate": 1.302725,
+      "lower_ci": 0.821002,
+      "upper_ci": 2.067098,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Suzuki 2021",
+      "year": "2021",
+      "ee": 101.0,
+      "en": 103.0,
+      "ce": 101.0,
+      "cn": 101.0,
+      "effect_estimate": 0.2,
+      "lower_ci": 0.009477,
+      "upper_ci": 4.220842,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Yang 2020A",
+      "year": "2020",
+      "ee": 121.0,
+      "en": 329.0,
+      "ce": 119.0,
+      "cn": 327.0,
+      "effect_estimate": 1.016807,
+      "lower_ci": 0.739964,
+      "upper_ci": 1.397225,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Zi 2021A",
+      "year": "2021",
+      "ee": 55.0,
+      "en": 118.0,
+      "ce": 63.0,
+      "cn": 116.0,
+      "effect_estimate": 0.734442,
+      "lower_ci": 0.439185,
+      "upper_ci": 1.228196,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

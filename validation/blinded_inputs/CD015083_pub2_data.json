@@ -1,0 +1,161 @@
+{
+  "dataset_name": "CD015083_pub2_data",
+  "cd_number": "CD015083",
+  "analysis_name": "Referral for or receipt of any lumbar spine imaging at last follow-up within 12 months",
+  "effect_type": "MD",
+  "k": 19,
+  "studies": [
+    {
+      "study": "Apeldoorn 2012",
+      "year": "2012",
+      "effect_estimate": -0.5392,
+      "lower_ci": -1.237614,
+      "upper_ci": 0.159214,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Bishop 2017",
+      "year": "2017",
+      "effect_estimate": -0.071943,
+      "lower_ci": -0.861982,
+      "upper_ci": 0.718096,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Cherkin 2018",
+      "year": "2018",
+      "effect_estimate": 0.19596,
+      "lower_ci": -0.561145,
+      "upper_ci": 0.953065,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Choudhry 2022",
+      "year": "2022",
+      "effect_estimate": -0.248461,
+      "lower_ci": -0.364387,
+      "upper_ci": -0.132535,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Coombs 2021",
+      "year": "2021",
+      "effect_estimate": -0.018943,
+      "lower_ci": -0.202828,
+      "upper_ci": 0.164942,
+      "effect_type": "MD"
+    },
+    {
+      "study": "DeBar 2022",
+      "year": "2022",
+      "effect_estimate": -0.012323,
+      "lower_ci": -0.147786,
+      "upper_ci": 0.12314,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Delitto 2021",
+      "year": "2021",
+      "effect_estimate": -0.114388,
+      "lower_ci": -0.408055,
+      "upper_ci": 0.179279,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Dey 2004",
+      "year": "2004",
+      "effect_estimate": 0.094174,
+      "lower_ci": -0.110566,
+      "upper_ci": 0.298914,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hill 2011",
+      "year": "2011",
+      "effect_estimate": -0.116837,
+      "lower_ci": -0.462217,
+      "upper_ci": 0.228543,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hill 2022",
+      "year": "2022",
+      "effect_estimate": -0.349839,
+      "lower_ci": -1.12047,
+      "upper_ci": 0.420792,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hurley 2020",
+      "year": "2020",
+      "effect_estimate": 0.303186,
+      "lower_ci": -1.047526,
+      "upper_ci": 1.653898,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Koppenaal 2023",
+      "year": "2023",
+      "effect_estimate": -0.079249,
+      "lower_ci": -1.195694,
+      "upper_ci": 1.037196,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kroenke 2014",
+      "year": "2014",
+      "effect_estimate": -0.062041,
+      "lower_ci": -0.330866,
+      "upper_ci": 0.206784,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Morso 2021",
+      "year": "2021",
+      "effect_estimate": 0.035926,
+      "lower_ci": -0.159988,
+      "upper_ci": 0.23184,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Rhon 2023",
+      "year": "2023",
+      "effect_estimate": -0.052644,
+      "lower_ci": -0.439169,
+      "upper_ci": 0.333881,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Rossignol 2000",
+      "year": "2000",
+      "effect_estimate": -0.382992,
+      "lower_ci": -1.578217,
+      "upper_ci": 0.812233,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Schroder 2021",
+      "year": "2021",
+      "effect_estimate": -0.270511,
+      "lower_ci": -0.808639,
+      "upper_ci": 0.267617,
+      "effect_type": "MD"
+    },
+    {
+      "study": "van der Roer 2008",
+      "year": "2008",
+      "effect_estimate": -0.157186,
+      "lower_ci": -1.334307,
+      "upper_ci": 1.019935,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Gilbert 2004",
+      "year": "2004",
+      "effect_estimate": 1.322455,
+      "lower_ci": 1.138842,
+      "upper_ci": 1.506068,
+      "effect_type": "MD"
+    }
+  ]
+}

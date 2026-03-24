@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD003331_pub6_data",
+  "cd_number": "CD003331",
+  "analysis_name": "All-cause mortality up to 12 months' follow-up",
+  "effect_type": "OR",
+  "k_input": 34,
+  "results": {
+    "I2": 0,
+    "Q": 21.60616157717828,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 34,
+    "funnel_dots": 34,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 34,
+    "p_value": 0.49604400324794606,
+    "pooled": 0.9054824389983837,
+    "pooled_hi": 1.2052003436043137,
+    "pooled_lo": 0.6803005423002495,
+    "pooled_log": -0.09928739555364961,
+    "pooled_se": 0.14585490222427258,
+    "tau2": 0
+  }
+}

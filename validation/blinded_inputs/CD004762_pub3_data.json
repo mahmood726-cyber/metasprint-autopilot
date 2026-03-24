@@ -1,0 +1,49 @@
+{
+  "dataset_name": "CD004762_pub3_data",
+  "cd_number": "CD004762",
+  "analysis_name": "Improvement of myotonia: visual analogue scale",
+  "effect_type": "MD",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Heatwole 2021",
+      "year": "2021",
+      "effect_estimate": -2.61,
+      "lower_ci": -20.3088,
+      "upper_ci": 15.0888,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Statland 2012",
+      "year": "2012",
+      "effect_estimate": -1.68,
+      "lower_ci": -2.660197,
+      "upper_ci": -0.699803,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Stunnenberg 2018",
+      "year": "2018",
+      "effect_estimate": -3.12,
+      "lower_ci": -3.748228,
+      "upper_ci": -2.491772,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Andersen 2017",
+      "year": "2017",
+      "effect_estimate": -2.8,
+      "lower_ci": -3.505742,
+      "upper_ci": -2.094258,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Antonini 1990",
+      "year": "1990",
+      "effect_estimate": -6.69,
+      "lower_ci": -12.82388,
+      "upper_ci": -0.55612,
+      "effect_type": "MD"
+    }
+  ]
+}

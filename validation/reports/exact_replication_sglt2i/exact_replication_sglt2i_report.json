@@ -1,0 +1,343 @@
+{
+  "timestamp_utc": "2026-02-27T19:58:32.119252+00:00",
+  "elapsed_sec": 11.19,
+  "reference": {
+    "title": "Association of SGLT2 Inhibitors With Cardiovascular and Kidney Outcomes in Patients With Type 2 Diabetes: A Meta-analysis",
+    "doi": "10.1001/jamacardio.2020.4511",
+    "pmid": "33031522",
+    "pmc": "PMC7542529",
+    "journal": "JAMA Cardiology",
+    "year": 2021
+  },
+  "summary": {
+    "k": 5,
+    "total_n": 46969,
+    "checks_passed": 10,
+    "checks_total": 10,
+    "all_passed": true,
+    "verdict": "PASS"
+  },
+  "trials": [
+    {
+      "name": "EMPA-REG OUTCOME",
+      "year": 2015,
+      "drug": "Empagliflozin",
+      "n": 7020,
+      "n_sglt2i": 4687,
+      "n_placebo": 2333,
+      "hr": 0.86,
+      "hr_lo": 0.74,
+      "hr_hi": 0.99,
+      "median_fu_years": 3.1,
+      "primary_endpoint": "3-point MACE (CV death, nonfatal MI, nonfatal stroke)",
+      "mace_is_primary": true,
+      "source_pmid": "26378978",
+      "source_journal": "N Engl J Med"
+    },
+    {
+      "name": "CANVAS Program",
+      "year": 2017,
+      "drug": "Canagliflozin",
+      "n": 10142,
+      "n_sglt2i": 5795,
+      "n_placebo": 4347,
+      "hr": 0.86,
+      "hr_lo": 0.75,
+      "hr_hi": 0.97,
+      "median_fu_years": 2.4,
+      "primary_endpoint": "3-point MACE (CV death, nonfatal MI, nonfatal stroke)",
+      "mace_is_primary": true,
+      "source_pmid": "28605608",
+      "source_journal": "N Engl J Med"
+    },
+    {
+      "name": "DECLARE-TIMI 58",
+      "year": 2019,
+      "drug": "Dapagliflozin",
+      "n": 17160,
+      "n_sglt2i": 8582,
+      "n_placebo": 8578,
+      "hr": 0.93,
+      "hr_lo": 0.84,
+      "hr_hi": 1.03,
+      "median_fu_years": 4.2,
+      "primary_endpoint": "Co-primary: 3-point MACE; CV death/HHF",
+      "mace_is_primary": true,
+      "source_pmid": "30415602",
+      "source_journal": "N Engl J Med"
+    },
+    {
+      "name": "CREDENCE",
+      "year": 2019,
+      "drug": "Canagliflozin",
+      "n": 4401,
+      "n_sglt2i": 2202,
+      "n_placebo": 2199,
+      "hr": 0.8,
+      "hr_lo": 0.67,
+      "hr_hi": 0.95,
+      "median_fu_years": 2.6,
+      "primary_endpoint": "Primary: kidney composite; 3-pt MACE is secondary",
+      "mace_is_primary": false,
+      "source_pmid": "30990260",
+      "source_journal": "N Engl J Med"
+    },
+    {
+      "name": "VERTIS CV",
+      "year": 2020,
+      "drug": "Ertugliflozin",
+      "n": 8246,
+      "n_sglt2i": 5499,
+      "n_placebo": 2747,
+      "hr": 0.97,
+      "hr_lo": 0.85,
+      "hr_hi": 1.11,
+      "median_fu_years": 3.5,
+      "primary_endpoint": "3-point MACE (CV death, nonfatal MI, nonfatal stroke)",
+      "mace_is_primary": true,
+      "source_pmid": "32966714",
+      "source_journal": "N Engl J Med"
+    }
+  ],
+  "fe_results": {
+    "pooled_hr": 0.8957129777815688,
+    "pooled_ci_lo": 0.8448706160849476,
+    "pooled_ci_hi": 0.949614915339484,
+    "I2": 4.4250961605383194,
+    "Q": 4.185199083975903,
+    "k": 5
+  },
+  "dl_results": {
+    "pooled_hr": 0.8951468616397353,
+    "pooled_ci_lo": 0.8430297964970979,
+    "pooled_ci_hi": 0.9504858632908665,
+    "tau2": 0.00021266417953600916,
+    "I2": 4.4250961605383194,
+    "Q": 4.185199083975903,
+    "k": 5
+  },
+  "published": {
+    "pooled_hr": 0.9,
+    "pooled_ci_lo": 0.85,
+    "pooled_ci_hi": 0.95,
+    "total_n": 46969,
+    "total_events": 4931,
+    "k": 5,
+    "method": "Fixed-effect inverse-variance",
+    "Q_p_value": 0.27,
+    "hhf_hr": 0.68,
+    "hhf_ci_lo": 0.61,
+    "hhf_ci_hi": 0.76,
+    "cv_death_hr": 0.85,
+    "cv_death_ci_lo": 0.78,
+    "cv_death_ci_hi": 0.93,
+    "acm_hr": 0.87,
+    "acm_ci_lo": 0.81,
+    "acm_ci_hi": 0.93,
+    "kidney_hr": 0.62,
+    "kidney_ci_lo": 0.56,
+    "kidney_ci_hi": 0.7
+  },
+  "comparisons": [
+    {
+      "label": "Pooled HR (MACE, fixed-effect)",
+      "computed": 0.895713,
+      "published": 0.9,
+      "difference": 0.004287,
+      "tolerance": 0.02,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "CI lower bound (FE)",
+      "computed": 0.844871,
+      "published": 0.85,
+      "difference": 0.005129,
+      "tolerance": 0.03,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "CI upper bound (FE)",
+      "computed": 0.949615,
+      "published": 0.95,
+      "difference": 0.000385,
+      "tolerance": 0.03,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "Pooled HR (MACE, DerSimonian-Laird)",
+      "computed": 0.895147,
+      "published": 0.9,
+      "difference": 0.004853,
+      "tolerance": 0.02,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "I-squared (%, should be ~0)",
+      "computed": 4.425096,
+      "published": 0.0,
+      "difference": 4.425096,
+      "tolerance": 10.0,
+      "unit": "%",
+      "passed": true
+    },
+    {
+      "label": "Number of studies (k)",
+      "computed": 5,
+      "published": 5,
+      "difference": 0,
+      "tolerance": 0,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "Total participants",
+      "computed": 46969,
+      "published": 46969,
+      "difference": 0,
+      "tolerance": 0,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "Pooled HR < 1 (favours SGLT2i)",
+      "computed": 0.8957,
+      "published": "< 1.00",
+      "difference": "N/A",
+      "tolerance": "directional",
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "Pooled HR CI excludes 1.0 (significant)",
+      "computed": "[0.8449, 0.9496]",
+      "published": "[0.85, 0.95]",
+      "difference": "N/A",
+      "tolerance": "CI upper < 1.0",
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "FE-DL concordance (should be <0.001)",
+      "computed": "0.000566",
+      "published": "< 0.001",
+      "difference": "N/A",
+      "tolerance": "< 0.001",
+      "unit": "",
+      "passed": true
+    }
+  ],
+  "js_verification": {
+    "I2": 4.4250961605383194,
+    "Q": 4.185199083975903,
+    "dl_ci_hi": 0.9504858632908665,
+    "dl_ci_lo": 0.8430297964970979,
+    "dl_hr": 0.8951468616397353,
+    "fe_ci_hi": 0.949614915339484,
+    "fe_ci_lo": 0.8448706160849475,
+    "fe_hr": 0.8957129777815688,
+    "k": 5,
+    "tau2": 0.0002126641795360092,
+    "diff_fe": "0.00e+00",
+    "diff_dl": "0.00e+00"
+  },
+  "tolerances": {
+    "effect": 0.02,
+    "ci": 0.03,
+    "I2": 10.0
+  },
+  "editorial_checklist": {
+    "journal": "JAMA Cardiology",
+    "total_weight": 106,
+    "items": [
+      {
+        "category": "Reporting",
+        "criterion": "PRISMA compliance",
+        "weight": 10
+      },
+      {
+        "category": "Reporting",
+        "criterion": "Prospective registration (PROSPERO)",
+        "weight": 8
+      },
+      {
+        "category": "Reporting",
+        "criterion": "Systematic search (>=2 databases)",
+        "weight": 8
+      },
+      {
+        "category": "Reporting",
+        "criterion": "Study selection flowchart",
+        "weight": 6
+      },
+      {
+        "category": "Methods",
+        "criterion": "Risk of bias assessment",
+        "weight": 10
+      },
+      {
+        "category": "Methods",
+        "criterion": "Effect measure specified (HR, fixed-effect IV)",
+        "weight": 6
+      },
+      {
+        "category": "Methods",
+        "criterion": "Heterogeneity assessment (Q test, I-squared)",
+        "weight": 8
+      },
+      {
+        "category": "Methods",
+        "criterion": "Publication bias assessment (Egger's or funnel)",
+        "weight": 6
+      },
+      {
+        "category": "Methods",
+        "criterion": "Statistical software stated",
+        "weight": 4
+      },
+      {
+        "category": "Methods",
+        "criterion": "Sensitivity analyses pre-specified",
+        "weight": 6
+      },
+      {
+        "category": "Results",
+        "criterion": "Forest plot per outcome",
+        "weight": 8
+      },
+      {
+        "category": "Results",
+        "criterion": "Subgroup analysis by ASCVD status",
+        "weight": 6
+      },
+      {
+        "category": "Results",
+        "criterion": "Multiple outcome analyses (MACE, HF, kidney, death)",
+        "weight": 6
+      },
+      {
+        "category": "Clinical",
+        "criterion": "Clinical context and guideline implications",
+        "weight": 4
+      },
+      {
+        "category": "Clinical",
+        "criterion": "Limitations acknowledged",
+        "weight": 4
+      },
+      {
+        "category": "Integrity",
+        "criterion": "COI disclosures (pharmaceutical)",
+        "weight": 4
+      },
+      {
+        "category": "Integrity",
+        "criterion": "Data availability statement",
+        "weight": 2
+      }
+    ]
+  }
+}

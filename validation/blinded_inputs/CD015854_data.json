@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD015854_data",
+  "cd_number": "CD015854",
+  "analysis_name": "Achievement of definitions of improvement (assessed with IMACS DOI, measured at 8 weeks)",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "RIM",
+      "year": "2012",
+      "ee": 14.0,
+      "en": 96.0,
+      "ce": 21.0,
+      "cn": 104.0,
+      "effect_estimate": 0.674797,
+      "lower_ci": 0.321285,
+      "upper_ci": 1.417281,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "NCT00533091",
+      "year": "2008",
+      "ee": 2.0,
+      "en": 39.0,
+      "ce": 1.0,
+      "cn": 12.0,
+      "effect_estimate": 0.594595,
+      "lower_ci": 0.049121,
+      "upper_ci": 7.197329,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "TIM NCT02043548",
+      "year": "2014",
+      "ee": 10.0,
+      "en": 18.0,
+      "ce": 15.0,
+      "cn": 18.0,
+      "effect_estimate": 0.25,
+      "lower_ci": 0.053071,
+      "upper_ci": 1.177665,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "NCT00033891",
+      "year": "2002",
+      "ee": 3.0,
+      "en": 6.0,
+      "ce": 4.0,
+      "cn": 6.0,
+      "effect_estimate": 0.5,
+      "lower_ci": 0.048486,
+      "upper_ci": 5.156146,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

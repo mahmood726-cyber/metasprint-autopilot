@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD012426_pub2_data",
+  "cd_number": "CD012426",
+  "analysis_name": "Unfavourable functional outcome at 90 days",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Hacke 2014",
+      "year": "2014",
+      "ee": 164.0,
+      "en": 316.0,
+      "ce": 166.0,
+      "cn": 314.0,
+      "effect_estimate": 0.961953,
+      "lower_ci": 0.703577,
+      "upper_ci": 1.315213,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Lampl 2007",
+      "year": "2007",
+      "ee": 32.0,
+      "en": 79.0,
+      "ce": 23.0,
+      "cn": 41.0,
+      "effect_estimate": 0.53284,
+      "lower_ci": 0.248396,
+      "upper_ci": 1.143007,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Zivin 2009",
+      "year": "2009",
+      "ee": 211.0,
+      "en": 331.0,
+      "ce": 226.0,
+      "cn": 327.0,
+      "effect_estimate": 0.785804,
+      "lower_ci": 0.568052,
+      "upper_ci": 1.087026,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

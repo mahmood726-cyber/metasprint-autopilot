@@ -1,0 +1,33 @@
+{
+  "dataset_name": "CD003218_pub3_data",
+  "cd_number": "CD003218",
+  "analysis_name": "Mean improvement in the Maintenance of Wakefulness Test",
+  "effect_type": "MD",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Orlikowski 2009",
+      "year": "2009",
+      "effect_estimate": 0.6,
+      "lower_ci": -2.026929,
+      "upper_ci": 3.226929,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Puymirat 2012",
+      "year": "2012",
+      "effect_estimate": 5.38,
+      "lower_ci": 2.629566,
+      "upper_ci": 8.130434,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Talbot 2003",
+      "year": "2003",
+      "effect_estimate": 5.7,
+      "lower_ci": 0.093271,
+      "upper_ci": 11.306729,
+      "effect_type": "MD"
+    }
+  ]
+}

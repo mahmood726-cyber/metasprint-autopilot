@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD001396_pub4_data",
+  "cd_number": "CD001396",
+  "analysis_name": "Response rate",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Freeman 2004",
+      "year": "2004",
+      "ee": 23.0,
+      "en": 56.0,
+      "ce": 30.0,
+      "cn": 56.0,
+      "effect_estimate": 0.60404,
+      "lower_ci": 0.285906,
+      "upper_ci": 1.27617,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Landen 2007",
+      "year": "2007",
+      "ee": 37.0,
+      "en": 59.0,
+      "ce": 44.0,
+      "cn": 60.0,
+      "effect_estimate": 0.61157,
+      "lower_ci": 0.280762,
+      "upper_ci": 1.332155,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Wikander 1998",
+      "year": "1998",
+      "ee": 17.0,
+      "en": 19.0,
+      "ce": 13.0,
+      "cn": 19.0,
+      "effect_estimate": 3.923077,
+      "lower_ci": 0.677601,
+      "upper_ci": 22.713274,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

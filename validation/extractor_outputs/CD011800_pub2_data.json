@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011800_pub2_data",
+  "cd_number": "CD011800",
+  "analysis_name": "Vitamin D status (achieved 25-hydroxyvitamin D level)",
+  "effect_type": "MD",
+  "k_input": 2,
+  "results": {
+    "I2": 94.14601592244686,
+    "Q": 17.082383326501695,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 2,
+    "funnel_dots": 2,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 2,
+    "p_value": 0.33268497314986023,
+    "pooled": 6.5839700482527475,
+    "pooled_hi": 19.907926612089607,
+    "pooled_lo": -6.739986515584113,
+    "pooled_log": 6.5839700482527475,
+    "pooled_se": 6.796567594010088,
+    "tau2": 87.06623552507885
+  }
+}

@@ -1,0 +1,822 @@
+{
+  "summary": {
+    "timestamp_utc": "2026-02-27T17:31:30.616844+00:00",
+    "benchmarks_tested": 4,
+    "runs_ok": 4,
+    "advanced_gate_ready_count": 4,
+    "mean_match_rate": 1.0,
+    "mean_panel_accept_rate": 1.0,
+    "mean_total_sec": 5.8452749999985105,
+    "elapsed_wall_sec": 28.48
+  },
+  "benchmarks": [
+    {
+      "id": "jacc_af_stable_cad_2025",
+      "title": "Anticoagulation and Antiplatelet Therapy for Atrial Fibrillation and Stable Coronary Disease: Meta-Analysis of Randomized Trials",
+      "journal": "J Am Coll Cardiol",
+      "year": 2025,
+      "pmid": "39918465",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39918465/",
+      "expected": {
+        "methods_reporting_min": 85,
+        "stats_reporting_min": 90,
+        "robustness_min": 75,
+        "gate_integrity_min": 80
+      }
+    },
+    {
+      "id": "jacc_hf_mra_post_mi_2025",
+      "title": "Mineralocorticoid Receptor Antagonists in Myocardial Infarction Patients: A Systematic Review and Meta-Analysis of Randomized Trials",
+      "journal": "JACC Heart Fail",
+      "year": 2025,
+      "pmid": "40616942",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40616942/",
+      "expected": {
+        "methods_reporting_min": 85,
+        "stats_reporting_min": 90,
+        "robustness_min": 70,
+        "gate_integrity_min": 80
+      }
+    },
+    {
+      "id": "jacc_hf_stroke_hfref_2025",
+      "title": "Stroke in Heart Failure With Reduced Ejection Fraction: Systematic Review and Meta-Analysis of Randomized Trials",
+      "journal": "JACC Heart Fail",
+      "year": 2025,
+      "pmid": "40088236",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40088236/",
+      "expected": {
+        "methods_reporting_min": 85,
+        "stats_reporting_min": 85,
+        "robustness_min": 70,
+        "gate_integrity_min": 80
+      }
+    },
+    {
+      "id": "dom_glp1_meta_reg_2025",
+      "title": "Cardiovascular risk reduction with glucagon-like peptide-1 receptor agonists is proportional to HbA1c lowering in type 2 diabetes",
+      "journal": "Diabetes Obes Metab",
+      "year": 2025,
+      "pmid": "40926380",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40926380/",
+      "expected": {
+        "methods_reporting_min": 85,
+        "stats_reporting_min": 90,
+        "robustness_min": 80,
+        "gate_integrity_min": 80
+      }
+    }
+  ],
+  "personas": [
+    {
+      "name": "AF-CAD Benchmark Author",
+      "subcategory": "af",
+      "p": "adults with atrial fibrillation and stable coronary artery disease",
+      "i": "oral anticoagulation monotherapy",
+      "c": "oral anticoagulation plus antiplatelet therapy",
+      "o": "major bleeding and ischemic events",
+      "relevant": 30,
+      "irrelevant": 70,
+      "duplicates": 22,
+      "manual_cap": 16
+    },
+    {
+      "name": "MRA-PostMI Benchmark Author",
+      "subcategory": "acs",
+      "p": "adults after myocardial infarction",
+      "i": "mineralocorticoid receptor antagonists",
+      "c": "no mineralocorticoid receptor antagonist",
+      "o": "death or new/worsening heart failure",
+      "relevant": 28,
+      "irrelevant": 68,
+      "duplicates": 20,
+      "manual_cap": 15
+    },
+    {
+      "name": "HFrEF-Stroke Benchmark Author",
+      "subcategory": "hf",
+      "p": "adults with heart failure with reduced ejection fraction",
+      "i": "SGLT2 inhibitors",
+      "c": "placebo",
+      "o": "stroke",
+      "relevant": 30,
+      "irrelevant": 72,
+      "duplicates": 24,
+      "manual_cap": 16
+    },
+    {
+      "name": "GLP1-MACE Benchmark Author",
+      "subcategory": "general",
+      "p": "adults with type 2 diabetes at cardiovascular risk",
+      "i": "GLP-1 receptor agonists",
+      "c": "placebo",
+      "o": "major adverse cardiovascular events",
+      "relevant": 32,
+      "irrelevant": 76,
+      "duplicates": 24,
+      "manual_cap": 17
+    }
+  ],
+  "results": [
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 10,
+      "auto_decision_rate": 1,
+      "extraction_k": 10,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 414,
+        "resultsWordCount": 144,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "AF-CAD Benchmark Author",
+      "protocol_readiness_pct": 100,
+      "queue_representatives": 0,
+      "rob_assessed": 10,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.15869999998807907,
+        "discover_sec": 1.0622000000178813,
+        "extract_verify_sec": 1.57,
+        "protocol_sec": 0.8578999999761582,
+        "search_screen_sec": 1.6391000000238418,
+        "total_sec": 5.428,
+        "write_sec": 0.1375
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 10
+      },
+      "verified_ratio": 1,
+      "benchmark_id": "jacc_af_stable_cad_2025",
+      "benchmark_title": "Anticoagulation and Antiplatelet Therapy for Atrial Fibrillation and Stable Coronary Disease: Meta-Analysis of Randomized Trials",
+      "benchmark_journal": "J Am Coll Cardiol",
+      "benchmark_year": 2025,
+      "benchmark_pmid": "39918465",
+      "benchmark_url": "https://pubmed.ncbi.nlm.nih.gov/39918465/",
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false,
+      "benchmark_match": {
+        "checks": {
+          "methods_reporting": true,
+          "stats_reporting": true,
+          "robustness": true,
+          "gate_integrity": true
+        },
+        "matched": 4,
+        "total": 4,
+        "match_rate": 1.0
+      }
+    },
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 9,
+      "auto_decision_rate": 1,
+      "extraction_k": 9,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 409,
+        "resultsWordCount": 154,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "MRA-PostMI Benchmark Author",
+      "protocol_readiness_pct": 100,
+      "queue_representatives": 0,
+      "rob_assessed": 9,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.3052999999821186,
+        "discover_sec": 1.453800000011921,
+        "extract_verify_sec": 1.5332000000178814,
+        "protocol_sec": 0.995,
+        "search_screen_sec": 1.4611999999880791,
+        "total_sec": 5.91559999999404,
+        "write_sec": 0.16119999998807907
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 9
+      },
+      "verified_ratio": 1,
+      "benchmark_id": "jacc_hf_mra_post_mi_2025",
+      "benchmark_title": "Mineralocorticoid Receptor Antagonists in Myocardial Infarction Patients: A Systematic Review and Meta-Analysis of Randomized Trials",
+      "benchmark_journal": "JACC Heart Fail",
+      "benchmark_year": 2025,
+      "benchmark_pmid": "40616942",
+      "benchmark_url": "https://pubmed.ncbi.nlm.nih.gov/40616942/",
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false,
+      "benchmark_match": {
+        "checks": {
+          "methods_reporting": true,
+          "stats_reporting": true,
+          "robustness": true,
+          "gate_integrity": true
+        },
+        "matched": 4,
+        "total": 4,
+        "match_rate": 1.0
+      }
+    },
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 10,
+      "auto_decision_rate": 1,
+      "extraction_k": 10,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 398,
+        "resultsWordCount": 144,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "HFrEF-Stroke Benchmark Author",
+      "protocol_readiness_pct": 100,
+      "queue_representatives": 0,
+      "rob_assessed": 10,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.2813000000119209,
+        "discover_sec": 1.5556999999880792,
+        "extract_verify_sec": 1.5378999999761582,
+        "protocol_sec": 1.0365999999940396,
+        "search_screen_sec": 1.3646000000238419,
+        "total_sec": 5.966,
+        "write_sec": 0.18580000001192093
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 10
+      },
+      "verified_ratio": 1,
+      "benchmark_id": "jacc_hf_stroke_hfref_2025",
+      "benchmark_title": "Stroke in Heart Failure With Reduced Ejection Fraction: Systematic Review and Meta-Analysis of Randomized Trials",
+      "benchmark_journal": "JACC Heart Fail",
+      "benchmark_year": 2025,
+      "benchmark_pmid": "40088236",
+      "benchmark_url": "https://pubmed.ncbi.nlm.nih.gov/40088236/",
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false,
+      "benchmark_match": {
+        "checks": {
+          "methods_reporting": true,
+          "stats_reporting": true,
+          "robustness": true,
+          "gate_integrity": true
+        },
+        "matched": 4,
+        "total": 4,
+        "match_rate": 1.0
+      }
+    },
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 11,
+      "auto_decision_rate": 1,
+      "extraction_k": 11,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 403,
+        "resultsWordCount": 144,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "GLP1-MACE Benchmark Author",
+      "protocol_readiness_pct": 90,
+      "queue_representatives": 0,
+      "rob_assessed": 11,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.20279999998211862,
+        "discover_sec": 1.3966999999880791,
+        "extract_verify_sec": 1.7802000000178815,
+        "protocol_sec": 0.9406000000238418,
+        "search_screen_sec": 1.5212999999821186,
+        "total_sec": 6.0715,
+        "write_sec": 0.2125
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 11
+      },
+      "verified_ratio": 1,
+      "benchmark_id": "dom_glp1_meta_reg_2025",
+      "benchmark_title": "Cardiovascular risk reduction with glucagon-like peptide-1 receptor agonists is proportional to HbA1c lowering in type 2 diabetes",
+      "benchmark_journal": "Diabetes Obes Metab",
+      "benchmark_year": 2025,
+      "benchmark_pmid": "40926380",
+      "benchmark_url": "https://pubmed.ncbi.nlm.nih.gov/40926380/",
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false,
+      "benchmark_match": {
+        "checks": {
+          "methods_reporting": true,
+          "stats_reporting": true,
+          "robustness": true,
+          "gate_integrity": true
+        },
+        "matched": 4,
+        "total": 4,
+        "match_rate": 1.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD003774_pub5_data",
+  "cd_number": "CD003774",
+  "analysis_name": "CMV disease",
+  "effect_type": "OR",
+  "k_input": 38,
+  "results": {
+    "I2": 44.081060785518964,
+    "Q": 66.16720653101785,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 38,
+    "funnel_dots": 38,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 38,
+    "p_value": 0,
+    "pooled": 0.3242621134597137,
+    "pooled_hi": 0.42336755080454375,
+    "pooled_lo": 0.24835611048968412,
+    "pooled_log": -1.1262030980879751,
+    "pooled_se": 0.13603816914314695,
+    "tau2": 0.26183590094877734
+  }
+}

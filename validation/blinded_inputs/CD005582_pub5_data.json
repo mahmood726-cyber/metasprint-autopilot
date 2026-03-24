@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD005582_pub5_data",
+  "cd_number": "CD005582",
+  "analysis_name": "The presence of PHN six months after the onset of acute herpetic rash",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Eaglstein 1970",
+      "year": "1970",
+      "ee": 2.0,
+      "en": 15.0,
+      "ce": 2.0,
+      "cn": 20.0,
+      "effect_estimate": 1.384615,
+      "lower_ci": 0.171909,
+      "upper_ci": 11.152181,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Esmann 1987",
+      "year": "1987",
+      "ee": 9.0,
+      "en": 42.0,
+      "ce": 9.0,
+      "cn": 37.0,
+      "effect_estimate": 0.848485,
+      "lower_ci": 0.296177,
+      "upper_ci": 2.430733,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

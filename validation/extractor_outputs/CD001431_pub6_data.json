@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD001431_pub6_data",
+  "cd_number": "CD001431",
+  "analysis_name": "Informed values-choice congruence - all studies",
+  "effect_type": "OR",
+  "k_input": 106,
+  "results": {
+    "I2": 87.70640592388521,
+    "Q": 854.1033594398921,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 106,
+    "funnel_dots": 106,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 106,
+    "p_value": 0.009779029186228527,
+    "pooled": 1.275758299440418,
+    "pooled_hi": 1.534706710344974,
+    "pooled_lo": 1.0605018063844014,
+    "pooled_log": 0.24354074647902943,
+    "pooled_se": 0.09426598004801348,
+    "tau2": 0.7216716641858424
+  }
+}

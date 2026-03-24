@@ -1,0 +1,87 @@
+{
+  "dataset_name": "CD014713_pub2_data",
+  "cd_number": "CD014713",
+  "analysis_name": "Unplanned hospital presentation rates - unplanned hospital admissions within one month (30 days)",
+  "effect_type": "OR",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Bronstein 2015",
+      "year": "2015",
+      "ee": 0.0,
+      "en": 45.0,
+      "ce": 8.0,
+      "cn": 44.0,
+      "effect_estimate": 0.047188,
+      "lower_ci": 0.002633,
+      "upper_ci": 0.845562,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Fitzgerald 1994",
+      "year": "1994",
+      "ee": 21.0,
+      "en": 333.0,
+      "ce": 21.0,
+      "cn": 335.0,
+      "effect_estimate": 1.00641,
+      "lower_ci": 0.538716,
+      "upper_ci": 1.880141,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Henschen 2020",
+      "year": "2021",
+      "ee": 16.0,
+      "en": 75.0,
+      "ce": 8.0,
+      "cn": 76.0,
+      "effect_estimate": 2.305085,
+      "lower_ci": 0.920699,
+      "upper_ci": 5.771065,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "McWilliams 2018",
+      "year": "2019",
+      "ee": 124.0,
+      "en": 935.0,
+      "ce": 128.0,
+      "cn": 941.0,
+      "effect_estimate": 0.971139,
+      "lower_ci": 0.7447,
+      "upper_ci": 1.26643,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Young 2013",
+      "year": "2013",
+      "ee": 31.0,
+      "en": 362.0,
+      "ce": 36.0,
+      "cn": 342.0,
+      "effect_estimate": 0.796073,
+      "lower_ci": 0.480495,
+      "upper_ci": 1.318913,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Balaban 2015",
+      "year": "2015",
+      "ee": 487.0,
+      "en": 585.0,
+      "ce": 726.0,
+      "cn": 925.0,
+      "effect_estimate": 1.362132,
+      "lower_ci": 1.042121,
+      "upper_ci": 1.780412,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

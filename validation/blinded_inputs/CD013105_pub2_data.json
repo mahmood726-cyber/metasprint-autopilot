@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD013105_pub2_data",
+  "cd_number": "CD013105",
+  "analysis_name": "Awareness of prolapse",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Barber 2014",
+      "year": "2014",
+      "ee": 31.0,
+      "en": 151.0,
+      "ce": 30.0,
+      "cn": 154.0,
+      "effect_estimate": 1.067778,
+      "lower_ci": 0.609111,
+      "upper_ci": 1.871826,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Mueller 2017",
+      "year": "2017",
+      "ee": 3.0,
+      "en": 34.0,
+      "ce": 4.0,
+      "cn": 43.0,
+      "effect_estimate": 0.943548,
+      "lower_ci": 0.196335,
+      "upper_ci": 4.534513,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

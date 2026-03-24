@@ -1,0 +1,87 @@
+{
+  "dataset_name": "CD013707_pub2_data",
+  "cd_number": "CD013707",
+  "analysis_name": "All-cause mortality within 30 days",
+  "effect_type": "OR",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Momeni 2011",
+      "year": "2011",
+      "ee": 1.0,
+      "en": 20.0,
+      "ce": 1.0,
+      "cn": 20.0,
+      "effect_estimate": 1.0,
+      "lower_ci": 0.058167,
+      "upper_ci": 17.191927,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Pellicer 2013",
+      "year": "2013",
+      "ee": 1.0,
+      "en": 11.0,
+      "ce": 2.0,
+      "cn": 9.0,
+      "effect_estimate": 0.35,
+      "lower_ci": 0.026308,
+      "upper_ci": 4.656381,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Abril-Molina 2021",
+      "year": "2020",
+      "ee": 0.0,
+      "en": 15.0,
+      "ce": 2.0,
+      "cn": 15.0,
+      "effect_estimate": 0.174194,
+      "lower_ci": 0.007665,
+      "upper_ci": 3.958638,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Wang 2019",
+      "year": "2019",
+      "ee": 3.0,
+      "en": 94.0,
+      "ce": 4.0,
+      "cn": 93.0,
+      "effect_estimate": 0.733516,
+      "lower_ci": 0.159544,
+      "upper_ci": 3.37241,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Costello 2014",
+      "year": "2014",
+      "ee": 21.0,
+      "en": 36.0,
+      "ce": 13.0,
+      "cn": 35.0,
+      "effect_estimate": 2.369231,
+      "lower_ci": 0.9129,
+      "upper_ci": 6.148815,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Hoffman 2003",
+      "year": "2003",
+      "ee": 8.0,
+      "en": 77.0,
+      "ce": 2.0,
+      "cn": 81.0,
+      "effect_estimate": 4.57971,
+      "lower_ci": 0.940355,
+      "upper_ci": 22.304079,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD014792_pub2_data",
+  "cd_number": "CD014792",
+  "analysis_name": "Mortality (Grade V Clavien-Dindo)",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Gianotti 2000",
+      "year": "2000",
+      "ee": 3.0,
+      "en": 144.0,
+      "ce": 4.0,
+      "cn": 68.0,
+      "effect_estimate": 0.340426,
+      "lower_ci": 0.073998,
+      "upper_ci": 1.566108,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Perinel 2016",
+      "year": "2016",
+      "ee": 35.0,
+      "en": 103.0,
+      "ce": 27.0,
+      "cn": 101.0,
+      "effect_estimate": 1.410675,
+      "lower_ci": 0.773812,
+      "upper_ci": 2.571691,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Tien 2009",
+      "year": "2009",
+      "ee": 10.0,
+      "en": 123.0,
+      "ce": 10.0,
+      "cn": 124.0,
+      "effect_estimate": 1.00885,
+      "lower_ci": 0.404254,
+      "upper_ci": 2.517668,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

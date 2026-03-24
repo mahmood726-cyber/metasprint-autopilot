@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD012993_pub2_data",
+  "cd_number": "CD012993",
+  "analysis_name": "Change in 6MWT from baseline",
+  "effect_type": "MD",
+  "k_input": 5,
+  "results": {
+    "I2": 16.07088524469766,
+    "Q": 4.765926593723895,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 5,
+    "funnel_dots": 5,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 5,
+    "p_value": 0.008607971066916242,
+    "pooled": 16.34548752640799,
+    "pooled_hi": 28.54213904683506,
+    "pooled_lo": 4.148836005980918,
+    "pooled_log": 16.34548752640799,
+    "pooled_se": 6.221527823361304,
+    "tau2": 36.38147248658965
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "dataset_name": "CD013726_pub2_data",
+  "cd_number": "CD013726",
+  "analysis_name": "Pain",
+  "effect_type": "MD",
+  "k": 8,
+  "studies": [
+    {
+      "study": "Torkki 2003",
+      "year": "2003",
+      "en": 71.0,
+      "cn": 69.0,
+      "effect_estimate": -18.0,
+      "lower_ci": -26.141614,
+      "upper_ci": -9.858386,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Radwan 2012",
+      "year": "2012",
+      "en": 31.0,
+      "cn": 29.0,
+      "effect_estimate": 0.55,
+      "lower_ci": -0.263274,
+      "upper_ci": 1.363274,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Palmanovich 2020",
+      "year": "2020",
+      "en": 15.0,
+      "cn": 21.0,
+      "effect_estimate": -0.2,
+      "lower_ci": -1.290327,
+      "upper_ci": 0.890327,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Avcu 2018",
+      "year": "2018",
+      "en": 20.0,
+      "cn": 20.0,
+      "effect_estimate": -0.2,
+      "lower_ci": -1.199609,
+      "upper_ci": 0.799609,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Glazebrook 2014",
+      "year": "2014",
+      "en": 33.0,
+      "cn": 35.0,
+      "effect_estimate": -0.9,
+      "lower_ci": -1.669769,
+      "upper_ci": -0.130231,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Saro 2007",
+      "year": "2007",
+      "en": 49.0,
+      "cn": 50.0,
+      "effect_estimate": 0.0,
+      "lower_ci": -0.636215,
+      "upper_ci": 0.636215,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Uygur 2016",
+      "year": "2016",
+      "en": 34.0,
+      "cn": 32.0,
+      "effect_estimate": 0.12,
+      "lower_ci": -0.655643,
+      "upper_ci": 0.895643,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wester 2016",
+      "year": "2016",
+      "en": 23.0,
+      "cn": 22.0,
+      "effect_estimate": 0.2,
+      "lower_ci": -0.740092,
+      "upper_ci": 1.140092,
+      "effect_type": "MD"
+    }
+  ]
+}

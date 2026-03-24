@@ -1,0 +1,59 @@
+{
+  "dataset_name": "CD014811_pub2_data",
+  "cd_number": "CD014811",
+  "analysis_name": "Net weight loss (kg)",
+  "effect_type": "MD",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Allen 2010",
+      "year": "2010",
+      "en": 20.0,
+      "cn": 21.0,
+      "effect_estimate": 1.02,
+      "lower_ci": -0.444958,
+      "upper_ci": 2.484958,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Felker 2011",
+      "year": "2011",
+      "en": 152.0,
+      "cn": 156.0,
+      "effect_estimate": 0.59,
+      "lower_ci": -0.337435,
+      "upper_ci": 1.517435,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Sager 2020",
+      "year": "2020",
+      "en": 18.0,
+      "cn": 20.0,
+      "effect_estimate": 0.29,
+      "lower_ci": -0.474303,
+      "upper_ci": 1.054303,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Yayla 2015",
+      "year": "2015",
+      "en": 15.0,
+      "cn": 14.0,
+      "effect_estimate": 0.5,
+      "lower_ci": -2.48816,
+      "upper_ci": 3.48816,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Zheng 2021",
+      "year": "2021",
+      "en": 42.0,
+      "cn": 39.0,
+      "effect_estimate": 1.19,
+      "lower_ci": 0.808089,
+      "upper_ci": 1.571911,
+      "effect_type": "MD"
+    }
+  ]
+}

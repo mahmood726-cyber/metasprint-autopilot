@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD014944_pub2_data",
+  "cd_number": "CD014944",
+  "analysis_name": "Proportion of participants without treatment success at the longest follow-up (1\u20134 years)",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Cotton 2014",
+      "year": "2014",
+      "ee": 109.0,
+      "en": 141.0,
+      "ce": 46.0,
+      "cn": 73.0,
+      "effect_estimate": 1.999321,
+      "lower_ci": 1.078272,
+      "upper_ci": 3.707121,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Geenen 1989",
+      "year": "198",
+      "ee": 9.0,
+      "en": 23.0,
+      "ce": 6.0,
+      "cn": 24.0,
+      "effect_estimate": 1.928571,
+      "lower_ci": 0.554083,
+      "upper_ci": 6.712695,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Toouli 2000",
+      "year": "2000",
+      "ee": 14.0,
+      "en": 37.0,
+      "ce": 24.0,
+      "cn": 42.0,
+      "effect_estimate": 0.456522,
+      "lower_ci": 0.185069,
+      "upper_ci": 1.126133,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Takezawa 2004",
+      "year": "2004",
+      "ee": 1.0,
+      "en": 45.0,
+      "ce": 3.0,
+      "cn": 46.0,
+      "effect_estimate": 0.325758,
+      "lower_ci": 0.032583,
+      "upper_ci": 3.256882,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

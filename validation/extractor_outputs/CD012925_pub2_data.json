@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD012925_pub2_data",
+  "cd_number": "CD012925",
+  "analysis_name": "Provider adherence to recommended practice (dichotomous outcomes)",
+  "effect_type": "MD",
+  "k_input": 8,
+  "results": {
+    "I2": 75.54083036968376,
+    "Q": 28.619123648922887,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 8,
+    "funnel_dots": 8,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 8,
+    "p_value": 0.032477984548378025,
+    "pooled": 0.06813154517890468,
+    "pooled_hi": 0.13058944123851915,
+    "pooled_lo": 0.0056736491192902125,
+    "pooled_log": 0.06813154517890468,
+    "pooled_se": 0.03185985411427852,
+    "tau2": 0.004601150061844771
+  }
+}

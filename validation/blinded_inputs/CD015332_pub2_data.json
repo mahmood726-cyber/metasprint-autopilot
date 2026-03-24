@@ -1,0 +1,39 @@
+{
+  "dataset_name": "CD015332_pub2_data",
+  "cd_number": "CD015332",
+  "analysis_name": "Mental state \u2013 general: mean endpoint PANSS total (high = poor)",
+  "effect_type": "MD",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Morrison 2014 \u2013 ACTION",
+      "year": "2014",
+      "en": 23.0,
+      "cn": 19.0,
+      "effect_estimate": -6.99,
+      "lower_ci": -14.906757,
+      "upper_ci": 0.926757,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Morrison 2018 \u2013 COMPARE",
+      "year": "2018",
+      "en": 22.0,
+      "cn": 22.0,
+      "effect_estimate": -0.56,
+      "lower_ci": -7.614713,
+      "upper_ci": 6.494713,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Morrison 2020 \u2013 MAPS",
+      "year": "2020",
+      "en": 16.0,
+      "cn": 18.0,
+      "effect_estimate": -8.8,
+      "lower_ci": -19.239512,
+      "upper_ci": 1.639512,
+      "effect_type": "MD"
+    }
+  ]
+}

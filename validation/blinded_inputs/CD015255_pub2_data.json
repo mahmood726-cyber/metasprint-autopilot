@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD015255_pub2_data",
+  "cd_number": "CD015255",
+  "analysis_name": "Normal hearing (very short-term - up to 6 weeks)",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "OSTRICH 2018",
+      "year": "2018",
+      "ee": 73.0,
+      "en": 183.0,
+      "ce": 59.0,
+      "cn": 180.0,
+      "effect_estimate": 1.361017,
+      "lower_ci": 0.885783,
+      "upper_ci": 2.091219,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Acharya 2020",
+      "year": "",
+      "ee": 16.0,
+      "en": 40.0,
+      "ce": 33.0,
+      "cn": 40.0,
+      "effect_estimate": 0.141414,
+      "lower_ci": 0.050366,
+      "upper_ci": 0.397054,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

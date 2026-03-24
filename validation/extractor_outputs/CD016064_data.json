@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD016064_data",
+  "cd_number": "CD016064",
+  "analysis_name": "Rate of falls",
+  "effect_type": "MD",
+  "k_input": 12,
+  "results": {
+    "I2": 86.63810034494894,
+    "Q": 82.32362376589006,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 12,
+    "funnel_dots": 12,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 12,
+    "p_value": 0.23889549879694472,
+    "pooled": -0.13804117438779553,
+    "pooled_hi": 0.09173143543121204,
+    "pooled_lo": -0.3678137842068031,
+    "pooled_log": -0.13804117438779553,
+    "pooled_se": 0.11720730748444311,
+    "tau2": 0.12213717863107201
+  }
+}

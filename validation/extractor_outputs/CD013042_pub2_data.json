@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013042_pub2_data",
+  "cd_number": "CD013042",
+  "analysis_name": "Mean pain (0 to 10, 0 is no pain)",
+  "effect_type": "MD",
+  "k_input": 22,
+  "results": {
+    "I2": 89.77441511209815,
+    "Q": 205.36722574026683,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 22,
+    "funnel_dots": 22,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 22,
+    "p_value": 0.00025315350751276,
+    "pooled": -1.063033685297985,
+    "pooled_hi": -0.4935064668875152,
+    "pooled_lo": -1.6325609037084545,
+    "pooled_log": -1.063033685297985,
+    "pooled_se": 0.2905165757640861,
+    "tau2": 1.4784668574841207
+  }
+}

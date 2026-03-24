@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD004307_pub7_data",
+  "cd_number": "CD004307",
+  "analysis_name": "Smoking cessation at longest follow-up",
+  "effect_type": "OR",
+  "k_input": 13,
+  "results": {
+    "I2": 32.90702807775225,
+    "Q": 17.88562893577956,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 13,
+    "funnel_dots": 13,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 13,
+    "p_value": 3.5461632785782626e-07,
+    "pooled": 2.3638309501572126,
+    "pooled_hi": 3.2919432299869182,
+    "pooled_lo": 1.6973855168648688,
+    "pooled_log": 0.8602835869011022,
+    "pooled_se": 0.16894272070676908,
+    "tau2": 0.10190861533587726
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "dataset_name": "CD014145_pub2_data",
+  "cd_number": "CD014145",
+  "analysis_name": "Failed apnea reduction after 2 to 7 days",
+  "effect_type": "OR",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Peliowski 1990",
+      "year": "1990",
+      "ee": 4.0,
+      "en": 11.0,
+      "ce": 8.0,
+      "cn": 10.0,
+      "effect_estimate": 0.142857,
+      "lower_ci": 0.019767,
+      "upper_ci": 1.032425,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Eyal 1985a",
+      "year": "1985",
+      "ee": 2.0,
+      "en": 9.0,
+      "ce": 1.0,
+      "cn": 7.0,
+      "effect_estimate": 1.714286,
+      "lower_ci": 0.12269,
+      "upper_ci": 23.952942,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Romeo 1991",
+      "year": "1991",
+      "ee": 2.0,
+      "en": 10.0,
+      "ce": 1.0,
+      "cn": 9.0,
+      "effect_estimate": 2.0,
+      "lower_ci": 0.149537,
+      "upper_ci": 26.749235,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Wang 2000",
+      "year": "2000",
+      "ee": 1.0,
+      "en": 14.0,
+      "ce": 2.0,
+      "cn": 14.0,
+      "effect_estimate": 0.461538,
+      "lower_ci": 0.036914,
+      "upper_ci": 5.770723,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Barrington 1998",
+      "year": "1998",
+      "ee": 4.0,
+      "en": 27.0,
+      "ce": 12.0,
+      "cn": 29.0,
+      "effect_estimate": 0.246377,
+      "lower_ci": 0.067555,
+      "upper_ci": 0.898543,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "dataset_name": "CD014803_pub2_data",
+  "cd_number": "CD014803",
+  "analysis_name": "Attrition (dropouts)",
+  "effect_type": "OR",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Fristad 2019",
+      "year": "2019",
+      "ee": 7.0,
+      "en": 18.0,
+      "ce": 3.0,
+      "cn": 18.0,
+      "effect_estimate": 3.181818,
+      "lower_ci": 0.668174,
+      "upper_ci": 15.151691,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Gabbay 2018",
+      "year": "2018",
+      "ee": 3.0,
+      "en": 21.0,
+      "ce": 6.0,
+      "cn": 27.0,
+      "effect_estimate": 0.583333,
+      "lower_ci": 0.12726,
+      "upper_ci": 2.673881,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "McNamara 2020",
+      "year": "2020",
+      "ee": 6.0,
+      "en": 27.0,
+      "ce": 8.0,
+      "cn": 29.0,
+      "effect_estimate": 0.75,
+      "lower_ci": 0.221556,
+      "upper_ci": 2.538863,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Nemets 2006",
+      "year": "2006",
+      "ee": 3.0,
+      "en": 13.0,
+      "ce": 5.0,
+      "cn": 15.0,
+      "effect_estimate": 0.6,
+      "lower_ci": 0.111961,
+      "upper_ci": 3.215415,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Trebaticka 2020",
+      "year": "2020",
+      "ee": 1.0,
+      "en": 30.0,
+      "ce": 1.0,
+      "cn": 30.0,
+      "effect_estimate": 1.0,
+      "lower_ci": 0.059617,
+      "upper_ci": 16.773701,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD009679_pub3_data",
+  "cd_number": "CD009679",
+  "analysis_name": "Generic quality of life (SF-36 scores) at 24 months",
+  "effect_type": "MD",
+  "k_input": 10,
+  "results": {
+    "I2": 92.65491959856557,
+    "Q": 122.5309936463374,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 10,
+    "funnel_dots": 10,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 10,
+    "p_value": 0.12424655003554563,
+    "pooled": 1.974908346057768,
+    "pooled_hi": 4.493528324050462,
+    "pooled_lo": -0.5437116319349264,
+    "pooled_log": 1.974908346057768,
+    "pooled_se": 1.284751330585405,
+    "tau2": 13.05754920518756
+  }
+}

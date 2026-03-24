@@ -1,0 +1,119 @@
+{
+  "dataset_name": "CD013758_pub2_data",
+  "cd_number": "CD013758",
+  "analysis_name": "Underweight (weight-for-age z-score)",
+  "effect_type": "MD",
+  "k": 11,
+  "studies": [
+    {
+      "study": "Axelsson 1988",
+      "year": "1988",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": -0.26,
+      "lower_ci": -0.63263,
+      "upper_ci": 0.11263,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hascoet 2011",
+      "year": "2011",
+      "en": 38.0,
+      "cn": 39.0,
+      "effect_estimate": -0.01,
+      "lower_ci": -0.378678,
+      "upper_ci": 0.358678,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Liotto 2018",
+      "year": "2018",
+      "en": 58.0,
+      "cn": 55.0,
+      "effect_estimate": -0.3,
+      "lower_ci": -0.63207,
+      "upper_ci": 0.03207,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Turck 2006",
+      "year": "2006",
+      "en": 50.0,
+      "cn": 51.0,
+      "effect_estimate": -0.02,
+      "lower_ci": -0.197674,
+      "upper_ci": 0.157674,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Koletzko 2009b",
+      "year": "2009",
+      "en": 550.0,
+      "cn": 540.0,
+      "effect_estimate": 0.2,
+      "lower_ci": 0.073522,
+      "upper_ci": 0.326478,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Putet 2016",
+      "year": "2016",
+      "en": 80.0,
+      "cn": 74.0,
+      "effect_estimate": 0.21,
+      "lower_ci": -0.016017,
+      "upper_ci": 0.436017,
+      "effect_type": "MD"
+    },
+    {
+      "study": "\u00c5keson 1998",
+      "year": "1998",
+      "en": 23.0,
+      "cn": 51.0,
+      "effect_estimate": 0.21,
+      "lower_ci": -0.0107,
+      "upper_ci": 0.4307,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Fomon 1995",
+      "year": "1995",
+      "en": 13.0,
+      "cn": 15.0,
+      "effect_estimate": 0.57,
+      "lower_ci": -0.052805,
+      "upper_ci": 1.192805,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Picone 1989",
+      "year": "1989",
+      "en": 20.0,
+      "cn": 10.0,
+      "effect_estimate": -0.59,
+      "lower_ci": -0.939918,
+      "upper_ci": -0.240082,
+      "effect_type": "MD"
+    },
+    {
+      "study": "R\u00e4ih\u00e4 1986a",
+      "year": "1986",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": 0.02,
+      "lower_ci": -0.379122,
+      "upper_ci": 0.419122,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kouwenhoven 2020",
+      "year": "2020",
+      "en": 88.0,
+      "cn": 90.0,
+      "effect_estimate": 0.15,
+      "lower_ci": -0.100077,
+      "upper_ci": 0.400077,
+      "effect_type": "MD"
+    }
+  ]
+}

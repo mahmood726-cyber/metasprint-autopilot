@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015160_pub2_data",
+  "cd_number": "CD015160",
+  "analysis_name": "Surgical site infections (as defined by the included studies) within 30 days of repair",
+  "effect_type": "OR",
+  "k_input": 4,
+  "results": {
+    "I2": 64.07359513123383,
+    "Q": 8.350404141351062,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 4,
+    "funnel_dots": 4,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 4,
+    "p_value": 0.8383911068027194,
+    "pooled": 0.8873610973987005,
+    "pooled_hi": 2.7987346690432324,
+    "pooled_lo": 0.28134489699440063,
+    "pooled_log": -0.1195032798548253,
+    "pooled_se": 0.5859384152990296,
+    "tau2": 0.758427978506978
+  }
+}

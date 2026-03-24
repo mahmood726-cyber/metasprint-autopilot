@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015395_pub3_data",
+  "cd_number": "CD015395",
+  "analysis_name": "All-cause mortality at day 28",
+  "effect_type": "OR",
+  "k_input": 2,
+  "results": {
+    "I2": 67.50098737136285,
+    "Q": 3.077016558708711,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 2,
+    "funnel_dots": 2,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 2,
+    "p_value": 0.24590796150538452,
+    "pooled": 0.2143178419455053,
+    "pooled_hi": 2.892207416986114,
+    "pooled_lo": 0.015881342778673584,
+    "pooled_log": -1.5402951231063653,
+    "pooled_se": 1.3274443446640105,
+    "tau2": 2.516092591720595
+  }
+}

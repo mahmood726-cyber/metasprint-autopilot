@@ -1,0 +1,100 @@
+{
+  "dataset_name": "CD007130_pub5_data",
+  "cd_number": "CD007130",
+  "analysis_name": "Total mortality",
+  "effect_type": "OR",
+  "k": 7,
+  "studies": [
+    {
+      "study": "Bell 1998",
+      "year": "1998",
+      "ee": 12.0,
+      "en": 152.0,
+      "ce": 7.0,
+      "cn": 99.0,
+      "effect_estimate": 1.126531,
+      "lower_ci": 0.427576,
+      "upper_ci": 2.968061,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Dalal 2007",
+      "year": "2007",
+      "ee": 4.0,
+      "en": 60.0,
+      "ce": 1.0,
+      "cn": 44.0,
+      "effect_estimate": 3.071429,
+      "lower_ci": 0.331079,
+      "upper_ci": 28.493719,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Daskapan 2005",
+      "year": "2005",
+      "ee": 1.0,
+      "en": 15.0,
+      "ce": 0.0,
+      "cn": 14.0,
+      "effect_estimate": 3.0,
+      "lower_ci": 0.11254,
+      "upper_ci": 79.971678,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Jolly 2007",
+      "year": "2007",
+      "ee": 3.0,
+      "en": 263.0,
+      "ce": 3.0,
+      "cn": 262.0,
+      "effect_estimate": 0.996154,
+      "lower_ci": 0.199142,
+      "upper_ci": 4.982979,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Moholdt 2012",
+      "year": "2012",
+      "ee": 0.0,
+      "en": 14.0,
+      "ce": 1.0,
+      "cn": 16.0,
+      "effect_estimate": 0.356322,
+      "lower_ci": 0.013402,
+      "upper_ci": 9.473838,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Oerkild 2011",
+      "year": "2011",
+      "ee": 4.0,
+      "en": 36.0,
+      "ce": 3.0,
+      "cn": 39.0,
+      "effect_estimate": 1.5,
+      "lower_ci": 0.311692,
+      "upper_ci": 7.218674,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Piotrowicz 2010",
+      "year": "2010",
+      "ee": 0.0,
+      "en": 77.0,
+      "ce": 1.0,
+      "cn": 75.0,
+      "effect_estimate": 0.32043,
+      "lower_ci": 0.01284,
+      "upper_ci": 7.996338,
+      "effect_type": "OR",
+      "cc_applied": true
+    }
+  ]
+}

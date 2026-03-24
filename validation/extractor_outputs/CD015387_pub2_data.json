@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015387_pub2_data",
+  "cd_number": "CD015387",
+  "analysis_name": "Good functional outcome at the end of scheduled follow-up",
+  "effect_type": "OR",
+  "k_input": 18,
+  "results": {
+    "I2": 56.340343140195536,
+    "Q": 38.9375483517626,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 18,
+    "funnel_dots": 18,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 18,
+    "p_value": 1.7329057013570903e-05,
+    "pooled": 1.6835370383023758,
+    "pooled_hi": 2.1351687144960154,
+    "pooled_lo": 1.327434661295579,
+    "pooled_log": 0.5208969601505906,
+    "pooled_se": 0.12122491470427846,
+    "tau2": 0.11170902077111072
+  }
+}

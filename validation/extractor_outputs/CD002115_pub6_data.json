@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD002115_pub6_data",
+  "cd_number": "CD002115",
+  "analysis_name": "Self-reported improvement in faecal incontinence (continuous data)",
+  "effect_type": "MD",
+  "k_input": 3,
+  "results": {
+    "I2": 99.15014553866578,
+    "Q": 235.3344120662882,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 3,
+    "funnel_dots": 3,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 3,
+    "p_value": 0.11628459152097514,
+    "pooled": -3.273486478150303,
+    "pooled_hi": 0.8125215378840376,
+    "pooled_lo": -7.359494494184643,
+    "pooled_log": -3.273486478150303,
+    "pooled_se": 2.084278009883227,
+    "tau2": 10.146773371275799
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014722_pub2_data",
+  "cd_number": "CD014722",
+  "analysis_name": "Diagnosis of mental disorders at 1-6 months",
+  "effect_type": "OR",
+  "k_input": 6,
+  "results": {
+    "I2": 70.42501030999311,
+    "Q": 16.90617664590245,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 6,
+    "p_value": 0.038392065402278464,
+    "pooled": 0.46798349397155903,
+    "pooled_hi": 0.9603775337004357,
+    "pooled_lo": 0.22804422526000295,
+    "pooled_log": -0.7593222529780069,
+    "pooled_se": 0.36670848267063305,
+    "tau2": 0.47866774171148907
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD006632_pub3_data",
+  "cd_number": "CD006632",
+  "analysis_name": "Inhospital mortality",
+  "effect_type": "MD",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Philbin 2000",
+      "year": "2000.0",
+      "effect_estimate": 0.34359,
+      "lower_ci": -0.154866,
+      "upper_ci": 0.842046,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wang 2018",
+      "year": "",
+      "effect_estimate": -0.733969,
+      "lower_ci": -1.458864,
+      "upper_ci": -0.009074,
+      "effect_type": "MD"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD006714_pub3_data",
+  "cd_number": "CD006714",
+  "analysis_name": "Abortion completed with intended method (defined as fetal expulsion)",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Chhetri 2015",
+      "year": "2015",
+      "ee": 66.0,
+      "en": 66.0,
+      "ce": 75.0,
+      "cn": 75.0,
+      "effect_estimate": 0.880795,
+      "lower_ci": 0.017222,
+      "upper_ci": 45.046532,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Grimes 2004",
+      "year": "2004",
+      "ee": 8.0,
+      "en": 9.0,
+      "ce": 9.0,
+      "cn": 9.0,
+      "effect_estimate": 0.298246,
+      "lower_ci": 0.010649,
+      "upper_ci": 8.352739,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Kelly 2010",
+      "year": "2010",
+      "ee": 58.0,
+      "en": 58.0,
+      "ce": 52.0,
+      "cn": 52.0,
+      "effect_estimate": 1.114286,
+      "lower_ci": 0.021704,
+      "upper_ci": 57.207017,
+      "effect_type": "OR",
+      "cc_applied": true
+    }
+  ]
+}

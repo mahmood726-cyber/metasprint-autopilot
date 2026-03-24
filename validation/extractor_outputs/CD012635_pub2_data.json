@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD012635_pub2_data",
+  "cd_number": "CD012635",
+  "analysis_name": "All-cause mortality at 24 hours",
+  "effect_type": "OR",
+  "k_input": 4,
+  "results": {
+    "I2": 13.75948145589534,
+    "Q": 3.4786432765542292,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 4,
+    "funnel_dots": 4,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 4,
+    "p_value": 0.797629876700999,
+    "pooled": 0.9344096132045345,
+    "pooled_hi": 1.5696060705092705,
+    "pooled_lo": 0.5562678060780927,
+    "pooled_log": -0.06784037885692867,
+    "pooled_se": 0.2645717206019169,
+    "tau2": 0.04579429111349832
+  }
+}

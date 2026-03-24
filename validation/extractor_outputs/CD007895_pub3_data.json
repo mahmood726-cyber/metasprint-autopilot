@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD007895_pub3_data",
+  "cd_number": "CD007895",
+  "analysis_name": "Systolic blood pressure, measured as change-from-baseline",
+  "effect_type": "MD",
+  "k_input": 4,
+  "results": {
+    "I2": 53.642264959499094,
+    "Q": 6.4714119388684965,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 4,
+    "funnel_dots": 4,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 4,
+    "p_value": 0.7321643393080985,
+    "pooled": 0.5408206735568334,
+    "pooled_hi": 3.638638211324011,
+    "pooled_lo": -2.556996864210344,
+    "pooled_log": 0.5408206735568334,
+    "pooled_se": 1.58020076007224,
+    "tau2": 4.8455621461711935
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011468_pub2_data",
+  "cd_number": "CD011468",
+  "analysis_name": "Secondary patency",
+  "effect_type": "OR",
+  "k_input": 2,
+  "results": {
+    "I2": 34.61960478313277,
+    "Q": 1.5295104850360617,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 2,
+    "funnel_dots": 2,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 2,
+    "p_value": 0.2258918070894791,
+    "pooled": 0.3576182387563696,
+    "pooled_hi": 1.8895068628837373,
+    "pooled_lo": 0.06768475267458024,
+    "pooled_log": -1.028289233749703,
+    "pooled_se": 0.8491172341323728,
+    "tau2": 0.6380640304732321
+  }
+}

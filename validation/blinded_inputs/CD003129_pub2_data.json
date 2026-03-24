@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD003129_pub2_data",
+  "cd_number": "CD003129",
+  "analysis_name": "Treatment response",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Bharadwaj 2003",
+      "year": "2003",
+      "ee": 10.0,
+      "en": 14.0,
+      "ce": 4.0,
+      "cn": 11.0,
+      "effect_estimate": 4.375,
+      "lower_ci": 0.807557,
+      "upper_ci": 23.701882,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Giannini 1992",
+      "year": "1992",
+      "ee": 42.0,
+      "en": 86.0,
+      "ce": 15.0,
+      "cn": 41.0,
+      "effect_estimate": 1.654545,
+      "lower_ci": 0.771103,
+      "upper_ci": 3.550137,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Woo 2000",
+      "year": "2000",
+      "ee": 32.0,
+      "en": 88.0,
+      "ce": 15.0,
+      "cn": 88.0,
+      "effect_estimate": 2.780952,
+      "lower_ci": 1.37355,
+      "upper_ci": 5.630444,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Silverman 2005",
+      "year": "2005",
+      "ee": 28.0,
+      "en": 47.0,
+      "ce": 20.0,
+      "cn": 47.0,
+      "effect_estimate": 1.989474,
+      "lower_ci": 0.875361,
+      "upper_ci": 4.521568,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

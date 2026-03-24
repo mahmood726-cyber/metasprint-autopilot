@@ -1,0 +1,179 @@
+{
+  "dataset_name": "CD007639_pub3_data",
+  "cd_number": "CD007639",
+  "analysis_name": "Treatment time (minutes)",
+  "effect_type": "MD",
+  "k": 17,
+  "studies": [
+    {
+      "study": "Hubert 2009",
+      "year": "2009",
+      "en": 21.0,
+      "cn": 21.0,
+      "effect_estimate": 6.8,
+      "lower_ci": 4.311067,
+      "upper_ci": 9.288933,
+      "effect_type": "MD"
+    },
+    {
+      "study": "NCT00420836",
+      "year": "2007",
+      "en": 22.0,
+      "cn": 22.0,
+      "effect_estimate": 6.8,
+      "lower_ci": 4.404844,
+      "upper_ci": 9.195156,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Coates 2011",
+      "year": "2011",
+      "en": 17.0,
+      "cn": 17.0,
+      "effect_estimate": 13.0,
+      "lower_ci": 11.71977,
+      "upper_ci": 14.28023,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Geller 2003",
+      "year": "2003",
+      "en": 51.0,
+      "cn": 33.0,
+      "effect_estimate": 9.7,
+      "lower_ci": 8.153236,
+      "upper_ci": 11.246764,
+      "effect_type": "MD"
+    },
+    {
+      "study": "NCT00399945",
+      "year": "2006",
+      "en": 6.0,
+      "cn": 6.0,
+      "effect_estimate": 12.5,
+      "lower_ci": 5.633485,
+      "upper_ci": 19.366515,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Griese 2014",
+      "year": "2014",
+      "en": 38.0,
+      "cn": 38.0,
+      "effect_estimate": 11.5,
+      "lower_ci": 10.323333,
+      "upper_ci": 12.676667,
+      "effect_type": "MD"
+    },
+    {
+      "study": "van Velzen 2019",
+      "year": "2019",
+      "en": 22.0,
+      "cn": 22.0,
+      "effect_estimate": 2.6,
+      "lower_ci": -1.503654,
+      "upper_ci": 6.703654,
+      "effect_type": "MD"
+    },
+    {
+      "study": "van Velzen 2016",
+      "year": "2016",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": 10.3,
+      "lower_ci": 4.763056,
+      "upper_ci": 15.836944,
+      "effect_type": "MD"
+    },
+    {
+      "study": "van Velzen 2015",
+      "year": "2015",
+      "en": 18.0,
+      "cn": 18.0,
+      "effect_estimate": -8.71,
+      "lower_ci": -10.749591,
+      "upper_ci": -6.670409,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Byrne 2003",
+      "year": "2003",
+      "en": 15.0,
+      "cn": 15.0,
+      "effect_estimate": 84.5,
+      "lower_ci": 41.612851,
+      "upper_ci": 127.387149,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Elkins 2006",
+      "year": "2006",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": -2.0,
+      "lower_ci": -4.235194,
+      "upper_ci": 0.235194,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Devadason 2001",
+      "year": "2001",
+      "en": 15.0,
+      "cn": 7.0,
+      "effect_estimate": -16.3,
+      "lower_ci": -91.106202,
+      "upper_ci": 58.506202,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Sawicki 2015",
+      "year": "2015",
+      "en": 85.0,
+      "cn": 85.0,
+      "effect_estimate": -0.9,
+      "lower_ci": -7.338654,
+      "upper_ci": 5.538654,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Marshall 1994",
+      "year": "1994",
+      "en": 12.0,
+      "cn": 12.0,
+      "effect_estimate": 5.3,
+      "lower_ci": 0.286599,
+      "upper_ci": 10.313401,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kastelik 2002",
+      "year": "2002",
+      "en": 6.0,
+      "cn": 6.0,
+      "effect_estimate": -0.24,
+      "lower_ci": -0.635333,
+      "upper_ci": 0.155333,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Haussermann 2016",
+      "year": "2016",
+      "en": 13.0,
+      "cn": 13.0,
+      "effect_estimate": -5.4,
+      "lower_ci": -8.62034,
+      "upper_ci": -2.17966,
+      "effect_type": "MD"
+    },
+    {
+      "study": "K\u00f6hler 2003",
+      "year": "2003",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": -1.5,
+      "lower_ci": -3.473096,
+      "upper_ci": 0.473096,
+      "effect_type": "MD"
+    }
+  ]
+}

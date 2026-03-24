@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013421_pub2_data",
+  "cd_number": "CD013421",
+  "analysis_name": "Failure of hemostatic intervention",
+  "effect_type": "OR",
+  "k_input": 18,
+  "results": {
+    "I2": 54.14963545679177,
+    "Q": 37.07713159833141,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 18,
+    "funnel_dots": 18,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 18,
+    "p_value": 1.7607615365733409e-09,
+    "pooled": 0.30827840775281,
+    "pooled_hi": 0.45226544547139,
+    "pooled_lo": 0.2101322965046634,
+    "pooled_log": -1.176751983024018,
+    "pooled_se": 0.19550447561985687,
+    "tau2": 0.3166704501304515
+  }
+}

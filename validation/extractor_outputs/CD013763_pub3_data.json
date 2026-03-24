@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013763_pub3_data",
+  "cd_number": "CD013763",
+  "analysis_name": "Mean difference in postoperative pain intensity at rest (24 hours postoperatively) (VAS)",
+  "effect_type": "MD",
+  "k_input": 39,
+  "results": {
+    "I2": 91.59095220589728,
+    "Q": 451.8942088383592,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 39,
+    "funnel_dots": 39,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 39,
+    "p_value": 8.178849959228351e-05,
+    "pooled": -0.3532920038903873,
+    "pooled_hi": -0.17747156854474805,
+    "pooled_lo": -0.5291124392360265,
+    "pooled_log": -0.3532920038903873,
+    "pooled_se": 0.08968623302767686,
+    "tau2": 0.23371483520278147
+  }
+}

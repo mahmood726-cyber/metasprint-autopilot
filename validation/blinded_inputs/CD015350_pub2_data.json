@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD015350_pub2_data",
+  "cd_number": "CD015350",
+  "analysis_name": "Proportion with non-serious or non-severe harms/adverse events",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Geffen 2009",
+      "year": "2009",
+      "ee": 8.0,
+      "en": 12.0,
+      "ce": 10.0,
+      "cn": 14.0,
+      "effect_estimate": 0.8,
+      "lower_ci": 0.150716,
+      "upper_ci": 4.246404,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Katz 2004",
+      "year": "2004",
+      "ee": 29.0,
+      "en": 154.0,
+      "ce": 23.0,
+      "cn": 135.0,
+      "effect_estimate": 1.129739,
+      "lower_ci": 0.617611,
+      "upper_ci": 2.066528,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

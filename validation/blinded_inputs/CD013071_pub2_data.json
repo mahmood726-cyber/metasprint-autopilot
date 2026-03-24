@@ -1,0 +1,89 @@
+{
+  "dataset_name": "CD013071_pub2_data",
+  "cd_number": "CD013071",
+  "analysis_name": "Erectile function (AMS sexual)",
+  "effect_type": "MD",
+  "k": 8,
+  "studies": [
+    {
+      "study": "Behre 2012",
+      "year": "2012",
+      "en": 183.0,
+      "cn": 179.0,
+      "effect_estimate": -1.4,
+      "lower_ci": -2.23172,
+      "upper_ci": -0.56828,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Ho 2012",
+      "year": "2012",
+      "en": 56.0,
+      "cn": 58.0,
+      "effect_estimate": -0.21,
+      "lower_ci": -1.612954,
+      "upper_ci": 1.192954,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Legros 2009",
+      "year": "2009",
+      "en": 237.0,
+      "cn": 79.0,
+      "effect_estimate": -1.31,
+      "lower_ci": -2.308395,
+      "upper_ci": -0.311605,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Allan 2008",
+      "year": "2008",
+      "en": 17.0,
+      "cn": 25.0,
+      "effect_estimate": 4.2,
+      "lower_ci": -2.030595,
+      "upper_ci": 10.430595,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Aliaev 2010",
+      "year": "2010",
+      "en": 30.0,
+      "cn": 34.0,
+      "effect_estimate": -3.4,
+      "lower_ci": -5.466062,
+      "upper_ci": -1.333938,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Zhong 2013",
+      "year": "2013",
+      "en": 42.0,
+      "cn": 40.0,
+      "effect_estimate": 4.0,
+      "lower_ci": 1.515666,
+      "upper_ci": 6.484334,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Buvat 2011",
+      "year": "2011",
+      "en": 83.0,
+      "cn": 84.0,
+      "effect_estimate": 2.5,
+      "lower_ci": 0.452049,
+      "upper_ci": 4.547951,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Spitzer 2012",
+      "year": "2012",
+      "en": 58.0,
+      "cn": 57.0,
+      "effect_estimate": 2.07,
+      "lower_ci": -1.108476,
+      "upper_ci": 5.248476,
+      "effect_type": "MD"
+    }
+  ]
+}

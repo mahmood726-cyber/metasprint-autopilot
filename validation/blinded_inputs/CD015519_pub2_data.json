@@ -1,0 +1,59 @@
+{
+  "dataset_name": "CD015519_pub2_data",
+  "cd_number": "CD015519",
+  "analysis_name": "Cancer-related fatigue (CRF) \u2264 12 weeks",
+  "effect_type": "MD",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Courneya 2007",
+      "year": "2007",
+      "en": 74.0,
+      "cn": 76.0,
+      "effect_estimate": 0.5,
+      "lower_ci": -2.675751,
+      "upper_ci": 3.675751,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Piraux 2020",
+      "year": "2020",
+      "en": 24.0,
+      "cn": 24.0,
+      "effect_estimate": 1.6,
+      "lower_ci": -4.089228,
+      "upper_ci": 7.289228,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Schmidt 2015",
+      "year": "2015",
+      "en": 20.0,
+      "cn": 21.0,
+      "effect_estimate": -1.8,
+      "lower_ci": -4.159471,
+      "upper_ci": 0.559471,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Segal 2009",
+      "year": "2009",
+      "en": 38.0,
+      "cn": 34.0,
+      "effect_estimate": -0.9,
+      "lower_ci": -5.067885,
+      "upper_ci": 3.267885,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Pelzer 2023",
+      "year": "2023",
+      "en": 47.0,
+      "cn": 48.0,
+      "effect_estimate": 1.47,
+      "lower_ci": -0.092718,
+      "upper_ci": 3.032718,
+      "effect_type": "MD"
+    }
+  ]
+}

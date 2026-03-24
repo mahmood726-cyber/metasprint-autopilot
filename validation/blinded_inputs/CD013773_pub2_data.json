@@ -1,0 +1,59 @@
+{
+  "dataset_name": "CD013773_pub2_data",
+  "cd_number": "CD013773",
+  "analysis_name": "Refractive error (D)",
+  "effect_type": "MD",
+  "k": 5,
+  "studies": [
+    {
+      "study": "He 2015",
+      "year": "2015",
+      "en": 382.0,
+      "cn": 309.0,
+      "effect_estimate": 0.08,
+      "lower_ci": -0.254562,
+      "upper_ci": 0.414562,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Li 2021",
+      "year": "2021",
+      "en": 183.0,
+      "cn": 292.0,
+      "effect_estimate": 0.02,
+      "lower_ci": -0.127995,
+      "upper_ci": 0.167995,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wu 2018",
+      "year": "2018",
+      "en": 163.0,
+      "cn": 261.0,
+      "effect_estimate": 0.12,
+      "lower_ci": -0.00647,
+      "upper_ci": 0.24647,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Yi 2011",
+      "year": "2011",
+      "en": 37.0,
+      "cn": 29.0,
+      "effect_estimate": 0.07,
+      "lower_ci": -0.243239,
+      "upper_ci": 0.383239,
+      "effect_type": "MD"
+    },
+    {
+      "study": "He 2022",
+      "year": "298",
+      "en": 833.0,
+      "cn": 387.0,
+      "effect_estimate": 0.1,
+      "lower_ci": 0.00796,
+      "upper_ci": 0.19204,
+      "effect_type": "MD"
+    }
+  ]
+}

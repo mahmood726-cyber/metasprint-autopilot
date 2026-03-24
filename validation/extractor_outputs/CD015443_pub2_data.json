@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015443_pub2_data",
+  "cd_number": "CD015443",
+  "analysis_name": "Relapse (12 months)",
+  "effect_type": "OR",
+  "k_input": 15,
+  "results": {
+    "I2": 71.34762765318814,
+    "Q": 48.861573591681235,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 15,
+    "funnel_dots": 15,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 15,
+    "p_value": 0.2916278141756241,
+    "pooled": 0.8704108745416599,
+    "pooled_hi": 1.1266142750980126,
+    "pooled_lo": 0.6724707002797978,
+    "pooled_log": -0.13878990922957568,
+    "pooled_se": 0.13160961873311144,
+    "tau2": 0.14959400855819677
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "dataset_name": "CD011885_pub2_data",
+  "cd_number": "CD011885",
+  "analysis_name": "Clinically relevant response, as defined by study authors",
+  "effect_type": "OR",
+  "k": 7,
+  "studies": [
+    {
+      "study": "Hatta 2011a",
+      "year": "2011",
+      "ee": 1.0,
+      "en": 6.0,
+      "ce": 2.0,
+      "cn": 8.0,
+      "effect_estimate": 0.6,
+      "lower_ci": 0.041203,
+      "upper_ci": 8.737147,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Hatta 2011b",
+      "year": "2011",
+      "ee": 0.0,
+      "en": 9.0,
+      "ce": 1.0,
+      "cn": 11.0,
+      "effect_estimate": 0.368421,
+      "lower_ci": 0.013326,
+      "upper_ci": 10.185364,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Heres 2022",
+      "year": "2022",
+      "ee": 43.0,
+      "en": 70.0,
+      "ce": 27.0,
+      "cn": 72.0,
+      "effect_estimate": 2.654321,
+      "lower_ci": 1.347642,
+      "upper_ci": 5.22796,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Kahn 2018",
+      "year": "2018",
+      "ee": 17.0,
+      "en": 46.0,
+      "ce": 15.0,
+      "cn": 47.0,
+      "effect_estimate": 1.250575,
+      "lower_ci": 0.530647,
+      "upper_ci": 2.947228,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Kinon 1993",
+      "year": "1993",
+      "ee": 1.0,
+      "en": 13.0,
+      "ce": 1.0,
+      "cn": 18.0,
+      "effect_estimate": 1.416667,
+      "lower_ci": 0.080383,
+      "upper_ci": 24.967177,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Kinon 2010",
+      "year": "2010",
+      "ee": 11.0,
+      "en": 179.0,
+      "ce": 2.0,
+      "cn": 189.0,
+      "effect_estimate": 6.122024,
+      "lower_ci": 1.337209,
+      "upper_ci": 28.027914,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Klimke 1993",
+      "year": "1993",
+      "ee": 5.0,
+      "en": 12.0,
+      "ce": 9.0,
+      "cn": 13.0,
+      "effect_estimate": 0.31746,
+      "lower_ci": 0.061284,
+      "upper_ci": 1.64448,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

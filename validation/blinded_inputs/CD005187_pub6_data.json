@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD005187_pub6_data",
+  "cd_number": "CD005187",
+  "analysis_name": "Influenza",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Potter 1997",
+      "year": "1997",
+      "ee": 3.0,
+      "en": 118.0,
+      "ce": 2.0,
+      "cn": 107.0,
+      "effect_estimate": 1.369565,
+      "lower_ci": 0.224349,
+      "upper_ci": 8.360668,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Carman 2000",
+      "year": "2000",
+      "ee": 14.0,
+      "en": 258.0,
+      "ce": 18.0,
+      "cn": 269.0,
+      "effect_estimate": 0.800091,
+      "lower_ci": 0.389262,
+      "upper_ci": 1.644511,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "dataset_name": "CD006982_pub5_data",
+  "cd_number": "CD006982",
+  "analysis_name": "Growth (g) at 3 and 6 months",
+  "effect_type": "MD",
+  "k": 7,
+  "studies": [
+    {
+      "study": "Arayici 2021",
+      "year": "2021",
+      "en": 72.0,
+      "cn": 75.0,
+      "effect_estimate": -11.0,
+      "lower_ci": -329.383076,
+      "upper_ci": 307.383076,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Mirmiran 2003",
+      "year": "2003",
+      "en": 19.0,
+      "cn": 21.0,
+      "effect_estimate": 181.0,
+      "lower_ci": -484.151051,
+      "upper_ci": 846.151051,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Esmaeilizadeh 2016",
+      "year": "2016",
+      "en": 30.0,
+      "cn": 30.0,
+      "effect_estimate": -1.5,
+      "lower_ci": -2.234385,
+      "upper_ci": -0.765615,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Farahani 2018",
+      "year": "2018",
+      "en": 33.0,
+      "cn": 33.0,
+      "effect_estimate": -0.21,
+      "lower_ci": -5.589427,
+      "upper_ci": 5.169427,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Miller 1995",
+      "year": "1995",
+      "en": 20.0,
+      "cn": 21.0,
+      "effect_estimate": -16.0,
+      "lower_ci": -32.26596,
+      "upper_ci": 0.26596,
+      "effect_type": "MD"
+    },
+    {
+      "study": "S\u00e1nchez-S\u00e1nchez 2022",
+      "year": "2022",
+      "en": 150.0,
+      "cn": 144.0,
+      "effect_estimate": -10.77,
+      "lower_ci": -11.010121,
+      "upper_ci": -10.529879,
+      "effect_type": "MD"
+    },
+    {
+      "study": "V\u00e1squez-Ruiz 2014",
+      "year": "2014",
+      "en": 19.0,
+      "cn": 19.0,
+      "effect_estimate": -16.74,
+      "lower_ci": -28.795946,
+      "upper_ci": -4.684054,
+      "effect_type": "MD"
+    }
+  ]
+}

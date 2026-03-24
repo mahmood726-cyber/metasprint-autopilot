@@ -1,0 +1,73 @@
+{
+  "dataset_name": "CD015804_pub2_data",
+  "cd_number": "CD015804",
+  "analysis_name": "Change from baseline in best-corrected visual acuity (BCVA) at 8 to 12 weeks",
+  "effect_type": "MD",
+  "k": 8,
+  "studies": [
+    {
+      "study": "NCT04480463",
+      "year": "2020",
+      "effect_estimate": -0.4,
+      "lower_ci": -1.850692,
+      "upper_ci": 1.050692,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Woo 2023",
+      "year": "2023",
+      "effect_estimate": 0.1,
+      "lower_ci": -1.250712,
+      "upper_ci": 1.450712,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Holz 2022",
+      "year": "2022",
+      "effect_estimate": -0.5,
+      "lower_ci": -1.960494,
+      "upper_ci": 0.960494,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Loewenstein 2023",
+      "year": "2023",
+      "effect_estimate": -1.8,
+      "lower_ci": -3.172276,
+      "upper_ci": -0.427724,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Singh 2022",
+      "year": "2022",
+      "effect_estimate": 1.33,
+      "lower_ci": -1.385147,
+      "upper_ci": 4.045147,
+      "effect_type": "MD"
+    },
+    {
+      "study": "UMIN000030010",
+      "year": "2017",
+      "effect_estimate": -1.5,
+      "lower_ci": -3.409425,
+      "upper_ci": 0.409425,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Woo 2021",
+      "year": "2021",
+      "effect_estimate": -0.8,
+      "lower_ci": -1.976237,
+      "upper_ci": 0.376237,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Yoon 2022",
+      "year": "2022",
+      "effect_estimate": 0.87,
+      "lower_ci": -1.286434,
+      "upper_ci": 3.026434,
+      "effect_type": "MD"
+    }
+  ]
+}

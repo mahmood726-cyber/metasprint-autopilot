@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD012335_pub2_data",
+  "cd_number": "CD012335",
+  "analysis_name": "All\u2010cause mortality",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Carneiro 2023",
+      "year": "2023",
+      "ee": 2.0,
+      "en": 20.0,
+      "ce": 1.0,
+      "cn": 20.0,
+      "effect_estimate": 2.111111,
+      "lower_ci": 0.175723,
+      "upper_ci": 25.362605,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Plante 2024",
+      "year": "2024",
+      "ee": 7.0,
+      "en": 350.0,
+      "ce": 7.0,
+      "cn": 350.0,
+      "effect_estimate": 1.0,
+      "lower_ci": 0.346971,
+      "upper_ci": 2.882084,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

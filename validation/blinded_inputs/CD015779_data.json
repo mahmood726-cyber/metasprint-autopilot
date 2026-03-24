@@ -1,0 +1,113 @@
+{
+  "dataset_name": "CD015779_data",
+  "cd_number": "CD015779",
+  "analysis_name": "Recurrence of rheumatic fever",
+  "effect_type": "OR",
+  "k": 8,
+  "studies": [
+    {
+      "study": "Brick 1950",
+      "year": "1950",
+      "ee": 3.0,
+      "en": 38.0,
+      "ce": 6.0,
+      "cn": 38.0,
+      "effect_estimate": 0.457143,
+      "lower_ci": 0.105447,
+      "upper_ci": 1.981852,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Cope 1960",
+      "year": "1960",
+      "ee": 1.0,
+      "en": 79.0,
+      "ce": 3.0,
+      "cn": 38.0,
+      "effect_estimate": 0.149573,
+      "lower_ci": 0.015018,
+      "upper_ci": 1.489684,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Evans 1950",
+      "year": "1950",
+      "ee": 0.0,
+      "en": 155.0,
+      "ce": 4.0,
+      "cn": 145.0,
+      "effect_estimate": 0.101108,
+      "lower_ci": 0.005392,
+      "upper_ci": 1.895866,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Feinstein 1966",
+      "year": "1966",
+      "ee": 1.0,
+      "en": 82.0,
+      "ce": 2.0,
+      "cn": 79.0,
+      "effect_estimate": 0.475309,
+      "lower_ci": 0.042216,
+      "upper_ci": 5.351529,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Gale 1952",
+      "year": "1952",
+      "ee": 0.0,
+      "en": 41.0,
+      "ce": 2.0,
+      "cn": 32.0,
+      "effect_estimate": 0.146988,
+      "lower_ci": 0.006804,
+      "upper_ci": 3.175313,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Padmavati 1973",
+      "year": "1973",
+      "ee": 11.0,
+      "en": 523.0,
+      "ce": 22.0,
+      "cn": 471.0,
+      "effect_estimate": 0.438477,
+      "lower_ci": 0.210265,
+      "upper_ci": 0.914377,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Wood 1964",
+      "year": "1964",
+      "ee": 2.0,
+      "en": 146.0,
+      "ce": 30.0,
+      "cn": 143.0,
+      "effect_estimate": 0.052315,
+      "lower_ci": 0.012238,
+      "upper_ci": 0.22363,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Markowitz 1957",
+      "year": "1957",
+      "ee": 0.0,
+      "en": 56.0,
+      "ce": 3.0,
+      "cn": 50.0,
+      "effect_estimate": 0.120101,
+      "lower_ci": 0.006046,
+      "upper_ci": 2.385565,
+      "effect_type": "OR",
+      "cc_applied": true
+    }
+  ]
+}

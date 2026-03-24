@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD011670_pub3_data",
+  "cd_number": "CD011670",
+  "analysis_name": "Overall morbidity",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Kumar 2004",
+      "year": "2004",
+      "ee": 6.0,
+      "en": 20.0,
+      "ce": 0.0,
+      "cn": 20.0,
+      "effect_estimate": 18.37931,
+      "lower_ci": 0.957487,
+      "upper_ci": 352.797416,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Kumar 2018",
+      "year": "2018",
+      "ee": 7.0,
+      "en": 23.0,
+      "ce": 11.0,
+      "cn": 23.0,
+      "effect_estimate": 0.477273,
+      "lower_ci": 0.14263,
+      "upper_ci": 1.59706,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Ravi 2018",
+      "year": "2018",
+      "ee": 4.0,
+      "en": 30.0,
+      "ce": 14.0,
+      "cn": 30.0,
+      "effect_estimate": 0.175824,
+      "lower_ci": 0.049175,
+      "upper_ci": 0.628651,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "St Peter 2010",
+      "year": "2010",
+      "ee": 1.0,
+      "en": 20.0,
+      "ce": 0.0,
+      "cn": 20.0,
+      "effect_estimate": 3.153846,
+      "lower_ci": 0.120972,
+      "upper_ci": 82.223671,
+      "effect_type": "OR",
+      "cc_applied": true
+    }
+  ]
+}

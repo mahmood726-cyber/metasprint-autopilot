@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD012532_pub2_data",
+  "cd_number": "CD012532",
+  "analysis_name": "Overall Survival",
+  "effect_type": "MD",
+  "k_input": 6,
+  "results": {
+    "I2": 49.124008429888065,
+    "Q": 9.827818280670808,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 6,
+    "p_value": 0.21896356886600898,
+    "pooled": 0.10695449825906433,
+    "pooled_hi": 0.2775189775848458,
+    "pooled_lo": -0.06360998106671709,
+    "pooled_log": 0.10695449825906433,
+    "pooled_se": 0.08700516301750708,
+    "tau2": 0.01943837879915658
+  }
+}

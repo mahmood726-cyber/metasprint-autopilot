@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013631_pub2_data",
+  "cd_number": "CD013631",
+  "analysis_name": "Patient-reported outcomes: HRQoL at 12 weeks",
+  "effect_type": "MD",
+  "k_input": 12,
+  "results": {
+    "I2": 70.82460089089761,
+    "Q": 37.702997511242714,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 12,
+    "funnel_dots": 12,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 12,
+    "p_value": 0.31903614565482696,
+    "pooled": 0.5915814824247544,
+    "pooled_hi": 1.7554575474267549,
+    "pooled_lo": -0.572294582577246,
+    "pooled_log": 0.5915814824247544,
+    "pooled_se": 0.5936946963866903,
+    "tau2": 1.7303005346933336
+  }
+}

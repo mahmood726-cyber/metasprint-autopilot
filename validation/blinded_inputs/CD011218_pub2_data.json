@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD011218_pub2_data",
+  "cd_number": "CD011218",
+  "analysis_name": "Frequency of wearing a seat belt (Kreuter 1996)",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Kreuter 1996",
+      "year": "1996",
+      "ee": 13.0,
+      "en": 55.0,
+      "ce": 14.0,
+      "cn": 59.0,
+      "effect_estimate": 0.994898,
+      "lower_ci": 0.419189,
+      "upper_ci": 2.361276,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Hempel 1992",
+      "year": "1992",
+      "ee": 44.0,
+      "en": 118.0,
+      "ce": 42.0,
+      "cn": 125.0,
+      "effect_estimate": 1.175032,
+      "lower_ci": 0.694132,
+      "upper_ci": 1.989104,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD001552_pub3_data",
+  "cd_number": "CD001552",
+  "analysis_name": "Clinical improvement at short-term follow-up: 3 months or less",
+  "effect_type": "OR",
+  "k_input": 6,
+  "results": {
+    "I2": 83.44079166732861,
+    "Q": 30.194680201800352,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 6,
+    "p_value": 0.7683767362506084,
+    "pooled": 1.1559550273507053,
+    "pooled_hi": 3.0333363054622207,
+    "pooled_lo": 0.44051562065544025,
+    "pooled_log": 0.14492686581755773,
+    "pooled_se": 0.49211321174635975,
+    "tau2": 1.1723096086241127
+  }
+}

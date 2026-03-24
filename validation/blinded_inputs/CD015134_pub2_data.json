@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD015134_pub2_data",
+  "cd_number": "CD015134",
+  "analysis_name": "Infant hospitalisation with laboratory-confirmed RSV disease",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Kampmann 2023",
+      "year": "2023",
+      "ee": 19.0,
+      "en": 3495.0,
+      "ce": 44.0,
+      "cn": 3480.0,
+      "effect_estimate": 0.426849,
+      "lower_ci": 0.24869,
+      "upper_ci": 0.732638,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Madhi 2020",
+      "year": "2020",
+      "ee": 83.0,
+      "en": 2980.0,
+      "ce": 70.0,
+      "cn": 1547.0,
+      "effect_estimate": 0.604522,
+      "lower_ci": 0.437114,
+      "upper_ci": 0.836044,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Sim\u00f5es 2022",
+      "year": "2022",
+      "ee": 0.0,
+      "en": 405.0,
+      "ce": 2.0,
+      "cn": 103.0,
+      "effect_estimate": 0.050062,
+      "lower_ci": 0.002383,
+      "upper_ci": 1.051602,
+      "effect_type": "OR",
+      "cc_applied": true
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015350_pub2_data",
+  "cd_number": "CD015350",
+  "analysis_name": "Proportion with non-serious or non-severe harms/adverse events",
+  "effect_type": "OR",
+  "k_input": 2,
+  "results": {
+    "I2": 0,
+    "Q": 0.14528169300620986,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 2,
+    "funnel_dots": 2,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 2,
+    "p_value": 0.7769996390646159,
+    "pooled": 1.0855025720858356,
+    "pooled_hi": 1.9153625500139615,
+    "pooled_lo": 0.6151920606343565,
+    "pooled_log": 0.08204307982749309,
+    "pooled_se": 0.2896680873529679,
+    "tau2": 0
+  }
+}

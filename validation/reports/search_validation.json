@@ -1,0 +1,3908 @@
+{
+  "summary": {
+    "total_tested": 100,
+    "pico_extracted": 100,
+    "ctgov_found": 65,
+    "pubmed_found": 58,
+    "errors": 0,
+    "ctgov_rate": 65.0,
+    "pubmed_rate": 57.99999999999999
+  },
+  "details": {
+    "CD009679_pub3_data": {
+      "dataset_name": "CD009679_pub3_data",
+      "cd_number": "CD009679",
+      "pico": {
+        "P": "Country of study: India Sample size: 20 participants with 20 fractures Age: not ",
+        "I": "Circular external fixation with limited internal fixation (hybrid fixation)",
+        "C": "standard open reduction and internal fixation (ORIF)",
+        "O": "Generic quality of life (SF-36 scores) at 24 months",
+        "group_name": "Circular external fixation with limited internal fixation (hybrid fixation) versus standard open reduction and internal fixation (ORIF)"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": "HTTP Error 400: Bad Request"
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD013255_pub2_data": {
+      "dataset_name": "CD013255_pub2_data",
+      "cd_number": "CD013255",
+      "pico": {
+        "P": "Baseline characteristics Ibutilide Not given by treatment Placebo Not given by t",
+        "I": "Flecainide",
+        "C": "amiodarone",
+        "O": "Sinus rhythm until hospital discharge or end of study follow-up (paroxysmal AF)",
+        "group_name": "Flecainide vs amiodarone"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 14,
+        "n_returned": 14,
+        "sample": [
+          {
+            "nctId": "NCT07405671",
+            "title": "Randomized Evaluation of fleCAinide Safety Versus STandard of Care in Patients With Coronary Artery Disease and Atrial Fibrillation",
+            "status": "NOT_YET_RECRUITING"
+          },
+          {
+            "nctId": "NCT06142604",
+            "title": "Single Dose Flecainide for Early Sinus Rhythm Conversion of Perioperative Atrial Fibrillation After Noncardiac Surgery (FLIP-AF): a Pilot Randomized Controlled Trial",
+            "status": "WITHDRAWN"
+          },
+          {
+            "nctId": "NCT05549752",
+            "title": "Safety and Efficacy of Flecainide Versus Amiodarone in the Cardioversion of Paroxysmal Atrial Fibrillation at the Emergency Department, in Patients With Coronary Artery Disease Without Residual Ischemia and Ejection Fraction > 35%",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT07270848",
+            "title": "A Multicenter Prospective Study on the Efficacy, Safety, and Quality of Life Improvements of Dronedarone for Early Rhythm Control in Atrial Fibrillation",
+            "status": "NOT_YET_RECRUITING"
+          },
+          {
+            "nctId": "NCT00215774",
+            "title": "Targeted Pharmacological Reversal of Electrical Remodeling After Cardioversion.",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 27579,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD014833_pub2_data": {
+      "dataset_name": "CD014833_pub2_data",
+      "cd_number": "CD014833",
+      "pico": {
+        "P": "141 women Age: mean ± SD, 29",
+        "I": "Psychosocial (including psychological and educational) breastfeeding interventio",
+        "C": "standard care",
+        "O": "Incidence of depression immediately post-intervention",
+        "group_name": "Psychosocial (including psychological and educational) breastfeeding interventions versus standard care"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD015849_pub2_data": {
+      "dataset_name": "CD015849_pub2_data",
+      "cd_number": "CD015849",
+      "pico": {
+        "P": "Study characteristics Inclusion criteria: T2DM with HbA1c > 7%",
+        "I": "GLP-1 receptor agonists",
+        "C": "placebo",
+        "O": "All-cause death",
+        "group_name": "GLP-1 receptor agonists versus placebo"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 55,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT06513715",
+            "title": "Discovery of Bioactive Compounds as Agonists of GLP1 Receptor for Obesity Treatment",
+            "status": "ACTIVE_NOT_RECRUITING"
+          },
+          {
+            "nctId": "NCT07082114",
+            "title": "A Phase 3, Randomized, Double-blind, Active-Controlled, Parallel-Group Study to Evaluate the Efficacy and Safety of HDM1002 Tablets Compared With Dapagliflozin in Subjects With Type 2 Diabetes Mellitus Inadequately Controlled on Metformin",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT07193459",
+            "title": "A Phase 3, Randomized, Double-blind, Placebo-Controlled, Parallel-Group Study to Evaluate the Efficacy and Safety of HDM1002 Tablets in Subjects With Type 2 Diabetes Mellitus Inadequately Controlled With Diet and Exercise Only",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT06520540",
+            "title": "A Randomized, Double-blind, Placebo-controlled Phase I Clinical Study to Evaluate the Safety, Efficacy, and Pharmacokinetics of Multiple Oral Administration of HDM1002 Tablets in Chinese Overweight and Obese Adult Subjects",
+            "status": "NOT_YET_RECRUITING"
+          },
+          {
+            "nctId": "NCT03341013",
+            "title": "A Phase 1, Randomized, Cross-over, Two-period Pilot Study Investigating Bioequivalence Between a Single Dose of Formulation 2 and Formulation 3 of MEDI0382 in Healthy Adult Subjects",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 29,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD003376_pub4_data": {
+      "dataset_name": "CD003376_pub4_data",
+      "cd_number": "CD003376",
+      "pico": {
+        "P": "base case analysis",
+        "I": "Etidronate 400 mg/day",
+        "C": "placebo",
+        "O": "Clinical vertebral fractures",
+        "group_name": "Etidronate 400 mg/day versus placebo - base case analysis"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 2,
+        "n_returned": 2,
+        "sample": [
+          {
+            "nctId": "NCT05184595",
+            "title": "Cost-Utility Analysis of Home-based Versus Hospital-based Chemotherapy in Multiple Myeloma: Case of Carfilzomib",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT06784141",
+            "title": "Network-Based vs. Standardized Cognitive Behavioral Therapy in Chronic Primary Pain: A Single-Case Experimental Design With Randomized Baselines",
+            "status": "RECRUITING"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 8,
+        "n_pmids": 8,
+        "error": null
+      }
+    },
+    "CD014965_pub2_data": {
+      "dataset_name": "CD014965_pub2_data",
+      "cd_number": "CD014965",
+      "pico": {
+        "P": "Inclusion criteria: \"Patients were recruited in the age range of 6–17 years, con",
+        "I": "Atypical antipsychotics",
+        "C": "placebo (children – short term)",
+        "O": "Irritability",
+        "group_name": "Atypical antipsychotics versus placebo (children – short term)"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 85,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT03730857",
+            "title": "Early Predictors of Poor Treatment Response in Patients With Schizophrenia Treated With Atypical Antipsychotics",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06590298",
+            "title": "Evaluating the Effects of Adjunctive Aripiprazole on Weight and Metabolic Outcomes in Females Receiving Atypical Antipsychotics: a Randomized Clinical Trial",
+            "status": "NOT_YET_RECRUITING"
+          },
+          {
+            "nctId": "NCT00140426",
+            "title": "A Double-blind, Placebo Controlled Trial of Risperidone for the Treatment of Anorexia Nervosa",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00552500",
+            "title": "Effects of Atypical Antipsychotic and Valproate Combination Therapy on Glucose and Lipid Metabolism in Schizophrenia",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00617240",
+            "title": "Metformin Mitigation of Atypical Antipsychotic-Induced Metabolic Dysregulation in Adolescent Youth",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 9,
+        "n_pmids": 9,
+        "error": null
+      }
+    },
+    "CD015314_pub2_data": {
+      "dataset_name": "CD015314_pub2_data",
+      "cd_number": "CD015314",
+      "pico": {
+        "P": "Participants: Dental hygiene patients (N = 633, Avg",
+        "I": "Counselling",
+        "C": "usual care/minimal support",
+        "O": "Tobacco cessation at longest follow-up",
+        "group_name": "Counselling vs usual care/minimal support"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 1172,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT04393636",
+            "title": "Randomized Controlled Trial of Digital Cardiac Counseling in Patients With Delayed Cardiac Surgical Treatment Due to Covid-19 Pandemic (DCC Trial)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00112268",
+            "title": "Quitlink : A Leveraging Solution to Tobacco Counseling",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00459238",
+            "title": "A Telephone-Based Education and Prevention Intervention for Teens and Young Adults",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01041989",
+            "title": "Finnish Geriatric Intervention Study to Prevent Cognitive Impairment and Disability",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT03839147",
+            "title": "The Effect of Education and Counseling on Reducing Pain and Anxiety in Women Undergoing Hysterosalpingography",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 5,
+        "n_pmids": 5,
+        "error": null
+      }
+    },
+    "CD012178_pub2_data": {
+      "dataset_name": "CD012178_pub2_data",
+      "cd_number": "CD012178",
+      "pico": {
+        "P": "Inclusion criteria : infants with gestational age ≤ 34 weeks and able to tolerat",
+        "I": "Lutein and zeaxanthin",
+        "C": "control (placebo or no supplementation)",
+        "O": "Incidence of ROP at any stage",
+        "group_name": "Lutein and zeaxanthin versus control (placebo or no supplementation) "
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 27,
+        "n_returned": 27,
+        "sample": [
+          {
+            "nctId": "NCT07355725",
+            "title": "A Prospective, Randomized, Double-Blind, Parallel, Placebo- Controlled Study to Evaluate Efficacy of Lutemax 2020 (Lutein 10 mg & Zeaxanthin Isomers 2 mg) on Vision and Cognitive Performance in Children",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02200263",
+            "title": "A Randomized Placebo-controlled Trial to Investigate the Effect of Lutein and Zeaxanthin Supplementation on Macular Pigment and Visual Function in Albinism - LUtein for VIsion in Albinism (LUVIA)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01404845",
+            "title": "Assessment of the Evolution of Macular Pigment Density in Two Distinct Populations, Before and After Supplementation With Nutrof Total Versus Dietary Supplement Without Lutein and Zeaxanthin, Using the Macular Pigment Module of Visucam 200 or Visucam 500 (Zeiss).",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00909090",
+            "title": "Effects of Lutein and Zeaxanthin Upon MPOD and Its Effects Upon Glare Disability, Photostress Recovery, and Contrast Enhancement in Healthy Subjects: A Randomized, Double-blind Placebo-controlled Study",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00564902",
+            "title": "Randomized, Double Blind, Lutein Controlled Study of Zeaxanthin and Visual Function in Atrophic Age Related Macular Degeneration Patients",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 1,
+        "n_pmids": 1,
+        "error": null
+      }
+    },
+    "CD009362_pub4_data": {
+      "dataset_name": "CD009362_pub4_data",
+      "cd_number": "CD009362",
+      "pico": {
+        "P": "Inclusion criteria : ≥ 21 years of age (the study venue was an adult-focused hea",
+        "I": "Silicone dressing",
+        "C": "no dressing",
+        "O": "Pressure ulcer",
+        "group_name": "Silicone dressing versus no dressing"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 12,
+        "n_returned": 12,
+        "sample": [
+          {
+            "nctId": "NCT05786612",
+            "title": "A Randomised Controlled Investigation Comparing the Clinical Performance and Cost Effectiveness of Biatain® Silicone With Standard of Care Dressing Including Filler in Chronic Wounds",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01356459",
+            "title": "A Prospective Randomised Controlled Trial of the Effectiveness of Absorbent Silicone Self Adherent Dressings in the Prevention of Sacral and Heel Pressure Ulcers in Trauma and Critically Ill ED/ICU Patients",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT03442777",
+            "title": "Silicone Adhesive Multilayer Foam Dressings as Adjuvant Prophylactic Therapy for Pressure Ulcer (PU) Prevention: a Multicentric Randomised Open Label Parallel Group Medical Device Trial in Hospitalised Patients at Risk of PU Development",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02771015",
+            "title": "A Mono-centre, Post CE-mark, Prospective-randomized Clinical Trial to Evaluate the Performance of a Flexible Self-adherent Absorbent Dressing Coated With a Soft Silicone Layer After Hip or Knee Arthroplasty or Primary Spine Surgery in Comparison to a Standard Wound Dressing (Cosmopor E®Steril, Fa. Hartmann)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01988818",
+            "title": "A Mono-centre, Post CE-mark, Prospective-randomized Clinical Trial to Evaluate the Performance of a Flexible Self-adherent Absorbent Dressing Coated With a Soft Silicone Layer After Hip or Knee Arthroplasty or Primary Spine Surgery in Comparison to a Standard Wound Dressing (Cosmopor E®Steril, Fa. Hartmann)",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 25,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD015083_pub2_data": {
+      "dataset_name": "CD015083_pub2_data",
+      "cd_number": "CD015083",
+      "pico": {
+        "P": "Number of participants 36 randomised (12 to SA-MPMP, 12 to P-MPMP and 12 to SMC)",
+        "I": "Main analysis: Models of care",
+        "C": "usual care",
+        "O": "Referral for or receipt of any lumbar spine imaging at last follow-up within 12 months",
+        "group_name": "Main analysis: Models of care vs usual care"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 89,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD010189_pub3_data": {
+      "dataset_name": "CD010189_pub3_data",
+      "cd_number": "CD010189",
+      "pico": {
+        "P": "Inclusion criteria: age < 66 years",
+        "I": "Bone marrow transplantation (BMT)",
+        "C": "peripheral blood stem cell transplantation (PBSCT)",
+        "O": "Overall survival",
+        "group_name": "Bone marrow transplantation (BMT) versus peripheral blood stem cell transplantation (PBSCT)"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 42,
+        "n_returned": 42,
+        "sample": [
+          {
+            "nctId": "NCT01016093",
+            "title": "Zoledronic Acid for the Prevention of Bone Loss Post-bone Marrow Transplantation for Thalassemia Major Patients: A Prospective Pilot Study",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT00412360",
+            "title": "Multi-center, Open Label, Randomized Trial Comparing Single Versus Double Umbilical Cord Blood (UCB) Transplantation in Pediatric Patients With High Risk Leukemia and Myelodysplasia (BMT CTN #0501)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00406393",
+            "title": "A Phase III Randomized, Multicenter Trial Comparing Sirolimus/Tacrolimus With Tacrolimus/Methotrexate as Graft-versus-Host Disease (GVHD) Prophylaxis After HLA-Matched, Related Peripheral Blood Stem Cell Transplantation (BMT CTN #0402)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01282216",
+            "title": "Patient-donor Vaccination in the Context of Allogeneic Bone Marrow Transplant (BMT) With High-dose Post Transplantation Cyclophosphamide.",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT03959241",
+            "title": "A Randomized, Multicenter, Phase III Trial of Tacrolimus/Methotrexate Versus Post-Transplant Cyclophosphamide/Tacrolimus/Mycophenolate Mofetil in Non-Myeloablative/Reduced Intensity Conditioning Allogeneic Peripheral Blood Stem Cell Transplantation (BMT CTN 1703; Progress III); Companion Study: Microbiome and Immune Reconstitution in Cellular Therapies and Hematopoietic Stem Cell Transplantation (BMT CTN 1801; Mi-Immune)",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 185,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD015530_pub2_data": {
+      "dataset_name": "CD015530_pub2_data",
+      "cd_number": "CD015530",
+      "pico": {
+        "P": "Number of participants included in total and per arm Total N = 22,182 (throughou",
+        "I": "Vaccines for preventing herpes zoster",
+        "C": "placebo or no vaccine (RCT)",
+        "O": "Incidence of herpes zoster (up to 21 months after final dose)",
+        "group_name": "Vaccines for preventing herpes zoster compared to placebo or no vaccine (RCT)"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD013059_pub2_data": {
+      "dataset_name": "CD013059_pub2_data",
+      "cd_number": "CD013059",
+      "pico": {
+        "P": "Number of participants: 76 Baseline characteristics Cognitive behavioural therap",
+        "I": "Any psychological therapy",
+        "C": "any non-therapy comparator",
+        "O": "Depressive symptomatology",
+        "group_name": "Any psychological therapy versus any non-therapy comparator"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 207,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD014544_pub2_data": {
+      "dataset_name": "CD014544_pub2_data",
+      "cd_number": "CD014544",
+      "pico": {
+        "P": "Males with hemophilia A or B, 12 years of age or older, with severe hemophilia (",
+        "I": "Emicizumab prophylaxis",
+        "C": "on-demand therapy in people with inhibitors",
+        "O": "Annualized Bleeding Rates (ABR)",
+        "group_name": "Emicizumab prophylaxis versus on-demand therapy in people with inhibitors"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 9,
+        "n_returned": 9,
+        "sample": [
+          {
+            "nctId": "NCT03315455",
+            "title": "A Randomized, Multicenter, Open-Label, Phase III Clinical Trial to Evaluate the Efficacy, Safety, and Pharmacokinetics of Prophylactic Emicizumab Versus No Prophylaxis in Hemophilia A Patients",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04303559",
+            "title": "Multicenter, Randomized Phase III Inhibitor Prevention Trial, Comparing Eloctate vs. Emicizumab to Prevent Inhibitor Formation in Severe Hemophilia A",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT02196207",
+            "title": "Phase III INHIBIT Platform: Prevention Trial, Eloctate vs Emicizumab to Prevent Inhibitors; Eradication Trial: Eloctate Immune Tolerance (ITI) Plus Emicizumab vs vs Eloctate ITI Alone to Eradicate Inhibitors in Severe Hemophilia A",
+            "status": "WITHDRAWN"
+          },
+          {
+            "nctId": "NCT02622321",
+            "title": "A Randomized, Multicenter, Open-Label, Phase III Clinical Trial to Evaluate the Efficacy, Safety, and Pharmacokinetics of Prophylactic Emicizumab Versus no Prophylaxis in Hemophilia A Patients With Inhibitors",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06938659",
+            "title": "Comparison of Low Dose Emicizumab and Low Dose Factor VIII as a Prophylaxis in Hemophilia A Patients- a Randomized Control Trial'",
+            "status": "NOT_YET_RECRUITING"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 1,
+        "n_pmids": 1,
+        "error": null
+      }
+    },
+    "CD013834_pub2_data": {
+      "dataset_name": "CD013834_pub2_data",
+      "cd_number": "CD013834",
+      "pico": {
+        "P": "lower limb and gait function",
+        "I": "VR",
+        "C": "no intervention",
+        "O": "TUG",
+        "group_name": "VR vs no intervention - lower limb and gait function"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 3,
+        "n_returned": 3,
+        "sample": [
+          {
+            "nctId": "NCT06025981",
+            "title": "Clinical Study of the Effects of a Robotic Walker and Immersive Technology for Hip Fracture Rehabilitation in the Elderly",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT05411653",
+            "title": "Combined Effects of Xbox Kinect Virtual Reality and Motor Imagery on Lower Limb Function, Dynamic Balance and Gait in Chronic Stroke Patients",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05423626",
+            "title": "Innovative Technologies in Restoring Gait and Balance Functions in Patients in Acute and Early Recovery Periods of Ischemic Stroke at the Inpatient Stage of Medical Rehabilitation",
+            "status": "UNKNOWN"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 25,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD000143_pub2_data": {
+      "dataset_name": "CD000143_pub2_data",
+      "cd_number": "CD000143",
+      "pico": {
+        "P": "Inclusion criteria BW 600–1500 g Endotracheal intubation within 48 hours of life",
+        "I": "Nasal continuous positive airway pressure (NCPAP)",
+        "C": "no continuous positive airway pressure (no CPAP)",
+        "O": "Extubation failure",
+        "group_name": "Nasal continuous positive airway pressure (NCPAP) versus no continuous positive airway pressure (no CPAP)"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 34,
+        "n_returned": 34,
+        "sample": [
+          {
+            "nctId": "NCT06295484",
+            "title": "Effect of Nasal Continuous Positive Airway Pressure (nCPAP) Versus Non-Invasive Positive Pressure Ventilation (NIPPV) On Diaphragm Electrical Activity (Edi) In Very Low Birth Weight (VLBW) Preterm Infants",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT03181958",
+            "title": "Nasal High Frequency Oscillation Ventilation(NHFOV) vs. Nasal Continuous Positive Airway Pressure(NCPAP) vs Nasal Intermittent Positive Pressure Ventilation（NIPPV） as Post-extubation Respiratory Support in Preterm Infants With Respiratory Distress Syndrome:a Multicenter Randomized Controlled Trial",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02051491",
+            "title": "A Randomized Controlled Trial of BiPhasic Nasal Continuous Positive Airway Pressure (BP-NCPAP) vs. Non-invasive High Frequency Ventilation (NIHFV) Following NCPAP Failure: A Pilot Study",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT01860560",
+            "title": "Effect of High Flow Nasal Cannula (Flowrest®) on Mild-Moderate Sleep Disordered Breathing: A Non-Inferiority Study Versus Nasal Continuous Positive Airway Pressure (CPAP) Therapy",
+            "status": "WITHDRAWN"
+          },
+          {
+            "nctId": "NCT01316575",
+            "title": "Prophylactic Nasal Continuous Positive Airway Pressure (nCPAP) Following Bowel Surgery",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 34,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD015122_pub2_data": {
+      "dataset_name": "CD015122_pub2_data",
+      "cd_number": "CD015122",
+      "pico": {
+        "P": "Baseline Characteristics TXA Mean Age (SD) : 32",
+        "I": "Systemic TXA",
+        "C": "No TXA (placebo or usual care)",
+        "O": "Blood transfusion",
+        "group_name": "Systemic TXA vs No TXA (placebo or usual care)"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 16,
+        "n_pmids": 16,
+        "error": null
+      }
+    },
+    "CD013800_pub2_data": {
+      "dataset_name": "CD013800_pub2_data",
+      "cd_number": "CD013800",
+      "pico": {
+        "P": "Baseline characteristics Inclusion criteria: all patients who started dialysis (",
+        "I": "PD",
+        "C": "HD",
+        "O": "Residual kidney function at 6 months [mL/min/1.73 m2]",
+        "group_name": "PD versus HD"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 1716,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT03194217",
+            "title": "Dose Finding Phase IIb Study of Bavisant to Evaluate Its Safety and effiCacy in treAtment of exceSsive Daytime sleePiness (EDS) in PARkinson's Disease (PD).",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT03322540",
+            "title": "A Phase 2, Randomized, Double-Blind Study of Pembrolizumab (MK-3475) Plus Epacadostat (INCB024360) Versus Pembrolizumab Plus Placebo as First-Line Treatment in Patients With Metastatic Non-Small Cell Lung Cancer Expressing High Levels of PD-L1",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04175704",
+            "title": "A Phase I, Randomized, Single-Blind, Placebo-Controlled, Single Ascending Dose Study to Assess the Safety, Tolerability, Pharmacokinetics, and Pharmacodynamics of UB-221 as an Add-on Therapy in Patients With Chronic Spontaneous Urticaria",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT03083704",
+            "title": "A Phase 1 Randomized, Double-blind, Placebo-controlled Study to Evaluate the Pharmacokinetics, Pharmacodynamics, Safety, and Tolerability of Second Generation Andexanet Alfa Administered to Healthy Subjects",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06692738",
+            "title": "A Phase III, Randomized, Double-blind, Multicenter, Global Study of Rilvegostomig or Pembrolizumab in Combination With Platinum-based Chemotherapy for the First-line Treatment of Patients With Metastatic Squamous Non-small Cell Lung Cancer Whose Tumors Express PD-L1 (ARTEMIDE-Lung02)",
+            "status": "RECRUITING"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 50,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD014920_pub2_data": {
+      "dataset_name": "CD014920_pub2_data",
+      "cd_number": "CD014920",
+      "pico": {
+        "P": "Country : Italy Setting : 3 vascular centres Number of participants : 426 Inclus",
+        "I": "Preoperative coronary intervention plus usual care",
+        "C": "usual care alone",
+        "O": "Acute myocardial infarction (short term < 30 days)",
+        "group_name": "Preoperative coronary intervention plus usual care versus usual care alone"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD011218_pub2_data": {
+      "dataset_name": "CD011218_pub2_data",
+      "cd_number": "CD011218",
+      "pico": {
+        "P": "Setting: lower secondary schools Country: Denmark Description: participating sch",
+        "I": "Behavioural education-based interventions",
+        "C": "no or another intervention",
+        "O": "Frequency of wearing a seat belt (Fernandez 2008)",
+        "group_name": "Behavioural education-based interventions compared to no or another intervention"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 1,
+        "n_returned": 1,
+        "sample": [
+          {
+            "nctId": "NCT05450146",
+            "title": "Trial-based Effectiveness and Cost-effectiveness of the Partner in Balance Intervention to Selfmanage Mild Dementia Via Blended eHealth Psycho-education and Behavioural Modelling for the Care Partner Coached by a Case Manager",
+            "status": "RECRUITING"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD009235_pub4_data": {
+      "dataset_name": "CD009235_pub4_data",
+      "cd_number": "CD009235",
+      "pico": {
+        "P": "Setting: India, respiratory ICU Sample size: 46 adults Inclusion criteria: 1",
+        "I": "Primary analysis: automated closed loop system",
+        "C": "non-automated system",
+        "O": "Duration of mechanical ventilation",
+        "group_name": "Primary analysis: automated closed loop system versus non-automated system"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD004762_pub3_data": {
+      "dataset_name": "CD004762_pub3_data",
+      "cd_number": "CD004762",
+      "pico": {
+        "P": "Setting: adults with myotonia congenita or paramyotonia congenita registered at ",
+        "I": "Mexiletine",
+        "C": "placebo in myotonic dystrophy type 1",
+        "O": "Improvement of myotonia: visual analogue scale ",
+        "group_name": "Mexiletine versus placebo in myotonic dystrophy type 1"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 17,
+        "n_returned": 17,
+        "sample": [
+          {
+            "nctId": "NCT02561702",
+            "title": "Mexiletine for Muscle Cramps in Charcot Marie Tooth Disease",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04700046",
+            "title": "A Randomized, Double-blind, Placebo-controlled, Multi-center Study to Investigate the Efficacy and Safety of Mexiletine During 26 Weeks of Treatment in Patients With Myotonic Dystrophy Type 1 and Type 2 [The MIND Study]",
+            "status": "WITHDRAWN"
+          },
+          {
+            "nctId": "NCT02045667",
+            "title": "Combining N-of-1 Trials to Estimate Population Clinical and Cost-effectiveness of Drugs Using Bayesian Hierarchical Modeling. The Case of Mexiletine for Patients With Non- Dystrophic Myotonia.",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05017155",
+            "title": "A Phase III, Randomised, Double Blinded, Head-to-head, Single-site, Cross-over Trial of Lamotrigine Versus Mexiletine for Non-dystrophic Myotonias",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT02308748",
+            "title": "Five Period Crossover Study of the Ability of Late Sodium or Calcium Current Block (Mexiletine, Lidocaine, or Diltiazem) to Balance the Electrocardiographic Effects of hERG Potassium Current Block (Dofetilide or Moxifloxacin)",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD015432_pub2_data": {
+      "dataset_name": "CD015432_pub2_data",
+      "cd_number": "CD015432",
+      "pico": {
+        "P": "59 total: 30 ibuprofen, 29 ketorolac Median (IQR) age of participants: &nbsp",
+        "I": "Ibuprofen",
+        "C": "placebo",
+        "O": "Pain intensity – as reported by the child, less than 2 hours postintervention",
+        "group_name": "Ibuprofen versus placebo"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 475,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT02227316",
+            "title": "A Prospective, Double Blind, Randomized, Placebo Controlled Study to Compare the Effectiveness of Intravenous Acetaminophen and Intravenous Ibuprofen in Reducing Post Procedural Pain in the Uterine Fibroid Embolization Procedure",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04111315",
+            "title": "Efficacy of Metamizole Versus Ibuprofen and a Short Educational Intervention Versus Standard Care in Acute and Subacute Low Back Pain: A Randomized, Factorial Trial",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT00267176",
+            "title": "A 4-week, Multicentre, Randomized, Double-blind, Double-dummy, Parallel Group Ambulatory Blood Pressure Monitoring Study to Investigate Whether Treatment With Lumiracoxib 100 mg Once Daily Results in an Improved 24-hour Blood Pressure Profile Compared to Ibuprofen 600 mg Three Times a Day in Osteoarthritis Patients With Controlled Hypertension",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00565084",
+            "title": "A Randomized, Placebo-Controlled Single-Dose 3-Period Crossover Study to Assess the Tolerability and Efficacy of Ibuprofen 800 mg in a Walking Model of Osteoarthritis Pain",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01756209",
+            "title": "The Effects of Acetaminophen and Ibuprofen With and Without Magnesium in the Treatment of Primary Migraine in Childhood",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD001321_pub7_data": {
+      "dataset_name": "CD001321_pub7_data",
+      "cd_number": "CD001321",
+      "pico": {
+        "P": "Study characteristics Country: Canada Setting: single centre Inclusion criteria:",
+        "I": "Any cranberry product",
+        "C": "placebo, control or no treatment",
+        "O": "Symptomatic UTI: culture-verified UTI",
+        "group_name": "Any cranberry product versus placebo, control or no treatment"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD016147_data": {
+      "dataset_name": "CD016147_data",
+      "cd_number": "CD016147",
+      "pico": {
+        "P": "Systemic uterotonic agents Mean age (years) ± SD: not reported Other: not report",
+        "I": "Systemic uterotonic agents (sulprostone or misoprostol)",
+        "C": "placebo or no treatment",
+        "O": "Manual removal of the placenta (end of treatment)",
+        "group_name": "Systemic uterotonic agents (sulprostone or misoprostol) vs placebo or no treatment"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD015711_pub2_data": {
+      "dataset_name": "CD015711_pub2_data",
+      "cd_number": "CD015711",
+      "pico": {
+        "P": "Country: Croatia Setting: Svjetlost Eye Clinic Baseline characteristics Diffract",
+        "I": "Diffractive bifocal IOL",
+        "C": "refractive bifocal IOL after refractive lens exchange (RLE)",
+        "O": "Spectacle independence for near vision",
+        "group_name": "Diffractive bifocal IOL versus refractive bifocal IOL after refractive lens exchange (RLE)"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 2,
+        "n_pmids": 2,
+        "error": null
+      }
+    },
+    "CD015592_pub3_data": {
+      "dataset_name": "CD015592_pub3_data",
+      "cd_number": "CD015592",
+      "pico": {
+        "P": "171 newborns who satisfied the criteria for lumbar puncture indications",
+        "I": "Lateral decubitus position",
+        "C": "sitting position",
+        "O": "Successful lumbar puncture procedure at the first attempt",
+        "group_name": "Lateral decubitus position versus sitting position"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 54,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT04942106",
+            "title": "Biobehavioral Efficacy of the Semi-Elevated Side-Lying Position for Feeding Preterm Infants",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04987983",
+            "title": "A Comparison Study of the Bottle-feeding of Prematurely Born Infants (≤ 34 Weeks of Gestational Age) in Side-lying Position, Positioned on the Right and Left Side - a Pilot Study.",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01854450",
+            "title": "Evaluation of Asymmetrical Lateral Decubitus for Rotation of Occipitoposterior Fetal Position During Labor : EVADELA Multicentre Randomized Trial",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT03337217",
+            "title": "Colonoscopy in the Prone Position for Patients With BMI Greater Than 30 Is Superior to Standard Left Lateral Decubitus Position",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05482230",
+            "title": "Lung Isolation With a Bronchial Blocker Placed in the Lateral Position for Patients Undergoing Thoracic Surgery: a Multicenter, Randomized Clinical Trial",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 5,
+        "n_pmids": 5,
+        "error": null
+      }
+    },
+    "CD008688_pub3_data": {
+      "dataset_name": "CD008688_pub3_data",
+      "cd_number": "CD008688",
+      "pico": {
+        "P": "Number: 69 (Group 1 (suture): 15",
+        "I": "Stapler",
+        "C": "scalpel resection followed by hand-sewn closure of the pancreatic remnant for di",
+        "O": "Pancreatic fistula (free definition)",
+        "group_name": "Stapler versus scalpel resection followed by hand-sewn closure of the pancreatic remnant for distal pancreatectomy"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 46,
+        "n_returned": 46,
+        "sample": [
+          {
+            "nctId": "NCT03385798",
+            "title": "Endo-GIA Versus Endowrist Stapler in Intracorporeal Urinary Diversion in Robotic Assisted Radical Cystectomy",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01615575",
+            "title": "Transanal Haemorrhoidal Dearterialisation Versus Stapler Haemorrhoidopexy. A Randomized Trial With Long-term Follow-up",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05628415",
+            "title": "Comparison Between the Non-powered AEON™ Endostapler and Echelon FLEX™ Powered Plus Stapler With Regards to the Closure of Lung Tissue After Lung Resection in the Presence of Severe Lung Emphysema: A Prospective Randomized Single-blinded Monocentric Study",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02941640",
+            "title": "Influence of the Different Ways of Appendix Stump Closure on Patient Outcome in Laparoscopic Appendectomy",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT03910699",
+            "title": "Uni-center, Patient-blinded, Randomized, 12 Month, Parallel-group, Non-inferiority Study to Compare Outcomes of Three-row Versus Two-row Circular Staplers for Colorectal Anastomosis Formation After Low Anterior Resection for Rectal Cancer",
+            "status": "UNKNOWN"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD004736_pub6_data": {
+      "dataset_name": "CD004736_pub6_data",
+      "cd_number": "CD004736",
+      "pico": {
+        "P": "97 healthy women attending prenatal care at National Maternity Hospital, Dublin,",
+        "I": "Any supplements containing iron",
+        "C": "same supplements without iron or no treatment/placebo (no iron or placebo)",
+        "O": "Maternal anaemia at term (Hb less than 110 g/L at 37 weeks' gestation or more) (ALL)",
+        "group_name": "Any supplements containing iron versus same supplements without iron or no treatment/placebo (no iron or placebo)"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD011039_pub2_data": {
+      "dataset_name": "CD011039_pub2_data",
+      "cd_number": "CD011039",
+      "pico": {
+        "P": "Participants enroled and randomised: 70 EG: 35 CG: 35 Participants completed stu",
+        "I": "Transjugular intrahepatic portosystemic shunts (TIPS)",
+        "C": "conventional treatment",
+        "O": "All-cause mortality",
+        "group_name": "Transjugular intrahepatic portosystemic shunts (TIPS) versus conventional treatment"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 42,
+        "n_returned": 42,
+        "sample": [
+          {
+            "nctId": "NCT06576934",
+            "title": "Early Implantation of a Transjugular Intrahepatic Portosystemic Shunt (TIPS) in Patients With Liver Cirrhosis and Ascites: a Multicentre, Randomised Controlled Trial",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT05346393",
+            "title": "Hepatorenal Syndrome-acute Kidney Injury (HRS-AKI) Treatment With Transjugular Intrahepatic Portosystemic Shunt in Patients With Cirrhosis. A Randomized Controlled Trial",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT07253389",
+            "title": "A Multicenter Randomized Controlled Trial: Comparison of Underdilated Versus Standard Transjugular Intrahepatic Portosystemic Shunt in Preventing Rebleeding From Esophagogastric Varices in Patients With Cirrhosis",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT04421924",
+            "title": "Optimizing Periinterventional Coagulation Management of Patients Undergoing a Transjugular Intrahepatic Portosystemic Shunt Implantation: A Prospective Randomized Cohort Study",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT03172273",
+            "title": "Early Use of Transjugular Intrahepatic Portosystemic Shunt（TIPS）With Polytetrafluoroethylene(PTFE) Covered Stents in Cirrhotic Patients With Refractory Ascites",
+            "status": "UNKNOWN"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 1,
+        "n_pmids": 1,
+        "error": null
+      }
+    },
+    "CD015476_pub2_data": {
+      "dataset_name": "CD015476_pub2_data",
+      "cd_number": "CD015476",
+      "pico": {
+        "P": "Mean age: 61 years Male: 35% Indication for colonoscopy: screening or/and survei",
+        "I": "",
+        "C": "",
+        "O": "Adenoma detection rate",
+        "group_name": "Critical outcomes"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 451,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD015120_pub2_data": {
+      "dataset_name": "CD015120_pub2_data",
+      "cd_number": "CD015120",
+      "pico": {
+        "P": "Total N: 503",
+        "I": "Single-form NRT",
+        "C": "placebo; low SES",
+        "O": "Smoking cessation",
+        "group_name": "Single-form NRT versus placebo; low SES vs high SES"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 1,
+        "n_pmids": 1,
+        "error": null
+      }
+    },
+    "CD007310_pub3_data": {
+      "dataset_name": "CD007310_pub3_data",
+      "cd_number": "CD007310",
+      "pico": {
+        "P": "Included criteria: People who desired D&E for induced abortion or intrauterine f",
+        "I": "Prostaglandin",
+        "C": "osmotic dilators",
+        "O": "Dilation achieved (mm)",
+        "group_name": "Prostaglandin versus osmotic dilators"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 128,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT00637988",
+            "title": "A Multicenter, Open-label, Four-way Crossover Study of the Effects of Esomeprazole, Aspirin and Rofecoxib on Prostaglandin (PGE2) Production, Cyclooxygenase-2 Enzyme Activity and PCNA Expression in Patients With Barrett's Esophagus",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00598429",
+            "title": "Randomized Clinical Trial of Inhaled PGE1 (IPGE1) in Neonatal Hypoxemic Respiratory Failure. A Protocol for the NICHD Neonatal Research Network",
+            "status": "WITHDRAWN"
+          },
+          {
+            "nctId": "NCT04747301",
+            "title": "The Effectiveness and Safety of Double-balloon Versus Vaginal Prostaglandin for Cervical Ripening in Women With Low-risk Pregnancies: A Randomized Controlled Trial (DOBA-PRO)",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT01402050",
+            "title": "A Randomized Controlled Trial of Transcervical Foley Balloon Compared to Controlled Release Prostaglandin (Cervidil) for Labor Induction and Cervical Ripening in Term and Near Term Women",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02829333",
+            "title": "Effect of Anesthetic Technique on Serum Vascular Endothelial Growth Factor C and Prostaglandin E2 in Women Undergoing Surgery for Uterine Leiomyomas",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 68,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD015594_pub2_data": {
+      "dataset_name": "CD015594_pub2_data",
+      "cd_number": "CD015594",
+      "pico": {
+        "P": "Number: 60 (30 EMLA group, 30 placebo group) Age: GA ≥ 34 weeks, postnatal age <",
+        "I": "Topical anesthetics",
+        "C": "placebo or no intervention",
+        "O": "Neonatal Facial Coding System pain score during the procedure",
+        "group_name": "Topical anesthetics versus placebo or no intervention"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 99,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT00267111",
+            "title": "Local Anaesthesia [Topical Amethocaine Gel (Ametop)] for Intramuscular Injection in Term Neonates: A Randomized Controlled Trial.",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04317508",
+            "title": "Effectiveness of Benzocaine Gelpatch in Reducing Injection Pain in Pediatric Dental Patients:A Randomized Clinical Trial",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04343222",
+            "title": "Control of Pain in Intravitreal Injections (COPIVIN Study): A Study Evaluating the Use of Combination Topical Anesthetic and Non-Steroidal Anti-Inflammatory Drugs (NSAIDs)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01351298",
+            "title": "Intra-nasal Topical Local Anesthetic and Decongestant for Flexible Nasendoscopy in Children: a Randomised Double-blind Placebo Controlled Trial",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00556478",
+            "title": "A Phase IIb, Multi-center, Randomized, Double-blind, Placebo-controlled Study, With Open-label Follow on, to Evaluate the Efficacy, Safety and Tolerability of PSD502 in Subjects With Premature Ejaculation (PE)",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD015003_pub2_data": {
+      "dataset_name": "CD015003_pub2_data",
+      "cd_number": "CD015003",
+      "pico": {
+        "P": "Type of disease: primary biliary cirrhosis (currently known as primary biliary c",
+        "I": "Colchicine",
+        "C": "placebo",
+        "O": "All-cause mortality",
+        "group_name": "Colchicine versus placebo"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 198,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT06304896",
+            "title": "Colchicine Versus Beta-blockers, Angiotensin-converting Enzyme Inhibitors, and Statins for Prevention of Chemotherapy-Induced Cardiomyopathy",
+            "status": "NOT_YET_RECRUITING"
+          },
+          {
+            "nctId": "NCT01906749",
+            "title": "Colchicine for Acute Coronary Syndromes. A Multicenter Double Blind Randomized Trial.",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT06855433",
+            "title": "A Randomized, Double-Blind, Multi-Site Placebo Controlled Trial of Colchicine in Calcium Pyrophosphate Deposition Disease",
+            "status": "NOT_YET_RECRUITING"
+          },
+          {
+            "nctId": "NCT07247734",
+            "title": "The Effect of Colchicine, on Insulin Sensitivity in Individuals With Type 1 Diabetes and Systemic Low-grade Inflammation: A Randomized, Double-Blind, Placebo-Controlled, Investigator-Initiated Trial",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT06078904",
+            "title": "The Effects of Different Doses of Colchicine on High-sensitivity C-reactive Protein in Patients After Percutaneous Coronary Intervention",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 6,
+        "n_pmids": 6,
+        "error": null
+      }
+    },
+    "CD014999_pub2_data": {
+      "dataset_name": "CD014999_pub2_data",
+      "cd_number": "CD014999",
+      "pico": {
+        "P": "Baseline characteristics Prophylactic TAE after successful endoscopic treatment ",
+        "I": "Prophylactic arterial embolization after successful endoscopic treatment",
+        "C": "endoscopic treatment only",
+        "O": "Rebleeding",
+        "group_name": "Prophylactic arterial embolization after successful endoscopic treatment vs endoscopic treatment only"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD015532_data": {
+      "dataset_name": "CD015532_data",
+      "cd_number": "CD015532",
+      "pico": {
+        "P": "Baseline characteristics Number of participants (in total and per arm) (recruite",
+        "I": "RCT: early (≤ 10 days)",
+        "C": "late (> 10 days) tracheostomy",
+        "O": "Overall mortality",
+        "group_name": "RCT: early (≤ 10 days) vs late (> 10 days) tracheostomy"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 24,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD007569_pub4_data": {
+      "dataset_name": "CD007569_pub4_data",
+      "cd_number": "CD007569",
+      "pico": {
+        "P": "Inclusion criteria: people with cancer (80% breast cancer, 8% ovarian cancer)",
+        "I": "Psycho-educational interventions",
+        "C": "care as usual",
+        "O": "Return to work",
+        "group_name": "Psycho-educational interventions versus care as usual"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 23,
+        "n_returned": 23,
+        "sample": [
+          {
+            "nctId": "NCT04613076",
+            "title": "A Collaborative, Computer-assisted, Psycho-educational Intervention for Depressed Patients With Chronic Disease at Primary Care",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01737021",
+            "title": "A Psycho-educational Intervention to Improve Family Mental Health and Child Educational Outcomes Following Admission to PICU: A Pilot Study",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05195554",
+            "title": "Effectiveness of a Psycho-educational Intervention for People With Suicidal Conduct in the Prison Environment. N'VIU Project: a Randomized Control Trial",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT02407951",
+            "title": "Tel Aviv Sourasky Medical Center",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT02161913",
+            "title": "Comparison of Two Psycho-educational Family Group Interventions for Persons With SCI and Their Caregivers",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 1,
+        "n_pmids": 1,
+        "error": null
+      }
+    },
+    "CD012532_pub2_data": {
+      "dataset_name": "CD012532_pub2_data",
+      "cd_number": "CD012532",
+      "pico": {
+        "P": "Sample size : 90 Inclusion criteria Recurrent GBM patients with previous treatme",
+        "I": "Nivolumab",
+        "C": "bevacizumab in people with recurrent GBM",
+        "O": "Overall Survival",
+        "group_name": "Nivolumab compared to bevacizumab in people with recurrent GBM"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 435,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT03220009",
+            "title": "A Randomized Phase II Trial of Adjuvant Nivolumab or Expectant Observation Following Neoadjuvant Ipilimumab Plus Nivolumab and Surgical Resection of High-Risk Localized, Locoregionally Advanced, or Recurrent Mucosal Melanoma",
+            "status": "WITHDRAWN"
+          },
+          {
+            "nctId": "NCT01592370",
+            "title": "Multiple Phase 1/2 Cohorts of Nivolumab Monotherapy or Nivolumab Combination Regimens Across Relapsed/Refractory Hematologic Malignancies",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06681298",
+            "title": "A Multi-center, Two-arm, Phase 2 Clinical Study on the Perioperative Treatment of HER2-positive Resectable Esophagogastric Junctional Adenocarcinoma With Nabulimab Combined With FLOT and Trastuzumab VS FLOT Combined With Trastuzumab",
+            "status": "ACTIVE_NOT_RECRUITING"
+          },
+          {
+            "nctId": "NCT03342352",
+            "title": "A Randomized, Global, Phase 3 Trial of Nivolumab Plus Epacadostat in Combination With Chemotherapy (Platinum + 5-fluorouracil) Versus the EXTREME Regimen (Cetuximab + Platinum + 5-fluorouracil) in First-line Treatment of Recurrent or Metastatic Squamous Cell Carcinoma of the Head and Neck (SCCHN) / CheckMate 9NA /ECHO-310",
+            "status": "WITHDRAWN"
+          },
+          {
+            "nctId": "NCT03381118",
+            "title": "A Randomized Study of Haploidentical Lymphocytes With Nivolumab and Intermediate Dose Cytarabine Versus Nivolumab and Intermediate Dose Cytarabine as Consolidation Treatment in Older Adults With Acute Myeloid Leukemia.",
+            "status": "TERMINATED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 357,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD011793_pub3_data": {
+      "dataset_name": "CD011793_pub3_data",
+      "cd_number": "CD011793",
+      "pico": {
+        "P": "Sample size: 101 Setting: 22 nursing homes in Norway Time frame for trial recrui",
+        "I": "Limited",
+        "C": "full sternotomy for aortic valve replacement",
+        "O": "Mortality",
+        "group_name": "Limited versus full sternotomy for aortic valve replacement"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 679,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT05151406",
+            "title": "Myths and Misconceptions About HSCT in a Limited Resource Region: Current Situation and Future Directions",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05904015",
+            "title": "A Prospective, Two Cohort, Multicenter Phase II Clinical Study of Envafolimab Combined With Concurrent Chemoradiotherapy and Immune Maintenance Therapy For Limited Stage Small Cell Lung Cancer",
+            "status": "NOT_YET_RECRUITING"
+          },
+          {
+            "nctId": "NCT02476578",
+            "title": "Sending Advisory Electronic Mail to Primary Care Staff, Addressing Low Metabolic Measures: Assessing the Health Outcomes for Patients Above Age 75",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00810108",
+            "title": "Pharmacokinetics of Lopinavir Crushed Versus Whole Tablets in Pediatric Patients",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02134847",
+            "title": "Multi-center Clinical Trial of Limiting Resident Work Hours on ICU Patient Safety",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 4698,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD003333_pub4_data": {
+      "dataset_name": "CD003333_pub4_data",
+      "cd_number": "CD003333",
+      "pico": {
+        "P": "Heart failure, sinus rhythm Entire cohort was 197 participants, of whom 115 had ",
+        "I": "Warfarin",
+        "C": "aspirin for people with heart failure in sinus rhythm",
+        "O": "All-cause mortality",
+        "group_name": "Warfarin versus aspirin for people with heart failure in sinus rhythm"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 253,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT04846114",
+            "title": "Efficacy of Local Hemostatic Management in Implant Surgery in Anticoagulated Patients on Warfarin: a Randomized Clinical Study",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02610933",
+            "title": "The Effect of Replacement of Vitamin K Antagonist by Rivaroxaban With or Without Vitamin K2 Supplementation on Vascular Calcifications in Chronic Hemodialysis Patients: A Randomized Controlled Trial",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01006876",
+            "title": "Role of Coumadin in Preventing Periprocedural Thrombo-Embolism as a Complication of Radio Frequency Catheter Ablation in High-risk Atrial Fibrillation Patients",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00957242",
+            "title": "AntiCoagulant Effectiveness in Idiopathic Pulmonary Fibrosis (ACE-IPF)",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT02704598",
+            "title": "Comparison of the Recanalization Rate and Incidence of Postthrombotic Syndrome in Patients With Lower-limb Deep Venous Thrombosis Treated With Rivaroxaban or Warfarin",
+            "status": "UNKNOWN"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 62,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD009508_pub2_data": {
+      "dataset_name": "CD009508_pub2_data",
+      "cd_number": "CD009508",
+      "pico": {
+        "P": "Number: 33 UI diagnosis (n/N (%)): SUI or stress-predominant MUI presumed 100% b",
+        "I": "Exercise type: other types",
+        "C": "direct pelvic floor muscle training (PFMT)",
+        "O": "Incontinence quality of life",
+        "group_name": "Exercise type: other types versus direct pelvic floor muscle training (PFMT)"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 2,
+        "n_returned": 2,
+        "sample": [
+          {
+            "nctId": "NCT07085923",
+            "title": "Dietary Counselling And Exercise To Combat Cardiovascular Disease Risk In Norwegian Patients With A Severe Mental Illness",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT02131272",
+            "title": "A 26-week Open Label, Randomised, 2-armed, Parallel Group, Multi-centre Trial Investigating Efficacy and Safety of Insulin Detemir Versus Insulin Neutral Protamine Hagedorn in Combination With the Maximum Tolerated Dose of Metformin and Diet/Exercise on Glycaemic Control in Children and Adolescents With Type 2 Diabetes Insufficiently Controlled on the Maximum Tolerated Dose of Metformin ± Other Oral Antidiabetic Drug(s) ± Basal Insulin",
+            "status": "TERMINATED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 1,
+        "n_pmids": 1,
+        "error": null
+      }
+    },
+    "CD008349_pub5_data": {
+      "dataset_name": "CD008349_pub5_data",
+      "cd_number": "CD008349",
+      "pico": {
+        "P": "Aged 34-86, recruited from regional health system in Virgina, USA 21 participant",
+        "I": "Virtual reality",
+        "C": "alternative therapy approaches",
+        "O": "Upper limb function post intervention (composite measure)",
+        "group_name": "Virtual reality compared to alternative therapy approaches "
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 2293,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT03221244",
+            "title": "Virtual Reality Attention Management Program for Improving Attention in Children",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT04710121",
+            "title": "The Effect of Virtual Reality Glasses Used During Colonoscopy on Vital Signs, Pain and Anxiety Level",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT05812638",
+            "title": "Effects of Mental Imagery With Virtual Reality Training on Lower Limb Functions in Stroke",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT04819126",
+            "title": "Nintendo Wii Virtual Reality Application In Older People With Alzheimer's Dementia",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06432426",
+            "title": "The Effect of Virtual Exercise on Elderly Breast Cancer Survivors on Functionality, Muscular Strength, and Quality of Life Effecto-B):",
+            "status": "RECRUITING"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD001396_pub4_data": {
+      "dataset_name": "CD001396_pub4_data",
+      "cd_number": "CD001396",
+      "pico": {
+        "P": "Country: USA Site: no details Recruitment: 72 women",
+        "I": "SSRI",
+        "C": "placebo",
+        "O": "Self-rated overall premenstrual symptoms",
+        "group_name": "SSRI versus placebo"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 186,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT00118417",
+            "title": "Treatment Refractory Panic Disorder",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00269334",
+            "title": "Phase 4 Study of Clinical Pharmacogenomics of Antidepressant Response",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT00642694",
+            "title": "Time to Remission of Depressive Symptoms With Combined SSRI and Ramelteon",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT01354314",
+            "title": "Pilot Study of Paroxetine and Fluconazole for the Treatment of HIV Associated Neurocognitive Disorder (HAND)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00791713",
+            "title": "A Randomized, Open-label, Single-center, Crossover Study of the Potential Effects of Paroxetine on the Pharmacokinetics of a Single Dose of Paliperidone Extended-release in Healthy Men",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD013197_pub2_data": {
+      "dataset_name": "CD013197_pub2_data",
+      "cd_number": "CD013197",
+      "pico": {
+        "P": "Type of surgery: bariatric surgery Number of participants: 60 Deep NMB (n = 30) ",
+        "I": "Deep NMB",
+        "C": "Moderate NMB",
+        "O": "All-cause mortality short-term",
+        "group_name": "Comparison 1: deep neuromuscular blockade (NMB) versus moderate NMB"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 88,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT02320734",
+            "title": "A Randomized Controlled Double-blinded Trial Comparing the Effect of on Demand vs Deep Neuromuscular Relaxation on Rating of Surgical and Anesthesia Conditions in Patients Undergoing Thoraco-laparoscopic Esophagectomy",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02860507",
+            "title": "A Randomized, Blinded-assessor, Single Center Study to Determine if Administration of Sugammadex, When Used to Reverse Deep Neuromuscular Blockade (NMB) After Open Abdominal Surgery, Impacts Hospital Efficiency",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02762890",
+            "title": "Comparison of Deep Neuromuscular Block and Moderate Neuromuscular Block on Quality of Recovery in Patients Undergoing Robotic Gastrectomy",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02580188",
+            "title": "The Effect of Deep Neuromuscular Block on Surgical Condition During Laparoscopic Colorectal Surgery",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02036827",
+            "title": "The Effect of Deep Neuromuscular Blockade on Postoperative Shoulder Tip Pain After Laparoscopic Cholecystectomy",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD003429_pub5_data": {
+      "dataset_name": "CD003429_pub5_data",
+      "cd_number": "CD003429",
+      "pico": {
+        "P": "Country: Italy Participants: previously untreated boys with severe hemophilia A ",
+        "I": "Clotting factor prophylaxis",
+        "C": "episodic treatment in previously untreated or minimally treated children with he",
+        "O": "Annualized joint bleeding rates",
+        "group_name": "Clotting factor prophylaxis compared to episodic treatment in previously untreated or minimally treated children with hemophilia A or B with no proven joint damage"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 24,
+        "n_returned": 24,
+        "sample": [
+          {
+            "nctId": "NCT01233258",
+            "title": "A Phase II/III, Randomized, Cross-over, Open-label Trial to Demonstrate Superiority of Prophylaxis Over On-demand Therapy in Previously Treated Subjects With Severe Hemophilia A Treated With Plasma Protein-free Recombinant FVIII Formulated With Sucrose (BAY 81-8973)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT03315455",
+            "title": "A Randomized, Multicenter, Open-Label, Phase III Clinical Trial to Evaluate the Efficacy, Safety, and Pharmacokinetics of Prophylactic Emicizumab Versus No Prophylaxis in Hemophilia A Patients",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04303559",
+            "title": "Multicenter, Randomized Phase III Inhibitor Prevention Trial, Comparing Eloctate vs. Emicizumab to Prevent Inhibitor Formation in Severe Hemophilia A",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT02196207",
+            "title": "Phase III INHIBIT Platform: Prevention Trial, Eloctate vs Emicizumab to Prevent Inhibitors; Eradication Trial: Eloctate Immune Tolerance (ITI) Plus Emicizumab vs vs Eloctate ITI Alone to Eradicate Inhibitors in Severe Hemophilia A",
+            "status": "WITHDRAWN"
+          },
+          {
+            "nctId": "NCT02622321",
+            "title": "A Randomized, Multicenter, Open-Label, Phase III Clinical Trial to Evaluate the Efficacy, Safety, and Pharmacokinetics of Prophylactic Emicizumab Versus no Prophylaxis in Hemophilia A Patients With Inhibitors",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 5,
+        "n_pmids": 5,
+        "error": null
+      }
+    },
+    "CD006140_pub3_data": {
+      "dataset_name": "CD006140_pub3_data",
+      "cd_number": "CD006140",
+      "pico": {
+        "P": "51 adults with HIV infection and opioid use disorder (n = 16), alcohol use disor",
+        "I": "Sustained-release naltrexone",
+        "C": "opioid agonist treatment",
+        "O": "Any illicit opioid use (urine drug screen)",
+        "group_name": "Sustained-release naltrexone vs opioid agonist treatment"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 7,
+        "n_returned": 7,
+        "sample": [
+          {
+            "nctId": "NCT00456521",
+            "title": "A Multicenter, Randomized, Double-Blind, Placebo-Controlled Study Comparing the Safety and Efficacy of Naltrexone Sustained Release (SR)/Bupropion SR and Placebo in Subjects With Obesity Participating in a Behavior Modification Program",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00474630",
+            "title": "A Multicenter, Randomized, Double Blind, Placebo Controlled Study Comparing the Safety and Efficacy of Naltrexone 32 mg Sustained Release (SR)/Bupropion 360 mg Sustained Release (SR) and Placebo in Obese Subjects With Type 2 Diabetes Mellitus",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00567255",
+            "title": "A Multicenter, Randomized, Double Blind, Placebo Controlled Study Comparing the Safety and Efficacy of Naltrexone Sustained Release (SR)/Bupropion Sustained Release (SR) and Placebo in Obese Subjects",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00758966",
+            "title": "A Proof-of-Concept, Multicenter, Randomized, Double-Blind, Parallel Study of Naltrexone Sustained-Release (SR) and/or Fluoxetine Therapy in the Treatment of Subjects With Obsessive-Compulsive Disorder (OCD)",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT01764386",
+            "title": "A Multicenter, Randomized, Open-Label, Controlled, Method-of-Use Study Assessing the Effect of Naltrexone Sustained Release (SR)/Bupropion SR on Body Weight and Cardiovascular Risk Factors in Overweight and Obese Subjects (The Ignite Study)",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD013781_pub2_data": {
+      "dataset_name": "CD013781_pub2_data",
+      "cd_number": "CD013781",
+      "pico": {
+        "P": "N randomised: 60 N lost to follow-up or withdrawn: 0 N analysed: 60 Mean age (ye",
+        "I": "Comparison 1: Amrinone",
+        "C": "placebo",
+        "O": "Secondary outcome: cardiac index (postoperative nadir)",
+        "group_name": "Comparison 1: Amrinone versus placebo"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD011381_pub3_data": {
+      "dataset_name": "CD011381_pub3_data",
+      "cd_number": "CD011381",
+      "pico": {
+        "P": "Age: 19 to 60 years",
+        "I": "",
+        "C": "",
+        "O": "Comparisons for relapse (12 months) ",
+        "group_name": "Treatment efficacy (primary outcomes): pairwise comparisons"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 781,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD013590_pub2_data": {
+      "dataset_name": "CD013590_pub2_data",
+      "cd_number": "CD013590",
+      "pico": {
+        "P": "\"Homozygous SCA or Sb0-thalassaemia adult patients regularly attending the Hered",
+        "I": "L-glutamine with hydroxyurea",
+        "C": "placebo with hydroxyurea",
+        "O": "Frequency of crisis (mean number of pain crises)",
+        "group_name": "L-glutamine with hydroxyurea versus placebo with hydroxyurea"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD013539_pub2_data": {
+      "dataset_name": "CD013539_pub2_data",
+      "cd_number": "CD013539",
+      "pico": {
+        "P": "Total number of participants recruited: 160 Total number of participants: 109 Me",
+        "I": "Bevacizumab biosimilar",
+        "C": "originator",
+        "O": "Progression-free survival",
+        "group_name": "Bevacizumab biosimilar compared to originator"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 16,
+        "n_returned": 16,
+        "sample": [
+          {
+            "nctId": "NCT04238663",
+            "title": "A Randomised, Double Blind, Three-Arm, Single Dose, Parallel Study To Compare the Pharmacokinetics, Safety and Immunogenicity of MB02 (Bevacizumab Biosimilar Drug), US Licenced Avastin® and EU Approved Avastin® in Healthy Male Volunteers",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02069704",
+            "title": "Open Label Randomized Bioequivalence Study to Evaluate the Pharmacokinetic and Safety Profile of Bevacizumab Biosimilar (BEVZ92) vs Bevacizumab (AVASTIN®), Both With FOLFOX or FOLFIRI, in First-line Treatment for mCRC Patients",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02754882",
+            "title": "A Phase 3, Randomised, Double-blind Study to Compare the Efficacy, Safety, PK and Immunogenicity Between SB8 (Proposed Bevacizumab Biosimilar) and Avastin® in Subjects With Metastatic or Recurrent Non-squamous Non-small Cell Lung Cancer",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05427305",
+            "title": "Bevacizumab Biosimilar Candidate TAB008 Compared to Avastin® in Patients With Locally Advanced, Metastatic EGFR Wild-type Non-squamous Non-small Cell Lung Cancer: a Randomized, Double-blind, Multicenter Study",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06860490",
+            "title": "Sintilimab Plus Bevacizumab Biosimilar with or Without HAIC for Advanced Hepatocellular Carcinoma (TASK-03): a Multicenter, Randomized, Phase 2 Study",
+            "status": "RECRUITING"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 19,
+        "n_pmids": 19,
+        "error": null
+      }
+    },
+    "CD013823_pub2_data": {
+      "dataset_name": "CD013823_pub2_data",
+      "cd_number": "CD013823",
+      "pico": {
+        "P": "Included: 366 pregnant women aged ≥ 18 years who presented for antenatal care ≤ ",
+        "I": "Vitamin B12 supplementation",
+        "C": "placebo or no vitamin B12 supplementation",
+        "O": "Maternal anaemia",
+        "group_name": "Vitamin B12 supplementation versus placebo or no vitamin B12 supplementation"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 38,
+        "n_returned": 38,
+        "sample": [
+          {
+            "nctId": "NCT00710138",
+            "title": "Cobalamin Status in Young Children With Developmental Delay and Regression",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06885827",
+            "title": "Interventional Vitamin Mix Glaucoma Study (IVMGS) - A Prospective, Randomized, Two-Arm, Single-Center Study Protocol in Existing Glaucoma Patients.",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT06443593",
+            "title": "Vitamin B12, Vitamin D and Iron Supplementation for Improvement of Nerve Conduction Velocities in Children and Youth With Type 1 Diabetes",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT07341789",
+            "title": "Effects of Supplementation With a New Formulation of Vitamin B12, Natural Orange Extract and a Combination of Both on Physical and Mental Performance.",
+            "status": "ENROLLING_BY_INVITATION"
+          },
+          {
+            "nctId": "NCT01238926",
+            "title": "Effects of Vitamin Supplementation and Strength Training in Parkinson's Disease",
+            "status": "UNKNOWN"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 8,
+        "n_pmids": 8,
+        "error": null
+      }
+    },
+    "CD013042_pub2_data": {
+      "dataset_name": "CD013042_pub2_data",
+      "cd_number": "CD013042",
+      "pico": {
+        "P": "Number of participants Number of participants assessed for eligibility not repor",
+        "I": "Manual therapy",
+        "C": "placebo manual therapy",
+        "O": "Mean pain (0 to 10, 0 is no pain)",
+        "group_name": "Manual therapy versus placebo manual therapy"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 693,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT06435364",
+            "title": "Investigation of the Effect of Instrument Supported Cervical Manual Therapy Methods and Vagus Nerve Stimulation in Patients With Nonspecific Neck Pain",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06460532",
+            "title": "Effects of Diaphragm Manual Therapy Versus Sustained Natural Apophyseal Glide on Pain, Range of Motion and Functional Disability in Patients With Mechanical Neck Pain",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT03781609",
+            "title": "A Motor Learning Approach to Wheelchair Propulsion Training for Manual Wheelchair Users With SCI",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02036905",
+            "title": "Comparing the Early Use of Cervical/Upper Thoracic Mobilization and Manipulation for Individuals With Mechanical Neck Pain.",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04880954",
+            "title": "Soft Tissue Mobilization and Rehabilitation on Pain and Physical Functioning for Non-Specific Chronic Knee Pain: A Randomized Clinical Trail",
+            "status": "UNKNOWN"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD004661_pub4_data": {
+      "dataset_name": "CD004661_pub4_data",
+      "cd_number": "CD004661",
+      "pico": {
+        "P": "Setting characteristic: community or primary care population Inclusion criteria:",
+        "I": "Vitamin A",
+        "C": "placebo",
+        "O": "The number of acute URTIs over 2 weeks",
+        "group_name": "Vitamin A versus placebo"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 1184,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT01007799",
+            "title": "A Randomized, Clinical Trial of a Novel Immunotherapy for Chronic Sinusitis: Vitamin D",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04307784",
+            "title": "The Effects of Vitamin D3 Supplementation Alone and in a Combination With Omega-3 on the Association of C-peptide With Glycemic Control; A Randomized Controlled Trial in People With Vitamin D Deficiency",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05802433",
+            "title": "Effects of VDR rs7311856, GC rs2282679 and CYP2R1 rs2060793 Variants on Vitamin D Status: A Randomised Control Trial",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT01922843",
+            "title": "A Phase 2B, Double-blind, Randomized, Placebo-controlled, Proof-of-concept Study of an Oral Vitamin D Compound (DP001) in Secondary Hyperparathyroidism in Patients on Hemodialysis",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT03938584",
+            "title": "The Effect of Vitamin C on Wound Healing In Mandibular Fracture Patients: A Double Blind, Placebo-controlled Randomized Clinical Trial",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD015701_pub2_data": {
+      "dataset_name": "CD015701_pub2_data",
+      "cd_number": "CD015701",
+      "pico": {
+        "P": "INCLUSION CRITERIA To be eligible for the study a woman must have met all of the",
+        "I": "DMPA injection",
+        "C": "copper IUD in women at risk of HIV",
+        "O": "HIV acquisition",
+        "group_name": "DMPA injection compared to copper IUD in women at risk of HIV"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 4,
+        "n_returned": 4,
+        "sample": [
+          {
+            "nctId": "NCT03255941",
+            "title": "'A Randomized Controlled Trial of Safety and Effectiveness of Depo Provera Intramuscular and Subcutaneous Administration Comparing Lay Lady Health Workers With Clinically-trained Family Welfare Workers in Pakistan",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06100783",
+            "title": "Depot-medroxy Progesterone Acetate Injectable Contraceptives in Lactating Women 1st Week Versus 6 Week Postpartum Initiation",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02732418",
+            "title": "A Study to Evaluate Suppression of Ovulation Following a Single Subcutaneous Administration of Various Doses of Depo-Provera CI",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02293694",
+            "title": "A 12-month Open-label Randomized Controlled Trial to Evaluate Sayana® Press Suitability for at Home Subcutaneous Self-injection Procedures in Adult Women",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 15,
+        "n_pmids": 15,
+        "error": null
+      }
+    },
+    "CD015014_pub2_data": {
+      "dataset_name": "CD015014_pub2_data",
+      "cd_number": "CD015014",
+      "pico": {
+        "P": "Number of participants: 60&nbsp",
+        "I": "Uncut Roux-en-Y reconstruction",
+        "C": "Billroth II reconstruction",
+        "O": "Major postoperative complications",
+        "group_name": "Uncut Roux-en-Y reconstruction versus Billroth II reconstruction"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 2,
+        "n_returned": 2,
+        "sample": [
+          {
+            "nctId": "NCT03349398",
+            "title": "Uncut Roux-en-Y vs Roux-en-Y Reconstruction After Distal Gastrectomy for Gastric Cancer",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT02694081",
+            "title": "The Advantages and Disadvantages Between Uncut Roux-en-Y Reconstruction",
+            "status": "UNKNOWN"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD004992_pub4_data": {
+      "dataset_name": "CD004992_pub4_data",
+      "cd_number": "CD004992",
+      "pico": {
+        "P": "Setting: tertiary care hospital Number randomised: 64 Inclusion criteria Age 20–",
+        "I": "Excisional surgery",
+        "C": "ablative surgery in the management of ovarian endometrioma by laparoscopy",
+        "O": "Recurrence of pelvic pain",
+        "group_name": "Excisional surgery versus ablative surgery in the management of ovarian endometrioma by laparoscopy"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 968,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT01271192",
+            "title": "A Randomized Multicenter Clinical Trial of Direct Surgical Resection Compared to Neoadjuvant Followed by Surgical Resection in Treating Patients With Operable Local Recurrent Carcinoma Of The Rectum",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT03220009",
+            "title": "A Randomized Phase II Trial of Adjuvant Nivolumab or Expectant Observation Following Neoadjuvant Ipilimumab Plus Nivolumab and Surgical Resection of High-Risk Localized, Locoregionally Advanced, or Recurrent Mucosal Melanoma",
+            "status": "WITHDRAWN"
+          },
+          {
+            "nctId": "NCT04224116",
+            "title": "Tranexamic Acid Contribution in the Prevention of Perioperative Bleeding in Pulmonary Resection Surgery",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02647047",
+            "title": "Spinal Analgesia Versus Epidural Analgesia in Minor Laparotomic Liver Surgery in an Enhanced Recovery Programme: A Randomized Controlled Trial",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT00644176",
+            "title": "A Randomized, Open Label, Clinical Trial of the Pharmacokinetics of Azithromycin in Serum, Bronchial Washings and Lung Tissue Following a Single Dose of Azithromycin Sustained Release (2 Gram) or Commercial Azithromycin Tablet (500 mg) to Cancer Patients That Require Lung Resection",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 1,
+        "n_pmids": 1,
+        "error": null
+      }
+    },
+    "CD014967_pub2_data": {
+      "dataset_name": "CD014967_pub2_data",
+      "cd_number": "CD014967",
+      "pico": {
+        "P": "Neonates with seizures, diagnosis based on clinical examination",
+        "I": "Phenobarbital",
+        "C": "levetiracetam as first-line ASM for EEG-confirmed neonatal seizures",
+        "O": "Proportion of infants who achieve seizure control after the first loading dose of ASM",
+        "group_name": "Phenobarbital versus levetiracetam as first-line ASM for EEG-confirmed neonatal seizures"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 20,
+        "n_returned": 20,
+        "sample": [
+          {
+            "nctId": "NCT03025906",
+            "title": "Phenobarbital Versus Valproate for Generalized Convulsive Status Epilepticus in Adults: A Prospective Randomized Controlled Trial in China",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT04320940",
+            "title": "A Randomized, Double-Blind, Controlled Study to Assess the Efficacy and Safety of Intravenous Phenobarbital in Neonatal Seizures",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT03670160",
+            "title": "Clonidine Versus Phenobarbital as Adjunctive Therapy for Neonatal Abstinence Syndrome",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01284556",
+            "title": "An International, Double-blind, Parallel-group, Placebo-controlled, Randomized Study: Evaluation of the Efficacy and Safety of Phenobarbital as Adjunctive Therapy in Participants (> or = 17 to 70 Years Old) With Partial Onset Seizures",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01723722",
+            "title": "Treatment of Neonatal Abstinence Syndrome: Evaluation of Efficacy of Phenobarbital in Combination With Either Methadone or Diluted Deodorized Tincture of Opium as Stabilizing and Tapering Regiments",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD009535_pub3_data": {
+      "dataset_name": "CD009535_pub3_data",
+      "cd_number": "CD009535",
+      "pico": {
+        "P": "Baseline characteristics HHD Mean age: 47 years Male: 80% Mean education: 16 yea",
+        "I": "Home",
+        "C": "in-centre haemodialysis",
+        "O": "Cardiovascular death",
+        "group_name": "Home versus in-centre haemodialysis"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 3490,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT06049914",
+            "title": "Combined Exercise and Nutrition Intervention for Possible Sarcopenia Among Community-dwelling Older Adults in Primary Care: A Randomized Controlled Trial",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT07330635",
+            "title": "Constructing a Holistic Care New Model for Chronic Wounds and Blood Circulation Detection to Enhance Home Care Quality",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT03038126",
+            "title": "Care Coordination/Telehealth to Address Patient Safety and Poor Outcomes in CKD",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT03501108",
+            "title": "Medication Rationalization for Older People Awaiting Long-term Nursing Home Care: a Randomized Controlled Trial Using the STOPPfrail Criteria",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT02790047",
+            "title": "Effect of Home-base Exercise Program With a Conical Positive Expiratory Pressure Device on Physical Performance and Health Related Quality of Life in Patients With Chronic Obstructive Pulmonary Disease",
+            "status": "UNKNOWN"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 107,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD004417_pub6_data": {
+      "dataset_name": "CD004417_pub6_data",
+      "cd_number": "CD004417",
+      "pico": {
+        "P": "129 adults and children with the common cold presenting to primary care services",
+        "I": "",
+        "C": "",
+        "O": "Number of participants with pain on days 3 to 6: delayed versus immediate antibiotics",
+        "group_name": "Pain"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD013456_pub2_data": {
+      "dataset_name": "CD013456_pub2_data",
+      "cd_number": "CD013456",
+      "pico": {
+        "P": "Baseline characteristics Other psychosocial interventions (telephonic psychosoci",
+        "I": "Psychosocial interventions",
+        "C": "inactive control",
+        "O": "Psychosocial interventions versus inactive control; outcome 1: PTSD symptoms, post-treatment",
+        "group_name": "Psychosocial interventions versus inactive control"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 684,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT05627206",
+            "title": "The Impact of PM+For Moms Intervention on Improving Mother's Mental Health in Zambia (PM+FM)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT07115186",
+            "title": "Enhancing Stress Resilience and Coping Skills Among Adolescents in Rural China Through School-Based Psychological Interventions: A Cluster Randomized Controlled Trial",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT01464463",
+            "title": "The Impact of Psychological Interventions (With and Without Exercise) on Psychometric and Immunological Measures in Patients With Major Depression",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01315028",
+            "title": "A Pilot Randomised Controlled Trial of Cognitive Behaviour Therapy for Early Bipolar Disorder",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05528536",
+            "title": "Investigation of the Effect of Acceptance and Commitment Therapy and Exercise in Older Adults With Chronic Pain: A Randomized Controlled Trial",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 3,
+        "n_pmids": 3,
+        "error": null
+      }
+    },
+    "CD009752_pub3_data": {
+      "dataset_name": "CD009752_pub3_data",
+      "cd_number": "CD009752",
+      "pico": {
+        "P": "Inclusion criteria: children undergoing planned radical correction of interventr",
+        "I": "Restrictive transfusion-trigger",
+        "C": "liberal transfusion-trigger",
+        "O": "All-cause mortality: short term (0 to 30 days post surgery)",
+        "group_name": "Restrictive transfusion-trigger versus liberal transfusion-trigger"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 2,
+        "n_returned": 2,
+        "sample": [
+          {
+            "nctId": "NCT06718439",
+            "title": "Threshold for Operative and Postoperative Hemoglobin Trigger for Red Blood Cell Transfusion: A Pilot Randomized Controlled Trial (TOPGUN-Pilot)",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT02761564",
+            "title": "Restrictive Transfusion Strategy Early After Cardiac Surgery",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD006919_pub5_data": {
+      "dataset_name": "CD006919_pub5_data",
+      "cd_number": "CD006919",
+      "pico": {
+        "P": "Couples with all causes of infertility (unexplained: 20%, male factor: 7%, endom",
+        "I": "Long",
+        "C": "short protocol",
+        "O": "Live birth/ongoing pregnancies primary analysis",
+        "group_name": "Long versus short protocol"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 4030,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT00248157",
+            "title": "An Open-label Extension Study to Evaluate the Long-term Safety and Tolerability of Octreotide Acetate in Microspheres in the Therapy of Patients With Moderately Severe or Severe Non-proliferative Diabetic Retinopathy (NPDR) or Low Risk Proliferative Diabetic Retinopathy (PDR)",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT02679508",
+            "title": "Vonoprazan Study In Patients With Erosive Esophagitis to Evaluate Long-term Safety: A Study to Evaluate the Safety of Long-term Administration of Vonoprazan in Maintenance Treatment in Patients With Erosive Esophagitis (EE)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT03100240",
+            "title": "The Preliminary Mechanism Study of Modified Utral-long Protocol in Improving Endometrial Receptivity in Patients With PCOS and Insulin Resistance",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT05247047",
+            "title": "A Post-market Cluster Randomized Controlled Trial of the Effect of the TENA SmartCare Change Indicator on Continence Care Efficiency and Skin Health in Long Term Care Facilities",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05227976",
+            "title": "Short- and Long-term Effects of Patient Education With or Without Physical Training or Mindfulness and Medical Yoga in Patients With Established Spinal Osteoporosis",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 5,
+        "n_pmids": 5,
+        "error": null
+      }
+    },
+    "CD001155_pub3_data": {
+      "dataset_name": "CD001155_pub3_data",
+      "cd_number": "CD001155",
+      "pico": {
+        "P": "Base case",
+        "I": "Alendronate 10 mg/day",
+        "C": "Placebo",
+        "O": "Clinical vertebral fractures",
+        "group_name": "Alendronate 10 mg/day vs Placebo - Base case"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 77,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT00973609",
+            "title": "Randomized Three Arm Phase III Trial on Induction Treatment With a Fluoropyrimidine-, Oxaliplatin- and Bevacizumab-based Chemotherapy for 24 Weeks Followed by Maintenance Treatment With a Fluoropyrimidine and Bevacizumab vs. Bevacizumab Alone vs. no Maintenance Treatment and Reinduction in Case of Progression for First-line Treatment of Patients With Metastatic Colorectal Cancer",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00336388",
+            "title": "Introduction of Malaria Rapid Diagnostic Tests, Artemisinin-based Combination Therapy, and Malaria Case Management Guidelines at Health Facilities in Kenya: A Cluster Randomized Trial to Evaluate Adherence and Acceptance by Health Care Workers, Impact on Antimalarial Prescription Practices, and Patient Perceptions",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05384028",
+            "title": "Effects of Nurse-led Case Management Based on Multidisciplinary Collaboration in the Whole Course Prevention and Control of Acute Myocardial Infarction",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT06321315",
+            "title": "The Effect of Case-based Teaching on Critical Thinking Motivation, Motivation and Knowledge Acquisition in Midwifery Undergraduate Students",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05504824",
+            "title": "The Effect of Case-Based Education on the Development of Nursing Students' Clinical Reasoning Skills in Critical Illness: A Pilot Randomized Controlled Trial",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 10,
+        "n_pmids": 10,
+        "error": null
+      }
+    },
+    "CD014937_pub2_data": {
+      "dataset_name": "CD014937_pub2_data",
+      "cd_number": "CD014937",
+      "pico": {
+        "P": "Study characteristics Inclusion criteria: children 1 month to 12 years diagnosed",
+        "I": "",
+        "C": "",
+        "O": "Acute kidney injury",
+        "group_name": "Prevention"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 1796,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD015064_pub2_data": {
+      "dataset_name": "CD015064_pub2_data",
+      "cd_number": "CD015064",
+      "pico": {
+        "P": "long-term",
+        "I": "",
+        "C": "",
+        "O": "Pimecrolimus 1% versus vehicle",
+        "group_name": "Investigator Global Assessment (binary) - long-term"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 2716,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT00248157",
+            "title": "An Open-label Extension Study to Evaluate the Long-term Safety and Tolerability of Octreotide Acetate in Microspheres in the Therapy of Patients With Moderately Severe or Severe Non-proliferative Diabetic Retinopathy (NPDR) or Low Risk Proliferative Diabetic Retinopathy (PDR)",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT02679508",
+            "title": "Vonoprazan Study In Patients With Erosive Esophagitis to Evaluate Long-term Safety: A Study to Evaluate the Safety of Long-term Administration of Vonoprazan in Maintenance Treatment in Patients With Erosive Esophagitis (EE)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05247047",
+            "title": "A Post-market Cluster Randomized Controlled Trial of the Effect of the TENA SmartCare Change Indicator on Continence Care Efficiency and Skin Health in Long Term Care Facilities",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05227976",
+            "title": "Short- and Long-term Effects of Patient Education With or Without Physical Training or Mindfulness and Medical Yoga in Patients With Established Spinal Osteoporosis",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT03501108",
+            "title": "Medication Rationalization for Older People Awaiting Long-term Nursing Home Care: a Randomized Controlled Trial Using the STOPPfrail Criteria",
+            "status": "UNKNOWN"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 13,
+        "n_pmids": 13,
+        "error": null
+      }
+    },
+    "CD015462_pub2_data": {
+      "dataset_name": "CD015462_pub2_data",
+      "cd_number": "CD015462",
+      "pico": {
+        "P": "Indication : treatment of apnea 20 infants enrolled: caffeine: 10, theophylline:",
+        "I": "Caffeine",
+        "C": "other methylxanthines",
+        "O": "All-cause mortality prior to hospital discharge",
+        "group_name": "Caffeine versus other methylxanthines"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 378,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT02524249",
+            "title": "A Randomized Double Blind Controlled Trial of Early Versus Late Caffeine for Extremely Low Birth Weight Newborns",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT03360903",
+            "title": "A Randomized, Double-Blinded, Placebo-Controlled Study to Determine if Caffeine Citrate Accelerates Emergence From Anesthesia",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01815203",
+            "title": "Does Caffeine Consumption Improve Response Inhibition to Food Cues?",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04616859",
+            "title": "Combination of Alcohol and Energy Drinks in a Binge Drinking Pattern: Acute Effects and Gender Differences",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT00826280",
+            "title": "A Phase 3b, Multicenter, Randomized, Double-Blind, Placebo-Controlled Study to Evaluate the Effect of Caffeine Intake on Single Photon Emission Computed Tomography (SPECT) Myocardial Perfusion Imaging (MPI) in Subjects Administered Regadenoson",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD001552_pub3_data": {
+      "dataset_name": "CD001552_pub3_data",
+      "cd_number": "CD001552",
+      "pico": {
+        "P": "Details of sampling frame: Total n eligible = not reported Total n excluded pre-",
+        "I": "Surgery",
+        "C": "splint",
+        "O": "Clinical improvement at short-term follow-up: 3 months or less",
+        "group_name": "Surgery versus splint"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 21250,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT05521100",
+            "title": "Comparison of Safety and Efficacy Between the Application of Vascular Closure Device and Conventional Figure-of-eight Suture in Transvenous Cardiac Interventional Surgery",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT04992507",
+            "title": "The Impact of Total Intravenous Anesthesia Following Cancer Surgery (TIVACS) Study",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT00998907",
+            "title": "Pathway Driven Study to Evaluate the Incidence of Wound Infections and Incisional Hernias After Laparotomy and Fascial Closure With PDS*Plus Sutures",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01271192",
+            "title": "A Randomized Multicenter Clinical Trial of Direct Surgical Resection Compared to Neoadjuvant Followed by Surgical Resection in Treating Patients With Operable Local Recurrent Carcinoma Of The Rectum",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT04393636",
+            "title": "Randomized Controlled Trial of Digital Cardiac Counseling in Patients With Delayed Cardiac Surgical Treatment Due to Covid-19 Pandemic (DCC Trial)",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 5477,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD011885_pub2_data": {
+      "dataset_name": "CD011885_pub2_data",
+      "cd_number": "CD011885",
+      "pico": {
+        "P": "Diagnosis: schizophrenic disorder (SCID-I)",
+        "I": "Switching",
+        "C": "continuation of antipsychotics for people with non-responsive schizophrenia",
+        "O": "Clinically relevant response, as defined by study authors",
+        "group_name": "Switching versus continuation of antipsychotics for people with non-responsive schizophrenia"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 320,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT01597934",
+            "title": "A Randomized, Multicenter, Prospective Study to Compare Antiviral Efficacy and Safety of Switching to ETV Plus TDF Versus Maintaining LAM/LDT Plus ADF Combination in CHC With PVR to LAM/LDF Plus ADF Combination Rescue Therapy for YMDD Mutation",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT01702207",
+            "title": "A One-Year, Prospective, Randomized, Controlled Study Evaluating The Efficacy Of Switching From The Twice Daily Tacrolimus Formulation To The Extended Release, Once Daily Formulation To Reduce The Framingham Cardiovascular Risk Scores.",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06972732",
+            "title": "A Randomized, Open-label, Active-controlled, Parallel, Multicenter, Phase IV Clinical Trial to Compare the Efficacy and Safety of Switching Metformin+SGLT2-i+Dipeptidyl Peptidase-4-inhibitor(DPP-4-i) to Metformin+SGLT2-i+TZD in Patients With Type 2 Diabetes",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT06691191",
+            "title": "Switching From Dual Antiplatelet Therapy to Monotherapy With Potent P2Y12 Inhibitors: Pharmadodynamic Comparison Between Prasugrel and Ticagrelor Monotherapy. The Switching Antiplatelet -7 (SWAP-7) Study",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT00048035",
+            "title": "An Open-label, Multicenter, Randomized Study to Determine Dose Conversion Factors at Different Frequencies of Administration After Switching From Maintenance Treatment With Intravenous Epoetin Alfa to Maintenance Treatment With Intravenous RO0503821 in Hemodialysis Patients With Chronic Renal Anemia.",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD012642_pub2_data": {
+      "dataset_name": "CD012642_pub2_data",
+      "cd_number": "CD012642",
+      "pico": {
+        "P": "Inclusion criteria : healthy preterm infants weighing 1001 g to 1500 g Exclusion",
+        "I": "Early (< 7 days following birth) higher",
+        "C": "lower sodium intake",
+        "O": "Mortality (latest time reported up to hospital discharge)",
+        "group_name": "Early (< 7 days following birth) higher versus lower sodium intake"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD014960_pub2_data": {
+      "dataset_name": "CD014960_pub2_data",
+      "cd_number": "CD014960",
+      "pico": {
+        "P": "Mean age: experimental group: 35",
+        "I": "Antibiotics",
+        "C": "placebo or no intervention",
+        "O": "All-cause mortality",
+        "group_name": "Antibiotics versus placebo or no intervention"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 2287,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT07029932",
+            "title": "A Randomized, Double-blind, Placebo-controlled, Phase 1 Study of the Safety, Tolerability, and Pharmacokinetics of Single and Multiple Ascending Doses of BWC0977 in Healthy Adult Volunteers",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT05137314",
+            "title": "A Phase 1b Open-Label, Dose-Escalating Study to Evaluate the Safety and Tolerability of PLG0206 in Patients Undergoing Debridement, Antibiotics, and Implant Retention (DAIR) for Treatment of a Periprosthetic Joint Infection (PJI) Occurring After Total Knee Arthroplasty (TKA)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT03839485",
+            "title": "Endodontic Treatment of Primary Teeth With Guedes-Pinto Paste Without Antibiotic: Randomized Non-inferiority Clinical Trial",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04438187",
+            "title": "Trial of Antimicrobial Restraint in Presumed Pneumonia",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02171338",
+            "title": "Procalcitonin as a Marker of Antibiotic Therapy in Patients With Lower Respiratory Tract Infections. Can Measurement of Procalcitonin Reduce the Use of Antibiotics?",
+            "status": "UNKNOWN"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 260,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD014666_pub2_data": {
+      "dataset_name": "CD014666_pub2_data",
+      "cd_number": "CD014666",
+      "pico": {
+        "P": "Country: Sweden n = 175, at-home sessions Female: 70% Mean age (years): 83 (SD 4",
+        "I": "",
+        "C": "",
+        "O": "Fear of falling: subgrouped according to intervention approach",
+        "group_name": "Fear of falling: immediate postintervention"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD011762_pub2_data": {
+      "dataset_name": "CD011762_pub2_data",
+      "cd_number": "CD011762",
+      "pico": {
+        "P": "Diagnosis: scheduled to TKR (unilateral/bilateral) or revision of knee prosthesi",
+        "I": "Direct factor Xa inhibitors",
+        "C": "LMWHs",
+        "O": "All-cause mortality",
+        "group_name": "Direct factor Xa inhibitors versus LMWHs"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 27,
+        "n_returned": 27,
+        "sample": [
+          {
+            "nctId": "NCT05189002",
+            "title": "A Multicenter Randomized Double-blind Placebo-controlled Prospective Study to Evaluate the Safety and Efficacy of the Direct Factor Xa Inhibitor Dimolegin (DD217) in Prevention of Venous Thromboembolic Complications During Knee Replacement",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT01442792",
+            "title": "Prospective, Multi-center, Randomized, Heparin-controlled Dose-finding Trial to Evaluate the Efficacy and Safety of Rivaroxaban, a Direct Factor Xa Inhibitor, on the Background of Standard Dual Antiplatelet Therapy to Support Elective Percutaneous Coronary Intervention",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05472766",
+            "title": "Pilot Randomized Controlled Trial of Anticoagulation Therapy Timing in Atrial Fibrillation After Acute and Chronic Subdural Hematoma (ATTAACH)",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT00839163",
+            "title": "ODIXa-DVTA Prospective, Randomized, Multinational, Multicenter, Partially Blinded, Parallel-group, Open-label Active Comparator Controlled Phase II Dose Finding and Proof of Principle Trial.",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05156983",
+            "title": "A Phase 3, Prospective, Randomized, Open-label, Adaptive Group Sequential, Multicenter Trial With Blinded Endpoint Assessment to Evaluate the Efficacy and Safety of TAK-330 for the Reversal of Direct Oral Factor Xa Inhibitor-induced Anticoagulation in Patients Requiring Urgent Surgery/Invasive Procedure",
+            "status": "RECRUITING"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 80,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD014594_pub2_data": {
+      "dataset_name": "CD014594_pub2_data",
+      "cd_number": "CD014594",
+      "pico": {
+        "P": "Patients referred for diagnostic and therapeutic transarterial procedures at a s",
+        "I": "",
+        "C": "",
+        "O": "First-pass success",
+        "group_name": "First-pass success"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 157,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD012079_pub2_data": {
+      "dataset_name": "CD012079_pub2_data",
+      "cd_number": "CD012079",
+      "pico": {
+        "P": "Inclusion criteria: stage 2-3 cystocele and SUI Exclusion criteria: detrusor ove",
+        "I": "Transvaginal permanent mesh",
+        "C": "native tissue repair",
+        "O": "Awareness of prolapse (0.5 to 7 years)",
+        "group_name": "Transvaginal permanent mesh versus native tissue repair"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD012693_pub3_data": {
+      "dataset_name": "CD012693_pub3_data",
+      "cd_number": "CD012693",
+      "pico": {
+        "P": "Age eligibility criteria: 18 to 40 years",
+        "I": "Anticipated low responders: higher",
+        "C": "lower dose",
+        "O": "Live birth or ongoing pregnancy",
+        "group_name": "Anticipated low responders: higher versus lower dose"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 795,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD015215_pub2_data": {
+      "dataset_name": "CD015215_pub2_data",
+      "cd_number": "CD015215",
+      "pico": {
+        "P": "Location: Canada, single centre Setting of recruitment and treatment: otolaryngo",
+        "I": "Ventilation tubes",
+        "C": "no treatment",
+        "O": "Return to normal hearing, randomised by ear (medium-term)",
+        "group_name": "Ventilation tubes versus no treatment"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 139,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT02607644",
+            "title": "Clinical Evaluation of Laryngeal Tube and Laryngeal Mask Airway for Cardiac Arrest Treatment in Emergency Ambulances in Singapore",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06857019",
+            "title": "Evaluating the Clinical Effectiveness of \"Endotracheal Tube Position Anomaly Alerting System\"",
+            "status": "NOT_YET_RECRUITING"
+          },
+          {
+            "nctId": "NCT03812718",
+            "title": "Anaesthesia Requirements for Ventilation With Endotracheal Tube Versus ProSeal Laryngeal Mask Airway During Automated Feedback-Loop Controlled Total Intravenous Anaesthesia in Patients Undergoing Laparoscopic Cholecystectomy: A Randomised Controlled Study",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT05395728",
+            "title": "Relationship Between Deflating the Tracheostomy Tube Cuff During Wean Mechanical Ventilation and Time for Decannulation",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT03871985",
+            "title": "Efficacy of Intermittent Subglottic Secretion Lavage Combined With Aspiration Preventing Ventilator Associated Pneumonia in Patients With Severe Neurological Disease：A Single-center Randomized Controlled Trial",
+            "status": "UNKNOWN"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD015854_data": {
+      "dataset_name": "CD015854_data",
+      "cd_number": "CD015854",
+      "pico": {
+        "P": "Number randomised: 20 (DM 9",
+        "I": "Rituximab",
+        "C": "placebo",
+        "O": "Achievement of definitions of improvement (assessed with IMACS DOI, measured at 8 weeks) ",
+        "group_name": "Rituximab versus placebo"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 629,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT00115700",
+            "title": "A Randomised Multicentre Trial of Involved Field Radiotherapy Versus Involved Field Radiotherapy Plus Chemotherapy in Combination With Rituximab (Mabthera®) for Stage I - II Low Grade Follicular Lymphoma",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06522555",
+            "title": "The Efficacy and Safety of Pola-ZR2 (Polatuzumab Vedotin, Zanubrutinib, Rituximab and Lenalidomide) Versus ZR2 (Zanubrutinib, Rituximab and Lenalidomide) in the Treatment of Old Patients With de Novo Diffuse Large B-cell Lymphoma: A Multicenter, Prospective, Randomized, Open-label, Controlled Trial",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT06482684",
+            "title": "Early Treatment Intensification in Patients With High Risk Mantle Cell Lymphoma Using CAR-T-cell Treatment After an Abbreviated Induction Therapy With Rituximab and Ibrutinib and 6 Months Ibrutinib Maintenance (Arm A) as Compared to Standard of Care Induction and Maintenance (Arm B)",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT05518383",
+            "title": "B-cell Mature Non-Hodgkin's Lymphoma Treatment Protocol in Children and Adolescents 2021 (B-NHL-M-2021)",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT00664599",
+            "title": "Effect of Rituximab in the Treatment of Resistant Ocular Inflammatory Lesions of Behcet's Disease (Pilot Study)",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD016211_data": {
+      "dataset_name": "CD016211_data",
+      "cd_number": "CD016211",
+      "pico": {
+        "P": "Inclusion criteria:&nbsp",
+        "I": "Azithromycin + Amoxicillin (Any antibiotic)",
+        "C": "Placebo",
+        "O": "Maternal sepsis",
+        "group_name": "Any antibiotic versus placebo"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 4,
+        "n_pmids": 4,
+        "error": null
+      }
+    },
+    "CD007639_pub3_data": {
+      "dataset_name": "CD007639_pub3_data",
+      "cd_number": "CD007639",
+      "pico": {
+        "P": "conventional versus conventional",
+        "I": "Tobramycin - conventional",
+        "C": "conventional",
+        "O": "Bronchoconstriction (sidestream versus Pari LC plus)",
+        "group_name": "Tobramycin - conventional versus conventional"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 1375,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT01212536",
+            "title": "Randomised Controlled Trial of the Airtraq Optical Laryngoscope and Conventional Laryngoscopy in Children",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06023849",
+            "title": "Trans Caesarean Intra Uterine Contraceptive Device Insertion Versus Conventional Postpartum 6 Weeks Insertion",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT07332585",
+            "title": "Efficacy of Piezosurgery Versus Conventional Osteotomy in Prelacrimal Approach Targeting Different Maxillary Sinus Pathologies: a Randomized Controlled Trial",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02462408",
+            "title": "A Prospective, Randomized Comparison Between Lateral and Posterior Approach In Ultrasound-Guided Parasagittal In-Plane Infraclavicular Brachial Plexus Block",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT07311785",
+            "title": "Accuracy of Maxillary Fixation Using Custom Plates on Nasal Buttress Only Via Minimally Invasive Approach Versus Custom Plates on Nasal and Zygomatic Buttresses Via Conventional Approach in Orthognathic Surgeries: A Randomized Controlled Trial.",
+            "status": "NOT_YET_RECRUITING"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD013332_pub2_data": {
+      "dataset_name": "CD013332_pub2_data",
+      "cd_number": "CD013332",
+      "pico": {
+        "P": "Adult patients undergoing cardiac surgery via full median sternotomy across 12 U",
+        "I": "Decolonisation",
+        "C": "no decolonisation (Comparison 1)",
+        "O": "SSI",
+        "group_name": "Decolonisation versus no decolonisation (Comparison 1)"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 7,
+        "n_returned": 7,
+        "sample": [
+          {
+            "nctId": "NCT05889351",
+            "title": "A Phase IIa, Randomised, Double-blind, Placebo-controlled Study to Evaluate the Efficacy, Safety and Tolerability of 3% LTX-109 Compared to Placebo for Nasal Decolonisation of Staphylococcus Aureus.",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06731881",
+            "title": "Leveraging Photodynamic Therapy to Inhibit Microorganisms - Assessing the Efficacy of Photodynamic Therapy for Preventing Surgical Site Infections in Nasal Surgery Patients: A Pilot Study",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT07180615",
+            "title": "Neomycine/Metronidazole- vs Rifaximin-based Gut Decolonisation Prior to Colon Surgery: a Randomized Multicenter Trial",
+            "status": "NOT_YET_RECRUITING"
+          },
+          {
+            "nctId": "NCT04767321",
+            "title": "A Phase I/IIa, Randomised, Double-blind, Placebo-controlled Study to Evaluate the Safety and Exploratory Efficacy of 3% LTX-109 Compared to Placebo for Nasal Decolonisation of Staphylococcus Aureus",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02208154",
+            "title": "RGNOSIS: Ecological Effects of Decolonisation Strategies in Intensive Care",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 2,
+        "n_pmids": 2,
+        "error": null
+      }
+    },
+    "CD016136_data": {
+      "dataset_name": "CD016136_data",
+      "cd_number": "CD016136",
+      "pico": {
+        "P": "effect",
+        "I": "Intravenous iron",
+        "C": "oral iron",
+        "O": "Hb level (three to six weeks after treatment start)",
+        "group_name": "Intravenous iron versus oral iron - effect"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 57,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT01519830",
+            "title": "Significance of Iron Deficiency in Transfusion Medicine: Effects of Iron Substitution on Fatigue Und General Well Being in Healthy Blood Donors",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04965961",
+            "title": "Plasma and Exosome Proteomic Changes Associated With Augmented Erythropoiesis and Muscle Contractions.",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT03191201",
+            "title": "A Double Blind Randomised Placebo-controlled Trial to Assess the Effect of a Single Administration of Ferric Carboxymaltose of 1000 mg Iron on Glucose Homeostasis, in Iron-deficient Non-anaemic Women of Childbearing Age.",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT03743103",
+            "title": "A Randomized, Exploratory, Open-label, Phase IV, Blinded Endpoint, Multicenter and Prospective Study to Evaluate the Effect of the Addition of Esmolol on the Current Therapeutic Regimen Used for the Treatment of Hemorrhagic Stroke",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT04976179",
+            "title": "Intravenous Versus Oral Iron for Iron Deficiency Anaemia in Pregnant Nigerian Women (IVON): an Open Label, Randomized Controlled Trial",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD006689_pub3_data": {
+      "dataset_name": "CD006689_pub3_data",
+      "cd_number": "CD006689",
+      "pico": {
+        "P": "142 HIV-positive pregnant women in South-West Nigeria Inclusion criteria HIV-inf",
+        "I": "Daily cotrimoxazole (CTXp) with any other drug regimen (mefloquine (MQ) or dihyd",
+        "C": "CTXp with or without placebo (current standard of care)",
+        "O": "Maternal peripheral parasitaemia at delivery (amplification techniques)",
+        "group_name": "Daily cotrimoxazole (CTXp) with any other drug regimen (mefloquine (MQ) or dihydroartemisinin-piperaquine (DHA-PPQ)) versus CTXp with or without placebo (current standard of care)"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": "HTTP Error 400: Bad Request"
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD013078_pub2_data": {
+      "dataset_name": "CD013078_pub2_data",
+      "cd_number": "CD013078",
+      "pico": {
+        "P": "Diagnosis: psychotic disorders (ICD-10) N = 109 Age: intervention: 38",
+        "I": "Post-incident  debriefing",
+        "C": "treatment as usual",
+        "O": "Further seclusion and restraint",
+        "group_name": "Post-incident  debriefing versus treatment as usual"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD014891_pub2_data": {
+      "dataset_name": "CD014891_pub2_data",
+      "cd_number": "CD014891",
+      "pico": {
+        "P": "Country: France Total number of participants (eyes): 60 (120) Average age (range",
+        "I": "Trifocal",
+        "C": "extended depth of focus (EDOF) intraocular lenses",
+        "O": "Uncorrected distance visual acuity worse than 6/6",
+        "group_name": "Trifocal compared with extended depth of focus (EDOF) intraocular lenses"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 23,
+        "n_returned": 23,
+        "sample": [
+          {
+            "nctId": "NCT03306355",
+            "title": "Clinical Study to Compare Clinical Outcomes of IOLs FineVision POD F GF (Hydrophobic) and FineVision POD F (Hydrophilic) After Bilateral Implantation in Asian Eyes",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04005651",
+            "title": "Post-Market Follow-up Clinical Trial to Investigate Safety and Efficacy of a Trifocal Intraocular Lens (IOL) POD L GF In Comparison With a Multifocal (TECNIS Symfony® Extended Range of Vision IOL) and a Monofocal (AcrySof® IQ Monofocal IOL)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04468022",
+            "title": "Toric Trifocal IOL Treatment With High Astigmatism and Hyperopia vs SMILE Enhancement After Trifocal IOL Treatment With High Astigmatism and Hyperopia",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT03226561",
+            "title": "Assessment of Near Vision Capacity in Different Light Conditions Following Bilateral Trifocal Intraocular Implantation",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT07008768",
+            "title": "Visual Outcome After Implantation of Three Different Presbyopia-correcting IOLs and Monofocal IOL",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD012152_pub4_data": {
+      "dataset_name": "CD012152_pub4_data",
+      "cd_number": "CD012152",
+      "pico": {
+        "P": "2149 infants were randomised (16 infants randomised in error)",
+        "I": "Dextrose gel",
+        "C": "control",
+        "O": "Hypoglycaemia",
+        "group_name": "Dextrose gel versus control"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 30,
+        "n_returned": 30,
+        "sample": [
+          {
+            "nctId": "NCT05669560",
+            "title": "Efficacy of Hydrogen Peroxide Gel on Periodontal Ststus and Metabolic Control in Diabetic Patients: a Randomized Control Trial",
+            "status": "WITHDRAWN"
+          },
+          {
+            "nctId": "NCT02984098",
+            "title": "40% Orally Administered Dextrose Gel is More Effective Than 25% Dextrose But Not Sufficiently Reliefs Acute Pain in Term Neonates: A Randomized Controlled Trial",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06469294",
+            "title": "Evaluation of Chlorhexidine Gel Associated with Photodynamic Therapy in the Treatment of Chronic Periodontitis in Type 2 Diabetics",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT03207607",
+            "title": "The Effect of Mid-Morning Gel Snacks on Subjective Appetite, Glycemic and Insulin Responses, and Food Intake in Healthy Adults",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00493051",
+            "title": "A Randomized, Double-Blind, Placebo-Controlled, Single- and Double-Dose, Comparator Arm (Standard of Care), Multicenter Phase 2b Study of Topical GAM501 (Ad5PDGF-B/Bovine Type I Collagen Gel) in the Treatment of Non-Healing Diabetic Ulcers of the Lower Extremities",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 21,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD013295_pub2_data": {
+      "dataset_name": "CD013295_pub2_data",
+      "cd_number": "CD013295",
+      "pico": {
+        "P": "Baseline characteristics Placebo arm Age (years) (mean SD) : 72 (7) Ethnicity : ",
+        "I": "",
+        "C": "",
+        "O": "Need for allogeneic blood transfusion (only trials included in the NMA)",
+        "group_name": "Results included in the network meta-analyses"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 2,
+        "n_pmids": 2,
+        "error": null
+      }
+    },
+    "CD014755_pub2_data": {
+      "dataset_name": "CD014755_pub2_data",
+      "cd_number": "CD014755",
+      "pico": {
+        "P": "Country: Iran Setting: Motahhari Teaching Hospital in the province of West Azerb",
+        "I": "Fertility-sparing surgical interventions without subsequent adjuvant chemotherap",
+        "C": "primary chemotherapy",
+        "O": "Number of chemotherapy cycles to remission",
+        "group_name": "Fertility-sparing surgical interventions without subsequent adjuvant chemotherapy versus primary chemotherapy"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD008628_pub3_data": {
+      "dataset_name": "CD008628_pub3_data",
+      "cd_number": "CD008628",
+      "pico": {
+        "P": "Total number of randomised participants: 82 Source population: multicentre, 5 tr",
+        "I": "Surgical",
+        "C": "non-surgical management",
+        "O": "Function in the long term; measured using AOFAS",
+        "group_name": "Surgical versus non-surgical management"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 21097,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT05521100",
+            "title": "Comparison of Safety and Efficacy Between the Application of Vascular Closure Device and Conventional Figure-of-eight Suture in Transvenous Cardiac Interventional Surgery",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT04992507",
+            "title": "The Impact of Total Intravenous Anesthesia Following Cancer Surgery (TIVACS) Study",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT00998907",
+            "title": "Pathway Driven Study to Evaluate the Incidence of Wound Infections and Incisional Hernias After Laparotomy and Fascial Closure With PDS*Plus Sutures",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01271192",
+            "title": "A Randomized Multicenter Clinical Trial of Direct Surgical Resection Compared to Neoadjuvant Followed by Surgical Resection in Treating Patients With Operable Local Recurrent Carcinoma Of The Rectum",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT04393636",
+            "title": "Randomized Controlled Trial of Digital Cardiac Counseling in Patients With Delayed Cardiac Surgical Treatment Due to Covid-19 Pandemic (DCC Trial)",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD013054_pub3_data": {
+      "dataset_name": "CD013054_pub3_data",
+      "cd_number": "CD013054",
+      "pico": {
+        "P": "Location: Iraq, 1 site Setting of recruitment and treatment: otolaryngology depa",
+        "I": "Topical antibiotics with steroids",
+        "C": "placebo",
+        "O": "Resolution of ear discharge 2 to 4 weeks",
+        "group_name": "Topical antibiotics with steroids versus placebo"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD004508_pub5_data": {
+      "dataset_name": "CD004508_pub5_data",
+      "cd_number": "CD004508",
+      "pico": {
+        "P": "Inclusion criteria: women scheduled for major abdominal gynaecologic surgery",
+        "I": "Early",
+        "C": "delayed oral fluids and food after major abdominal gynaecologic surgery",
+        "O": "Postoperative ileus",
+        "group_name": "Early versus delayed oral fluids and food after major abdominal gynaecologic surgery"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 6730,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT00827307",
+            "title": "The Effects of Adjuvant Zoladex Plus Tamoxifen on Breast Density in Pre- or Peri-menopausal Women With Early-stage Breast Cancer",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00115700",
+            "title": "A Randomised Multicentre Trial of Involved Field Radiotherapy Versus Involved Field Radiotherapy Plus Chemotherapy in Combination With Rituximab (Mabthera®) for Stage I - II Low Grade Follicular Lymphoma",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT06548971",
+            "title": "Safety and Efficacy of Treatment With Early Antiplatelet Administration After Intravenous Thrombolysis for Acute Ischemic Stroke (TREND-IVT): A Multicenter, Randomized, Placebo-controlled, Clinical Trial",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT03794544",
+            "title": "A Phase 2 Open-label, Multicenter, Randomized, Multidrug Platform Study of Neoadjuvant Durvalumab Alone or in Combination With Novel Agents in Subjects With Resectable, Early-stage (I [> 2 cm] to IIIA) Non-small Cell Lung Cancer (NeoCOAST)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04147104",
+            "title": "ecco2R to facilitatE earLy libEration From mechanicAl Ventilation inpatientS With Copd Acute Exacerbation",
+            "status": "UNKNOWN"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 122,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD003331_pub6_data": {
+      "dataset_name": "CD003331_pub6_data",
+      "cd_number": "CD003331",
+      "pico": {
+        "P": "N Randomised: 100 (exercise 50, control 50) Diagnosis (% of participants) Aetiol",
+        "I": "Exercise-based rehabilitation",
+        "C": "usual care",
+        "O": "All-cause mortality up to 12 months' follow-up",
+        "group_name": "Exercise-based rehabilitation versus usual care"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 219,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT07341633",
+            "title": "Efficacy of Artificial Intelligence-Based Digital Therapeutics Versus Traditional Schroth Exercises for Adolescent Idiopathic Scoliosis: A Randomized Controlled Trial",
+            "status": "NOT_YET_RECRUITING"
+          },
+          {
+            "nctId": "NCT06327412",
+            "title": "Effects of Hospital-Based Aerobic Exercise Therapy on Exercise Capacity, Body Composition, Functional Level and Quality of Life in Patients With Primary Lower Extremity Lymphedema; Prospective Randomized Controlled Single Blind Trial",
+            "status": "NOT_YET_RECRUITING"
+          },
+          {
+            "nctId": "NCT02757092",
+            "title": "The Efficacy of Home-Based Pulmonary Rehabilitation Training in Aged Patients With Lung Tumor After Video-assisted Thoracic Surgery:A Clinical Randomized Trial",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT05601947",
+            "title": "Investigation of the Effectiveness of Wii-Based Exercise Play Therapy in Knee",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02607787",
+            "title": "The Feasibility and Effects of a Home-based Walking and Strengthening Intervention on Physiological, Biochemical and Psychological Outcomes in Colo-rectal Cancer Survivors",
+            "status": "UNKNOWN"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 2,
+        "n_pmids": 2,
+        "error": null
+      }
+    },
+    "CD007895_pub3_data": {
+      "dataset_name": "CD007895_pub3_data",
+      "cd_number": "CD007895",
+      "pico": {
+        "P": "Baseline characteristics Placebo n : 12 Mean age (years) : 38 Male (n) : 0 Femal",
+        "I": "Adrenergic agonist oral decongestants (AAOD)",
+        "C": "placebo",
+        "O": "Systolic blood pressure, measured as change-from-baseline",
+        "group_name": "Adrenergic agonist oral decongestants (AAOD) versus placebo"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 0,
+        "n_pmids": 0,
+        "error": null
+      }
+    },
+    "CD007156_pub3_data": {
+      "dataset_name": "CD007156_pub3_data",
+      "cd_number": "CD007156",
+      "pico": {
+        "P": "Baseline characteristics Group I (hyaluronidase submucosal injection) Initial pa",
+        "I": "Any intervention",
+        "C": "placebo (< 3 months' follow-up)",
+        "O": "Interincisal distance (mm)",
+        "group_name": "Any intervention vs placebo (< 3 months' follow-up)"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 17,
+        "n_returned": 17,
+        "sample": [
+          {
+            "nctId": "NCT01704885",
+            "title": "A Cognitive- Behavioral Play Intervention for Siblings of Children Diagnosed With Cancer: A Pilot Study",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT02011230",
+            "title": "Pain Control as a Function of Hydration Status in the Post Tonsillectomy Patient.",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT05460039",
+            "title": "Technology-mediated Dance: Impact on Psychossocial, Physical, and Cognitive Functions of the Old",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02500836",
+            "title": "Phase III Topical Application of Cocaine HCl 4% Solution on Safety/Efficacy & Cocaine HCl 4% & 10% Solution on Safety in Local Anesthesia for Diagnostic Procedures & Surgeries on or Through Accessible Mucous Membranes of the Nasal Cavities",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00128024",
+            "title": "Effects of Early Statin Treatment on Symptomatic Heart Failure and Ischemic Events After Acute Myocardial Infarction. The MUSASHI-AMI: A Multicenter Randomized Controlled Trial",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 47,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD009298_pub3_data": {
+      "dataset_name": "CD009298_pub3_data",
+      "cd_number": "CD009298",
+      "pico": {
+        "P": "Inclusion criteria : women aged 18 years and above at least 37 weeks of gestatio",
+        "I": "Manual rotation",
+        "C": "no manual rotation",
+        "O": "Operative delivery",
+        "group_name": "Manual rotation versus no manual rotation"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 13,
+        "n_returned": 13,
+        "sample": [
+          {
+            "nctId": "NCT03048357",
+            "title": "Effectiveness of the Freedom Bed, Automatic Continuous Lateral Rotation Therapy System as Compared to a Standard Hospital Mattress With Manual Caregiver Turning Every 2 Hours for Prevention of Pressure Injuries in Persons With Limited Mobility Due to Traumatic Brain Injury and/or Spinal Cord Injury.",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT01250860",
+            "title": "Short-term Effects of the Simultaneous Use of Two Physiotherapeutic Methods in the Treatment of Adolescent Idiopathic Scoliosis - Pilot Study",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02695238",
+            "title": "Trial of Prophylactic Manual Rotation of Persistent Occiput Posterior Presentation During the Early Second Stage of Labor to Reduce Operative Delivery: a Prospective Multicenter Randomized Control Trial",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT04777370",
+            "title": "Are There Differences in Range of Motion, Glenohumeral Translation, and Rotator Cuff Activity Following Shoulder Mobilization, Stretching, or Thoracic Manipulation?",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT04054869",
+            "title": "Bio-mechanical Reasoning and Lateral Specificity of Upper Cervical Joint Mobilization to Improve Cervical Rotation, Improve Function and Reduce Pain.... Does it Matter?",
+            "status": "UNKNOWN"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 14,
+        "n_pmids": 14,
+        "error": null
+      }
+    },
+    "CD015160_pub2_data": {
+      "dataset_name": "CD015160_pub2_data",
+      "cd_number": "CD015160",
+      "pico": {
+        "P": "Number of randomised participants: 70 Inclusion criteria: patients with acutely ",
+        "I": "Primary analysis: mesh",
+        "C": "non-mesh",
+        "O": "Surgical site infections (as defined by the included studies) within 30 days of repair",
+        "group_name": "Primary analysis: mesh versus non-mesh"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 1,
+        "n_pmids": 1,
+        "error": null
+      }
+    },
+    "CD013071_pub2_data": {
+      "dataset_name": "CD013071_pub2_data",
+      "cd_number": "CD013071",
+      "pico": {
+        "P": "Inclusion criteria: IIEF-5: 8 to 21 points AMS questionnaire: more than 26 point",
+        "I": "Testosterone",
+        "C": "placebo (short-term)",
+        "O": "Erectile function (AMS sexual)",
+        "group_name": "Testosterone versus placebo (short-term)"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 380,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT00080483",
+            "title": "Will Testosterone and Growth Hormone Improve Bone Structure?",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT02991209",
+            "title": "A Randomized Double-blind Study of Testosterone Replacement Therapy or Placebo in Testicular Cancer Survivors With Mild Leydig Cell Insufficiency (Einstein-intervention)",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT00467987",
+            "title": "Effect of Androgel on Atherogenesis, Inflammation, Cardiovascular Risk Factors And Adiposity in Type 2 Diabetic Males With Hypogonadotrophic Hypogonadism.: a Prospective, Randomized and Controlled-Study",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT06683547",
+            "title": "The Impact of Ketone Monoester Intake on Post-exercise Hormonal Response During Recovery Following an Acute Bout of Resistance Exercise.",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01797718",
+            "title": "Constitutional Delay of Growth and Puberty: Towards Evidence-based Treatment",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 11,
+        "n_pmids": 11,
+        "error": null
+      }
+    },
+    "CD013726_pub2_data": {
+      "dataset_name": "CD013726_pub2_data",
+      "cd_number": "CD013726",
+      "pico": {
+        "P": "Place of study : 1 training and research hospital in Turkey Number of participan",
+        "I": "Surgery",
+        "C": "no treatment",
+        "O": "Pain",
+        "group_name": "Surgery versus no treatment"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 21250,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT05521100",
+            "title": "Comparison of Safety and Efficacy Between the Application of Vascular Closure Device and Conventional Figure-of-eight Suture in Transvenous Cardiac Interventional Surgery",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT04992507",
+            "title": "The Impact of Total Intravenous Anesthesia Following Cancer Surgery (TIVACS) Study",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT00998907",
+            "title": "Pathway Driven Study to Evaluate the Incidence of Wound Infections and Incisional Hernias After Laparotomy and Fascial Closure With PDS*Plus Sutures",
+            "status": "COMPLETED"
+          },
+          {
+            "nctId": "NCT01271192",
+            "title": "A Randomized Multicenter Clinical Trial of Direct Surgical Resection Compared to Neoadjuvant Followed by Surgical Resection in Treating Patients With Operable Local Recurrent Carcinoma Of The Rectum",
+            "status": "UNKNOWN"
+          },
+          {
+            "nctId": "NCT04393636",
+            "title": "Randomized Controlled Trial of Digital Cardiac Counseling in Patients With Delayed Cardiac Surgical Treatment Due to Covid-19 Pandemic (DCC Trial)",
+            "status": "COMPLETED"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 40410,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD012186_pub2_data": {
+      "dataset_name": "CD012186_pub2_data",
+      "cd_number": "CD012186",
+      "pico": {
+        "P": "Age: 19-60 years",
+        "I": "",
+        "C": "",
+        "O": "SAEs",
+        "group_name": "Treatment safety: pairwise comparisons"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 0,
+        "n_returned": 0,
+        "sample": [],
+        "error": null
+      },
+      "pubmed": {
+        "total": 725,
+        "n_pmids": 20,
+        "error": null
+      }
+    },
+    "CD013774_pub2_data": {
+      "dataset_name": "CD013774_pub2_data",
+      "cd_number": "CD013774",
+      "pico": {
+        "P": "Study setting Second-line Cisplatin eligible Locally advanced or metastatic urot",
+        "I": "Immune checkpoint inhibitors",
+        "C": "any first-line chemotherapy",
+        "O": "Time to death from any cause",
+        "group_name": "Immune checkpoint inhibitors versus any first-line chemotherapy"
+      },
+      "has_pico": true,
+      "ctgov": {
+        "total": 143,
+        "n_returned": 50,
+        "sample": [
+          {
+            "nctId": "NCT05335928",
+            "title": "AbatacepT foR ImmUne Checkpoint Inhibitor Associated Myocarditis (ATRIUM): A Phase 3, Investigator-Initiated, Randomized, Double-Blind, Placebo-Controlled Study to Evaluate the Efficacy and Safety of Abatacept in ICI Myocarditis",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT06563934",
+            "title": "A Randomized Controlled Trial Evaluating the Effects of Oral Enterobacterial Capsules in Liver Cancer Patients Treated With Tyrosine Kinase Inhibitors (TKIs) in Combination With Immune Checkpoint Inhibitors (ICIs)",
+            "status": "NOT_YET_RECRUITING"
+          },
+          {
+            "nctId": "NCT06006923",
+            "title": "Randomized Trial of Regorafenib in Combination With Pembrolizumab or Pembrolizumab Monotherapy With an Efficacy Lead-in of Regorafenib and Pembrolizumab for Patients With MSI-H Colorectal Cancer",
+            "status": "TERMINATED"
+          },
+          {
+            "nctId": "NCT05715255",
+            "title": "Adaptive Symptom Self-Management to Reduce Psychological Distress and Improve Symptom Management for Survivors on Immune Checkpoint Inhibitors",
+            "status": "RECRUITING"
+          },
+          {
+            "nctId": "NCT04841148",
+            "title": "A Phase II Trial of Avelumab or Hydroxychloroquine with or Without Palbociclib to Eliminate Dormant Breast Cancer (PALAVY)",
+            "status": "RECRUITING"
+          }
+        ],
+        "error": null
+      },
+      "pubmed": {
+        "total": 86,
+        "n_pmids": 20,
+        "error": null
+      }
+    }
+  }
+}

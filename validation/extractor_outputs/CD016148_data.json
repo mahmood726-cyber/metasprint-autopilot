@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD016148_data",
+  "cd_number": "CD016148",
+  "analysis_name": "2nd degree tears",
+  "effect_type": "OR",
+  "k_input": 16,
+  "results": {
+    "I2": 40.2549867124326,
+    "Q": 25.106697905984756,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 16,
+    "funnel_dots": 16,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 16,
+    "p_value": 0.15502799115875132,
+    "pooled": 0.8904878991160584,
+    "pooled_hi": 1.044893476373468,
+    "pooled_lo": 0.7588990805304892,
+    "pooled_log": -0.11598576520936732,
+    "pooled_se": 0.08156555985991437,
+    "tau2": 0.02919933089238257
+  }
+}

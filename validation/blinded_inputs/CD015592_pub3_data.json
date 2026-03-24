@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD015592_pub3_data",
+  "cd_number": "CD015592",
+  "analysis_name": "Successful lumbar puncture procedure at the first attempt",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Hanson 2016",
+      "year": "2016",
+      "ee": 51.0,
+      "en": 82.0,
+      "ce": 45.0,
+      "cn": 85.0,
+      "effect_estimate": 1.462366,
+      "lower_ci": 0.788957,
+      "upper_ci": 2.710556,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Marshall 2022",
+      "year": "2022",
+      "ee": 235.0,
+      "en": 536.0,
+      "ce": 250.0,
+      "cn": 546.0,
+      "effect_estimate": 0.924385,
+      "lower_ci": 0.727332,
+      "upper_ci": 1.174825,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Guo 2022",
+      "year": "2022",
+      "ee": 57.0,
+      "en": 89.0,
+      "ce": 70.0,
+      "cn": 82.0,
+      "effect_estimate": 0.305357,
+      "lower_ci": 0.144223,
+      "upper_ci": 0.646521,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

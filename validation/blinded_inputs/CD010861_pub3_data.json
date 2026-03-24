@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD010861_pub3_data",
+  "cd_number": "CD010861",
+  "analysis_name": "Maternal mortality",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Van Wyck 2007",
+      "year": "2007",
+      "ee": 1.0,
+      "en": 182.0,
+      "ce": 0.0,
+      "cn": 179.0,
+      "effect_estimate": 2.966942,
+      "lower_ci": 0.119981,
+      "upper_ci": 73.367978,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Perello 2014",
+      "year": "2014",
+      "ee": 3.0,
+      "en": 36.0,
+      "ce": 1.0,
+      "cn": 36.0,
+      "effect_estimate": 3.181818,
+      "lower_ci": 0.314852,
+      "upper_ci": 32.154716,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Wagstrom 2007",
+      "year": "2007",
+      "ee": 3.0,
+      "en": 20.0,
+      "ce": 4.0,
+      "cn": 20.0,
+      "effect_estimate": 0.705882,
+      "lower_ci": 0.136158,
+      "upper_ci": 3.659491,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

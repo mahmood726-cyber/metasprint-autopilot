@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD004417_pub6_data",
+  "cd_number": "CD004417",
+  "analysis_name": "Number of participants with pain on days 3 to 6: delayed versus immediate antibiotics",
+  "effect_type": "OR",
+  "k_input": 10,
+  "results": {
+    "I2": 97.3055604096597,
+    "Q": 334.02122030367565,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 10,
+    "funnel_dots": 10,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 10,
+    "p_value": 0.02659473257183831,
+    "pooled": 0.1545579984632733,
+    "pooled_hi": 0.8053935310363645,
+    "pooled_lo": 0.02966025175076135,
+    "pooled_log": -1.867185858502962,
+    "pooled_se": 0.8420556397413721,
+    "tau2": 6.68917583765125
+  }
+}

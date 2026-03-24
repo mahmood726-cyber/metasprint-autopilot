@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD004992_pub4_data",
+  "cd_number": "CD004992",
+  "analysis_name": "Recurrence of pelvic pain",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Beretta 1998",
+      "year": "1998",
+      "ee": 3.0,
+      "en": 19.0,
+      "ce": 9.0,
+      "cn": 17.0,
+      "effect_estimate": 0.166667,
+      "lower_ci": 0.035078,
+      "upper_ci": 0.79188,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Fulop 2006",
+      "year": "2006",
+      "ee": 11.0,
+      "en": 54.0,
+      "ce": 24.0,
+      "cn": 50.0,
+      "effect_estimate": 0.277132,
+      "lower_ci": 0.11679,
+      "upper_ci": 0.657608,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

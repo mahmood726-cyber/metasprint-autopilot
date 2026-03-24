@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD012905_pub2_data",
+  "cd_number": "CD012905",
+  "analysis_name": "Development of AKI",
+  "effect_type": "OR",
+  "k_input": 15,
+  "results": {
+    "I2": 63.341203446899506,
+    "Q": 38.1900152661065,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 15,
+    "funnel_dots": 15,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 15,
+    "p_value": 0.1984529989250321,
+    "pooled": 0.7785696142126861,
+    "pooled_hi": 1.1402724504652806,
+    "pooled_lo": 0.5316015869084156,
+    "pooled_log": -0.25029687075190293,
+    "pooled_se": 0.19463634237483482,
+    "tau2": 0.2988108725402726
+  }
+}

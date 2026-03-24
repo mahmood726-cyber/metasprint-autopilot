@@ -1,0 +1,29 @@
+{
+  "dataset_name": "CD014965_pub2_data",
+  "cd_number": "CD014965",
+  "analysis_name": "Irritability",
+  "effect_type": "MD",
+  "k": 2,
+  "studies": [
+    {
+      "study": "DeVane 2019",
+      "year": "2019",
+      "en": 24.0,
+      "cn": 27.0,
+      "effect_estimate": -1.4,
+      "lower_ci": -3.18461,
+      "upper_ci": 0.38461,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Ghanizadeh 2014",
+      "year": "2014",
+      "en": 30.0,
+      "cn": 29.0,
+      "effect_estimate": -2.1,
+      "lower_ci": -4.882866,
+      "upper_ci": 0.682866,
+      "effect_type": "MD"
+    }
+  ]
+}

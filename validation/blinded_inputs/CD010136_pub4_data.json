@@ -1,0 +1,29 @@
+{
+  "dataset_name": "CD010136_pub4_data",
+  "cd_number": "CD010136",
+  "analysis_name": "Pain at 24 hours",
+  "effect_type": "MD",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Fouad 1996",
+      "year": "1996",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": -0.1,
+      "lower_ci": -0.998142,
+      "upper_ci": 0.798142,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Henry 2001",
+      "year": "2001",
+      "en": 19.0,
+      "cn": 22.0,
+      "effect_estimate": 0.002,
+      "lower_ci": -0.593484,
+      "upper_ci": 0.597484,
+      "effect_type": "MD"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD002203_pub5_data",
+  "cd_number": "CD002203",
+  "analysis_name": "FEV1 % predicted (mean change from baseline)",
+  "effect_type": "MD",
+  "k_input": 10,
+  "results": {
+    "I2": 63.14888473709024,
+    "Q": 24.4225987077748,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 10,
+    "funnel_dots": 10,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 10,
+    "p_value": 0.7019294274408887,
+    "pooled": 0.09433657430355513,
+    "pooled_hi": 0.5775572048088542,
+    "pooled_lo": -0.38888405620174393,
+    "pooled_log": 0.09433657430355513,
+    "pooled_se": 0.2464914728830131,
+    "tau2": 0.1273936669589809
+  }
+}

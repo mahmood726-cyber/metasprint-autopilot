@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD010441_pub3_data",
+  "cd_number": "CD010441",
+  "analysis_name": "Incidence of perineal trauma (tears or episiotomy or both)",
+  "effect_type": "OR",
+  "k_input": 5,
+  "results": {
+    "I2": 71.44656083313158,
+    "Q": 14.008820361791456,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 5,
+    "funnel_dots": 5,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 5,
+    "p_value": 0.008613609058264693,
+    "pooled": 0.39464581938002696,
+    "pooled_hi": 0.789831300412146,
+    "pooled_lo": 0.19718808645955482,
+    "pooled_log": -0.9297665761182776,
+    "pooled_se": 0.3539239313574583,
+    "tau2": 0.4388578672200209
+  }
+}

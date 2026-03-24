@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011044_pub3_data",
+  "cd_number": "CD011044",
+  "analysis_name": "Overall survival",
+  "effect_type": "MD",
+  "k_input": 52,
+  "results": {
+    "I2": 70.78503446306094,
+    "Q": 174.56806490329825,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 52,
+    "funnel_dots": 52,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 52,
+    "p_value": 0.00020424031416688138,
+    "pooled": -0.1480140130826632,
+    "pooled_hi": -0.06988191407132363,
+    "pooled_lo": -0.2261461120940028,
+    "pooled_log": -0.1480140130826632,
+    "pooled_se": 0.039855285451301334,
+    "tau2": 0.050763011489659414
+  }
+}

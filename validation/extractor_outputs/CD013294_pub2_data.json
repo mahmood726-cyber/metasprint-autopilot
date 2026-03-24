@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013294_pub2_data",
+  "cd_number": "CD013294",
+  "analysis_name": "Time (%) in target oxygen saturation range",
+  "effect_type": "MD",
+  "k_input": 12,
+  "results": {
+    "I2": 79.57380440135043,
+    "Q": 53.85241684813418,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 12,
+    "funnel_dots": 12,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 12,
+    "p_value": 9.192011507508369e-08,
+    "pooled": 12.01382064690832,
+    "pooled_hi": 16.422291263800368,
+    "pooled_lo": 7.605350030016273,
+    "pooled_log": 12.01382064690832,
+    "pooled_se": 2.2487666024997863,
+    "tau2": 44.84492309672376
+  }
+}

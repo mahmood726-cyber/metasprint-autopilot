@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011866_pub3_data",
+  "cd_number": "CD011866",
+  "analysis_name": "Dropouts",
+  "effect_type": "OR",
+  "k_input": 43,
+  "results": {
+    "I2": 47.28360723244737,
+    "Q": 79.67161217800802,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 43,
+    "funnel_dots": 43,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 43,
+    "p_value": 0.002103667325215053,
+    "pooled": 0.7457469289698019,
+    "pooled_hi": 0.8991087527481298,
+    "pooled_lo": 0.6185441754048674,
+    "pooled_log": -0.2933689736382633,
+    "pooled_se": 0.09539796853967336,
+    "tau2": 0.16248444710772478
+  }
+}

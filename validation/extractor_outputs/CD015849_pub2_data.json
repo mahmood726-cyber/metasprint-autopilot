@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015849_pub2_data",
+  "cd_number": "CD015849",
+  "analysis_name": "All-cause death",
+  "effect_type": "OR",
+  "k_input": 10,
+  "results": {
+    "I2": 0,
+    "Q": 6.953260288813934,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 10,
+    "funnel_dots": 10,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 10,
+    "p_value": 0.09035410021219326,
+    "pooled": 0.8756535605141964,
+    "pooled_hi": 1.0211443122112227,
+    "pooled_lo": 0.7508920618485353,
+    "pooled_log": -0.13278474513320876,
+    "pooled_se": 0.07840696636582656,
+    "tau2": 0
+  }
+}

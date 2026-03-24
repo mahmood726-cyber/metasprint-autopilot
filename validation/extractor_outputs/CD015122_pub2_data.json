@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015122_pub2_data",
+  "cd_number": "CD015122",
+  "analysis_name": "Blood transfusion",
+  "effect_type": "OR",
+  "k_input": 10,
+  "results": {
+    "I2": 15.01149266637717,
+    "Q": 10.58966710012973,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 10,
+    "funnel_dots": 10,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 10,
+    "p_value": 8.608444853086539e-05,
+    "pooled": 0.4149350663851101,
+    "pooled_hi": 0.6437140403427546,
+    "pooled_lo": 0.26746520741467866,
+    "pooled_log": -0.8796332375355086,
+    "pooled_se": 0.22400208525234203,
+    "tau2": 0.07446936289570867
+  }
+}

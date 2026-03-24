@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD015254_pub2_data",
+  "cd_number": "CD015254",
+  "analysis_name": "Normal hearing (as complete improvement in air-bone gap in worst ear): short-term",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Podoshin 1990",
+      "year": "1990",
+      "ee": 20.0,
+      "en": 49.0,
+      "ce": 0.0,
+      "cn": 37.0,
+      "effect_estimate": 52.118644,
+      "lower_ci": 3.023232,
+      "upper_ci": 898.493187,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Ernston 1985",
+      "year": "1985",
+      "ee": 24.0,
+      "en": 46.0,
+      "ce": 5.0,
+      "cn": 45.0,
+      "effect_estimate": 8.727273,
+      "lower_ci": 2.918948,
+      "upper_ci": 26.093405,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

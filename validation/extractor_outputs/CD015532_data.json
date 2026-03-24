@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015532_data",
+  "cd_number": "CD015532",
+  "analysis_name": "Overall mortality",
+  "effect_type": "OR",
+  "k_input": 11,
+  "results": {
+    "I2": 39.569118545342896,
+    "Q": 16.547830776725085,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 11,
+    "funnel_dots": 11,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 11,
+    "p_value": 0.7066033431113525,
+    "pooled": 1.0729611499972727,
+    "pooled_hi": 1.5483337903569963,
+    "pooled_lo": 0.7435384001650119,
+    "pooled_log": 0.07042225609398237,
+    "pooled_se": 0.18708328587703565,
+    "tau2": 0.13229944136864868
+  }
+}

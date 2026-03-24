@@ -1,0 +1,195 @@
+{
+  "total_trials": 282,
+  "accuracy": 0.9574468085106383,
+  "macro_precision": 0.8690339422482279,
+  "macro_recall": 0.8557233044733045,
+  "macro_f1": 0.8623272616174507,
+  "weighted_precision": 0.9622460450727925,
+  "weighted_recall": 0.9574468085106383,
+  "weighted_f1": 0.9586985816977208,
+  "per_class": {
+    "acs": {
+      "precision": 1.0,
+      "recall": 0.9762,
+      "f1": 0.988,
+      "support": 42,
+      "tp": 41,
+      "fp": 0,
+      "fn": 1
+    },
+    "af": {
+      "precision": 0.9846,
+      "recall": 0.9697,
+      "f1": 0.9771,
+      "support": 66,
+      "tp": 64,
+      "fp": 1,
+      "fn": 2
+    },
+    "general": {
+      "precision": 0.5,
+      "recall": 0.3333,
+      "f1": 0.4,
+      "support": 3,
+      "tp": 1,
+      "fp": 1,
+      "fn": 2
+    },
+    "hf": {
+      "precision": 0.898,
+      "recall": 0.9778,
+      "f1": 0.9362,
+      "support": 45,
+      "tp": 44,
+      "fp": 5,
+      "fn": 1
+    },
+    "htn": {
+      "precision": 0.9697,
+      "recall": 1.0,
+      "f1": 0.9846,
+      "support": 64,
+      "tp": 64,
+      "fp": 2,
+      "fn": 0
+    },
+    "lipids": {
+      "precision": 1.0,
+      "recall": 0.96,
+      "f1": 0.9796,
+      "support": 25,
+      "tp": 24,
+      "fp": 0,
+      "fn": 1
+    },
+    "pad": {
+      "precision": 0.0,
+      "recall": 0,
+      "f1": 0,
+      "support": 0,
+      "tp": 0,
+      "fp": 1,
+      "fn": 0
+    },
+    "ph": {
+      "precision": 1.0,
+      "recall": 0.8788,
+      "f1": 0.9355,
+      "support": 33,
+      "tp": 29,
+      "fp": 0,
+      "fn": 4
+    },
+    "rhythm": {
+      "precision": 0.6,
+      "recall": 0.75,
+      "f1": 0.6667,
+      "support": 4,
+      "tp": 3,
+      "fp": 2,
+      "fn": 1
+    }
+  },
+  "misclassifications": 12,
+  "confusion_matrix": {
+    "acs": {
+      "acs": 41,
+      "af": 0,
+      "general": 1,
+      "hf": 0,
+      "htn": 0,
+      "lipids": 0,
+      "pad": 0,
+      "ph": 0,
+      "rhythm": 0
+    },
+    "af": {
+      "acs": 0,
+      "af": 64,
+      "general": 0,
+      "hf": 0,
+      "htn": 0,
+      "lipids": 0,
+      "pad": 0,
+      "ph": 0,
+      "rhythm": 2
+    },
+    "general": {
+      "acs": 0,
+      "af": 0,
+      "general": 1,
+      "hf": 1,
+      "htn": 0,
+      "lipids": 0,
+      "pad": 1,
+      "ph": 0,
+      "rhythm": 0
+    },
+    "hf": {
+      "acs": 0,
+      "af": 0,
+      "general": 0,
+      "hf": 44,
+      "htn": 1,
+      "lipids": 0,
+      "pad": 0,
+      "ph": 0,
+      "rhythm": 0
+    },
+    "htn": {
+      "acs": 0,
+      "af": 0,
+      "general": 0,
+      "hf": 0,
+      "htn": 64,
+      "lipids": 0,
+      "pad": 0,
+      "ph": 0,
+      "rhythm": 0
+    },
+    "lipids": {
+      "acs": 0,
+      "af": 0,
+      "general": 0,
+      "hf": 0,
+      "htn": 1,
+      "lipids": 24,
+      "pad": 0,
+      "ph": 0,
+      "rhythm": 0
+    },
+    "pad": {
+      "acs": 0,
+      "af": 0,
+      "general": 0,
+      "hf": 0,
+      "htn": 0,
+      "lipids": 0,
+      "pad": 0,
+      "ph": 0,
+      "rhythm": 0
+    },
+    "ph": {
+      "acs": 0,
+      "af": 0,
+      "general": 0,
+      "hf": 4,
+      "htn": 0,
+      "lipids": 0,
+      "pad": 0,
+      "ph": 29,
+      "rhythm": 0
+    },
+    "rhythm": {
+      "acs": 0,
+      "af": 1,
+      "general": 0,
+      "hf": 0,
+      "htn": 0,
+      "lipids": 0,
+      "pad": 0,
+      "ph": 0,
+      "rhythm": 3
+    }
+  }
+}

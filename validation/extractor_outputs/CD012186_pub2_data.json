@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD012186_pub2_data",
+  "cd_number": "CD012186",
+  "analysis_name": "SAEs",
+  "effect_type": "OR",
+  "k_input": 83,
+  "results": {
+    "I2": 9.148291741486446,
+    "Q": 90.25697102653645,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 83,
+    "funnel_dots": 83,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 83,
+    "p_value": 0.46256316795275865,
+    "pooled": 1.0253253418363049,
+    "pooled_hi": 1.0960907895284862,
+    "pooled_lo": 0.9591286293574072,
+    "pooled_log": 0.025009968897096897,
+    "pooled_se": 0.034044188129002395,
+    "tau2": 0.008105870218621658
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013052_pub3_data",
+  "cd_number": "CD013052",
+  "analysis_name": "Resolution of ear discharge (1 to 2 weeks)",
+  "effect_type": "OR",
+  "k_input": 5,
+  "results": {
+    "I2": 0,
+    "Q": 0.6880676541245552,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 5,
+    "funnel_dots": 5,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 5,
+    "p_value": 0.28273008370762676,
+    "pooled": 1.2760870639944966,
+    "pooled_hi": 1.9911714854227804,
+    "pooled_lo": 0.817809117303797,
+    "pooled_log": 0.24379841456551168,
+    "pooled_se": 0.22695668778977002,
+    "tau2": 0
+  }
+}

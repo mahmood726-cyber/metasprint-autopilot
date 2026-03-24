@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013816_pub2_data",
+  "cd_number": "CD013816",
+  "analysis_name": "Thromboembolic events (composite)",
+  "effect_type": "OR",
+  "k_input": 5,
+  "results": {
+    "I2": 0,
+    "Q": 2.3920317281533308,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 5,
+    "funnel_dots": 5,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 5,
+    "p_value": 0.8549093962158261,
+    "pooled": 0.8794897422434129,
+    "pooled_hi": 3.484371833070238,
+    "pooled_lo": 0.22199186647362407,
+    "pooled_log": -0.12841337804091585,
+    "pooled_se": 0.702257053086789,
+    "tau2": 0
+  }
+}

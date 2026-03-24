@@ -1,0 +1,87 @@
+{
+  "dataset_name": "CD007388_pub3_data",
+  "cd_number": "CD007388",
+  "analysis_name": "Recurrence of convulsion",
+  "effect_type": "OR",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Regmi 2010",
+      "year": "2012",
+      "ee": 2.0,
+      "en": 43.0,
+      "ce": 0.0,
+      "cn": 37.0,
+      "effect_estimate": 4.518072,
+      "lower_ci": 0.209948,
+      "upper_ci": 97.228768,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Muhammad 2013",
+      "year": "2013",
+      "ee": 2.0,
+      "en": 39.0,
+      "ce": 1.0,
+      "cn": 33.0,
+      "effect_estimate": 1.72973,
+      "lower_ci": 0.149686,
+      "upper_ci": 19.98826,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Bhattacharjee 2011",
+      "year": "2011",
+      "ee": 5.0,
+      "en": 67.0,
+      "ce": 6.0,
+      "cn": 70.0,
+      "effect_estimate": 0.860215,
+      "lower_ci": 0.249578,
+      "upper_ci": 2.964889,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Keepanasseril 2018",
+      "year": "2018",
+      "ee": 6.0,
+      "en": 201.0,
+      "ce": 3.0,
+      "cn": 201.0,
+      "effect_estimate": 2.030769,
+      "lower_ci": 0.500658,
+      "upper_ci": 8.237212,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Rimal 2017",
+      "year": "2017",
+      "ee": 2.0,
+      "en": 30.0,
+      "ce": 1.0,
+      "cn": 30.0,
+      "effect_estimate": 2.071429,
+      "lower_ci": 0.177589,
+      "upper_ci": 24.161499,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Vigil-De Gracia 2018",
+      "year": "2018",
+      "ee": 2.0,
+      "en": 558.0,
+      "ce": 1.0,
+      "cn": 555.0,
+      "effect_estimate": 1.992806,
+      "lower_ci": 0.180086,
+      "upper_ci": 22.052138,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

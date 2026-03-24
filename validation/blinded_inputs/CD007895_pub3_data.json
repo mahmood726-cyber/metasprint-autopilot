@@ -1,0 +1,49 @@
+{
+  "dataset_name": "CD007895_pub3_data",
+  "cd_number": "CD007895",
+  "analysis_name": "Systolic blood pressure, measured as change-from-baseline",
+  "effect_type": "MD",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Alger 1993",
+      "year": "1993",
+      "en": 8.0,
+      "cn": 10.0,
+      "effect_estimate": -6.0,
+      "lower_ci": -13.068372,
+      "upper_ci": 1.068372,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Astrup 1992",
+      "year": "1992",
+      "en": 89.0,
+      "cn": 83.0,
+      "effect_estimate": 3.75,
+      "lower_ci": 0.266384,
+      "upper_ci": 7.233616,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Gelotte 2019",
+      "year": "2019",
+      "en": 281.0,
+      "cn": 273.0,
+      "effect_estimate": 0.7,
+      "lower_ci": -0.999435,
+      "upper_ci": 2.399435,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Lehtonen 1986",
+      "year": "1986",
+      "en": 19.0,
+      "cn": 21.0,
+      "effect_estimate": -1.0,
+      "lower_ci": -9.689907,
+      "upper_ci": 7.689907,
+      "effect_type": "MD"
+    }
+  ]
+}

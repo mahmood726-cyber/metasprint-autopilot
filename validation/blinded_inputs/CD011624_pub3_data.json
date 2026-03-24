@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011624_pub3_data",
+  "cd_number": "CD011624",
+  "analysis_name": "Hypertensive disorders of pregnancy (including pre-eclampsia, pregnancy-induced hypertension, eclampsia)",
+  "effect_type": "MD",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Crowther 2022",
+      "year": "2019",
+      "effect_estimate": 0.451076,
+      "lower_ci": -0.248595,
+      "upper_ci": 1.150747,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Popova 2018",
+      "year": "2018",
+      "effect_estimate": 0.030214,
+      "lower_ci": -0.410469,
+      "upper_ci": 0.470897,
+      "effect_type": "MD"
+    }
+  ]
+}

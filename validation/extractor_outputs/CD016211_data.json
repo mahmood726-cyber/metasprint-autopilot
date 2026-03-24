@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD016211_data",
+  "cd_number": "CD016211",
+  "analysis_name": "Maternal sepsis",
+  "effect_type": "OR",
+  "k_input": 4,
+  "results": {
+    "I2": 0,
+    "Q": 0.22551298123518815,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 4,
+    "funnel_dots": 4,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 4,
+    "p_value": 2.968789534207872e-07,
+    "pooled": 0.6492120816030718,
+    "pooled_hi": 0.7658455498353933,
+    "pooled_lo": 0.5503411582008715,
+    "pooled_log": -0.43199583352861715,
+    "pooled_se": 0.08427948392513003,
+    "tau2": 0
+  }
+}

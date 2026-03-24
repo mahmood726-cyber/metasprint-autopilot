@@ -1,0 +1,74 @@
+{
+  "dataset_name": "CD010441_pub3_data",
+  "cd_number": "CD010441",
+  "analysis_name": "Incidence of perineal trauma (tears or episiotomy or both)",
+  "effect_type": "OR",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Chatfield 1966",
+      "year": "1966",
+      "ee": 37.0,
+      "en": 57.0,
+      "ce": 52.0,
+      "cn": 66.0,
+      "effect_estimate": 0.498077,
+      "lower_ci": 0.223181,
+      "upper_ci": 1.111568,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Colacioppo 2011",
+      "year": "2011",
+      "ee": 50.0,
+      "en": 76.0,
+      "ce": 54.0,
+      "cn": 80.0,
+      "effect_estimate": 0.925926,
+      "lower_ci": 0.475666,
+      "upper_ci": 1.802395,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Kwon 2020",
+      "year": "2020",
+      "ee": 67.0,
+      "en": 75.0,
+      "ce": 67.0,
+      "cn": 72.0,
+      "effect_estimate": 0.625,
+      "lower_ci": 0.194408,
+      "upper_ci": 2.009309,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "O'Leary 1965",
+      "year": "1965",
+      "ee": 20.0,
+      "en": 50.0,
+      "ce": 40.0,
+      "cn": 50.0,
+      "effect_estimate": 0.166667,
+      "lower_ci": 0.068115,
+      "upper_ci": 0.407805,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Scarabotto 2008",
+      "year": "2008",
+      "ee": 28.0,
+      "en": 71.0,
+      "ce": 52.0,
+      "cn": 68.0,
+      "effect_estimate": 0.200358,
+      "lower_ci": 0.096039,
+      "upper_ci": 0.417987,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

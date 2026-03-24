@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD009752_pub3_data",
+  "cd_number": "CD009752",
+  "analysis_name": "All-cause mortality: short term (0 to 30 days post surgery)",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Cholette 2017",
+      "year": "2012",
+      "ee": 6.0,
+      "en": 82.0,
+      "ce": 5.0,
+      "cn": 80.0,
+      "effect_estimate": 1.184211,
+      "lower_ci": 0.346409,
+      "upper_ci": 4.048268,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Willems 2010",
+      "year": "2010",
+      "ee": 2.0,
+      "en": 63.0,
+      "ce": 2.0,
+      "cn": 62.0,
+      "effect_estimate": 0.983607,
+      "lower_ci": 0.134114,
+      "upper_ci": 7.213884,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Cholette 2012",
+      "year": "2012",
+      "ee": 1.0,
+      "en": 64.0,
+      "ce": 4.0,
+      "cn": 64.0,
+      "effect_estimate": 0.238095,
+      "lower_ci": 0.025856,
+      "upper_ci": 2.192513,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Ye 2013",
+      "year": "2013",
+      "ee": 1.0,
+      "en": 217.0,
+      "ce": 2.0,
+      "cn": 92.0,
+      "effect_estimate": 0.208333,
+      "lower_ci": 0.018645,
+      "upper_ci": 2.327821,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

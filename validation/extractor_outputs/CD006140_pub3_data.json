@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD006140_pub3_data",
+  "cd_number": "CD006140",
+  "analysis_name": "Any illicit opioid use (urine drug screen)",
+  "effect_type": "OR",
+  "k_input": 9,
+  "results": {
+    "I2": 78.08600204878125,
+    "Q": 36.506346390139555,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 9,
+    "funnel_dots": 9,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 9,
+    "p_value": 0.013676419153473507,
+    "pooled": 0.505685012558471,
+    "pooled_hi": 0.8696001424167086,
+    "pooled_lo": 0.2940631210289319,
+    "pooled_log": -0.6818413083564033,
+    "pooled_se": 0.27653587768130433,
+    "tau2": 0.4529273355652932
+  }
+}

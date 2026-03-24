@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD003333_pub4_data",
+  "cd_number": "CD003333",
+  "analysis_name": "All-cause mortality",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "HELAS 2006",
+      "year": "2006",
+      "ee": 11.0,
+      "en": 54.0,
+      "ce": 9.0,
+      "cn": 61.0,
+      "effect_estimate": 1.478036,
+      "lower_ci": 0.560652,
+      "upper_ci": 3.896517,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "WARCEF 2012",
+      "year": "2012",
+      "ee": 275.0,
+      "en": 1142.0,
+      "ce": 272.0,
+      "cn": 1163.0,
+      "effect_estimate": 1.039016,
+      "lower_ci": 0.857538,
+      "upper_ci": 1.258901,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "WASH 2004",
+      "year": "2004",
+      "ee": 22.0,
+      "en": 89.0,
+      "ce": 27.0,
+      "cn": 91.0,
+      "effect_estimate": 0.778331,
+      "lower_ci": 0.402636,
+      "upper_ci": 1.504581,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "WATCH 2009",
+      "year": "2009",
+      "ee": 92.0,
+      "en": 540.0,
+      "ce": 94.0,
+      "cn": 523.0,
+      "effect_estimate": 0.937215,
+      "lower_ci": 0.68292,
+      "upper_ci": 1.286201,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

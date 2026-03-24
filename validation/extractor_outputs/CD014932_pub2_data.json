@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014932_pub2_data",
+  "cd_number": "CD014932",
+  "analysis_name": "Reduction in disease severity, as measured by clinical signs (SCORAD)",
+  "effect_type": "MD",
+  "k_input": 9,
+  "results": {
+    "I2": 74.95065535421243,
+    "Q": 31.93696327438778,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 9,
+    "funnel_dots": 9,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 9,
+    "p_value": 0.0006105413311465746,
+    "pooled": -5.006971570329215,
+    "pooled_hi": -2.1427064467609505,
+    "pooled_lo": -7.87123669389748,
+    "pooled_log": -5.006971570329215,
+    "pooled_se": 1.4610653694514493,
+    "tau2": 12.405619960421964
+  }
+}

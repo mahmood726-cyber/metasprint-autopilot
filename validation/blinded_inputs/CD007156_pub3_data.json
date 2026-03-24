@@ -1,0 +1,239 @@
+{
+  "dataset_name": "CD007156_pub3_data",
+  "cd_number": "CD007156",
+  "analysis_name": "Interincisal distance (mm)",
+  "effect_type": "MD",
+  "k": 23,
+  "studies": [
+    {
+      "study": "Bhadage 2013",
+      "year": "2013",
+      "en": 15.0,
+      "cn": 10.0,
+      "effect_estimate": 0.7,
+      "lower_ci": -5.469692,
+      "upper_ci": 6.869692,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Singh 2016",
+      "year": "2016",
+      "en": 30.0,
+      "cn": 30.0,
+      "effect_estimate": 3.37,
+      "lower_ci": -0.886404,
+      "upper_ci": 7.626404,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Arakeri 2020",
+      "year": "2020",
+      "en": 200.0,
+      "cn": 200.0,
+      "effect_estimate": 1.79,
+      "lower_ci": 1.293526,
+      "upper_ci": 2.286474,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Patil 2015a",
+      "year": "2015",
+      "en": 60.0,
+      "cn": 60.0,
+      "effect_estimate": 4.5,
+      "lower_ci": 3.56324,
+      "upper_ci": 5.43676,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Patil 2014a",
+      "year": "2014",
+      "en": 53.0,
+      "cn": 53.0,
+      "effect_estimate": 1.8,
+      "lower_ci": 1.01723,
+      "upper_ci": 2.58277,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Ara 2018",
+      "year": "2018",
+      "en": 50.0,
+      "cn": 50.0,
+      "effect_estimate": 9.12,
+      "lower_ci": 7.898493,
+      "upper_ci": 10.341507,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Prabhu 2015",
+      "year": "2015",
+      "en": 15.0,
+      "cn": 15.0,
+      "effect_estimate": -2.8,
+      "lower_ci": -5.353159,
+      "upper_ci": -0.246841,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Cox 2009",
+      "year": "2009",
+      "en": 16.0,
+      "cn": 8.0,
+      "effect_estimate": 0.5,
+      "lower_ci": -7.724285,
+      "upper_ci": 8.724285,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Piyush 2018",
+      "year": "2018",
+      "en": 60.0,
+      "cn": 30.0,
+      "effect_estimate": -1.41,
+      "lower_ci": -5.73976,
+      "upper_ci": 2.91976,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Jiang 2013",
+      "year": "2013",
+      "en": 14.0,
+      "cn": 14.0,
+      "effect_estimate": 0.36,
+      "lower_ci": -2.798422,
+      "upper_ci": 3.518422,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kumar 2007",
+      "year": "2007",
+      "en": 16.0,
+      "cn": 14.0,
+      "effect_estimate": -5.14,
+      "lower_ci": -12.018398,
+      "upper_ci": 1.738398,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Yadav 2014",
+      "year": "2014",
+      "en": 20.0,
+      "cn": 20.0,
+      "effect_estimate": -0.65,
+      "lower_ci": -3.026044,
+      "upper_ci": 1.726044,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Jirge 2008",
+      "year": "2008",
+      "en": 15.0,
+      "cn": 15.0,
+      "effect_estimate": -1.0,
+      "lower_ci": -7.178614,
+      "upper_ci": 5.178614,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Rajbhoj 2021",
+      "year": "2021",
+      "en": 30.0,
+      "cn": 30.0,
+      "effect_estimate": -0.64,
+      "lower_ci": -3.908986,
+      "upper_ci": 2.628986,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Patil 2019",
+      "year": "2019",
+      "en": 25.0,
+      "cn": 25.0,
+      "effect_estimate": -2.6,
+      "lower_ci": -3.821123,
+      "upper_ci": -1.378877,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Alora Veedu 2015",
+      "year": "2015",
+      "en": 60.0,
+      "cn": 60.0,
+      "effect_estimate": 9.4,
+      "lower_ci": 8.522554,
+      "upper_ci": 10.277446,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wu 2010",
+      "year": "2010",
+      "en": 60.0,
+      "cn": 60.0,
+      "effect_estimate": -0.35,
+      "lower_ci": -4.100683,
+      "upper_ci": 3.400683,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Mulk 2013",
+      "year": "2013",
+      "en": 20.0,
+      "cn": 20.0,
+      "effect_estimate": -8.0,
+      "lower_ci": -14.473015,
+      "upper_ci": -1.526985,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kania 2022",
+      "year": "2022",
+      "en": 15.0,
+      "cn": 15.0,
+      "effect_estimate": -3.6,
+      "lower_ci": -5.168253,
+      "upper_ci": -2.031747,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Patil 2017",
+      "year": "2017",
+      "en": 4.0,
+      "cn": 4.0,
+      "effect_estimate": -7.25,
+      "lower_ci": -14.195285,
+      "upper_ci": -0.304715,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Thakur 2015",
+      "year": "2015",
+      "en": 5.0,
+      "cn": 5.0,
+      "effect_estimate": 7.8,
+      "lower_ci": 4.904105,
+      "upper_ci": 10.695895,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Dani 2018",
+      "year": "2018",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": -3.7,
+      "lower_ci": -11.53079,
+      "upper_ci": 4.13079,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Vadepally\u00a02019",
+      "year": "2019",
+      "en": 25.0,
+      "cn": 25.0,
+      "effect_estimate": 0.92,
+      "lower_ci": 0.281742,
+      "upper_ci": 1.558258,
+      "effect_type": "MD"
+    }
+  ]
+}

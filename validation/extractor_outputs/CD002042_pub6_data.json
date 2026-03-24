@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD002042_pub6_data",
+  "cd_number": "CD002042",
+  "analysis_name": "Participants exposed to blood transfusion (all trials)",
+  "effect_type": "OR",
+  "k_input": 57,
+  "results": {
+    "I2": 94.94227407098401,
+    "Q": 1107.2169743071686,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 57,
+    "funnel_dots": 57,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 57,
+    "p_value": 0,
+    "pooled": 0.09458286009412628,
+    "pooled_hi": 0.1384746390162923,
+    "pooled_lo": 0.06460329116678565,
+    "pooled_log": -2.35827900227727,
+    "pooled_se": 0.19445618689813668,
+    "tau2": 1.5063142242302505
+  }
+}

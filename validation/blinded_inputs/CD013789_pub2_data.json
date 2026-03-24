@@ -1,0 +1,49 @@
+{
+  "dataset_name": "CD013789_pub2_data",
+  "cd_number": "CD013789",
+  "analysis_name": "Scar improvement (VSS) (PGT vs other scar management therapy)",
+  "effect_type": "MD",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Tsang 2004",
+      "year": "2004",
+      "en": 34.0,
+      "cn": 23.0,
+      "effect_estimate": 0.63,
+      "lower_ci": -0.209417,
+      "upper_ci": 1.469417,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Groce 2000",
+      "year": "2000",
+      "en": 18.0,
+      "cn": 10.0,
+      "effect_estimate": -1.1,
+      "lower_ci": -2.3879,
+      "upper_ci": 0.1879,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Li-Tsang 2010a",
+      "year": "2010",
+      "en": 36.0,
+      "cn": 9.0,
+      "effect_estimate": 1.4,
+      "lower_ci": -0.274962,
+      "upper_ci": 3.074962,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Moiemen 2018",
+      "year": "2018",
+      "en": 38.0,
+      "cn": 37.0,
+      "effect_estimate": -0.26,
+      "lower_ci": -1.161766,
+      "upper_ci": 0.641766,
+      "effect_type": "MD"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011793_pub3_data",
+  "cd_number": "CD011793",
+  "analysis_name": "Mortality",
+  "effect_type": "OR",
+  "k_input": 10,
+  "results": {
+    "I2": 0,
+    "Q": 4.828810869745213,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 10,
+    "funnel_dots": 10,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 10,
+    "p_value": 0.7668001792037313,
+    "pooled": 0.8788407956988825,
+    "pooled_hi": 2.0638826440143516,
+    "pooled_lo": 0.374227258717756,
+    "pooled_log": -0.1291515174976243,
+    "pooled_se": 0.4354941433531422,
+    "tau2": 0
+  }
+}

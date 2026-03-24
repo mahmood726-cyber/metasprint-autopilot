@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD012503_pub3_data",
+  "cd_number": "CD012503",
+  "analysis_name": "Mortality during follow-up (for all studies)",
+  "effect_type": "OR",
+  "k_input": 21,
+  "results": {
+    "I2": 2.7864905095791053,
+    "Q": 20.573272279580376,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 21,
+    "funnel_dots": 21,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 21,
+    "p_value": 0.08894516927398666,
+    "pooled": 0.8189810262277164,
+    "pooled_hi": 1.0309225851567647,
+    "pooled_lo": 0.6506113368532038,
+    "pooled_log": -0.1996943623965519,
+    "pooled_se": 0.11739903806286038,
+    "tau2": 0.009018245558730847
+  }
+}

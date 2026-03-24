@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013332_pub2_data",
+  "cd_number": "CD013332",
+  "analysis_name": "SSI",
+  "effect_type": "OR",
+  "k_input": 28,
+  "results": {
+    "I2": 35.44993085397858,
+    "Q": 41.82799547266505,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 28,
+    "funnel_dots": 28,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 28,
+    "p_value": 8.961947461738617e-05,
+    "pooled": 0.5815324234802445,
+    "pooled_hi": 0.7627720793912052,
+    "pooled_lo": 0.44335650018642464,
+    "pooled_log": -0.5420885502283393,
+    "pooled_se": 0.1383866787092551,
+    "tau2": 0.1411776570144508
+  }
+}

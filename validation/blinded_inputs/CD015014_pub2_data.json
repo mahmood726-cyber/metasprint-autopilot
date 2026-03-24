@@ -1,0 +1,100 @@
+{
+  "dataset_name": "CD015014_pub2_data",
+  "cd_number": "CD015014",
+  "analysis_name": "ED visits (proportion of residents with at least one ED visit)",
+  "effect_type": "OR",
+  "k": 7,
+  "studies": [
+    {
+      "study": "Agar 2017",
+      "year": "2017",
+      "ee": 4.0,
+      "en": 41.0,
+      "ce": 4.0,
+      "cn": 39.0,
+      "effect_estimate": 0.945946,
+      "lower_ci": 0.219409,
+      "upper_ci": 4.078294,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Arendts 2018",
+      "year": "2018",
+      "ee": 24.0,
+      "en": 39.0,
+      "ce": 23.0,
+      "cn": 38.0,
+      "effect_estimate": 1.043478,
+      "lower_ci": 0.417379,
+      "upper_ci": 2.608775,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Bellantonio 2008",
+      "year": "2008",
+      "ee": 9.0,
+      "en": 48.0,
+      "ce": 11.0,
+      "cn": 52.0,
+      "effect_estimate": 0.86014,
+      "lower_ci": 0.321464,
+      "upper_ci": 2.301476,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Cordato 2018",
+      "year": "2018",
+      "ee": 9.0,
+      "en": 22.0,
+      "ce": 14.0,
+      "cn": 21.0,
+      "effect_estimate": 0.346154,
+      "lower_ci": 0.099826,
+      "upper_ci": 1.200311,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Harvey 2014",
+      "year": "2014",
+      "ee": 35.0,
+      "en": 57.0,
+      "ce": 36.0,
+      "cn": 59.0,
+      "effect_estimate": 1.016414,
+      "lower_ci": 0.481456,
+      "upper_ci": 2.145779,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Loeb 2006",
+      "year": "2006",
+      "ee": 3.0,
+      "en": 121.0,
+      "ce": 5.0,
+      "cn": 133.0,
+      "effect_estimate": 0.650847,
+      "lower_ci": 0.152156,
+      "upper_ci": 2.783992,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Van den Block 2020",
+      "year": "2020",
+      "ee": 44.0,
+      "en": 262.0,
+      "ce": 44.0,
+      "cn": 344.0,
+      "effect_estimate": 1.376147,
+      "lower_ci": 0.87492,
+      "upper_ci": 2.164519,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

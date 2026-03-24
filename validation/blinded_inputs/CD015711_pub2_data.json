@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD015711_pub2_data",
+  "cd_number": "CD015711",
+  "analysis_name": "Spectacle independence for near vision",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Bari\u0161i\u0107 2008",
+      "year": "2008",
+      "ee": 36.0,
+      "en": 50.0,
+      "ce": 34.0,
+      "cn": 50.0,
+      "effect_estimate": 1.210084,
+      "lower_ci": 0.513586,
+      "upper_ci": 2.851134,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Bari\u0161i\u0107 2010",
+      "year": "2010",
+      "ee": 45.0,
+      "en": 50.0,
+      "ce": 42.0,
+      "cn": 50.0,
+      "effect_estimate": 1.714286,
+      "lower_ci": 0.519376,
+      "upper_ci": 5.658278,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

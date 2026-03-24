@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014666_pub2_data",
+  "cd_number": "CD014666",
+  "analysis_name": "Fear of falling: subgrouped according to intervention approach",
+  "effect_type": "MD",
+  "k_input": 11,
+  "results": {
+    "I2": 78.25221798756701,
+    "Q": 45.98170054437322,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 11,
+    "funnel_dots": 11,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 11,
+    "p_value": 0.0015798497863475092,
+    "pooled": -1.688137997535227,
+    "pooled_hi": -0.6407301254896294,
+    "pooled_lo": -2.735545869580825,
+    "pooled_log": -1.688137997535227,
+    "pooled_se": 0.5342841194917706,
+    "tau2": 1.571125642918883
+  }
+}

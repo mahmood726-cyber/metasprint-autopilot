@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD006982_pub5_data",
+  "cd_number": "CD006982",
+  "analysis_name": "Growth (g) at 3 and 6 months",
+  "effect_type": "MD",
+  "k_input": 7,
+  "results": {
+    "I2": 98.94311324873296,
+    "Q": 567.7051011195774,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 7,
+    "funnel_dots": 7,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 7,
+    "p_value": 0.030525664088906446,
+    "pooled": -7.279677190417528,
+    "pooled_hi": -0.6824879516524565,
+    "pooled_lo": -13.8768664291826,
+    "pooled_log": -7.279677190417528,
+    "pooled_se": 3.365234821722567,
+    "tau2": 42.57913074260424
+  }
+}

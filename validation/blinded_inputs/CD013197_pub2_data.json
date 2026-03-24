@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD013197_pub2_data",
+  "cd_number": "CD013197",
+  "analysis_name": "All-cause mortality short-term",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Albers 2022",
+      "year": "2022",
+      "ee": 1.0,
+      "en": 89.0,
+      "ce": 0.0,
+      "cn": 89.0,
+      "effect_estimate": 3.033898,
+      "lower_ci": 0.121855,
+      "upper_ci": 75.536853,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Diaz-Cambronero 2020",
+      "year": "2020",
+      "ee": 1.0,
+      "en": 85.0,
+      "ce": 0.0,
+      "cn": 81.0,
+      "effect_estimate": 2.893491,
+      "lower_ci": 0.116102,
+      "upper_ci": 72.111332,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Madsen 2016",
+      "year": "2016",
+      "ee": 4.0,
+      "en": 55.0,
+      "ce": 3.0,
+      "cn": 55.0,
+      "effect_estimate": 1.359477,
+      "lower_ci": 0.289611,
+      "upper_ci": 6.381595,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Staehr-Rye 2014",
+      "year": "2014",
+      "ee": 3.0,
+      "en": 25.0,
+      "ce": 1.0,
+      "cn": 23.0,
+      "effect_estimate": 3.0,
+      "lower_ci": 0.289108,
+      "upper_ci": 31.130234,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

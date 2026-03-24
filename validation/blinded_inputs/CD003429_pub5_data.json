@@ -1,0 +1,39 @@
+{
+  "dataset_name": "CD003429_pub5_data",
+  "cd_number": "CD003429",
+  "analysis_name": "Annualized joint bleeding rates",
+  "effect_type": "MD",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Gringeri 2011",
+      "year": "2011",
+      "en": 21.0,
+      "cn": 19.0,
+      "effect_estimate": -3.81,
+      "lower_ci": -6.107101,
+      "upper_ci": -1.512899,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Manco-Johnson 2007",
+      "year": "2007",
+      "en": 32.0,
+      "cn": 33.0,
+      "effect_estimate": -4.26,
+      "lower_ci": -5.565043,
+      "upper_ci": -2.954957,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Verma 2016",
+      "year": "2016",
+      "en": 11.0,
+      "cn": 10.0,
+      "effect_estimate": -4.61,
+      "lower_ci": -7.302156,
+      "upper_ci": -1.917844,
+      "effect_type": "MD"
+    }
+  ]
+}

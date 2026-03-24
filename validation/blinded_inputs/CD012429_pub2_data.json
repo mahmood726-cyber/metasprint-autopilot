@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD012429_pub2_data",
+  "cd_number": "CD012429",
+  "analysis_name": "Total serious adverse events/effects",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Potkin 2015",
+      "year": "2002",
+      "ee": 9.0,
+      "en": 67.0,
+      "ce": 1.0,
+      "cn": 23.0,
+      "effect_estimate": 3.413793,
+      "lower_ci": 0.408152,
+      "upper_ci": 28.553012,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "NCT02199743",
+      "year": "2013",
+      "ee": 1.0,
+      "en": 14.0,
+      "ce": 0.0,
+      "cn": 8.0,
+      "effect_estimate": 1.888889,
+      "lower_ci": 0.068673,
+      "upper_ci": 51.955253,
+      "effect_type": "OR",
+      "cc_applied": true
+    }
+  ]
+}

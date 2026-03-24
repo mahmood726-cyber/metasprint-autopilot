@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015802_pub2_data",
+  "cd_number": "CD015802",
+  "analysis_name": "Apnea: number of infants with at least 1 episode (interruption of breathing for more than 20 seconds, or as defined by the authors) in the 7 days after treatment discontinued",
+  "effect_type": "OR",
+  "k_input": 2,
+  "results": {
+    "I2": 30.801975338738202,
+    "Q": 1.4451279568964583,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 2,
+    "funnel_dots": 2,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 2,
+    "p_value": 0.23307644145228767,
+    "pooled": 0.5649057956607971,
+    "pooled_hi": 1.4445130606532572,
+    "pooled_lo": 0.2209177380693548,
+    "pooled_log": -0.5710962950809673,
+    "pooled_se": 0.4789180840561024,
+    "tau2": 0.14267805896992114
+  }
+}

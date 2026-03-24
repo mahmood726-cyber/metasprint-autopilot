@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD007491_pub3_data",
+  "cd_number": "CD007491",
+  "analysis_name": "Mortality at 3 months using IPD",
+  "effect_type": "MD",
+  "k_input": 3,
+  "results": {
+    "I2": 14.511593079914398,
+    "Q": 2.339498502843311,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 3,
+    "funnel_dots": 3,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 3,
+    "p_value": 0.8451607638732896,
+    "pooled": -0.06258571152007751,
+    "pooled_hi": 0.5656519581237696,
+    "pooled_lo": -0.6908233811639246,
+    "pooled_log": -0.06258571152007751,
+    "pooled_se": 0.3204648533924826,
+    "tau2": 0.0665665256443472
+  }
+}

@@ -37542,5 +37542,153 @@ function checkLivingEvidence(){
     });
   }
   </script>
+  <script>
+    window.__webrValidationConfig = {
+      appName: 'MetaSprint Autopilot',
+      intro: 'Reviewer-facing WebR parity checks for the live pairwise meta-analysis. Run a meta-analysis in the Analyze tab, then click Run.',
+      autoRun: false,
+      webRTimeoutMs: 180000,
+      webRAttempts: 2,
+    ready: async (helpers) => {
+      await helpers.waitFor(() => {
+        return !!(
+          window._lastAnalysisResult &&
+          Array.isArray(window._lastAnalysisResult.studyResults) &&
+          window._lastAnalysisResult.studyResults.length >= 2
+        );
+      }, 15000, 150);
+    },
+    tests: [
+      {
+        name: 'Pooled effect and confidence interval',
+        collect: () => {
+          const result = window._lastAnalysisResult;
+          const studies = Array.isArray(result?.studyResults) ? result.studyResults : [];
+          const methodLabel = String(result?.method || 'DL');
+          const normalized = methodLabel.toLowerCase();
+          const mapping = {
+            'dl': { rMethod: 'DL', rTest: 'z' },
+            'dl+hksj': { rMethod: 'DL', rTest: 'knha' },
+            'reml': { rMethod: 'REML', rTest: 'z' },
+            'reml+hksj': { rMethod: 'REML', rTest: 'knha' },
+            'fixed effect': { rMethod: 'FE', rTest: 'z' },
+            'fe': { rMethod: 'FE', rTest: 'z' },
+          };
+          const metaMap = mapping[normalized];
+          return {
+            supported: !!metaMap,
+            methodLabel,
+            rMethod: metaMap?.rMethod || '',
+            rTest: metaMap?.rTest || '',
+            yi: studies.map((s) => Number(s.yi)),
+            vi: studies.map((s) => Number(s.vi)),
+            pooled: Number(result?.isRatio ? Math.log(result?.pooled ?? 1) : result?.pooled ?? NaN),
+            pooledLo: Number(result?.isRatio ? Math.log(result?.pooledLo ?? 1) : result?.pooledLo ?? NaN),
+            pooledHi: Number(result?.isRatio ? Math.log(result?.pooledHi ?? 1) : result?.pooledHi ?? NaN),
+            tau2: Number(result?.tau2 ?? 0),
+            q: Number(result?.Q ?? NaN),
+            i2: Number(result?.I2 ?? NaN),
+            k: Number(result?.k ?? studies.length ?? 0),
+          };
+        },
+        r: (payload, helpers) => {
+          if (!payload.supported) {
+            return 'cat("FAIL|Current method is not supported for WebR parity. Switch to FE, DL, DL+HKSJ, REML, or REML+HKSJ.")';
+          }
+          return `
+method_label <- ${helpers.rString(payload.methodLabel)}
+if (!requireNamespace("metafor", quietly = TRUE)) webr::install("metafor", quiet = TRUE)
+suppressPackageStartupMessages(library(metafor))
+yi <- ${helpers.rVector(payload.yi)}
+vi <- ${helpers.rVector(payload.vi)}
+  fit <- rma(yi = yi, vi = vi, method = "${payload.rMethod}", test = "${payload.rTest}")
+  r_est <- as.numeric(fit$b[1,1])
+  r_lo <- as.numeric(fit$ci.lb)
+  r_hi <- as.numeric(fit$ci.ub)
+  d_est <- abs(r_est - ${payload.pooled})
+  d_lo <- abs(r_lo - ${payload.pooledLo})
+  d_hi <- abs(r_hi - ${payload.pooledHi})
+  ok <- d_est <= 5e-4 && d_lo <= 1e-3 && d_hi <= 1e-3
+  status_line <- paste0(
+    if (ok) "PASS|" else "FAIL|",
+    sprintf(
+      "method=%s; effect diff=%.6f; CI diffs=[%.6f, %.6f]",
+      method_label,
+      d_est,
+      d_lo,
+      d_hi
+    )
+  )
+  cat(status_line)
+  status_line
+  `;
+          },
+        },
+      {
+        name: 'Heterogeneity statistics',
+        collect: () => {
+          const result = window._lastAnalysisResult;
+          const studies = Array.isArray(result?.studyResults) ? result.studyResults : [];
+          const methodLabel = String(result?.method || 'DL');
+          const normalized = methodLabel.toLowerCase();
+          const mapping = {
+            'dl': { rMethod: 'DL', rTest: 'z' },
+            'dl+hksj': { rMethod: 'DL', rTest: 'knha' },
+            'reml': { rMethod: 'REML', rTest: 'z' },
+            'reml+hksj': { rMethod: 'REML', rTest: 'knha' },
+            'fixed effect': { rMethod: 'FE', rTest: 'z' },
+            'fe': { rMethod: 'FE', rTest: 'z' },
+          };
+          const metaMap = mapping[normalized];
+          return {
+            supported: !!metaMap,
+            methodLabel,
+            rMethod: metaMap?.rMethod || '',
+            rTest: metaMap?.rTest || '',
+            yi: studies.map((s) => Number(s.yi)),
+            vi: studies.map((s) => Number(s.vi)),
+            tau2: Number(result?.tau2 ?? 0),
+            q: Number(result?.Q ?? NaN),
+            i2: Number(result?.I2 ?? NaN),
+            k: Number(result?.k ?? studies.length ?? 0),
+          };
+        },
+        r: (payload, helpers) => {
+          if (!payload.supported) {
+            return 'cat("FAIL|Current method is not supported for WebR parity. Switch to FE, DL, DL+HKSJ, REML, or REML+HKSJ.")';
+          }
+          return `
+method_label <- ${helpers.rString(payload.methodLabel)}
+if (!requireNamespace("metafor", quietly = TRUE)) webr::install("metafor", quiet = TRUE)
+suppressPackageStartupMessages(library(metafor))
+yi <- ${helpers.rVector(payload.yi)}
+vi <- ${helpers.rVector(payload.vi)}
+fit <- rma(yi = yi, vi = vi, method = "${payload.rMethod}", test = "${payload.rTest}")
+r_tau2 <- as.numeric(fit$tau2)
+r_q <- as.numeric(fit$QE)
+  r_i2 <- if (length(yi) > 1 && is.finite(r_q) && r_q > 0) max(0, (r_q - (length(yi) - 1)) / r_q * 100) else 0
+  d_tau2 <- abs(r_tau2 - ${payload.tau2})
+  d_q <- abs(r_q - ${payload.q})
+  d_i2 <- abs(r_i2 - ${payload.i2})
+  ok <- d_tau2 <= 1e-3 && d_q <= 1e-2 && d_i2 <= 0.5
+  status_line <- paste0(
+    if (ok) "PASS|" else "FAIL|",
+    sprintf(
+      "method=%s; tau2 diff=%.6f; Q diff=%.6f; I2 diff=%.4f",
+      method_label,
+      d_tau2,
+      d_q,
+      d_i2
+    )
+  )
+  cat(status_line)
+  status_line
+  `;
+          },
+        },
+      ],
+  };
+  </script>
+  <script src="webr-reviewer-validation.js?v=20260319"></script>
 </body>
 </html>

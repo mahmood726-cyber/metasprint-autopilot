@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013078_pub2_data",
+  "cd_number": "CD013078",
+  "analysis_name": "Pain intensity at the end of the treatment (6 months)",
+  "effect_type": "MD",
+  "k_input": 4,
+  "results": {
+    "I2": 81.24523990788795,
+    "Q": 15.995939085681785,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 4,
+    "funnel_dots": 4,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 4,
+    "p_value": 0.821558879527009,
+    "pooled": -2.417416884944327,
+    "pooled_hi": 18.59473408537273,
+    "pooled_lo": -23.429567855261382,
+    "pooled_log": -2.417416884944327,
+    "pooled_se": 10.718325572518962,
+    "tau2": 356.49913819570787
+  }
+}

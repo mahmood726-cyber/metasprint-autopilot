@@ -1,0 +1,9 @@
+# MetaSprint Autopilot — Python dependencies
+# Core validation and testing
+selenium>=4.15.0
+pytest>=7.4.0
+
+# Pipeline (CT.gov harvesting, data processing)
+requests>=2.31.0
+
+# No numpy/scipy required — all statistical computation is in JavaScript

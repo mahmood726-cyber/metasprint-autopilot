@@ -1,0 +1,49 @@
+{
+  "dataset_name": "CD011600_pub3_data",
+  "cd_number": "CD011600",
+  "analysis_name": "Moderate-to-severe exacerbations (Rate)",
+  "effect_type": "MD",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Ferguson 2018",
+      "year": "2018",
+      "effect_estimate": -0.73397,
+      "lower_ci": -1.008014,
+      "upper_ci": -0.459926,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Lipson 2018",
+      "year": "2018",
+      "effect_estimate": -0.28768,
+      "lower_ci": -0.360666,
+      "upper_ci": -0.214694,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Papi 2018",
+      "year": "2018",
+      "effect_estimate": -0.16487,
+      "lower_ci": -0.324564,
+      "upper_ci": -0.005176,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Rabe 2020 (160 \u03bcg budesonide)",
+      "year": "2020",
+      "effect_estimate": -0.287682,
+      "lower_ci": -0.400797,
+      "upper_ci": -0.174567,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Rabe 2020 (320 \u03bcg budesonide)",
+      "year": "2020",
+      "effect_estimate": -0.274437,
+      "lower_ci": -0.387552,
+      "upper_ci": -0.161322,
+      "effect_type": "MD"
+    }
+  ]
+}

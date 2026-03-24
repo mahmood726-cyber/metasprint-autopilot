@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD011851_pub3_data",
+  "cd_number": "CD011851",
+  "analysis_name": "Fatal cardiovascular events",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Bermon 2021",
+      "year": "2021",
+      "ee": 2.0,
+      "en": 462.0,
+      "ce": 3.0,
+      "cn": 468.0,
+      "effect_estimate": 0.673913,
+      "lower_ci": 0.112042,
+      "upper_ci": 4.05346,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Chen 2019",
+      "year": "2019",
+      "ee": 21.0,
+      "en": 252.0,
+      "ce": 24.0,
+      "cn": 260.0,
+      "effect_estimate": 0.893939,
+      "lower_ci": 0.484153,
+      "upper_ci": 1.650569,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Khonsari 2015",
+      "year": "2015",
+      "ee": 0.0,
+      "en": 31.0,
+      "ce": 2.0,
+      "cn": 31.0,
+      "effect_estimate": 0.187302,
+      "lower_ci": 0.008623,
+      "upper_ci": 4.068399,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Passaglia 2021",
+      "year": "2021",
+      "ee": 1.0,
+      "en": 77.0,
+      "ce": 1.0,
+      "cn": 73.0,
+      "effect_estimate": 0.947368,
+      "lower_ci": 0.058125,
+      "upper_ci": 15.441106,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

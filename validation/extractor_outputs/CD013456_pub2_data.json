@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013456_pub2_data",
+  "cd_number": "CD013456",
+  "analysis_name": "Psychosocial interventions versus inactive control; outcome 1: PTSD symptoms, post-treatment",
+  "effect_type": "MD",
+  "k_input": 25,
+  "results": {
+    "I2": 93.26740207185077,
+    "Q": 356.4745772156562,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 25,
+    "funnel_dots": 25,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 25,
+    "p_value": 0.00012568294167603078,
+    "pooled": -8.783592601455004,
+    "pooled_hi": -4.293381972287348,
+    "pooled_lo": -13.27380323062266,
+    "pooled_log": -8.783592601455004,
+    "pooled_se": 2.2904622892055087,
+    "tau2": 109.01148485395053
+  }
+}

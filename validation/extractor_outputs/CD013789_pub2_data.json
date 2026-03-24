@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013789_pub2_data",
+  "cd_number": "CD013789",
+  "analysis_name": "Scar improvement (VSS) (PGT vs other scar management therapy)",
+  "effect_type": "MD",
+  "k_input": 4,
+  "results": {
+    "I2": 61.50643934853422,
+    "Q": 7.7935113022228695,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 4,
+    "funnel_dots": 4,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 4,
+    "p_value": 0.8136505357682999,
+    "pooled": 0.10809120390025034,
+    "pooled_hi": 1.0070476552491157,
+    "pooled_lo": -0.7908652474486149,
+    "pooled_log": 0.10809120390025034,
+    "pooled_se": 0.4585588564771317,
+    "tau2": 0.4999113798464452
+  }
+}

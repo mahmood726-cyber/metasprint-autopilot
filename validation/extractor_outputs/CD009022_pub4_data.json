@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD009022_pub4_data",
+  "cd_number": "CD009022",
+  "analysis_name": "Postoperative pain at 12 hours",
+  "effect_type": "MD",
+  "k_input": 6,
+  "results": {
+    "I2": 82.01209765240388,
+    "Q": 27.79645955031657,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 6,
+    "p_value": 0.23645116534588428,
+    "pooled": -0.3295735787489639,
+    "pooled_hi": 0.21615845012336127,
+    "pooled_lo": -0.8753056076212891,
+    "pooled_log": -0.3295735787489639,
+    "pooled_se": 0.2783786185939744,
+    "tau2": 0.37414201861607077
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD012642_pub2_data",
+  "cd_number": "CD012642",
+  "analysis_name": "Mortality (latest time reported up to hospital discharge)",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Costarino 1992",
+      "year": "1992;120 MISC3 - J Pediatr. 1992 Jan",
+      "ee": 3.0,
+      "en": 8.0,
+      "ce": 3.0,
+      "cn": 9.0,
+      "effect_estimate": 1.2,
+      "lower_ci": 0.163576,
+      "upper_ci": 8.803258,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Hartnoll 2000",
+      "year": "2000",
+      "ee": 3.0,
+      "en": 24.0,
+      "ce": 3.0,
+      "cn": 22.0,
+      "effect_estimate": 0.904762,
+      "lower_ci": 0.162533,
+      "upper_ci": 5.036489,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Isemann 2016",
+      "year": "2016;40 MISC3 - JPEN J Parenter Enteral Nutr. 2016 Mar",
+      "ee": 0.0,
+      "en": 23.0,
+      "ce": 4.0,
+      "cn": 26.0,
+      "effect_estimate": 0.106383,
+      "lower_ci": 0.005409,
+      "upper_ci": 2.092437,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Shaffer 1989",
+      "year": "1989",
+      "ee": 5.0,
+      "en": 10.0,
+      "ce": 2.0,
+      "cn": 10.0,
+      "effect_estimate": 4.0,
+      "lower_ci": 0.549661,
+      "upper_ci": 29.10887,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

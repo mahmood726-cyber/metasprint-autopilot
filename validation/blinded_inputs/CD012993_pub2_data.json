@@ -1,0 +1,59 @@
+{
+  "dataset_name": "CD012993_pub2_data",
+  "cd_number": "CD012993",
+  "analysis_name": "Change in 6MWT from baseline",
+  "effect_type": "MD",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Van der Ploeg 2010",
+      "year": "2011",
+      "en": 60.0,
+      "cn": 30.0,
+      "effect_estimate": 30.95,
+      "lower_ci": 7.973531,
+      "upper_ci": 53.926469,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Koeberl 2018",
+      "year": "2018",
+      "en": 7.0,
+      "cn": 4.0,
+      "effect_estimate": 11.212,
+      "lower_ci": -65.543848,
+      "upper_ci": 87.967848,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Koeberl 2019",
+      "year": "2019",
+      "en": 3.0,
+      "cn": 2.0,
+      "effect_estimate": -8.0,
+      "lower_ci": -89.378076,
+      "upper_ci": 73.378076,
+      "effect_type": "MD"
+    },
+    {
+      "study": "PROPEL 2021",
+      "year": "2021",
+      "en": 85.0,
+      "cn": 37.0,
+      "effect_estimate": 8.0,
+      "lower_ci": -2.978946,
+      "upper_ci": 18.978946,
+      "effect_type": "MD"
+    },
+    {
+      "study": "COMET 2021",
+      "year": "2021",
+      "en": 51.0,
+      "cn": 49.0,
+      "effect_estimate": 30.02,
+      "lower_ci": 1.83085,
+      "upper_ci": 58.20915,
+      "effect_type": "MD"
+    }
+  ]
+}

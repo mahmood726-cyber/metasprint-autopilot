@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013822_pub2_data",
+  "cd_number": "CD013822",
+  "analysis_name": "Confidence - decisional conflict - continuous",
+  "effect_type": "MD",
+  "k_input": 7,
+  "results": {
+    "I2": 79.60290854239501,
+    "Q": 29.415958704067684,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 7,
+    "funnel_dots": 7,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 7,
+    "p_value": 0.6317548439641172,
+    "pooled": -0.15988067729208874,
+    "pooled_hi": 0.4941073965278232,
+    "pooled_lo": -0.8138687511120007,
+    "pooled_log": -0.15988067729208874,
+    "pooled_se": 0.333600168095528,
+    "tau2": 0.2603569886429458
+  }
+}

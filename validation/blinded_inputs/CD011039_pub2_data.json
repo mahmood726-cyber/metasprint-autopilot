@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD011039_pub2_data",
+  "cd_number": "CD011039",
+  "analysis_name": "All-cause mortality",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Gin\u00e8s 2002",
+      "year": "2002",
+      "ee": 20.0,
+      "en": 35.0,
+      "ce": 18.0,
+      "cn": 35.0,
+      "effect_estimate": 1.259259,
+      "lower_ci": 0.490768,
+      "upper_ci": 3.231127,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "R\u00f6ssle 2000",
+      "year": "2000",
+      "ee": 15.0,
+      "en": 29.0,
+      "ce": 23.0,
+      "cn": 31.0,
+      "effect_estimate": 0.372671,
+      "lower_ci": 0.125869,
+      "upper_ci": 1.103396,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

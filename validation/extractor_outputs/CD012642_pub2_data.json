@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD012642_pub2_data",
+  "cd_number": "CD012642",
+  "analysis_name": "Mortality (latest time reported up to hospital discharge)",
+  "effect_type": "OR",
+  "k_input": 4,
+  "results": {
+    "I2": 25.827992603794712,
+    "Q": 4.0446525654548795,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 4,
+    "funnel_dots": 4,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 4,
+    "p_value": 0.9069966261137117,
+    "pooled": 1.0745876541163313,
+    "pooled_hi": 3.5932523572270685,
+    "pooled_lo": 0.32136307489139393,
+    "pooled_log": 0.07193701042873041,
+    "pooled_se": 0.615753856844731,
+    "tau2": 0.39356829779319
+  }
+}

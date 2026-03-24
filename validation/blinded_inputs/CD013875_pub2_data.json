@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD013875_pub2_data",
+  "cd_number": "CD013875",
+  "analysis_name": "Live birth (or ongoing pregnancy) \u2013 low risk of bias",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Baybordi 2022",
+      "year": "2022",
+      "ee": 9.0,
+      "en": 48.0,
+      "ce": 8.0,
+      "cn": 46.0,
+      "effect_estimate": 1.096154,
+      "lower_ci": 0.382749,
+      "upper_ci": 3.139269,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Selvaraj 2019",
+      "year": "2019",
+      "ee": 19.0,
+      "en": 56.0,
+      "ce": 28.0,
+      "cn": 76.0,
+      "effect_estimate": 0.880309,
+      "lower_ci": 0.426993,
+      "upper_ci": 1.814887,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Herlihy 2022",
+      "year": "2022",
+      "ee": 7.0,
+      "en": 38.0,
+      "ce": 6.0,
+      "cn": 35.0,
+      "effect_estimate": 1.091398,
+      "lower_ci": 0.327897,
+      "upper_ci": 3.632691,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

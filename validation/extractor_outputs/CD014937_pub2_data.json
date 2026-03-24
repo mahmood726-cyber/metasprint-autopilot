@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014937_pub2_data",
+  "cd_number": "CD014937",
+  "analysis_name": "Acute kidney injury",
+  "effect_type": "OR",
+  "k_input": 43,
+  "results": {
+    "I2": 64.68521424840795,
+    "Q": 118.93035482483864,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 43,
+    "funnel_dots": 43,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 43,
+    "p_value": 0.001665631790440436,
+    "pooled": 0.6665659724710757,
+    "pooled_hi": 0.8583742440885571,
+    "pooled_lo": 0.5176182751476781,
+    "pooled_log": -0.4056161608094356,
+    "pooled_se": 0.12900516419090785,
+    "tau2": 0.3792239355775567
+  }
+}

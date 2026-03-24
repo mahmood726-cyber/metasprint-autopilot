@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD012942_pub2_data",
+  "cd_number": "CD012942",
+  "analysis_name": "Comparison 1 All antidepressants versus placebo, Outcome 1 Rate of treatment response measured as a reduction of at least 50% on the HAM-A",
+  "effect_type": "OR",
+  "k_input": 36,
+  "results": {
+    "I2": 68.81252675817585,
+    "Q": 112.22454518393957,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 36,
+    "funnel_dots": 36,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 36,
+    "p_value": 3.0358160429955205e-10,
+    "pooled": 1.6607712473970428,
+    "pooled_hi": 1.944869422362012,
+    "pooled_lo": 1.4181729140617514,
+    "pooled_log": 0.5072821013377888,
+    "pooled_se": 0.0805514935196055,
+    "tau2": 0.15290024801835692
+  }
+}

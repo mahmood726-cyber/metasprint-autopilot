@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD006689_pub3_data",
+  "cd_number": "CD006689",
+  "analysis_name": "Maternal peripheral parasitaemia at delivery (amplification techniques)",
+  "effect_type": "OR",
+  "k_input": 12,
+  "results": {
+    "I2": 30.679446586878946,
+    "Q": 15.868309553798095,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 12,
+    "funnel_dots": 12,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 12,
+    "p_value": 8.569528694213346e-06,
+    "pooled": 0.45153046395933055,
+    "pooled_hi": 0.64089849748479,
+    "pooled_lo": 0.3181155216987645,
+    "pooled_log": -0.7951124356231417,
+    "pooled_se": 0.17865188679151697,
+    "tau2": 0.11001776189442605
+  }
+}

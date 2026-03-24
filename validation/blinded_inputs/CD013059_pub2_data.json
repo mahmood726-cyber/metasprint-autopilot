@@ -1,0 +1,189 @@
+{
+  "dataset_name": "CD013059_pub2_data",
+  "cd_number": "CD013059",
+  "analysis_name": "Depressive symptomatology",
+  "effect_type": "MD",
+  "k": 18,
+  "studies": [
+    {
+      "study": "Abraham 1992",
+      "year": "1992",
+      "en": 30.0,
+      "cn": 13.0,
+      "effect_estimate": -2.61,
+      "lower_ci": -5.100095,
+      "upper_ci": -0.119905,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Bailey 2017",
+      "year": "2017",
+      "en": 26.0,
+      "cn": 25.0,
+      "effect_estimate": -4.83,
+      "lower_ci": -7.462557,
+      "upper_ci": -2.197443,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Daleo 1999",
+      "year": "1999",
+      "en": 13.0,
+      "cn": 12.0,
+      "effect_estimate": -7.5,
+      "lower_ci": -8.390051,
+      "upper_ci": -6.609949,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Dhooper 1993",
+      "year": "1993",
+      "en": 8.0,
+      "cn": 6.0,
+      "effect_estimate": -15.58,
+      "lower_ci": -27.709953,
+      "upper_ci": -3.450047,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hamzehzadeh 2018",
+      "year": "2018",
+      "en": 10.0,
+      "cn": 11.0,
+      "effect_estimate": -3.8,
+      "lower_ci": -6.45533,
+      "upper_ci": -1.14467,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hansen 1976",
+      "year": "1976",
+      "en": 11.0,
+      "cn": 11.0,
+      "effect_estimate": -9.1,
+      "lower_ci": -12.276478,
+      "upper_ci": -5.923522,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hussian 1979",
+      "year": "1979",
+      "en": 24.0,
+      "cn": 12.0,
+      "effect_estimate": -6.67,
+      "lower_ci": -12.252016,
+      "upper_ci": -1.087984,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Karimi 2010",
+      "year": "2010",
+      "en": 19.0,
+      "cn": 10.0,
+      "effect_estimate": -2.21,
+      "lower_ci": -4.348779,
+      "upper_ci": -0.071221,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Luo 2020",
+      "year": "2020",
+      "en": 26.0,
+      "cn": 24.0,
+      "effect_estimate": -1.2,
+      "lower_ci": -2.170917,
+      "upper_ci": -0.229083,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Meeks 2008",
+      "year": "2008",
+      "en": 10.0,
+      "cn": 4.0,
+      "effect_estimate": -2.0,
+      "lower_ci": -8.299704,
+      "upper_ci": 4.299704,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Meeks 2015",
+      "year": "2015",
+      "en": 29.0,
+      "cn": 26.0,
+      "effect_estimate": -2.4,
+      "lower_ci": -5.572309,
+      "upper_ci": 0.772309,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Reinhardt 2014",
+      "year": "2014",
+      "en": 10.0,
+      "cn": 15.0,
+      "effect_estimate": -4.5,
+      "lower_ci": -7.808753,
+      "upper_ci": -1.191247,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Sales 2015",
+      "year": "2015",
+      "en": 4.0,
+      "cn": 4.0,
+      "effect_estimate": -7.75,
+      "lower_ci": -18.959868,
+      "upper_ci": 3.459868,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Travers 2017",
+      "year": "2017",
+      "en": 10.0,
+      "cn": 8.0,
+      "effect_estimate": 1.0,
+      "lower_ci": -2.962932,
+      "upper_ci": 4.962932,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Tsai 2008",
+      "year": "2008",
+      "en": 31.0,
+      "cn": 32.0,
+      "effect_estimate": 1.5,
+      "lower_ci": -0.451839,
+      "upper_ci": 3.451839,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Zerhusen 1991",
+      "year": "1991",
+      "en": 19.0,
+      "cn": 19.0,
+      "effect_estimate": -19.21,
+      "lower_ci": -24.164823,
+      "upper_ci": -14.255177,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Dozeman 2011",
+      "year": "2011",
+      "en": 51.0,
+      "cn": 56.0,
+      "effect_estimate": -0.3,
+      "lower_ci": -2.782199,
+      "upper_ci": 2.182199,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hyer 2009",
+      "year": "2009",
+      "en": 13.0,
+      "cn": 12.0,
+      "effect_estimate": -5.5,
+      "lower_ci": -7.607439,
+      "upper_ci": -3.392561,
+      "effect_type": "MD"
+    }
+  ]
+}

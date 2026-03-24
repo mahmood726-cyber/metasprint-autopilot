@@ -1,0 +1,113 @@
+{
+  "dataset_name": "CD012623_pub2_data",
+  "cd_number": "CD012623",
+  "analysis_name": "Macular hole closure",
+  "effect_type": "OR",
+  "k": 8,
+  "studies": [
+    {
+      "study": "Alberti 2016",
+      "year": "2016",
+      "ee": 33.0,
+      "en": 34.0,
+      "ce": 33.0,
+      "cn": 34.0,
+      "effect_estimate": 1.0,
+      "lower_ci": 0.059958,
+      "upper_ci": 16.678324,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Guillaubey 2008",
+      "year": "2008",
+      "ee": 76.0,
+      "en": 78.0,
+      "ce": 63.0,
+      "cn": 72.0,
+      "effect_estimate": 5.428571,
+      "lower_ci": 1.131095,
+      "upper_ci": 26.05386,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Lange 2011",
+      "year": "2011",
+      "ee": 14.0,
+      "en": 15.0,
+      "ce": 9.0,
+      "cn": 15.0,
+      "effect_estimate": 9.333333,
+      "lower_ci": 0.957422,
+      "upper_ci": 90.98509,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Pasu 2020",
+      "year": "2020",
+      "ee": 84.0,
+      "en": 88.0,
+      "ce": 77.0,
+      "cn": 90.0,
+      "effect_estimate": 3.545455,
+      "lower_ci": 1.108356,
+      "upper_ci": 11.341342,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Tadayoni 2011",
+      "year": "2011",
+      "ee": 32.0,
+      "en": 34.0,
+      "ce": 32.0,
+      "cn": 35.0,
+      "effect_estimate": 1.5,
+      "lower_ci": 0.234566,
+      "upper_ci": 9.592187,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Veith 2020",
+      "year": "2020",
+      "ee": 47.0,
+      "en": 53.0,
+      "ce": 40.0,
+      "cn": 51.0,
+      "effect_estimate": 2.154167,
+      "lower_ci": 0.731089,
+      "upper_ci": 6.347294,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Yorston 2012",
+      "year": "2012",
+      "ee": 15.0,
+      "en": 16.0,
+      "ce": 14.0,
+      "cn": 14.0,
+      "effect_estimate": 0.356322,
+      "lower_ci": 0.013402,
+      "upper_ci": 9.473838,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Zhang 2019",
+      "year": "2019",
+      "ee": 36.0,
+      "en": 40.0,
+      "ce": 37.0,
+      "cn": 40.0,
+      "effect_estimate": 0.72973,
+      "lower_ci": 0.15242,
+      "upper_ci": 3.493667,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD016211_data",
+  "cd_number": "CD016211",
+  "analysis_name": "Maternal sepsis",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Oluwalana 2017",
+      "year": "2017",
+      "ee": 4.0,
+      "en": 414.0,
+      "ce": 5.0,
+      "cn": 415.0,
+      "effect_estimate": 0.8,
+      "lower_ci": 0.213243,
+      "upper_ci": 3.001277,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Roca 2023",
+      "year": "2023",
+      "ee": 8.0,
+      "en": 5802.0,
+      "ce": 13.0,
+      "cn": 5823.0,
+      "effect_estimate": 0.617084,
+      "lower_ci": 0.255528,
+      "upper_ci": 1.490217,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Subramaniam 2021",
+      "year": "2021",
+      "ee": 8.0,
+      "en": 506.0,
+      "ce": 5.0,
+      "cn": 250.0,
+      "effect_estimate": 0.787149,
+      "lower_ci": 0.254779,
+      "upper_ci": 2.431919,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Tita 2023",
+      "year": "2023",
+      "ee": 219.0,
+      "en": 14558.0,
+      "ce": 339.0,
+      "cn": 14662.0,
+      "effect_estimate": 0.645297,
+      "lower_ci": 0.543583,
+      "upper_ci": 0.766043,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

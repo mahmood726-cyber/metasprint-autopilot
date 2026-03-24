@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015014_pub2_data",
+  "cd_number": "CD015014",
+  "analysis_name": "ED visits (proportion of residents with at least one ED visit)",
+  "effect_type": "OR",
+  "k_input": 7,
+  "results": {
+    "I2": 0,
+    "Q": 5.03145218358055,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 7,
+    "funnel_dots": 7,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 7,
+    "p_value": 0.73204809573044,
+    "pooled": 1.0554404300926747,
+    "pooled_hi": 1.4374786715394776,
+    "pooled_lo": 0.7749363684688365,
+    "pooled_log": 0.05395814909412988,
+    "pooled_se": 0.1575868742711106,
+    "tau2": 0
+  }
+}

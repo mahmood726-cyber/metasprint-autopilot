@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD007569_pub4_data",
+  "cd_number": "CD007569",
+  "analysis_name": "Return to work",
+  "effect_type": "OR",
+  "k_input": 5,
+  "results": {
+    "I2": 0,
+    "Q": 2.600551369830967,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 5,
+    "funnel_dots": 5,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 5,
+    "p_value": 0.29429995952178967,
+    "pooled": 1.2788518714424817,
+    "pooled_hi": 2.0253435012874452,
+    "pooled_lo": 0.8074986332206499,
+    "pooled_log": 0.24596269997277825,
+    "pooled_se": 0.2345326507919388,
+    "tau2": 0
+  }
+}

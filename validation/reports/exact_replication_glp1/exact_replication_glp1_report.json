@@ -1,0 +1,440 @@
+{
+  "timestamp_utc": "2026-02-27T18:43:20.213860+00:00",
+  "elapsed_sec": 7.4,
+  "reference": {
+    "title": "Cardiovascular risk reduction with GLP-1 receptor agonists is proportional to HbA1c lowering in type 2 diabetes",
+    "doi": "10.1111/dom.70121",
+    "pmid": "40926380",
+    "pmc": "PMC12587236",
+    "journal": "Diabetes, Obesity & Metabolism",
+    "year": 2025
+  },
+  "summary": {
+    "k": 10,
+    "total_n": 73263,
+    "checks_passed": 11,
+    "checks_total": 11,
+    "all_passed": true,
+    "verdict": "PASS"
+  },
+  "trials": [
+    {
+      "name": "ELIXA",
+      "year": 2015,
+      "drug": "Lixisenatide",
+      "route": "SC",
+      "n": 6068,
+      "hr": 1.02,
+      "hr_lo": 0.89,
+      "hr_hi": 1.17,
+      "hba1c_delta": 0.27,
+      "weight_delta": 0.7,
+      "source_pmid": "26389183",
+      "source_journal": "N Engl J Med"
+    },
+    {
+      "name": "LEADER",
+      "year": 2016,
+      "drug": "Liraglutide",
+      "route": "SC",
+      "n": 9340,
+      "hr": 0.87,
+      "hr_lo": 0.78,
+      "hr_hi": 0.97,
+      "hba1c_delta": 0.4,
+      "weight_delta": 2.3,
+      "source_pmid": "27295427",
+      "source_journal": "N Engl J Med"
+    },
+    {
+      "name": "SUSTAIN-6",
+      "year": 2016,
+      "drug": "Semaglutide (SC)",
+      "route": "SC",
+      "n": 3297,
+      "hr": 0.74,
+      "hr_lo": 0.58,
+      "hr_hi": 0.95,
+      "hba1c_delta": 0.85,
+      "weight_delta": 3.61,
+      "source_pmid": "27633186",
+      "source_journal": "N Engl J Med"
+    },
+    {
+      "name": "EXSCEL",
+      "year": 2017,
+      "drug": "Exenatide",
+      "route": "SC",
+      "n": 14752,
+      "hr": 0.91,
+      "hr_lo": 0.83,
+      "hr_hi": 1.0,
+      "hba1c_delta": 0.53,
+      "weight_delta": 1.27,
+      "source_pmid": "28881995",
+      "source_journal": "N Engl J Med"
+    },
+    {
+      "name": "Harmony Outcomes",
+      "year": 2018,
+      "drug": "Albiglutide",
+      "route": "SC",
+      "n": 9463,
+      "hr": 0.78,
+      "hr_lo": 0.68,
+      "hr_hi": 0.9,
+      "hba1c_delta": 0.52,
+      "weight_delta": 0.83,
+      "source_pmid": "30291013",
+      "source_journal": "Lancet"
+    },
+    {
+      "name": "PIONEER 6",
+      "year": 2019,
+      "drug": "Semaglutide (oral)",
+      "route": "PO",
+      "n": 3183,
+      "hr": 0.79,
+      "hr_lo": 0.57,
+      "hr_hi": 1.11,
+      "hba1c_delta": 0.7,
+      "weight_delta": 3.4,
+      "source_pmid": "31185157",
+      "source_journal": "N Engl J Med"
+    },
+    {
+      "name": "REWIND",
+      "year": 2019,
+      "drug": "Dulaglutide",
+      "route": "SC",
+      "n": 9901,
+      "hr": 0.88,
+      "hr_lo": 0.79,
+      "hr_hi": 0.99,
+      "hba1c_delta": 0.61,
+      "weight_delta": 1.46,
+      "source_pmid": "31189511",
+      "source_journal": "Lancet"
+    },
+    {
+      "name": "AMPLITUDE-O",
+      "year": 2021,
+      "drug": "Efpeglenatide",
+      "route": "SC",
+      "n": 4076,
+      "hr": 0.73,
+      "hr_lo": 0.58,
+      "hr_hi": 0.92,
+      "hba1c_delta": 1.24,
+      "weight_delta": 2.6,
+      "source_pmid": "34710927",
+      "source_journal": "N Engl J Med"
+    },
+    {
+      "name": "FLOW",
+      "year": 2024,
+      "drug": "Semaglutide (SC)",
+      "route": "SC",
+      "n": 3533,
+      "hr": 0.82,
+      "hr_lo": 0.68,
+      "hr_hi": 0.98,
+      "hba1c_delta": 0.81,
+      "weight_delta": 4.1,
+      "source_pmid": "38785209",
+      "source_journal": "N Engl J Med"
+    },
+    {
+      "name": "SOUL",
+      "year": 2025,
+      "drug": "Semaglutide (oral)",
+      "route": "PO",
+      "n": 9650,
+      "hr": 0.86,
+      "hr_lo": 0.77,
+      "hr_hi": 0.96,
+      "hba1c_delta": 0.56,
+      "weight_delta": 2.95,
+      "source_pmid": "40162642",
+      "source_journal": "N Engl J Med"
+    }
+  ],
+  "dl_results": {
+    "pooled_hr": 0.8625368507417515,
+    "pooled_ci_lo": 0.8165517433382713,
+    "pooled_ci_hi": 0.91111166555834,
+    "tau2": 0.002302403282649152,
+    "I2": 31.309776290578593,
+    "Q": 13.102301192193641,
+    "k": 10
+  },
+  "published": {
+    "pooled_hr": 0.86,
+    "pooled_ci_lo": 0.82,
+    "pooled_ci_hi": 0.91,
+    "I2": 31.3,
+    "total_n": 73263,
+    "k": 10,
+    "reg_hba1c_slope": -0.31,
+    "reg_hba1c_slope_lo": -0.54,
+    "reg_hba1c_slope_hi": -0.08,
+    "reg_hba1c_p": 0.015,
+    "reg_hba1c_R2": 0.61,
+    "reg_weight_slope": -0.04,
+    "reg_weight_slope_lo": -0.1,
+    "reg_weight_slope_hi": 0.02,
+    "reg_weight_p": 0.14,
+    "reg_weight_R2": 0.21
+  },
+  "comparisons": [
+    {
+      "label": "Pooled HR (MACE)",
+      "computed": 0.862537,
+      "published": 0.86,
+      "difference": 0.002537,
+      "tolerance": 0.02,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "CI lower bound",
+      "computed": 0.816552,
+      "published": 0.82,
+      "difference": 0.003448,
+      "tolerance": 0.03,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "CI upper bound",
+      "computed": 0.911112,
+      "published": 0.91,
+      "difference": 0.001112,
+      "tolerance": 0.03,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "I-squared (%)",
+      "computed": 31.309776,
+      "published": 31.3,
+      "difference": 0.009776,
+      "tolerance": 5.0,
+      "unit": "%",
+      "passed": true
+    },
+    {
+      "label": "Number of studies (k)",
+      "computed": 10,
+      "published": 10,
+      "difference": 0,
+      "tolerance": 0,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "Total participants",
+      "computed": 73263,
+      "published": 73263,
+      "difference": 0,
+      "tolerance": 0,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "HbA1c regression slope",
+      "computed": -0.31139,
+      "published": -0.31,
+      "difference": 0.00139,
+      "tolerance": 0.1,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "HbA1c slope within published CI",
+      "computed": -0.3114,
+      "published": "[-0.54, -0.08]",
+      "passed": true,
+      "difference": "N/A",
+      "tolerance": "within CI",
+      "unit": ""
+    },
+    {
+      "label": "HbA1c regression R\u00b2",
+      "computed": 0.579766,
+      "published": 0.61,
+      "difference": 0.030234,
+      "tolerance": 0.2,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "Weight regression slope",
+      "computed": -0.041756,
+      "published": -0.04,
+      "difference": 0.001756,
+      "tolerance": 0.1,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "Weight slope not significant (p>0.05)",
+      "computed": 0.0962,
+      "published": "p=0.14 (not significant)",
+      "passed": true,
+      "difference": "N/A",
+      "tolerance": "p>0.05",
+      "unit": ""
+    }
+  ],
+  "meta_regression": {
+    "hba1c": {
+      "intercept": 0.0294548674717367,
+      "slope": -0.31139012409954503,
+      "slope_se": 0.09373016219487389,
+      "slope_ci_lo": -0.4950978662665956,
+      "slope_ci_hi": -0.1276823819324945,
+      "t_stat": -3.322197644896159,
+      "p_value": 0.0008931140682739702,
+      "R2": 0.5797656573976159,
+      "k": 10
+    },
+    "weight": {
+      "intercept": -0.06449995248329335,
+      "slope": -0.041756149414361884,
+      "slope_se": 0.025103505476507,
+      "slope_ci_lo": -0.0909581160340196,
+      "slope_ci_hi": 0.007445817205295829,
+      "t_stat": -1.663359304677157,
+      "p_value": 0.09624053406817112,
+      "R2": 0.256972673601064,
+      "k": 10
+    }
+  },
+  "js_verification": {
+    "I2": 31.30977629057861,
+    "Q": 13.102301192193645,
+    "ci_hi": 0.91111166555834,
+    "ci_lo": 0.8165517433382713,
+    "k": 10,
+    "log_hr": -0.14787740549164743,
+    "pooled_hr": 0.8625368507417515,
+    "se": 0.027953366182873404,
+    "tau2": 0.0023024032826491543,
+    "diff_vs_python": "0.00e+00"
+  },
+  "tolerances": {
+    "effect": 0.02,
+    "ci": 0.03,
+    "I2": 5.0,
+    "reg_slope": 0.1
+  },
+  "editorial_checklist": {
+    "journal": "Diabetes, Obesity & Metabolism",
+    "total_weight": 104,
+    "items": [
+      {
+        "category": "Reporting",
+        "criterion": "PRISMA 2020 compliance",
+        "description": "Must follow PRISMA 2020 checklist for systematic reviews",
+        "weight": 10
+      },
+      {
+        "category": "Reporting",
+        "criterion": "PROSPERO registration",
+        "description": "Prospective registration before data extraction",
+        "weight": 8
+      },
+      {
+        "category": "Reporting",
+        "criterion": "Search strategy documented",
+        "description": "At least 2 databases (PubMed + 1), reproducible search terms",
+        "weight": 8
+      },
+      {
+        "category": "Reporting",
+        "criterion": "Study selection flowchart",
+        "description": "PRISMA flow diagram with counts at each stage",
+        "weight": 6
+      },
+      {
+        "category": "Methods",
+        "criterion": "Risk of bias assessment",
+        "description": "RoB 2 for RCTs, independently by 2+ reviewers",
+        "weight": 10
+      },
+      {
+        "category": "Methods",
+        "criterion": "Effect measure specified",
+        "description": "HR/OR/RR with justification, CI level stated",
+        "weight": 6
+      },
+      {
+        "category": "Methods",
+        "criterion": "Heterogeneity assessment",
+        "description": "I\u00b2, tau\u00b2, Q-test, interpretation thresholds stated",
+        "weight": 8
+      },
+      {
+        "category": "Methods",
+        "criterion": "Publication bias assessment",
+        "description": "Funnel plot + formal test (Egger's) for k>=10",
+        "weight": 6
+      },
+      {
+        "category": "Methods",
+        "criterion": "Statistical software stated",
+        "description": "Package version, R/Stata/Python with specific packages",
+        "weight": 4
+      },
+      {
+        "category": "Methods",
+        "criterion": "Meta-regression methodology",
+        "description": "Mixed-effects model, REML estimation, moderators pre-specified",
+        "weight": 6
+      },
+      {
+        "category": "Results",
+        "criterion": "Forest plot",
+        "description": "Individual study HRs with CIs + pooled diamond",
+        "weight": 8
+      },
+      {
+        "category": "Results",
+        "criterion": "Heterogeneity reported",
+        "description": "I\u00b2, tau\u00b2, Q-statistic with p-value",
+        "weight": 4
+      },
+      {
+        "category": "Results",
+        "criterion": "Sensitivity analyses",
+        "description": "Leave-one-out, subgroup, or alternative estimators",
+        "weight": 6
+      },
+      {
+        "category": "Results",
+        "criterion": "Meta-regression results",
+        "description": "Slope, CI, p-value, R\u00b2, bubble plot",
+        "weight": 4
+      },
+      {
+        "category": "Clinical",
+        "criterion": "Clinical interpretability",
+        "description": "ARR/NNT if applicable, clinical significance discussed",
+        "weight": 4
+      },
+      {
+        "category": "Clinical",
+        "criterion": "Limitations acknowledged",
+        "description": "At least 3 substantive limitations including trial-level data",
+        "weight": 4
+      },
+      {
+        "category": "Integrity",
+        "criterion": "Data availability statement",
+        "description": "How to access individual study data / extracted data",
+        "weight": 2
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014967_pub2_data",
+  "cd_number": "CD014967",
+  "analysis_name": "Proportion of infants who achieve seizure control after the first loading dose of ASM",
+  "effect_type": "OR",
+  "k_input": 11,
+  "results": {
+    "I2": 86.00158003372943,
+    "Q": 71.43663373505848,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 11,
+    "funnel_dots": 11,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 11,
+    "p_value": 0.6221026456751675,
+    "pooled": 1.2102444827237173,
+    "pooled_hi": 2.5852345962459675,
+    "pooled_lo": 0.5665604622845773,
+    "pooled_log": 0.1908223910367092,
+    "pooled_se": 0.38716375927768626,
+    "tau2": 1.3288174513941768
+  }
+}

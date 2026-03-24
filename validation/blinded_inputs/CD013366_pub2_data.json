@@ -1,0 +1,87 @@
+{
+  "dataset_name": "CD013366_pub2_data",
+  "cd_number": "CD013366",
+  "analysis_name": "Venous thromboembolism",
+  "effect_type": "OR",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Gavin 2020",
+      "year": "2020",
+      "ee": 1.0,
+      "en": 56.0,
+      "ce": 0.0,
+      "cn": 55.0,
+      "effect_estimate": 3.0,
+      "lower_ci": 0.119522,
+      "upper_ci": 75.300116,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Kleidon\u00a02018",
+      "year": "2018",
+      "ee": 2.0,
+      "en": 72.0,
+      "ce": 5.0,
+      "cn": 74.0,
+      "effect_estimate": 0.394286,
+      "lower_ci": 0.073959,
+      "upper_ci": 2.101982,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Pittiruti 2014",
+      "year": "2014",
+      "ee": 1.0,
+      "en": 121.0,
+      "ce": 0.0,
+      "cn": 59.0,
+      "effect_estimate": 1.481328,
+      "lower_ci": 0.059403,
+      "upper_ci": 36.939613,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Ong 2010",
+      "year": "2010",
+      "ee": 2.0,
+      "en": 199.0,
+      "ce": 5.0,
+      "cn": 194.0,
+      "effect_estimate": 0.383756,
+      "lower_ci": 0.073532,
+      "upper_ci": 2.002783,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Itkin 2014",
+      "year": "2014",
+      "ee": 6.0,
+      "en": 167.0,
+      "ce": 7.0,
+      "cn": 164.0,
+      "effect_estimate": 0.835847,
+      "lower_ci": 0.274744,
+      "upper_ci": 2.542882,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Sheretz\u00a01997",
+      "year": "1997",
+      "ee": 1.0,
+      "en": 80.0,
+      "ce": 2.0,
+      "cn": 87.0,
+      "effect_estimate": 0.537975,
+      "lower_ci": 0.047816,
+      "upper_ci": 6.052717,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

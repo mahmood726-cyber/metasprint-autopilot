@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD013590_pub2_data",
+  "cd_number": "CD013590",
+  "analysis_name": "Frequency of crisis (number of participants with pain crisis)",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Arruda 2012",
+      "year": "2012",
+      "ee": 16.0,
+      "en": 44.0,
+      "ce": 12.0,
+      "cn": 39.0,
+      "effect_estimate": 1.285714,
+      "lower_ci": 0.514155,
+      "upper_ci": 3.2151,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Eleuterio 2019",
+      "year": "2019",
+      "ee": 0.0,
+      "en": 25.0,
+      "ce": 5.0,
+      "cn": 25.0,
+      "effect_estimate": 0.073084,
+      "lower_ci": 0.003812,
+      "upper_ci": 1.401248,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Rabb 1983",
+      "year": "1983",
+      "ee": 22.0,
+      "en": 59.0,
+      "ce": 18.0,
+      "cn": 56.0,
+      "effect_estimate": 1.255255,
+      "lower_ci": 0.581086,
+      "upper_ci": 2.711588,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

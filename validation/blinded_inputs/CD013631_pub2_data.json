@@ -1,0 +1,129 @@
+{
+  "dataset_name": "CD013631_pub2_data",
+  "cd_number": "CD013631",
+  "analysis_name": "Patient-reported outcomes: HRQoL at 12 weeks",
+  "effect_type": "MD",
+  "k": 12,
+  "studies": [
+    {
+      "study": "Haghighat 2019",
+      "year": "2019",
+      "en": 23.0,
+      "cn": 23.0,
+      "effect_estimate": 1.98,
+      "lower_ci": -11.120394,
+      "upper_ci": 15.080394,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Guida 2017",
+      "year": "2017",
+      "en": 22.0,
+      "cn": 12.0,
+      "effect_estimate": -3.8,
+      "lower_ci": -17.98237,
+      "upper_ci": 10.38237,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Ramos 2019",
+      "year": "2019",
+      "en": 24.0,
+      "cn": 26.0,
+      "effect_estimate": 0.0,
+      "lower_ci": -1.734927,
+      "upper_ci": 1.734927,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Miranda Alatriste 2014",
+      "year": "2014",
+      "en": 15.0,
+      "cn": 15.0,
+      "effect_estimate": -0.64,
+      "lower_ci": -9.509268,
+      "upper_ci": 8.229268,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Cosola 2021",
+      "year": "2021",
+      "en": 13.0,
+      "cn": 10.0,
+      "effect_estimate": 1.4,
+      "lower_ci": 0.620948,
+      "upper_ci": 2.179052,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Dehghani 2016",
+      "year": "2016",
+      "en": 38.0,
+      "cn": 37.0,
+      "effect_estimate": 3.74,
+      "lower_ci": -4.213502,
+      "upper_ci": 11.693502,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Esgalhado 2018",
+      "year": "2018",
+      "en": 15.0,
+      "cn": 16.0,
+      "effect_estimate": 0.6,
+      "lower_ci": -1.241798,
+      "upper_ci": 2.441798,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Khosroshahi 2018",
+      "year": "2018",
+      "en": 23.0,
+      "cn": 21.0,
+      "effect_estimate": -1.87,
+      "lower_ci": -2.958395,
+      "upper_ci": -0.781605,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Meng 2019",
+      "year": "2019",
+      "en": 34.0,
+      "cn": 36.0,
+      "effect_estimate": 4.7,
+      "lower_ci": 0.47163,
+      "upper_ci": 8.92837,
+      "effect_type": "MD"
+    },
+    {
+      "study": "ProbiotiCKD 2019",
+      "year": "2019",
+      "en": 14.0,
+      "cn": 14.0,
+      "effect_estimate": 0.4,
+      "lower_ci": -4.149818,
+      "upper_ci": 4.949818,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Abbasi 2017",
+      "year": "2017",
+      "en": 20.0,
+      "cn": 20.0,
+      "effect_estimate": 12.1,
+      "lower_ci": 4.191114,
+      "upper_ci": 20.008886,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Soleimani 2017",
+      "year": "2017",
+      "en": 30.0,
+      "cn": 30.0,
+      "effect_estimate": 0.02,
+      "lower_ci": -0.628216,
+      "upper_ci": 0.668216,
+      "effect_type": "MD"
+    }
+  ]
+}

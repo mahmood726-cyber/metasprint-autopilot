@@ -1,0 +1,879 @@
+{
+  "dataset_name": "CD008349_pub5_data",
+  "cd_number": "CD008349",
+  "analysis_name": "Upper limb function post intervention (composite measure)",
+  "effect_type": "MD",
+  "k": 87,
+  "studies": [
+    {
+      "study": "Adie 2017",
+      "year": "2016",
+      "en": 101.0,
+      "cn": 108.0,
+      "effect_estimate": -1.4,
+      "lower_ci": -5.175493,
+      "upper_ci": 2.375493,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Ain 2021",
+      "year": "2021",
+      "en": 25.0,
+      "cn": 28.0,
+      "effect_estimate": 16.84,
+      "lower_ci": 10.530498,
+      "upper_ci": 23.149502,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Allegue 2023",
+      "year": "2023",
+      "en": 4.0,
+      "cn": 4.0,
+      "effect_estimate": -7.25,
+      "lower_ci": -28.827335,
+      "upper_ci": 14.327335,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Anwar 2022",
+      "year": "2022",
+      "en": 34.0,
+      "cn": 34.0,
+      "effect_estimate": 16.24,
+      "lower_ci": 11.217748,
+      "upper_ci": 21.262252,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Brunner 2017",
+      "year": "2017",
+      "en": 57.0,
+      "cn": 55.0,
+      "effect_estimate": 0.9,
+      "lower_ci": -6.194689,
+      "upper_ci": 7.994689,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Byl 2013",
+      "year": "2013",
+      "en": 5.0,
+      "cn": 3.0,
+      "effect_estimate": -2.4,
+      "lower_ci": -11.2096,
+      "upper_ci": 6.4096,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Cannell 2018",
+      "year": "2018",
+      "en": 39.0,
+      "cn": 40.0,
+      "effect_estimate": -4.3,
+      "lower_ci": -10.554858,
+      "upper_ci": 1.954858,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Cho 2021",
+      "year": "2021",
+      "en": 12.0,
+      "cn": 12.0,
+      "effect_estimate": -2.08,
+      "lower_ci": -4.684677,
+      "upper_ci": 0.524677,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Choi 2014",
+      "year": "2014",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": -6.9,
+      "lower_ci": -20.033329,
+      "upper_ci": 6.233329,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Crosbie 2008",
+      "year": "2008",
+      "en": 9.0,
+      "cn": 9.0,
+      "effect_estimate": 2.6,
+      "lower_ci": -10.547806,
+      "upper_ci": 15.747806,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Dhanusia 2023",
+      "year": "2023",
+      "en": 7.0,
+      "cn": 7.0,
+      "effect_estimate": -23.15,
+      "lower_ci": -25.082897,
+      "upper_ci": -21.217103,
+      "effect_type": "MD"
+    },
+    {
+      "study": "El Kafy 2022",
+      "year": "2022",
+      "en": 18.0,
+      "cn": 18.0,
+      "effect_estimate": 3.82,
+      "lower_ci": 1.824282,
+      "upper_ci": 5.815718,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Esquenazi 2021",
+      "year": "2021",
+      "en": 21.0,
+      "cn": 19.0,
+      "effect_estimate": -11.2,
+      "lower_ci": -20.593714,
+      "upper_ci": -1.806286,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Faria 2018",
+      "year": "2018",
+      "en": 12.0,
+      "cn": 12.0,
+      "effect_estimate": -19.0,
+      "lower_ci": -36.679821,
+      "upper_ci": -1.320179,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Galvao 2015",
+      "year": "2015",
+      "en": 18.0,
+      "cn": 10.0,
+      "effect_estimate": 19.22,
+      "lower_ci": 6.101671,
+      "upper_ci": 32.338329,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Givon 2016",
+      "year": "2016",
+      "en": 20.0,
+      "cn": 21.0,
+      "effect_estimate": 4.7,
+      "lower_ci": -9.720443,
+      "upper_ci": 19.120443,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Grechuta 2019",
+      "year": "2019",
+      "en": 9.0,
+      "cn": 8.0,
+      "effect_estimate": 16.67,
+      "lower_ci": -8.924331,
+      "upper_ci": 42.264331,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Gueye 2021",
+      "year": "2021",
+      "en": 25.0,
+      "cn": 25.0,
+      "effect_estimate": 0.3,
+      "lower_ci": -6.437013,
+      "upper_ci": 7.037013,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Guo 2023",
+      "year": "2023",
+      "en": 54.0,
+      "cn": 55.0,
+      "effect_estimate": 5.63,
+      "lower_ci": -1.957295,
+      "upper_ci": 13.217295,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hegazy 2022",
+      "year": "2022",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": 4.7,
+      "lower_ci": -6.862191,
+      "upper_ci": 16.262191,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Henrique 2019",
+      "year": "2019",
+      "en": 16.0,
+      "cn": 15.0,
+      "effect_estimate": 1.85,
+      "lower_ci": -4.850208,
+      "upper_ci": 8.550208,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hernandez 2022",
+      "year": "2022",
+      "en": 26.0,
+      "cn": 25.0,
+      "effect_estimate": -0.870769,
+      "lower_ci": -10.916773,
+      "upper_ci": 9.175234,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Housman 2009",
+      "year": "2009",
+      "en": 14.0,
+      "cn": 14.0,
+      "effect_estimate": 5.3,
+      "lower_ci": 0.069801,
+      "upper_ci": 10.530199,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Huang 2022",
+      "year": "2022",
+      "en": 15.0,
+      "cn": 15.0,
+      "effect_estimate": 6.94,
+      "lower_ci": -2.551554,
+      "upper_ci": 16.431554,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hung 2019",
+      "year": "2019",
+      "en": 17.0,
+      "cn": 16.0,
+      "effect_estimate": 1.59,
+      "lower_ci": -7.438554,
+      "upper_ci": 10.618554,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Junior 2019",
+      "year": "2019",
+      "en": 11.0,
+      "cn": 15.0,
+      "effect_estimate": 10.0,
+      "lower_ci": -8.776387,
+      "upper_ci": 28.776387,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kaur 2020",
+      "year": "2020",
+      "en": 15.0,
+      "cn": 15.0,
+      "effect_estimate": -0.53,
+      "lower_ci": -3.455677,
+      "upper_ci": 2.395677,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kim 2018a",
+      "year": "2018",
+      "en": 11.0,
+      "cn": 8.0,
+      "effect_estimate": 4.6,
+      "lower_ci": -10.070416,
+      "upper_ci": 19.270416,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kim 2018b",
+      "year": "2018",
+      "en": 12.0,
+      "cn": 12.0,
+      "effect_estimate": -6.42,
+      "lower_ci": -15.091509,
+      "upper_ci": 2.251509,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kiper 2011",
+      "year": "2011",
+      "en": 40.0,
+      "cn": 40.0,
+      "effect_estimate": 2.5,
+      "lower_ci": -4.591713,
+      "upper_ci": 9.591713,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kiper 2018",
+      "year": "2018",
+      "en": 68.0,
+      "cn": 68.0,
+      "effect_estimate": 1.42,
+      "lower_ci": -4.131507,
+      "upper_ci": 6.971507,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kong 2014",
+      "year": "2014",
+      "en": 33.0,
+      "cn": 34.0,
+      "effect_estimate": 3.6,
+      "lower_ci": -4.955261,
+      "upper_ci": 12.155261,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kong 2016",
+      "year": "2016",
+      "en": 33.0,
+      "cn": 34.0,
+      "effect_estimate": 3.6,
+      "lower_ci": -4.955261,
+      "upper_ci": 12.155261,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kottink 2014",
+      "year": "2014",
+      "en": 8.0,
+      "cn": 10.0,
+      "effect_estimate": 4.0,
+      "lower_ci": -10.787668,
+      "upper_ci": 18.787668,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kuo 2023",
+      "year": "2023",
+      "en": 19.0,
+      "cn": 18.0,
+      "effect_estimate": -1.29,
+      "lower_ci": -7.860117,
+      "upper_ci": 5.280117,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Lee 2016a",
+      "year": "2016",
+      "en": 10.0,
+      "cn": 8.0,
+      "effect_estimate": 20.16,
+      "lower_ci": 7.334608,
+      "upper_ci": 32.985392,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Lee 2016b",
+      "year": "2016",
+      "en": 13.0,
+      "cn": 13.0,
+      "effect_estimate": -0.84,
+      "lower_ci": -14.554145,
+      "upper_ci": 12.874145,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Lee 2020",
+      "year": "2020",
+      "en": 18.0,
+      "cn": 18.0,
+      "effect_estimate": 8.4,
+      "lower_ci": 1.425046,
+      "upper_ci": 15.374954,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Leng 2022",
+      "year": "2022",
+      "en": 31.0,
+      "cn": 26.0,
+      "effect_estimate": 0.33,
+      "lower_ci": -9.948309,
+      "upper_ci": 10.608309,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Levin 2012",
+      "year": "2012",
+      "en": 6.0,
+      "cn": 6.0,
+      "effect_estimate": 2.4,
+      "lower_ci": -10.956127,
+      "upper_ci": 15.756127,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Lin 2021",
+      "year": "2021",
+      "en": 9.0,
+      "cn": 9.0,
+      "effect_estimate": 17.5,
+      "lower_ci": 2.890271,
+      "upper_ci": 32.109729,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Mekbib 2021",
+      "year": "2021",
+      "en": 12.0,
+      "cn": 11.0,
+      "effect_estimate": 4.546,
+      "lower_ci": 1.550672,
+      "upper_ci": 7.541328,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Miclaus 2020",
+      "year": "2020",
+      "en": 20.0,
+      "cn": 21.0,
+      "effect_estimate": 13.28,
+      "lower_ci": 5.666873,
+      "upper_ci": 20.893127,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Ogun 2019",
+      "year": "2019",
+      "en": 33.0,
+      "cn": 32.0,
+      "effect_estimate": 6.48,
+      "lower_ci": 2.527771,
+      "upper_ci": 10.432229,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Oh 2019",
+      "year": "2019",
+      "en": 17.0,
+      "cn": 14.0,
+      "effect_estimate": 0.9,
+      "lower_ci": -11.16221,
+      "upper_ci": 12.96221,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Piron 2007",
+      "year": "2007",
+      "en": 25.0,
+      "cn": 13.0,
+      "effect_estimate": 6.0,
+      "lower_ci": -0.350795,
+      "upper_ci": 12.350795,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Piron 2009",
+      "year": "2009",
+      "en": 18.0,
+      "cn": 18.0,
+      "effect_estimate": 4.1,
+      "lower_ci": -0.092628,
+      "upper_ci": 8.292628,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Piron 2010",
+      "year": "2010",
+      "en": 27.0,
+      "cn": 20.0,
+      "effect_estimate": 3.2,
+      "lower_ci": -2.509647,
+      "upper_ci": 8.909647,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Prange 2015",
+      "year": "2015",
+      "en": 35.0,
+      "cn": 33.0,
+      "effect_estimate": -7.8,
+      "lower_ci": -16.006065,
+      "upper_ci": 0.406065,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Rand 2017",
+      "year": "2017",
+      "en": 13.0,
+      "cn": 11.0,
+      "effect_estimate": -10.1,
+      "lower_ci": -24.506797,
+      "upper_ci": 4.306797,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Reinkensmeyer 2012",
+      "year": "2012",
+      "en": 13.0,
+      "cn": 13.0,
+      "effect_estimate": 3.6,
+      "lower_ci": -3.972303,
+      "upper_ci": 11.172303,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Rodriguez-Hernandez 2023",
+      "year": "2023",
+      "en": 23.0,
+      "cn": 20.0,
+      "effect_estimate": 10.7,
+      "lower_ci": 7.407392,
+      "upper_ci": 13.992608,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Saposnik 2010",
+      "year": "2010",
+      "en": 9.0,
+      "cn": 7.0,
+      "effect_estimate": 7.6,
+      "lower_ci": 0.781516,
+      "upper_ci": 14.418484,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Saposnik 2016",
+      "year": "2016",
+      "en": 71.0,
+      "cn": 70.0,
+      "effect_estimate": -24.3,
+      "lower_ci": -49.88609,
+      "upper_ci": 1.28609,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Schuster-Amft 2018",
+      "year": "2018",
+      "en": 22.0,
+      "cn": 32.0,
+      "effect_estimate": -0.82,
+      "lower_ci": -9.572865,
+      "upper_ci": 7.932865,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Shin 2022",
+      "year": "2022",
+      "en": 20.0,
+      "cn": 16.0,
+      "effect_estimate": 9.67,
+      "lower_ci": 3.399265,
+      "upper_ci": 15.940735,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Stockley 2017",
+      "year": "2017",
+      "en": 6.0,
+      "cn": 6.0,
+      "effect_estimate": 4.0,
+      "lower_ci": -22.060843,
+      "upper_ci": 30.060843,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Subramanian 2013",
+      "year": "2013",
+      "en": 32.0,
+      "cn": 32.0,
+      "effect_estimate": -0.9,
+      "lower_ci": -8.228,
+      "upper_ci": 6.428,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Thielbar 2014",
+      "year": "2014",
+      "en": 7.0,
+      "cn": 7.0,
+      "effect_estimate": 6.8,
+      "lower_ci": -2.967467,
+      "upper_ci": 16.567467,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Tramontano 2020",
+      "year": "2020",
+      "en": 19.0,
+      "cn": 18.0,
+      "effect_estimate": 29.2,
+      "lower_ci": -80.771083,
+      "upper_ci": 139.171083,
+      "effect_type": "MD"
+    },
+    {
+      "study": "T\u00e9r\u00e9metz 2022",
+      "year": "2022",
+      "en": 19.0,
+      "cn": 20.0,
+      "effect_estimate": -3.2,
+      "lower_ci": -12.261204,
+      "upper_ci": 5.861204,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Velmurugan 2023",
+      "year": "2023",
+      "en": 20.0,
+      "cn": 20.0,
+      "effect_estimate": 3.45,
+      "lower_ci": 1.228456,
+      "upper_ci": 5.671544,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wang 2017",
+      "year": "2017",
+      "en": 13.0,
+      "cn": 13.0,
+      "effect_estimate": 0.33,
+      "lower_ci": 0.129414,
+      "upper_ci": 0.530586,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Xie 2021",
+      "year": "2021",
+      "en": 6.0,
+      "cn": 6.0,
+      "effect_estimate": 1.8,
+      "lower_ci": -16.69606,
+      "upper_ci": 20.29606,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Zucconi 2012",
+      "year": "2012",
+      "en": 11.0,
+      "cn": 11.0,
+      "effect_estimate": -6.6,
+      "lower_ci": -20.880456,
+      "upper_ci": 7.680456,
+      "effect_type": "MD"
+    },
+    {
+      "study": "da Silva Cameirao 2011",
+      "year": "2011",
+      "en": 8.0,
+      "cn": 8.0,
+      "effect_estimate": 7.0,
+      "lower_ci": -0.698531,
+      "upper_ci": 14.698531,
+      "effect_type": "MD"
+    },
+    {
+      "study": "da Silva Ribeiro 2015",
+      "year": "2015",
+      "en": 15.0,
+      "cn": 15.0,
+      "effect_estimate": -6.0,
+      "lower_ci": -18.251031,
+      "upper_ci": 6.251031,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Adams 2023",
+      "year": "2023",
+      "en": 9.0,
+      "cn": 9.0,
+      "effect_estimate": 8.3,
+      "lower_ci": 0.964583,
+      "upper_ci": 15.635417,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Afsar 2018",
+      "year": "2018",
+      "en": 19.0,
+      "cn": 16.0,
+      "effect_estimate": 8.61,
+      "lower_ci": 0.948746,
+      "upper_ci": 16.271254,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Alves 2018",
+      "year": "2018",
+      "en": 17.0,
+      "cn": 10.0,
+      "effect_estimate": 21.5,
+      "lower_ci": 8.6133,
+      "upper_ci": 34.3867,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Cho 2012",
+      "year": "2012",
+      "en": 15.0,
+      "cn": 14.0,
+      "effect_estimate": 3.9,
+      "lower_ci": 0.637421,
+      "upper_ci": 7.162579,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Cinakli 2024",
+      "year": "2024",
+      "en": 9.0,
+      "cn": 9.0,
+      "effect_estimate": -0.55,
+      "lower_ci": -15.546708,
+      "upper_ci": 14.446708,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Coupar 2012",
+      "year": "2012",
+      "en": 4.0,
+      "cn": 2.0,
+      "effect_estimate": -0.25,
+      "lower_ci": -38.230136,
+      "upper_ci": 37.730136,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Jang 2005",
+      "year": "2005",
+      "en": 5.0,
+      "cn": 5.0,
+      "effect_estimate": 3.0,
+      "lower_ci": -3.378078,
+      "upper_ci": 9.378078,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Johnson 2020",
+      "year": "2020",
+      "en": 28.0,
+      "cn": 30.0,
+      "effect_estimate": 11.4,
+      "lower_ci": 8.53369,
+      "upper_ci": 14.26631,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kim 2011a",
+      "year": "2011",
+      "en": 15.0,
+      "cn": 13.0,
+      "effect_estimate": 2.8,
+      "lower_ci": -13.95031,
+      "upper_ci": 19.55031,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kwon 2012",
+      "year": "2012",
+      "en": 13.0,
+      "cn": 13.0,
+      "effect_estimate": 1.07,
+      "lower_ci": -2.030329,
+      "upper_ci": 4.170329,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Lin 2020",
+      "year": "2020",
+      "en": 38.0,
+      "cn": 107.0,
+      "effect_estimate": -0.1,
+      "lower_ci": -0.517247,
+      "upper_ci": 0.317247,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Manlapaz 2010",
+      "year": "2010",
+      "en": 8.0,
+      "cn": 8.0,
+      "effect_estimate": 2.5,
+      "lower_ci": 0.842901,
+      "upper_ci": 4.157099,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Marques-Sule 2021",
+      "year": "2021",
+      "en": 15.0,
+      "cn": 14.0,
+      "effect_estimate": -1.2,
+      "lower_ci": -16.10443,
+      "upper_ci": 13.70443,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Norouzi-Gheidari 2019",
+      "year": "2019",
+      "en": 9.0,
+      "cn": 9.0,
+      "effect_estimate": -1.5,
+      "lower_ci": -15.106045,
+      "upper_ci": 12.106045,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Park 2021",
+      "year": "2021",
+      "en": 22.0,
+      "cn": 22.0,
+      "effect_estimate": 1.95,
+      "lower_ci": -6.970693,
+      "upper_ci": 10.870693,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Shin 2014",
+      "year": "2013",
+      "en": 9.0,
+      "cn": 7.0,
+      "effect_estimate": 10.4,
+      "lower_ci": 1.528265,
+      "upper_ci": 19.271735,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Sin 2013",
+      "year": "2013",
+      "en": 18.0,
+      "cn": 17.0,
+      "effect_estimate": 13.13,
+      "lower_ci": 0.993412,
+      "upper_ci": 25.266588,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Standen 2017",
+      "year": "2017",
+      "en": 9.0,
+      "cn": 9.0,
+      "effect_estimate": 0.18,
+      "lower_ci": -1.209286,
+      "upper_ci": 1.569286,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Turkbey 2017",
+      "year": "2017",
+      "en": 10.0,
+      "cn": 9.0,
+      "effect_estimate": 0.56,
+      "lower_ci": 0.108258,
+      "upper_ci": 1.011742,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Yavuzer 2008",
+      "year": "2008",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": 0.2,
+      "lower_ci": -0.884437,
+      "upper_ci": 1.284437,
+      "effect_type": "MD"
+    }
+  ]
+}

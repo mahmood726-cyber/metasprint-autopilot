@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD012609_pub2_data",
+  "cd_number": "CD012609",
+  "analysis_name": "Clinical relapse",
+  "effect_type": "OR",
+  "k_input": 7,
+  "results": {
+    "I2": 76.13788919154206,
+    "Q": 25.14446457885568,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 7,
+    "funnel_dots": 7,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 7,
+    "p_value": 0.039744050244869156,
+    "pooled": 0.5082530329154625,
+    "pooled_hi": 0.9688986338192977,
+    "pooled_lo": 0.2666131795949502,
+    "pooled_log": -0.6767758591221545,
+    "pooled_se": 0.3291074527519974,
+    "tau2": 0.5558340037615037
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014755_pub2_data",
+  "cd_number": "CD014755",
+  "analysis_name": "Number of chemotherapy cycles to remission",
+  "effect_type": "MD",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Ayatollahi 2017",
+      "year": "2017",
+      "effect_estimate": 0.0,
+      "lower_ci": -1.845989,
+      "upper_ci": 1.845989,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hemida 2019",
+      "year": "2019",
+      "effect_estimate": 0.0,
+      "lower_ci": -2.910048,
+      "upper_ci": 2.910048,
+      "effect_type": "MD"
+    }
+  ]
+}

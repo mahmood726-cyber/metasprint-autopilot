@@ -1,0 +1,74 @@
+{
+  "dataset_name": "CD016147_data",
+  "cd_number": "CD016147",
+  "analysis_name": "Manual removal of the placenta (end of treatment)",
+  "effect_type": "OR",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Stralen 2013",
+      "year": "2013",
+      "ee": 24.0,
+      "en": 48.0,
+      "ce": 28.0,
+      "cn": 51.0,
+      "effect_estimate": 0.821429,
+      "lower_ci": 0.372681,
+      "upper_ci": 1.810518,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "van Beekhuizen 2006",
+      "year": "2006",
+      "ee": 11.0,
+      "en": 24.0,
+      "ce": 22.0,
+      "cn": 26.0,
+      "effect_estimate": 0.153846,
+      "lower_ci": 0.040512,
+      "upper_ci": 0.584233,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "van Beekhuizen 2013",
+      "year": "2013",
+      "ee": 26.0,
+      "en": 65.0,
+      "ce": 10.0,
+      "cn": 30.0,
+      "effect_estimate": 1.333333,
+      "lower_ci": 0.538258,
+      "upper_ci": 3.302833,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Maher 2017",
+      "year": "2017",
+      "ee": 27.0,
+      "en": 94.0,
+      "ce": 33.0,
+      "cn": 91.0,
+      "effect_estimate": 0.708277,
+      "lower_ci": 0.381623,
+      "upper_ci": 1.314532,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Aslam 2009",
+      "year": "2009",
+      "ee": 16.0,
+      "en": 19.0,
+      "ce": 15.0,
+      "cn": 16.0,
+      "effect_estimate": 0.355556,
+      "lower_ci": 0.033212,
+      "upper_ci": 3.80649,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

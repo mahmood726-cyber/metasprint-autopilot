@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD015160_pub2_data",
+  "cd_number": "CD015160",
+  "analysis_name": "Surgical site infections (as defined by the included studies) within 30 days of repair",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Duan 2018",
+      "year": "2018",
+      "ee": 32.0,
+      "en": 104.0,
+      "ce": 16.0,
+      "cn": 104.0,
+      "effect_estimate": 2.444444,
+      "lower_ci": 1.243022,
+      "upper_ci": 4.807082,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Karaca 2016",
+      "year": "2016",
+      "ee": 9.0,
+      "en": 125.0,
+      "ce": 8.0,
+      "cn": 121.0,
+      "effect_estimate": 1.095905,
+      "lower_ci": 0.408357,
+      "upper_ci": 2.941072,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Ren 2012",
+      "year": "2012",
+      "ee": 1.0,
+      "en": 17.0,
+      "ce": 5.0,
+      "cn": 16.0,
+      "effect_estimate": 0.1375,
+      "lower_ci": 0.014055,
+      "upper_ci": 1.345164,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Ye 2012",
+      "year": "2012",
+      "ee": 0.0,
+      "en": 38.0,
+      "ce": 2.0,
+      "cn": 38.0,
+      "effect_estimate": 0.18961,
+      "lower_ci": 0.008797,
+      "upper_ci": 4.087077,
+      "effect_type": "OR",
+      "cc_applied": true
+    }
+  ]
+}

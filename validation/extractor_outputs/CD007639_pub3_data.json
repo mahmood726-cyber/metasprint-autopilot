@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD007639_pub3_data",
+  "cd_number": "CD007639",
+  "analysis_name": "Treatment time (minutes)",
+  "effect_type": "MD",
+  "k_input": 17,
+  "results": {
+    "I2": 98.34679668252515,
+    "Q": 967.8180433631644,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 17,
+    "funnel_dots": 17,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 17,
+    "p_value": 0.01878385483356282,
+    "pooled": 4.392635957720598,
+    "pooled_hi": 8.057343381584218,
+    "pooled_lo": 0.7279285338569776,
+    "pooled_log": 4.392635957720598,
+    "pooled_se": 1.8693720291885396,
+    "tau2": 49.644948873787214
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD015252_pub2_data",
+  "cd_number": "CD015252",
+  "analysis_name": "Proportion of children whose hearing has returned to normal",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Fiellau-Nikolajsen 1982",
+      "year": "",
+      "ee": 15.0,
+      "en": 22.0,
+      "ce": 14.0,
+      "cn": 20.0,
+      "effect_estimate": 0.918367,
+      "lower_ci": 0.2474,
+      "upper_ci": 3.409042,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Luo 2007",
+      "year": "",
+      "ee": 47.0,
+      "en": 83.0,
+      "ce": 32.0,
+      "cn": 77.0,
+      "effect_estimate": 1.835938,
+      "lower_ci": 0.980043,
+      "upper_ci": 3.439305,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Dempster 1993",
+      "year": "1993.0",
+      "ee": 30.0,
+      "en": 37.0,
+      "ce": 27.0,
+      "cn": 35.0,
+      "effect_estimate": 1.269841,
+      "lower_ci": 0.406073,
+      "upper_ci": 3.97095,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

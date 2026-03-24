@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015701_pub2_data",
+  "cd_number": "CD015701",
+  "analysis_name": "HIV acquisition",
+  "effect_type": "OR",
+  "k_input": 2,
+  "results": {
+    "I2": 0,
+    "Q": 0.10535240878873273,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 2,
+    "funnel_dots": 2,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 2,
+    "p_value": 0.11866589261627514,
+    "pooled": 0.8206104255663352,
+    "pooled_hi": 1.0519869792082903,
+    "pooled_lo": 0.6401233892219405,
+    "pooled_log": -0.19770679424567167,
+    "pooled_se": 0.12670280317586657,
+    "tau2": 0
+  }
+}

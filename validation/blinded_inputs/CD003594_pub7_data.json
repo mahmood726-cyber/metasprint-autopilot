@@ -1,0 +1,113 @@
+{
+  "dataset_name": "CD003594_pub7_data",
+  "cd_number": "CD003594",
+  "analysis_name": "Remission at 6 months",
+  "effect_type": "OR",
+  "k": 8,
+  "studies": [
+    {
+      "study": "Mattoo 2012",
+      "year": "2012",
+      "ee": 2.0,
+      "en": 6.0,
+      "ce": 1.0,
+      "cn": 8.0,
+      "effect_estimate": 3.5,
+      "lower_ci": 0.235894,
+      "upper_ci": 51.930004,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Mazaheri 2019",
+      "year": "2019",
+      "ee": 18.0,
+      "en": 104.0,
+      "ce": 37.0,
+      "cn": 106.0,
+      "effect_estimate": 0.390321,
+      "lower_ci": 0.204511,
+      "upper_ci": 0.744948,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Elhence 1994",
+      "year": "1994",
+      "ee": 7.0,
+      "en": 7.0,
+      "ce": 1.0,
+      "cn": 4.0,
+      "effect_estimate": 35.0,
+      "lower_ci": 1.118154,
+      "upper_ci": 1095.555958,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Shah 2017",
+      "year": "2017",
+      "ee": 13.0,
+      "en": 25.0,
+      "ce": 11.0,
+      "cn": 25.0,
+      "effect_estimate": 1.378788,
+      "lower_ci": 0.452826,
+      "upper_ci": 4.198207,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Ravani 2020",
+      "year": "2020",
+      "ee": 4.0,
+      "en": 7.0,
+      "ce": 3.0,
+      "cn": 7.0,
+      "effect_estimate": 1.777778,
+      "lower_ci": 0.21393,
+      "upper_ci": 14.773465,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Kleinknecht 1980",
+      "year": "1980",
+      "ee": 6.0,
+      "en": 15.0,
+      "ce": 6.0,
+      "cn": 15.0,
+      "effect_estimate": 1.0,
+      "lower_ci": 0.23196,
+      "upper_ci": 4.311096,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "DUET 2017",
+      "year": "2017",
+      "ee": 18.0,
+      "en": 64.0,
+      "ce": 3.0,
+      "cn": 32.0,
+      "effect_estimate": 3.782609,
+      "lower_ci": 1.02276,
+      "upper_ci": 13.989726,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "DUPLEX 2018",
+      "year": "2018",
+      "ee": 34.0,
+      "en": 184.0,
+      "ce": 14.0,
+      "cn": 187.0,
+      "effect_estimate": 2.800952,
+      "lower_ci": 1.447917,
+      "upper_ci": 5.418358,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

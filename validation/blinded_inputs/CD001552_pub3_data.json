@@ -1,0 +1,87 @@
+{
+  "dataset_name": "CD001552_pub3_data",
+  "cd_number": "CD001552",
+  "analysis_name": "Clinical improvement at short-term follow-up: 3 months or less",
+  "effect_type": "OR",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Gerritsen 2002",
+      "year": "2002",
+      "ee": 62.0,
+      "en": 78.0,
+      "ce": 46.0,
+      "cn": 86.0,
+      "effect_estimate": 3.369565,
+      "lower_ci": 1.683137,
+      "upper_ci": 6.745718,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Ucan 2006",
+      "year": "2006",
+      "ee": 5.0,
+      "en": 11.0,
+      "ce": 16.0,
+      "cn": 23.0,
+      "effect_estimate": 0.364583,
+      "lower_ci": 0.08277,
+      "upper_ci": 1.60591,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Awan 2015",
+      "year": "2015",
+      "ee": 33.0,
+      "en": 58.0,
+      "ce": 40.0,
+      "cn": 58.0,
+      "effect_estimate": 0.594,
+      "lower_ci": 0.277398,
+      "upper_ci": 1.271951,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Ly Pen 2005",
+      "year": "2005",
+      "ee": 21.0,
+      "en": 36.0,
+      "ce": 29.0,
+      "cn": 33.0,
+      "effect_estimate": 0.193103,
+      "lower_ci": 0.055996,
+      "upper_ci": 0.665926,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Fernandez-de-las-Penas 2015",
+      "year": "2015",
+      "ee": 52.0,
+      "en": 56.0,
+      "ce": 39.0,
+      "cn": 55.0,
+      "effect_estimate": 5.333333,
+      "lower_ci": 1.65209,
+      "upper_ci": 17.217252,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Jarvik 2009",
+      "year": "2009",
+      "ee": 22.0,
+      "en": 49.0,
+      "ce": 14.0,
+      "cn": 52.0,
+      "effect_estimate": 2.21164,
+      "lower_ci": 0.962197,
+      "upper_ci": 5.083523,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

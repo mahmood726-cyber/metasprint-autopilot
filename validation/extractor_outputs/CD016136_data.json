@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD016136_data",
+  "cd_number": "CD016136",
+  "analysis_name": "Implementation outcome",
+  "effect_type": "MD",
+  "k_input": 30,
+  "results": {
+    "I2": 78.07329732504674,
+    "Q": 132.25882810517845,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 30,
+    "funnel_dots": 30,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 30,
+    "p_value": 1.176836406102666e-14,
+    "pooled": 0.9476613352269047,
+    "pooled_hi": 1.1883083334825857,
+    "pooled_lo": 0.7070143369712236,
+    "pooled_log": 0.9476613352269047,
+    "pooled_se": 0.12275434718689686,
+    "tau2": 0.29599915725030274
+  }
+}

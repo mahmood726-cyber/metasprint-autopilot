@@ -1,0 +1,87 @@
+{
+  "dataset_name": "CD013571_pub2_data",
+  "cd_number": "CD013571",
+  "analysis_name": "Participant-reported cure or improvement: immediately after treatment",
+  "effect_type": "OR",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Lagro-Janssen 1992",
+      "year": "1992",
+      "ee": 8.0,
+      "en": 9.0,
+      "ce": 0.0,
+      "cn": 9.0,
+      "effect_estimate": 107.666667,
+      "lower_ci": 3.844381,
+      "upper_ci": 3015.338639,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Colombo 1995",
+      "year": "1995",
+      "ee": 34.0,
+      "en": 37.0,
+      "ce": 31.0,
+      "cn": 38.0,
+      "effect_estimate": 2.55914,
+      "lower_ci": 0.607707,
+      "upper_ci": 10.776894,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Jarvis 1981",
+      "year": "1981",
+      "ee": 21.0,
+      "en": 25.0,
+      "ce": 14.0,
+      "cn": 25.0,
+      "effect_estimate": 4.125,
+      "lower_ci": 1.091469,
+      "upper_ci": 15.589662,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Milani 1987",
+      "year": "1987",
+      "ee": 37.0,
+      "en": 37.0,
+      "ce": 25.0,
+      "cn": 38.0,
+      "effect_estimate": 39.705882,
+      "lower_ci": 2.256281,
+      "upper_ci": 698.741372,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Song 2006",
+      "year": "2006",
+      "ee": 14.0,
+      "en": 26.0,
+      "ce": 10.0,
+      "cn": 32.0,
+      "effect_estimate": 2.566667,
+      "lower_ci": 0.876751,
+      "upper_ci": 7.513849,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Mattiasson 2003",
+      "year": "2003",
+      "ee": 185.0,
+      "en": 244.0,
+      "ce": 182.0,
+      "cn": 257.0,
+      "effect_estimate": 1.29214,
+      "lower_ci": 0.868027,
+      "upper_ci": 1.923471,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

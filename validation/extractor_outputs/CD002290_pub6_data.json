@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD002290_pub6_data",
+  "cd_number": "CD002290",
+  "analysis_name": "Relapse",
+  "effect_type": "OR",
+  "k_input": 55,
+  "results": {
+    "I2": 73.38759647920095,
+    "Q": 202.9129009628764,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 55,
+    "funnel_dots": 55,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 55,
+    "p_value": 3.788891445033471e-08,
+    "pooled": 0.391356099690144,
+    "pooled_hi": 0.5467279845727747,
+    "pooled_lo": 0.28013857180616836,
+    "pooled_log": -0.9381373925741192,
+    "pooled_se": 0.17054395696845712,
+    "tau2": 1.0138454954404723
+  }
+}

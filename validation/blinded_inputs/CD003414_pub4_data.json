@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD003414_pub4_data",
+  "cd_number": "CD003414",
+  "analysis_name": "Live birth rate per woman",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Aleyasin 2017",
+      "year": "2017",
+      "ee": 10.0,
+      "en": 50.0,
+      "ce": 12.0,
+      "cn": 50.0,
+      "effect_estimate": 0.791667,
+      "lower_ci": 0.306284,
+      "upper_ci": 2.046257,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Van der Auwera 1994",
+      "year": "1994",
+      "ee": 19.0,
+      "en": 102.0,
+      "ce": 9.0,
+      "cn": 107.0,
+      "effect_estimate": 2.492637,
+      "lower_ci": 1.070236,
+      "upper_ci": 5.805486,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "dataset_name": "CD008145_pub4_data",
+  "cd_number": "CD008145",
+  "analysis_name": "Reception of DTP3 by 1 year of age",
+  "effect_type": "MD",
+  "k": 22,
+  "studies": [
+    {
+      "study": "Andersson 2009",
+      "year": "2009",
+      "effect_estimate": 0.7734,
+      "lower_ci": 0.357012,
+      "upper_ci": 1.189788,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Owais 2011",
+      "year": "2011",
+      "effect_estimate": 0.3324,
+      "lower_ci": 0.16361,
+      "upper_ci": 0.50119,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Powell-Jackson 2018",
+      "year": "2018",
+      "effect_estimate": 0.4184,
+      "lower_ci": 0.188446,
+      "upper_ci": 0.648354,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hu 2017",
+      "year": "2017",
+      "effect_estimate": 0.0527,
+      "lower_ci": 0.019961,
+      "upper_ci": 0.085439,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Usman 2009",
+      "year": "2009",
+      "effect_estimate": 0.1655,
+      "lower_ci": 0.047288,
+      "upper_ci": 0.283712,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Usman 2011",
+      "year": "2011",
+      "effect_estimate": 0.4055,
+      "lower_ci": 0.242787,
+      "upper_ci": 0.568213,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Barham 2005",
+      "year": "2005",
+      "effect_estimate": 0.0,
+      "lower_ci": -0.010002,
+      "upper_ci": 0.010002,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wallace 2019",
+      "year": "2019",
+      "effect_estimate": 0.04879,
+      "lower_ci": -0.341668,
+      "upper_ci": 0.439248,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Chen 2016",
+      "year": "2016",
+      "effect_estimate": 0.0,
+      "lower_ci": -0.114956,
+      "upper_ci": 0.114956,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Nagar 2018",
+      "year": "2018",
+      "effect_estimate": -0.094311,
+      "lower_ci": -0.355463,
+      "upper_ci": 0.166841,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Bangure 2015",
+      "year": "2015",
+      "effect_estimate": 0.2336,
+      "lower_ci": 0.134404,
+      "upper_ci": 0.332796,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Ekhaguere 2019",
+      "year": "2019",
+      "effect_estimate": 0.051908,
+      "lower_ci": -0.01945,
+      "upper_ci": 0.123266,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kazi 2018",
+      "year": "2018",
+      "effect_estimate": 0.186586,
+      "lower_ci": -0.172676,
+      "upper_ci": 0.545848,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Domek 2016",
+      "year": "2016",
+      "effect_estimate": 0.043971,
+      "lower_ci": -0.056729,
+      "upper_ci": 0.144671,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Gibson 2017",
+      "year": "2017",
+      "effect_estimate": -0.0144,
+      "lower_ci": -0.037925,
+      "upper_ci": 0.009125,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Dissieka 2019",
+      "year": "2019",
+      "effect_estimate": 0.2415,
+      "lower_ci": 0.169946,
+      "upper_ci": 0.313054,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Siddiqi 2020",
+      "year": "2020",
+      "effect_estimate": 0.024937,
+      "lower_ci": -0.023475,
+      "upper_ci": 0.073349,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Basheer 2021",
+      "year": "2021",
+      "effect_estimate": 1.731656,
+      "lower_ci": 1.285492,
+      "upper_ci": 2.17782,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Brugha 1996",
+      "year": "1996",
+      "effect_estimate": 0.254642,
+      "lower_ci": 0.138716,
+      "upper_ci": 0.370568,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Sengupta 2017",
+      "year": "2017",
+      "effect_estimate": 0.277632,
+      "lower_ci": 0.107432,
+      "upper_ci": 0.447832,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Dicko 2011",
+      "year": "2011",
+      "effect_estimate": 0.239017,
+      "lower_ci": 0.156459,
+      "upper_ci": 0.321575,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Oyo-Ita 2021",
+      "year": "2021",
+      "effect_estimate": 0.314811,
+      "lower_ci": 0.106009,
+      "upper_ci": 0.523613,
+      "effect_type": "MD"
+    }
+  ]
+}

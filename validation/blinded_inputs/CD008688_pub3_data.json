@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD008688_pub3_data",
+  "cd_number": "CD008688",
+  "analysis_name": "Pancreatic fistula (free definition)",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Bassi 1999",
+      "year": "1999",
+      "ee": 2.0,
+      "en": 14.0,
+      "ce": 5.0,
+      "cn": 15.0,
+      "effect_estimate": 0.333333,
+      "lower_ci": 0.052807,
+      "upper_ci": 2.104085,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Diener 2011",
+      "year": "2011",
+      "ee": 63.0,
+      "en": 177.0,
+      "ce": 64.0,
+      "cn": 175.0,
+      "effect_estimate": 0.95847,
+      "lower_ci": 0.620269,
+      "upper_ci": 1.481076,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Shimada 2021",
+      "year": "2021",
+      "ee": 46.0,
+      "en": 68.0,
+      "ce": 46.0,
+      "cn": 66.0,
+      "effect_estimate": 0.909091,
+      "lower_ci": 0.437787,
+      "upper_ci": 1.88778,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

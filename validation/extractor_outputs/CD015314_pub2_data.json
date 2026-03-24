@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015314_pub2_data",
+  "cd_number": "CD015314",
+  "analysis_name": "Tobacco cessation at longest follow up",
+  "effect_type": "OR",
+  "k_input": 23,
+  "results": {
+    "I2": 30.882538062585578,
+    "Q": 31.829872485654796,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 23,
+    "funnel_dots": 23,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 23,
+    "p_value": 0.0005880226621253204,
+    "pooled": 1.2829928875752088,
+    "pooled_hi": 1.4789412438611595,
+    "pooled_lo": 1.113006183579733,
+    "pooled_log": 0.2491955420290524,
+    "pooled_se": 0.07250116430471851,
+    "tau2": 0.03036836020862434
+  }
+}

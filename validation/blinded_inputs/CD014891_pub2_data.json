@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD014891_pub2_data",
+  "cd_number": "CD014891",
+  "analysis_name": "Uncorrected distance visual acuity worse than 6/6",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Cochener 2018",
+      "year": "2018",
+      "ee": 38.0,
+      "en": 80.0,
+      "ce": 16.0,
+      "cn": 40.0,
+      "effect_estimate": 1.357143,
+      "lower_ci": 0.628348,
+      "upper_ci": 2.931239,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Scheepers 2022",
+      "year": "2022",
+      "ee": 51.0,
+      "en": 68.0,
+      "ce": 48.0,
+      "cn": 66.0,
+      "effect_estimate": 1.125,
+      "lower_ci": 0.520181,
+      "upper_ci": 2.433045,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "dataset_name": "CD013355_pub2_data",
+  "cd_number": "CD013355",
+  "analysis_name": "PIPP during endotracheal suctioning",
+  "effect_type": "MD",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Anand 1999",
+      "year": "1999",
+      "en": 24.0,
+      "cn": 21.0,
+      "effect_estimate": -4.8,
+      "lower_ci": -6.668078,
+      "upper_ci": -2.931922,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Anand 2008",
+      "year": "2008",
+      "en": 449.0,
+      "cn": 449.0,
+      "effect_estimate": -0.77,
+      "lower_ci": -1.155346,
+      "upper_ci": -0.384654,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Cignacco 2008",
+      "year": "2008",
+      "en": 16.0,
+      "cn": 14.0,
+      "effect_estimate": 0.2,
+      "lower_ci": -1.123267,
+      "upper_ci": 1.523267,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Simons 2013",
+      "year": "2013",
+      "en": 73.0,
+      "cn": 77.0,
+      "effect_estimate": 0.1,
+      "lower_ci": -0.092147,
+      "upper_ci": 0.292147,
+      "effect_type": "MD"
+    }
+  ]
+}

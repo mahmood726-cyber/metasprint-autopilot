@@ -1,0 +1,643 @@
+{
+  "summary": {
+    "timestamp_utc": "2026-02-27T17:22:41.700896+00:00",
+    "personas_total": 12,
+    "personas_ok": 12,
+    "personas_failed": 0,
+    "publication_ready_count": 12,
+    "publication_ready_rate": 1.0,
+    "timing": {
+      "mean_total_sec": 8.774341666668654,
+      "median_total_sec": 8.72104999999702,
+      "p90_total_sec": 9.573899999976158,
+      "max_total_sec": 9.736
+    },
+    "screening": {
+      "mean_auto_decision_rate": 1,
+      "mean_queue_representatives": 0,
+      "p90_queue_representatives": 0.0
+    },
+    "quality": {
+      "mean_protocol_readiness_pct": 95,
+      "mean_verified_ratio": 1
+    },
+    "issue_frequency": {},
+    "elapsed_wall_sec": 113.74
+  },
+  "personas": [
+    {
+      "name": "Interventional Fellow",
+      "subcategory": "acs",
+      "p": "adults with acute coronary syndrome",
+      "i": "ticagrelor",
+      "c": "clopidogrel",
+      "o": "major adverse cardiovascular events",
+      "relevant": 34,
+      "irrelevant": 80,
+      "duplicates": 28,
+      "manual_cap": 18
+    },
+    {
+      "name": "Heart Failure Consultant",
+      "subcategory": "hf",
+      "p": "adults with HFrEF",
+      "i": "empagliflozin",
+      "c": "placebo",
+      "o": "CV death or HF hospitalization",
+      "relevant": 30,
+      "irrelevant": 72,
+      "duplicates": 24,
+      "manual_cap": 16
+    },
+    {
+      "name": "EP Registrar",
+      "subcategory": "af",
+      "p": "adults with atrial fibrillation",
+      "i": "apixaban",
+      "c": "warfarin",
+      "o": "stroke or systemic embolism",
+      "relevant": 28,
+      "irrelevant": 70,
+      "duplicates": 22,
+      "manual_cap": 15
+    },
+    {
+      "name": "Hypertension Nurse",
+      "subcategory": "htn",
+      "p": "adults with resistant hypertension",
+      "i": "renal denervation",
+      "c": "sham",
+      "o": "24-hour systolic blood pressure",
+      "relevant": 26,
+      "irrelevant": 68,
+      "duplicates": 20,
+      "manual_cap": 14
+    },
+    {
+      "name": "Lipid Pharmacist",
+      "subcategory": "lipids",
+      "p": "adults with ASCVD",
+      "i": "inclisiran",
+      "c": "standard care",
+      "o": "LDL-C change",
+      "relevant": 27,
+      "irrelevant": 75,
+      "duplicates": 24,
+      "manual_cap": 16
+    },
+    {
+      "name": "Pulmonary HTN Lead",
+      "subcategory": "ph",
+      "p": "adults with pulmonary arterial hypertension",
+      "i": "selexipag",
+      "c": "placebo",
+      "o": "clinical worsening",
+      "relevant": 24,
+      "irrelevant": 66,
+      "duplicates": 19,
+      "manual_cap": 14
+    },
+    {
+      "name": "Stroke Prevention Fellow",
+      "subcategory": "af",
+      "p": "adults with non-valvular AF",
+      "i": "edoxaban",
+      "c": "warfarin",
+      "o": "ischemic stroke",
+      "relevant": 30,
+      "irrelevant": 78,
+      "duplicates": 26,
+      "manual_cap": 18
+    },
+    {
+      "name": "General Cardiology Registrar",
+      "subcategory": "general",
+      "p": "adults with chronic coronary syndrome",
+      "i": "rivaroxaban",
+      "c": "aspirin alone",
+      "o": "composite cardiovascular events",
+      "relevant": 25,
+      "irrelevant": 74,
+      "duplicates": 21,
+      "manual_cap": 15
+    },
+    {
+      "name": "Valve Investigator",
+      "subcategory": "af",
+      "p": "adults after TAVI",
+      "i": "direct oral anticoagulants",
+      "c": "vitamin K antagonists",
+      "o": "major bleeding",
+      "relevant": 22,
+      "irrelevant": 64,
+      "duplicates": 18,
+      "manual_cap": 13
+    },
+    {
+      "name": "Preventive Fellow",
+      "subcategory": "lipids",
+      "p": "adults at high cardiovascular risk",
+      "i": "high-intensity statin",
+      "c": "moderate-intensity statin",
+      "o": "myocardial infarction",
+      "relevant": 26,
+      "irrelevant": 72,
+      "duplicates": 23,
+      "manual_cap": 16
+    },
+    {
+      "name": "Academic Meta-Analyst",
+      "subcategory": "hf",
+      "p": "adults with heart failure",
+      "i": "SGLT2 inhibitors",
+      "c": "placebo",
+      "o": "all-cause mortality",
+      "relevant": 32,
+      "irrelevant": 84,
+      "duplicates": 30,
+      "manual_cap": 20
+    },
+    {
+      "name": "Methods Reviewer",
+      "subcategory": "acs",
+      "p": "adults with cardiovascular disease",
+      "i": "antiplatelet therapy",
+      "c": "standard care",
+      "o": "major bleeding and ischemic events",
+      "relevant": 29,
+      "irrelevant": 76,
+      "duplicates": 25,
+      "manual_cap": 17
+    }
+  ],
+  "results": [
+    {
+      "analysis_k": 11,
+      "auto_decision_rate": 1,
+      "auto_exclude": 1,
+      "auto_include": 1,
+      "extraction_k": 11,
+      "included_after_screening": 1,
+      "issues": [],
+      "manual_reviewed": 0,
+      "methods_results_only": true,
+      "needs_review": 0,
+      "ok": true,
+      "persona": "Interventional Fellow",
+      "protocol_readiness_pct": 100,
+      "queue": {
+        "clusters": 0,
+        "multi_clusters": 0,
+        "representatives": 0,
+        "saved_checks": 0,
+        "saved_pct": 0
+      },
+      "references_decided": 2,
+      "references_total": 2,
+      "timings": {
+        "analyze_sec": 0.5952000000178814,
+        "discover_sec": 2.1667000000178813,
+        "extract_verify_sec": 2.1655,
+        "protocol_sec": 1.9314000000059606,
+        "search_screen_sec": 2.226699999988079,
+        "total_sec": 9.494900000005961,
+        "write_sec": 0.4051999999880791
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 11
+      },
+      "verified_ratio": 1
+    },
+    {
+      "analysis_k": 10,
+      "auto_decision_rate": 1,
+      "auto_exclude": 1,
+      "auto_include": 1,
+      "extraction_k": 10,
+      "included_after_screening": 1,
+      "issues": [],
+      "manual_reviewed": 0,
+      "methods_results_only": true,
+      "needs_review": 0,
+      "ok": true,
+      "persona": "Heart Failure Consultant",
+      "protocol_readiness_pct": 90,
+      "queue": {
+        "clusters": 0,
+        "multi_clusters": 0,
+        "representatives": 0,
+        "saved_checks": 0,
+        "saved_pct": 0
+      },
+      "references_decided": 2,
+      "references_total": 2,
+      "timings": {
+        "analyze_sec": 0.6134000000059605,
+        "discover_sec": 1.8875999999940396,
+        "extract_verify_sec": 1.7580999999940394,
+        "protocol_sec": 1.6205999999940395,
+        "search_screen_sec": 2.3579000000059605,
+        "total_sec": 8.57969999998808,
+        "write_sec": 0.3275
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 10
+      },
+      "verified_ratio": 1
+    },
+    {
+      "analysis_k": 9,
+      "auto_decision_rate": 1,
+      "auto_exclude": 1,
+      "auto_include": 1,
+      "extraction_k": 9,
+      "included_after_screening": 1,
+      "issues": [],
+      "manual_reviewed": 0,
+      "methods_results_only": true,
+      "needs_review": 0,
+      "ok": true,
+      "persona": "EP Registrar",
+      "protocol_readiness_pct": 100,
+      "queue": {
+        "clusters": 0,
+        "multi_clusters": 0,
+        "representatives": 0,
+        "saved_checks": 0,
+        "saved_pct": 0
+      },
+      "references_decided": 2,
+      "references_total": 2,
+      "timings": {
+        "analyze_sec": 0.5802000000178814,
+        "discover_sec": 2.110800000011921,
+        "extract_verify_sec": 1.61,
+        "protocol_sec": 1.8701999999880792,
+        "search_screen_sec": 2.3040999999940395,
+        "total_sec": 8.77630000001192,
+        "write_sec": 0.2970999999940395
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 9
+      },
+      "verified_ratio": 1
+    },
+    {
+      "analysis_k": 9,
+      "auto_decision_rate": 1,
+      "auto_exclude": 1,
+      "auto_include": 1,
+      "extraction_k": 9,
+      "included_after_screening": 1,
+      "issues": [],
+      "manual_reviewed": 0,
+      "methods_results_only": true,
+      "needs_review": 0,
+      "ok": true,
+      "persona": "Hypertension Nurse",
+      "protocol_readiness_pct": 100,
+      "queue": {
+        "clusters": 0,
+        "multi_clusters": 0,
+        "representatives": 0,
+        "saved_checks": 0,
+        "saved_pct": 0
+      },
+      "references_decided": 2,
+      "references_total": 2,
+      "timings": {
+        "analyze_sec": 0.6826000000238419,
+        "discover_sec": 1.683300000011921,
+        "extract_verify_sec": 1.8520999999940395,
+        "protocol_sec": 2.1189000000059606,
+        "search_screen_sec": 2.594199999988079,
+        "total_sec": 9.29159999999404,
+        "write_sec": 0.3558999999761581
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 9
+      },
+      "verified_ratio": 1
+    },
+    {
+      "analysis_k": 9,
+      "auto_decision_rate": 1,
+      "auto_exclude": 1,
+      "auto_include": 1,
+      "extraction_k": 9,
+      "included_after_screening": 1,
+      "issues": [],
+      "manual_reviewed": 0,
+      "methods_results_only": true,
+      "needs_review": 0,
+      "ok": true,
+      "persona": "Lipid Pharmacist",
+      "protocol_readiness_pct": 90,
+      "queue": {
+        "clusters": 0,
+        "multi_clusters": 0,
+        "representatives": 0,
+        "saved_checks": 0,
+        "saved_pct": 0
+      },
+      "references_decided": 2,
+      "references_total": 2,
+      "timings": {
+        "analyze_sec": 0.6841999999880791,
+        "discover_sec": 2.2407999999821184,
+        "extract_verify_sec": 1.728800000011921,
+        "protocol_sec": 2.123700000017881,
+        "search_screen_sec": 2.480699999988079,
+        "total_sec": 9.736,
+        "write_sec": 0.4723000000119209
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 9
+      },
+      "verified_ratio": 1
+    },
+    {
+      "analysis_k": 8,
+      "auto_decision_rate": 1,
+      "auto_exclude": 1,
+      "auto_include": 1,
+      "extraction_k": 8,
+      "included_after_screening": 1,
+      "issues": [],
+      "manual_reviewed": 0,
+      "methods_results_only": true,
+      "needs_review": 0,
+      "ok": true,
+      "persona": "Pulmonary HTN Lead",
+      "protocol_readiness_pct": 100,
+      "queue": {
+        "clusters": 0,
+        "multi_clusters": 0,
+        "representatives": 0,
+        "saved_checks": 0,
+        "saved_pct": 0
+      },
+      "references_decided": 2,
+      "references_total": 2,
+      "timings": {
+        "analyze_sec": 0.5845999999940396,
+        "discover_sec": 1.3425999999940395,
+        "extract_verify_sec": 1.8170999999940396,
+        "protocol_sec": 1.6875999999940396,
+        "search_screen_sec": 2.0598000000119208,
+        "total_sec": 7.9364000000059605,
+        "write_sec": 0.43630000001192093
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 8
+      },
+      "verified_ratio": 1
+    },
+    {
+      "analysis_k": 10,
+      "auto_decision_rate": 1,
+      "auto_exclude": 1,
+      "auto_include": 1,
+      "extraction_k": 10,
+      "included_after_screening": 1,
+      "issues": [],
+      "manual_reviewed": 0,
+      "methods_results_only": true,
+      "needs_review": 0,
+      "ok": true,
+      "persona": "Stroke Prevention Fellow",
+      "protocol_readiness_pct": 90,
+      "queue": {
+        "clusters": 0,
+        "multi_clusters": 0,
+        "representatives": 0,
+        "saved_checks": 0,
+        "saved_pct": 0
+      },
+      "references_decided": 2,
+      "references_total": 2,
+      "timings": {
+        "analyze_sec": 0.675,
+        "discover_sec": 1.4855,
+        "extract_verify_sec": 1.7435999999940395,
+        "protocol_sec": 1.8306000000238418,
+        "search_screen_sec": 2.5375999999940397,
+        "total_sec": 8.744,
+        "write_sec": 0.4669000000059605
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 10
+      },
+      "verified_ratio": 1
+    },
+    {
+      "analysis_k": 8,
+      "auto_decision_rate": 1,
+      "auto_exclude": 1,
+      "auto_include": 1,
+      "extraction_k": 8,
+      "included_after_screening": 1,
+      "issues": [],
+      "manual_reviewed": 0,
+      "methods_results_only": true,
+      "needs_review": 0,
+      "ok": true,
+      "persona": "General Cardiology Registrar",
+      "protocol_readiness_pct": 100,
+      "queue": {
+        "clusters": 0,
+        "multi_clusters": 0,
+        "representatives": 0,
+        "saved_checks": 0,
+        "saved_pct": 0
+      },
+      "references_decided": 2,
+      "references_total": 2,
+      "timings": {
+        "analyze_sec": 0.5951000000238419,
+        "discover_sec": 1.4326999999880792,
+        "extract_verify_sec": 1.608699999988079,
+        "protocol_sec": 1.536699999988079,
+        "search_screen_sec": 2.4733000000119207,
+        "total_sec": 8.035200000017882,
+        "write_sec": 0.37859999999403954
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 8
+      },
+      "verified_ratio": 1
+    },
+    {
+      "analysis_k": 7,
+      "auto_decision_rate": 1,
+      "auto_exclude": 1,
+      "auto_include": 1,
+      "extraction_k": 7,
+      "included_after_screening": 1,
+      "issues": [],
+      "manual_reviewed": 0,
+      "methods_results_only": true,
+      "needs_review": 0,
+      "ok": true,
+      "persona": "Valve Investigator",
+      "protocol_readiness_pct": 90,
+      "queue": {
+        "clusters": 0,
+        "multi_clusters": 0,
+        "representatives": 0,
+        "saved_checks": 0,
+        "saved_pct": 0
+      },
+      "references_decided": 2,
+      "references_total": 2,
+      "timings": {
+        "analyze_sec": 0.519800000011921,
+        "discover_sec": 2.2147999999821186,
+        "extract_verify_sec": 1.5672999999821187,
+        "protocol_sec": 1.384800000011921,
+        "search_screen_sec": 2.625,
+        "total_sec": 8.698099999994039,
+        "write_sec": 0.37680000001192093
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 7
+      },
+      "verified_ratio": 1
+    },
+    {
+      "analysis_k": 9,
+      "auto_decision_rate": 1,
+      "auto_exclude": 1,
+      "auto_include": 1,
+      "extraction_k": 9,
+      "included_after_screening": 1,
+      "issues": [],
+      "manual_reviewed": 0,
+      "methods_results_only": true,
+      "needs_review": 0,
+      "ok": true,
+      "persona": "Preventive Fellow",
+      "protocol_readiness_pct": 90,
+      "queue": {
+        "clusters": 0,
+        "multi_clusters": 0,
+        "representatives": 0,
+        "saved_checks": 0,
+        "saved_pct": 0
+      },
+      "references_decided": 2,
+      "references_total": 2,
+      "timings": {
+        "analyze_sec": 0.551,
+        "discover_sec": 1.2949000000059605,
+        "extract_verify_sec": 1.7120999999940396,
+        "protocol_sec": 1.4439000000059605,
+        "search_screen_sec": 2.6225999999940397,
+        "total_sec": 7.927900000005961,
+        "write_sec": 0.2952999999821186
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 9
+      },
+      "verified_ratio": 1
+    },
+    {
+      "analysis_k": 11,
+      "auto_decision_rate": 1,
+      "auto_exclude": 1,
+      "auto_include": 1,
+      "extraction_k": 11,
+      "included_after_screening": 1,
+      "issues": [],
+      "manual_reviewed": 0,
+      "methods_results_only": true,
+      "needs_review": 0,
+      "ok": true,
+      "persona": "Academic Meta-Analyst",
+      "protocol_readiness_pct": 100,
+      "queue": {
+        "clusters": 0,
+        "multi_clusters": 0,
+        "representatives": 0,
+        "saved_checks": 0,
+        "saved_pct": 0
+      },
+      "references_decided": 2,
+      "references_total": 2,
+      "timings": {
+        "analyze_sec": 0.4813000000119209,
+        "discover_sec": 2.1985999999940393,
+        "extract_verify_sec": 2.0447999999821187,
+        "protocol_sec": 1.696699999988079,
+        "search_screen_sec": 2.8147000000178815,
+        "total_sec": 9.573899999976158,
+        "write_sec": 0.32859999999403955
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 11
+      },
+      "verified_ratio": 1
+    },
+    {
+      "analysis_k": 10,
+      "auto_decision_rate": 1,
+      "auto_exclude": 1,
+      "auto_include": 1,
+      "extraction_k": 10,
+      "included_after_screening": 1,
+      "issues": [],
+      "manual_reviewed": 0,
+      "methods_results_only": true,
+      "needs_review": 0,
+      "ok": true,
+      "persona": "Methods Reviewer",
+      "protocol_readiness_pct": 90,
+      "queue": {
+        "clusters": 0,
+        "multi_clusters": 0,
+        "representatives": 0,
+        "saved_checks": 0,
+        "saved_pct": 0
+      },
+      "references_decided": 2,
+      "references_total": 2,
+      "timings": {
+        "analyze_sec": 0.42219999998807906,
+        "discover_sec": 2.209,
+        "extract_verify_sec": 1.6662000000178814,
+        "protocol_sec": 1.8050999999940396,
+        "search_screen_sec": 2.0364000000059606,
+        "total_sec": 8.498100000023841,
+        "write_sec": 0.3483000000119209
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 10
+      },
+      "verified_ratio": 1
+    }
+  ]
+}

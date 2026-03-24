@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD014833_pub2_data",
+  "cd_number": "CD014833",
+  "analysis_name": "Incidence of depression immediately post-intervention",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Wong 2023",
+      "year": "2023",
+      "ee": 3.0,
+      "en": 13.0,
+      "ce": 5.0,
+      "cn": 17.0,
+      "effect_estimate": 0.72,
+      "lower_ci": 0.136955,
+      "upper_ci": 3.785171,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Massa 2022",
+      "year": "2022",
+      "ee": 6.0,
+      "en": 29.0,
+      "ce": 10.0,
+      "cn": 31.0,
+      "effect_estimate": 0.547826,
+      "lower_ci": 0.169589,
+      "upper_ci": 1.769649,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

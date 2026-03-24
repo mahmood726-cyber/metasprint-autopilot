@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD013055_pub3_data",
+  "cd_number": "CD013055",
+  "analysis_name": "Resolution of ear discharge (2 to 4 weeks)",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Minja 2006",
+      "year": "2006",
+      "ee": 35.0,
+      "en": 87.0,
+      "ce": 18.0,
+      "cn": 87.0,
+      "effect_estimate": 2.580128,
+      "lower_ci": 1.316331,
+      "upper_ci": 5.057287,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Al-Abbasi 2006",
+      "year": "2006",
+      "ee": 13.0,
+      "en": 16.0,
+      "ce": 4.0,
+      "cn": 16.0,
+      "effect_estimate": 13.0,
+      "lower_ci": 2.397601,
+      "upper_ci": 70.487137,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Loock 2012",
+      "year": "2012",
+      "ee": 32.0,
+      "en": 49.0,
+      "ce": 11.0,
+      "cn": 44.0,
+      "effect_estimate": 5.647059,
+      "lower_ci": 2.293372,
+      "upper_ci": 13.904971,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

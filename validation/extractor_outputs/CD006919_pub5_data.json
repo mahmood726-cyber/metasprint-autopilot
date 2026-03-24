@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD006919_pub5_data",
+  "cd_number": "CD006919",
+  "analysis_name": "Live birth/ongoing pregnancies primary analysis",
+  "effect_type": "OR",
+  "k_input": 14,
+  "results": {
+    "I2": 22.210105586186582,
+    "Q": 16.711682279506405,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 14,
+    "funnel_dots": 14,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 14,
+    "p_value": 0.7352382115776748,
+    "pooled": 1.0509006206464497,
+    "pooled_hi": 1.4013850750441066,
+    "pooled_lo": 0.7880718398833627,
+    "pooled_log": 0.049647530474880054,
+    "pooled_se": 0.14681406991268858,
+    "tau2": 0.06448220771048843
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015721_pub2_data",
+  "cd_number": "CD015721",
+  "analysis_name": "Functional independence: mRS score < 3 within 90 days",
+  "effect_type": "OR",
+  "k_input": 6,
+  "results": {
+    "I2": 16.54713992417906,
+    "Q": 5.991406400520317,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 6,
+    "p_value": 0.37264491248919795,
+    "pooled": 1.092900612620521,
+    "pooled_hi": 1.328666948181928,
+    "pooled_lo": 0.8989700170540872,
+    "pooled_log": 0.08883527424614834,
+    "pooled_se": 0.09964363254966602,
+    "tau2": 0.009909724081197443
+  }
+}

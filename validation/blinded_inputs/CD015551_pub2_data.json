@@ -1,0 +1,74 @@
+{
+  "dataset_name": "CD015551_pub2_data",
+  "cd_number": "CD015551",
+  "analysis_name": "Incidence of herpes zoster (up to 29.4 months after final dose)",
+  "effect_type": "OR",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Mullane 2019",
+      "year": "2019",
+      "ee": 22.0,
+      "en": 1328.0,
+      "ce": 61.0,
+      "cn": 1350.0,
+      "effect_estimate": 0.355961,
+      "lower_ci": 0.217293,
+      "upper_ci": 0.583121,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Goldmann 2015",
+      "year": "2004",
+      "ee": 1.0,
+      "en": 33.0,
+      "ce": 1.0,
+      "cn": 33.0,
+      "effect_estimate": 1.0,
+      "lower_ci": 0.059881,
+      "upper_ci": 16.699902,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "INVIDIa-2",
+      "year": "2020",
+      "ee": 51.0,
+      "en": 581.0,
+      "ce": 47.0,
+      "cn": 607.0,
+      "effect_estimate": 1.146527,
+      "lower_ci": 0.758,
+      "upper_ci": 1.734203,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Thomas 2022",
+      "year": "2022",
+      "ee": 3.0,
+      "en": 1054.0,
+      "ce": 39.0,
+      "cn": 1046.0,
+      "effect_estimate": 0.073703,
+      "lower_ci": 0.022699,
+      "upper_ci": 0.239314,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Zhao 2024",
+      "year": "2024",
+      "ee": 61.0,
+      "en": 107.0,
+      "ce": 27.0,
+      "cn": 34.0,
+      "effect_estimate": 0.3438,
+      "lower_ci": 0.137646,
+      "upper_ci": 0.858713,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

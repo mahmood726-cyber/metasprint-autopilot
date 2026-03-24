@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011575_pub3_data",
+  "cd_number": "CD011575",
+  "analysis_name": "All-cause mortality",
+  "effect_type": "OR",
+  "k_input": 4,
+  "results": {
+    "I2": 75.27505792040857,
+    "Q": 12.133496573390454,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 4,
+    "funnel_dots": 4,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 4,
+    "p_value": 0.4924407458566675,
+    "pooled": 1.1557313909734772,
+    "pooled_hi": 1.7473153011500537,
+    "pooled_lo": 0.764438477246976,
+    "pooled_log": 0.14473338250065698,
+    "pooled_se": 0.21084890104556084,
+    "tau2": 0.13223913962751477
+  }
+}

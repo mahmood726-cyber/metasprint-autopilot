@@ -1,0 +1,345 @@
+{
+  "dataset_name": "CD008552_pub8_data",
+  "cd_number": "CD008552",
+  "analysis_name": "Vegetable intake",
+  "effect_type": "MD",
+  "k": 42,
+  "studies": [
+    {
+      "study": "Cooke 2011",
+      "year": "2011",
+      "effect_estimate": 0.0477,
+      "lower_ci": -0.227735,
+      "upper_ci": 0.323135,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Cravener 2015",
+      "year": "2015",
+      "effect_estimate": 0.5723,
+      "lower_ci": -0.247341,
+      "upper_ci": 1.391941,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Daniels 2014",
+      "year": "2014",
+      "effect_estimate": 0.0135,
+      "lower_ci": -0.15529,
+      "upper_ci": 0.18229,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Fildes 2015",
+      "year": "2015",
+      "effect_estimate": 0.2821,
+      "lower_ci": -0.052147,
+      "upper_ci": 0.616347,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hetherington 2015",
+      "year": "2015",
+      "effect_estimate": 1.0337,
+      "lower_ci": 0.322665,
+      "upper_ci": 1.744735,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Keller 2012",
+      "year": "2012",
+      "effect_estimate": 1.0339,
+      "lower_ci": -0.036868,
+      "upper_ci": 2.104668,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Lee 2015",
+      "year": "2015",
+      "effect_estimate": 2.5608,
+      "lower_ci": 1.641375,
+      "upper_ci": 3.480225,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Nekitsing 2019b",
+      "year": "2019",
+      "effect_estimate": 1.2398,
+      "lower_ci": 0.58444,
+      "upper_ci": 1.89516,
+      "effect_type": "MD"
+    },
+    {
+      "study": "O'Connell 2012",
+      "year": "2012",
+      "effect_estimate": 0.1455,
+      "lower_ci": -0.372828,
+      "upper_ci": 0.663828,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Owen 2018",
+      "year": "2018",
+      "effect_estimate": 0.3848,
+      "lower_ci": -0.080402,
+      "upper_ci": 0.850002,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Rapson 2022",
+      "year": "2022",
+      "effect_estimate": 0.4441,
+      "lower_ci": 0.021831,
+      "upper_ci": 0.866369,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Remington 2012",
+      "year": "2012",
+      "effect_estimate": 0.3636,
+      "lower_ci": 0.010141,
+      "upper_ci": 0.717059,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Zeinstra 2017",
+      "year": "2017",
+      "effect_estimate": 0.3067,
+      "lower_ci": -0.281418,
+      "upper_ci": 0.894818,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Zeinstra 2018",
+      "year": "2018",
+      "effect_estimate": 0.3125,
+      "lower_ci": -0.05429,
+      "upper_ci": 0.67929,
+      "effect_type": "MD"
+    },
+    {
+      "study": "van Vliet 2021",
+      "year": "2021",
+      "effect_estimate": 0.177171,
+      "lower_ci": -0.109625,
+      "upper_ci": 0.463967,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Braga-Pontes 2021",
+      "year": "2021",
+      "effect_estimate": -0.479676,
+      "lower_ci": -1.167563,
+      "upper_ci": 0.208211,
+      "effect_type": "MD"
+    },
+    {
+      "study": "De Coen 2012",
+      "year": "2012",
+      "effect_estimate": 0.124,
+      "lower_ci": -0.129283,
+      "upper_ci": 0.377283,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Gans 2022",
+      "year": "2022",
+      "effect_estimate": 0.363871,
+      "lower_ci": 0.156932,
+      "upper_ci": 0.57081,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Hong 2018b",
+      "year": "2018",
+      "effect_estimate": 0.5133,
+      "lower_ci": -0.19401,
+      "upper_ci": 1.22061,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kobel 2019",
+      "year": "2019",
+      "effect_estimate": -0.0555,
+      "lower_ci": -0.233896,
+      "upper_ci": 0.122896,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kristiansen 2019",
+      "year": "2019",
+      "effect_estimate": 0.0769,
+      "lower_ci": -0.15129,
+      "upper_ci": 0.30509,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Leis 2020",
+      "year": "2020",
+      "effect_estimate": 0.0514,
+      "lower_ci": -0.100335,
+      "upper_ci": 0.203135,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Namenek Brouwer 2013",
+      "year": "2013",
+      "effect_estimate": 0.4614,
+      "lower_ci": -0.692684,
+      "upper_ci": 1.615484,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Nicklas 2017",
+      "year": "2017",
+      "effect_estimate": 0.7209,
+      "lower_ci": 0.400768,
+      "upper_ci": 1.041032,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Smith 2017",
+      "year": "2017",
+      "effect_estimate": 0.595871,
+      "lower_ci": 0.133263,
+      "upper_ci": 1.058479,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Sobko 2020",
+      "year": "2020",
+      "effect_estimate": 0.3087,
+      "lower_ci": 0.028167,
+      "upper_ci": 0.589233,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Tovar 2023",
+      "year": "2023",
+      "effect_estimate": 0.82,
+      "lower_ci": 0.164856,
+      "upper_ci": 1.475144,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Williams 2014",
+      "year": "2014",
+      "effect_estimate": 0.0347,
+      "lower_ci": -0.125856,
+      "upper_ci": 0.195256,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Alexandrou 2023",
+      "year": "2023",
+      "effect_estimate": 0.1478,
+      "lower_ci": -0.027263,
+      "upper_ci": 0.322863,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Campbell 2013",
+      "year": "2013",
+      "effect_estimate": 0.1661,
+      "lower_ci": -0.033076,
+      "upper_ci": 0.365276,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Duncanson 2013",
+      "year": "2013",
+      "effect_estimate": -0.372885,
+      "lower_ci": -0.741043,
+      "upper_ci": -0.004727,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Fagerlund 2020",
+      "year": "2020",
+      "effect_estimate": -0.063854,
+      "lower_ci": -0.352838,
+      "upper_ci": 0.22513,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Haire-Joshu 2008",
+      "year": "2008",
+      "effect_estimate": 0.0267,
+      "lower_ci": -0.082102,
+      "upper_ci": 0.135502,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Martinez-Andrade 2014",
+      "year": "2014",
+      "effect_estimate": -0.197,
+      "lower_ci": -0.568495,
+      "upper_ci": 0.174495,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Roset-Salla 2016",
+      "year": "2016",
+      "effect_estimate": 0.7755,
+      "lower_ci": 0.41714,
+      "upper_ci": 1.13386,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Sherwood 2015",
+      "year": "2015",
+      "effect_estimate": 0.2594,
+      "lower_ci": -0.272455,
+      "upper_ci": 0.791255,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Skouteris 2015",
+      "year": "2015",
+      "effect_estimate": 0.0677,
+      "lower_ci": -0.26047,
+      "upper_ci": 0.39587,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Tabak 2012",
+      "year": "2012",
+      "effect_estimate": 0.7362,
+      "lower_ci": 0.116323,
+      "upper_ci": 1.356077,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Verbestel 2014",
+      "year": "2014",
+      "effect_estimate": 0.0648,
+      "lower_ci": -0.357665,
+      "upper_ci": 0.487265,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Ward 2020",
+      "year": "2020",
+      "effect_estimate": 0.051918,
+      "lower_ci": -0.273811,
+      "upper_ci": 0.377647,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Watt 2009",
+      "year": "2009",
+      "effect_estimate": -0.0681,
+      "lower_ci": -0.321971,
+      "upper_ci": 0.185771,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wyse 2012",
+      "year": "2012",
+      "effect_estimate": 0.2485,
+      "lower_ci": 0.035993,
+      "upper_ci": 0.461007,
+      "effect_type": "MD"
+    }
+  ]
+}

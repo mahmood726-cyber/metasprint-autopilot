@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011671_pub3_data",
+  "cd_number": "CD011671",
+  "analysis_name": "Delayed graft function",
+  "effect_type": "OR",
+  "k_input": 16,
+  "results": {
+    "I2": 30.502728812342493,
+    "Q": 21.583581259610597,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 16,
+    "funnel_dots": 16,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 16,
+    "p_value": 4.334447324438884e-05,
+    "pooled": 0.6442186611683633,
+    "pooled_hi": 0.7954052404645701,
+    "pooled_lo": 0.5217688572873375,
+    "pooled_log": -0.4397170745313589,
+    "pooled_se": 0.10753624942882857,
+    "tau2": 0.04850914410677449
+  }
+}

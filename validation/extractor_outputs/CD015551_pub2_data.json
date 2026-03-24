@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015551_pub2_data",
+  "cd_number": "CD015551",
+  "analysis_name": "Incidence of herpes zoster (up to 29.4 months after final dose)",
+  "effect_type": "OR",
+  "k_input": 5,
+  "results": {
+    "I2": 85.3862078820145,
+    "Q": 27.371403450286635,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 5,
+    "funnel_dots": 5,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 5,
+    "p_value": 0.042363667603690036,
+    "pooled": 0.38489929671428436,
+    "pooled_hi": 0.967824001792145,
+    "pooled_lo": 0.1530727367133096,
+    "pooled_log": -0.9547735458848455,
+    "pooled_se": 0.47034835346565046,
+    "tau2": 0.8033084899580261
+  }
+}

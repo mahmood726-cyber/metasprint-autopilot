@@ -1,0 +1,57 @@
+{
+  "dataset_name": "CD012532_pub2_data",
+  "cd_number": "CD012532",
+  "analysis_name": "Overall Survival",
+  "effect_type": "MD",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Reardon 2020",
+      "year": "2020",
+      "effect_estimate": 0.039221,
+      "lower_ci": -0.185176,
+      "upper_ci": 0.263618,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Ahluwalia 2021",
+      "year": "2021",
+      "effect_estimate": 0.329304,
+      "lower_ci": -0.151679,
+      "upper_ci": 0.810287,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Nayak 2021",
+      "year": "2021",
+      "effect_estimate": 0.029559,
+      "lower_ci": -0.430224,
+      "upper_ci": 0.489342,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Cloughesy 2019",
+      "year": "2019",
+      "effect_estimate": -0.941609,
+      "lower_ci": -1.796837,
+      "upper_ci": -0.086381,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Omuro 2022",
+      "year": "2022",
+      "effect_estimate": 0.270027,
+      "lower_ci": 0.084362,
+      "upper_ci": 0.455692,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Lim 2022",
+      "year": "2022",
+      "effect_estimate": 0.09531,
+      "lower_ci": -0.088593,
+      "upper_ci": 0.279213,
+      "effect_type": "MD"
+    }
+  ]
+}

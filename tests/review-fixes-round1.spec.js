@@ -831,23 +831,18 @@ test.describe('Review Fixes Round 1 (e396d65)', () => {
     expect(result).not.toContain('<script>');
   });
 
-  test('R38: chi2Quantile function exists and returns correct values', async () => {
+  test('R38: chi2Quantile exact via Newton-Raphson', async () => {
     const result = await page.evaluate(() => {
-      // chi2(0.95, 1) ≈ 3.841, chi2(0.95, 2) ≈ 5.991
-      // Wilson-Hilferty approximation is less precise for small df
       return {
         chi2_95_1: chi2Quantile(0.95, 1),
         chi2_95_2: chi2Quantile(0.95, 2),
         chi2_95_10: chi2Quantile(0.95, 10)
       };
     });
-    // Wilson-Hilferty has ~2.5% error for df=1, so use tolerance of 0
-    // (which means precision to 0.5 units)
-    expect(result.chi2_95_1).toBeCloseTo(3.841, 0);
-    // df=2 is more accurate
-    expect(result.chi2_95_2).toBeCloseTo(5.991, 0);
-    // df=10: chi2(0.95,10) ≈ 18.307 — very accurate for larger df
-    expect(result.chi2_95_10).toBeCloseTo(18.307, 0);
+    // Newton-Raphson on chi2CDF: machine-precision results
+    expect(result.chi2_95_1).toBeCloseTo(3.8415, 3);
+    expect(result.chi2_95_2).toBeCloseTo(5.9915, 3);
+    expect(result.chi2_95_10).toBeCloseTo(18.307, 3);
   });
 
   test('R39: normalQuantile function exists and returns ~1.96 for p=0.975', async () => {
@@ -1018,5 +1013,65 @@ test.describe('Review Fixes Round 1 (e396d65)', () => {
     expect(result.commaField.endsWith('"')).toBe(true);
     // Fields with quotes should have quotes doubled
     expect(result.quoteField).toContain('""');
+  });
+
+  // --- Precision tests for exact methods ---
+
+  test('R38b: chi2Quantile(0.95, 2) exact to 4 significant figures', async () => {
+    const val = await page.evaluate(() => chi2Quantile(0.95, 2));
+    expect(val).toBeCloseTo(5.9915, 3);
+  });
+
+  test('R38c: chi2Quantile(0.99, 5) exact to 4 significant figures', async () => {
+    const val = await page.evaluate(() => chi2Quantile(0.99, 5));
+    expect(val).toBeCloseTo(15.0863, 3);
+  });
+
+  test('R49: RoBMA pEffect > 0.5 for strong-signal dataset', async () => {
+    const result = await page.evaluate(() => {
+      // Strong signal: 8 studies with large consistent effects (log-OR ~ 0.5-0.8)
+      const studies = [
+        { yi: 0.6, sei: 0.15 }, { yi: 0.7, sei: 0.18 },
+        { yi: 0.5, sei: 0.12 }, { yi: 0.8, sei: 0.20 },
+        { yi: 0.55, sei: 0.14 }, { yi: 0.65, sei: 0.16 },
+        { yi: 0.75, sei: 0.19 }, { yi: 0.60, sei: 0.13 }
+      ].map(s => ({ yi: s.yi, vi: s.sei * s.sei, sei: s.sei }));
+      return computeRoBMA(studies, 0.95);
+    });
+    expect(result).not.toBeNull();
+    expect(result.pEffect).toBeGreaterThan(0.5);
+    expect(result.BF10).toBeGreaterThan(1);
+  });
+
+  test('R50: Bivariate DTA model updates covTau during EM iteration', async () => {
+    const result = await page.evaluate(() => {
+      // Heterogeneous DTA data where covTau should deviate from initial moment estimate
+      const studies = [
+        { tp: 80, fp: 10, fn: 5,  tn: 105 },
+        { tp: 50, fp: 30, fn: 20, tn: 100 },
+        { tp: 90, fp: 5,  fn: 2,  tn: 103 },
+        { tp: 60, fp: 25, fn: 15, tn: 100 },
+        { tp: 85, fp: 8,  fn: 4,  tn: 103 },
+        { tp: 45, fp: 35, fn: 25, tn: 95  }
+      ];
+      const br = computeBivariateModel(studies, 0.95);
+      return {
+        tau2Sens: br.tau2Sens,
+        tau2Spec: br.tau2Spec,
+        covTau: br.covTau,
+        rho: br.Sigma.rho,
+        k: br.k
+      };
+    });
+    expect(result).not.toBeNull();
+    expect(result.k).toBe(6);
+    // tau2 values should be positive for heterogeneous data
+    expect(result.tau2Sens).toBeGreaterThan(0);
+    expect(result.tau2Spec).toBeGreaterThan(0);
+    // covTau should be a finite number (EM updated it, not stuck at initial)
+    expect(isFinite(result.covTau)).toBe(true);
+    // rho (correlation) should be between -1 and 1
+    expect(result.rho).toBeGreaterThanOrEqual(-1);
+    expect(result.rho).toBeLessThanOrEqual(1);
   });
 });

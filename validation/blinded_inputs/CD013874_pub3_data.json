@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD013874_pub3_data",
+  "cd_number": "CD013874",
+  "analysis_name": "Disability worsening over 24 months",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Svenningsson 2022",
+      "year": "2022",
+      "ee": 10.0,
+      "en": 98.0,
+      "ce": 5.0,
+      "cn": 97.0,
+      "effect_estimate": 2.090909,
+      "lower_ci": 0.687131,
+      "upper_ci": 6.362546,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Komori 2016",
+      "year": "2016",
+      "ee": 4.0,
+      "en": 18.0,
+      "ce": 4.0,
+      "cn": 9.0,
+      "effect_estimate": 0.357143,
+      "lower_ci": 0.063835,
+      "upper_ci": 1.998137,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Vollmer 2020a",
+      "year": "2020",
+      "ee": 6.0,
+      "en": 182.0,
+      "ce": 24.0,
+      "cn": 271.0,
+      "effect_estimate": 0.350852,
+      "lower_ci": 0.140459,
+      "upper_ci": 0.876395,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

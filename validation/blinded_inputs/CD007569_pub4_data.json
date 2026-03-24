@@ -1,0 +1,74 @@
+{
+  "dataset_name": "CD007569_pub4_data",
+  "cd_number": "CD007569",
+  "analysis_name": "Return to work",
+  "effect_type": "OR",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Hass 2017",
+      "year": "",
+      "ee": 38.0,
+      "en": 53.0,
+      "ce": 35.0,
+      "cn": 63.0,
+      "effect_estimate": 2.026667,
+      "lower_ci": 0.931422,
+      "upper_ci": 4.409791,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Lepore 2003",
+      "year": "2003.0",
+      "ee": 31.0,
+      "en": 41.0,
+      "ce": 14.0,
+      "cn": 20.0,
+      "effect_estimate": 1.328571,
+      "lower_ci": 0.402957,
+      "upper_ci": 4.380378,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Purcell 2011",
+      "year": "2011.0",
+      "ee": 14.0,
+      "en": 43.0,
+      "ce": 16.0,
+      "cn": 48.0,
+      "effect_estimate": 0.965517,
+      "lower_ci": 0.402096,
+      "upper_ci": 2.318409,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Singer 2018",
+      "year": "2018.0",
+      "ee": 70.0,
+      "en": 81.0,
+      "ce": 48.0,
+      "cn": 55.0,
+      "effect_estimate": 0.92803,
+      "lower_ci": 0.335801,
+      "upper_ci": 2.564735,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Greidanus 2021",
+      "year": "2021.0",
+      "ee": 22.0,
+      "en": 24.0,
+      "ce": 10.0,
+      "cn": 10.0,
+      "effect_estimate": 0.428571,
+      "lower_ci": 0.018846,
+      "upper_ci": 9.746052,
+      "effect_type": "OR",
+      "cc_applied": true
+    }
+  ]
+}

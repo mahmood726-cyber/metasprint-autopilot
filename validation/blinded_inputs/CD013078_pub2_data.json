@@ -1,0 +1,49 @@
+{
+  "dataset_name": "CD013078_pub2_data",
+  "cd_number": "CD013078",
+  "analysis_name": "Pain intensity at the end of the treatment (6 months)",
+  "effect_type": "MD",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Rieder 2022",
+      "year": "2022",
+      "en": 8.0,
+      "cn": 8.0,
+      "effect_estimate": -37.0,
+      "lower_ci": -57.100024,
+      "upper_ci": -16.899976,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kongsgaard 2009",
+      "year": "2009",
+      "en": 13.0,
+      "cn": 6.0,
+      "effect_estimate": 13.0,
+      "lower_ci": -8.961673,
+      "upper_ci": 34.961673,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Bahr 2006",
+      "year": "2006",
+      "en": 20.0,
+      "cn": 20.0,
+      "effect_estimate": 4.0,
+      "lower_ci": -4.059107,
+      "upper_ci": 12.059107,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Jensen 1989",
+      "year": "1989",
+      "en": 8.0,
+      "cn": 7.0,
+      "effect_estimate": 12.0,
+      "lower_ci": -15.970613,
+      "upper_ci": 39.970613,
+      "effect_type": "MD"
+    }
+  ]
+}

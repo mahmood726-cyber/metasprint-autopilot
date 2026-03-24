@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015040_pub2_data",
+  "cd_number": "CD015040",
+  "analysis_name": "PTSD symptom severity: immediately after treatment, SMD (ITT, endpoint)",
+  "effect_type": "MD",
+  "k_input": 6,
+  "results": {
+    "I2": 30.355761026402224,
+    "Q": 7.179344729282643,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 6,
+    "p_value": 0.6470812029548676,
+    "pooled": -1.2201337432883237,
+    "pooled_hi": 4.004495120096263,
+    "pooled_lo": -6.444762606672911,
+    "pooled_log": -1.2201337432883237,
+    "pooled_se": 2.665089986857767,
+    "tau2": 11.900370346790849
+  }
+}

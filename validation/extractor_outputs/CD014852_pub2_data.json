@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014852_pub2_data",
+  "cd_number": "CD014852",
+  "analysis_name": "Disability (modified Rankin Scale 0 to 2, good status) at follow\u2010up",
+  "effect_type": "OR",
+  "k_input": 10,
+  "results": {
+    "I2": 42.274664407916994,
+    "Q": 15.591074365679988,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 10,
+    "funnel_dots": 10,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 10,
+    "p_value": 0.703183332903806,
+    "pooled": 0.9425324448370314,
+    "pooled_hi": 1.278034403167874,
+    "pooled_lo": 0.695104456788071,
+    "pooled_log": -0.059184936022199396,
+    "pooled_se": 0.15533003504696036,
+    "tau2": 0.06683952815851016
+  }
+}

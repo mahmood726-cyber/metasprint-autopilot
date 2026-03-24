@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD004508_pub5_data",
+  "cd_number": "CD004508",
+  "analysis_name": "Postoperative ileus",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "MacMillan 2000",
+      "year": "2000",
+      "ee": 2.0,
+      "en": 67.0,
+      "ce": 4.0,
+      "cn": 72.0,
+      "effect_estimate": 0.523077,
+      "lower_ci": 0.092597,
+      "upper_ci": 2.954849,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Minig 2009b",
+      "year": "2009",
+      "ee": 1.0,
+      "en": 71.0,
+      "ce": 4.0,
+      "cn": 72.0,
+      "effect_estimate": 0.242857,
+      "lower_ci": 0.026454,
+      "upper_ci": 2.229501,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Steed 2002",
+      "year": "2002",
+      "ee": 4.0,
+      "en": 47.0,
+      "ce": 7.0,
+      "cn": 49.0,
+      "effect_estimate": 0.55814,
+      "lower_ci": 0.152071,
+      "upper_ci": 2.048521,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD015701_pub2_data",
+  "cd_number": "CD015701",
+  "analysis_name": "HIV acquisition",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "ECHO 2019",
+      "year": "2019/07",
+      "ee": 116.0,
+      "en": 2588.0,
+      "ce": 138.0,
+      "cn": 2571.0,
+      "effect_estimate": 0.827318,
+      "lower_ci": 0.642253,
+      "upper_ci": 1.06571,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "WHICH 2024",
+      "year": "2024",
+      "ee": 4.0,
+      "en": 224.0,
+      "ce": 6.0,
+      "cn": 226.0,
+      "effect_estimate": 0.666667,
+      "lower_ci": 0.185514,
+      "upper_ci": 2.395746,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

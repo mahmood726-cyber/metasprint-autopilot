@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD013823_pub2_data",
+  "cd_number": "CD013823",
+  "analysis_name": "Maternal anaemia",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Duggan 2014",
+      "year": "2014",
+      "ee": 87.0,
+      "en": 108.0,
+      "ce": 81.0,
+      "cn": 108.0,
+      "effect_estimate": 1.380952,
+      "lower_ci": 0.724006,
+      "upper_ci": 2.633997,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Siddiqua 2016",
+      "year": "2016",
+      "ee": 13.0,
+      "en": 33.0,
+      "ce": 12.0,
+      "cn": 35.0,
+      "effect_estimate": 1.245833,
+      "lower_ci": 0.464085,
+      "upper_ci": 3.34443,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

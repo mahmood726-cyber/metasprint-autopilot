@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD010216_pub9_data",
+  "cd_number": "CD010216",
+  "analysis_name": "Smoking cessation",
+  "effect_type": "OR",
+  "k_input": 29,
+  "results": {
+    "I2": 62.55268436522668,
+    "Q": 74.77171467532214,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 29,
+    "funnel_dots": 29,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 29,
+    "p_value": 3.547330274455973e-05,
+    "pooled": 1.625323698612093,
+    "pooled_hi": 2.046159019895865,
+    "pooled_lo": 1.2910419471720904,
+    "pooled_log": 0.48570699509008863,
+    "pooled_se": 0.11745459538045518,
+    "tau2": 0.17875673658087612
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011600_pub3_data",
+  "cd_number": "CD011600",
+  "analysis_name": "Moderate-to-severe exacerbations (Rate)",
+  "effect_type": "MD",
+  "k_input": 5,
+  "results": {
+    "I2": 68.0459688137101,
+    "Q": 12.517982400030416,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 5,
+    "funnel_dots": 5,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 5,
+    "p_value": 2.3367079382552447e-09,
+    "pooled": -0.3050383744758813,
+    "pooled_hi": -0.20492281792396036,
+    "pooled_lo": -0.40515393102780217,
+    "pooled_log": -0.3050383744758813,
+    "pooled_se": 0.05106907577017236,
+    "tau2": 0.008131570423662504
+  }
+}

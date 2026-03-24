@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011381_pub3_data",
+  "cd_number": "CD011381",
+  "analysis_name": "Comparisons for relapse (12 months)",
+  "effect_type": "OR",
+  "k_input": 44,
+  "results": {
+    "I2": 84.25941810669157,
+    "Q": 273.1792273720196,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 44,
+    "funnel_dots": 44,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 44,
+    "p_value": 0.5954910172080883,
+    "pooled": 0.944383584323673,
+    "pooled_hi": 1.1665833678644555,
+    "pooled_lo": 0.7645063172576043,
+    "pooled_log": -0.05722285604417848,
+    "pooled_se": 0.10778549389451018,
+    "tau2": 0.3473220660039211
+  }
+}

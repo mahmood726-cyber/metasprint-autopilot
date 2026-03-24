@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD014541_pub2_data",
+  "cd_number": "CD014541",
+  "analysis_name": "Symptomatic VTE: short-term (45 days or fewer)",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Cohen 2016",
+      "year": "2016",
+      "ee": 35.0,
+      "en": 3721.0,
+      "ce": 54.0,
+      "cn": 3720.0,
+      "effect_estimate": 0.644631,
+      "lower_ci": 0.420237,
+      "upper_ci": 0.988846,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Hull 2010",
+      "year": "2010",
+      "ee": 5.0,
+      "en": 2485.0,
+      "ce": 24.0,
+      "cn": 2510.0,
+      "effect_estimate": 0.208837,
+      "lower_ci": 0.079538,
+      "upper_ci": 0.548333,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Ramacciotti 2022",
+      "year": "2022",
+      "ee": 1.0,
+      "en": 159.0,
+      "ce": 8.0,
+      "cn": 159.0,
+      "effect_estimate": 0.119462,
+      "lower_ci": 0.014757,
+      "upper_ci": 0.967046,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Spyropoulos 2018",
+      "year": "2018",
+      "ee": 50.0,
+      "en": 6007.0,
+      "ce": 66.0,
+      "cn": 6012.0,
+      "effect_estimate": 0.756177,
+      "lower_ci": 0.522682,
+      "upper_ci": 1.09398,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

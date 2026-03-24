@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD015373_pub2_data",
+  "cd_number": "CD015373",
+  "analysis_name": "Magnesium (oral) versus aspirin: tolerability",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Dequeker 1980",
+      "year": "1980",
+      "ee": 8.0,
+      "en": 20.0,
+      "ce": 3.0,
+      "cn": 20.0,
+      "effect_estimate": 3.777778,
+      "lower_ci": 0.826959,
+      "upper_ci": 17.257926,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Van Der Plas 2013",
+      "year": "2013",
+      "ee": 3.0,
+      "en": 16.0,
+      "ce": 2.0,
+      "cn": 14.0,
+      "effect_estimate": 1.384615,
+      "lower_ci": 0.196189,
+      "upper_ci": 9.772027,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

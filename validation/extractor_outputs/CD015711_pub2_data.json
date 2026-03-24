@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015711_pub2_data",
+  "cd_number": "CD015711",
+  "analysis_name": "Spectacle independence for near vision",
+  "effect_type": "OR",
+  "k_input": 2,
+  "results": {
+    "I2": 0,
+    "Q": 0.21581010320951685,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 2,
+    "funnel_dots": 2,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 2,
+    "p_value": 0.38412746049923263,
+    "pooled": 1.3622070110920008,
+    "pooled_hi": 2.732919549569006,
+    "pooled_lo": 0.6789837415304962,
+    "pooled_log": 0.3091061867006926,
+    "pooled_se": 0.3551653175216529,
+    "tau2": 0
+  }
+}

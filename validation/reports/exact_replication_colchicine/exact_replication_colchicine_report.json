@@ -1,0 +1,334 @@
+{
+  "timestamp_utc": "2026-02-27T19:18:29.758105+00:00",
+  "elapsed_sec": 8.01,
+  "reference": {
+    "title": "Long-term trials of colchicine for secondary prevention of vascular events: a meta-analysis",
+    "doi": "10.1093/eurheartj/ehaf174",
+    "pmid": "40314333",
+    "pmc": "PMC12233006",
+    "journal": "European Heart Journal",
+    "year": 2025
+  },
+  "summary": {
+    "k": 6,
+    "total_n": 21800,
+    "checks_passed": 8,
+    "checks_total": 8,
+    "all_passed": true,
+    "verdict": "PASS"
+  },
+  "trials": [
+    {
+      "name": "LoDoCo",
+      "year": 2013,
+      "population": "Stable CAD",
+      "n": 532,
+      "n_colchicine": 250,
+      "n_control": 282,
+      "hr": 0.33,
+      "hr_lo": 0.18,
+      "hr_hi": 0.59,
+      "median_fu_months": 24.0,
+      "primary_endpoint": "ACS, out-of-hospital cardiac arrest, or non-cardioembolic ischaemic stroke",
+      "endpoint_matches_ma": false,
+      "source_pmid": "24036105",
+      "source_journal": "J Am Coll Cardiol"
+    },
+    {
+      "name": "COLCOT",
+      "year": 2019,
+      "population": "Recent MI (<30d)",
+      "n": 4745,
+      "n_colchicine": 2366,
+      "n_control": 2379,
+      "hr": 0.77,
+      "hr_lo": 0.61,
+      "hr_hi": 0.96,
+      "median_fu_months": 22.6,
+      "primary_endpoint": "CV death, cardiac arrest, MI, stroke, or urgent revasc for angina",
+      "endpoint_matches_ma": false,
+      "source_pmid": "31733140",
+      "source_journal": "N Engl J Med"
+    },
+    {
+      "name": "COPS",
+      "year": 2020,
+      "population": "ACS",
+      "n": 795,
+      "n_colchicine": 396,
+      "n_control": 399,
+      "hr": 0.65,
+      "hr_lo": 0.38,
+      "hr_hi": 1.09,
+      "median_fu_months": 12.0,
+      "primary_endpoint": "All-cause death, ACS, ischaemia-driven revasc, or non-cardioembolic stroke",
+      "endpoint_matches_ma": false,
+      "source_pmid": "32862667",
+      "source_journal": "Circ Cardiovasc Qual Outcomes"
+    },
+    {
+      "name": "LoDoCo2",
+      "year": 2020,
+      "population": "Stable CAD",
+      "n": 5522,
+      "n_colchicine": 2762,
+      "n_control": 2760,
+      "hr": 0.69,
+      "hr_lo": 0.57,
+      "hr_hi": 0.83,
+      "median_fu_months": 28.6,
+      "primary_endpoint": "CV death, MI, ischaemic stroke, or ischaemia-driven coronary revasc",
+      "endpoint_matches_ma": true,
+      "source_pmid": "32865380",
+      "source_journal": "N Engl J Med"
+    },
+    {
+      "name": "CONVINCE",
+      "year": 2024,
+      "population": "Post-stroke",
+      "n": 3144,
+      "n_colchicine": 1569,
+      "n_control": 1575,
+      "hr": 0.84,
+      "hr_lo": 0.68,
+      "hr_hi": 1.05,
+      "median_fu_months": 33.6,
+      "primary_endpoint": "Fatal/nonfatal recurrent ischaemic stroke, MI, cardiac arrest, CV death, or hospitalization for unstable angina",
+      "endpoint_matches_ma": false,
+      "source_pmid": "38785210",
+      "source_journal": "N Engl J Med"
+    },
+    {
+      "name": "CLEAR-SYNERGY",
+      "year": 2025,
+      "population": "Post-MI (PCI)",
+      "n": 7062,
+      "n_colchicine": 3528,
+      "n_control": 3534,
+      "hr": 0.99,
+      "hr_lo": 0.85,
+      "hr_hi": 1.16,
+      "median_fu_months": 26.0,
+      "primary_endpoint": "CV death, MI, stroke, or ischaemia-driven revasc",
+      "endpoint_matches_ma": true,
+      "source_pmid": "39535807",
+      "source_journal": "N Engl J Med"
+    }
+  ],
+  "dl_results": {
+    "pooled_hr": 0.7448159551777604,
+    "pooled_ci_lo": 0.6085608478349306,
+    "pooled_ci_hi": 0.911578207932682,
+    "tau2": 0.04129019048772235,
+    "I2": 73.6235121906148,
+    "Q": 18.95627665113517,
+    "k": 6
+  },
+  "published": {
+    "pooled_hr": 0.75,
+    "pooled_ci_lo": 0.56,
+    "pooled_ci_hi": 0.93,
+    "I2": 77.1,
+    "total_n": 21800,
+    "k": 6,
+    "mi_hr": 0.71,
+    "mi_ci_lo": 0.51,
+    "mi_ci_hi": 0.91,
+    "mi_I2": 62.5,
+    "stroke_hr": 0.63,
+    "stroke_ci_lo": 0.34,
+    "stroke_ci_hi": 0.92,
+    "stroke_I2": 61.1,
+    "revasc_hr": 0.67,
+    "revasc_ci_lo": 0.41,
+    "revasc_ci_hi": 0.93,
+    "revasc_I2": 77.6
+  },
+  "comparisons": [
+    {
+      "label": "Pooled HR (MACE)",
+      "computed": 0.744816,
+      "published": 0.75,
+      "difference": 0.005184,
+      "tolerance": 0.05,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "CI lower bound",
+      "computed": 0.608561,
+      "published": 0.56,
+      "difference": 0.048561,
+      "tolerance": 0.1,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "CI upper bound",
+      "computed": 0.911578,
+      "published": 0.93,
+      "difference": 0.018422,
+      "tolerance": 0.1,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "I-squared (%)",
+      "computed": 73.623512,
+      "published": 77.1,
+      "difference": 3.476488,
+      "tolerance": 10.0,
+      "unit": "%",
+      "passed": true
+    },
+    {
+      "label": "Number of studies (k)",
+      "computed": 6,
+      "published": 6,
+      "difference": 0,
+      "tolerance": 0,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "Total participants",
+      "computed": 21800,
+      "published": 21800,
+      "difference": 0,
+      "tolerance": 0,
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "Pooled HR < 1 (favours colchicine)",
+      "computed": 0.7448,
+      "published": "< 1.00",
+      "difference": "N/A",
+      "tolerance": "directional",
+      "unit": "",
+      "passed": true
+    },
+    {
+      "label": "Pooled HR CI excludes 1.0 (significant)",
+      "computed": "[0.6086, 0.9116]",
+      "published": "[0.56, 0.93]",
+      "difference": "N/A",
+      "tolerance": "CI upper < 1.0",
+      "unit": "",
+      "passed": true
+    }
+  ],
+  "js_verification": {
+    "I2": 73.6235121906148,
+    "Q": 18.95627665113517,
+    "ci_hi": 0.911578207932682,
+    "ci_lo": 0.6085608478349306,
+    "k": 6,
+    "log_hr": -0.29461813115184393,
+    "pooled_hr": 0.7448159551777604,
+    "se": 0.10308365130876548,
+    "tau2": 0.041290190487722346,
+    "diff_vs_python": "0.00e+00"
+  },
+  "tolerances": {
+    "effect": 0.05,
+    "ci": 0.1,
+    "I2": 10.0
+  },
+  "editorial_checklist": {
+    "journal": "European Heart Journal",
+    "total_weight": 110,
+    "items": [
+      {
+        "category": "Reporting",
+        "criterion": "PRISMA 2020 compliance",
+        "weight": 10
+      },
+      {
+        "category": "Reporting",
+        "criterion": "Prospective registration (PROSPERO or equivalent)",
+        "weight": 8
+      },
+      {
+        "category": "Reporting",
+        "criterion": "Search strategy documented (>=2 databases)",
+        "weight": 8
+      },
+      {
+        "category": "Reporting",
+        "criterion": "Study selection flowchart",
+        "weight": 6
+      },
+      {
+        "category": "Methods",
+        "criterion": "Risk of bias assessment (RoB 2 or Cochrane tool)",
+        "weight": 10
+      },
+      {
+        "category": "Methods",
+        "criterion": "Effect measure specified (HR with DL random effects)",
+        "weight": 6
+      },
+      {
+        "category": "Methods",
+        "criterion": "Heterogeneity assessment (I-squared, tau-squared)",
+        "weight": 8
+      },
+      {
+        "category": "Methods",
+        "criterion": "Publication bias assessment (Egger's test, funnel plot)",
+        "weight": 6
+      },
+      {
+        "category": "Methods",
+        "criterion": "Statistical software stated (Stata v16)",
+        "weight": 4
+      },
+      {
+        "category": "Methods",
+        "criterion": "Sensitivity analyses pre-specified",
+        "weight": 6
+      },
+      {
+        "category": "Results",
+        "criterion": "Forest plot (per-trial HRs + pooled)",
+        "weight": 8
+      },
+      {
+        "category": "Results",
+        "criterion": "Heterogeneity quantified",
+        "weight": 4
+      },
+      {
+        "category": "Results",
+        "criterion": "Sensitivity analyses reported (excl. CONVINCE, pre-COVID)",
+        "weight": 6
+      },
+      {
+        "category": "Results",
+        "criterion": "Subgroup analyses (age, sex, diabetes)",
+        "weight": 4
+      },
+      {
+        "category": "Clinical",
+        "criterion": "Clinical context (colchicine mechanism, guidelines)",
+        "weight": 4
+      },
+      {
+        "category": "Clinical",
+        "criterion": "Limitations acknowledged (>=3 substantive)",
+        "weight": 4
+      },
+      {
+        "category": "Safety",
+        "criterion": "Adverse events pooled (SAEs, infections, cancer)",
+        "weight": 6
+      },
+      {
+        "category": "Integrity",
+        "criterion": "Conflict of interest disclosure",
+        "weight": 2
+      }
+    ]
+  }
+}

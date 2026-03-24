@@ -1,0 +1,289 @@
+{
+  "dataset_name": "CD014872_pub2_data",
+  "cd_number": "CD014872",
+  "analysis_name": "Progression-free survival",
+  "effect_type": "MD",
+  "k": 35,
+  "studies": [
+    {
+      "study": "Andre 2022",
+      "year": "2022",
+      "effect_estimate": -0.261365,
+      "lower_ci": -0.580478,
+      "upper_ci": 0.057748,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Cortes 2019",
+      "year": "2019",
+      "effect_estimate": -0.105361,
+      "lower_ci": -0.357964,
+      "upper_ci": 0.147242,
+      "effect_type": "MD"
+    },
+    {
+      "study": "De Bono 2020",
+      "year": "2020",
+      "effect_estimate": -0.71335,
+      "lower_ci": -0.96618,
+      "upper_ci": -0.46052,
+      "effect_type": "MD"
+    },
+    {
+      "study": "De Botton 2023",
+      "year": "2023/01/12",
+      "effect_estimate": -0.385662,
+      "lower_ci": -0.665532,
+      "upper_ci": -0.105792,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Fizazi 2023",
+      "year": "2023/02/22",
+      "effect_estimate": -0.693147,
+      "lower_ci": -1.018512,
+      "upper_ci": -0.367782,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kristeleit 2022",
+      "year": "2022",
+      "effect_estimate": -0.400478,
+      "lower_ci": -0.652085,
+      "upper_ci": -0.148871,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Lee 2024",
+      "year": "2024",
+      "effect_estimate": -0.235722,
+      "lower_ci": -0.528736,
+      "upper_ci": 0.057292,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Litton 2018",
+      "year": "2018",
+      "effect_estimate": -0.579818,
+      "lower_ci": -1.093688,
+      "upper_ci": -0.065948,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Liu 2020",
+      "year": "2020/05/20",
+      "effect_estimate": -0.462035,
+      "lower_ci": -0.993108,
+      "upper_ci": 0.069038,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Loriot 2023",
+      "year": "2023/11/23",
+      "effect_estimate": -0.544727,
+      "lower_ci": -0.831049,
+      "upper_ci": -0.258405,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Penson 2020",
+      "year": "2020",
+      "effect_estimate": -0.223144,
+      "lower_ci": -0.583014,
+      "upper_ci": 0.136726,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Perl 2019",
+      "year": "2019",
+      "effect_estimate": -0.235722,
+      "lower_ci": -0.551244,
+      "upper_ci": 0.0798,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Robson 2017",
+      "year": "2017",
+      "effect_estimate": -0.430783,
+      "lower_ci": -0.761211,
+      "upper_ci": -0.100355,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wang 2021",
+      "year": "2021/11/05",
+      "effect_estimate": -0.673345,
+      "lower_ci": -1.013542,
+      "upper_ci": -0.333148,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Agarwal 2022",
+      "year": "2022/02/01",
+      "effect_estimate": -0.798508,
+      "lower_ci": -1.105759,
+      "upper_ci": -0.491257,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Andre 2019",
+      "year": "2019/05/16",
+      "effect_estimate": -0.430783,
+      "lower_ci": -0.696156,
+      "upper_ci": -0.16541,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Chi 2023",
+      "year": "2023",
+      "effect_estimate": -0.314711,
+      "lower_ci": -0.584269,
+      "upper_ci": -0.045153,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Ciardiello 2016",
+      "year": "2016",
+      "effect_estimate": -0.579818,
+      "lower_ci": -1.103326,
+      "upper_ci": -0.05631,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Clarke 2018",
+      "year": "2018",
+      "effect_estimate": -0.301105,
+      "lower_ci": -1.350581,
+      "upper_ci": 0.748371,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Clarke 2022",
+      "year": "2022",
+      "effect_estimate": -0.798508,
+      "lower_ci": -1.168789,
+      "upper_ci": -0.428227,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Crabb 2020",
+      "year": "2020",
+      "effect_estimate": 0.157004,
+      "lower_ci": -0.493526,
+      "upper_ci": 0.807534,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Dieras 2020",
+      "year": "2020",
+      "effect_estimate": -0.223144,
+      "lower_ci": -0.689328,
+      "upper_ci": 0.24304,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Howell 2022",
+      "year": "2022",
+      "effect_estimate": -0.820981,
+      "lower_ci": -1.330378,
+      "upper_ci": -0.311584,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Lehmann 2019",
+      "year": "2019",
+      "effect_estimate": -0.127833,
+      "lower_ci": -1.596412,
+      "upper_ci": 1.340746,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Peeter 2010",
+      "year": "2010",
+      "effect_estimate": -0.314711,
+      "lower_ci": -0.525893,
+      "upper_ci": -0.103529,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Rodler 2023",
+      "year": "2023",
+      "effect_estimate": -0.356675,
+      "lower_ci": -1.226191,
+      "upper_ci": 0.512841,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Soulieres 2018",
+      "year": "2018",
+      "effect_estimate": -0.400478,
+      "lower_ci": -1.561459,
+      "upper_ci": 0.760503,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Turner 2023",
+      "year": "2023",
+      "effect_estimate": -0.693147,
+      "lower_ci": -0.961607,
+      "upper_ci": -0.424687,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Chen 2021",
+      "year": "2021",
+      "effect_estimate": -0.223144,
+      "lower_ci": -0.560942,
+      "upper_ci": 0.114654,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Le Tourneau 2015",
+      "year": "2015",
+      "effect_estimate": -0.127833,
+      "lower_ci": -0.438603,
+      "upper_ci": 0.182937,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Tsimberidou 2019",
+      "year": "2019",
+      "effect_estimate": -0.400478,
+      "lower_ci": -0.63907,
+      "upper_ci": -0.161886,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Abdou-Alfa 2020",
+      "year": "2020",
+      "effect_estimate": -0.994252,
+      "lower_ci": -1.379391,
+      "upper_ci": -0.609113,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Amado 2008",
+      "year": "2008",
+      "effect_estimate": -0.798508,
+      "lower_ci": -1.074157,
+      "upper_ci": -0.522859,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Brose 2014",
+      "year": "2014",
+      "effect_estimate": -0.776529,
+      "lower_ci": -1.437553,
+      "upper_ci": -0.115505,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Schlumberger 2017",
+      "year": "2017",
+      "effect_estimate": -1.469676,
+      "lower_ci": -1.969049,
+      "upper_ci": -0.970303,
+      "effect_type": "MD"
+    }
+  ]
+}

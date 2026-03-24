@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013462_pub3_data",
+  "cd_number": "CD013462",
+  "analysis_name": "Rate of postoperative pancreatic fistula (grade B or C defined according to the 2005 ISGPF definition)",
+  "effect_type": "OR",
+  "k_input": 11,
+  "results": {
+    "I2": 57.92257659364215,
+    "Q": 23.76571374968984,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 11,
+    "funnel_dots": 11,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 11,
+    "p_value": 0.3591729017267906,
+    "pooled": 1.2733535679615051,
+    "pooled_hi": 2.1346508577265184,
+    "pooled_lo": 0.7595758824781196,
+    "pooled_log": 0.24165402489335724,
+    "pooled_se": 0.2635433663253028,
+    "tau2": 0.39902139765610467
+  }
+}

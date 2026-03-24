@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD015123_pub2_data",
+  "cd_number": "CD015123",
+  "analysis_name": "Number of participants with at least one SAE",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "NCT04115488 (Antelope)",
+      "year": "",
+      "ee": 2.0,
+      "en": 103.0,
+      "ce": 3.0,
+      "cn": 131.0,
+      "effect_estimate": 0.844884,
+      "lower_ci": 0.138475,
+      "upper_ci": 5.154922,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "NCT01416181 (ASCEND)",
+      "year": "2011.0",
+      "ee": 73.0,
+      "en": 439.0,
+      "ce": 122.0,
+      "cn": 448.0,
+      "effect_estimate": 0.532966,
+      "lower_ci": 0.384603,
+      "upper_ci": 0.738561,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "NCT01144052",
+      "year": "",
+      "ee": 0.0,
+      "en": 10.0,
+      "ce": 2.0,
+      "cn": 9.0,
+      "effect_estimate": 0.142857,
+      "lower_ci": 0.005951,
+      "upper_ci": 3.429631,
+      "effect_type": "OR",
+      "cc_applied": true
+    }
+  ]
+}

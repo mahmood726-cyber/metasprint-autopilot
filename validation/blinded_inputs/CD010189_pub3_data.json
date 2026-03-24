@@ -1,0 +1,57 @@
+{
+  "dataset_name": "CD010189_pub3_data",
+  "cd_number": "CD010189",
+  "analysis_name": "Overall survival",
+  "effect_type": "MD",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Couban 2002",
+      "year": "2002",
+      "effect_estimate": 0.48,
+      "lower_ci": 0.029109,
+      "upper_ci": 0.930891,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Friedrichs 2010",
+      "year": "2010",
+      "effect_estimate": -0.19,
+      "lower_ci": -0.523267,
+      "upper_ci": 0.143267,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Mielcarek 2011",
+      "year": "2011",
+      "effect_estimate": 0.29,
+      "lower_ci": -0.141287,
+      "upper_ci": 0.721287,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Powles 2002",
+      "year": "2002",
+      "effect_estimate": 0.42,
+      "lower_ci": -0.540594,
+      "upper_ci": 1.380594,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Vigorito 2001",
+      "year": "2001",
+      "effect_estimate": -0.13,
+      "lower_ci": -1.051386,
+      "upper_ci": 0.791386,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Anasetti 2012",
+      "year": "2012",
+      "effect_estimate": 0.0,
+      "lower_ci": -0.235247,
+      "upper_ci": 0.235247,
+      "effect_type": "MD"
+    }
+  ]
+}

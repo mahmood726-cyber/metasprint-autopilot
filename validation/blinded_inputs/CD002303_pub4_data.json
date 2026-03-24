@@ -1,0 +1,113 @@
+{
+  "dataset_name": "CD002303_pub4_data",
+  "cd_number": "CD002303",
+  "analysis_name": "Reulceration at 6 months",
+  "effect_type": "OR",
+  "k": 8,
+  "studies": [
+    {
+      "study": "Vandongen 2000",
+      "year": "2000",
+      "ee": 15.0,
+      "en": 72.0,
+      "ce": 37.0,
+      "cn": 81.0,
+      "effect_estimate": 0.312945,
+      "lower_ci": 0.152703,
+      "upper_ci": 0.641336,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Clarke-Moloney 2014",
+      "year": "2014",
+      "ee": 10.0,
+      "en": 49.0,
+      "ce": 6.0,
+      "cn": 50.0,
+      "effect_estimate": 1.880342,
+      "lower_ci": 0.625705,
+      "upper_ci": 5.650724,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Kapp 2013",
+      "year": "2013",
+      "ee": 7.0,
+      "en": 49.0,
+      "ce": 6.0,
+      "cn": 44.0,
+      "effect_estimate": 1.055556,
+      "lower_ci": 0.325759,
+      "upper_ci": 3.420309,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Milic 2010",
+      "year": "2010",
+      "ee": 59.0,
+      "en": 162.0,
+      "ce": 34.0,
+      "cn": 165.0,
+      "effect_estimate": 2.207025,
+      "lower_ci": 1.345615,
+      "upper_ci": 3.619874,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Milic 2018",
+      "year": "2018",
+      "ee": 96.0,
+      "en": 160.0,
+      "ce": 51.0,
+      "cn": 176.0,
+      "effect_estimate": 3.676471,
+      "lower_ci": 2.334691,
+      "upper_ci": 5.78939,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Milic 2019",
+      "year": "2019",
+      "ee": 120.0,
+      "en": 125.0,
+      "ce": 89.0,
+      "cn": 133.0,
+      "effect_estimate": 11.865169,
+      "lower_ci": 4.520532,
+      "upper_ci": 31.142848,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Nelson 2006",
+      "year": "1996",
+      "ee": 59.0,
+      "en": 151.0,
+      "ce": 48.0,
+      "cn": 149.0,
+      "effect_estimate": 1.349411,
+      "lower_ci": 0.839707,
+      "upper_ci": 2.168508,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Franks 1995",
+      "year": "1995",
+      "ee": 18.0,
+      "en": 74.0,
+      "ce": 29.0,
+      "cn": 92.0,
+      "effect_estimate": 0.698276,
+      "lower_ci": 0.35035,
+      "upper_ci": 1.39172,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

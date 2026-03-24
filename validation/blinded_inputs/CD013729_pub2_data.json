@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD013729_pub2_data",
+  "cd_number": "CD013729",
+  "analysis_name": "Myocardial infarction (medium-term follow-up)",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Appel 2003",
+      "year": "2003.0",
+      "ee": 1.0,
+      "en": 269.0,
+      "ce": 0.0,
+      "cn": 268.0,
+      "effect_estimate": 3.0,
+      "lower_ci": 0.121582,
+      "upper_ci": 74.024178,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "NCT02514889",
+      "year": "",
+      "ee": 1.0,
+      "en": 131.0,
+      "ce": 0.0,
+      "cn": 130.0,
+      "effect_estimate": 3.0,
+      "lower_ci": 0.12101,
+      "upper_ci": 74.37425,
+      "effect_type": "OR",
+      "cc_applied": true
+    }
+  ]
+}

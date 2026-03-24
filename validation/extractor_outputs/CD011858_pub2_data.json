@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011858_pub2_data",
+  "cd_number": "CD011858",
+  "analysis_name": "Extracorporeal circuit thrombosis",
+  "effect_type": "OR",
+  "k_input": 14,
+  "results": {
+    "I2": 67.42412984519487,
+    "Q": 39.906838829545194,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 14,
+    "funnel_dots": 14,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 14,
+    "p_value": 0.5583106084903031,
+    "pooled": 0.7561465805399159,
+    "pooled_hi": 1.9282562119690332,
+    "pooled_lo": 0.296515394434207,
+    "pooled_log": -0.2795200319937004,
+    "pooled_se": 0.4775242484542931,
+    "tau2": 1.827925912242623
+  }
+}

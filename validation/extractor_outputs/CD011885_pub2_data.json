@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD011885_pub2_data",
+  "cd_number": "CD011885",
+  "analysis_name": "Clinically relevant response, as defined by study authors",
+  "effect_type": "OR",
+  "k_input": 7,
+  "results": {
+    "I2": 41.550060537639396,
+    "Q": 10.265194549711651,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 7,
+    "funnel_dots": 7,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 7,
+    "p_value": 0.2743008025345173,
+    "pooled": 1.5037020497695446,
+    "pooled_hi": 3.125042667701983,
+    "pooled_lo": 0.7235484743457461,
+    "pooled_log": 0.4079301006957998,
+    "pooled_se": 0.3731482007774704,
+    "tau2": 0.3459654479009397
+  }
+}

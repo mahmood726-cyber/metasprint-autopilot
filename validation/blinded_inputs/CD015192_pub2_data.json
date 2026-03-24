@@ -1,0 +1,100 @@
+{
+  "dataset_name": "CD015192_pub2_data",
+  "cd_number": "CD015192",
+  "analysis_name": "Graft infection rate",
+  "effect_type": "OR",
+  "k": 7,
+  "studies": [
+    {
+      "study": "D'Addato 1996",
+      "year": "1996",
+      "ee": 4.0,
+      "en": 296.0,
+      "ce": 5.0,
+      "cn": 304.0,
+      "effect_estimate": 0.819178,
+      "lower_ci": 0.217756,
+      "upper_ci": 3.081675,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Prager 2001",
+      "year": "2001",
+      "ee": 5.0,
+      "en": 209.0,
+      "ce": 5.0,
+      "cn": 106.0,
+      "effect_estimate": 0.495098,
+      "lower_ci": 0.140072,
+      "upper_ci": 1.749967,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Healy 1989",
+      "year": "1989",
+      "ee": 2.0,
+      "en": 50.0,
+      "ce": 0.0,
+      "cn": 50.0,
+      "effect_estimate": 5.206186,
+      "lower_ci": 0.243497,
+      "upper_ci": 111.313003,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Bisgaard 2013",
+      "year": "2013",
+      "ee": 4.0,
+      "en": 32.0,
+      "ce": 3.0,
+      "cn": 32.0,
+      "effect_estimate": 1.380952,
+      "lower_ci": 0.283078,
+      "upper_ci": 6.736771,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Partridge 2017",
+      "year": "2017",
+      "ee": 4.0,
+      "en": 85.0,
+      "ce": 13.0,
+      "cn": 91.0,
+      "effect_estimate": 0.296296,
+      "lower_ci": 0.092584,
+      "upper_ci": 0.948234,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Vierhout 2019",
+      "year": "2018",
+      "ee": 0.0,
+      "en": 73.0,
+      "ce": 2.0,
+      "cn": 64.0,
+      "effect_estimate": 0.170068,
+      "lower_ci": 0.008008,
+      "upper_ci": 3.611591,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Svensson-Bjork 2022",
+      "year": "2022",
+      "ee": 5.0,
+      "en": 183.0,
+      "ce": 11.0,
+      "cn": 194.0,
+      "effect_estimate": 0.467314,
+      "lower_ci": 0.159125,
+      "upper_ci": 1.372393,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

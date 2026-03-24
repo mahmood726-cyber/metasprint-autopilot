@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD008552_pub8_data",
+  "cd_number": "CD008552",
+  "analysis_name": "Vegetable intake",
+  "effect_type": "MD",
+  "k_input": 42,
+  "results": {
+    "I2": 68.92792593813085,
+    "Q": 131.9512817791399,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 42,
+    "funnel_dots": 42,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 42,
+    "p_value": 3.1189926108510235e-07,
+    "pooled": 0.2250425838613562,
+    "pooled_hi": 0.3112689358019196,
+    "pooled_lo": 0.13881623192079276,
+    "pooled_log": 0.2250425838613562,
+    "pooled_se": 0.04398417441104154,
+    "tau2": 0.04475938991105078
+  }
+}

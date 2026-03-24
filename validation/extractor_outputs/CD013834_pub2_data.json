@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013834_pub2_data",
+  "cd_number": "CD013834",
+  "analysis_name": "TUG",
+  "effect_type": "MD",
+  "k_input": 18,
+  "results": {
+    "I2": 76.00619005864993,
+    "Q": 70.8516073168639,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 18,
+    "funnel_dots": 18,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 18,
+    "p_value": 0.9220088835522111,
+    "pooled": 0.050035330066966914,
+    "pooled_hi": 1.0519311474840947,
+    "pooled_lo": -0.9518604873501608,
+    "pooled_log": 0.050035330066966914,
+    "pooled_se": 0.5110683611588268,
+    "tau2": 2.4891022068131834
+  }
+}

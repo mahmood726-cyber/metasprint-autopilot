@@ -1,0 +1,87 @@
+{
+  "dataset_name": "CD013414_pub2_data",
+  "cd_number": "CD013414",
+  "analysis_name": "Death: ADPKD subgroup analysis",
+  "effect_type": "OR",
+  "k": 6,
+  "studies": [
+    {
+      "study": "REMOVAL 2017",
+      "year": "2017",
+      "ee": 5.0,
+      "en": 193.0,
+      "ce": 2.0,
+      "cn": 194.0,
+      "effect_estimate": 2.553191,
+      "lower_ci": 0.48913,
+      "upper_ci": 13.327316,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Rachmani 2002a",
+      "year": "2002",
+      "ee": 62.0,
+      "en": 191.0,
+      "ce": 64.0,
+      "cn": 190.0,
+      "effect_estimate": 0.946221,
+      "lower_ci": 0.617375,
+      "upper_ci": 1.450227,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "TAME-PKD 2018",
+      "year": "2018",
+      "ee": 1.0,
+      "en": 49.0,
+      "ce": 0.0,
+      "cn": 48.0,
+      "effect_estimate": 3.0,
+      "lower_ci": 0.119152,
+      "upper_ci": 75.533875,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "APRIME 2011",
+      "year": "2011",
+      "ee": 1.0,
+      "en": 31.0,
+      "ce": 0.0,
+      "cn": 32.0,
+      "effect_estimate": 3.196721,
+      "lower_ci": 0.125292,
+      "upper_ci": 81.561868,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "ADOPT 2002",
+      "year": "2002",
+      "ee": 31.0,
+      "en": 1454.0,
+      "ce": 65.0,
+      "cn": 2897.0,
+      "effect_estimate": 0.949154,
+      "lower_ci": 0.615821,
+      "upper_ci": 1.462915,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "QUARTET 2004",
+      "year": "2004",
+      "ee": 2.0,
+      "en": 597.0,
+      "ce": 3.0,
+      "cn": 597.0,
+      "effect_estimate": 0.665546,
+      "lower_ci": 0.110765,
+      "upper_ci": 3.999019,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

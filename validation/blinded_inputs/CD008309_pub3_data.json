@@ -1,0 +1,74 @@
+{
+  "dataset_name": "CD008309_pub3_data",
+  "cd_number": "CD008309",
+  "analysis_name": "Composite outcome of death or bronchopulmonary dysplasia (BPD) at 36 weeks' postmenstrual age (PMA)",
+  "effect_type": "OR",
+  "k": 5,
+  "studies": [
+    {
+      "study": "Pinheiro 2016",
+      "year": "2016",
+      "ee": 3.0,
+      "en": 30.0,
+      "ce": 2.0,
+      "cn": 30.0,
+      "effect_estimate": 1.555556,
+      "lower_ci": 0.240692,
+      "upper_ci": 10.053319,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Gallup 2022",
+      "year": "2022",
+      "ee": 1.0,
+      "en": 51.0,
+      "ce": 3.0,
+      "cn": 42.0,
+      "effect_estimate": 0.26,
+      "lower_ci": 0.026013,
+      "upper_ci": 2.598704,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Barbosa 2017",
+      "year": "2017",
+      "ee": 6.0,
+      "en": 26.0,
+      "ce": 4.0,
+      "cn": 22.0,
+      "effect_estimate": 1.35,
+      "lower_ci": 0.3274,
+      "upper_ci": 5.566591,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Attridge 2013",
+      "year": "2013",
+      "ee": 8.0,
+      "en": 13.0,
+      "ce": 7.0,
+      "cn": 13.0,
+      "effect_estimate": 1.371429,
+      "lower_ci": 0.287728,
+      "upper_ci": 6.536781,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Roberts 2018",
+      "year": "2018",
+      "ee": 5.0,
+      "en": 50.0,
+      "ce": 1.0,
+      "cn": 53.0,
+      "effect_estimate": 5.777778,
+      "lower_ci": 0.650338,
+      "upper_ci": 51.331323,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

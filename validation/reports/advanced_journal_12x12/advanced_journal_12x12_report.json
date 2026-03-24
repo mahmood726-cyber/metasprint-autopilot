@@ -1,0 +1,2229 @@
+{
+  "summary": {
+    "timestamp_utc": "2026-02-27T17:20:36.322515+00:00",
+    "personas_total": 12,
+    "personas_ok": 12,
+    "personas_failed": 0,
+    "advanced_gate_ready_count": 12,
+    "advanced_gate_ready_rate": 1.0,
+    "panel_reviews_total": 144,
+    "panel_reviews_accepted": 144,
+    "panel_review_accept_rate": 1.0,
+    "manuscripts_major_revision": 0,
+    "timing": {
+      "mean_total_sec": 5.863958333335817,
+      "median_total_sec": 5.86945000000298,
+      "p90_total_sec": 6.332
+    },
+    "quality": {
+      "mean_gate_score": 88,
+      "mean_verified_ratio": 1,
+      "mean_rob_coverage": 1,
+      "mean_panel_accept_rate": 1.0
+    },
+    "issue_frequency": {},
+    "elapsed_wall_sec": 77.4
+  },
+  "author_personas": [
+    {
+      "name": "Interventional Fellow",
+      "subcategory": "acs",
+      "p": "adults with acute coronary syndrome",
+      "i": "ticagrelor",
+      "c": "clopidogrel",
+      "o": "major adverse cardiovascular events",
+      "relevant": 34,
+      "irrelevant": 80,
+      "duplicates": 28,
+      "manual_cap": 18
+    },
+    {
+      "name": "Heart Failure Consultant",
+      "subcategory": "hf",
+      "p": "adults with HFrEF",
+      "i": "empagliflozin",
+      "c": "placebo",
+      "o": "CV death or HF hospitalization",
+      "relevant": 30,
+      "irrelevant": 72,
+      "duplicates": 24,
+      "manual_cap": 16
+    },
+    {
+      "name": "EP Registrar",
+      "subcategory": "af",
+      "p": "adults with atrial fibrillation",
+      "i": "apixaban",
+      "c": "warfarin",
+      "o": "stroke or systemic embolism",
+      "relevant": 28,
+      "irrelevant": 70,
+      "duplicates": 22,
+      "manual_cap": 15
+    },
+    {
+      "name": "Hypertension Nurse",
+      "subcategory": "htn",
+      "p": "adults with resistant hypertension",
+      "i": "renal denervation",
+      "c": "sham",
+      "o": "24-hour systolic blood pressure",
+      "relevant": 26,
+      "irrelevant": 68,
+      "duplicates": 20,
+      "manual_cap": 14
+    },
+    {
+      "name": "Lipid Pharmacist",
+      "subcategory": "lipids",
+      "p": "adults with ASCVD",
+      "i": "inclisiran",
+      "c": "standard care",
+      "o": "LDL-C change",
+      "relevant": 27,
+      "irrelevant": 75,
+      "duplicates": 24,
+      "manual_cap": 16
+    },
+    {
+      "name": "Pulmonary HTN Lead",
+      "subcategory": "ph",
+      "p": "adults with pulmonary arterial hypertension",
+      "i": "selexipag",
+      "c": "placebo",
+      "o": "clinical worsening",
+      "relevant": 24,
+      "irrelevant": 66,
+      "duplicates": 19,
+      "manual_cap": 14
+    },
+    {
+      "name": "Stroke Prevention Fellow",
+      "subcategory": "af",
+      "p": "adults with non-valvular AF",
+      "i": "edoxaban",
+      "c": "warfarin",
+      "o": "ischemic stroke",
+      "relevant": 30,
+      "irrelevant": 78,
+      "duplicates": 26,
+      "manual_cap": 18
+    },
+    {
+      "name": "General Cardiology Registrar",
+      "subcategory": "general",
+      "p": "adults with chronic coronary syndrome",
+      "i": "rivaroxaban",
+      "c": "aspirin alone",
+      "o": "composite cardiovascular events",
+      "relevant": 25,
+      "irrelevant": 74,
+      "duplicates": 21,
+      "manual_cap": 15
+    },
+    {
+      "name": "Valve Investigator",
+      "subcategory": "af",
+      "p": "adults after TAVI",
+      "i": "direct oral anticoagulants",
+      "c": "vitamin K antagonists",
+      "o": "major bleeding",
+      "relevant": 22,
+      "irrelevant": 64,
+      "duplicates": 18,
+      "manual_cap": 13
+    },
+    {
+      "name": "Preventive Fellow",
+      "subcategory": "lipids",
+      "p": "adults at high cardiovascular risk",
+      "i": "high-intensity statin",
+      "c": "moderate-intensity statin",
+      "o": "myocardial infarction",
+      "relevant": 26,
+      "irrelevant": 72,
+      "duplicates": 23,
+      "manual_cap": 16
+    },
+    {
+      "name": "Academic Meta-Analyst",
+      "subcategory": "hf",
+      "p": "adults with heart failure",
+      "i": "SGLT2 inhibitors",
+      "c": "placebo",
+      "o": "all-cause mortality",
+      "relevant": 32,
+      "irrelevant": 84,
+      "duplicates": 30,
+      "manual_cap": 20
+    },
+    {
+      "name": "Methods Reviewer",
+      "subcategory": "acs",
+      "p": "adults with cardiovascular disease",
+      "i": "antiplatelet therapy",
+      "c": "standard care",
+      "o": "major bleeding and ischemic events",
+      "relevant": 29,
+      "irrelevant": 76,
+      "duplicates": 25,
+      "manual_cap": 17
+    }
+  ],
+  "reviewer_panel": [
+    {
+      "name": "Cardiology Handling Editor",
+      "threshold": 80,
+      "weights": {
+        "structure": 12,
+        "methods_reporting": 18,
+        "stats_reporting": 20,
+        "robustness": 10,
+        "registry_verification": 14,
+        "bias_assessment": 10,
+        "gate_integrity": 16
+      }
+    },
+    {
+      "name": "Statistical Editor",
+      "threshold": 82,
+      "weights": {
+        "structure": 5,
+        "methods_reporting": 10,
+        "stats_reporting": 35,
+        "robustness": 25,
+        "registry_verification": 5,
+        "bias_assessment": 10,
+        "gate_integrity": 10
+      }
+    },
+    {
+      "name": "PRISMA Compliance Reviewer",
+      "threshold": 80,
+      "weights": {
+        "structure": 20,
+        "methods_reporting": 35,
+        "stats_reporting": 10,
+        "robustness": 5,
+        "registry_verification": 10,
+        "bias_assessment": 5,
+        "gate_integrity": 15
+      }
+    },
+    {
+      "name": "Registry Integrity Reviewer",
+      "threshold": 80,
+      "weights": {
+        "structure": 8,
+        "methods_reporting": 12,
+        "stats_reporting": 10,
+        "robustness": 8,
+        "registry_verification": 40,
+        "bias_assessment": 7,
+        "gate_integrity": 15
+      }
+    },
+    {
+      "name": "RoB2 GRADE Reviewer",
+      "threshold": 80,
+      "weights": {
+        "structure": 8,
+        "methods_reporting": 15,
+        "stats_reporting": 10,
+        "robustness": 8,
+        "registry_verification": 7,
+        "bias_assessment": 37,
+        "gate_integrity": 15
+      }
+    },
+    {
+      "name": "Sensitivity Analysis Reviewer",
+      "threshold": 80,
+      "weights": {
+        "structure": 6,
+        "methods_reporting": 8,
+        "stats_reporting": 24,
+        "robustness": 38,
+        "registry_verification": 6,
+        "bias_assessment": 6,
+        "gate_integrity": 12
+      }
+    },
+    {
+      "name": "Methods Transparency Editor",
+      "threshold": 80,
+      "weights": {
+        "structure": 15,
+        "methods_reporting": 30,
+        "stats_reporting": 10,
+        "robustness": 10,
+        "registry_verification": 10,
+        "bias_assessment": 5,
+        "gate_integrity": 20
+      }
+    },
+    {
+      "name": "Clinical Outcomes Reviewer",
+      "threshold": 80,
+      "weights": {
+        "structure": 10,
+        "methods_reporting": 15,
+        "stats_reporting": 24,
+        "robustness": 15,
+        "registry_verification": 10,
+        "bias_assessment": 8,
+        "gate_integrity": 18
+      }
+    },
+    {
+      "name": "Editorial Quality Reviewer",
+      "threshold": 80,
+      "weights": {
+        "structure": 24,
+        "methods_reporting": 20,
+        "stats_reporting": 15,
+        "robustness": 8,
+        "registry_verification": 10,
+        "bias_assessment": 8,
+        "gate_integrity": 15
+      }
+    },
+    {
+      "name": "Reproducibility Reviewer",
+      "threshold": 80,
+      "weights": {
+        "structure": 10,
+        "methods_reporting": 24,
+        "stats_reporting": 15,
+        "robustness": 10,
+        "registry_verification": 12,
+        "bias_assessment": 8,
+        "gate_integrity": 21
+      }
+    },
+    {
+      "name": "Rapid Review Board Member",
+      "threshold": 78,
+      "weights": {
+        "structure": 14,
+        "methods_reporting": 14,
+        "stats_reporting": 20,
+        "robustness": 12,
+        "registry_verification": 12,
+        "bias_assessment": 8,
+        "gate_integrity": 20
+      }
+    },
+    {
+      "name": "Journal Chief Editor",
+      "threshold": 82,
+      "weights": {
+        "structure": 12,
+        "methods_reporting": 18,
+        "stats_reporting": 22,
+        "robustness": 12,
+        "registry_verification": 12,
+        "bias_assessment": 10,
+        "gate_integrity": 14
+      }
+    }
+  ],
+  "results": [
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 11,
+      "auto_decision_rate": 1,
+      "extraction_k": 11,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 393,
+        "resultsWordCount": 144,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "Interventional Fellow",
+      "protocol_readiness_pct": 100,
+      "queue_representatives": 0,
+      "rob_assessed": 11,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.18119999998807906,
+        "discover_sec": 1.1802999999821187,
+        "extract_verify_sec": 1.6402999999821186,
+        "protocol_sec": 0.8847000000178814,
+        "search_screen_sec": 1.510899999976158,
+        "total_sec": 5.63690000000596,
+        "write_sec": 0.235
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 11
+      },
+      "verified_ratio": 1,
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false
+    },
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 10,
+      "auto_decision_rate": 1,
+      "extraction_k": 10,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 390,
+        "resultsWordCount": 144,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "Heart Failure Consultant",
+      "protocol_readiness_pct": 90,
+      "queue_representatives": 0,
+      "rob_assessed": 10,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.2535,
+        "discover_sec": 1.7285,
+        "extract_verify_sec": 1.5344000000059606,
+        "protocol_sec": 0.964199999988079,
+        "search_screen_sec": 1.8152000000178814,
+        "total_sec": 6.445300000011921,
+        "write_sec": 0.14609999999403953
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 10
+      },
+      "verified_ratio": 1,
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false
+    },
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 9,
+      "auto_decision_rate": 1,
+      "extraction_k": 9,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 398,
+        "resultsWordCount": 154,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "EP Registrar",
+      "protocol_readiness_pct": 100,
+      "queue_representatives": 0,
+      "rob_assessed": 9,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.23630000001192092,
+        "discover_sec": 1.1739000000059605,
+        "extract_verify_sec": 1.3319000000059604,
+        "protocol_sec": 1.054,
+        "search_screen_sec": 1.1067999999821185,
+        "total_sec": 5.080400000005961,
+        "write_sec": 0.17409999999403952
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 9
+      },
+      "verified_ratio": 1,
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false
+    },
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 9,
+      "auto_decision_rate": 1,
+      "extraction_k": 9,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 400,
+        "resultsWordCount": 154,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "Hypertension Nurse",
+      "protocol_readiness_pct": 100,
+      "queue_representatives": 0,
+      "rob_assessed": 9,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.22040000000596047,
+        "discover_sec": 1.4085999999940395,
+        "extract_verify_sec": 1.4895,
+        "protocol_sec": 0.8482000000178814,
+        "search_screen_sec": 1.4610999999940395,
+        "total_sec": 5.5469000000059605,
+        "write_sec": 0.11609999999403954
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 9
+      },
+      "verified_ratio": 1,
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false
+    },
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 9,
+      "auto_decision_rate": 1,
+      "extraction_k": 9,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 396,
+        "resultsWordCount": 154,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "Lipid Pharmacist",
+      "protocol_readiness_pct": 90,
+      "queue_representatives": 0,
+      "rob_assessed": 9,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.18859999999403954,
+        "discover_sec": 1.9205999999940395,
+        "extract_verify_sec": 1.5595,
+        "protocol_sec": 1.0019000000059604,
+        "search_screen_sec": 1.4339000000059605,
+        "total_sec": 6.332,
+        "write_sec": 0.224
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 9
+      },
+      "verified_ratio": 1,
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false
+    },
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 8,
+      "auto_decision_rate": 1,
+      "extraction_k": 8,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 398,
+        "resultsWordCount": 154,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "Pulmonary HTN Lead",
+      "protocol_readiness_pct": 100,
+      "queue_representatives": 0,
+      "rob_assessed": 8,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.24759999999403953,
+        "discover_sec": 1.9187999999821186,
+        "extract_verify_sec": 1.2034000000059604,
+        "protocol_sec": 1.1230999999940396,
+        "search_screen_sec": 1.3762000000178813,
+        "total_sec": 6.037700000017882,
+        "write_sec": 0.16390000000596047
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 8
+      },
+      "verified_ratio": 1,
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false
+    },
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 10,
+      "auto_decision_rate": 1,
+      "extraction_k": 10,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 389,
+        "resultsWordCount": 144,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "Stroke Prevention Fellow",
+      "protocol_readiness_pct": 90,
+      "queue_representatives": 0,
+      "rob_assessed": 10,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.18619999998807907,
+        "discover_sec": 1.7315,
+        "extract_verify_sec": 1.4020999999940396,
+        "protocol_sec": 0.9054000000059604,
+        "search_screen_sec": 1.2795999999940395,
+        "total_sec": 5.701199999988079,
+        "write_sec": 0.19290000000596047
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 10
+      },
+      "verified_ratio": 1,
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false
+    },
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 8,
+      "auto_decision_rate": 1,
+      "extraction_k": 8,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 401,
+        "resultsWordCount": 154,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "General Cardiology Registrar",
+      "protocol_readiness_pct": 100,
+      "queue_representatives": 0,
+      "rob_assessed": 8,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.19730000001192094,
+        "discover_sec": 1.1800999999940396,
+        "extract_verify_sec": 1.282699999988079,
+        "protocol_sec": 0.8229000000059604,
+        "search_screen_sec": 1.7785,
+        "total_sec": 5.477400000005961,
+        "write_sec": 0.21209999999403953
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 8
+      },
+      "verified_ratio": 1,
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false
+    },
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 7,
+      "auto_decision_rate": 1,
+      "extraction_k": 7,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 402,
+        "resultsWordCount": 154,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "Valve Investigator",
+      "protocol_readiness_pct": 90,
+      "queue_representatives": 0,
+      "rob_assessed": 7,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.1872000000178814,
+        "discover_sec": 1.353199999988079,
+        "extract_verify_sec": 1.142,
+        "protocol_sec": 0.9857000000178814,
+        "search_screen_sec": 1.3552999999821187,
+        "total_sec": 5.193799999982119,
+        "write_sec": 0.16659999999403954
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 7
+      },
+      "verified_ratio": 1,
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false
+    },
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 9,
+      "auto_decision_rate": 1,
+      "extraction_k": 9,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 402,
+        "resultsWordCount": 154,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "Preventive Fellow",
+      "protocol_readiness_pct": 90,
+      "queue_representatives": 0,
+      "rob_assessed": 9,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.224,
+        "discover_sec": 1.6789000000059604,
+        "extract_verify_sec": 1.5285999999940396,
+        "protocol_sec": 1.0309000000059605,
+        "search_screen_sec": 1.719300000011921,
+        "total_sec": 6.323900000005961,
+        "write_sec": 0.13669999998807908
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 9
+      },
+      "verified_ratio": 1,
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false
+    },
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 11,
+      "auto_decision_rate": 1,
+      "extraction_k": 11,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 391,
+        "resultsWordCount": 144,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "Academic Meta-Analyst",
+      "protocol_readiness_pct": 100,
+      "queue_representatives": 0,
+      "rob_assessed": 11,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.20640000000596045,
+        "discover_sec": 1.3973999999761582,
+        "extract_verify_sec": 1.8385,
+        "protocol_sec": 1.1132999999821187,
+        "search_screen_sec": 1.6090999999940396,
+        "total_sec": 6.30840000000596,
+        "write_sec": 0.13980000001192092
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 11
+      },
+      "verified_ratio": 1,
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false
+    },
+    {
+      "advanced_gate_critical_missing": [],
+      "advanced_gate_critical_passed": 6,
+      "advanced_gate_critical_total": 6,
+      "advanced_gate_ready": true,
+      "advanced_gate_score": 88,
+      "analysis_k": 10,
+      "auto_decision_rate": 1,
+      "extraction_k": 10,
+      "manual_reviewed": 1,
+      "methods_results_only": true,
+      "metrics": {
+        "hasCI": true,
+        "hasCumulative": true,
+        "hasDiscussion": false,
+        "hasEligibility": true,
+        "hasExtractionWorkflow": true,
+        "hasFragility": true,
+        "hasHeterogeneity": true,
+        "hasIntro": false,
+        "hasLoo": true,
+        "hasMethodsHeader": true,
+        "hasPValue": true,
+        "hasPico": true,
+        "hasPooledEffect": true,
+        "hasPredictionInterval": true,
+        "hasPrisma": true,
+        "hasReproducibility": true,
+        "hasResultsHeader": true,
+        "hasRobSentence": true,
+        "hasScreeningWorkflow": true,
+        "hasSources": true,
+        "hasTrimFill": true,
+        "hasVerificationCounts": true,
+        "methodsWordCount": 396,
+        "resultsWordCount": 144,
+        "sensitivitySignals": 4
+      },
+      "ok": true,
+      "persona": "Methods Reviewer",
+      "protocol_readiness_pct": 90,
+      "queue_representatives": 0,
+      "rob_assessed": 10,
+      "rob_coverage": 1,
+      "timings": {
+        "analyze_sec": 0.2195,
+        "discover_sec": 1.6456000000238418,
+        "extract_verify_sec": 1.492800000011921,
+        "protocol_sec": 0.8937999999821186,
+        "search_screen_sec": 1.811,
+        "total_sec": 6.283599999994039,
+        "write_sec": 0.21509999999403953
+      },
+      "verification": {
+        "needs-check": 0,
+        "unverified": 0,
+        "verified": 10
+      },
+      "verified_ratio": 1,
+      "subscores": {
+        "structure": 90.0,
+        "methods_reporting": 100.0,
+        "stats_reporting": 100.0,
+        "robustness": 100.0,
+        "registry_verification": 100.0,
+        "bias_assessment": 100.0,
+        "gate_integrity": 100.0
+      },
+      "panel_reviews": [
+        {
+          "reviewer": "Cardiology Handling Editor",
+          "score": 98.8,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Statistical Editor",
+          "score": 99.5,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "PRISMA Compliance Reviewer",
+          "score": 98.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Registry Integrity Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "RoB2 GRADE Reviewer",
+          "score": 99.2,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Sensitivity Analysis Reviewer",
+          "score": 99.4,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Methods Transparency Editor",
+          "score": 98.5,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Clinical Outcomes Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Editorial Quality Reviewer",
+          "score": 97.6,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Reproducibility Reviewer",
+          "score": 99.0,
+          "threshold": 80,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Rapid Review Board Member",
+          "score": 98.6,
+          "threshold": 78,
+          "accepted": true,
+          "concerns": []
+        },
+        {
+          "reviewer": "Journal Chief Editor",
+          "score": 98.8,
+          "threshold": 82,
+          "accepted": true,
+          "concerns": []
+        }
+      ],
+      "panel_accept_count": 12,
+      "panel_accept_rate": 1.0,
+      "panel_major_revision": false
+    }
+  ]
+}

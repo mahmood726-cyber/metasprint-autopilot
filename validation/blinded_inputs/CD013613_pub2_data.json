@@ -1,0 +1,69 @@
+{
+  "dataset_name": "CD013613_pub2_data",
+  "cd_number": "CD013613",
+  "analysis_name": "PTSD severity at three months",
+  "effect_type": "MD",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Suliman 2015",
+      "year": "2015",
+      "en": 8.0,
+      "cn": 15.0,
+      "effect_estimate": -11.35,
+      "lower_ci": -24.560117,
+      "upper_ci": 1.860117,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Carmi 2022",
+      "year": "2022",
+      "en": 43.0,
+      "cn": 33.0,
+      "effect_estimate": 8.48,
+      "lower_ci": -0.808485,
+      "upper_ci": 17.768485,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Delahanty 2013",
+      "year": "2013",
+      "en": 19.0,
+      "cn": 24.0,
+      "effect_estimate": -11.9,
+      "lower_ci": -22.851921,
+      "upper_ci": -0.948079,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Zohar 2011",
+      "year": "2011",
+      "en": 9.0,
+      "cn": 8.0,
+      "effect_estimate": -21.49,
+      "lower_ci": -37.184864,
+      "upper_ci": -5.795136,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Van Zuiden 2017",
+      "year": "2017",
+      "en": 53.0,
+      "cn": 54.0,
+      "effect_estimate": -4.27,
+      "lower_ci": -10.84654,
+      "upper_ci": 2.30654,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Mellman 2002",
+      "year": "2002",
+      "en": 11.0,
+      "cn": 11.0,
+      "effect_estimate": 9.2,
+      "lower_ci": -9.916889,
+      "upper_ci": 28.316889,
+      "effect_type": "MD"
+    }
+  ]
+}

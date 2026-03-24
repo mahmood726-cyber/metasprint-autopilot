@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD007156_pub3_data",
+  "cd_number": "CD007156",
+  "analysis_name": "Interincisal distance (mm)",
+  "effect_type": "MD",
+  "k_input": 23,
+  "results": {
+    "I2": 96.34090650516515,
+    "Q": 601.2418111495379,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 23,
+    "funnel_dots": 23,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 23,
+    "p_value": 0.4027802650916241,
+    "pooled": 0.7250374684828138,
+    "pooled_hi": 2.4238753086219855,
+    "pooled_lo": -0.9738003716563579,
+    "pooled_log": 0.7250374684828138,
+    "pooled_se": 0.8665793945250628,
+    "tau2": 13.579070368045047
+  }
+}

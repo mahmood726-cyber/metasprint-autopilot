@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014999_pub2_data",
+  "cd_number": "CD014999",
+  "analysis_name": "Rebleeding",
+  "effect_type": "OR",
+  "k_input": 2,
+  "results": {
+    "I2": 45.249991609548324,
+    "Q": 1.8264837383557344,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 2,
+    "funnel_dots": 2,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 2,
+    "p_value": 0.35151548172267555,
+    "pooled": 0.5789768952044503,
+    "pooled_hi": 1.828402493015733,
+    "pooled_lo": 0.1833372282421738,
+    "pooled_log": -0.54649270686088,
+    "pooled_se": 0.5865835133028984,
+    "tau2": 0.34732110546436146
+  }
+}

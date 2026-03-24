@@ -1,0 +1,119 @@
+{
+  "dataset_name": "CD014666_pub2_data",
+  "cd_number": "CD014666",
+  "analysis_name": "Fear of falling: subgrouped according to intervention approach",
+  "effect_type": "MD",
+  "k": 11,
+  "studies": [
+    {
+      "study": "Arkkukangas 2019",
+      "year": "2019",
+      "en": 52.0,
+      "cn": 55.0,
+      "effect_estimate": -3.3,
+      "lower_ci": -10.712618,
+      "upper_ci": 4.112618,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Dorresteijn 2016",
+      "year": "2016",
+      "en": 141.0,
+      "cn": 171.0,
+      "effect_estimate": -3.93,
+      "lower_ci": -6.249245,
+      "upper_ci": -1.610755,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Freiberger 2012",
+      "year": "2012",
+      "en": 65.0,
+      "cn": 64.0,
+      "effect_estimate": 7.6,
+      "lower_ci": 0.912462,
+      "upper_ci": 14.287538,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Freiberger 2013",
+      "year": "2013",
+      "en": 168.0,
+      "cn": 129.0,
+      "effect_estimate": -4.0,
+      "lower_ci": -6.167403,
+      "upper_ci": -1.832597,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Gitlin 2006",
+      "year": "2006",
+      "en": 154.0,
+      "cn": 146.0,
+      "effect_estimate": -0.34,
+      "lower_ci": -0.790553,
+      "upper_ci": 0.110553,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Huang 2011",
+      "year": "2011",
+      "en": 56.0,
+      "cn": 30.0,
+      "effect_estimate": -8.02,
+      "lower_ci": -16.220533,
+      "upper_ci": 0.180533,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Reinsch 1992",
+      "year": "1992",
+      "en": 43.0,
+      "cn": 10.0,
+      "effect_estimate": -0.3,
+      "lower_ci": -1.14065,
+      "upper_ci": 0.54065,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Resnick 2008",
+      "year": "2008",
+      "en": 56.0,
+      "cn": 34.0,
+      "effect_estimate": -0.2,
+      "lower_ci": -0.967192,
+      "upper_ci": 0.567192,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wetherell 2018",
+      "year": "2018",
+      "en": 19.0,
+      "cn": 21.0,
+      "effect_estimate": -6.65,
+      "lower_ci": -90.630449,
+      "upper_ci": 77.330449,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Zijlstra 2009",
+      "year": "2009",
+      "en": 232.0,
+      "cn": 239.0,
+      "effect_estimate": -2.7,
+      "lower_ci": -4.553163,
+      "upper_ci": -0.846837,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Parry 2016a",
+      "year": "2016",
+      "en": 164.0,
+      "cn": 180.0,
+      "effect_estimate": -3.39,
+      "lower_ci": -4.998557,
+      "upper_ci": -1.781443,
+      "effect_type": "MD"
+    }
+  ]
+}

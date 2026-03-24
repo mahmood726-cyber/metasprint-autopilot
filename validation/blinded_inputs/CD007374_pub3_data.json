@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD007374_pub3_data",
+  "cd_number": "CD007374",
+  "analysis_name": "Death",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Kopf 2012",
+      "year": "2012",
+      "ee": 2.0,
+      "en": 53.0,
+      "ce": 2.0,
+      "cn": 57.0,
+      "effect_estimate": 1.078431,
+      "lower_ci": 0.146375,
+      "upper_ci": 7.945457,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "MEMO 2011",
+      "year": "2011",
+      "ee": 3.0,
+      "en": 90.0,
+      "ce": 4.0,
+      "cn": 89.0,
+      "effect_estimate": 0.732759,
+      "lower_ci": 0.159171,
+      "upper_ci": 3.373314,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "C-DIRECT 2019",
+      "year": "2019",
+      "ee": 0.0,
+      "en": 20.0,
+      "ce": 1.0,
+      "cn": 24.0,
+      "effect_estimate": 0.382114,
+      "lower_ci": 0.014732,
+      "upper_ci": 9.910907,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "MESMI 2010",
+      "year": "2010",
+      "ee": 2.0,
+      "en": 39.0,
+      "ce": 1.0,
+      "cn": 41.0,
+      "effect_estimate": 2.162162,
+      "lower_ci": 0.188029,
+      "upper_ci": 24.862884,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

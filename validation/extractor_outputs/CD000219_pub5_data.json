@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD000219_pub5_data",
+  "cd_number": "CD000219",
+  "analysis_name": "Pain",
+  "effect_type": "OR",
+  "k_input": 17,
+  "results": {
+    "I2": 25.98573909193046,
+    "Q": 21.617455614226866,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 17,
+    "funnel_dots": 17,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 17,
+    "p_value": 1.968633775994988e-07,
+    "pooled": 0.6222887768892778,
+    "pooled_hi": 0.7440764006036805,
+    "pooled_lo": 0.5204348928795173,
+    "pooled_log": -0.4743510224574667,
+    "pooled_se": 0.09117523233535171,
+    "tau2": 0.034443281672530746
+  }
+}

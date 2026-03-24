@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD012594_pub2_data",
+  "cd_number": "CD012594",
+  "analysis_name": "Number of unexpected (previously unknown) adverse drug reaction reports",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Johansson 2009",
+      "year": "2009",
+      "ee": 16.0,
+      "en": 59.0,
+      "ce": 11.0,
+      "cn": 58.0,
+      "effect_estimate": 1.589852,
+      "lower_ci": 0.664613,
+      "upper_ci": 3.803162,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Johansson 2011",
+      "year": "2011",
+      "ee": 20.0,
+      "en": 77.0,
+      "ce": 13.0,
+      "cn": 74.0,
+      "effect_estimate": 1.646424,
+      "lower_ci": 0.750018,
+      "upper_ci": 3.614194,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

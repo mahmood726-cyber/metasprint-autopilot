@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD003376_pub4_data",
+  "cd_number": "CD003376",
+  "analysis_name": "Clinical vertebral fractures",
+  "effect_type": "OR",
+  "k_input": 14,
+  "results": {
+    "I2": 0,
+    "Q": 8.022944014422343,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 14,
+    "funnel_dots": 14,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 14,
+    "p_value": 0.7708137064846692,
+    "pooled": 0.9373631135173437,
+    "pooled_hi": 1.4486240565405395,
+    "pooled_lo": 0.6065408085802693,
+    "pooled_log": -0.064684544046564,
+    "pooled_se": 0.22204644568360643,
+    "tau2": 0
+  }
+}

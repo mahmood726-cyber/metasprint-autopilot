@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD015495_data",
+  "cd_number": "CD015495",
+  "analysis_name": "Treatment-related adverse events \u2265 grade 3, in people aged 65 years and older, at any time point",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Wang 2021",
+      "year": "2021",
+      "ee": 77.0,
+      "en": 91.0,
+      "ce": 28.0,
+      "cn": 36.0,
+      "effect_estimate": 1.571429,
+      "lower_ci": 0.595343,
+      "upper_ci": 4.147842,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Gogishvili 2022",
+      "year": "2022",
+      "ee": 54.0,
+      "en": 128.0,
+      "ce": 12.0,
+      "cn": 60.0,
+      "effect_estimate": 2.918919,
+      "lower_ci": 1.415846,
+      "upper_ci": 6.017664,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

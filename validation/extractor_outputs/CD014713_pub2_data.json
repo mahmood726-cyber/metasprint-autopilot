@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD014713_pub2_data",
+  "cd_number": "CD014713",
+  "analysis_name": "Unplanned hospital presentation rates - unplanned hospital admissions within one month (30 days)",
+  "effect_type": "OR",
+  "k_input": 6,
+  "results": {
+    "I2": 58.392443344760935,
+    "Q": 12.017047868083402,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 6,
+    "p_value": 0.6401579227283922,
+    "pooled": 1.0789083082174618,
+    "pooled_hi": 1.4835664674496292,
+    "pooled_lo": 0.7846248638537576,
+    "pooled_log": 0.07594970418269523,
+    "pooled_se": 0.16246688730670467,
+    "tau2": 0.07527416976361376
+  }
+}

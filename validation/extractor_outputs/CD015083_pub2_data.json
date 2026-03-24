@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015083_pub2_data",
+  "cd_number": "CD015083",
+  "analysis_name": "Referral for or receipt of any lumbar spine imaging at last follow-up within 12 months",
+  "effect_type": "MD",
+  "k_input": 19,
+  "results": {
+    "I2": 91.84664494285609,
+    "Q": 220.76801358268472,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 19,
+    "funnel_dots": 19,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 19,
+    "p_value": 0.9931350282253688,
+    "pooled": 0.001060724149345078,
+    "pooled_hi": 0.24274285142495233,
+    "pooled_lo": -0.24062140312626218,
+    "pooled_log": 0.001060724149345078,
+    "pooled_se": 0.12328236784793274,
+    "tau2": 0.2103432849648029
+  }
+}

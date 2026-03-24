@@ -1,0 +1,69 @@
+{
+  "dataset_name": "CD012445_pub2_data",
+  "cd_number": "CD012445",
+  "analysis_name": "Child emotional and behavioural adjustment \u2013 postintervention",
+  "effect_type": "MD",
+  "k": 6,
+  "studies": [
+    {
+      "study": "Dawe 2007",
+      "year": "",
+      "en": 20.0,
+      "cn": 17.0,
+      "effect_estimate": -3.56,
+      "lower_ci": -5.856054,
+      "upper_ci": -1.263946,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Gewirtz 2018",
+      "year": "2018.0",
+      "en": 105.0,
+      "cn": 88.0,
+      "effect_estimate": -1.65,
+      "lower_ci": -4.587979,
+      "upper_ci": 1.287979,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Whittingham 2013",
+      "year": "2013.0",
+      "en": 21.0,
+      "cn": 19.0,
+      "effect_estimate": -3.4,
+      "lower_ci": -8.070358,
+      "upper_ci": 1.270358,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Gershy 2015",
+      "year": "2015.0",
+      "en": 19.0,
+      "cn": 19.0,
+      "effect_estimate": -3.4,
+      "lower_ci": -8.049776,
+      "upper_ci": 1.249776,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Mah 2021",
+      "year": "2021.0",
+      "en": 34.0,
+      "cn": 29.0,
+      "effect_estimate": 1.09,
+      "lower_ci": -4.542203,
+      "upper_ci": 6.722203,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Rocheleau 2001",
+      "year": "2001.0",
+      "en": 8.0,
+      "cn": 7.0,
+      "effect_estimate": 0.67,
+      "lower_ci": -0.146599,
+      "upper_ci": 1.486599,
+      "effect_type": "MD"
+    }
+  ]
+}

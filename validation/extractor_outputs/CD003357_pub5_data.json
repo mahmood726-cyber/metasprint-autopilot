@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD003357_pub5_data",
+  "cd_number": "CD003357",
+  "analysis_name": "Live birth rate per woman",
+  "effect_type": "OR",
+  "k_input": 8,
+  "results": {
+    "I2": 72.21368388456779,
+    "Q": 25.19225640030878,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 8,
+    "funnel_dots": 8,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 8,
+    "p_value": 0.0021463460504709264,
+    "pooled": 2.284230068556987,
+    "pooled_hi": 3.8714803490200103,
+    "pooled_lo": 1.3477291722326887,
+    "pooled_log": 0.8260290172623715,
+    "pooled_se": 0.26913349509783513,
+    "tau2": 0.355685010401639
+  }
+}

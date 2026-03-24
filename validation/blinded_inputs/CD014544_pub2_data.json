@@ -1,0 +1,69 @@
+{
+  "dataset_name": "CD014544_pub2_data",
+  "cd_number": "CD014544",
+  "analysis_name": "Annualized Bleeding Rates (ABR)",
+  "effect_type": "MD",
+  "k": 6,
+  "studies": [
+    {
+      "study": "HAVEN 1",
+      "year": "2017.0",
+      "en": 35.0,
+      "cn": 18.0,
+      "effect_estimate": -15.5,
+      "lower_ci": -24.057281,
+      "upper_ci": -6.942719,
+      "effect_type": "MD"
+    },
+    {
+      "study": "ATLAS - INH",
+      "year": "2018.0",
+      "en": 38.0,
+      "cn": 19.0,
+      "effect_estimate": -16.8,
+      "lower_ci": -25.800096,
+      "upper_ci": -7.799904,
+      "effect_type": "MD"
+    },
+    {
+      "study": "EXPLORER 7",
+      "year": "",
+      "en": 33.0,
+      "cn": 19.0,
+      "effect_estimate": -10.1,
+      "lower_ci": -17.744293,
+      "upper_ci": -2.455707,
+      "effect_type": "MD"
+    },
+    {
+      "study": "EXPLORER 4",
+      "year": "2019.0",
+      "en": 17.0,
+      "cn": 9.0,
+      "effect_estimate": -16.2,
+      "lower_ci": -22.740548,
+      "upper_ci": -9.659452,
+      "effect_type": "MD"
+    },
+    {
+      "study": "HAVEN 3",
+      "year": "2018.0",
+      "en": 36.0,
+      "cn": 18.0,
+      "effect_estimate": -25.4,
+      "lower_ci": -45.230482,
+      "upper_ci": -5.569518,
+      "effect_type": "MD"
+    },
+    {
+      "study": "ATLAS - A/B",
+      "year": "2018.0",
+      "en": 79.0,
+      "cn": 40.0,
+      "effect_estimate": -21.131,
+      "lower_ci": -33.059776,
+      "upper_ci": -9.202224,
+      "effect_type": "MD"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "dataset_name": "CD013539_pub2_data",
+  "cd_number": "CD013539",
+  "analysis_name": "Progression-free survival",
+  "effect_type": "MD",
+  "k": 9,
+  "studies": [
+    {
+      "study": "b-Chu 2021",
+      "year": "2021",
+      "effect_estimate": 0.10616,
+      "lower_ci": -0.069419,
+      "upper_ci": 0.28174,
+      "effect_type": "MD"
+    },
+    {
+      "study": "b-Reck 2020",
+      "year": "2020",
+      "effect_estimate": -0.01005,
+      "lower_ci": -0.186008,
+      "upper_ci": 0.165907,
+      "effect_type": "MD"
+    },
+    {
+      "study": "b-Verschraegen 2022",
+      "year": "2022",
+      "effect_estimate": -0.083382,
+      "lower_ci": -0.261755,
+      "upper_ci": 0.094992,
+      "effect_type": "MD"
+    },
+    {
+      "study": "b-Zhou 2020",
+      "year": "2020",
+      "effect_estimate": -0.01005,
+      "lower_ci": -0.22109,
+      "upper_ci": 0.200989,
+      "effect_type": "MD"
+    },
+    {
+      "study": "b-Rezvani 2020",
+      "year": "2020",
+      "effect_estimate": -0.235722,
+      "lower_ci": -0.774147,
+      "upper_ci": 0.302703,
+      "effect_type": "MD"
+    },
+    {
+      "study": "t-Esteva 2019",
+      "year": "2019",
+      "effect_estimate": 0.270027,
+      "lower_ci": -0.154537,
+      "upper_ci": 0.694591,
+      "effect_type": "MD"
+    },
+    {
+      "study": "t-Pegram 2019",
+      "year": "2019",
+      "effect_estimate": -0.061875,
+      "lower_ci": -0.314592,
+      "upper_ci": 0.190841,
+      "effect_type": "MD"
+    },
+    {
+      "study": "t-Rugo 2017",
+      "year": "2017",
+      "effect_estimate": -0.01005,
+      "lower_ci": -0.2459,
+      "upper_ci": 0.2258,
+      "effect_type": "MD"
+    },
+    {
+      "study": "t-Xu 2021",
+      "year": "2021",
+      "effect_estimate": -0.18633,
+      "lower_ci": -0.401391,
+      "upper_ci": 0.028732,
+      "effect_type": "MD"
+    }
+  ]
+}

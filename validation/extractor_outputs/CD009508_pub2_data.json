@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD009508_pub2_data",
+  "cd_number": "CD009508",
+  "analysis_name": "Incontinence quality of life",
+  "effect_type": "MD",
+  "k_input": 35,
+  "results": {
+    "I2": 81.88855918845714,
+    "Q": 187.7266439141107,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 35,
+    "funnel_dots": 35,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 35,
+    "p_value": 0.16700960307921076,
+    "pooled": -0.6842300447918912,
+    "pooled_hi": 0.2864505238859919,
+    "pooled_lo": -1.6549106134697742,
+    "pooled_log": -0.6842300447918912,
+    "pooled_se": 0.4951454221276431,
+    "tau2": 4.287622123223423
+  }
+}

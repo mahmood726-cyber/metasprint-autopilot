@@ -1,0 +1,29 @@
+{
+  "dataset_name": "CD013800_pub2_data",
+  "cd_number": "CD013800",
+  "analysis_name": "Residual kidney function at 6 months [mL/min/1.73 m2]",
+  "effect_type": "MD",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Lang 2001",
+      "year": "2001",
+      "en": 15.0,
+      "cn": 15.0,
+      "effect_estimate": 1.1,
+      "lower_ci": 0.240998,
+      "upper_ci": 1.959002,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Teruel-Briones 2013",
+      "year": "2013",
+      "en": 78.0,
+      "cn": 38.0,
+      "effect_estimate": 2.82,
+      "lower_ci": 1.669603,
+      "upper_ci": 3.970397,
+      "effect_type": "MD"
+    }
+  ]
+}

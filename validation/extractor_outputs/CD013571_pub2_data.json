@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD013571_pub2_data",
+  "cd_number": "CD013571",
+  "analysis_name": "Participant-reported cure or improvement: immediately after treatment",
+  "effect_type": "OR",
+  "k_input": 6,
+  "results": {
+    "I2": 66.67614978554968,
+    "Q": 15.00426861789169,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 6,
+    "p_value": 0.006807965288643247,
+    "pooled": 3.571917470728591,
+    "pooled_hi": 8.983444909629823,
+    "pooled_lo": 1.420234057874561,
+    "pooled_log": 1.2731025582480648,
+    "pooled_se": 0.4704566731764181,
+    "tau2": 0.7307328040591748
+  }
+}

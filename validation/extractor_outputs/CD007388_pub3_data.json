@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD007388_pub3_data",
+  "cd_number": "CD007388",
+  "analysis_name": "Recurrence of convulsion",
+  "effect_type": "OR",
+  "k_input": 6,
+  "results": {
+    "I2": 0,
+    "Q": 1.5824026721795426,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 6,
+    "funnel_dots": 6,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 6,
+    "p_value": 0.2668543654119504,
+    "pooled": 1.529768178322634,
+    "pooled_hi": 3.2403971674543675,
+    "pooled_lo": 0.7221925456893876,
+    "pooled_log": 0.42511620648823084,
+    "pooled_se": 0.38287168155293183,
+    "tau2": 0
+  }
+}

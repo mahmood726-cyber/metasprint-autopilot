@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD009252_pub2_data",
+  "cd_number": "CD009252",
+  "analysis_name": "Lower urinary tract symptom-specific quality of life",
+  "effect_type": "MD",
+  "k_input": 15,
+  "results": {
+    "I2": 32.729735758014904,
+    "Q": 20.81157277699861,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 15,
+    "funnel_dots": 15,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 15,
+    "p_value": 0.7343815853639777,
+    "pooled": -0.10634263843930955,
+    "pooled_hi": 0.5080743930527649,
+    "pooled_lo": -0.7207596699313841,
+    "pooled_log": -0.10634263843930955,
+    "pooled_se": 0.31341492787367503,
+    "tau2": 0.299856815257241
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD015120_pub2_data",
+  "cd_number": "CD015120",
+  "analysis_name": "Smoking cessation",
+  "effect_type": "MD",
+  "k_input": 46,
+  "results": {
+    "I2": 19.275665800469415,
+    "Q": 55.74527240914881,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 46,
+    "funnel_dots": 46,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 46,
+    "p_value": 0.10179069823361298,
+    "pooled": 0.10927467167017298,
+    "pooled_hi": 0.2401982266572792,
+    "pooled_lo": -0.021648883316933223,
+    "pooled_log": 0.10927467167017298,
+    "pooled_se": 0.06678427589092363,
+    "tau2": 0.03173912367043475
+  }
+}

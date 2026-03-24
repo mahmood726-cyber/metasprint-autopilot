@@ -1,0 +1,48 @@
+{
+  "dataset_name": "CD013853_pub2_data",
+  "cd_number": "CD013853",
+  "analysis_name": "Exergaming vs alternative treatment for people with dementia",
+  "effect_type": "OR",
+  "k": 3,
+  "studies": [
+    {
+      "study": "Swinnen 2023",
+      "year": "2023",
+      "ee": 2.0,
+      "en": 7.0,
+      "ce": 0.0,
+      "cn": 11.0,
+      "effect_estimate": 10.454545,
+      "lower_ci": 0.425054,
+      "upper_ci": 257.138137,
+      "effect_type": "OR",
+      "cc_applied": true
+    },
+    {
+      "study": "Karssemeijer 2019",
+      "year": "2019",
+      "ee": 4.0,
+      "en": 38.0,
+      "ce": 5.0,
+      "cn": 39.0,
+      "effect_estimate": 0.8,
+      "lower_ci": 0.197596,
+      "upper_ci": 3.238929,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Swinnen 2021",
+      "year": "2021",
+      "ee": 5.0,
+      "en": 28.0,
+      "ce": 5.0,
+      "cn": 27.0,
+      "effect_estimate": 0.956522,
+      "lower_ci": 0.242869,
+      "upper_ci": 3.76719,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

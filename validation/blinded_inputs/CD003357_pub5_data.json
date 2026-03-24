@@ -1,0 +1,113 @@
+{
+  "dataset_name": "CD003357_pub5_data",
+  "cd_number": "CD003357",
+  "analysis_name": "Live birth rate per woman",
+  "effect_type": "OR",
+  "k": 8,
+  "studies": [
+    {
+      "study": "Hughes 2004",
+      "year": "2004.0",
+      "ee": 11.0,
+      "en": 24.0,
+      "ce": 1.0,
+      "cn": 27.0,
+      "effect_estimate": 22.0,
+      "lower_ci": 2.554645,
+      "upper_ci": 189.45882,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Elzeiny 2014",
+      "year": "2013.0",
+      "ee": 4.0,
+      "en": 10.0,
+      "ce": 2.0,
+      "cn": 33.0,
+      "effect_estimate": 10.333333,
+      "lower_ci": 1.530661,
+      "upper_ci": 69.759238,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Goverde 2000",
+      "year": "2000.0",
+      "ee": 24.0,
+      "en": 59.0,
+      "ce": 14.0,
+      "cn": 54.0,
+      "effect_estimate": 1.959184,
+      "lower_ci": 0.880029,
+      "upper_ci": 4.361673,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Reindollar 2010",
+      "year": "2010.0",
+      "ee": 58.0,
+      "en": 111.0,
+      "ce": 37.0,
+      "cn": 169.0,
+      "effect_estimate": 3.904131,
+      "lower_ci": 2.318063,
+      "upper_ci": 6.575419,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Goldman 2014",
+      "year": "2014.0",
+      "ee": 16.0,
+      "en": 51.0,
+      "ce": 7.0,
+      "cn": 52.0,
+      "effect_estimate": 2.938776,
+      "lower_ci": 1.0896,
+      "upper_ci": 7.926211,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Bensdorp 2015",
+      "year": "",
+      "ee": 118.0,
+      "en": 201.0,
+      "ce": 116.0,
+      "cn": 207.0,
+      "effect_estimate": 1.115289,
+      "lower_ci": 0.753057,
+      "upper_ci": 1.651759,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Nandi 2017",
+      "year": "2017.0",
+      "ee": 36.0,
+      "en": 106.0,
+      "ce": 29.0,
+      "cn": 101.0,
+      "effect_estimate": 1.276847,
+      "lower_ci": 0.708118,
+      "upper_ci": 2.302355,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "van Rumste 2014",
+      "year": "2009.0",
+      "ee": 13.0,
+      "en": 58.0,
+      "ce": 10.0,
+      "cn": 58.0,
+      "effect_estimate": 1.386667,
+      "lower_ci": 0.55291,
+      "upper_ci": 3.477678,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

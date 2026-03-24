@@ -1,0 +1,87 @@
+{
+  "dataset_name": "CD014722_pub2_data",
+  "cd_number": "CD014722",
+  "analysis_name": "Diagnosis of mental disorders at 1-6 months",
+  "effect_type": "OR",
+  "k": 6,
+  "studies": [
+    {
+      "study": "George 2020",
+      "year": "2020",
+      "ee": 9.0,
+      "en": 64.0,
+      "ce": 18.0,
+      "cn": 73.0,
+      "effect_estimate": 0.5,
+      "lower_ci": 0.206702,
+      "upper_ci": 1.209473,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Tripathy 2010",
+      "year": "2010",
+      "ee": 2.0,
+      "en": 183.0,
+      "ce": 1.0,
+      "cn": 166.0,
+      "effect_estimate": 1.823204,
+      "lower_ci": 0.163713,
+      "upper_ci": 20.304318,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Acarturk 2022",
+      "year": "2022",
+      "ee": 30.0,
+      "en": 237.0,
+      "ce": 36.0,
+      "cn": 267.0,
+      "effect_estimate": 0.929952,
+      "lower_ci": 0.553055,
+      "upper_ci": 1.563696,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Rajeswari 2020",
+      "year": "2020",
+      "ee": 4.0,
+      "en": 120.0,
+      "ce": 32.0,
+      "cn": 119.0,
+      "effect_estimate": 0.09375,
+      "lower_ci": 0.031959,
+      "upper_ci": 0.275015,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Rotheram-Borus 2014a",
+      "year": "2014",
+      "ee": 1.0,
+      "en": 45.0,
+      "ce": 7.0,
+      "cn": 55.0,
+      "effect_estimate": 0.155844,
+      "lower_ci": 0.018422,
+      "upper_ci": 1.318399,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Yu 2002",
+      "year": "2002",
+      "ee": 27.0,
+      "en": 104.0,
+      "ce": 39.0,
+      "cn": 116.0,
+      "effect_estimate": 0.692308,
+      "lower_ci": 0.386191,
+      "upper_ci": 1.241069,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "dataset_name": "CD013827_pub2_data",
+  "cd_number": "CD013827",
+  "analysis_name": "Live birth or ongoing pregnancy",
+  "effect_type": "OR",
+  "k": 4,
+  "studies": [
+    {
+      "study": "Chen 2019",
+      "year": "2019",
+      "ee": 37.0,
+      "en": 170.0,
+      "ce": 31.0,
+      "cn": 170.0,
+      "effect_estimate": 1.247393,
+      "lower_ci": 0.731818,
+      "upper_ci": 2.126195,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Xi 2020",
+      "year": "2020",
+      "ee": 59.0,
+      "en": 130.0,
+      "ce": 61.0,
+      "cn": 130.0,
+      "effect_estimate": 0.939968,
+      "lower_ci": 0.577106,
+      "upper_ci": 1.530981,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Dong 2017",
+      "year": "2017",
+      "ee": 63.0,
+      "en": 150.0,
+      "ce": 73.0,
+      "cn": 150.0,
+      "effect_estimate": 0.763817,
+      "lower_ci": 0.484225,
+      "upper_ci": 1.204844,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Guo 2020",
+      "year": "2020",
+      "ee": 53.0,
+      "en": 150.0,
+      "ce": 50.0,
+      "cn": 150.0,
+      "effect_estimate": 1.092784,
+      "lower_ci": 0.678301,
+      "upper_ci": 1.760541,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

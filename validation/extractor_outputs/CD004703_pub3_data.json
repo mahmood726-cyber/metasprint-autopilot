@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD004703_pub3_data",
+  "cd_number": "CD004703",
+  "analysis_name": "Serious adverse events",
+  "effect_type": "OR",
+  "k_input": 9,
+  "results": {
+    "I2": 0,
+    "Q": 4.914531300697848,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 9,
+    "funnel_dots": 9,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 9,
+    "p_value": 0.6676787371691753,
+    "pooled": 0.824577341938086,
+    "pooled_hi": 1.989426456995338,
+    "pooled_lo": 0.34177076033490816,
+    "pooled_log": -0.19288433672681832,
+    "pooled_se": 0.44926188787418764,
+    "tau2": 0
+  }
+}

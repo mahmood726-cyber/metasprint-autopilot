@@ -1,0 +1,149 @@
+{
+  "dataset_name": "CD013331_pub2_data",
+  "cd_number": "CD013331",
+  "analysis_name": "Pain relief: high-frequency TENS versus placebo or no treatment",
+  "effect_type": "MD",
+  "k": 14,
+  "studies": [
+    {
+      "study": "Lauretti 2015",
+      "year": "2015",
+      "en": 20.0,
+      "cn": 20.0,
+      "effect_estimate": -5.0,
+      "lower_ci": -5.980197,
+      "upper_ci": -4.019803,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Machado 2019",
+      "year": "2019",
+      "en": 14.0,
+      "cn": 20.0,
+      "effect_estimate": -0.1,
+      "lower_ci": -1.671201,
+      "upper_ci": 1.471201,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Parsa 2013",
+      "year": "2013",
+      "en": 32.0,
+      "cn": 32.0,
+      "effect_estimate": -2.594,
+      "lower_ci": -3.528856,
+      "upper_ci": -1.659144,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Thomas 1995",
+      "year": "1995",
+      "en": 12.0,
+      "cn": 12.0,
+      "effect_estimate": -0.378,
+      "lower_ci": -1.701184,
+      "upper_ci": 0.945184,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wang 2009",
+      "year": "2009",
+      "en": 22.0,
+      "cn": 22.0,
+      "effect_estimate": -0.89,
+      "lower_ci": -1.9799,
+      "upper_ci": 0.1999,
+      "effect_type": "MD"
+    },
+    {
+      "study": "da Silva 2016",
+      "year": "2016",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": -2.583,
+      "lower_ci": -3.803997,
+      "upper_ci": -1.362003,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Fagevik Olsen 2019",
+      "year": "2019",
+      "en": 7.0,
+      "cn": 9.0,
+      "effect_estimate": 0.59,
+      "lower_ci": -1.553707,
+      "upper_ci": 2.733707,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Nakagawa 2017",
+      "year": "2017",
+      "en": 22.0,
+      "cn": 22.0,
+      "effect_estimate": -0.71,
+      "lower_ci": -1.935478,
+      "upper_ci": 0.515478,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Oh 2014",
+      "year": "2014",
+      "en": 9.0,
+      "cn": 8.0,
+      "effect_estimate": 0.01,
+      "lower_ci": -1.235738,
+      "upper_ci": 1.255738,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Schiotz 2007",
+      "year": "2007",
+      "en": 21.0,
+      "cn": 21.0,
+      "effect_estimate": -1.55,
+      "lower_ci": -2.911566,
+      "upper_ci": -0.188434,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Lewers 1989",
+      "year": "1989",
+      "en": 10.0,
+      "cn": 11.0,
+      "effect_estimate": -1.82,
+      "lower_ci": -3.349281,
+      "upper_ci": -0.290719,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Neighbors 1987",
+      "year": "1987",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": -2.76,
+      "lower_ci": -4.356429,
+      "upper_ci": -1.163571,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Park 1999",
+      "year": "1999",
+      "en": 10.0,
+      "cn": 10.0,
+      "effect_estimate": 0.5,
+      "lower_ci": -1.43349,
+      "upper_ci": 2.43349,
+      "effect_type": "MD"
+    },
+    {
+      "study": "de Oliveira 2012",
+      "year": "2012",
+      "en": 5.0,
+      "cn": 5.0,
+      "effect_estimate": 0.4,
+      "lower_ci": -2.697982,
+      "upper_ci": 3.497982,
+      "effect_type": "MD"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "dataset_name": "CD002203_pub5_data",
+  "cd_number": "CD002203",
+  "analysis_name": "FEV1 % predicted (mean change from baseline)",
+  "effect_type": "MD",
+  "k": 10,
+  "studies": [
+    {
+      "study": "Saiman 2003",
+      "year": "2003",
+      "en": 87.0,
+      "cn": 97.0,
+      "effect_estimate": 3.81,
+      "lower_ci": 0.526578,
+      "upper_ci": 7.093422,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Wolter 2002",
+      "year": "2002",
+      "en": 22.0,
+      "cn": 23.0,
+      "effect_estimate": 4.24,
+      "lower_ci": 0.305012,
+      "upper_ci": 8.174988,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Clement 2006",
+      "year": "2006",
+      "en": 40.0,
+      "cn": 42.0,
+      "effect_estimate": 2.1,
+      "lower_ci": -4.622128,
+      "upper_ci": 8.822128,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Equi 2002",
+      "year": "2002",
+      "en": 20.0,
+      "cn": 21.0,
+      "effect_estimate": 2.04,
+      "lower_ci": -5.253724,
+      "upper_ci": 9.333724,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Nichols 2020",
+      "year": "2020",
+      "en": 56.0,
+      "cn": 52.0,
+      "effect_estimate": 2.5,
+      "lower_ci": -0.254259,
+      "upper_ci": 5.254259,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Steinkamp 2007",
+      "year": "2007",
+      "en": 21.0,
+      "cn": 17.0,
+      "effect_estimate": 1.3,
+      "lower_ci": -6.145352,
+      "upper_ci": 8.745352,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Saiman 2010",
+      "year": "2010",
+      "en": 125.0,
+      "cn": 124.0,
+      "effect_estimate": 2.0,
+      "lower_ci": -1.194373,
+      "upper_ci": 5.194373,
+      "effect_type": "MD"
+    },
+    {
+      "study": "OPTIMIZE 2018",
+      "year": "2018",
+      "en": 38.0,
+      "cn": 32.0,
+      "effect_estimate": 2.0,
+      "lower_ci": -4.48167,
+      "upper_ci": 8.48167,
+      "effect_type": "MD"
+    },
+    {
+      "study": "Kabra 2010",
+      "year": "2010",
+      "en": 23.0,
+      "cn": 24.0,
+      "effect_estimate": -0.05,
+      "lower_ci": -0.202547,
+      "upper_ci": 0.102547,
+      "effect_type": "MD"
+    },
+    {
+      "study": "McCormack 2007",
+      "year": "2007",
+      "en": 105.0,
+      "cn": 103.0,
+      "effect_estimate": -0.4,
+      "lower_ci": -0.604225,
+      "upper_ci": -0.195775,
+      "effect_type": "MD"
+    }
+  ]
+}

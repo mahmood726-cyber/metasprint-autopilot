@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD001909_pub4_data",
+  "cd_number": "CD001909",
+  "analysis_name": "\u2265 50% reduction in seizure frequency (intention-to-treat analysis)",
+  "effect_type": "OR",
+  "k_input": 14,
+  "results": {
+    "I2": 49.34319128618298,
+    "Q": 25.662887832991647,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 14,
+    "funnel_dots": 14,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 14,
+    "p_value": 0.012199714983816001,
+    "pooled": 1.7240150238676164,
+    "pooled_hi": 2.6397282780455384,
+    "pooled_lo": 1.1259597539796415,
+    "pooled_log": 0.5446558867439106,
+    "pooled_se": 0.21731340785283662,
+    "tau2": 0.25023732422695405
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD012693_pub3_data",
+  "cd_number": "CD012693",
+  "analysis_name": "Live birth or ongoing pregnancy",
+  "effect_type": "OR",
+  "k_input": 18,
+  "results": {
+    "I2": 12.756538680528697,
+    "Q": 19.48570098307858,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 18,
+    "funnel_dots": 18,
+    "funnel_plot_rendered": true,
+    "is_ratio": true,
+    "k": 18,
+    "p_value": 0.2842020627737327,
+    "pooled": 1.0762434930876075,
+    "pooled_hi": 1.231188716322341,
+    "pooled_lo": 0.9407981417124661,
+    "pooled_log": 0.07347673082989617,
+    "pooled_se": 0.06861036351857515,
+    "tau2": 0.010236330232509415
+  }
+}

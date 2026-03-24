@@ -1,0 +1,35 @@
+{
+  "dataset_name": "CD006942_pub4_data",
+  "cd_number": "CD006942",
+  "analysis_name": "Live birth or ongoing pregnancy rate per couple",
+  "effect_type": "OR",
+  "k": 2,
+  "studies": [
+    {
+      "study": "Morad 2018",
+      "year": "2018",
+      "ee": 7.0,
+      "en": 54.0,
+      "ce": 16.0,
+      "cn": 54.0,
+      "effect_estimate": 0.353723,
+      "lower_ci": 0.131967,
+      "upper_ci": 0.948117,
+      "effect_type": "OR",
+      "cc_applied": false
+    },
+    {
+      "study": "Majumdar 2019",
+      "year": "2019",
+      "ee": 11.0,
+      "en": 144.0,
+      "ce": 5.0,
+      "cn": 73.0,
+      "effect_estimate": 1.124812,
+      "lower_ci": 0.375541,
+      "upper_ci": 3.369016,
+      "effect_type": "OR",
+      "cc_applied": false
+    }
+  ]
+}

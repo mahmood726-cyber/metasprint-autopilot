@@ -1,0 +1,25 @@
+{
+  "dataset_name": "CD008628_pub3_data",
+  "cd_number": "CD008628",
+  "analysis_name": "Function in the long term; measured using AOFAS",
+  "effect_type": "MD",
+  "k_input": 5,
+  "results": {
+    "I2": 80.0157478665647,
+    "Q": 20.015760276100956,
+    "conf_level": 0.95,
+    "forest_plot_rendered": true,
+    "forest_studies": 5,
+    "funnel_dots": 5,
+    "funnel_plot_rendered": true,
+    "is_ratio": false,
+    "k": 5,
+    "p_value": 0.0199348822795975,
+    "pooled": 6.57864192971886,
+    "pooled_hi": 12.119499592055533,
+    "pooled_lo": 1.0377842673821887,
+    "pooled_log": 6.57864192971886,
+    "pooled_se": 2.826398709004453,
+    "tau2": 28.596753284219577
+  }
+}
