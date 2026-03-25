@@ -7,11 +7,11 @@ tags:
   - JavaScript
   - browser-based
 authors:
-  - name: [AUTHOR_NAME_PLACEHOLDER]
-    orcid: [ORCID_PLACEHOLDER]
+  - name: Mahmood Ahmad
+    orcid: 0009-0003-7781-4478
     affiliation: 1
 affiliations:
-  - name: [AFFILIATION_PLACEHOLDER]
+  - name: Royal Free Hospital, London, United Kingdom
     index: 1
 date: 28 February 2026
 bibliography: paper.bib

@@ -136,7 +136,7 @@ The Burhan stage delivers estimates with four components of provenance:
 
 ### Software and reproducibility
 
-The complete system is contained in a single HTML file executable in any modern web browser (Chrome 90+, Firefox 90+, Edge 90+, Safari 15+). No server infrastructure, API keys, user accounts, or installation is required. The statistical engine was validated against R metafor v4.8.0 [11]. Over 1,060 automated tests across 13 test suites verify all components. The application, validation scripts, test data, and pipeline code are available at [REPOSITORY_URL_PLACEHOLDER]. The Al-Burhan export dataset is deposited at [ZENODO_DOI_PLACEHOLDER].
+The complete system is contained in a single HTML file executable in any modern web browser (Chrome 90+, Firefox 90+, Edge 90+, Safari 15+). No server infrastructure, API keys, user accounts, or installation is required. The statistical engine was validated against R metafor v4.8.0 [11]. Over 1,060 automated tests across 13 test suites verify all components. The application, validation scripts, test data, and pipeline code are available at https://github.com/mahmood726-cyber/metasprint-autopilot. The Al-Burhan export dataset is deposited at [ZENODO_DOI_PLACEHOLDER].
 
 ---
 
@@ -357,7 +357,7 @@ Automated evidence surveillance from trial registries is feasible for cardiovasc
 
 ## Data availability statement
 
-All relevant data are within the manuscript and its Supporting Information files. The Al-Burhan export dataset (282 trials, 1,101 effects, 99 poolable clusters with GRADE ratings) is deposited at [ZENODO_DOI_PLACEHOLDER]. The complete application source code, validation scripts, pipeline code, and test data are available at [REPOSITORY_URL_PLACEHOLDER].
+All relevant data are within the manuscript and its Supporting Information files. The Al-Burhan export dataset (282 trials, 1,101 effects, 99 poolable clusters with GRADE ratings) is deposited at [ZENODO_DOI_PLACEHOLDER]. The complete application source code, validation scripts, pipeline code, and test data are available at https://github.com/mahmood726-cyber/metasprint-autopilot.
 
 ## Ethics statement
 
@@ -365,7 +365,7 @@ This study is a computational validation of software against publicly available 
 
 ## Author contributions
 
-**Conceptualization:** [AUTHOR]. **Data curation:** [AUTHOR]. **Formal analysis:** [AUTHOR]. **Investigation:** [AUTHOR]. **Methodology:** [AUTHOR]. **Project administration:** [AUTHOR]. **Resources:** [AUTHOR]. **Software:** [AUTHOR]. **Validation:** [AUTHOR]. **Visualization:** [AUTHOR]. **Writing — original draft:** [AUTHOR]. **Writing — review and editing:** [AUTHOR].
+**Conceptualization:** Mahmood Ahmad. **Data curation:** Mahmood Ahmad. **Formal analysis:** Mahmood Ahmad. **Investigation:** Mahmood Ahmad. **Methodology:** Mahmood Ahmad. **Project administration:** Mahmood Ahmad. **Resources:** Mahmood Ahmad. **Software:** Mahmood Ahmad. **Validation:** Mahmood Ahmad. **Visualization:** Mahmood Ahmad. **Writing — original draft:** Mahmood Ahmad. **Writing — review and editing:** Mahmood Ahmad.
 
 ## Funding
 

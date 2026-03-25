@@ -438,7 +438,7 @@ This study involved computational validation using publicly available Cochrane s
 
 ## Data availability statement
 
-All source code, validation data, sealed oracle hashes, blinded extractor outputs, and judge comparison scripts are available at [REPOSITORY_URL_PLACEHOLDER] under the MIT License. The Cochrane pairwise comparison data used for validation are derived from publicly available Cochrane systematic reviews. ClinicalTrials.gov data are public domain (National Institutes of Health). A Zenodo archive of the complete validation dataset and reproducibility capsule is available at [ZENODO_DOI_PLACEHOLDER].
+All source code, validation data, sealed oracle hashes, blinded extractor outputs, and judge comparison scripts are available at https://github.com/mahmood726-cyber/metasprint-autopilot under the MIT License. The Cochrane pairwise comparison data used for validation are derived from publicly available Cochrane systematic reviews. ClinicalTrials.gov data are public domain (National Institutes of Health). A Zenodo archive of the complete validation dataset and reproducibility capsule is available at [ZENODO_DOI_PLACEHOLDER].
 
 ## Acknowledgments
 
