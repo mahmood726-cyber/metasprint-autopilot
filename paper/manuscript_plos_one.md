@@ -1,12 +1,12 @@
 # MetaSprint Autopilot: A zero-install, single-file platform for automated systematic review and meta-analysis with living evidence monitoring
 
-[AUTHOR_PLACEHOLDER]^1
+Mahmood Ahmad^1
 
-^1 [AFFILIATION_PLACEHOLDER]
+^1 Royal Free Hospital, London, UK
 
-\* Corresponding author: [EMAIL_PLACEHOLDER]
+\* Corresponding author: mahmood.ahmad2@nhs.net
 
-ORCID: [ORCID_PLACEHOLDER]
+ORCID: 0009-0003-7781-4478
 
 ## Abstract
 
@@ -434,7 +434,7 @@ This study involved computational validation using publicly available Cochrane s
 
 ## Author contributions (CRediT)
 
-**[AUTHOR_PLACEHOLDER]**: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data curation, Writing — original draft, Writing — review and editing, Visualization, Project administration.
+**Mahmood Ahmad**: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data curation, Writing — original draft, Writing — review and editing, Visualization, Project administration.
 
 ## Data availability statement
 

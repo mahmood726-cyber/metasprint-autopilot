@@ -2,9 +2,9 @@
 
 ## Authors
 
-[AUTHOR_NAME_PLACEHOLDER] [ORCID_PLACEHOLDER]
-[AFFILIATION_PLACEHOLDER]
-Corresponding author: [EMAIL_PLACEHOLDER]
+Mahmood Ahmad 0009-0003-7781-4478
+Royal Free Hospital, London, UK
+Corresponding author: mahmood.ahmad2@nhs.net
 
 ## Abstract
 
