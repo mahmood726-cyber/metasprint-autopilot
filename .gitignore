@@ -52,3 +52,4 @@ chromedriver.log
 *.tmp
 *.bak
 nul
+data/ctgov_cv_raw.json
