@@ -1,0 +1,96 @@
+{
+  "title": "MetaSprint Autopilot: Zero-Install Browser Platform for Systematic Review and Meta-Analysis",
+  "slug": "metasprint-autopilot",
+  "author": "Mahmood Ahmad",
+  "date": "2026-03-26",
+  "body": "Can a zero-install browser application match the statistical accuracy of validated meta-analysis software across hundreds of Cochrane reviews? MetaSprint Autopilot is a single HTML file implementing a complete seven-phase systematic review workflow from topic discovery through manuscript drafting, validated against 291 Cochrane reviews via triple-blinded architecture. The engine provides DerSimonian-Laird, REML, Mantel-Haenszel, and Peto pooling with Hartung-Knapp-Sidik-Jonkman intervals, publication bias diagnostics, living meta-analysis with sequential stopping rules, and GRADE assessment. Across all 291 reviews the engine achieved 100.0 percent accuracy with median effect difference of 1.65 times ten to the negative seventh, and R metafor v4.8.0 cross-validation confirmed exact agreement with concordance coefficient of 1.0000. Leave-one-out analysis showed 24.9 percent of reviews changed direction upon single-study removal, and 92.2 percent of prediction intervals crossed the null. The platform eliminates software installation barriers while preserving statistical rigor for global evidence synthesis. However, a limitation is that open-access search discovery rates remain moderate at 58 to 65 percent.",
+  "word_count": 156,
+  "sentence_count": 7,
+  "sentences": [
+    {
+      "role": "Question",
+      "text": "Can a zero-install browser application match the statistical accuracy of validated meta-analysis software across hundreds of Cochrane reviews?"
+    },
+    {
+      "role": "Dataset",
+      "text": "MetaSprint Autopilot is a single HTML file implementing a complete seven-phase systematic review workflow from topic discovery through manuscript drafting, validated against 291 Cochrane reviews via triple-blinded architecture."
+    },
+    {
+      "role": "Method",
+      "text": "The engine provides DerSimonian-Laird, REML, Mantel-Haenszel, and Peto pooling with Hartung-Knapp-Sidik-Jonkman intervals, publication bias diagnostics, living meta-analysis with sequential stopping rules, and GRADE assessment."
+    },
+    {
+      "role": "Primary result",
+      "text": "Across all 291 reviews the engine achieved 100.0 percent accuracy with median effect difference of 1.65 times ten to the negative seventh, and R metafor v4.8.0 cross-validation confirmed exact agreement with concordance coefficient of 1.0000."
+    },
+    {
+      "role": "Robustness",
+      "text": "Leave-one-out analysis showed 24.9 percent of reviews changed direction upon single-study removal, and 92.2 percent of prediction intervals crossed the null."
+    },
+    {
+      "role": "Interpretation",
+      "text": "The platform eliminates software installation barriers while preserving statistical rigor for global evidence synthesis."
+    },
+    {
+      "role": "Boundary",
+      "text": "However, a limitation is that open-access search discovery rates remain moderate at 58 to 65 percent."
+    }
+  ],
+  "notes": {
+    "app": "MetaSprint Autopilot v1.0",
+    "data": "291 Cochrane reviews (triple-blinded validation)",
+    "code": "https://github.com/mahmood726-cyber/metasprint-autopilot",
+    "doi": "",
+    "version": "1.0",
+    "date": "2026-03-26",
+    "validation": "DRAFT"
+  },
+  "type": "methods",
+  "primary_estimand": "Engine accuracy vs Cochrane reviews",
+  "validation": {
+    "status": "fail",
+    "checks": [
+      {
+        "name": "single paragraph",
+        "ok": true,
+        "detail": "Body must not contain blank-line paragraph breaks."
+      },
+      {
+        "name": "sentence count",
+        "ok": true,
+        "detail": "Found 7 sentences."
+      },
+      {
+        "name": "word count",
+        "ok": true,
+        "detail": "Found 156 words."
+      },
+      {
+        "name": "no headings",
+        "ok": true,
+        "detail": "No markdown headings allowed in body."
+      },
+      {
+        "name": "no links",
+        "ok": true,
+        "detail": "No links or DOI links allowed in body."
+      },
+      {
+        "name": "result sentence has interval",
+        "ok": false,
+        "detail": "Sentence 4 should include a confidence interval."
+      },
+      {
+        "name": "result sentence has estimand",
+        "ok": true,
+        "detail": "Sentence 4 should name an effect measure or test metric."
+      },
+      {
+        "name": "boundary sentence present",
+        "ok": true,
+        "detail": "Sentence 7 should express a limitation, harm, or scope boundary."
+      }
+    ]
+  },
+  "schema": "e156-v0.2"
+}
