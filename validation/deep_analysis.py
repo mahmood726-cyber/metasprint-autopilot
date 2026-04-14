@@ -42,7 +42,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ORACLE_PATH = os.path.join(BASE_DIR, 'sealed_oracle', 'oracle_results.json')
 EXTRACTOR_DIR = os.path.join(BASE_DIR, 'extractor_outputs')
 REPORT_DIR = os.path.join(BASE_DIR, 'reports')
-CSV_DIR = r'C:\Users\user\OneDrive - NHS\Documents\CochraneDataExtractor\data\pairwise'
+from _paths import CSV_DIR
 
 
 # --- Utility helpers ---

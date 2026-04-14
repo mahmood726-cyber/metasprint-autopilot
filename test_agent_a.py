@@ -2,6 +2,7 @@ import sys
 import io
 import json
 import time
+from pathlib import Path
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
@@ -19,7 +20,7 @@ opts.add_argument('--disable-gpu')
 opts.add_argument('--window-size=1400,900')
 
 driver = webdriver.Chrome(options=opts)
-driver.get('file:///C:/Users/user/Downloads/metasprint-autopilot/metasprint-autopilot.html')
+driver.get((Path(__file__).resolve().parent / 'metasprint-autopilot.html').as_uri())
 time.sleep(4)
 
 # Check initial state

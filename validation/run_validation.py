@@ -15,7 +15,7 @@ ORACLE_PATH = os.path.join(BASE, 'sealed_oracle', 'oracle_results.json')
 INPUT_DIR = os.path.join(BASE, 'blinded_inputs')
 OUTPUT_DIR = os.path.join(BASE, 'extractor_outputs')
 REPORT_DIR = os.path.join(BASE, 'reports')
-CSV_DIR = 'C:/Users/user/OneDrive - NHS/Documents/CochraneDataExtractor/data/pairwise'
+from _paths import CSV_DIR
 
 t_total = time.time()
 

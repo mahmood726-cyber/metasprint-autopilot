@@ -33,7 +33,7 @@ from selenium.common.exceptions import (
 )
 
 # ─── Configuration ─────────────────────────────────────────
-APP_DIR = Path(r"C:\Users\user\Downloads\metasprint-autopilot")
+APP_DIR = Path(__file__).resolve().parent
 APP_FILE = "metasprint-autopilot.html"
 PORT = 9877
 BASE_URL = f"http://127.0.0.1:{PORT}/{APP_FILE}"

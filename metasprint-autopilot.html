@@ -28013,7 +28013,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
   }
 
   const TRUTHCERT_BRIDGE_STORAGE_KEY = 'metasprint_truthcert_bridge_payload_v1';
-  const DEFAULT_TRUTHCERT_URL = 'file:///C:/Users/user/Downloads/metasprint-autopilot/truthcert1_work/TruthCert-PairwisePro-v1.0.html#metasprint-bridge';
+  const DEFAULT_TRUTHCERT_URL = new URL('./truthcert1_work/TruthCert-PairwisePro-v1.0.html#metasprint-bridge', window.location.href).href;
 
   function _isFiniteNumber(v) {
     return typeof v === 'number' && Number.isFinite(v);

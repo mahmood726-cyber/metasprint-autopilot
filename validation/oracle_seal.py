@@ -538,7 +538,7 @@ def seal_oracle(csv_dir, diagnostics_path, output_dir, n_sample=300, seed=42):
 # --- Self-test ---
 
 if __name__ == '__main__':
-    CSV_DIR = r'C:\Users\user\OneDrive - NHS\Documents\CochraneDataExtractor\data\pairwise'
+    from _paths import CSV_DIR
     DIAG_PATH = r'C:\Models\Pairwise70\analysis\output\analysis_diagnostics_results.csv'
     OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'sealed_oracle')
 

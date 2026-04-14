@@ -297,7 +297,7 @@ def run_search_validation(oracle_path, csv_dir, output_dir, n_sample=50, seed=42
 if __name__ == '__main__':
     BASE = os.path.dirname(os.path.abspath(__file__))
     ORACLE_PATH = os.path.join(BASE, 'sealed_oracle', 'oracle_results.json')
-    CSV_DIR = 'C:/Users/user/OneDrive - NHS/Documents/CochraneDataExtractor/data/pairwise'
+    from _paths import CSV_DIR
     OUTPUT_DIR = os.path.join(BASE, 'reports')
 
     run_search_validation(ORACLE_PATH, CSV_DIR, OUTPUT_DIR, n_sample=50)

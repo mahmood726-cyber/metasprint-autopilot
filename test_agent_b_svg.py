@@ -3,6 +3,7 @@ import sys, io, json, time
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from pathlib import Path
 
 opts = Options()
 opts.add_argument('--headless=new')
@@ -12,7 +13,7 @@ opts.add_argument('--disable-gpu')
 opts.add_argument('--window-size=1400,900')
 
 driver = webdriver.Chrome(options=opts)
-driver.get('file:///C:/Users/user/Downloads/metasprint-autopilot/metasprint-autopilot.html')
+driver.get((Path(__file__).resolve().parent / 'metasprint-autopilot.html').as_uri())
 time.sleep(3)
 driver.execute_script("try { window.selectMode('autopilot'); } catch(e) {}")
 time.sleep(2)

@@ -36,7 +36,7 @@ from oracle_seal import (
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
-CSV_DIR = r'C:\Users\user\OneDrive - NHS\Documents\CochraneDataExtractor\data\pairwise'
+from _paths import CSV_DIR
 ORACLE_PATH = os.path.join(_this_dir, 'sealed_oracle', 'oracle_results.json')
 REPORT_DIR = os.path.join(_this_dir, 'reports')
 

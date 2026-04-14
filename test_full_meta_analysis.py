@@ -11,6 +11,7 @@ import io
 import time
 import math
 import json
+from pathlib import Path
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
@@ -106,7 +107,7 @@ app_hi = None
 
 try:
     driver.get(
-        'file:///C:/Users/user/Downloads/metasprint-autopilot/metasprint-autopilot.html'
+        (Path(__file__).resolve().parent / 'metasprint-autopilot.html').as_uri()
     )
     time.sleep(2)
 
