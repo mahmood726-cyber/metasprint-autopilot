@@ -32,7 +32,8 @@ suppressMessages(library(jsonlite))
 }
 SCRIPT_DIR <- .get_script_dir()
 ORACLE_PATH <- file.path(SCRIPT_DIR, "sealed_oracle", "oracle_results.json")
-CSV_DIR <- "C:/Users/user/OneDrive - NHS/Documents/CochraneDataExtractor/data/pairwise"
+CSV_DIR <- Sys.getenv("COCHRANE_PAIRWISE_DIR",
+                       unset = "C:/CochraneData/pairwise")
 REPORT_DIR <- file.path(SCRIPT_DIR, "reports")
 dir.create(REPORT_DIR, showWarnings = FALSE, recursive = TRUE)
 

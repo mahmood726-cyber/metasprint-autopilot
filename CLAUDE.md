@@ -39,8 +39,8 @@ META-SPRINT is a 40-day structured meta-analysis framework with 5 quality gates 
 
 ## Testing
 ```bash
-# Run Selenium tests
-python C:/Users/user/Downloads/metasprint/test_metasprint.py
+# Run Selenium tests (run from repo root)
+python ./test_metasprint.py
 ```
 
 ## Workflow Rules (from usage insights)
