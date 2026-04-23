@@ -1212,7 +1212,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         </div>
       </div>
       <div class="mode-remember">
-        <label><input type="checkbox" id="modeRememberCb"> Remember my choice</label>
+        <label><input type="checkbox" id="modeRememberCb" aria-label="Remember my choice"> Remember my choice</label>
       </div>
     </div>
   </div>
@@ -1286,20 +1286,20 @@ body.dark-mode .input-error { background: #451a1a !important; }
           <div class="card-header" style="font-weight:600;margin-bottom:12px">PICO Framework</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
             <div>
-              <label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:4px">Population</label>
-              <textarea id="rmPicoP" rows="3" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem;font-family:var(--font);resize:vertical" placeholder="e.g., Adults with chronic kidney disease stage 3-4" oninput="rmProtocolEngine.savePICO('population',this.value)"></textarea>
+              <label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:4px" for="rmPicoP">Population</label>
+              <textarea id="rmPicoP" rows="3" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem;font-family:var(--font);resize:vertical" aria-label="e.g., Adults with chronic kidney disease stage 3-4" placeholder="e.g., Adults with chronic kidney disease stage 3-4" oninput="rmProtocolEngine.savePICO('population',this.value)"></textarea>
             </div>
             <div>
-              <label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:4px">Intervention</label>
-              <textarea id="rmPicoI" rows="3" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem;font-family:var(--font);resize:vertical" placeholder="e.g., Finerenone (any dose)" oninput="rmProtocolEngine.savePICO('intervention',this.value)"></textarea>
+              <label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:4px" for="rmPicoI">Intervention</label>
+              <textarea id="rmPicoI" rows="3" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem;font-family:var(--font);resize:vertical" aria-label="e.g., Finerenone (any dose)" placeholder="e.g., Finerenone (any dose)" oninput="rmProtocolEngine.savePICO('intervention',this.value)"></textarea>
             </div>
             <div>
-              <label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:4px">Comparator</label>
-              <textarea id="rmPicoC" rows="3" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem;font-family:var(--font);resize:vertical" placeholder="e.g., Placebo" oninput="rmProtocolEngine.savePICO('comparator',this.value)"></textarea>
+              <label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:4px" for="rmPicoC">Comparator</label>
+              <textarea id="rmPicoC" rows="3" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem;font-family:var(--font);resize:vertical" aria-label="e.g., Placebo" placeholder="e.g., Placebo" oninput="rmProtocolEngine.savePICO('comparator',this.value)"></textarea>
             </div>
             <div>
-              <label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:4px">Outcomes</label>
-              <textarea id="rmPicoO" rows="3" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem;font-family:var(--font);resize:vertical" placeholder="e.g., Composite renal endpoint, eGFR decline, cardiovascular death" oninput="rmProtocolEngine.savePICO('outcomes',this.value)"></textarea>
+              <label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:4px" for="rmPicoO">Outcomes</label>
+              <textarea id="rmPicoO" rows="3" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem;font-family:var(--font);resize:vertical" aria-label="e.g., Composite renal endpoint, eGFR decline, cardiovascular death" placeholder="e.g., Composite renal endpoint, eGFR decline, cardiovascular death" oninput="rmProtocolEngine.savePICO('outcomes',this.value)"></textarea>
             </div>
           </div>
         </div>
@@ -1329,40 +1329,40 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <div class="card" style="padding:20px;margin-bottom:16px">
           <div class="card-header" style="font-weight:600;margin-bottom:12px">Search Strategy</div>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px">
-            <label style="font-size:0.8rem;display:inline-flex;align-items:center;gap:4px"><input type="checkbox" id="rmSrcCTgov" checked> ClinicalTrials.gov</label>
-            <label style="font-size:0.8rem;display:inline-flex;align-items:center;gap:4px"><input type="checkbox" id="rmSrcPubMed" checked> PubMed</label>
-            <label style="font-size:0.8rem;display:inline-flex;align-items:center;gap:4px"><input type="checkbox" id="rmSrcOpenAlex" checked> OpenAlex</label>
-            <label style="font-size:0.8rem;display:inline-flex;align-items:center;gap:4px"><input type="checkbox" id="rmSrcCrossRef" disabled> CrossRef</label>
-            <label style="font-size:0.8rem;display:inline-flex;align-items:center;gap:4px"><input type="checkbox" id="rmSrcAACT" disabled> AACT</label>
+            <label style="font-size:0.8rem;display:inline-flex;align-items:center;gap:4px"><input type="checkbox" id="rmSrcCTgov" checked aria-label="ClinicalTrials.gov"> ClinicalTrials.gov</label>
+            <label style="font-size:0.8rem;display:inline-flex;align-items:center;gap:4px"><input type="checkbox" id="rmSrcPubMed" checked aria-label="PubMed"> PubMed</label>
+            <label style="font-size:0.8rem;display:inline-flex;align-items:center;gap:4px"><input type="checkbox" id="rmSrcOpenAlex" checked aria-label="OpenAlex"> OpenAlex</label>
+            <label style="font-size:0.8rem;display:inline-flex;align-items:center;gap:4px"><input type="checkbox" id="rmSrcCrossRef" disabled aria-label="CrossRef"> CrossRef</label>
+            <label style="font-size:0.8rem;display:inline-flex;align-items:center;gap:4px"><input type="checkbox" id="rmSrcAACT" disabled aria-label="AACT"> AACT</label>
           </div>
           <div id="rmProtocolPolicyNote" style="font-size:0.75rem;color:var(--text-muted);margin:-4px 0 10px">Benchmark topics lock the workflow to ClinicalTrials.gov, PubMed, and OpenAlex; extraction is limited to PubMed abstracts and CT.gov records.</div>
-          <label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:4px">Search Terms</label>
-          <textarea id="rmSearchTerms" rows="3" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem;font-family:var(--font);resize:vertical" placeholder="Enter search query terms..." oninput="rmProtocolEngine.saveField('searchTerms',this.value)"></textarea>
+          <label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:4px" for="rmSearchTerms">Search Terms</label>
+          <textarea id="rmSearchTerms" rows="3" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem;font-family:var(--font);resize:vertical" aria-label="Enter search query terms..." placeholder="Enter search query terms..." oninput="rmProtocolEngine.saveField('searchTerms',this.value)"></textarea>
         </div>
 
         <!-- Statistical Analysis Plan -->
         <div class="card" style="padding:20px;margin-bottom:16px">
           <div class="card-header" style="font-weight:600;margin-bottom:12px">Statistical Analysis Plan</div>
-          <textarea id="rmAnalysisPlan" rows="5" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem;font-family:var(--font);resize:vertical" placeholder="Describe planned analysis methods: effect measure (OR/RR/HR), pooling method (DL/REML/HKSJ), subgroup analyses, sensitivity analyses, publication bias tests..." oninput="rmProtocolEngine.saveField('analysisPlan',this.value)"></textarea>
+          <textarea id="rmAnalysisPlan" rows="5" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem;font-family:var(--font);resize:vertical" aria-label="Describe planned analysis methods: effect measure (OR/RR/HR), pooling method (DL/REML/HKSJ), subgroup analyses, sensitivity analyses, publication bias tests..." placeholder="Describe planned analysis methods: effect measure (OR/RR/HR), pooling method (DL/REML/HKSJ), subgroup analyses, sensitivity analyses, publication bias tests..." oninput="rmProtocolEngine.saveField('analysisPlan',this.value)"></textarea>
         </div>
 
         <!-- PRISMA 2020 Compliance -->
         <div class="card" style="padding:20px;margin-bottom:16px">
           <div class="card-header" style="font-weight:600;margin-bottom:12px">PRISMA 2020 Compliance</div>
           <div id="rmPrismaChecklist" style="font-size:0.8rem;line-height:2">
-            <label style="display:block"><input type="checkbox" disabled checked> 1. Title identifies as systematic review</label>
-            <label style="display:block"><input type="checkbox" disabled checked> 2. Structured abstract (Background, Methods, Results, Conclusion)</label>
-            <label style="display:block"><input type="checkbox" disabled> 3. Rationale described</label>
-            <label style="display:block"><input type="checkbox" disabled> 4. Objectives with PICO</label>
-            <label style="display:block"><input type="checkbox" disabled checked> 5. Eligibility criteria specified</label>
-            <label style="display:block"><input type="checkbox" disabled> 6. Information sources described</label>
-            <label style="display:block"><input type="checkbox" disabled> 7. Search strategy reproducible</label>
-            <label style="display:block"><input type="checkbox" disabled> 8. Selection process described</label>
-            <label style="display:block"><input type="checkbox" disabled> 9. Data collection process</label>
-            <label style="display:block"><input type="checkbox" disabled> 10. Data items listed</label>
-            <label style="display:block"><input type="checkbox" disabled> 11. Risk of bias assessment</label>
-            <label style="display:block"><input type="checkbox" disabled> 12. Effect measures specified</label>
-            <label style="display:block"><input type="checkbox" disabled> 13. Synthesis methods described</label>
+            <label style="display:block"><input type="checkbox" disabled checked aria-label="1. Title identifies as systematic review"> 1. Title identifies as systematic review</label>
+            <label style="display:block"><input type="checkbox" disabled checked aria-label="2. Structured abstract (Background, Methods, Results, Conclusion)"> 2. Structured abstract (Background, Methods, Results, Conclusion)</label>
+            <label style="display:block"><input type="checkbox" disabled aria-label="3. Rationale described"> 3. Rationale described</label>
+            <label style="display:block"><input type="checkbox" disabled aria-label="4. Objectives with PICO"> 4. Objectives with PICO</label>
+            <label style="display:block"><input type="checkbox" disabled checked aria-label="5. Eligibility criteria specified"> 5. Eligibility criteria specified</label>
+            <label style="display:block"><input type="checkbox" disabled aria-label="6. Information sources described"> 6. Information sources described</label>
+            <label style="display:block"><input type="checkbox" disabled aria-label="7. Search strategy reproducible"> 7. Search strategy reproducible</label>
+            <label style="display:block"><input type="checkbox" disabled aria-label="8. Selection process described"> 8. Selection process described</label>
+            <label style="display:block"><input type="checkbox" disabled aria-label="9. Data collection process"> 9. Data collection process</label>
+            <label style="display:block"><input type="checkbox" disabled aria-label="10. Data items listed"> 10. Data items listed</label>
+            <label style="display:block"><input type="checkbox" disabled aria-label="11. Risk of bias assessment"> 11. Risk of bias assessment</label>
+            <label style="display:block"><input type="checkbox" disabled aria-label="12. Effect measures specified"> 12. Effect measures specified</label>
+            <label style="display:block"><input type="checkbox" disabled aria-label="13. Synthesis methods described"> 13. Synthesis methods described</label>
           </div>
           <p style="font-size:0.7rem;color:var(--text-muted);margin-top:8px">Items auto-checked as review progresses. Full 27-item checklist available in Scientific Output tab.</p>
         </div>
@@ -1458,11 +1458,11 @@ body.dark-mode .input-error { background: #451a1a !important; }
             </div>
             <div>
               <label for="rmDateFrom" style="font-weight:600;margin-right:4px">From:</label>
-              <input id="rmDateFrom" type="text" placeholder="YYYY/MM/DD" style="width:100px;padding:4px 6px;border:1px solid var(--border);border-radius:4px;font-size:0.8rem">
+              <input id="rmDateFrom" type="text" aria-label="YYYY/MM/DD" placeholder="YYYY/MM/DD" style="width:100px;padding:4px 6px;border:1px solid var(--border);border-radius:4px;font-size:0.8rem">
             </div>
             <div>
               <label for="rmDateTo" style="font-weight:600;margin-right:4px">To:</label>
-              <input id="rmDateTo" type="text" placeholder="YYYY/MM/DD" style="width:100px;padding:4px 6px;border:1px solid var(--border);border-radius:4px;font-size:0.8rem">
+              <input id="rmDateTo" type="text" aria-label="YYYY/MM/DD" placeholder="YYYY/MM/DD" style="width:100px;padding:4px 6px;border:1px solid var(--border);border-radius:4px;font-size:0.8rem">
             </div>
           </div>
           <!-- Progress -->
@@ -1706,7 +1706,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
           <h3>Scientific Output &amp; Reporting</h3>
           <div style="display:flex;gap:8px;align-items:center">
             <label style="font-size:0.8rem;display:inline-flex;align-items:center;gap:4px;cursor:pointer">
-              <input type="checkbox" id="rmPatientModeToggle" onchange="rmOutputEngine.togglePatientMode(this.checked)"> Patient Mode
+              <input type="checkbox" id="rmPatientModeToggle" onchange="rmOutputEngine.togglePatientMode(this.checked)" aria-label="Patient Mode"> Patient Mode
             </label>
             <button class="btn-sm btn-outline" onclick="rmOutputEngine.render()">Refresh</button>
           </div>
@@ -1811,7 +1811,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
           <div class="card" style="padding:16px;margin-bottom:16px">
             <div style="font-weight:600;margin-bottom:8px">Config Library</div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
-              <input id="rmConfigFilter" type="search" placeholder="Filter 70 benchmark topics..." style="min-width:240px;flex:1 1 240px;padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.82rem" oninput="renderConfigLibrary(this.value)">
+              <input id="rmConfigFilter" type="search" aria-label="Filter 70 benchmark topics..." placeholder="Filter 70 benchmark topics..." style="min-width:240px;flex:1 1 240px;padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.82rem" oninput="renderConfigLibrary(this.value)">
             </div>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
               <label for="rmConfigSelect" class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0">Config Library</label>
@@ -1953,8 +1953,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
       </div>
       <div style="margin-bottom:10px;font-size:0.82rem;color:var(--text-muted)">Enter 2x2 diagnostic accuracy data (TP, FP, FN, TN) per study. Minimum 3 studies required for bivariate model.</div>
       <div style="margin-bottom:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-        <label style="font-size:0.82rem">Confidence level: <select id="dtaConfLevel" style="font-size:0.82rem"><option value="0.95" selected>95%</option><option value="0.90">90%</option><option value="0.99">99%</option></select></label>
-        <label style="font-size:0.82rem">Prior probability: <input type="number" id="dtaPriorProb" value="0.20" min="0.01" max="0.99" step="0.05" style="width:60px;font-size:0.82rem"> <span style="color:var(--text-muted)">(for Fagan nomogram)</span></label>
+        <label style="font-size:0.82rem">Confidence level: <select aria-label="Confidence level" id="dtaConfLevel" style="font-size:0.82rem"><option value="0.95" selected>95%</option><option value="0.90">90%</option><option value="0.99">99%</option></select></label>
+        <label style="font-size:0.82rem">Prior probability: <input type="number" aria-label="Prior probability" id="dtaPriorProb" value="0.20" min="0.01" max="0.99" step="0.05" style="width:60px;font-size:0.82rem"> <span style="color:var(--text-muted)">(for Fagan nomogram)</span></label>
       </div>
       <div class="extract-table-wrap" style="overflow-x:auto">
         <table class="extract-table" style="width:100%">
@@ -1994,8 +1994,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
       </div>
       <div style="margin-bottom:10px;font-size:0.82rem;color:var(--text-muted)">Enter study-level contrasts (treatment A vs treatment B with effect and SE). Minimum 3 treatments for network analysis.</div>
       <div style="margin-bottom:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-        <label style="font-size:0.82rem">Confidence level: <select id="nmaConfLevel" style="font-size:0.82rem"><option value="0.95" selected>95%</option><option value="0.90">90%</option><option value="0.99">99%</option></select></label>
-        <label style="font-size:0.82rem">Effect type: <select id="nmaEffectType" style="font-size:0.82rem"><option value="ratio">Ratio (OR/RR/HR)</option><option value="diff">Difference (MD/SMD)</option></select></label>
+        <label style="font-size:0.82rem">Confidence level: <select aria-label="Confidence level" id="nmaConfLevel" style="font-size:0.82rem"><option value="0.95" selected>95%</option><option value="0.90">90%</option><option value="0.99">99%</option></select></label>
+        <label style="font-size:0.82rem">Effect type: <select aria-label="Effect type" id="nmaEffectType" style="font-size:0.82rem"><option value="ratio">Ratio (OR/RR/HR)</option><option value="diff">Difference (MD/SMD)</option></select></label>
       </div>
       <div class="extract-table-wrap" style="overflow-x:auto">
         <table class="extract-table" style="width:100%">
@@ -2034,8 +2034,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
       </div>
       <div style="margin-bottom:10px;font-size:0.82rem;color:var(--text-muted)">Enter dose-level data per study (dose, cases, total or RR + CI). Uses Greenland-Longnecker two-stage method with restricted cubic splines.</div>
       <div style="margin-bottom:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-        <label style="font-size:0.82rem">Model: <select id="doseModel" style="font-size:0.82rem"><option value="linear">Linear</option><option value="rcs3" selected>RCS (3 knots)</option><option value="rcs4">RCS (4 knots)</option><option value="emax">Emax</option><option value="hill">Hill/Sigmoid Emax</option><option value="auto">Auto (best AIC)</option></select></label>
-        <label style="font-size:0.82rem">Confidence level: <select id="doseConfLevel" style="font-size:0.82rem"><option value="0.95" selected>95%</option><option value="0.90">90%</option><option value="0.99">99%</option></select></label>
+        <label style="font-size:0.82rem">Model: <select aria-label="Model" id="doseModel" style="font-size:0.82rem"><option value="linear">Linear</option><option value="rcs3" selected>RCS (3 knots)</option><option value="rcs4">RCS (4 knots)</option><option value="emax">Emax</option><option value="hill">Hill/Sigmoid Emax</option><option value="auto">Auto (best AIC)</option></select></label>
+        <label style="font-size:0.82rem">Confidence level: <select aria-label="Confidence level" id="doseConfLevel" style="font-size:0.82rem"><option value="0.95" selected>95%</option><option value="0.90">90%</option><option value="0.99">99%</option></select></label>
       </div>
       <div id="doseDataEntry" style="margin-bottom:16px">
         <div id="doseStudyPanels"></div>
@@ -2058,10 +2058,10 @@ body.dark-mode .input-error { background: #451a1a !important; }
       </div>
       <div style="margin-bottom:10px;font-size:0.82rem;color:var(--text-muted)">Enter cost and effectiveness (QALYs) for each strategy. ICER = incremental cost / incremental QALY vs comparator. NMB = QALY &times; WTP &minus; Cost.</div>
       <div style="margin-bottom:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-        <label style="font-size:0.82rem">WTP threshold (/QALY): <input type="number" id="icerWTP" value="50000" min="1000" max="1000000" step="1000" style="width:100px;font-size:0.82rem"></label>
+        <label style="font-size:0.82rem">WTP threshold (/QALY): <input type="number" aria-label="WTP threshold (/QALY)" id="icerWTP" value="50000" min="1000" max="1000000" step="1000" style="width:100px;font-size:0.82rem"></label>
         <span style="font-size:0.7rem;color:var(--text-muted)" title="International WTP thresholds">(US: $50-100k; NICE: &pound;20-30k; WHO: 1-3&times; GDP/capita)</span>
-        <label style="font-size:0.82rem">Currency: <select id="icerCurrency" style="font-size:0.82rem"><option value="$">$ (USD)</option><option value="£">£ (GBP)</option><option value="€">€ (EUR)</option><option value="OMR">OMR</option></select></label>
-        <label style="font-size:0.82rem">Discount rate: <input type="number" id="icerDiscount" value="3.0" min="0" max="15" step="0.5" style="width:60px;font-size:0.82rem">%</label>
+        <label style="font-size:0.82rem">Currency: <select aria-label="Currency" id="icerCurrency" style="font-size:0.82rem"><option value="$">$ (USD)</option><option value="£">£ (GBP)</option><option value="€">€ (EUR)</option><option value="OMR">OMR</option></select></label>
+        <label style="font-size:0.82rem">Discount rate: <input type="number" aria-label="Discount rate" id="icerDiscount" value="3.0" min="0" max="15" step="0.5" style="width:60px;font-size:0.82rem">%</label>
       </div>
       <div class="extract-table-wrap" style="overflow-x:auto">
         <table class="extract-table" style="width:100%">
@@ -2175,10 +2175,10 @@ body.dark-mode .input-error { background: #451a1a !important; }
         </div>
         <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:6px">
           <label style="font-size:0.78rem;color:var(--text-muted);display:flex;align-items:center;gap:4px">
-            Moderate &ge; <input type="number" id="gapThreshMod" value="3" min="0" max="50" step="0.5" style="width:50px;font-size:0.78rem" onchange="updateGapThresholds()" aria-label="Moderate gap threshold">
+            Moderate &ge; <input type="number" aria-label="Moderate &amp;ge;" id="gapThreshMod" value="3" min="0" max="50" step="0.5" style="width:50px;font-size:0.78rem" onchange="updateGapThresholds()" aria-label="Moderate gap threshold">
           </label>
           <label style="font-size:0.78rem;color:var(--text-muted);display:flex;align-items:center;gap:4px">
-            High &ge; <input type="number" id="gapThreshHigh" value="10" min="0" max="100" step="1" style="width:50px;font-size:0.78rem" onchange="updateGapThresholds()" aria-label="High gap threshold">
+            High &ge; <input type="number" aria-label="High &amp;ge;" id="gapThreshHigh" value="10" min="0" max="100" step="1" style="width:50px;font-size:0.78rem" onchange="updateGapThresholds()" aria-label="High gap threshold">
           </label>
           <span style="font-size:0.72rem;color:var(--text-muted)">(Gap score thresholds)</span>
         </div>
@@ -2221,15 +2221,15 @@ body.dark-mode .input-error { background: #451a1a !important; }
       <p style="margin-bottom:12px;font-size:0.85rem;color:var(--text-muted)">Define your review question using PICO (Population, Intervention, Comparator, Outcomes). The generated protocol can be submitted to <a href="https://www.crd.york.ac.uk/prospero/" target="_blank" rel="noopener">PROSPERO</a>.</p>
       <div class="protocol-form">
         <div class="form-group"><label for="protTitle">Review Title:</label>
-          <input id="protTitle" maxlength="500" placeholder="e.g., Efficacy of X vs Y in patients with Z: a systematic review"></div>
-        <div class="form-group"><label for="protP">Population:</label><input id="protP" maxlength="500" placeholder="e.g., adults with type 2 diabetes"></div>
-        <div class="form-group"><label for="protI">Intervention:</label><input id="protI" maxlength="500" placeholder="e.g., SGLT2 inhibitors"></div>
-        <div class="form-group"><label for="protC">Comparator:</label><input id="protC" maxlength="500" placeholder="e.g., placebo or standard care"></div>
-        <div class="form-group"><label for="protO">Outcomes:</label><input id="protO" maxlength="500" placeholder="e.g., HbA1c reduction, cardiovascular events"></div>
+          <input id="protTitle" maxlength="500" aria-label="e.g., Efficacy of X vs Y in patients with Z: a systematic review" placeholder="e.g., Efficacy of X vs Y in patients with Z: a systematic review"></div>
+        <div class="form-group"><label for="protP">Population:</label><input id="protP" maxlength="500" aria-label="e.g., adults with type 2 diabetes" placeholder="e.g., adults with type 2 diabetes"></div>
+        <div class="form-group"><label for="protI">Intervention:</label><input id="protI" maxlength="500" aria-label="e.g., SGLT2 inhibitors" placeholder="e.g., SGLT2 inhibitors"></div>
+        <div class="form-group"><label for="protC">Comparator:</label><input id="protC" maxlength="500" aria-label="e.g., placebo or standard care" placeholder="e.g., placebo or standard care"></div>
+        <div class="form-group"><label for="protO">Outcomes:</label><input id="protO" maxlength="500" aria-label="e.g., HbA1c reduction, cardiovascular events" placeholder="e.g., HbA1c reduction, cardiovascular events"></div>
         <div class="form-group"><label for="protStudyType">Study Types:</label>
           <select id="protStudyType"><option>RCTs only</option><option>RCTs and observational</option></select></div>
         <div class="form-group"><label for="protPROSPERO">PROSPERO Registration ID:</label>
-          <input id="protPROSPERO" maxlength="30" placeholder="e.g., CRD42024xxxxxx" style="width:220px" pattern="CRD\d{8,}" title="Format: CRD followed by 8+ digits (e.g., CRD42024123456)"></div>
+          <input id="protPROSPERO" maxlength="30" aria-label="e.g., CRD42024xxxxxx" placeholder="e.g., CRD42024xxxxxx" style="width:220px" pattern="CRD\d{8,}" title="Format: CRD followed by 8+ digits (e.g., CRD42024123456)"></div>
         <div style="display:flex;gap:8px">
           <button onclick="generateProtocol()">Generate Protocol</button>
         </div>
@@ -2288,7 +2288,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
           <p style="font-size:0.8rem;color:var(--text-muted);margin:0 0 12px">Record searches performed in external databases (EMBASE, CENTRAL, Scopus, etc.) for PRISMA compliance.</p>
           <div style="display:flex;flex-direction:column;gap:10px">
             <label style="font-size:0.82rem">Database:
-              <select id="manualSearchDB" style="width:100%;margin-top:2px;padding:6px">
+              <select aria-label="Database" id="manualSearchDB" style="width:100%;margin-top:2px;padding:6px">
                 <option value="embase">EMBASE</option>
                 <option value="central">Cochrane CENTRAL</option>
                 <option value="scopus">Scopus</option>
@@ -2297,19 +2297,19 @@ body.dark-mode .input-error { background: #451a1a !important; }
               </select>
             </label>
             <label id="manualSearchOtherLabel" style="font-size:0.82rem;display:none">Database name:
-              <input id="manualSearchOtherName" maxlength="100" placeholder="e.g., CINAHL" style="width:100%;margin-top:2px;padding:6px">
+              <input aria-label="Database name" id="manualSearchOtherName" maxlength="100" aria-label="e.g., CINAHL" placeholder="e.g., CINAHL" style="width:100%;margin-top:2px;padding:6px">
             </label>
             <label style="font-size:0.82rem">Search date:
-              <input id="manualSearchDate" type="date" style="width:100%;margin-top:2px;padding:6px">
+              <input aria-label="Search date" id="manualSearchDate" type="date" style="width:100%;margin-top:2px;padding:6px">
             </label>
             <label style="font-size:0.82rem">Search query / strategy:
-              <textarea id="manualSearchQuery" rows="3" maxlength="2000" placeholder="Paste your search strategy here..." style="width:100%;margin-top:2px;padding:6px;font-family:monospace;font-size:0.78rem"></textarea>
+              <textarea aria-label="Search query / strategy" id="manualSearchQuery" rows="3" maxlength="2000" aria-label="Paste your search strategy here..." placeholder="Paste your search strategy here..." style="width:100%;margin-top:2px;padding:6px;font-family:monospace;font-size:0.78rem"></textarea>
             </label>
             <label style="font-size:0.82rem">Results found:
-              <input id="manualSearchCount" type="number" min="0" step="1" placeholder="0" style="width:100%;margin-top:2px;padding:6px">
+              <input aria-label="Results found" id="manualSearchCount" type="number" min="0" step="1" aria-label="0" placeholder="0" style="width:100%;margin-top:2px;padding:6px">
             </label>
             <label style="font-size:0.82rem">Notes:
-              <input id="manualSearchNotes" maxlength="500" placeholder="Optional notes" style="width:100%;margin-top:2px;padding:6px">
+              <input aria-label="Notes" id="manualSearchNotes" maxlength="500" aria-label="Optional notes" placeholder="Optional notes" style="width:100%;margin-top:2px;padding:6px">
             </label>
           </div>
           <div style="display:flex;gap:8px;margin-top:14px;justify-content:flex-end">
@@ -2357,7 +2357,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
             <strong>Strict Recall</strong> (never auto-exclude possible RCTs)
           </label>
           <label style="font-size:0.82rem">Target review: <strong id="targetReviewLabel">20%</strong>
-            <input type="range" id="targetReviewRate" min="5" max="40" step="5" value="20" oninput="document.getElementById('targetReviewLabel').textContent=this.value+'%'">
+            <input type="range"  aria-label="20%" id="targetReviewRate" min="5" max="40" step="5" value="20" oninput="document.getElementById('targetReviewLabel').textContent=this.value+'%'">
           </label>
           <label style="font-size:0.82rem;display:flex;align-items:center;gap:4px">
             <input type="checkbox" id="shadowModeToggle" onchange="_shadowMode=this.checked;showToast(_shadowMode?'Shadow mode: scores only, no auto-decisions':'Shadow mode off','info')">
@@ -2373,9 +2373,9 @@ body.dark-mode .input-error { background: #451a1a !important; }
           </label>
         </div>
         <div class="threshold-group">
-          <label>Include threshold: <strong id="inclThreshLabel">0.50</strong></label>
+          <label for="inclThresh">Include threshold: <strong id="inclThreshLabel">0.50</strong></label>
           <input type="range" id="inclThresh" min="0.3" max="0.8" step="0.05" value="0.50" oninput="document.getElementById('inclThreshLabel').textContent=this.value">
-          <label>Exclude threshold: <strong id="exclThreshLabel">0.20</strong></label>
+          <label for="exclThresh">Exclude threshold: <strong id="exclThreshLabel">0.20</strong></label>
           <input type="range" id="exclThresh" min="0.05" max="0.4" step="0.05" value="0.20" oninput="document.getElementById('exclThreshLabel').textContent=this.value">
         </div>
         <button id="autoScreenBtn" class="btn-success" onclick="runAutoScreen()">Run CardioRCT Screening</button>
@@ -2419,8 +2419,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
       <div class="prisma-section">
         <h3>PRISMA Flow</h3>
         <div style="margin-bottom:8px;display:flex;gap:12px;align-items:center">
-          <label style="font-size:0.82rem;cursor:pointer"><input type="radio" name="prismaVersion" value="classic" checked onchange="document.getElementById('prismaFlow').style.display='block';document.getElementById('prisma2020Flow').style.display='none'"> Classic</label>
-          <label style="font-size:0.82rem;cursor:pointer"><input type="radio" name="prismaVersion" value="2020" onchange="document.getElementById('prismaFlow').style.display='none';document.getElementById('prisma2020Flow').style.display='block';renderPRISMA2020Flow()"> PRISMA 2020</label>
+          <label style="font-size:0.82rem;cursor:pointer"><input type="radio" name="prismaVersion" value="classic" checked onchange="document.getElementById('prismaFlow').style.display='block';document.getElementById('prisma2020Flow').style.display='none'" aria-label="Classic"> Classic</label>
+          <label style="font-size:0.82rem;cursor:pointer"><input type="radio" name="prismaVersion" value="2020" onchange="document.getElementById('prismaFlow').style.display='none';document.getElementById('prisma2020Flow').style.display='block';renderPRISMA2020Flow()" aria-label="PRISMA 2020"> PRISMA 2020</label>
         </div>
         <div id="prismaFlow"></div>
         <div id="prisma2020Flow" style="display:none"></div>
@@ -2448,7 +2448,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       </div>
       <div style="margin-bottom:8px;padding:8px 12px;background:var(--bg-offset,#f0f7ff);border-radius:8px;border:1px solid var(--border);display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <strong style="font-size:0.82rem">Benchmark:</strong>
-        <select id="benchmarkOutcome" style="font-size:0.82rem;padding:2px 6px;border-radius:4px;border:1px solid var(--border)">
+        <select  aria-label="Benchmark" id="benchmarkOutcome" style="font-size:0.82rem;padding:2px 6px;border-radius:4px;border:1px solid var(--border)">
           <option value="composite">SGLT2i Composite (CV death + HF hosp)</option>
           <option value="acm">SGLT2i All-Cause Mortality</option>
           <option value="hfHosp">SGLT2i HF Hospitalization</option>
@@ -2459,10 +2459,10 @@ body.dark-mode .input-error { background: #451a1a !important; }
       </div>
       <div style="margin-bottom:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
         <label style="font-size:0.82rem;color:var(--text-muted)">Input mode:</label>
-        <label style="font-size:0.82rem;cursor:pointer"><input type="radio" name="inputMode" value="effect" checked onchange="setInputMode('effect')"> Pre-computed effect + CI</label>
-        <label style="font-size:0.82rem;cursor:pointer"><input type="radio" name="inputMode" value="2x2" onchange="setInputMode('2x2')"> Raw 2x2 counts (events/totals)</label>
-        <label style="font-size:0.82rem;cursor:pointer"><input type="radio" name="inputMode" value="means" onchange="setInputMode('means')"> Raw means + SDs</label>
-        <label style="font-size:0.82rem;cursor:pointer"><input type="checkbox" id="publishableGateToggle" checked> Strict publishability gates</label>
+        <label style="font-size:0.82rem;cursor:pointer"><input type="radio" name="inputMode" value="effect" checked onchange="setInputMode('effect')" aria-label="Pre-computed effect + CI"> Pre-computed effect + CI</label>
+        <label style="font-size:0.82rem;cursor:pointer"><input type="radio" name="inputMode" value="2x2" onchange="setInputMode('2x2')" aria-label="Raw 2x2 counts (events/totals)"> Raw 2x2 counts (events/totals)</label>
+        <label style="font-size:0.82rem;cursor:pointer"><input type="radio" name="inputMode" value="means" onchange="setInputMode('means')" aria-label="Raw means + SDs"> Raw means + SDs</label>
+        <label style="font-size:0.82rem;cursor:pointer"><input type="checkbox" id="publishableGateToggle" checked aria-label="Strict publishability gates"> Strict publishability gates</label>
         <span id="inputModeHelp" style="font-size:0.78rem;color:var(--text-muted)">Enter the effect size and 95% CI from each study. For ratio measures (OR, RR, HR), values must be positive.</span>
       </div>
       <div id="csvDropZone" tabindex="0" role="button" aria-label="Import CSV data: drop file, click to browse, or paste CSV text" style="border:2px dashed var(--border);border-radius:8px;padding:16px;text-align:center;margin-bottom:10px;cursor:pointer;transition:border-color 0.2s,background 0.2s"
@@ -2549,7 +2549,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <select id="outcomeFilterSelect" style="padding:4px 8px;font-size:0.82rem;border:1px solid var(--border);border-radius:var(--radius)">
           <option value="__all__">All outcomes</option>
         </select>
-        <label style="font-size:0.8rem;color:var(--text-muted);margin-left:12px;cursor:pointer"><input type="checkbox" id="bayesianCrIToggle" style="margin-right:4px;vertical-align:middle"> Bayesian CrI</label>
+        <label style="font-size:0.8rem;color:var(--text-muted);margin-left:12px;cursor:pointer"><input type="checkbox" id="bayesianCrIToggle" style="margin-right:4px;vertical-align:middle" aria-label="Bayesian CrI"> Bayesian CrI</label>
       </div>
       <div id="analysisWarnings" style="margin-bottom:8px"></div>
       <div class="analysis-summary" id="analysisSummary" aria-live="polite"></div>
@@ -2657,7 +2657,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <button class="btn-outline" onclick="refreshAdvancedJournalGate()">Refresh Advanced Journal Gate</button>
         <button class="btn-outline" onclick="importTruthCertWriteback()">Import TruthCert Methods+Results</button>
         <label style="font-size:0.82rem;color:var(--text-muted);display:flex;align-items:center;gap:6px">
-          <input type="checkbox" id="mergeTruthCertWritebackToggle" checked>
+          <input type="checkbox" id="mergeTruthCertWritebackToggle" checked aria-label="Merge TruthCert advanced methods/results into draft">
           Merge TruthCert advanced methods/results into draft
         </label>
       </div>
@@ -2768,7 +2768,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <h3>Fitrah — Natural Query Interface</h3>
         <p class="text-muted" style="margin-bottom:10px">Ask questions about your evidence in plain language.</p>
         <div style="display:flex;gap:8px;margin-bottom:16px">
-          <input type="text" id="fitrahQuery" placeholder="e.g., 'Is the effect robust to removing small studies?' or 'What is the prediction interval?'"
+          <input type="text" id="fitrahQuery" aria-label="e.g., 'Is the effect robust to removing small studies?' or 'What is the prediction interval?'" placeholder="e.g., 'Is the effect robust to removing small studies?' or 'What is the prediction interval?'"
             style="flex:1;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.9rem"
             onkeydown="if(event.key==='Enter')runFitrahQuery()">
           <button onclick="runFitrahQuery()">Ask</button>
@@ -2870,13 +2870,13 @@ body.dark-mode .input-error { background: #451a1a !important; }
         <h3 style="font-size:1rem;margin-bottom:8px">Sequential Monitoring Dashboard</h3>
         <p class="text-muted" style="font-size:0.8rem;margin-bottom:12px">Living meta-analysis surveillance: CUSUM control charts, alpha spending boundaries, and stopping recommendations.</p>
         <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;align-items:center">
-          <label style="font-size:0.8rem">Spending function: <select id="lmaSpendingType" style="padding:3px 6px;font-size:0.8rem;border:1px solid var(--border);border-radius:var(--radius)"><option value="obrien-fleming" selected>O'Brien-Fleming</option><option value="pocock">Pocock</option><option value="lan-demets">Lan-DeMets</option></select></label>
-          <label style="font-size:0.8rem">CUSUM threshold (h): <input type="number" id="lmaCusumThreshold" value="4" min="1" max="10" step="0.5" style="width:56px;padding:3px 6px;font-size:0.8rem;border:1px solid var(--border);border-radius:var(--radius)"></label>
-          <label style="font-size:0.8rem">Power: <select id="lmaPower" style="padding:3px 6px;font-size:0.8rem;border:1px solid var(--border);border-radius:var(--radius)"><option value="0.80" selected>80%</option><option value="0.90">90%</option></select></label>
+          <label style="font-size:0.8rem">Spending function: <select aria-label="Spending function" id="lmaSpendingType" style="padding:3px 6px;font-size:0.8rem;border:1px solid var(--border);border-radius:var(--radius)"><option value="obrien-fleming" selected>O'Brien-Fleming</option><option value="pocock">Pocock</option><option value="lan-demets">Lan-DeMets</option></select></label>
+          <label style="font-size:0.8rem">CUSUM threshold (h): <input type="number" aria-label="CUSUM threshold (h)" id="lmaCusumThreshold" value="4" min="1" max="10" step="0.5" style="width:56px;padding:3px 6px;font-size:0.8rem;border:1px solid var(--border);border-radius:var(--radius)"></label>
+          <label style="font-size:0.8rem">Power: <select aria-label="Power" id="lmaPower" style="padding:3px 6px;font-size:0.8rem;border:1px solid var(--border);border-radius:var(--radius)"><option value="0.80" selected>80%</option><option value="0.90">90%</option></select></label>
           <button id="lmaRunBtn" class="btn btn-sm" style="padding:4px 14px;font-size:0.8rem;background:var(--primary);color:#fff;border:none;border-radius:var(--radius);cursor:pointer" onclick="runLivingMADashboard()">Run Surveillance</button>
         </div>
         <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap;align-items:center;padding:8px 12px;background:var(--bg-alt,#f8f9fa);border-radius:var(--radius)">
-          <label style="font-size:0.8rem">Auto-update interval: <select id="lmaAutoInterval" style="padding:3px 6px;font-size:0.8rem;border:1px solid var(--border);border-radius:var(--radius)"><option value="0" selected>Manual only</option><option value="86400000">Daily</option><option value="604800000">Weekly</option><option value="2592000000">Monthly</option></select></label>
+          <label style="font-size:0.8rem">Auto-update interval: <select aria-label="Auto-update interval" id="lmaAutoInterval" style="padding:3px 6px;font-size:0.8rem;border:1px solid var(--border);border-radius:var(--radius)"><option value="0" selected>Manual only</option><option value="86400000">Daily</option><option value="604800000">Weekly</option><option value="2592000000">Monthly</option></select></label>
           <button id="lmaAutoToggle" class="btn btn-sm" style="padding:4px 14px;font-size:0.8rem;background:var(--surface-alt,#6c757d);color:#fff;border:none;border-radius:var(--radius);cursor:pointer" onclick="toggleLMAAutoUpdate()">Enable Auto-Update</button>
           <span id="lmaLastUpdated" class="text-muted" style="font-size:0.75rem"></span>
           <span id="lmaStaleWarning" style="display:none;font-size:0.75rem;color:#dc3545;font-weight:600" role="status" aria-live="polite">Evidence may be stale</span>
@@ -2932,7 +2932,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
       <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px">
         Paste PubMed abstract results text or ClinicalTrials.gov record text. Imports only high-confidence, complete-CI extractions and removes duplicates. Requires RCT Extractor at localhost:8000.
       </p>
-      <textarea id="extractorText" rows="6" maxlength="50000" placeholder="Paste results text here (e.g., 'HR 0.74, 95% CI 0.65-0.85, P&lt;0.001')"
+      <textarea id="extractorText" rows="6" maxlength="50000" aria-label="Paste results text here (e.g., 'HR 0.74, 95% CI 0.65-0.85, P&lt;0.001')" placeholder="Paste results text here (e.g., 'HR 0.74, 95% CI 0.65-0.85, P&lt;0.001')"
         style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem;resize:vertical"></textarea>
       <div style="margin-top:8px;display:flex;gap:8px">
         <input type="file" id="extractorFile" accept=".pdf" style="font-size:0.82rem">
@@ -4787,7 +4787,7 @@ body.dark-mode .input-error { background: #451a1a !important; }
         '<button class="rob-judgment-btn' + (current === 'some' ? ' selected-some' : '') + '" onclick="setRoBJudgment(\'' + escapeHtml(studyId) + '\',\'' + d.key + '\',\'some\')">Some concerns</button>' +
         '<button class="rob-judgment-btn' + (current === 'high' ? ' selected-high' : '') + '" onclick="setRoBJudgment(\'' + escapeHtml(studyId) + '\',\'' + d.key + '\',\'high\')">High</button>' +
         '</div>' +
-        '<input class="rob-support-input" value="' + escapeHtml(support) + '" placeholder="Support for judgment..." onchange="setRoBSupport(\'' + escapeHtml(studyId) + '\',\'' + d.key + '\',this.value)"></div>';
+        '<input class="rob-support-input" value="' + escapeHtml(support) + '" aria-label="Support for judgment..." placeholder="Support for judgment..." onchange="setRoBSupport(\'' + escapeHtml(studyId) + '\',\'' + d.key + '\',this.value)"></div>';
     });
     domainsDiv.innerHTML = html;
     panel.classList.add('visible');
@@ -15665,8 +15665,8 @@ body.dark-mode .input-error { background: #451a1a !important; }
     body.innerHTML = nmaContrasts.map(c =>
       '<tr data-nma-id="' + c.id + '">' +
         '<td><input type="text" value="' + escapeHtml(c.study || '') + '" data-field="study" style="width:100px"></td>' +
-        '<td><input type="text" value="' + escapeHtml(c.treatA || '') + '" data-field="treatA" placeholder="e.g. Drug A" style="width:100px"></td>' +
-        '<td><input type="text" value="' + escapeHtml(c.treatB || '') + '" data-field="treatB" placeholder="e.g. Placebo" style="width:100px"></td>' +
+        '<td><input type="text" value="' + escapeHtml(c.treatA || '') + '" data-field="treatA" aria-label="e.g. Drug A" placeholder="e.g. Drug A" style="width:100px"></td>' +
+        '<td><input type="text" value="' + escapeHtml(c.treatB || '') + '" data-field="treatB" aria-label="e.g. Placebo" placeholder="e.g. Placebo" style="width:100px"></td>' +
         '<td><input type="number" step="any" value="' + (c.effect ?? '') + '" data-field="effect" style="width:80px"></td>' +
         '<td><input type="number" step="any" min="0" value="' + (c.se ?? '') + '" data-field="se" style="width:70px"></td>' +
         '<td><input type="text" value="' + escapeHtml(c.notes || '') + '" data-field="notes" style="width:80px"></td>' +
@@ -33412,7 +33412,7 @@ function checkLivingEvidence(){
           '</div>' +
           '<div style="margin-top:16px">' +
             '<label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:4px">Screening Note</label>' +
-            '<textarea id="rmScreenNote" rows="2" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.82rem;font-family:var(--font)" placeholder="Add rationale..." oninput="rmScreenEngine.saveNote(this.value)">' + escapeHtml(sr.note || '') + '</textarea>' +
+            '<textarea id="rmScreenNote" rows="2" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:0.82rem;font-family:var(--font)" aria-label="Add rationale..." placeholder="Add rationale..." oninput="rmScreenEngine.saveNote(this.value)">' + escapeHtml(sr.note || '') + '</textarea>' +
           '</div>' +
         '</div>';
     },
