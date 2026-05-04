@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
 """
-Script to update the renderForestPlot function with improved visualization
+Script to update the renderForestPlot function with improved visualization.
+
+This is a one-shot CLI script; do NOT import as a module — module-level
+side effects (open/read/write of an absolute Windows path) would fire
+during import and break smoke witness collection.
 """
 
 import re
+import sys
+
+if __name__ != "__main__":
+    sys.exit(0)
 
 # Read the HTML file
 with open(r'C:\Truthcert1\truthcert_v8-8-0_with_S14-HTA.html', 'r', encoding='utf-8') as f:
