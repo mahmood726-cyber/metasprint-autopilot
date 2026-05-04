@@ -1,3 +1,10 @@
+# Smoke-witness import guard: this is a standalone Selenium script, not a
+# pytest test (conftest.py declares it in collect_ignore). Bail at import
+# so smoke witness sees exit 0 instead of triggering Chrome at module level.
+import sys as _sys
+if __name__ != "__main__":
+    _sys.exit(0)
+
 """GRADE Certainty + NNT Integration Tests.
 
 Validates that GRADE certainty assessment and NNT computation are

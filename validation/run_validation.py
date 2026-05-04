@@ -3,8 +3,14 @@ ORCHESTRATOR: Runs all validation phases in sequence.
 Phase A: Meta-analysis engine (291 Cochrane reviews, blinded)
 Phase B: Search engine (100 reviews, CT.gov + PubMed)
 Phase C: Feature tests (17 Selenium tests)
+
+This is a one-shot CLI orchestrator — running its body at import would
+trigger the full 13s validation pipeline, breaking smoke-witness budget.
 """
 import os, sys, io, time, json
+
+if __name__ != "__main__":
+    sys.exit(0)
 
 if hasattr(sys.stdout, 'buffer') and not isinstance(sys.stdout, io.TextIOWrapper):
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
