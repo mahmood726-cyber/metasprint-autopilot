@@ -5,7 +5,9 @@
 # Tolerance: 1e-4 for all comparisons
 # Output: CSV of (metric, R_value, JS_value, abs_diff, pass/fail)
 #
-# Usage: Rscript tests/validate_against_R.R
+# Usage: Rscript --vanilla tests/validate_against_R.R
+# (--vanilla skips .Rprofile / Renviron so renv::activate output does
+#  not pollute stdout that downstream witnesses parse as JSON/CSV.)
 # ============================================================
 
 library(metafor)

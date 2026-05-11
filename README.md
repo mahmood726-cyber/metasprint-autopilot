@@ -103,6 +103,27 @@ Selenium-based suites run in headless Chrome. No external services or API keys a
 | Landscape analytics | 91 |
 | Total | 1,050+ |
 
+## Methods
+
+The pooling engine is JavaScript-only and runs in the browser tab. Primary pooling is **DerSimonian–Laird** with **Hartung–Knapp–Sidik–Jonkman (HKSJ)** confidence intervals; **REML**, **Mantel–Haenszel**, and **Peto** pools are exposed as alternative estimators in the same UI. The HKSJ implementation uses `t_{k-1}` quantiles and applies the `max(1, Q/(k-1))` variance floor so that the interval does not narrow below the underlying DerSimonian–Laird interval when Q < k-1.
+
+Heterogeneity is reported as `τ²`, `I²` (with Q-profile interval for small k), and a prediction interval on the `t_{k-1}` × √(τ² + SE²) scale (Cochrane Handbook v6.5, §10.10.4.3). Publication-bias diagnostics include Egger's radial test, trim-and-fill (sensitivity only), and a conditional PET / PEESE.
+
+R cross-validation: `tests/validate_against_R.R` re-runs the same 2×2 / mean-difference inputs through `metafor`, `mada`, `netmeta`, and `dosresmeta`, and reports `(metric, R_value, JS_value, abs_diff, pass/fail)` at a 1e-4 tolerance. The 291-Cochrane validation reported in the table above uses this script.
+
+## Limitations
+
+- **DerSimonian–Laird default at k < 10.** DL underestimates τ² with few studies; the engine exposes REML and Paule–Mandel as alternatives, but does not auto-switch. For analyses with k < 10 the user should pick REML or PM explicitly and treat any DL-only report as a sensitivity case.
+- **No Bayesian inference.** No Stan / MCMC path; for hierarchical priors, posterior probabilities of clinically meaningful effects, or rare-event Poisson-Normal models, a Bayesian tool (e.g. `brms`, `metaBMA`) is needed downstream.
+- **Search coverage is partial.** CT.gov discovery ≈ 65% and PubMed discovery ≈ 58% on the validation set. A formal systematic review should not rely on the built-in search alone — the seven-phase workflow lets the user paste in external search results, and that path should be used when completeness matters.
+- **Single-file scope limits dataset size.** Browser memory bounds and single-HTML packaging mean very large NMA networks (hundreds of treatments, IPD-scale rows) are slower than equivalent R workflows; for those scales, export to R and finish there.
+- **Browser-only test harness.** Selenium-based Chrome is required to reproduce the full test suite. Headless-Chrome on locked-down corporate browsers may need flags; CI runs are not currently public-facing.
+- **No risk-of-bias auto-import.** RoB-2 and ROBINS-I assessments are typed in by the user; the engine does not parse Cochrane RoB JSON exports.
+
+## Conclusions
+
+Use MetaSprint Autopilot when (a) the analyst needs a one-file workflow that runs offline after first load, (b) the meta-analysis is pairwise or modest NMA scale with classic 2×2 / mean-difference outcomes, and (c) DerSimonian–Laird or REML pooling is appropriate. For Bayesian inference, large IPD networks, or formal systematic-review search completeness, hand off to specialised R / Stan tooling after using MetaSprint for the workflow scaffolding.
+
 ## Citation
 
 Use `CITATION.cff` for software citation metadata.
