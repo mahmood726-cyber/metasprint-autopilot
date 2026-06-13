@@ -30308,13 +30308,13 @@ function checkLivingEvidence(){
         statusEl.appendChild(document.createTextNode('RCT Extractor not running. Start it with one of these commands: '));
         const code = document.createElement('code');
         code.style.fontSize = '0.75rem';
-        code.textContent = 'cd C:\\Users\\user\\rct-extractor-v2 && python -m uvicorn src.api.main:app --port 8000';
+        code.textContent = 'cd <path-to>\\rct-extractor-v2 && python -m uvicorn src.api.main:app --port 8000';
         statusEl.appendChild(code);
         const alt = document.createElement('div');
         alt.style.marginTop = '4px';
         const altCode = document.createElement('code');
         altCode.style.fontSize = '0.75rem';
-        altCode.textContent = 'WSL: cd /mnt/c/Users/user/rct-extractor-v2 && python -m uvicorn src.api.main:app --port 8000';
+        altCode.textContent = 'WSL: cd <path-to>/rct-extractor-v2 && python -m uvicorn src.api.main:app --port 8000';
         alt.appendChild(altCode);
         statusEl.appendChild(alt);
         // Offer in-browser fallback if text was provided
