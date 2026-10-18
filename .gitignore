@@ -53,3 +53,4 @@ chromedriver.log
 *.bak
 nul
 data/ctgov_cv_raw.json
+PROGRESS.md

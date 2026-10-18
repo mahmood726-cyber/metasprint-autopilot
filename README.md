@@ -24,6 +24,13 @@ MetaSprint Autopilot is a browser-first workflow that guides medical students an
 
 No installation, server, or account is required for normal use.
 
+The Python registry harvester rejects nonfinite estimates, nonpositive ratios
+or ratio interval bounds, and unordered confidence limits. Poolable records
+must explicitly report a two-sided interval and a confidence percentage between
+0 and 100; an absent level is no longer assumed to mean 95%. Invalid optional
+p-values are exported as unavailable. This input check does not establish the
+clinical validity of a record.
+
 ## Validation
 
 Validated against 291 Cochrane systematic reviews using a triple-blinded architecture.
