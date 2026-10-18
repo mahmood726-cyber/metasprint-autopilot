@@ -5,6 +5,7 @@ AL-KITAB (The Book) -- CT.gov Cardiovascular Results Harvester
 from __future__ import annotations
 
 import json
+import math
 import os
 import re
 import time
@@ -53,7 +54,7 @@ def normalize_param_type(param_type_str: str | None) -> tuple[str, bool] | None:
         'HR', 'OR', 'RR', 'RD', 'MD', 'SMD', and is_ratio is bool.
         Returns None for unrecognized types.
     """
-    if not param_type_str:
+    if not isinstance(param_type_str, str) or not param_type_str:
         return None
     lowered = param_type_str.strip().lower()
     for pattern, result in _PARAM_TYPE_MAP:
@@ -68,15 +69,14 @@ def normalize_param_type(param_type_str: str | None) -> tuple[str, bool] | None:
 
 def _parse_float(val: str | int | float | None) -> float | None:
     """Try to parse a string to float. Returns None on failure."""
-    if val is None:
+    if val is None or isinstance(val, bool):
         return None
-    if isinstance(val, (int, float)):
-        return float(val)
     val = str(val).strip()
     if not val or val.upper() in ("NA", "N/A", "NR", "NE", "--", ""):
         return None
     try:
-        return float(val)
+        parsed = float(val)
+        return parsed if math.isfinite(parsed) else None
     except (ValueError, TypeError):
         return None
 
@@ -90,7 +90,8 @@ def _parse_pvalue(pval_str: str | None) -> float | None:
         return None
     # Strip leading comparison operators
     s = re.sub(r'^[<>=]+\s*', '', s)
-    return _parse_float(s)
+    value = _parse_float(s)
+    return value if value is not None and 0 <= value <= 1 else None
 
 
 def parse_analysis(raw: dict | None) -> dict | None:
@@ -125,8 +126,8 @@ def parse_analysis(raw: dict | None) -> dict | None:
     if effect_estimate is None:
         return None
 
-    # --- ratio measures cannot be zero ---
-    if is_ratio and effect_estimate == 0.0:
+    # --- ratio measures must be positive ---
+    if is_ratio and effect_estimate <= 0.0:
         return None
 
     # --- CI limits (both required) ---
@@ -134,10 +135,18 @@ def parse_analysis(raw: dict | None) -> dict | None:
     upper_ci = _parse_float(raw.get("ciUpperLimit"))
     if lower_ci is None or upper_ci is None:
         return None
+    if lower_ci >= upper_ci:
+        return None
+    if is_ratio and (lower_ci <= 0.0 or upper_ci <= 0.0):
+        return None
 
     # --- CI level ---
     ci_pct = _parse_float(raw.get("ciPctValue"))
-    ci_level = ci_pct / 100.0 if ci_pct is not None else 0.95
+    if ci_pct is None or not 0 < ci_pct < 100:
+        return None
+    if raw.get("ciNumSides") != "TWO_SIDED":
+        return None
+    ci_level = ci_pct / 100.0
 
     # --- p-value (optional) ---
     p_value = _parse_pvalue(raw.get("pValue"))
